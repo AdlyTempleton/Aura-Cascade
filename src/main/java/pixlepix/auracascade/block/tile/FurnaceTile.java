@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -11,6 +12,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.AuraUtil;
+import pixlepix.auracascade.main.CommonProxy;
+import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -21,7 +24,7 @@ import java.util.List;
  */
 public class FurnaceTile extends TileEntity {
 
-    public static final int COST_PER_TICK = 20;
+    public static final int COST_PER_TICK = 200;
     //Smelting occurs when this number reaches 20
     //Incremented once per tick
     int heat = 0;
@@ -72,9 +75,9 @@ public class FurnaceTile extends TileEntity {
                     }
                 }
             }
-            heat += (energyLeft-20);
+            heat += (energyLeft-COST_PER_TICK);
 
-            if(heat >= 200) {
+            if(heat >= COST_PER_TICK) {
                 heat = 0;
                 int range = 3;
                 List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
@@ -97,6 +100,9 @@ public class FurnaceTile extends TileEntity {
                         newEntity.motionZ = entityItem.motionZ;
 
                         worldObj.spawnEntityInWorld(newEntity);
+
+                        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+
                         break;
                     }
                 }

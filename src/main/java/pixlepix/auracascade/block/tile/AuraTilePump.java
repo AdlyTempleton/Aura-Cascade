@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -7,8 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.AxisAlignedBB;
 import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
+import pixlepix.auracascade.main.CommonProxy;
+import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.List;
 
@@ -37,7 +41,7 @@ public class AuraTilePump extends AuraTile {
         if(worldObj.getTotalWorldTime() % 2400 == 0){
             AuraUtil.keepAlive(this, 3);
         }
-        if(!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 ==2){
+        if(!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 ==2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
             if(pumpPower != 0){
                 AuraTile upNode = null;
                 for(int i=1; i<15; i++){
@@ -54,6 +58,8 @@ public class AuraTilePump extends AuraTile {
                     quantity = Math.min(quantity, storage.get(EnumAura.WHITE_AURA));
                     storage.subtract(EnumAura.WHITE_AURA , quantity);
                     upNode.storage.add(new AuraQuantity(EnumAura.WHITE_AURA, quantity));
+                    CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), new CoordTuple(upNode), "crit"), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+
                 }
             }else{
                 int range = 3;

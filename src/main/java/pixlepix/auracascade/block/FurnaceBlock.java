@@ -67,7 +67,7 @@ public class FurnaceBlock extends Block implements ITTinkererBlock, ITileEntityP
     @Override
     public Class<? extends TileEntity> getTileEntity() {
         // TODO Auto-generated method stub
-        return AuraTile.class;
+        return FurnaceTile.class;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pixlepix.auracascade.data;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -18,7 +19,8 @@ public class CoordTuple {
         this.z = tileEntity.zCoord;
     }
 
-    public double dist(CoordTuple other){
+
+	public double dist(CoordTuple other){
         return Math.sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z));
     }
 

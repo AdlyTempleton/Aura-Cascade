@@ -195,7 +195,7 @@ public class AuraTile extends TileEntity {
         boolean isLower = tuple.getY() < yCoord;
 
         boolean isSame = tuple.getY() == yCoord;
-        return  (isSame || (isLower && (!(tuple.getTile(worldObj) instanceof AuraTilePump)))) && !(this instanceof AuraTilePump);
+        return  (isSame || (isLower && (!(tuple.getTile(worldObj) instanceof AuraTilePump)))) && !(this instanceof AuraTilePump) && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
     }
 
     public double getWeight(CoordTuple tuple) {
