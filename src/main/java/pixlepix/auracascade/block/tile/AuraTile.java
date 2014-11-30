@@ -27,6 +27,7 @@ public class AuraTile extends TileEntity {
     public HashMap<CoordTuple, AuraQuantityList> burstMap = null;
     public LinkedList<CoordTuple> connected = new LinkedList<CoordTuple>();
     public boolean hasConnected = false;
+    public int energy = 0;
 
     public AuraTile() {
     }
@@ -38,7 +39,7 @@ public class AuraTile extends TileEntity {
         readCustomNBT(nbt);
     }
 
-    private void readCustomNBT(NBTTagCompound nbt) {
+    protected void readCustomNBT(NBTTagCompound nbt) {
         NBTTagList storageNBT = nbt.getTagList("storage", 10);
         storage.readFromNBT(storageNBT);
 
@@ -54,6 +55,7 @@ public class AuraTile extends TileEntity {
         }
 
         hasConnected = nbt.getBoolean("hasConnected");
+        energy = nbt.getInteger("energy");
 
     }
 
@@ -63,7 +65,7 @@ public class AuraTile extends TileEntity {
         writeCustomNBT(nbt);
     }
 
-    private void writeCustomNBT(NBTTagCompound nbt){
+    protected void writeCustomNBT(NBTTagCompound nbt){
         NBTTagList storageNBT = new NBTTagList();
         storage.writeToNBT(storageNBT);
         nbt.setTag("storage", storageNBT);
@@ -79,6 +81,7 @@ public class AuraTile extends TileEntity {
         nbt.setTag("connected", connectionsNBT);
 
         nbt.setBoolean("hasConnected", hasConnected);
+        nbt.setInteger("energy", energy);
     }
 
     public void verifyConnections() {
@@ -124,7 +127,7 @@ public class AuraTile extends TileEntity {
 
                 connect(xCoord, yCoord, zCoord + i);
 
-                connect(xCoord, yCoord, zCoord);
+                connect(xCoord, yCoord + i, zCoord);
             }
             hasConnected = true;
         }
@@ -133,6 +136,7 @@ public class AuraTile extends TileEntity {
 
             if (worldObj.getTotalWorldTime() % 20 == 0) {
                 verifyConnections();
+                energy = 0;
                 burstMap = new HashMap<CoordTuple, AuraQuantityList>();
                 double totalWeight = 0;
                 for (CoordTuple tuple : connected) {
@@ -175,6 +179,10 @@ public class AuraTile extends TileEntity {
                         ((AuraTile) tuple.getTile(worldObj)).storage.add(burstMap.get(tuple));
                         storage.subtract(burstMap.get(tuple));
                         burst(tuple, "magicCrit");
+                        if(tuple.getY() < yCoord){
+                            int power = (tuple.getY() - yCoord) * burstMap.get(tuple).get(EnumAura.WHITE_AURA);
+                            ((AuraTile) tuple.getTile(worldObj)).energy += power;
+                        }
                     }
                 }
                 burstMap = null;
@@ -184,7 +192,10 @@ public class AuraTile extends TileEntity {
     }
 
     public boolean canTransfer(CoordTuple tuple) {
-        return tuple.getY() <= yCoord;
+        boolean isLower = tuple.getY() < yCoord;
+
+        boolean isSame = tuple.getY() == yCoord;
+        return  (isSame || (isLower && (!(tuple.getTile(worldObj) instanceof AuraTilePump)))) && !(this instanceof AuraTilePump);
     }
 
     public double getWeight(CoordTuple tuple) {

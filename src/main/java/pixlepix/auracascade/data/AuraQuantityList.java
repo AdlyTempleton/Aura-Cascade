@@ -54,6 +54,20 @@ public class AuraQuantityList {
 		}
 		return 0;
 	}
+
+	public void set(EnumAura type, int num){
+		for(AuraQuantity quantity : this.quantityList){
+			if(quantity.getType() == type){
+				quantity.setNum(num);
+			}
+
+		}
+	}
+
+
+	public void subtract(EnumAura type, int num){
+		set(type, get(type) - num);
+	}
 	public boolean empty(){
 		for(AuraQuantity quantity:quantityList){
 			if(quantity.getNum() > 0){
