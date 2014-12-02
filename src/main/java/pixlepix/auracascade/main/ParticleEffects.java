@@ -1,6 +1,7 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.TextureManager;
 import pixlepix.auracascade.particle.ParticleSphere;
@@ -13,7 +14,8 @@ public class ParticleEffects {
     public static TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
     public static Minecraft minecraft = Minecraft.getMinecraft();
 
-    public static EntityFX spawnParticle(String particleName, double par2, double par4, double par6, double par8, double par10, double par12){
+    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b){
+
         if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null)
         {
             int var14 = minecraft.gameSettings.particleSetting;
@@ -21,16 +23,12 @@ public class ParticleEffects {
             {
                 var14 = 2;
             }
-            double var15 = minecraft.renderViewEntity.posX - par2;
-            double var17 = minecraft.renderViewEntity.posY - par4;
-            double var19 = minecraft.renderViewEntity.posZ - par6;
+            double var15 = minecraft.renderViewEntity.posX - posX;
+            double var17 = minecraft.renderViewEntity.posY - posY;
+            double var19 = minecraft.renderViewEntity.posZ - posZ;
             EntityFX var21 = null;
             double var22 = 16.0D;
             if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
-            {
-                return null;
-            }
-            else if (var14 > 1)
             {
                 return null;
             }
@@ -38,8 +36,17 @@ public class ParticleEffects {
             {
                 if (particleName.equals("fire"))
                 {
-                    var21 = new ParticleSphere(minecraft.theWorld, par2, par4, par6, (float)par8, (float)par10, (float)par12);
+                    var21 = new ParticleSphere(minecraft.theWorld, posX, posY, posZ, (float)motX, (float)motY, (float)motZ);
                 }
+                if (particleName.equals("crit"))
+                {
+                    var21 = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ);
+                    if(r!=0 || g!=0 || b!=0) {
+                        ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
+                    }
+
+                }
+
                 minecraft.effectRenderer.addEffect(var21);
                 return var21;
             }

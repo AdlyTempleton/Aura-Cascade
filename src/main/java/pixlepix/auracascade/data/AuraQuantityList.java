@@ -18,6 +18,17 @@ public class AuraQuantityList {
 			quantityList.add(new AuraQuantity(type, 0));
 		}
 	}
+	public int getTotalAura(){
+		int sum = 0;
+		for(EnumAura aura:EnumAura.values()){
+			sum += get(aura);
+		}
+		return sum;
+	}
+
+	public double getComposition(EnumAura aura){
+		return get(aura) / getTotalAura();
+	}
 
 	public void subtract(AuraQuantityList other){
 		for(AuraQuantity quantity : this.quantityList){

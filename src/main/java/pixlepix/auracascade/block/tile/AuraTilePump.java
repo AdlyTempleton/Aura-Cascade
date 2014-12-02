@@ -52,14 +52,17 @@ public class AuraTilePump extends AuraTile {
                     }
                 }
                 if(upNode != null){
-                    pumpPower--;
-                    int dist = upNode.yCoord - yCoord;
-                    int quantity = 500/dist;
-                    quantity = Math.min(quantity, storage.get(EnumAura.WHITE_AURA));
-                    storage.subtract(EnumAura.WHITE_AURA , quantity);
-                    upNode.storage.add(new AuraQuantity(EnumAura.WHITE_AURA, quantity));
-                    CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), new CoordTuple(upNode), "crit"), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                    for(EnumAura aura:EnumAura.values()) {
+                        pumpPower--;
+                        int dist = upNode.yCoord - yCoord;
+                        int quantity = 500 / dist;
+                        quantity *= storage.getComposition(aura);
+                        quantity = Math.min(quantity, storage.get(aura));
+                        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), new CoordTuple(upNode), "magicCrit", aura.r, aura.g, aura.b, storage.getComposition(aura)), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                        storage.subtract(aura, quantity);
+                        upNode.storage.add(new AuraQuantity(aura, quantity));
 
+                    }
                 }
             }else{
                 int range = 3;

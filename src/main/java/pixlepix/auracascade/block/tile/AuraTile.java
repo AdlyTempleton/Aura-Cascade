@@ -5,13 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
-import net.minecraft.util.Vec3;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.CoordTuple;
@@ -105,15 +102,15 @@ public class AuraTile extends TileEntity {
                 AuraTile otherNode = (AuraTile) worldObj.getTileEntity(x2, y2, z2);
                 otherNode.connected.add(new CoordTuple(this));
                 this.connected.add(new CoordTuple(otherNode));
-                burst(new CoordTuple(x2, y2, z2), "spell");
+                burst(new CoordTuple(x2, y2, z2), "spell", EnumAura.WHITE_AURA, 1D);
 
             }
         }
     }
 
-    public void burst(CoordTuple target, String particle) {
+    public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
 
-        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), target, particle), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
     }
 
@@ -178,9 +175,10 @@ public class AuraTile extends TileEntity {
 
                         ((AuraTile) tuple.getTile(worldObj)).storage.add(burstMap.get(tuple));
                         storage.subtract(burstMap.get(tuple));
-                        burst(tuple, "magicCrit");
-                        if(tuple.getY() < yCoord){
-                            int power = (tuple.getY() - yCoord) * burstMap.get(tuple).get(EnumAura.WHITE_AURA);
+                        for(EnumAura aura:EnumAura.values()) {
+
+                            burst(tuple, "crit", aura, burstMap.get(tuple).getComposition(aura));
+                            int power = (tuple.getY() - yCoord) * burstMap.get(tuple).get(aura);
                             ((AuraTile) tuple.getTile(worldObj)).energy += power;
                         }
                     }

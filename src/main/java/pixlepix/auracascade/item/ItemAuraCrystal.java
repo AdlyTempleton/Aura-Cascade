@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,7 @@ import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.
@@ -25,7 +27,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
         TileEntity te = world.getTileEntity(x, y, z);
         if(te instanceof AuraTile){
             stack.stackSize--;
-            ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.WHITE_AURA, 100));
+            ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100));
             return true;
         }
         return false;
@@ -48,6 +50,18 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     @Override
     public boolean shouldDisplayInTab() {
+        return true;
+    }
+
+    @Override
+    public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
+        for(int i=0; i<EnumAura.values().length; i++) {
+            list.add(new ItemStack(item, 1, i));
+        }
+    }
+
+    @Override
+    public boolean getHasSubtypes() {
         return true;
     }
 
