@@ -27,7 +27,10 @@ public class AuraQuantityList {
 	}
 
 	public double getComposition(EnumAura aura){
-		return get(aura) / getTotalAura();
+		if(getTotalAura() != 0){
+			return (double)get(aura) / (double)getTotalAura();
+		}
+		return 0;
 	}
 
 	public void subtract(AuraQuantityList other){

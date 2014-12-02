@@ -178,7 +178,7 @@ public class AuraTile extends TileEntity {
                         for(EnumAura aura:EnumAura.values()) {
 
                             burst(tuple, "crit", aura, burstMap.get(tuple).getComposition(aura));
-                            int power = (tuple.getY() - yCoord) * burstMap.get(tuple).get(aura);
+                            int power = (int)((tuple.getY() - yCoord) * burstMap.get(tuple).get(aura) * aura.getRelativeMass(worldObj, new CoordTuple(this)));
                             ((AuraTile) tuple.getTile(worldObj)).energy += power;
                         }
                     }

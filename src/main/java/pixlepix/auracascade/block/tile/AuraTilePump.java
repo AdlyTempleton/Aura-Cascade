@@ -42,7 +42,7 @@ public class AuraTilePump extends AuraTile {
             AuraUtil.keepAlive(this, 3);
         }
         if(!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 ==2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
-            if(pumpPower != 0){
+            if(pumpPower > 0){
                 AuraTile upNode = null;
                 for(int i=1; i<15; i++){
                     TileEntity te = worldObj.getTileEntity(xCoord, yCoord+i, zCoord);
@@ -52,15 +52,18 @@ public class AuraTilePump extends AuraTile {
                     }
                 }
                 if(upNode != null){
+
+                    pumpPower--;
                     for(EnumAura aura:EnumAura.values()) {
-                        pumpPower--;
                         int dist = upNode.yCoord - yCoord;
                         int quantity = 500 / dist;
                         quantity *= storage.getComposition(aura);
+                        quantity /= aura.getRelativeMass(worldObj, new CoordTuple(this));
                         quantity = Math.min(quantity, storage.get(aura));
-                        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), new CoordTuple(upNode), "magicCrit", aura.r, aura.g, aura.b, storage.getComposition(aura)), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                        burst(new CoordTuple(upNode), "magicCrit", aura, 1D);
                         storage.subtract(aura, quantity);
                         upNode.storage.add(new AuraQuantity(aura, quantity));
+
 
                     }
                 }
