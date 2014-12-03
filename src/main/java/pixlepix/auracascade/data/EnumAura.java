@@ -1,6 +1,14 @@
 package pixlepix.auracascade.data;
 
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.block.tile.AuraTile;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
 
 public enum EnumAura {
 	WHITE_AURA("White", 1, 1, 1),
@@ -12,6 +20,84 @@ public enum EnumAura {
 				return 2D;
 			}
 			return .5D;
+		}
+	},
+
+	BLACK_AURA("Black", .1, .1, .1){
+		@Override
+		public double getRelativeMass(World world, CoordTuple tuple) {
+			return 0D;
+		}
+	},
+	RED_AURA("Red", 1, .1, .1){
+		@Override
+		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity){
+			//Implementation loosely based off of Vazkii's Botania
+			AxisAlignedBB search = tuple.getBoundingBox(3);
+			List<EntityTNTPrimed> tntList = world.getEntitiesWithinAABB(EntityTNTPrimed.class, search);
+			for(EntityTNTPrimed tntPrimed:tntList){
+				if(tntPrimed.fuse == 1 && !tntPrimed.isDead){
+					tntPrimed.setDead();
+
+					//Make graphical explosion
+					Explosion explosion = new Explosion(world, null, tuple.getX(), tuple.getY(), tuple.getZ(), 4F);
+					explosion.isFlaming = false;
+					explosion.isSmoking = true;
+					explosion.doExplosionB(false);
+
+					//Move up mana
+
+					if(tuple.getTile(world) instanceof AuraTile){
+						AuraTile tile = (AuraTile) tuple.getTile(world);
+						tile.verifyConnections();
+						for(CoordTuple connectedNode: tile.connected){
+							if(connectedNode.getY() > tile.yCoord){
+								AuraTile transferTile = (AuraTile) connectedNode.getTile(world);
+
+								int auraPower = 1000000 / (connectedNode.getY() - tile.yCoord);
+								auraPower = Math.min(auraPower, tile.storage.get(this));
+
+								tile.burst(connectedNode, "magicCrit", this, 1D);
+								tile.storage.subtract(this, auraPower);
+								transferTile.storage.add(new AuraQuantity(this, auraPower));
+
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	ORANGE_AURA("Orange", 1, .5, 0){
+		@Override
+		public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction){
+			for(CoordTuple nearbyNode:tuple.inRange(2)){
+				if(nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction){
+					AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
+					for(CoordTuple targetNode: auraTile.connected){
+						if(nearbyNode.getDirectionTo(targetNode) == direction){
+							if(auraTile.burstMap == null) {
+
+								AuraQuantityList auraToSend = auraTile.storage.percent(Math.max(1F,(float)quantity.getNum() / (float) auraTile.storage.getTotalAura()));
+								auraToSend.set(this, 0);
+								auraTile.transferAura(targetNode, auraToSend, false);
+							}else{
+								AuraQuantityList auraToSend = (AuraQuantityList) auraTile.storage.clone();
+
+								//Simulate the node being discharged before the burst is calculated
+								for(AuraQuantityList quantityToSubtract:auraTile.burstMap.values()){
+									auraToSend.subtract(quantityToSubtract);
+								}
+								auraToSend.percent(Math.max(1F, (float)quantity.getNum() / (float) auraToSend.getTotalAura()));
+								auraToSend.set(this, 0);
+								auraTile.burstMap.put(targetNode, auraToSend);
+							}
+
+						}
+					}
+
+				}
+			}
 		}
 	};
 	public String name;
@@ -26,7 +112,11 @@ public enum EnumAura {
 		this.b = b;
 	}
 
+	public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity){}
+
 	public double getRelativeMass(World world, CoordTuple tuple){
 		return 1D;
 	}
+
+	public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction){}
 }

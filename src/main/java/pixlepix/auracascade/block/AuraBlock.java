@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
+import pixlepix.auracascade.block.tile.AuraTileBlack;
 import pixlepix.auracascade.block.tile.AuraTilePump;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -34,15 +35,16 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	}
 
 	//"" is default
-	//"pump" is AuraTilePump
+	//"pump" is AuraTilePump\
+	//"black" is AuraTileBlack
 	String type;
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-			player.addChatComponentMessage(new ChatComponentText("White Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(EnumAura.WHITE_AURA)));
-
-			player.addChatComponentMessage(new ChatComponentText("Green Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(EnumAura.GREEN_AURA)));
+			for(EnumAura aura:EnumAura.values()) {
+				player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
+			}
 			if(world.getTileEntity(x, y, z) instanceof AuraTilePump){
 
 				player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePump) world.getTileEntity(x, y, z)).pumpPower));
@@ -62,6 +64,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		// TODO Auto-generated method stub
 		ArrayList result = new ArrayList<Object>();
 		result.add("pump");
+		result.add("black");
 		return result;
 	}
 
@@ -97,6 +100,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		if(type.equals("pump")){
 			return AuraTilePump.class;
 		}
+		if(type.equals("black")) {
+			return AuraTileBlack.class;
+		}
 		return AuraTile.class;
 	}
 
@@ -105,6 +111,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 		if(type.equals("pump")){
 			return new AuraTilePump();
+		}
+
+		if(type.equals("black")){
+			return new AuraTileBlack();
 		}
 		return new AuraTile();
 	}

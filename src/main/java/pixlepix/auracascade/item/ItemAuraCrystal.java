@@ -34,6 +34,11 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return super.getItemStackDisplayName(stack) + EnumAura.values()[stack.getItemDamage()].name;
+    }
+
+    @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
     }

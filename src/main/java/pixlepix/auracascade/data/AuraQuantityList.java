@@ -91,23 +91,24 @@ public class AuraQuantityList {
 		return true;
 	}
 	public AuraQuantityList percent(float percentage){
-		try {
-			AuraQuantityList quantityList = (AuraQuantityList) this.clone();
+		AuraQuantityList quantityList = (AuraQuantityList) this.clone();
 
-			for(AuraQuantity quantity : this.quantityList){
-				quantityList.quantityList.add(new AuraQuantity(quantity.getType(), (int) (quantity.getNum()*percentage)));
-			}
-
-			return quantityList;
-
-		} catch (CloneNotSupportedException e) {
-
-			e.printStackTrace();
+		for(AuraQuantity quantity : this.quantityList){
+			quantityList.quantityList.add(new AuraQuantity(quantity.getType(), (int) (quantity.getNum()*percentage)));
 		}
-		return null;
+
+		return quantityList;
+
+	}
+	public AuraQuantityList min(AuraQuantityList other){
+		AuraQuantityList result = new AuraQuantityList();
+		for(EnumAura aura:EnumAura.values()){
+			result.set(aura, Math.min(get(aura), other.get(aura)));
+		}
+		return result;
 	}
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
+	protected Object clone(){
 		return new AuraQuantityList((ArrayList<AuraQuantity>) quantityList.clone());
 	}
 
