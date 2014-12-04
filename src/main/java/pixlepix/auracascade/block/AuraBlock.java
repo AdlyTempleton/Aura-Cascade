@@ -18,6 +18,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.block.tile.AuraTileBlack;
+import pixlepix.auracascade.block.tile.AuraTileConserve;
 import pixlepix.auracascade.block.tile.AuraTilePump;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -36,7 +37,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 	//"" is default
 	//"pump" is AuraTilePump\
-	//"black" is AuraTileBlack
+	//"black" is AuraTileBlack etc
 	String type;
 
 	@Override
@@ -67,6 +68,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		ArrayList result = new ArrayList<Object>();
 		result.add("pump");
 		result.add("black");
+		result.add("conserve");
 		return result;
 	}
 
@@ -105,20 +107,23 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		if(type.equals("black")) {
 			return AuraTileBlack.class;
 		}
+		if(type.equals("conserve")){
+			return AuraTileConserve.class;
+		}
 		return AuraTile.class;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 
-		if(type.equals("pump")){
-			return new AuraTilePump();
+		try {
+			return getTileEntity().newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
 		}
-
-		if(type.equals("black")){
-			return new AuraTileBlack();
-		}
-		return new AuraTile();
+		return null;
 	}
 
 
