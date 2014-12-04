@@ -99,6 +99,41 @@ public enum EnumAura {
 				}
 			}
 		}
+	},
+	YELLOW_AURA("Yellow", 1, 1, .1){
+		@Override
+		public double getAscentBoost(World world, CoordTuple tuple) {
+			return 10D;
+		}
+
+		@Override
+		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
+			if(world.getTotalWorldTime() % 1200 == 5) {
+				AuraTile tile = (AuraTile) tuple.getTile(world);
+				tile.storage.set(this, (int) (.9D * (double) tile.storage.get(this)));
+			}
+		}
+	},
+	BLUE_AURA("Blue", .1, .1, 1){
+		@Override
+		public double getAscentBoost(World world, CoordTuple tuple) {
+			return world.isRaining() ? 50 : .5;
+		}
+	},
+	VIOLET_AURA("Violet", 1, .1, 1){
+
+		@Override
+		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
+			if(world.getTotalWorldTime() % 400 == 5) {
+				AuraTile tile = (AuraTile) tuple.getTile(world);
+
+				//Achieve growth along logarithmic curve
+				double t = Math.log(tile.storage.get(this));
+				t += .1;
+				int newAura = (int) Math.pow(Math.E, t);
+				tile.storage.set(this, newAura);
+			}
+		}
 	};
 	public String name;
 	public double r;
@@ -115,6 +150,10 @@ public enum EnumAura {
 	public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity){}
 
 	public double getRelativeMass(World world, CoordTuple tuple){
+		return 1D;
+	}
+
+	public double getAscentBoost(World world, CoordTuple tuple){
 		return 1D;
 	}
 

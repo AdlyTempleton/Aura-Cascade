@@ -59,6 +59,7 @@ public class AuraTilePump extends AuraTile {
                         int quantity = 500 / dist;
                         quantity *= storage.getComposition(aura);
                         quantity = aura.getRelativeMass(worldObj, new CoordTuple(this)) == 0 ? 0 : (int) ((double) quantity / aura.getRelativeMass(worldObj, new CoordTuple(this)));
+                        quantity *= aura.getAscentBoost(worldObj, new CoordTuple(this));
                         quantity = Math.min(quantity, storage.get(aura));
                         burst(new CoordTuple(upNode), "magicCrit", aura, 1D);
                         storage.subtract(aura, quantity);

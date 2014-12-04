@@ -43,7 +43,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
 			for(EnumAura aura:EnumAura.values()) {
-				player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
+				if(((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
+					player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
+				}
 			}
 			if(world.getTileEntity(x, y, z) instanceof AuraTilePump){
 
