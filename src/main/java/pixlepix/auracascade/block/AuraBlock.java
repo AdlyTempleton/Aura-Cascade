@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -49,7 +50,20 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 				player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
 				world.markBlockForUpdate(x, y, z);
 
-			}else {
+			}else if(world.getTileEntity(x, y, z) instanceof AuraTilePedestal && !player.isSneaking()){
+				AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(x, y, z);
+
+				//Remove current itemstack from pedestal
+				if(pedestal.itemStack != null){
+					EntityItem item = new EntityItem(world, player.posX, player.posY, player.posZ, pedestal.itemStack);
+					world.spawnEntityInWorld(item);
+				}
+
+				pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
+				world.markBlockForUpdate(x, y, z);
+				return true;
+
+			}else{
 				for (EnumAura aura : EnumAura.values()) {
 					if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
 						player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
@@ -71,20 +85,6 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	}
 
 	@Override
-	public boolean canProvidePower() {
-		return true;
-	}
-
-	@Override
-	public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int meta) {
-		if(world.getTileEntity(x, y, z) instanceof AuraTileCapacitor){
-			AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
-			return capacitor.aboutToBurst ? 15 : 0;
-		}
-		return 0;
-	}
-
-	@Override
 	public ArrayList<Object> getSpecialParameters() {
 		// TODO Auto-generated method stub
 		ArrayList result = new ArrayList<Object>();
@@ -92,6 +92,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		result.add("black");
 		result.add("conserve");
 		result.add("capacitor");
+
+		result.add("craftingCenter");
+
+		result.add("craftingPedestal");
 		return result;
 	}
 
@@ -135,6 +139,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 		if(type.equals("capacitor")){
 			return AuraTileCapacitor.class;
+		}
+
+		if(type.equals("craftingPedestal")){
+			return AuraTilePedestal.class;
 		}
 		return AuraTile.class;
 	}

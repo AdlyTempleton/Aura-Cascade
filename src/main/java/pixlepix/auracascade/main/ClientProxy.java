@@ -1,10 +1,22 @@
 package pixlepix.auracascade.main;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.world.World;
+        import cpw.mods.fml.client.registry.ClientRegistry;
+        import cpw.mods.fml.client.registry.RenderingRegistry;
+        import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+        import net.minecraft.client.Minecraft;
+        import net.minecraft.world.World;
+        import pixlepix.auracascade.block.tile.AuraTilePedestal;
+        import pixlepix.auracascade.block.tile.AuraTilePump;
+        import pixlepix.auracascade.render.RenderPedestal;
 
 public class ClientProxy extends CommonProxy {
     public static World getWorld(){
         return Minecraft.getMinecraft().theWorld;
+    }
+
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+        super.postInit(event);
+        ClientRegistry.bindTileEntitySpecialRenderer(AuraTilePedestal.class, new RenderPedestal());
     }
 }

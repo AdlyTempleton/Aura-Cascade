@@ -117,6 +117,7 @@ public class AuraTile extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
+
         if (!hasConnected) {
             for (int i = -15; i < 15; i++) {
 
