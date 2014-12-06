@@ -2,6 +2,7 @@ package pixlepix.auracascade.block.tile;
 
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 
 /**
@@ -18,5 +19,10 @@ public class AuraTileBlack extends AuraTile {
                 storage.add(new AuraQuantity(EnumAura.BLACK_AURA, 100000));
             }
         }
+    }
+
+    @Override
+    public boolean canReceive(CoordTuple source, EnumAura aura) {
+        return aura == EnumAura.BLACK_AURA && super.canReceive(source, aura);
     }
 }

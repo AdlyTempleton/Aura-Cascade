@@ -51,6 +51,12 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     msg.world.spawnParticle("flame", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D)/16, rand.nextDouble()/16, (rand.nextDouble()-.5)/16);
                 }
             }
+            if(msg.type == 2){
+                for(int i=0; i<50; i++){
+                    Random rand = new Random();
+                    msg.world.spawnParticle("explode", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D)/4, rand.nextDouble()/4, (rand.nextDouble()-.5)/4);
+                }
+            }
         }
         return null;
     }
@@ -86,7 +92,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
         this.comp = comp;
     }
     public PacketBurst(int i, double x, double y, double z){
-        this.type = 1;
+        this.type = i;
         this.x = x;
         this.y = y;
         this.z = z;
@@ -105,8 +111,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             g = buf.readDouble();
             b = buf.readDouble();
             comp = buf.readDouble();
-        }
-        if(type == 1){
+        }else{
 
             x = buf.readDouble();
             y = buf.readDouble();
@@ -139,14 +144,10 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             buf.writeDouble(b);
             buf.writeDouble(comp);
 
-        }
-
-        if(type == 1){
+        }else{
             buf.writeDouble(x);
             buf.writeDouble(y);
             buf.writeDouble(z);
         }
     }
-
-
 }

@@ -14,7 +14,7 @@ public class AuraUtil {
     public static void keepAlive(TileEntity te, int range){
         List<EntityItem> nearbyItems = te.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(te.xCoord - range, te.yCoord - range, te.zCoord - range, te.xCoord + range, te.yCoord + range, te.zCoord + range));
         for (EntityItem entityItem : nearbyItems) {
-            entityItem.age = 0;
+            entityItem.lifespan = Integer.MAX_VALUE;
         }
     }
     

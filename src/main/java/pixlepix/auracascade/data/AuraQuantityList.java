@@ -136,4 +136,12 @@ public class AuraQuantityList {
 	}
 
 
+	public boolean greaterThan(AuraQuantityList list) {
+		for(EnumAura aura: EnumAura.values()){
+			if(get(aura) < list.get(aura)){
+				return false;
+			}
+		}
+		return true;
+	}
 }

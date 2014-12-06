@@ -36,6 +36,19 @@ public class AuraTilePump extends AuraTile {
     }
 
     @Override
+    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+        return false;
+    }
+
+    @Override
+    public boolean canReceive(CoordTuple source, EnumAura aura) {
+        if(source.getY() > yCoord){
+            return false;
+        }
+        return super.canReceive(source, aura);
+    }
+
+    @Override
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.getTotalWorldTime() % 2400 == 0){

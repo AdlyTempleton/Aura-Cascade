@@ -15,11 +15,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pixlepix.auracascade.block.tile.AuraTile;
-import pixlepix.auracascade.block.tile.AuraTileBlack;
-import pixlepix.auracascade.block.tile.AuraTileConserve;
-import pixlepix.auracascade.block.tile.AuraTilePump;
+import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -43,14 +41,24 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if(!world.isRemote) {
-			for(EnumAura aura:EnumAura.values()) {
-				if(((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
-					player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
-				}
-			}
-			if(world.getTileEntity(x, y, z) instanceof AuraTilePump){
+			player.addChatComponentMessage(new ChatComponentText("Aura:"));
 
-				player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePump) world.getTileEntity(x, y, z)).pumpPower));
+			if(world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()){
+				AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
+				capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
+				player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
+				world.markBlockForUpdate(x, y, z);
+
+			}else {
+				for (EnumAura aura : EnumAura.values()) {
+					if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
+						player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
+					}
+				}
+				if (world.getTileEntity(x, y, z) instanceof AuraTilePump) {
+
+					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePump) world.getTileEntity(x, y, z)).pumpPower));
+				}
 			}
 		}
 		return false;
@@ -63,12 +71,27 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	}
 
 	@Override
+	public boolean canProvidePower() {
+		return true;
+	}
+
+	@Override
+	public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int meta) {
+		if(world.getTileEntity(x, y, z) instanceof AuraTileCapacitor){
+			AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
+			return capacitor.aboutToBurst ? 15 : 0;
+		}
+		return 0;
+	}
+
+	@Override
 	public ArrayList<Object> getSpecialParameters() {
 		// TODO Auto-generated method stub
 		ArrayList result = new ArrayList<Object>();
 		result.add("pump");
 		result.add("black");
 		result.add("conserve");
+		result.add("capacitor");
 		return result;
 	}
 
@@ -109,6 +132,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 		if(type.equals("conserve")){
 			return AuraTileConserve.class;
+		}
+		if(type.equals("capacitor")){
+			return AuraTileCapacitor.class;
 		}
 		return AuraTile.class;
 	}

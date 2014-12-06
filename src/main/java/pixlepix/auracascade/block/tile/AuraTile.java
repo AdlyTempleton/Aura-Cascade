@@ -143,7 +143,7 @@ public class AuraTile extends TileEntity {
                 }
                 //Add a balance so the node doesn't completley discharge
                 //Based off 'sending aura to yourself'
-                totalWeight += 30 * 30;
+                totalWeight += this instanceof AuraTileCapacitor ? 0 : 30 * 30;
 
                 for (CoordTuple tuple : connected) {
                     double factor = getWeight(tuple) / totalWeight;
@@ -191,14 +191,16 @@ public class AuraTile extends TileEntity {
     }
 
     public void transferAura(CoordTuple tuple, AuraQuantityList list, boolean triggerOrange) {
-        ((AuraTile) tuple.getTile(worldObj)).storage.add(list);
-        storage.subtract(list);
-        for(EnumAura aura:EnumAura.values()) {
-            burst(tuple, "crit", aura, list.getComposition(aura));
-            int power = (int)((tuple.getY() - yCoord) * list.get(aura) * aura.getRelativeMass(worldObj, new CoordTuple(this)));
-            ((AuraTile) tuple.getTile(worldObj)).energy += power;
-            if(!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0){
-                aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
+        if(storage.greaterThan(list)){
+            ((AuraTile) tuple.getTile(worldObj)).storage.add(list);
+            storage.subtract(list);
+            for(EnumAura aura:EnumAura.values()) {
+                burst(tuple, "crit", aura, list.getComposition(aura));
+                int power = (int)((tuple.getY() - yCoord) * list.get(aura) * aura.getRelativeMass(worldObj, new CoordTuple(this)));
+                ((AuraTile) tuple.getTile(worldObj)).energy += power;
+                if(!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0){
+                    aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
+                }
             }
         }
     }
@@ -207,18 +209,19 @@ public class AuraTile extends TileEntity {
         boolean isLower = tuple.getY() < yCoord;
 
         boolean isSame = tuple.getY() == yCoord;
-        if(!(isSame || (isLower && (!(tuple.getTile(worldObj) instanceof AuraTilePump))))){
-            return false;
-        }
-        if(this instanceof AuraTilePump){
+        if(!(isSame || isLower )){
             return false;
         }
         if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !(this instanceof AuraTileBlack)){
             return false;
         }
-        if(aura != EnumAura.BLACK_AURA && tuple.getTile(worldObj) instanceof AuraTileBlack){
+        if(aura == EnumAura.BLACK_AURA && (xCoord != tuple.getX() || yCoord == tuple.getY())){
             return false;
         }
+        return ((AuraTile)tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
+    }
+
+    public boolean canReceive(CoordTuple source, EnumAura aura){
         return true;
     }
 
