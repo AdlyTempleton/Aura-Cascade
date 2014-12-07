@@ -197,8 +197,10 @@ public class AuraTile extends TileEntity {
             storage.subtract(list);
             for(EnumAura aura:EnumAura.values()) {
                 burst(tuple, "crit", aura, list.getComposition(aura));
-                int power = (int)((tuple.getY() - yCoord) * list.get(aura) * aura.getRelativeMass(worldObj, new CoordTuple(this)));
-                ((AuraTile) tuple.getTile(worldObj)).energy += power;
+                int power = (int)((yCoord - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj, new CoordTuple(this)));
+                if(power > 0) {
+                    ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
+                }
                 if(!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0){
                     aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
                 }
@@ -206,10 +208,17 @@ public class AuraTile extends TileEntity {
         }
     }
 
+    public void receivePower(int power, EnumAura type) {
+        energy += power;
+    }
+
     public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
         boolean isLower = tuple.getY() < yCoord;
 
         boolean isSame = tuple.getY() == yCoord;
+        if(!(tuple.getTile(worldObj) instanceof AuraTile)){
+            return false;
+        }
         if(!(isSame || isLower )){
             return false;
         }

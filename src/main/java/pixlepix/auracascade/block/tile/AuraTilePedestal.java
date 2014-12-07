@@ -4,6 +4,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
 
 /**
  * Created by pixlepix on 12/6/14.
@@ -11,12 +17,61 @@ import net.minecraft.nbt.NBTTagCompound;
 public class AuraTilePedestal extends AuraTile implements IInventory{
 
     public ItemStack itemStack;
+    //Direction to center of crafting
+    public ForgeDirection direction = ForgeDirection.UNKNOWN;
+    public int powerReceived = 0;
 
+    public void verifyConnections(){
+        if(direction != ForgeDirection.UNKNOWN){
+            TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY,zCoord + direction.offsetZ);
+            if(!(tileEntity instanceof CraftingCenterTile)){
+                direction = ForgeDirection.UNKNOWN;
+            }
+        }
+
+        if(direction == ForgeDirection.UNKNOWN){
+            for(ForgeDirection searchDir:CraftingCenterTile.pedestalRelativeLocations){
+                TileEntity tileEntity = worldObj.getTileEntity(xCoord + searchDir.offsetX, yCoord + searchDir.offsetY,zCoord + searchDir.offsetZ);
+                if(tileEntity instanceof CraftingCenterTile){
+                    direction = searchDir;
+                    break;
+                }
+            }
+        }
+    }
+
+    public CraftingCenterTile getCenter(){
+        if(direction == ForgeDirection.UNKNOWN){
+            return null;
+        }
+        TileEntity te= new CoordTuple(this).add(direction).getTile(worldObj);
+        return te instanceof CraftingCenterTile ? (CraftingCenterTile)te :null;
+    }
+
+    @Override
+    public void receivePower(int power, EnumAura type) {
+        verifyConnections();
+        CraftingCenterTile center = getCenter();
+        if(center != null){
+            PylonRecipe recipe = center.getRecipe();
+            if(recipe != null){
+                AuraQuantity quantity = recipe.getAuraFromItem(itemStack);
+                if(quantity != null && quantity.getType() == type){
+                    powerReceived += power;
+                    if(powerReceived >= quantity.getNum()){
+                        center.checkRecipeComplete();
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     protected void readCustomNBT(NBTTagCompound nbt) {
         super.readCustomNBT(nbt);
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
+        direction = ForgeDirection.getOrientation(nbt.getInteger("direction"));
+        powerReceived = nbt.getInteger("powerReceived");
     }
 
     @Override
@@ -27,6 +82,8 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
             itemStack.writeToNBT(compound);
             nbt.setTag("itemStack", compound);
         }
+        nbt.setInteger("direction", direction.ordinal());
+        nbt.setInteger("powerReceiver", powerReceived);
     }
 
     @Override

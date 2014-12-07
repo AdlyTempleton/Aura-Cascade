@@ -24,6 +24,10 @@ public class CoordTuple {
         this.z = tileEntity.zCoord;
     }
 
+	public CoordTuple add(ForgeDirection dir){
+		return new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+	}
+
 
 	public double dist(CoordTuple other){
         return Math.sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y) + (z - other.z) * (z - other.z));

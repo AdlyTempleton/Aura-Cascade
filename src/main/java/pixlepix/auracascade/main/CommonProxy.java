@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.world.World;
+import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
@@ -28,6 +29,7 @@ public class CommonProxy {
     }
     public void init(FMLInitializationEvent event){
         registry.init();
+        PylonRecipeRegistry.init();
     }
     public void postInit(FMLPostInitializationEvent event){
         registry.postInit();

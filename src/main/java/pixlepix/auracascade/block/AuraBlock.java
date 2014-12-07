@@ -41,7 +41,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		if(!world.isRemote) {
+		if(!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
 			player.addChatComponentMessage(new ChatComponentText("Aura:"));
 
 			if(world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()){
@@ -143,6 +143,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 		if(type.equals("craftingPedestal")){
 			return AuraTilePedestal.class;
+		}
+
+		if(type.equals("craftingCenter")){
+			return CraftingCenterTile.class;
 		}
 		return AuraTile.class;
 	}
