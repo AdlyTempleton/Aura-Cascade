@@ -70,25 +70,25 @@ public enum EnumAura {
 	},
 	ORANGE_AURA("Orange", 1, .5, 0){
 		@Override
-		public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction){
-			for(CoordTuple nearbyNode:tuple.inRange(2)){
-				if(nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction){
+		public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
+			for (CoordTuple nearbyNode : tuple.inRange(2)) {
+				if (nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction) {
 					AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
-					for(CoordTuple targetNode: auraTile.connected){
-						if(nearbyNode.getDirectionTo(targetNode) == direction){
-							if(auraTile.burstMap == null) {
+					for (CoordTuple targetNode : auraTile.connected) {
+						if (nearbyNode.getDirectionTo(targetNode) == direction) {
+							if (auraTile.burstMap == null) {
 
-								AuraQuantityList auraToSend = auraTile.storage.percent(Math.max(1F,(float)quantity.getNum() / (float) auraTile.storage.getTotalAura()));
+								AuraQuantityList auraToSend = auraTile.storage.percent(Math.max(1F, (float) quantity.getNum() / (float) auraTile.storage.getTotalAura()));
 								auraToSend.set(this, 0);
 								auraTile.transferAura(targetNode, auraToSend, false);
-							}else{
+							} else {
 								AuraQuantityList auraToSend = (AuraQuantityList) auraTile.storage.clone();
 
 								//Simulate the node being discharged before the burst is calculated
-								for(AuraQuantityList quantityToSubtract:auraTile.burstMap.values()){
+								for (AuraQuantityList quantityToSubtract : auraTile.burstMap.values()) {
 									auraToSend.subtract(quantityToSubtract);
 								}
-								auraToSend.percent(Math.max(1F, (float)quantity.getNum() / (float) auraToSend.getTotalAura()));
+								auraToSend.percent(Math.max(1F, (float) quantity.getNum() / (float) auraToSend.getTotalAura()));
 								auraToSend.set(this, 0);
 								auraTile.burstMap.put(targetNode, auraToSend);
 							}
@@ -98,6 +98,10 @@ public enum EnumAura {
 
 				}
 			}
+		}
+		@Override
+		public double getRelativeMass(World world, CoordTuple tuple) {
+			return 0D;
 		}
 	},
 	YELLOW_AURA("Yellow", 1, 1, .1){

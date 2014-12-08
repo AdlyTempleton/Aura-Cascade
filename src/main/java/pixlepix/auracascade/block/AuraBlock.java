@@ -158,6 +158,11 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		if(type.equals("craftingCenter")){
 			return CraftingCenterTile.class;
 		}
+
+
+		if(type.equals("craftingCenter")){
+			return AuraTileOrange.class;
+		}
 		return AuraTile.class;
 	}
 

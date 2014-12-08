@@ -10,19 +10,23 @@ import pixlepix.auracascade.data.EnumAura;
  */
 public class AuraTileBlack extends AuraTile {
 
+    public EnumAura getAuraType(){
+        return EnumAura.BLACK_AURA;
+    }
+
     @Override
     public void updateEntity() {
         super.updateEntity();
         if(worldObj.getTotalWorldTime() % 20 == 2){
             this.storage = new AuraQuantityList();
             if(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
-                storage.add(new AuraQuantity(EnumAura.BLACK_AURA, 100000));
+                storage.add(new AuraQuantity(getAuraType(), 100000));
             }
         }
     }
 
     @Override
     public boolean canReceive(CoordTuple source, EnumAura aura) {
-        return aura == EnumAura.BLACK_AURA && super.canReceive(source, aura);
+        return aura == getAuraType() && super.canReceive(source, aura);
     }
 }
