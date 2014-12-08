@@ -1,13 +1,18 @@
 package pixlepix.auracascade.block.tile;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
+import pixlepix.auracascade.main.CommonProxy;
+import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,12 +69,33 @@ public class CraftingCenterTile extends TileEntity {
         if(valid) {
             for (ForgeDirection direction : pedestalRelativeLocations) {
                 AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(this).add(direction).getTile(worldObj);
+                //Particles and sparklez
+                for(ForgeDirection beamDir:ForgeDirection.VALID_DIRECTIONS){
+                    if(beamDir != direction && beamDir != direction.getOpposite()){
+                        CoordTuple mid = new CoordTuple(pedestal).add(beamDir).add(direction);
+                        EnumAura aura = recipe.getAuraFromItem(pedestal.itemStack).getType();
+                        burst(mid, new CoordTuple(pedestal), "happyVillager", aura, 1);
+
+                        burst(mid, new CoordTuple(this), "happyVillager", aura, 1);
+
+                    }
+                }
+
                 pedestal.itemStack = null;
                 pedestal.powerReceived = 0;
             }
             ItemStack loot = recipe.result.copy();
             EntityItem entityDrop = new EntityItem(worldObj, xCoord + .5, yCoord + 2, zCoord + .5, loot);
             worldObj.spawnEntityInWorld(entityDrop);
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(3, xCoord + .5, yCoord + 2, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+
         }
     }
+
+    public void burst(CoordTuple origin, CoordTuple target, String particle, EnumAura aura, double composition) {
+
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, origin, target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+
+    }
+
 }

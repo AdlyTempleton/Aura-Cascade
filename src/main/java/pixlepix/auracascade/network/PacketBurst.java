@@ -31,7 +31,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     velocity = velocity.normalize();
                     double dist = msg.to.dist(msg.from);
 
-                    int density = (int) (25D * msg.comp);
+                    int density = (int) (10D * msg.comp);
                     for (int count = 0; count < dist * density; count++) {
                         double i = ((double) count) / density;
                         double xp = msg.from.getX() + (velocity.xCoord * i) + .5;
@@ -57,6 +57,15 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     msg.world.spawnParticle("explode", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D)/4, rand.nextDouble()/4, (rand.nextDouble()-.5)/4);
                 }
             }
+            if(msg.type == 3){
+                for(int i=0; i<200; i++){
+                    Random rand = new Random();
+                    double posX = msg.x + rand.nextDouble() * 8 - 4D;
+                    double posY = msg.y + rand.nextDouble() * 8 - 4D;
+                    double posZ = msg.z + rand.nextDouble() * 8 - 4D;
+                    msg.world.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                }
+            }
         }
         return null;
     }
@@ -79,7 +88,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
     //Type = 1: Fire sphere
     int type = 0;
 
-    public static final String[] particles = {"spell", "magicCrit", "crit"};
+    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark"};
 
     public PacketBurst(World world, CoordTuple from, CoordTuple to, String particle, double r, double g, double b, double comp){
         this.from = from;
@@ -97,6 +106,14 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
         this.y = y;
         this.z = z;
     }
+
+    public PacketBurst(int i, double x, double y, double z, CoordTuple from){
+        this.type = i;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.from = from;
+    }
     public PacketBurst(){
     }
 
@@ -112,7 +129,6 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             b = buf.readDouble();
             comp = buf.readDouble();
         }else{
-
             x = buf.readDouble();
             y = buf.readDouble();
             z = buf.readDouble();
@@ -143,7 +159,6 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             buf.writeDouble(g);
             buf.writeDouble(b);
             buf.writeDouble(comp);
-
         }else{
             buf.writeDouble(x);
             buf.writeDouble(y);

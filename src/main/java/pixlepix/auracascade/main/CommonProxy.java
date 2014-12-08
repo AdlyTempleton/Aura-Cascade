@@ -16,8 +16,8 @@ import sun.org.mozilla.javascript.internal.ast.Block;
 
 public class CommonProxy {
 
-    public static BlockRegistry registry;
-    public static SimpleNetworkWrapper networkWrapper;
+    public BlockRegistry registry;
+    public SimpleNetworkWrapper networkWrapper;
 
     public void preInit(FMLPreInitializationEvent event){
         ModCreativeTab.INSTANCE = new ModCreativeTab();

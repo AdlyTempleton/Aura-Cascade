@@ -2,6 +2,7 @@ package pixlepix.auracascade.block.tile;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.CommonProxy;
@@ -45,7 +46,7 @@ public class AuraTileCapacitor extends AuraTile{
             if (worldObj.getTotalWorldTime() % 19 == 0 && storage.getTotalAura() >= storageValues[storageValueIndex]) {
                 aboutToBurst = true;
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
-                CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(2, xCoord + .5, yCoord + .5, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(2, xCoord + .5, yCoord + .5, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 20));
             }
 
             if (worldObj.getTotalWorldTime() % 5 == 0 && aboutToBurst) {

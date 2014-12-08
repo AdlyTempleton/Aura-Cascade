@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.AuraUtil;
@@ -101,7 +102,7 @@ public class FurnaceTile extends TileEntity {
 
                         worldObj.spawnEntityInWorld(newEntity);
 
-                        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
                         break;
                     }

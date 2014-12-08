@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,6 +29,15 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	public AuraBlock(String type){
 		super(Material.glass);
 		this.type = type;
+
+		if(!type.equals("craftingCenter")){
+			setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
+		}
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	public AuraBlock(){

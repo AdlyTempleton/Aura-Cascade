@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityCritFX;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.Vec3;
+import pixlepix.auracascade.particle.EntityItemPoof;
 import pixlepix.auracascade.particle.ParticleSphere;
 
 /**
@@ -41,6 +43,14 @@ public class ParticleEffects {
                 if (particleName.equals("crit"))
                 {
                     var21 = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ);
+                    if(r!=0 || g!=0 || b!=0) {
+                        ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
+                    }
+
+                }
+                if (particleName.equals("fireworksSpark")){
+                    var21 = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ, minecraft.effectRenderer);
+
                     if(r!=0 || g!=0 || b!=0) {
                         ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
                     }

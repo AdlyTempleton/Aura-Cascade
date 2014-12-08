@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.CoordTuple;
@@ -110,7 +111,7 @@ public class AuraTile extends TileEntity {
 
     public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
 
-        CommonProxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
     }
 
