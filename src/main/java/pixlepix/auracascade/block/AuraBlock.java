@@ -106,6 +106,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		result.add("craftingCenter");
 
 		result.add("craftingPedestal");
+		result.add("orange");
 		return result;
 	}
 
