@@ -7,8 +7,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.world.World;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.network.PacketFairyUpdate;
@@ -34,6 +37,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event){
         registry.init();
         PylonRecipeRegistry.init();
+        EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 20, 20, true);
 
     }
     public void postInit(FMLPostInitializationEvent event){

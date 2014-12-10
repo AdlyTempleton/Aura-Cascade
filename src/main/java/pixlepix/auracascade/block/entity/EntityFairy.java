@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.entity;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
@@ -31,6 +32,8 @@ public class EntityFairy extends Entity {
     public boolean reverseTheta;
     public boolean reversePhi;
 
+    public EntityItem entityItemRender;
+
 
     public EntityFairy(World p_i1582_1_) {
         super(p_i1582_1_);
@@ -39,18 +42,15 @@ public class EntityFairy extends Entity {
     @Override
     protected void entityInit() {
         Random random = new Random();
-        rho = random.nextDouble() + 4;
+        rho = random.nextDouble() + 5;
         phi = random.nextDouble() * 180;
         theta = random.nextDouble() * 360;
 
         //Period of 5-10 s
-        dTheta = 1 / (random.nextDouble() * 5 + 5);
-        maxPhi = 45 + random.nextDouble() * 45;
+        dTheta = 1 / (random.nextDouble() * 5 + 5) + .1;
         //Period of 3-5 s
         dPhi = .3 / (3 + random.nextDouble());
 
-        reverseTheta = random.nextBoolean();
-        reversePhi = random.nextBoolean();
 
     }
 
@@ -60,12 +60,20 @@ public class EntityFairy extends Entity {
         if(worldObj.getTotalWorldTime() % 400 == 0){
             AuraCascade.netHandler.sendToAllAround(new PacketFairyUpdate(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, posX, posY, posZ, 30));
         }
+        double oldX = posX;
+        double oldY = posY;
+        double oldZ = posZ;
         setPosition(player.posX + rho * Math.sin(phi) * Math.cos(theta), player.posY + rho * Math.sin(phi) * Math.sin(theta), player.posZ + rho * Math.cos(phi));
-        phi += dPhi * (reversePhi ? -1 : 1);
-        theta += dTheta * (reverseTheta ? -1 : 1);
-        if(Math.abs(phi) > maxPhi){
-            reversePhi = !reversePhi;
+        phi += dPhi;
+        theta += dTheta;
+
+        phi %= 360;
+        theta %= 360;
+        if(entityItemRender == null){
+            entityItemRender = new EntityItem(worldObj);
         }
+        entityItemRender.setPosition(posX, posY, posZ);
+        entityItemRender.setVelocity(oldX, oldY, oldZ);
     }
 
     @Override

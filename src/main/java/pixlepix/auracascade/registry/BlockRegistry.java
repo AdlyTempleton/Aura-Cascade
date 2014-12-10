@@ -23,10 +23,10 @@ import java.util.Map;
 public class BlockRegistry {
 
 	private ArrayList<Class> itemClasses = new ArrayList<Class>();
-	private HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
+	private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
 
 	private ArrayList<Class> blockClasses = new ArrayList<Class>();
-	private HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
+	private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
 
 	public void registerClasses() {
 		try {
@@ -160,15 +160,15 @@ public class BlockRegistry {
 
 	}
 
-	public ArrayList<Item> getItemFromClass(Class clazz) {
+	public static ArrayList<Item> getItemFromClass(Class clazz) {
 		return itemRegistry.get(clazz);
 	}
 
-	public Item getFirstItemFromClass(Class clazz) {
+	public static Item getFirstItemFromClass(Class clazz) {
 		return itemRegistry.get(clazz) != null ? itemRegistry.get(clazz).get(0) : null;
 	}
 
-    public Item getItemFromClassAndName(Class clazz, String s) {
+    public static Item getItemFromClassAndName(Class clazz, String s) {
         if (itemRegistry.get(clazz) == null){
             return null;
         }
@@ -180,7 +180,7 @@ public class BlockRegistry {
         return null;
     }
 
-    public Block getBlockFromClassAndName(Class clazz, String s) {
+    public static Block getBlockFromClassAndName(Class clazz, String s) {
         if (blockRegistry.get(clazz) == null){
             return null;
         }
@@ -192,11 +192,11 @@ public class BlockRegistry {
         return null;
     }
 
-	public ArrayList<Block> getBlockFromClass(Class clazz) {
+	public static ArrayList<Block> getBlockFromClass(Class clazz) {
 		return blockRegistry.get(clazz);
 	}
 
-	public Block getFirstBlockFromClass(Class clazz) {
+	public static Block getFirstBlockFromClass(Class clazz) {
 		return blockRegistry.get(clazz) != null ? blockRegistry.get(clazz).get(0) : null;
 	}
 

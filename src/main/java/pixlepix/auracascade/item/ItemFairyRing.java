@@ -3,16 +3,24 @@ package pixlepix.auracascade.item;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagIntArray;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by pixlepix on 12/8/14.
@@ -29,23 +37,45 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     }
 
     @Override
-    public void onEquipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+    public void onEquipped(ItemStack ringStack, EntityLivingBase entityLivingBase) {
+        makeFaries(ringStack, entityLivingBase);
+    }
+
+    public static void makeFaries(ItemStack ringStack, EntityLivingBase entityLivingBase) {
         if(entityLivingBase instanceof EntityPlayer) {
-            EntityFairy fairy = new EntityFairy(entityLivingBase.worldObj);
-            fairy.player = (EntityPlayer) entityLivingBase;
-            ((EntityPlayer) entityLivingBase).worldObj.spawnEntityInWorld(fairy);
+
+            if(ringStack.stackTagCompound == null){
+                ringStack.stackTagCompound = new NBTTagCompound();
+            }
+            int[] tagList = ringStack.stackTagCompound.getIntArray("fairyList");
+            for(int i : tagList){
+                Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
+                EntityFairy fairy = null;
+                try {
+                    fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entityLivingBase).worldObj);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fairy.player = (EntityPlayer) entityLivingBase;
+                ((EntityPlayer) entityLivingBase).worldObj.spawnEntityInWorld(fairy);
+            }
+
         }
     }
 
     @Override
     public void onUnequipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+        killNearby(itemStack, entityLivingBase);
+
+    }
+
+    public static void killNearby(ItemStack itemStack, EntityLivingBase entityLivingBase){
         List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 10, entityLivingBase.posY - 10, entityLivingBase.posZ - 10, entityLivingBase.posX + 10, entityLivingBase.posY + 10, entityLivingBase.posZ + 10));
         for(EntityFairy fairy: fairies){
             if(fairy.player == entityLivingBase){
                 fairy.setDead();
             }
         }
-
     }
 
     @Override
@@ -83,5 +113,20 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return null;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if(!world.isRemote && player.isSneaking()){
+            int[] fairyCharms = stack.stackTagCompound.getIntArray("fairyList");
+            Random random = new Random();
+            for(int i: fairyCharms){
+                EntityItem item = new EntityItem(world, player.posX + random.nextDouble() -.5D, player.posY + random.nextDouble() -.5D, player.posZ + random.nextDouble() -.5D, new ItemStack(AuraCascade.proxy.registry.getFirstItemFromClass(ItemFairyCharm.class), 1, i));
+                world.spawnEntityInWorld(item);
+            }
+            stack.stackTagCompound.setIntArray("fairyList", new int[0]);
+
+        }
+        return stack;
     }
 }
