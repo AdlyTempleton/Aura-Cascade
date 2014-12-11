@@ -7,6 +7,8 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.server.FMLServerHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.main.ClientProxy;
 
@@ -21,41 +23,52 @@ public class PacketFairyUpdate implements IMessage, IMessageHandler<PacketFairyU
         this.fairy = fairy;
     }
 
+    double theta;
+    double rho;
+    double phi;
+    double dPhi;
+    double dTheta;
+    EntityPlayer player;
+
     public PacketFairyUpdate(){
 
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        Entity entity = ClientProxy.getWorld().getEntityByID(buf.readInt());
+        Entity entity = AuraCascade.proxy.getWorld().getEntityByID(buf.readInt());
         if(entity instanceof EntityFairy){
             this.fairy = (EntityFairy) entity;
-            fairy.theta = buf.readDouble();
-            fairy.rho = buf.readDouble();
-            fairy.phi = buf.readDouble();
-            fairy.dPhi = buf.readDouble();
-            fairy.dTheta = buf.readDouble();
-            fairy.maxPhi = buf.readDouble();
-            fairy.reverseTheta = buf.readBoolean();
-            fairy.reversePhi = buf.readBoolean();
+            player = (EntityPlayer) AuraCascade.proxy.getWorld().getEntityByID(buf.readInt());
+            theta = buf.readDouble();
+            rho = buf.readDouble();
+            phi = buf.readDouble();
+            dPhi = buf.readDouble();
+            dTheta = buf.readDouble();
         }
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(fairy.getEntityId());
+        buf.writeInt(fairy.player.getEntityId());
         buf.writeDouble(fairy.theta);
         buf.writeDouble(fairy.rho);
         buf.writeDouble(fairy.phi);
         buf.writeDouble(fairy.dPhi);
         buf.writeDouble(fairy.dTheta);
-        buf.writeDouble(fairy.maxPhi);
-        buf.writeBoolean(fairy.reverseTheta);
-        buf.writeBoolean(fairy.reversePhi);
     }
 
     @Override
-    public IMessage onMessage(PacketFairyUpdate message, MessageContext ctx) {
+    public IMessage onMessage(PacketFairyUpdate msg, MessageContext ctx) {
+        if(msg.fairy != null) {
+            msg.fairy.theta = msg.theta;
+            msg.fairy.rho = msg.rho;
+            msg.fairy.dPhi = msg.dPhi;
+            msg.fairy.dTheta = msg.dTheta;
+            msg.fairy.phi = msg.phi;
+            msg.fairy.player = msg.player;
+        }
         return null;
     }
 }

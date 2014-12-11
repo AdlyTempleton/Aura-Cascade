@@ -6,9 +6,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.network.PacketFairyRequestUpdate;
 import pixlepix.auracascade.network.PacketFairyUpdate;
 
 import java.util.Random;
@@ -37,6 +40,7 @@ public class EntityFairy extends Entity {
 
     public EntityFairy(World p_i1582_1_) {
         super(p_i1582_1_);
+        entityItemRender = new EntityItem(worldObj);
     }
 
     @Override
@@ -54,27 +58,35 @@ public class EntityFairy extends Entity {
 
     }
 
-    @Override
-    public void onEntityUpdate() {
-        super.onEntityUpdate();
-        if(worldObj.getTotalWorldTime() % 400 == 0){
-            AuraCascade.netHandler.sendToAllAround(new PacketFairyUpdate(this), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, posX, posY, posZ, 30));
-        }
-        double oldX = posX;
-        double oldY = posY;
-        double oldZ = posZ;
-        setPosition(player.posX + rho * Math.sin(phi) * Math.cos(theta), player.posY + rho * Math.sin(phi) * Math.sin(theta), player.posZ + rho * Math.cos(phi));
-        phi += dPhi;
-        theta += dTheta;
 
-        phi %= 360;
-        theta %= 360;
-        if(entityItemRender == null){
-            entityItemRender = new EntityItem(worldObj);
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if(player != null) {
+            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
+                ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.netHandler.getPacketFrom(new PacketFairyUpdate(this)));
+            }
+            double oldX = posX;
+            double oldY = posY;
+            double oldZ = posZ;
+            setPosition(player.posX + rho * Math.sin(phi) * Math.cos(theta), player.posY + rho * Math.sin(phi) * Math.sin(theta), player.posZ + rho * Math.cos(phi));
+            phi += dPhi;
+            theta += dTheta;
+
+            phi %= 360;
+            theta %= 360;
+            if (entityItemRender == null) {
+                entityItemRender = new EntityItem(worldObj);
+            }
+            entityItemRender.setPosition(posX, posY, posZ);
+            entityItemRender.setVelocity(oldX, oldY, oldZ);
+        }else if(worldObj.isRemote){
+            AuraCascade.netHandler.sendToServer(new PacketFairyRequestUpdate(this));
+        }else{
+            setDead();
         }
-        entityItemRender.setPosition(posX, posY, posZ);
-        entityItemRender.setVelocity(oldX, oldY, oldZ);
     }
+
 
     @Override
     public AxisAlignedBB getBoundingBox() {

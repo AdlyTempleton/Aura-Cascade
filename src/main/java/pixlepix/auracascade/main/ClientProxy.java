@@ -12,7 +12,8 @@ package pixlepix.auracascade.main;
         import pixlepix.auracascade.render.RenderPedestal;
 
 public class ClientProxy extends CommonProxy {
-    public static World getWorld(){
+    @Override
+    public World getWorld(){
         return Minecraft.getMinecraft().theWorld;
     }
 

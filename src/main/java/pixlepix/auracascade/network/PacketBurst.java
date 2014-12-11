@@ -9,6 +9,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import org.lwjgl.opengl.GL11;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.ClientProxy;
 import pixlepix.auracascade.main.ParticleEffects;
@@ -134,7 +135,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             z = buf.readDouble();
         }
 
-        world = ClientProxy.getWorld();
+        world = AuraCascade.proxy.getWorld();
     }
 
     @Override

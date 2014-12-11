@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -41,8 +42,8 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
         makeFaries(ringStack, entityLivingBase);
     }
 
-    public static void makeFaries(ItemStack ringStack, EntityLivingBase entityLivingBase) {
-        if(entityLivingBase instanceof EntityPlayer) {
+    public static void makeFaries(ItemStack ringStack, EntityLivingBase entity) {
+        if(entity instanceof EntityPlayer && !((EntityPlayer) entity).worldObj.isRemote) {
 
             if(ringStack.stackTagCompound == null){
                 ringStack.stackTagCompound = new NBTTagCompound();
@@ -52,12 +53,14 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
                 Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
                 EntityFairy fairy = null;
                 try {
-                    fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entityLivingBase).worldObj);
+                    fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entity).worldObj);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                fairy.player = (EntityPlayer) entityLivingBase;
-                ((EntityPlayer) entityLivingBase).worldObj.spawnEntityInWorld(fairy);
+                fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
+                fairy.player = (EntityPlayer) entity;
+
+                ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
             }
 
         }
@@ -71,9 +74,10 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
 
     public static void killNearby(ItemStack itemStack, EntityLivingBase entityLivingBase){
         List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 10, entityLivingBase.posY - 10, entityLivingBase.posZ - 10, entityLivingBase.posX + 10, entityLivingBase.posY + 10, entityLivingBase.posZ + 10));
-        for(EntityFairy fairy: fairies){
-            if(fairy.player == entityLivingBase){
+        for (EntityFairy fairy : fairies) {
+            if (fairy.player == entityLivingBase) {
                 fairy.setDead();
+
             }
         }
     }
