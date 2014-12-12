@@ -34,11 +34,12 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
             newFairies[newFairies.length - 1] = stack.getItemDamage();
 
-            //Trigger the re-spawn of fairies
-            ItemFairyRing.killNearby(stack, player);
-            ItemFairyRing.makeFaries(stack, player);
 
             ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
+            //Trigger the re-spawn of fairies
+            ItemFairyRing.killNearby(ringStack, player);
+            ItemFairyRing.makeFaries(ringStack, player);
+
             player.inventory.decrStackSize(player.inventory.currentItem, 1);
         }
         return stack;

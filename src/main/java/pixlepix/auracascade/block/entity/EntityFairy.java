@@ -63,7 +63,7 @@ public class EntityFairy extends Entity {
     public void onUpdate() {
         super.onUpdate();
         if(player != null) {
-            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
+            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 1000 == 0) {
                 ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.netHandler.getPacketFrom(new PacketFairyUpdate(this)));
             }
             double oldX = posX;
