@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.EntityCombatFairy;
+import pixlepix.auracascade.block.entity.EntityDebuffFairy;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -48,12 +49,17 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     @Override
     public int getItemStackLimit(ItemStack stack) {
-        return 1;
+        return 16;
+    }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return super.getItemStackDisplayName(stack) + fairyClasses[stack.getItemDamage()].getSimpleName();
     }
 
     public static final String name = "fairyCharm";
 
-    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class};
+    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class};
 
     @Override
     public ArrayList<Object> getSpecialParameters() {

@@ -67,6 +67,15 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     msg.world.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
                 }
             }
+            if(msg.type == 4){
+                for(int i=0; i<200; i++){
+                    Random rand = new Random();
+                    double posX = msg.x + rand.nextDouble() * 8 - 4D;
+                    double posY = msg.y + rand.nextDouble() * 8 - 4D;
+                    double posZ = msg.z + rand.nextDouble() * 8 - 4D;
+                    msg.world.spawnParticle("witchMagic", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                }
+            }
         }
         return null;
     }

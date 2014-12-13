@@ -46,7 +46,7 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event){
         registry.init();
         PylonRecipeRegistry.init();
-        EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 20, 20, true);
+        EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 20, 500, true);
 
 
     }

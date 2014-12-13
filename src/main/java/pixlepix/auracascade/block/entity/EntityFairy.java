@@ -63,23 +63,25 @@ public class EntityFairy extends Entity {
     public void onUpdate() {
         super.onUpdate();
         if(player != null) {
-            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 1000 == 0) {
+            phi += dPhi;
+            theta += dTheta;
+
+            phi %= 360;
+            theta %= 360;
+            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 400 == 0) {
                 ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.netHandler.getPacketFrom(new PacketFairyUpdate(this)));
             }
             double oldX = posX;
             double oldY = posY;
             double oldZ = posZ;
             setPosition(player.posX + rho * Math.sin(phi) * Math.cos(theta), player.posY + rho * Math.sin(phi) * Math.sin(theta), player.posZ + rho * Math.cos(phi));
-            phi += dPhi;
-            theta += dTheta;
 
-            phi %= 360;
-            theta %= 360;
             if (entityItemRender == null) {
                 entityItemRender = new EntityItem(worldObj);
             }
             entityItemRender.setPosition(posX, posY, posZ);
             entityItemRender.setVelocity(oldX, oldY, oldZ);
+            setVelocity(0, 0, 0);
         }else if(worldObj.isRemote){
             AuraCascade.netHandler.sendToServer(new PacketFairyRequestUpdate(this));
         }else{
