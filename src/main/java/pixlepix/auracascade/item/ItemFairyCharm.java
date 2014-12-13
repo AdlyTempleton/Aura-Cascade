@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import pixlepix.auracascade.block.entity.EntityCombatFairy;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -52,7 +53,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     public static final String name = "fairyCharm";
 
-    public static Class[] fairyClasses = new Class[]{EntityFairy.class};
+    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class};
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
