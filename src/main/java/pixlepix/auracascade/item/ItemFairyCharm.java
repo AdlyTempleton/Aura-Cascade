@@ -9,9 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import pixlepix.auracascade.block.entity.EntityCombatFairy;
-import pixlepix.auracascade.block.entity.EntityDebuffFairy;
-import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -42,7 +40,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             ItemFairyRing.killNearby(ringStack, player);
             ItemFairyRing.makeFaries(ringStack, player);
 
-            player.inventory.decrStackSize(player.inventory.currentItem, 1);
+            player.inventory.consumeInventoryItem(this);
         }
         return stack;
     }
@@ -59,7 +57,9 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     public static final String name = "fairyCharm";
 
-    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class};
+    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class, EntityBuffFairy.class,
+            EntityStealFairy.class, EntityPushFairy.class, EntityShooterFairy.class, EntitySaviorFairy.class
+    };
 
     @Override
     public ArrayList<Object> getSpecialParameters() {

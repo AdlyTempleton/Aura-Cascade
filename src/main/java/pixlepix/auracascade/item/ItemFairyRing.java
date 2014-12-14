@@ -73,7 +73,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     }
 
     public static void killNearby(ItemStack itemStack, EntityLivingBase entityLivingBase){
-        List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 10, entityLivingBase.posY - 10, entityLivingBase.posZ - 10, entityLivingBase.posX + 10, entityLivingBase.posY + 10, entityLivingBase.posZ + 10));
+        List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 50, entityLivingBase.posY - 50, entityLivingBase.posZ - 50, entityLivingBase.posX + 50, entityLivingBase.posY + 50, entityLivingBase.posZ + 50));
         for (EntityFairy fairy : fairies) {
             if (fairy.player == entityLivingBase) {
                 fairy.setDead();

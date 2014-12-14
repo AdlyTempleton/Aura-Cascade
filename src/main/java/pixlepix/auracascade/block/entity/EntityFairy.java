@@ -58,6 +58,14 @@ public class EntityFairy extends Entity {
 
     }
 
+    public double getEffectiveRho(){
+        return rho;
+    }
+
+    public Entity getOrbitingEntity(){
+        return player;
+    }
+
 
     @Override
     public void onUpdate() {
@@ -71,10 +79,12 @@ public class EntityFairy extends Entity {
             if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 400 == 0) {
                 ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.netHandler.getPacketFrom(new PacketFairyUpdate(this)));
             }
+
             double oldX = posX;
             double oldY = posY;
             double oldZ = posZ;
-            setPosition(player.posX + rho * Math.sin(phi) * Math.cos(theta), player.posY + rho * Math.sin(phi) * Math.sin(theta), player.posZ + rho * Math.cos(phi));
+            Entity entity = getOrbitingEntity();
+            setPosition(entity.posX + getEffectiveRho() * Math.sin(phi) * Math.cos(theta), entity.posY + getEffectiveRho() * Math.sin(phi) * Math.sin(theta), player.posZ + getEffectiveRho() * Math.cos(phi));
 
             if (entityItemRender == null) {
                 entityItemRender = new EntityItem(worldObj);
@@ -89,6 +99,10 @@ public class EntityFairy extends Entity {
         }
     }
 
+    @Override
+    public void setDead() {
+        super.setDead();
+    }
 
     @Override
     public AxisAlignedBB getBoundingBox() {
