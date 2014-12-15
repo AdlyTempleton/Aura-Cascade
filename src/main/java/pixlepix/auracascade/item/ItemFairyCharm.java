@@ -58,7 +58,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public static final String name = "fairyCharm";
 
     public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class, EntityBuffFairy.class,
-            EntityStealFairy.class, EntityPushFairy.class, EntityShooterFairy.class, EntitySaviorFairy.class
+            EntityStealFairy.class, EntityPushFairy.class, EntityShooterFairy.class, EntitySaviorFairy.class, EntityFetchFairy.class
     };
 
     @Override
