@@ -1,6 +1,7 @@
 package pixlepix.auracascade.main;
 
 import baubles.api.BaublesApi;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -39,6 +40,8 @@ public class CommonProxy {
 
     }
 
+    public static EventHandler eventHandler;
+
     public World getWorld(){
         return null;
     }
@@ -46,6 +49,9 @@ public class CommonProxy {
     public void init(FMLInitializationEvent event){
         registry.init();
         PylonRecipeRegistry.init();
+        eventHandler = new EventHandler();
+        MinecraftForge.EVENT_BUS.register(eventHandler);
+        FMLCommonHandler.instance().bus().register(eventHandler);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
 
 
