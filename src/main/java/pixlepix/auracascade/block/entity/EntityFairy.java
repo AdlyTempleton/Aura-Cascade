@@ -71,6 +71,7 @@ public class EntityFairy extends Entity {
     public void onUpdate() {
         super.onUpdate();
         if(player != null) {
+            extinguish();
             phi += dPhi;
             theta += dTheta;
 
