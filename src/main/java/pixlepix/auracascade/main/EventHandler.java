@@ -4,15 +4,14 @@ import baubles.api.BaublesApi;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import pixlepix.auracascade.block.entity.EntityBaitFairy;
-import pixlepix.auracascade.block.entity.EntityDigFairy;
-import pixlepix.auracascade.block.entity.EntityFairy;
-import pixlepix.auracascade.block.entity.EntityScareFairy;
+import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.item.ItemFairyRing;
 
 import java.util.ArrayList;
@@ -55,6 +54,24 @@ public class EventHandler {
             count = Math.min(count, 15);
             if(new Random().nextInt(50) <= count){
                 event.newSpeed = Float.MAX_VALUE;
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onGetBreakSpeed(LivingFallEvent event){
+        if(event.entityLiving instanceof EntityPlayer) {
+            EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
+            ItemStack item = BaublesApi.getBaubles(entityPlayer).getStackInSlot(1);
+            if (item != null && item.getItem() instanceof ItemFairyRing && !entityPlayer.worldObj.isRemote) {
+                List<EntityFallFairy> fairyList = entityPlayer.worldObj.getEntitiesWithinAABB(EntityFallFairy.class, entityPlayer.boundingBox.expand(20, 20, 20));
+                int count = 0;
+                for (EntityFallFairy fairy : fairyList) {
+                    if (fairy.player == entityPlayer) {
+                        count++;
+                    }
+                }
+                event.distance *= Math.pow(.85F, count);
             }
         }
     }
