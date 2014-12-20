@@ -2,6 +2,7 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaublesApi;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -60,7 +61,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class, EntityBuffFairy.class,
             EntityStealFairy.class, EntityPushFairy.class, EntityShooterFairy.class, EntitySaviorFairy.class, EntityFetchFairy.class
             ,EntityBaitFairy.class, EntityBreederFairy.class, EntityScareFairy.class, EntityExtinguisherFairy.class, EntityDigFairy.class,
-            EntityFallFairy.class
+            EntityFallFairy.class, EntityLightFairy.class, EntityXPFairy.class
     };
 
     @Override
