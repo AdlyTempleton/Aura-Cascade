@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -72,6 +73,19 @@ public class EventHandler {
                     }
                 }
                 event.distance *= Math.pow(.85F, count);
+            }
+        }
+    }
+
+    //Kill fairies on death
+    @SubscribeEvent
+    public void onPlayerDeath(LivingDeathEvent event){
+        if(event.entityLiving instanceof EntityPlayer && !((EntityPlayer) event.entityLiving).worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")){
+
+            EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
+            ItemStack item = BaublesApi.getBaubles(entityPlayer).getStackInSlot(1);
+            if (item != null && item.getItem() instanceof ItemFairyRing && !entityPlayer.worldObj.isRemote) {
+                ItemFairyRing.killNearby(item, entityPlayer);
             }
         }
     }
