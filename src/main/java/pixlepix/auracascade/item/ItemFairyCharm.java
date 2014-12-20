@@ -53,7 +53,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + fairyClasses[stack.getItemDamage()].getSimpleName();
+        return super.getItemStackDisplayName(stack) + ": "+getNameFromFairy(fairyClasses[stack.getItemDamage()]);
     }
 
     public static final String name = "fairyCharm";
@@ -94,6 +94,60 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         for(int i=0; i<fairyClasses.length; i++){
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    public static String getNameFromFairy(Class<? extends EntityFairy> clazz){
+        if(clazz == EntityFairy.class){
+            return "Fairy";
+        }
+        if(clazz == EntityBaitFairy.class){
+            return "Baiter Fairy";
+        }
+        if(clazz == EntityBreederFairy.class){
+            return "Breeder Fairy";
+        }
+        if(clazz == EntityBuffFairy.class){
+            return "Buffer Fairy";
+        }if(clazz == EntityCombatFairy.class){
+            return "Fighter Fairy";
+        }
+        if(clazz == EntityDebuffFairy.class){
+            return "Debuffer Fairy";
+        }
+        if(clazz == EntityDigFairy.class){
+            return "Digger Fairy";
+        }
+        if(clazz == EntityExtinguisherFairy.class){
+            return "Extinguisher Fairy";
+        }
+        if(clazz == EntityFallFairy.class){
+            return "Glider Fairy";
+        }
+        if(clazz == EntityFetchFairy.class){
+            return "Fetcher Fairy";
+        }
+        if(clazz == EntityLightFairy.class){
+            return "Lighter Fairy";
+        }
+        if(clazz == EntityPushFairy.class){
+            return "Pusher Fairy";
+        }
+        if(clazz == EntitySaviorFairy.class){
+            return "Savior Fairy";
+        }
+        if(clazz == EntityScareFairy.class){
+            return "Scarer Fairy";
+        }if(clazz == EntityShooterFairy.class){
+            return "Shooter Fairy";
+        }if(clazz == EntityStealFairy.class){
+            return "Stealer Fairy";
+        }if(clazz == EntityXPFairy.class){
+            return "Trainer Fairy";
+        }
+
+
+
+        return "INVALID_FAIRY";
     }
 
     @Override
