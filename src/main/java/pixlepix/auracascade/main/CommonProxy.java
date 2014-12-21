@@ -36,7 +36,7 @@ public class CommonProxy {
         networkWrapper.registerMessage(PacketBurst.class, PacketBurst.class, 0, Side.CLIENT);
 
         networkWrapper.registerMessage(PacketFairyUpdate.class, PacketFairyUpdate.class, 1, Side.CLIENT);
-        networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 0, Side.SERVER);
+        networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 2, Side.SERVER);
 
     }
 

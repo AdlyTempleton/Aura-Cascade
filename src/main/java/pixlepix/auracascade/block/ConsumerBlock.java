@@ -8,8 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import pixlepix.auracascade.block.tile.AuraTile;
-import pixlepix.auracascade.block.tile.FurnaceTile;
+import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -19,10 +18,17 @@ import java.util.ArrayList;
 /**
  * Created by pixlepix on 11/29/14.
  */
-public class FurnaceBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
+public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
 
-    public FurnaceBlock() {
-        super(Material.glass);
+    public ConsumerBlock() {
+        super(Material.iron);
+        this.name = "furnace";
+    }
+
+
+    public ConsumerBlock(String name) {
+        super(Material.iron);
+        this.name = name;
     }
 
 
@@ -34,16 +40,21 @@ public class FurnaceBlock extends Block implements ITTinkererBlock, ITileEntityP
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        // TODO Auto-generated method stub
-        return null;
+        ArrayList result = new ArrayList<Object>();
+        result.add("plant");
+        result.add("ore");
+        result.add("loot");
+        result.add("mob");
+        result.add("angel");
+        return result;
     }
 
-    public static String name = "auraFurnace";
+    public String name;
 
     @Override
     public String getBlockName() {
         // TODO Auto-generated method stub
-        return name;
+        return "consumerBlock" + name;
     }
 
     @Override
@@ -66,13 +77,36 @@ public class FurnaceBlock extends Block implements ITTinkererBlock, ITileEntityP
 
     @Override
     public Class<? extends TileEntity> getTileEntity() {
-        // TODO Auto-generated method stub
+        if(name != null) {
+            if (name.equals("plant")) {
+                return PlanterTile.class;
+            }
+            if (name.equals("ore")){
+                return OreTile.class;
+            }
+            if(name.equals("loot")){
+                return LootTile.class;
+            }
+
+            if(name.equals("mob")){
+                return SpawnTile.class;
+            }
+        }
         return FurnaceTile.class;
     }
 
+
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return new FurnaceTile();
+
+        try {
+            return getTileEntity().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

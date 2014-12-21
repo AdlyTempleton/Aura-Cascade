@@ -120,6 +120,19 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     }
 
     @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+        super.addInformation(stack, player, list, p_77624_4_);
+        if(stack.stackTagCompound == null){
+            stack.stackTagCompound = new NBTTagCompound();
+        }
+        int[] tagList = stack.stackTagCompound.getIntArray("fairyList");
+        for(int i : tagList){
+            Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
+            list.add(ItemFairyCharm.getNameFromFairy(fairyClass));
+        }
+    }
+
+    @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if(!world.isRemote && player.isSneaking()){
             int[] fairyCharms = stack.stackTagCompound.getIntArray("fairyList");

@@ -36,7 +36,7 @@ public enum EnumAura {
 			AxisAlignedBB search = tuple.getBoundingBox(3);
 			List<EntityTNTPrimed> tntList = world.getEntitiesWithinAABB(EntityTNTPrimed.class, search);
 			for(EntityTNTPrimed tntPrimed:tntList){
-				if(tntPrimed.fuse == 1 && !tntPrimed.isDead){
+				if(tntPrimed.fuse <= 2 && !tntPrimed.isDead){
 					tntPrimed.setDead();
 
 					//Make graphical explosion
