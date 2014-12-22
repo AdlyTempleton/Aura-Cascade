@@ -1,0 +1,31 @@
+item.ingotAngelSteel.name=Angel's Steel of the %n degree
+item.fairyCharm.name =Fairy Charm
+item.auraCrystal.name=Aura Crystal
+
+//Take careful note of the off-by-one in the naming
+0.aurasteel.name=first
+1.aurasteel.name=second
+2.aurasteel.name=third
+3.aurasteel.name=fourth
+4.aurasteel.name=fifth
+5.aurasteel.name=sixth
+6.aurasteel.name=seventh
+7.aurasteel.name=eighth
+8.aurasteel.name=ninth
+9.aurasteel.name=tenth
+10.aurasteel.name=eleventh
+11.aurasteel.name=twelfth
+
+item.angelsteelPickaxe0.name = Angel's Steel pickaxe of the first degree
+item.angelsteelPickaxe1.name = Angel's Steel pickaxe of the second degree
+item.angelsteelPickaxe2.name = Angel's Steel pickaxe of the third degree
+item.angelsteelPickaxe3.name = Angel's Steel pickaxe of the fourth degree
+item.angelsteelPickaxe4.name = Angel's Steel pickaxe of the fifth degree
+item.angelsteelPickaxe5.name = Angel's Steel pickaxe of the sixth degree
+item.angelsteelPickaxe6.name = Angel's Steel pickaxe of the seventh degree
+item.angelsteelPickaxe7.name = Angel's Steel pickaxe of the eighth degree
+item.angelsteelPickaxe8.name = Angel's Steel pickaxe of the ninth degree
+item.angelsteelPickaxe9.name = Angel's Steel pickaxe of the tenth degree
+item.angelsteelPickaxe10.name = Angel's Steel pickaxe of the eleventh degree
+item.angelsteelPickaxe11.name = Angel's Steel pickaxe of the twelfth degree
+

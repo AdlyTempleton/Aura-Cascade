@@ -51,7 +51,7 @@ public class ParticleSphere extends EntityFX {
     {
 
         par1Tessellator.draw();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("Aura:textures/particles/particleFire.png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
         par1Tessellator.startDrawingQuads();
         par1Tessellator.setBrightness(200);//make sure you have this!!
         super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);

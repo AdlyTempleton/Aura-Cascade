@@ -2,7 +2,7 @@ package pixlepix.auracascade.main;
 
 public class ConstantMod {
 
-    public static final String modId = "Aura";
+    public static final String modId = "aura";
 
     public static final String modName = "Aura Cascade";
 

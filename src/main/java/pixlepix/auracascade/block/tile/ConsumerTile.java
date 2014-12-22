@@ -49,7 +49,7 @@ public class ConsumerTile extends TileEntity {
             if(worldObj.getTotalWorldTime() % 20 == 18){
                 storedPower *= .5;
             }
-            //Drain energy from Aura Nodes
+            //Drain energy from aura Nodes
             for(ForgeDirection direction:ForgeDirection.VALID_DIRECTIONS){
                 TileEntity tileEntity = worldObj.getTileEntity(xCoord+direction.offsetX, yCoord+direction.offsetY, zCoord+direction.offsetZ);
                 if(tileEntity instanceof AuraTile){

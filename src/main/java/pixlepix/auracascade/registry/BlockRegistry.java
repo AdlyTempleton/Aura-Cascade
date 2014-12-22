@@ -225,11 +225,12 @@ public class BlockRegistry {
 				}
 			}
 		}
-        ModCreativeTab.INSTANCE.addAllItemsAndBlocks();
 
 	}
 
 	public void postInit() {
+
+		ModCreativeTab.INSTANCE.addAllItemsAndBlocks();
 	}
 
 }
