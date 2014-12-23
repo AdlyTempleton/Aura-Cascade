@@ -1,26 +1,26 @@
 package pixlepix.auracascade.item;
 
-import com.google.common.collect.Range;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import pixlepix.auracascade.registry.*;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
- * Created by pixlepix on 12/21/14.
+ * Created by pixlepix on 12/22/14.
  */
-public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem {
-    public ItemAngelsteelPickaxe(Integer i) {
+public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem {
+    public ItemAngelsteelAxe(Integer i) {
         super(AngelsteelToolHelper.materials[i.intValue()]);
         this.degree = i.intValue();
     }
 
-    public ItemAngelsteelPickaxe() {
+    public ItemAngelsteelAxe() {
         this(0);
     }
 
@@ -31,7 +31,7 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
 
     public int degree = 0;
 
-    public static final String name = "angelsteelPickaxe";
+    public static final String name = "angelsteelAxe";
 
     @Override
     public String getItemName() {
@@ -51,6 +51,6 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
 
-        return new CraftingBenchRecipe(new ItemStack(this, 1, degree), "AAA", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, degree), "AA ", "AS ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
     }
 }
