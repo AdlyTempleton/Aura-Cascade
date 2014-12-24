@@ -3,6 +3,7 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -31,6 +32,10 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
         this.name = name;
     }
 
+    @Override
+    public void registerBlockIcons(IIconRegister p_149651_1_) {
+        super.registerBlockIcons(p_149651_1_);
+    }
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {

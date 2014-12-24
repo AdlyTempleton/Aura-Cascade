@@ -1,15 +1,18 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.IconHelper;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
@@ -33,9 +36,24 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
         return false;
     }
 
+    private IIcon[] icons;
+
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        icons = new IIcon[EnumAura.values().length];
+        for(int i=0; i<EnumAura.values().length;i++){
+            icons[i] = iconRegister.registerIcon("aura:"+EnumAura.values()[i].name.toLowerCase()+"Crystal");
+        }
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int i) {
+        return icons[i];
+    }
+
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + EnumAura.values()[stack.getItemDamage()].name;
+        return super.getItemStackDisplayName(stack) + " " +EnumAura.values()[stack.getItemDamage()].name;
     }
 
     @Override

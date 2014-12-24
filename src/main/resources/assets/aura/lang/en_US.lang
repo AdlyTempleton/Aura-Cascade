@@ -1,7 +1,28 @@
+//Item
 item.ingotAngelSteel.name=Angel's Steel of the %n degree
-item.fairyCharm.name =Fairy Charm
-item.auraCrystal.name=Aura Crystal
+item.fairyCharm.name=Fairy Charm
+item.AuraCrystal.name=Aura Crystal:
+item.fairyRing.name=Ring of Binding
 
+//Tile
+tile.auraNode.name=Aura Node
+tile.auraNodeblack.name=Aura Manipulator: Black
+tile.auraNodecapacitor.name=Aura Capacitor
+tile.auraNodeconserve.name=Conserving Aura Node
+tile.auraNodecraftingCenter.name=Aura Vortex Controller
+tile.auraNodecraftingPedestal.name=Aura Vortex Pedestal
+tile.auraNodeorange.name=Aura Manipulator: Orange
+tile.auraNodepump.name=Aura Pump
+
+tile.consumerBlockmob.name=Cascading Spawner
+tile.consumerBlockangel.name=Cascading Synthesizer
+tile.consumerBlockloot.name=Cascading Looter
+tile.consumerBlockore.name=Cascading Processor
+tile.consumerBlockplant.name=Cascading Grower
+tile.consumerBlockfurnace.name=Cascading Smelter
+
+
+//Used for angelsteel ingots
 //Take careful note of the off-by-one in the naming
 0.aurasteel.name=first
 1.aurasteel.name=second
@@ -16,16 +37,49 @@ item.auraCrystal.name=Aura Crystal
 10.aurasteel.name=eleventh
 11.aurasteel.name=twelfth
 
-item.angelsteelPickaxe0.name = Angel's Steel pickaxe of the first degree
-item.angelsteelPickaxe1.name = Angel's Steel pickaxe of the second degree
-item.angelsteelPickaxe2.name = Angel's Steel pickaxe of the third degree
-item.angelsteelPickaxe3.name = Angel's Steel pickaxe of the fourth degree
-item.angelsteelPickaxe4.name = Angel's Steel pickaxe of the fifth degree
-item.angelsteelPickaxe5.name = Angel's Steel pickaxe of the sixth degree
-item.angelsteelPickaxe6.name = Angel's Steel pickaxe of the seventh degree
-item.angelsteelPickaxe7.name = Angel's Steel pickaxe of the eighth degree
-item.angelsteelPickaxe8.name = Angel's Steel pickaxe of the ninth degree
-item.angelsteelPickaxe9.name = Angel's Steel pickaxe of the tenth degree
-item.angelsteelPickaxe10.name = Angel's Steel pickaxe of the eleventh degree
-item.angelsteelPickaxe11.name = Angel's Steel pickaxe of the twelfth degree
+
+//Angelsteel tools
+item.angelsteelPickaxe0.name=Angel's Steel pickaxe of the first degree
+item.angelsteelPickaxe1.name=Angel's Steel pickaxe of the second degree
+item.angelsteelPickaxe2.name=Angel's Steel pickaxe of the third degree
+item.angelsteelPickaxe3.name=Angel's Steel pickaxe of the fourth degree
+item.angelsteelPickaxe4.name=Angel's Steel pickaxe of the fifth degree
+item.angelsteelPickaxe5.name=Angel's Steel pickaxe of the sixth degree
+item.angelsteelPickaxe6.name=Angel's Steel pickaxe of the seventh degree
+item.angelsteelPickaxe7.name=Angel's Steel pickaxe of the eighth degree
+item.angelsteelPickaxe8.name=Angel's Steel pickaxe of the ninth degree
+item.angelsteelPickaxe9.name=Angel's Steel pickaxe of the tenth degree
+item.angelsteelPickaxe10.name=Angel's Steel pickaxe of the eleventh degree
+item.angelsteelPickaxe11.name=Angel's Steel pickaxe of the twelfth degree
+
+item.angelsteelAxe0.name=Angel's Steel axe of the first degree
+item.angelsteelAxe1.name=Angel's Steel axe of the second degree
+item.angelsteelAxe2.name=Angel's Steel axe of the third degree
+item.angelsteelAxe3.name=Angel's Steel axe of the fourth degree
+item.angelsteelAxe4.name=Angel's Steel axe of the fifth degree
+item.angelsteelAxe5.name=Angel's Steel axe of the sixth degree
+item.angelsteelAxe6.name=Angel's Steel axe of the seventh degree
+item.angelsteelAxe7.name=Angel's Steel axe of the eighth degree
+item.angelsteelAxe8.name=Angel's Steel axe of the ninth degree
+item.angelsteelAxe9.name=Angel's Steel axe of the tenth degree
+item.angelsteelAxe10.name=Angel's Steel axe of the eleventh degree
+item.angelsteelAxe11.name=Angel's Steel axe of the twelfth degree
+
+item.angelsteelShovel0.name=Angel's Steel shovel of the first degree
+item.angelsteelShovel1.name=Angel's Steel shovel of the second degree
+item.angelsteelShovel2.name=Angel's Steel shovel of the third degree
+item.angelsteelShovel3.name=Angel's Steel shovel of the fourth degree
+item.angelsteelShovel4.name=Angel's Steel shovel of the fifth degree
+item.angelsteelShovel5.name=Angel's Steel shovel of the sixth degree
+item.angelsteelShovel6.name=Angel's Steel shovel of the seventh degree
+item.angelsteelShovel7.name=Angel's Steel shovel of the eighth degree
+item.angelsteelShovel8.name=Angel's Steel shovel of the ninth degree
+item.angelsteelShovel9.name=Angel's Steel shovel of the tenth degree
+item.angelsteelShovel10.name=Angel's Steel shovel of the eleventh degree
+item.angelsteelShovel11.name=Angel's Steel shovel of the twelfth degree
+
+
+
+itemGroup.aura=Aura Cascade
+
 
