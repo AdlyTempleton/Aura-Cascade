@@ -1,15 +1,18 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/22/14.
@@ -31,6 +34,13 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem {
 
     public int degree = 0;
 
+    @Override
+    public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+        if(!world.isRemote){
+            stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
+        }
+    }
+
     public static final String name = "angelsteelAxe";
 
     @Override
@@ -46,6 +56,19 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem {
     @Override
     public boolean shouldDisplayInTab() {
         return degree == 0 || degree == AngelsteelToolHelper.MAX_DEGREE;
+    }
+
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+        super.addInformation(stack, player, list, p_77624_4_);
+        if(AngelsteelToolHelper.hasValidBuffs(stack)) {
+            int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
+            list.add("Efficiency: " + buffs[0]);
+            list.add("Fortune: " + buffs[1]);
+            list.add("Shatter: " + buffs[2]);
+            list.add("Disintegrate: " + buffs[3]);
+        }
     }
 
     @Override

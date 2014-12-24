@@ -2,6 +2,7 @@ package pixlepix.auracascade.main;
 
 import baubles.api.BaublesApi;
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,9 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import pixlepix.auracascade.block.entity.*;
+import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
 
 import java.util.ArrayList;
@@ -57,10 +60,41 @@ public class EventHandler {
                 event.newSpeed = Float.MAX_VALUE;
             }
         }
+        if(event.entityPlayer.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.entityPlayer.inventory.getCurrentItem().getItem())){
+            int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
+            int efficiency = buffs[0];
+            event.newSpeed *= Math.pow(1.3, efficiency);
+            int shatter = buffs[2];
+            int disintegrate = buffs[3];
+            //1.5F, the hardness of stone, is used as a dividing point
+            //Stone is not affected by either enchant
+            if(event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F){
+                event.newSpeed *= Math.pow(3, disintegrate);
+            }
+            if(event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F){
+
+                event.newSpeed *= Math.pow(3, shatter);
+            }
+        }
     }
 
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onHarvestEvent(BlockEvent.HarvestDropsEvent event){
+
+        if(event.harvester != null && event.harvester.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.harvester.inventory.getCurrentItem().getItem())) {
+            int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().stackTagCompound)[1];
+            if (event.fortuneLevel < fortune) {
+                //Cancels the event and breaks the block again
+                event.dropChance = 0;
+                event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+            }
+        }
+    }
+
+
+
     @SubscribeEvent
-    public void onGetBreakSpeed(LivingFallEvent event){
+    public void onFall(LivingFallEvent event){
         if(event.entityLiving instanceof EntityPlayer) {
             EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
             ItemStack item = BaublesApi.getBaubles(entityPlayer).getStackInSlot(1);
