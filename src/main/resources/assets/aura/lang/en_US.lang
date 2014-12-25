@@ -12,6 +12,10 @@ tile.auraNodeconserve.name=Conserving Aura Node
 tile.auraNodecraftingCenter.name=Aura Vortex Controller
 tile.auraNodecraftingPedestal.name=Aura Vortex Pedestal
 tile.auraNodeorange.name=Aura Manipulator: Orange
+tile.auraNodepumpLight.name=Illumination Aura Pump
+tile.auraNodepumpFall.name=Momentum Aura Pump
+tile.auraNodepumpProjectile.name=Projectile Aura Pump
+tile.auraNodepumpRedstone.name=Redstone Aura Pump
 tile.auraNodepump.name=Aura Pump
 
 tile.consumerBlockmob.name=Cascading Spawner

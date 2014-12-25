@@ -4,6 +4,7 @@ package pixlepix.auracascade.main;
         import cpw.mods.fml.client.registry.RenderingRegistry;
         import cpw.mods.fml.common.event.FMLPostInitializationEvent;
         import net.minecraft.client.Minecraft;
+        import net.minecraft.client.particle.EffectRenderer;
         import net.minecraft.world.World;
         import pixlepix.auracascade.block.entity.EntityFairy;
         import pixlepix.auracascade.block.tile.AuraTilePedestal;
@@ -22,5 +23,10 @@ public class ClientProxy extends CommonProxy {
         super.postInit(event);
         ClientRegistry.bindTileEntitySpecialRenderer(AuraTilePedestal.class, new RenderPedestal());
         RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderEntityFairy());
+    }
+
+    @Override
+    public EffectRenderer getEffectRenderer() {
+        return Minecraft.getMinecraft().effectRenderer;
     }
 }

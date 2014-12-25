@@ -150,6 +150,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		result.add("craftingPedestal");
 		result.add("orange");
 		result.add("pumpProjectile");
+		result.add("pumpFall");
+		result.add("pumpLight");
+		result.add("pumpRedstone");
 		return result;
 	}
 
@@ -210,6 +213,15 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 		if(type.equals("pumpProjectile")){
 			return AuraTilePumpProjectile.class;
+		}
+		if(type.equals("pumpFall")){
+			return AuraTilePumpFall.class;
+		}
+		if(type.equals("pumpLight")){
+			return AuraTilePumpLight.class;
+		}
+		if(type.equals("pumpRedstone")){
+			return AuraTilePumpRedstone.class;
 		}
 		return AuraTile.class;
 	}

@@ -11,6 +11,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -64,4 +65,7 @@ public class CommonProxy {
         registry.postInit();
     }
 
+    public EffectRenderer getEffectRenderer() {
+        return null;
+    }
 }

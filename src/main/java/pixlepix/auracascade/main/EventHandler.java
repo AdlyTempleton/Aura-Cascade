@@ -15,6 +15,9 @@ import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import pixlepix.auracascade.block.entity.*;
+import pixlepix.auracascade.block.tile.AuraTilePump;
+import pixlepix.auracascade.block.tile.AuraTilePumpFall;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
 
@@ -107,6 +110,18 @@ public class EventHandler {
                     }
                 }
                 event.distance *= Math.pow(.85F, count);
+            }
+        }
+
+        //Momentum pump
+        int x = (int) event.entity.posX;
+        int y = (int) event.entity.posY;
+        int z = (int) event.entity.posZ;
+        CoordTuple tuple = new CoordTuple(x, y, z);
+        for(CoordTuple searchPump:tuple.inRange(3)){
+            if(searchPump.getTile(event.entity.worldObj) instanceof AuraTilePumpFall){
+                ((AuraTilePumpFall)searchPump.getTile(event.entity.worldObj)).onFall(event);
+                break;
             }
         }
     }

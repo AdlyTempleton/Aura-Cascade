@@ -19,12 +19,12 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
 
     public void onEntityCollidedWithBlock(Entity entity) {
         if(entity instanceof EntityArrow){
-            addFuel(600, 1500);
+            addFuel(300, 1500);
             entity.setDead();
         }
 
         if(entity instanceof EntityEgg){
-            addFuel(180, 400);
+            addFuel(90, 400);
         }
 
         if(entity instanceof EntitySnowball){

@@ -24,8 +24,18 @@ public class CoordTuple {
         this.z = tileEntity.zCoord;
     }
 
+	public void setBlockToAir(World world){
+		world.setBlockToAir(x, y, z);
+	}
+
+
 	public CoordTuple add(ForgeDirection dir){
 		return new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+	}
+
+
+	public CoordTuple add(ForgeDirection dir, int mult){
+		return new CoordTuple(x + dir.offsetX * mult, y + dir.offsetY * mult, z + dir.offsetZ * mult);
 	}
 
 
@@ -132,5 +142,9 @@ public class CoordTuple {
 			}
 		}
 		return result;
+	}
+
+	public int getMeta(World worldObj) {
+		return worldObj.getBlockMetadata(x, y, z);
 	}
 }
