@@ -64,7 +64,7 @@ minecraft {
 }
 version = "-${minecraft.version}"
 if (System.getenv("BUILD_NUMBER")!=null)
-    version = "$version-${System.getenv().BUILD_NUMBER}"
+    version = "$version${System.getenv().BUILD_NUMBER}"
 if (project.hasProperty("releaseType"))
     if (project.releaseType == "ALPHA")
         version = "alpha-" + version

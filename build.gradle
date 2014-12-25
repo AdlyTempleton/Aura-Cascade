@@ -53,7 +53,7 @@ apply plugin: 'forge'
 
 
 group = "pixlepix.auracascade" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "AuraCascade"
+archivesBaseName = "AuraCasade"
 
 minecraft {
     version = "1.7.10-10.13.2.1232"
@@ -64,7 +64,7 @@ minecraft {
 }
 version = "-${minecraft.version}"
 if (System.getenv("BUILD_NUMBER")!=null)
-    version = "$version${System.getenv().BUILD_NUMBER}"
+    version = "$version ${System.getenv().BUILD_NUMBER}"
 if (project.hasProperty("releaseType"))
     if (project.releaseType == "ALPHA")
         version = "alpha-" + version
