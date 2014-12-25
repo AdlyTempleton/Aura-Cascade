@@ -19,34 +19,8 @@ import java.util.List;
 /**
  * Created by pixlepix on 11/29/14.
  */
-public class AuraTilePump extends AuraTile {
+public class AuraTilePump extends AuraTilePumpBase {
 
-    public int pumpPower;
-
-    @Override
-    protected void readCustomNBT(NBTTagCompound nbt) {
-        super.readCustomNBT(nbt);
-        pumpPower = nbt.getInteger("pumpPower");
-    }
-
-    @Override
-    protected void writeCustomNBT(NBTTagCompound nbt) {
-        super.writeCustomNBT(nbt);
-        nbt.setInteger("pumpPower", pumpPower);
-    }
-
-    @Override
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
-        return false;
-    }
-
-    @Override
-    public boolean canReceive(CoordTuple source, EnumAura aura) {
-        if(source.getY() > yCoord){
-            return false;
-        }
-        return super.canReceive(source, aura);
-    }
 
     @Override
     public void updateEntity() {
@@ -55,39 +29,15 @@ public class AuraTilePump extends AuraTile {
             AuraUtil.keepAlive(this, 3);
         }
         if(!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 ==2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
-            if(pumpPower > 0){
-                AuraTile upNode = null;
-                for(int i=1; i<15; i++){
-                    TileEntity te = worldObj.getTileEntity(xCoord, yCoord+i, zCoord);
-                    if(te instanceof AuraTile){
-                        upNode = (AuraTile) te;
-                        break;
-                    }
-                }
-                if(upNode != null){
-
-                    pumpPower--;
-                    for(EnumAura aura:EnumAura.values()) {
-                        int dist = upNode.yCoord - yCoord;
-                        int quantity = 500 / dist;
-                        quantity *= storage.getComposition(aura);
-                        quantity = aura.getRelativeMass(worldObj, new CoordTuple(this)) == 0 ? 0 : (int) ((double) quantity / aura.getRelativeMass(worldObj, new CoordTuple(this)));
-                        quantity *= aura.getAscentBoost(worldObj, new CoordTuple(this));
-                        quantity = Math.min(quantity, storage.get(aura));
-                        burst(new CoordTuple(upNode), "magicCrit", aura, 1D);
-                        storage.subtract(aura, quantity);
-                        upNode.storage.add(new AuraQuantity(aura, quantity));
-
-
-                    }
-                }
-            }else{
+            if(pumpPower <= 0){
                 int range = 3;
                 List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
                 for (EntityItem entityItem : nearbyItems) {
                     ItemStack stack = entityItem.getEntityItem();
                     if(TileEntityFurnace.getItemBurnTime(stack) != 0){
-                        pumpPower = TileEntityFurnace.getItemBurnTime(stack);
+                        //Worth noting that the burn time should be 2* longer than a furnace
+                        pumpPower = TileEntityFurnace.getItemBurnTime(stack) / 10;
+                        pumpSpeed = 500;
 
                         //Kill the stack
                         if (stack.stackSize == 0) {

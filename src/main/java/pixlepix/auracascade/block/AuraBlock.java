@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -87,9 +88,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 						player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
 					}
 				}
-				if (world.getTileEntity(x, y, z) instanceof AuraTilePump) {
+				if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
 
-					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePump) world.getTileEntity(x, y, z)).pumpPower));
+					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
 				}
 			}
 		}
@@ -99,10 +100,11 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
 		super.onEntityCollidedWithBlock(world, x, y, z, entity);
+
+		TileEntity te = world.getTileEntity(x, y, z);
 		if(entity instanceof EntityItem && !world.isRemote){
 			ItemStack stack = ((EntityItem) entity).getEntityItem();
 			if(stack.getItem() instanceof ItemAuraCrystal){
-				TileEntity te = world.getTileEntity(x, y, z);
 				if(te instanceof AuraTile){
 					((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100 * stack.stackSize));
 					world.markBlockForUpdate(x, y, z);
@@ -112,6 +114,9 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 				}
 
 			}
+		}
+		if(!world.isRemote && te instanceof AuraTilePumpProjectile){
+			((AuraTilePumpProjectile) te).onEntityCollidedWithBlock(entity);
 		}
 	}
 
@@ -144,6 +149,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 		result.add("craftingPedestal");
 		result.add("orange");
+		result.add("pumpProjectile");
 		return result;
 	}
 
@@ -200,6 +206,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 		if(type.equals("craftingCenter")){
 			return AuraTileOrange.class;
+		}
+
+		if(type.equals("pumpProjectile")){
+			return AuraTilePumpProjectile.class;
 		}
 		return AuraTile.class;
 	}
