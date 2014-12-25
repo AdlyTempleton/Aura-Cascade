@@ -13,7 +13,7 @@ import pixlepix.auracascade.network.PacketBurst;
  */
 public class AuraTileCapacitor extends AuraTile{
 
-    public int[] storageValues = new int[]{100, 1000, 10000, 100000, 1000000, 10000000};
+    public int[] storageValues = new int[]{100, 1000, 10000, 100000};
     public int storageValueIndex = 1;
     public int ticksDisabled = 0;
     public boolean aboutToBurst = false;
