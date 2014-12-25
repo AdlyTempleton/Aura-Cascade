@@ -14,7 +14,8 @@ remotebuild.py
 /run
 /out
 /ForgeModule
-/libs
+/libs/downloads
+/libs/forgelibs
 ## idea
 *.iml
 *.ipr
