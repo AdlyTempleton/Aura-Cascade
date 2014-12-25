@@ -3,7 +3,6 @@ package pixlepix.auracascade.block.tile;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.oredict.OreDictionary;
@@ -50,9 +49,9 @@ public class OreTile extends ConsumerTile {
                 List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
                 for (EntityItem entityItem : nearbyItems) {
                     ItemStack stack = entityItem.getEntityItem();
-                    if (getTripleResult(stack) != null) {
-                        ItemStack dustStack = getTripleResult(stack);
-                        dustStack.stackSize = 3;
+                    if (getDoubleResult(stack) != null) {
+                        ItemStack dustStack = getDoubleResult(stack);
+                        dustStack.stackSize = 2;
                         //Kill the stack
                         if (stack.stackSize == 0) {
                             entityItem.setDead();
@@ -78,7 +77,7 @@ public class OreTile extends ConsumerTile {
         }
     }
 
-    public static ItemStack getTripleResult(ItemStack stack){
+    public static ItemStack getDoubleResult(ItemStack stack){
         int[] oreIds = OreDictionary.getOreIDs(stack);
         for(int id:oreIds){
             String oreName = OreDictionary.getOreName(id);
