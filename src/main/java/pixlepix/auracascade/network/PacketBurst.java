@@ -32,7 +32,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     velocity = velocity.normalize();
                     double dist = msg.to.dist(msg.from);
 
-                    int density = (int) (10D * msg.comp);
+                    int density = (int) (5D * msg.comp);
                     for (int count = 0; count < dist * density; count++) {
                         double i = ((double) count) / density;
                         double xp = msg.from.getX() + (velocity.xCoord * i) + .5;

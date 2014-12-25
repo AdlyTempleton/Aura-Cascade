@@ -23,11 +23,14 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -91,6 +94,17 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
 				}
+			}
+		} else if(!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile){
+			CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
+			if(tile.getRecipe() != null){
+				player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: "+tile.getRecipe().result.getDisplayName()));
+				for(ForgeDirection direction:CraftingCenterTile.pedestalRelativeLocations){
+					AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
+					player.addChatComponentMessage(new ChatComponentText("" +EnumColor.AQUA + pedestal.powerReceived +"/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" +tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")" ));
+				}
+			}else{
+				player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
 			}
 		}
 		return false;

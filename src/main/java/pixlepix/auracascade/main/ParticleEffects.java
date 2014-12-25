@@ -47,6 +47,7 @@ public class ParticleEffects {
                         ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
                     }
 
+
                 }
                 if (particleName.equals("fireworksSpark")){
                     var21 = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ, minecraft.effectRenderer);

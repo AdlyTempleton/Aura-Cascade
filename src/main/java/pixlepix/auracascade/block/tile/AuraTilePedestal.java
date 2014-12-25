@@ -20,6 +20,9 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
     //Direction to center of crafting
     public ForgeDirection direction = ForgeDirection.UNKNOWN;
     public int powerReceived = 0;
+    public EnumAura typeRecieving;
+
+
 
     public void verifyConnections(){
         if(direction != ForgeDirection.UNKNOWN){
@@ -56,8 +59,13 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
             PylonRecipe recipe = center.getRecipe();
             if(recipe != null){
                 AuraQuantity quantity = recipe.getAuraFromItem(itemStack);
-                if(quantity != null && quantity.getType() == type){
+                if(quantity.getType() != typeRecieving){
+                    typeRecieving = quantity.getType();
+                    powerReceived = 0;
+                }
+                if(quantity != null && (quantity.getType() == EnumAura.WHITE_AURA ||quantity.getType() == type)){
                     powerReceived += power;
+                    powerReceived = Math.min(powerReceived, quantity.getNum());
                     if(powerReceived >= quantity.getNum()){
                         center.checkRecipeComplete();
                     }
@@ -72,6 +80,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
         direction = ForgeDirection.getOrientation(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
+        typeRecieving = EnumAura.values()[nbt.getInteger("typeRecieving")];
     }
 
     @Override
@@ -83,7 +92,8 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
             nbt.setTag("itemStack", compound);
         }
         nbt.setInteger("direction", direction.ordinal());
-        nbt.setInteger("powerReceiver", powerReceived);
+        nbt.setInteger("powerReceived", powerReceived);
+        nbt.setInteger("typeRecieving", typeRecieving.ordinal());
     }
 
     @Override

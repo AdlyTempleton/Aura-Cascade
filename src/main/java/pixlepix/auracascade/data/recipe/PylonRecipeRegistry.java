@@ -15,12 +15,11 @@ public class PylonRecipeRegistry {
     public static List<PylonRecipe> recipes = new ArrayList<PylonRecipe>();
 
     public static void init(){
-        registerRecipe(new PylonRecipe(new ItemStack(Items.diamond),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 100), new ItemStack(Items.coal))));
     }
 
     public static void registerRecipe(PylonRecipe recipe){
         recipes.add(recipe);
     }
+
 
 }

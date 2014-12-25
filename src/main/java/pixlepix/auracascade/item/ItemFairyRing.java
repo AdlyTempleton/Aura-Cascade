@@ -5,6 +5,7 @@ import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +16,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -116,7 +121,14 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
+        return new PylonRecipe(new ItemStack(this),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.BLUE_AURA, 50000), new ItemStack(Blocks.diamond_block)),
+
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.iron_block)),
+
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 50000), new ItemStack(Blocks.gold_block)),
+
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 50000), new ItemStack(Blocks.redstone_block)));
     }
 
     @Override

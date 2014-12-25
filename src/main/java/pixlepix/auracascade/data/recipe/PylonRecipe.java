@@ -3,6 +3,7 @@ package pixlepix.auracascade.data.recipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +12,12 @@ import java.util.List;
 /**
  * Created by pixlepix on 12/7/14.
  */
-public class PylonRecipe {
+public class PylonRecipe extends ThaumicTinkererRecipe {
+    @Override
+    public void registerRecipe() {
+        PylonRecipeRegistry.registerRecipe(this);
+    }
+
     public List<PylonRecipeComponent> componentList = new ArrayList<PylonRecipeComponent>();
     public ItemStack result;
 

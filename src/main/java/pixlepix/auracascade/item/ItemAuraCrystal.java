@@ -3,6 +3,8 @@ package pixlepix.auracascade.item;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -11,9 +13,8 @@ import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.registry.ITTinkererItem;
-import pixlepix.auracascade.registry.IconHelper;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,24 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
+
+        return new ThaumicTinkererRecipeMulti(
+                new CraftingBenchRecipe(new ItemStack(this, 64, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.diamond), 'G', new ItemStack(Blocks.glass)),
+                //Green
+                new CraftingBenchRecipe(new ItemStack(this, 1, 1), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 2), 'C', new ItemStack(this, 1, 0)),
+                //Black
+                new CraftingBenchRecipe(new ItemStack(this, 1, 2), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 0), 'C', new ItemStack(this, 1, 0)),
+                //Red
+                new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 1), 'C', new ItemStack(this, 1, 0)),
+                //Orange
+                new CraftingBenchRecipe(new ItemStack(this, 1, 4), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 14), 'C', new ItemStack(this, 1, 0)),
+                //Yellow
+                new CraftingBenchRecipe(new ItemStack(this, 1, 5), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 11), 'C', new ItemStack(this, 1, 0)),
+                //Blue
+                new CraftingBenchRecipe(new ItemStack(this, 1, 6), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 4), 'C', new ItemStack(this, 1, 0)),
+                //Violet
+                new CraftingBenchRecipe(new ItemStack(this, 1, 7), " X ", "XCX", " X ", 'X', new ItemStack(Items.dye, 1, 5), 'C', new ItemStack(this, 1, 0))
+
+        );
     }
 }

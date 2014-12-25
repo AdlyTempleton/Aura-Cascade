@@ -4,6 +4,8 @@ import baubles.api.BaublesApi;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,9 +13,11 @@ import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.*;
-import pixlepix.auracascade.registry.BlockRegistry;
-import pixlepix.auracascade.registry.ITTinkererItem;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,7 +90,26 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
+
+        return new ThaumicTinkererRecipeMulti(
+                new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 125000), new ItemStack(Items.diamond))),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 1), " X ", "XCX", " X ", 'X', new ItemStack(Items.golden_sword), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 2), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem,1 , 8196), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem, 1, 8257), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 4), " X ", "XCX", " X ", 'X', new ItemStack(Items.fishing_rod), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 5), " X ", "XCX", " X ", 'X', new ItemStack(Items.snowball), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 6), " X ", "XCX", " X ", 'X', new ItemStack(Items.arrow), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 7), " X ", "XCX", " X ", 'X', new ItemStack(Items.diamond_sword), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 8), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.chest), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 9), " X ", "XCX", " X ", 'X', new ItemStack(Items.egg), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 10), " X ", "XCX", " X ", 'X', new ItemStack(Items.wheat), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 11), " X ", "XCX", " X ", 'X', new ItemStack(Items.gunpowder), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 12), " X ", "XCX", " X ", 'X', new ItemStack(Items.water_bucket), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 13), " X ", "XCX", " X ", 'X', new ItemStack(Items.golden_pickaxe), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 14), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.wool), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 15), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.torch), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 16), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.lapis_block), 'C', new ItemStack(this))
+                );
     }
 
     @Override
