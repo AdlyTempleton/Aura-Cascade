@@ -24,7 +24,6 @@ import pixlepix.auracascade.network.PacketFairyRequestUpdate;
 import pixlepix.auracascade.network.PacketFairyUpdate;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
-import sun.org.mozilla.javascript.internal.ast.Block;
 
 public class CommonProxy {
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.SideOnly;
-import javafx.geometry.Side;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
