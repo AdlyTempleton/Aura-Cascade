@@ -101,7 +101,11 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 				player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: "+tile.getRecipe().result.getDisplayName()));
 				for(ForgeDirection direction:CraftingCenterTile.pedestalRelativeLocations){
 					AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
-					player.addChatComponentMessage(new ChatComponentText("" +EnumColor.AQUA + pedestal.powerReceived +"/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" +tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")" ));
+					if(tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
+						player.addChatComponentMessage(new ChatComponentText("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
+					}else{
+						AuraCascade.log.warn("Invalid recipe when checking crafting center");
+					}
 				}
 			}else{
 				player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));

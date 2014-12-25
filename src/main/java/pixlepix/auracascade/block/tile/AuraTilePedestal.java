@@ -59,7 +59,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
             PylonRecipe recipe = center.getRecipe();
             if(recipe != null){
                 AuraQuantity quantity = recipe.getAuraFromItem(itemStack);
-                if(quantity.getType() != typeReceiving){
+                if(quantity!= null && quantity.getType() != typeReceiving){
                     typeReceiving = quantity.getType();
                     powerReceived = 0;
                 }

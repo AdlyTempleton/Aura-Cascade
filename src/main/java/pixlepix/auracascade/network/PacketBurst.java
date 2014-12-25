@@ -38,11 +38,8 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                         double xp = msg.from.getX() + (velocity.xCoord * i) + .5;
                         double yp = msg.from.getY() + (velocity.yCoord * i) + .5;
                         double zp = msg.from.getZ() + (velocity.zCoord * i) + .5;
-                        if (msg.particle.equals("crit")) {
-                            ParticleEffects.spawnParticle("crit", xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
-                        }else {
-                            msg.world.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1);
-                        }
+                        ParticleEffects.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
+
                     }
                 }
             }

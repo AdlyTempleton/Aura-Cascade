@@ -64,11 +64,17 @@ minecraft {
 }
 version = "-${minecraft.version}"
 if (System.getenv("BUILD_NUMBER")!=null)
-    version = "$version ${System.getenv().BUILD_NUMBER}"
+    version = "${System.getenv().BUILD_NUMBER}"
 if (project.hasProperty("releaseType"))
     if (project.releaseType == "ALPHA")
         version = "alpha-" + version
 
+
+jar {
+        manifest {
+        attributes 'FMLAT': 'accessTransformer.cfg'
+    }
+}
 
 dependencies {
     compile files("/libs/Baubles-deobf-1.7.10-1.0.1.10.jar")

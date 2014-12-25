@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.EntityTracker;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,5 +67,9 @@ public class CommonProxy {
 
     public EffectRenderer getEffectRenderer() {
         return null;
+    }
+
+    public void addEffectBypassingLimit(EntityFX entityFX){
+
     }
 }

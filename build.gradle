@@ -56,7 +56,7 @@ group = "pixlepix.auracascade" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "AuraCasade"
 
 minecraft {
-    version = "1.7.10-10.13.2.1232"
+    version = "1.7.10-10.13.2.1277"
     runDir = "eclipse"
     replace '${version}', project.version
 
@@ -69,6 +69,12 @@ if (project.hasProperty("releaseType"))
     if (project.releaseType == "ALPHA")
         version = "alpha-" + version
 
+
+jar {
+        manifest {
+        attributes 'FMLAT': 'accessTransformer.cfg'
+    }
+}
 
 dependencies {
     compile files("/libs/Baubles-deobf-1.7.10-1.0.1.10.jar")

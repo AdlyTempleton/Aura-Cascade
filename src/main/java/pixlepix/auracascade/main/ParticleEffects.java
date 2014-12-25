@@ -1,10 +1,10 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityCritFX;
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Vec3;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;
 import pixlepix.auracascade.particle.ParticleSphere;
 
@@ -28,41 +28,50 @@ public class ParticleEffects {
             double var15 = minecraft.renderViewEntity.posX - posX;
             double var17 = minecraft.renderViewEntity.posY - posY;
             double var19 = minecraft.renderViewEntity.posZ - posZ;
-            EntityFX var21 = null;
+            EntityFX entityfx = null;
             double var22 = 16.0D;
-            if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)
-            {
+            if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22) {
                 return null;
             }
-            else
-            {
-                if (particleName.equals("fire"))
-                {
-                    var21 = new ParticleSphere(minecraft.theWorld, posX, posY, posZ, (float)motX, (float)motY, (float)motZ);
+            else {
+                if (particleName.equals("fire")) {
+                    entityfx = new ParticleSphere(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                 }
-                if (particleName.equals("crit"))
-                {
-                    var21 = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ);
-                    if(r!=0 || g!=0 || b!=0) {
-                        ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
+                //Many particles are rendered here to make use of UnlimitedEffectRendererif (p_72726_1_.equals("spell"))
+                if (particleName.equals("spell")) {
+                    entityfx = new EntitySpellParticleFX(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                }
+                if (particleName.equals("happyVillager")) {
+                    entityfx = new EntityAuraFX(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    ((EntityFX) entityfx).setParticleTextureIndex(82);
+                    ((EntityFX) entityfx).setRBGColorF(1.0F, 1.0F, 1.0F);
+                }
+                if (particleName.equals("magicCrit")) {
+                    entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    ((EntityFX) entityfx).setRBGColorF(((EntityFX) entityfx).getRedColorF() * 0.3F, ((EntityFX) entityfx).getGreenColorF() * 0.8F, ((EntityFX) entityfx).getBlueColorF());
+                    ((EntityFX) entityfx).nextTextureIndexX();
+                }
+                if (particleName.equals("crit")) {
+                    entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    if (r != 0 || g != 0 || b != 0) {
+                        ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
+                    }
+                }
+                if (particleName.equals("fireworksSpark")) {
+                    entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);
+
+                    if (r != 0 || g != 0 || b != 0) {
+                        ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
                     }
 
-
-                }
-                if (particleName.equals("fireworksSpark")){
-                    var21 = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY,motZ, minecraft.effectRenderer);
-
-                    if(r!=0 || g!=0 || b!=0) {
-                        ((EntityFX) var21).setRBGColorF((float) r, (float) g, (float) b);
-                    }
-
                 }
 
-                minecraft.effectRenderer.addEffect(var21);
-                return var21;
+                AuraCascade.proxy.addEffectBypassingLimit(entityfx);
+                return entityfx;
             }
         }
-        return null;
-    }
-    
+
+    return null;
+}
+
 }

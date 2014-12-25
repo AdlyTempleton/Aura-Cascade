@@ -57,7 +57,7 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
         Iterator stacksIter = stacks.iterator();
         while (stacksIter.hasNext()) {
             ItemStack curStack = (ItemStack) stacksIter.next();
-            Iterator recipeStacksIter = new ArrayList<ItemStack>(stacks).iterator();
+            Iterator recipeStacksIter = new ArrayList<ItemStack>(recipeStacks).iterator();
 
             boolean found = false;
             while (recipeStacksIter.hasNext()) {

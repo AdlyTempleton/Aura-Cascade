@@ -92,7 +92,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 125000), new ItemStack(Items.diamond))),
+                new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 125000), new ItemStack(Items.gold_ingot))),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 1), " X ", "XCX", " X ", 'X', new ItemStack(Items.golden_sword), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 2), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem,1 , 8196), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem, 1, 8257), 'C', new ItemStack(this)),
