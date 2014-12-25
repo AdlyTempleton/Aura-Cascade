@@ -20,7 +20,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
     //Direction to center of crafting
     public ForgeDirection direction = ForgeDirection.UNKNOWN;
     public int powerReceived = 0;
-    public EnumAura typeRecieving;
+    public EnumAura typeReceiving;
 
 
 
@@ -59,8 +59,8 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
             PylonRecipe recipe = center.getRecipe();
             if(recipe != null){
                 AuraQuantity quantity = recipe.getAuraFromItem(itemStack);
-                if(quantity.getType() != typeRecieving){
-                    typeRecieving = quantity.getType();
+                if(quantity.getType() != typeReceiving){
+                    typeReceiving = quantity.getType();
                     powerReceived = 0;
                 }
                 if(quantity != null && (quantity.getType() == EnumAura.WHITE_AURA ||quantity.getType() == type)){
@@ -80,7 +80,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
         direction = ForgeDirection.getOrientation(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
-        typeRecieving = EnumAura.values()[nbt.getInteger("typeRecieving")];
+        typeReceiving = EnumAura.values()[nbt.getInteger("typeReceiving")];
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         }
         nbt.setInteger("direction", direction.ordinal());
         nbt.setInteger("powerReceived", powerReceived);
-        nbt.setInteger("typeRecieving", typeRecieving.ordinal());
+        nbt.setInteger("typeReceiving", typeReceiving.ordinal());
     }
 
     @Override
