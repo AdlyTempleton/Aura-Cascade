@@ -22,6 +22,9 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
     public int powerReceived = 0;
     public EnumAura typeReceiving;
 
+    //Not stored or synchronized
+    public long frames;
+
 
 
     public void verifyConnections(){

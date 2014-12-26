@@ -29,6 +29,7 @@ public class RenderPedestal extends TileEntitySpecialRenderer {
 
 
         AuraTilePedestal pedestal = (AuraTilePedestal) tileEntity;
+        pedestal.frames++;
         if(pedestal.itemStack != null) {
             if ((entityItem == null) || entityItem.getEntityItem().getItem() != pedestal.itemStack.getItem())
                 entityItem = new EntityItem(tileEntity.getWorldObj(), x, y, z, ((AuraTilePedestal) tileEntity).itemStack);
@@ -42,7 +43,7 @@ public class RenderPedestal extends TileEntitySpecialRenderer {
             //This parameter is never used ._.
             Minecraft.getMinecraft().entityRenderer.disableLightmap(0D);
 
-            float angle = (float) ((System.currentTimeMillis() % 360000D) / 10D);
+            float angle = (float) (pedestal.frames / 2D);
 
             entityItem.setRotationYawHead(angle);
 
