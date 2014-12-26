@@ -72,7 +72,7 @@ if (project.hasProperty("releaseType"))
 
 jar {
         manifest {
-        attributes 'FMLAT': 'accessTransformer.cfg'
+        attributes 'FMLAT': 'aura_at.cfg'
     }
 }
 
