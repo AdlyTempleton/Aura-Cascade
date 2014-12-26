@@ -78,6 +78,7 @@ jar {
 
 dependencies {
     compile files("/libs/Baubles-deobf-1.7.10-1.0.1.10.jar")
+    compile files("/libs/NotEnoughItems-1.7.10-1.0.3.74-dev.jar")
 }
 
 processResources
