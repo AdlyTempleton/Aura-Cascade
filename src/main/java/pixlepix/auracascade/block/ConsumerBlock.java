@@ -5,12 +5,21 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
+import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -39,8 +48,21 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        // TODO Auto-generated method stub
-        return null;
+        if(name != null) {
+            if (name.equals("plant")) {
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.GREEN_AURA, 200000), new ItemStack(Items.golden_hoe)));
+            }
+            if (name.equals("ore")){
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 200000), new ItemStack(Blocks.furnace)));
+            }
+            if(name.equals("loot")){
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 200000), new ItemStack(Blocks.mossy_cobblestone)));
+            }
+            if(name.equals("mob")){
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.VIOLET_AURA, 200000), new ItemStack(Items.egg)));
+            }
+        }
+        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }
 
     @Override

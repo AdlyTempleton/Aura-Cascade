@@ -14,6 +14,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -32,16 +34,18 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
 
-	public AuraBlock(String type){
+	public AuraBlock(String type) {
 		super(Material.glass);
 		this.type = type;
 
-		if(!type.equals("craftingCenter")){
+		if (!type.equals("craftingCenter")) {
 			setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
 		}
 	}
@@ -51,7 +55,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		return false;
 	}
 
-	public AuraBlock(){
+	public AuraBlock() {
 		this("");
 	}
 
@@ -62,20 +66,20 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
-		if(!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
+		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
 			player.addChatComponentMessage(new ChatComponentText("Aura:"));
 
-			if(world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()){
+			if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()) {
 				AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
 				capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
 				player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
 				world.markBlockForUpdate(x, y, z);
 
-			}else if(world.getTileEntity(x, y, z) instanceof AuraTilePedestal && !player.isSneaking()){
+			} else if (world.getTileEntity(x, y, z) instanceof AuraTilePedestal && !player.isSneaking()) {
 				AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(x, y, z);
 
 				//Remove current itemstack from pedestal
-				if(pedestal.itemStack != null){
+				if (pedestal.itemStack != null) {
 					EntityItem item = new EntityItem(world, player.posX, player.posY, player.posZ, pedestal.itemStack);
 					world.spawnEntityInWorld(item);
 				}
@@ -84,7 +88,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 				world.markBlockForUpdate(x, y, z);
 				return true;
 
-			}else if(world.getTileEntity(x, y, z) instanceof AuraTile){
+			} else if (world.getTileEntity(x, y, z) instanceof AuraTile) {
 				for (EnumAura aura : EnumAura.values()) {
 					if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
 						player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
@@ -95,19 +99,19 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
 				}
 			}
-		} else if(!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile){
+		} else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile) {
 			CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
-			if(tile.getRecipe() != null){
-				player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: "+tile.getRecipe().result.getDisplayName()));
-				for(ForgeDirection direction:CraftingCenterTile.pedestalRelativeLocations){
+			if (tile.getRecipe() != null) {
+				player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
+				for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
 					AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
-					if(tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
+					if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
 						player.addChatComponentMessage(new ChatComponentText("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
-					}else{
+					} else {
 						AuraCascade.log.warn("Invalid recipe when checking crafting center");
 					}
 				}
-			}else{
+			} else {
 				player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
 			}
 		}
@@ -119,10 +123,10 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		super.onEntityCollidedWithBlock(world, x, y, z, entity);
 
 		TileEntity te = world.getTileEntity(x, y, z);
-		if(entity instanceof EntityItem && !world.isRemote){
+		if (entity instanceof EntityItem && !world.isRemote) {
 			ItemStack stack = ((EntityItem) entity).getEntityItem();
-			if(stack.getItem() instanceof ItemAuraCrystal){
-				if(te instanceof AuraTile){
+			if (stack.getItem() instanceof ItemAuraCrystal) {
+				if (te instanceof AuraTile) {
 					((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100 * stack.stackSize));
 					world.markBlockForUpdate(x, y, z);
 					AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, 32));
@@ -132,7 +136,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 			}
 		}
-		if(!world.isRemote && te instanceof AuraTilePumpProjectile){
+		if (!world.isRemote && te instanceof AuraTilePumpProjectile) {
 			((AuraTilePumpProjectile) te).onEntityCollidedWithBlock(entity);
 		}
 	}
@@ -143,25 +147,90 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		topIcon = iconRegister.registerIcon("aura:"+type+"Node_Top");
-		sideIcon = iconRegister.registerIcon("aura:"+type+"Node_Side");
-		botIcon = iconRegister.registerIcon("aura:"+type+"Node_Bottom");
+		topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
+		sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
+		botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		switch (side){
-			case 0: return botIcon;
-			case 1: return topIcon;
-			default: return sideIcon;
+		switch (side) {
+			case 0:
+				return botIcon;
+			case 1:
+				return topIcon;
+			default:
+				return sideIcon;
 		}
+	}
+
+	private ItemStack getAuraNodeItemstack(){
+		List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
+		for(Block b:blockList){
+			if(((AuraBlock)b).type.equals("")){
+				return new ItemStack(b);
+			}
+		}
+		AuraCascade.log.warn("Failed to find aura node itemstack. Something has gone horribly wrong");
+		return null;
+	}
+
+	private ItemStack getAuraNodePumpItemstack(){
+		List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
+		for(Block b:blockList){
+			if(((AuraBlock)b).type.equals("pump")){
+				return new ItemStack(b);
+			}
+		}
+		AuraCascade.log.warn("Failed to find aura node pump itemstack. Something has gone horribly wrong");
+		return null;
 	}
 
 	@Override
 	public ThaumicTinkererRecipe getRecipeItem() {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		if (type.equals("pump")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
+		}
+		if (type.equals("black")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye), 'N', getAuraNodeItemstack());
+		}
+		if (type.equals("conserve")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "HHH", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.redstone), 'N', getAuraNodeItemstack(), 'H', new ItemStack(Items.gold_ingot));
+		}
+		if (type.equals("capacitor")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "III", " N ", "III", 'I', new ItemStack(Items.iron_ingot), 'N', getAuraNodeItemstack());
+		}
+
+		if (type.equals("craftingPedestal")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "GRR", "GNR", "GRR", 'G', new ItemStack(Items.gold_ingot), 'R', new ItemStack(Items.redstone), 'N', getAuraNodeItemstack());
+		}
+
+
+		if (type.equals("craftingCenter")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "GGG", "RDR", "RRR", 'G', new ItemStack(Items.gold_ingot), 'R', new ItemStack(Items.redstone), 'D', new ItemStack(Items.diamond));
+		}
+
+
+		if (type.equals("orange")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye, 1, 14), 'N', getAuraNodeItemstack());
+		}
+
+		if (type.equals("pumpProjectile")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.arrow), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
+		};
+		if (type.equals("pumpFall")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.water_bucket), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
+		}
+		if (type.equals("pumpLight")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.glowstone), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
+		}
+		if (type.equals("pumpRedstone")) {
+			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
+		}
+		return new CraftingBenchRecipe(new ItemStack(this), "PPP", "PRP", "PPP", 'P', new ItemStack(Blocks.glass_pane), 'R', new ItemStack(Blocks.redstone_block));
+	};
+
 
 	@Override
 	public ArrayList<Object> getSpecialParameters() {
@@ -234,7 +303,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 
 
-		if(type.equals("craftingCenter")){
+		if(type.equals("orange")){
 			return AuraTileOrange.class;
 		}
 
