@@ -71,7 +71,7 @@ if (project.hasProperty("releaseType"))
 
 
 jar {
-        manifest {
+    manifest {
         attributes 'FMLAT': 'aura_at.cfg'
     }
 }
