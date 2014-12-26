@@ -13,7 +13,7 @@ import pixlepix.auracascade.main.ConstantMod;
 import pixlepix.auracascade.registry.BlockRegistry;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version)
+@Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles")
 public class AuraCascade {
 
 	@Instance(ConstantMod.modId)
