@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import baubles.api.BaublesApi;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,6 +49,11 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             player.inventory.consumeInventoryItem(this);
         }
         return stack;
+    }
+
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("aura:fairy_plain");
     }
 
     @Override

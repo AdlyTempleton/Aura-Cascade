@@ -78,7 +78,7 @@ public class EntityFairy extends Entity {
             phi %= 360;
             theta %= 360;
             if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 400 == 0) {
-                ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.netHandler.getPacketFrom(new PacketFairyUpdate(this)));
+                ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
             }
 
             double oldX = posX;
@@ -94,7 +94,7 @@ public class EntityFairy extends Entity {
             entityItemRender.setVelocity(oldX, oldY, oldZ);
             setVelocity(0, 0, 0);
         }else if(worldObj.isRemote){
-            AuraCascade.netHandler.sendToServer(new PacketFairyRequestUpdate(this));
+            AuraCascade.proxy.networkWrapper.sendToServer(new PacketFairyRequestUpdate(this));
         }else{
             setDead();
         }

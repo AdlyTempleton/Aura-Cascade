@@ -13,6 +13,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
+import pixlepix.auracascade.item.ItemFairyCharm;
+import pixlepix.auracascade.registry.BlockRegistry;
 
 /**
  * Created by pixlepix on 12/8/14.
@@ -35,7 +37,7 @@ public class RenderEntityFairy extends Render {
         EntityItem entityItem = ((EntityFairy)entity).entityItemRender;
         entityItem.age = 0;
         entityItem.velocityChanged = true;
-        entityItem.setEntityItemStack(new ItemStack(Items.wheat));
+        entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class)));
 
 
 

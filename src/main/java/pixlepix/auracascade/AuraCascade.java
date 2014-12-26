@@ -21,8 +21,6 @@ public class AuraCascade {
 
 	@SidedProxy(clientSide = ConstantMod.clientProxy, serverSide = ConstantMod.commonProxy)
     public static CommonProxy proxy;
-	public static SimpleNetworkWrapper netHandler = NetworkRegistry.INSTANCE.newSimpleChannel(ConstantMod.modId);
-
     public static Logger log;
 
 	@EventHandler

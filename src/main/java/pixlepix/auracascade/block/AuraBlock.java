@@ -137,14 +137,24 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 	}
 
+	private IIcon topIcon;
+	private IIcon sideIcon;
+	private IIcon botIcon;
+
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister) {
-		blockIcon = iconRegister.registerIcon("aura:"+type+"Node");
+		topIcon = iconRegister.registerIcon("aura:"+type+"Node_Top");
+		sideIcon = iconRegister.registerIcon("aura:"+type+"Node_Side");
+		botIcon = iconRegister.registerIcon("aura:"+type+"Node_Bottom");
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
-		return blockIcon;
+	public IIcon getIcon(int side, int meta) {
+		switch (side){
+			case 0: return botIcon;
+			case 1: return topIcon;
+			default: return sideIcon;
+		}
 	}
 
 	@Override
