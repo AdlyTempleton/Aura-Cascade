@@ -96,6 +96,8 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         nbt.setInteger("typeReceiving", typeReceiving == null ? -1 :typeReceiving.ordinal());
     }
 
+
+
     @Override
     public int getSizeInventory() {
         return 1;

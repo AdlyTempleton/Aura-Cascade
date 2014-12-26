@@ -16,6 +16,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -184,6 +185,24 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 		AuraCascade.log.warn("Failed to find aura node pump itemstack. Something has gone horribly wrong");
 		return null;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if(te instanceof IInventory){
+			IInventory inv = (IInventory) te;
+			for(int i=0; i < inv.getSizeInventory(); i++){
+
+				float f = 0.7F;
+				double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+				double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+				double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
+				EntityItem entityitem = new EntityItem(world, (double)x + d0, (double)y + d1, (double)z + d2, inv.getStackInSlot(i));
+				entityitem.delayBeforeCanPickup = 10;
+				world.spawnEntityInWorld(entityitem);
+			}
+		}
 	}
 
 	@Override
