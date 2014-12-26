@@ -9,6 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -54,8 +56,11 @@ public class ConsumerTile extends TileEntity {
                 TileEntity tileEntity = worldObj.getTileEntity(xCoord+direction.offsetX, yCoord+direction.offsetY, zCoord+direction.offsetZ);
                 if(tileEntity instanceof AuraTile){
                     AuraTile auraTile = (AuraTile) tileEntity;
-                    storedPower += auraTile.energy;
-                    auraTile.energy = 0;
+                    if(auraTile.energy > 0) {
+                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        storedPower += auraTile.energy;
+                        auraTile.energy = 0;
+                    }
                 }
             }
         }

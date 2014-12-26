@@ -16,6 +16,11 @@ public class ParticleEffects {
     public static TextureManager textureManager = Minecraft.getMinecraft().renderEngine;
     public static Minecraft minecraft = Minecraft.getMinecraft();
 
+
+    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ){
+        return spawnParticle(particleName, posX, posY, posZ, motX, motY, motZ, 0, 0, 0);
+    }
+
     public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b){
 
         if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null)
@@ -71,7 +76,7 @@ public class ParticleEffects {
             }
         }
 
-    return null;
-}
+        return null;
+    }
 
 }

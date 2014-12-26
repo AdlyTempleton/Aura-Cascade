@@ -52,7 +52,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
             if(msg.type == 2){
                 for(int i=0; i<50; i++){
                     Random rand = new Random();
-                    msg.world.spawnParticle("explode", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D)/4, rand.nextDouble()/4, (rand.nextDouble()-.5)/4);
+                    msg.world.spawnParticle("explode", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 4, rand.nextDouble() / 4, (rand.nextDouble() - .5) / 4);
                 }
             }
             if(msg.type == 3){
@@ -61,16 +61,31 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     double posX = msg.x + rand.nextDouble() * 8 - 4D;
                     double posY = msg.y + rand.nextDouble() * 8 - 4D;
                     double posZ = msg.z + rand.nextDouble() * 8 - 4D;
-                    msg.world.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                    ParticleEffects.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
                 }
             }
             if(msg.type == 4){
                 for(int i=0; i<200; i++){
                     Random rand = new Random();
-                    double posX = msg.x + rand.nextDouble() * 8 - 4D;
-                    double posY = msg.y + rand.nextDouble() * 8 - 4D;
-                    double posZ = msg.z + rand.nextDouble() * 8 - 4D;
+                    double rho = 3;
+                    double phi = rand.nextDouble() * 2 * Math.PI;
+                    double theta = rand.nextDouble() * 2 * Math.PI;
+                    double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
+                    double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
+                    double posZ = msg.z + rho * Math.cos(phi);
                     msg.world.spawnParticle("witchMagic", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                }
+            }
+            if(msg.type == 5){
+                for(int i=0; i<200; i++){
+                    Random rand = new Random();
+                    double rho = 3;
+                    double phi = rand.nextDouble() * 2 * Math.PI;
+                    double theta = rand.nextDouble() * 2 * Math.PI;
+                    double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
+                    double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
+                    double posZ = msg.z + rho * Math.cos(phi);
+                    msg.world.spawnParticle("heart", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
                 }
             }
         }
