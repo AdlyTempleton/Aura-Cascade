@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,9 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
     public EnumAura typeReceiving;
 
     //Not stored or synchronized
+    //Not placed in world
+    //Used for rendering
+    public EntityItem entityItem;
     public long frames;
 
 
