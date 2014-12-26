@@ -192,15 +192,16 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		TileEntity te = world.getTileEntity(x, y, z);
 		if(te instanceof IInventory){
 			IInventory inv = (IInventory) te;
-			for(int i=0; i < inv.getSizeInventory(); i++){
-
-				float f = 0.7F;
-				double d0 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d1 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				double d2 = (double)(world.rand.nextFloat() * f) + (double)(1.0F - f) * 0.5D;
-				EntityItem entityitem = new EntityItem(world, (double)x + d0, (double)y + d1, (double)z + d2, inv.getStackInSlot(i));
-				entityitem.delayBeforeCanPickup = 10;
-				world.spawnEntityInWorld(entityitem);
+			for(int i=0; i < inv.getSizeInventory(); i++) {
+				if (inv.getStackInSlot(i) != null) {
+					float f = 0.7F;
+					double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+					EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, inv.getStackInSlot(i));
+					entityitem.delayBeforeCanPickup = 10;
+					world.spawnEntityInWorld(entityitem);
+				}
 			}
 		}
 	}
