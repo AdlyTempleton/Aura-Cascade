@@ -44,6 +44,12 @@ public enum EnumColor
         rgbCode = rgb;
         mcMeta = meta;
     }
+
+
+    public int getHex(){
+        return rgbCode[0] * 256 * 256 + rgbCode[1] * 256 + rgbCode[2];
+    }
+
     /**
      * Gets the localized name of this color by translating the unlocalized name.
      * @return localized name

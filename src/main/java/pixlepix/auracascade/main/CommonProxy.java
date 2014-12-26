@@ -1,6 +1,8 @@
 package pixlepix.auracascade.main;
 
 import baubles.api.BaublesApi;
+import codechicken.nei.api.API;
+import codechicken.nei.api.IConfigureNEI;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -26,7 +28,7 @@ import pixlepix.auracascade.network.PacketFairyUpdate;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
 
-public class CommonProxy {
+public class CommonProxy{
 
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
@@ -58,8 +60,6 @@ public class CommonProxy {
         FMLCommonHandler.instance().bus().register(eventHandler);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
         GameRegistry.addRecipe(new AngelsteelRecipe());
-
-
     }
     public void postInit(FMLPostInitializationEvent event){
         registry.postInit();

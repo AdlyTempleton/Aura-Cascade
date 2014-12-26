@@ -80,7 +80,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
         direction = ForgeDirection.getOrientation(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
-        typeReceiving = EnumAura.values()[nbt.getInteger("typeReceiving")];
+        typeReceiving = nbt.getInteger("typeReceiving") == -1 ? null : EnumAura.values()[nbt.getInteger("typeReceiving")];
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
         }
         nbt.setInteger("direction", direction.ordinal());
         nbt.setInteger("powerReceived", powerReceived);
-        nbt.setInteger("typeReceiving", typeReceiving.ordinal());
+        nbt.setInteger("typeReceiving", typeReceiving == null ? -1 :typeReceiving.ordinal());
     }
 
     @Override

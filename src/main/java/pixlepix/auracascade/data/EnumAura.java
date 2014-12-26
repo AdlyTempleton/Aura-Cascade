@@ -6,14 +6,15 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.AuraTile;
+import pixlepix.auracascade.main.EnumColor;
 
 import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 public enum EnumAura {
-	WHITE_AURA("White", 1, 1, 1),
+	WHITE_AURA("White", 1, 1, 1, EnumColor.BLACK),
 
-	GREEN_AURA("Green", .1, 1, .1){
+	GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN){
 		@Override
 		public double getRelativeMass(World world, CoordTuple tuple) {
 			if(world.isDaytime()){
@@ -23,13 +24,13 @@ public enum EnumAura {
 		}
 	},
 
-	BLACK_AURA("Black", .1, .1, .1){
+	BLACK_AURA("Black", .1, .1, .1, EnumColor.BLACK){
 		@Override
 		public double getRelativeMass(World world, CoordTuple tuple) {
 			return 0D;
 		}
 	},
-	RED_AURA("Red", 1, .1, .1){
+	RED_AURA("Red", 1, .1, .1, EnumColor.RED){
 		@Override
 		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity){
 			//Implementation loosely based off of Vazkii's Botania
@@ -68,7 +69,7 @@ public enum EnumAura {
 			}
 		}
 	},
-	ORANGE_AURA("Orange", 1, .5, 0){
+	ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE){
 		@Override
 		public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
 			for (CoordTuple nearbyNode : tuple.inRange(2)) {
@@ -104,7 +105,7 @@ public enum EnumAura {
 			return 0D;
 		}
 	},
-	YELLOW_AURA("Yellow", 1, 1, .1){
+	YELLOW_AURA("Yellow", 1, 1, .1, EnumColor.YELLOW){
 		@Override
 		public double getAscentBoost(World world, CoordTuple tuple) {
 			return 10D;
@@ -118,13 +119,13 @@ public enum EnumAura {
 			}
 		}
 	},
-	BLUE_AURA("Blue", .1, .1, 1){
+	BLUE_AURA("Blue", .1, .1, 1, EnumColor.DARK_BLUE){
 		@Override
 		public double getAscentBoost(World world, CoordTuple tuple) {
 			return world.isRaining() ? 50 : .5;
 		}
 	},
-	VIOLET_AURA("Violet", 1, .1, 1){
+	VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE){
 
 		@Override
 		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
@@ -143,12 +144,14 @@ public enum EnumAura {
 	public double r;
 	public double g;
 	public double b;
+	public EnumColor color;
 
-	EnumAura(String name, double r, double g, double b){
+	EnumAura(String name, double r, double g, double b, EnumColor color){
 		this.name = name;
 		this.r = r;
 		this.g = g;
 		this.b = b;
+		this.color = color;
 	}
 
 	public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity){}

@@ -27,9 +27,7 @@ public class AuraCascade {
 	public void preInit(FMLPreInitializationEvent event) {
         log=event.getModLog();
         proxy.preInit(event);
-
 	}
-
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
