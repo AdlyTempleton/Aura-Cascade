@@ -55,7 +55,7 @@ public enum EnumAura {
 							if(connectedNode.getY() > tile.yCoord){
 								AuraTile transferTile = (AuraTile) connectedNode.getTile(world);
 
-								int auraPower = 1000000 / (connectedNode.getY() - tile.yCoord);
+								int auraPower = 200000 / (connectedNode.getY() - tile.yCoord);
 								auraPower = Math.min(auraPower, tile.storage.get(this));
 
 								tile.burst(connectedNode, "magicCrit", this, 1D);
