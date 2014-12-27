@@ -61,6 +61,9 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
             if(name.equals("mob")){
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.VIOLET_AURA, 200000), new ItemStack(Items.egg)));
             }
+            if(name.equals("angel")){
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.blaze_rod)));
+            }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }
@@ -117,6 +120,9 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
 
             if(name.equals("mob")){
                 return SpawnTile.class;
+            }
+            if(name.equals("angel")){
+                return AngelSteelTile.class;
             }
         }
         return FurnaceTile.class;
