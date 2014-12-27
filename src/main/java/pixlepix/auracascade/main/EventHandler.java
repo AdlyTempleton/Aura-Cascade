@@ -18,6 +18,7 @@ import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.block.tile.AuraTilePump;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
 
@@ -64,6 +65,9 @@ public class EventHandler {
             }
         }
         if(event.entityPlayer.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.entityPlayer.inventory.getCurrentItem().getItem())){
+            if(event.entityPlayer.inventory.getCurrentItem().stackTagCompound == null){
+                event.entityPlayer.inventory.getCurrentItem().stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool)event.entityPlayer.inventory.getCurrentItem().getItem()).getDegree());
+            }
             int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
             int efficiency = buffs[0];
             event.newSpeed *= Math.pow(1.3, efficiency);
@@ -85,6 +89,9 @@ public class EventHandler {
     public void onHarvestEvent(BlockEvent.HarvestDropsEvent event){
 
         if(event.harvester != null && event.harvester.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.harvester.inventory.getCurrentItem().getItem())) {
+            if(event.harvester.inventory.getCurrentItem().stackTagCompound == null){
+                event.harvester.inventory.getCurrentItem().stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool)event.harvester.inventory.getCurrentItem().getItem()).getDegree());
+            }
             int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().stackTagCompound)[1];
             if (event.fortuneLevel < fortune) {
                 //Cancels the event and breaks the block again

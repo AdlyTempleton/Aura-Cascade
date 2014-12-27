@@ -6,6 +6,7 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by pixlepix on 12/22/14.
  */
-public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem {
+public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, IAngelsteelTool {
     public ItemAngelsteelShovel(Integer i) {
         super(AngelsteelToolHelper.materials[i.intValue()]);
         this.degree = i.intValue();
@@ -75,5 +76,10 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new CraftingBenchRecipe(new ItemStack(this, 1, degree), " A ", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+    }
+
+    @Override
+    public int getDegree() {
+        return degree;
     }
 }
