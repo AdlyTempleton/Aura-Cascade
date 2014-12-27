@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -83,18 +84,17 @@ public class AuraTile extends TileEntity {
     }
 
     public void verifyConnections() {
-        Iterator iter = connected.iterator();
-        while (iter.hasNext()) {
-            CoordTuple next = (CoordTuple) iter.next();
+        LinkedList<CoordTuple> result = new LinkedList<CoordTuple>();
+        for(CoordTuple next:connected){
             TileEntity tile = next.getTile(worldObj);
             if (tile instanceof AuraTile) {
                 if (!((AuraTile) tile).connected.contains(new CoordTuple(this))) {
                     ((AuraTile) tile).connected.add(new CoordTuple(this));
                 }
-            } else {
-                iter.remove();
+                result.add(next);
             }
         }
+        connected = result;
     }
 
     public void connect(int x2, int y2, int z2) {
