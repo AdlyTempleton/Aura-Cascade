@@ -87,7 +87,7 @@ public class CraftingCenterTile extends TileEntity {
             ItemStack loot = recipe.result.copy();
             EntityItem entityDrop = new EntityItem(worldObj, xCoord + .5, yCoord + 2, zCoord + .5, loot);
             worldObj.spawnEntityInWorld(entityDrop);
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(3, xCoord + .5, yCoord + 2, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 30));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(3, xCoord + .5, yCoord + 2, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
         }
     }

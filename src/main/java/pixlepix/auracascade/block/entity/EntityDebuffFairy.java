@@ -40,7 +40,7 @@ public class EntityDebuffFairy extends EntityFairy {
                 for(PotionEffect potionEffect: potionEffects) {
                     entity.addPotionEffect(potionEffect);
                 }
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 10));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
                 break;
             }
         }

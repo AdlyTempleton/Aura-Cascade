@@ -27,7 +27,7 @@ public class EntityBreederFairy extends EntityFairy {
             for(EntityAnimal entity:nearbyEntities){
                 if(!entity.isInLove() && entity.getGrowingAge() == 0) {
                     entity.func_146082_f(player);
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 10));
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
                     break;
 
                 }
