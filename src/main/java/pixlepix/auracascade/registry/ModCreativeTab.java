@@ -34,7 +34,9 @@ public class ModCreativeTab extends CreativeTabs {
         list.addAll(this.list);
     }
     public void addItem(Item item) {
+
         item.getSubItems(item, this, creativeTabQueue);
+        item.setCreativeTab(CreativeTabs.tabAllSearch);
     }
     public void addBlock(Block block) {
         block.getSubBlocks(Item.getItemFromBlock(block), this, creativeTabQueue);
