@@ -8,7 +8,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.main.EnumColor;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 public enum EnumAura {
@@ -77,23 +76,8 @@ public enum EnumAura {
 					AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
 					for (CoordTuple targetNode : auraTile.connected) {
 						if (nearbyNode.getDirectionTo(targetNode) == direction) {
-							if (auraTile.burstMap == null) {
-
-								AuraQuantityList auraToSend = auraTile.storage.percent(Math.max(1F, (float) quantity.getNum() / (float) auraTile.storage.getTotalAura()));
-								auraToSend.set(this, 0);
-								auraTile.transferAura(targetNode, auraToSend, false);
-							} else {
-								AuraQuantityList auraToSend = (AuraQuantityList) auraTile.storage.clone();
-
-								//Simulate the node being discharged before the burst is calculated
-								for (AuraQuantityList quantityToSubtract : auraTile.burstMap.values()) {
-									auraToSend.subtract(quantityToSubtract);
-								}
-								auraToSend.percent(Math.max(1F, (float) quantity.getNum() / (float) auraToSend.getTotalAura()));
-								auraToSend.set(this, 0);
-								auraTile.burstMap.put(targetNode, auraToSend);
-							}
-
+							((AuraTile) nearbyNode.getTile(world)).inducedBurstMap.put(targetNode, quantity.getNum());
+							break;
 						}
 					}
 

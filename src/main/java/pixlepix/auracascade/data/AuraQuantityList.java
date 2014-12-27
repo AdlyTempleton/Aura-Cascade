@@ -108,7 +108,7 @@ public class AuraQuantityList {
 		return result;
 	}
 	@Override
-	protected Object clone(){
+	public Object clone(){
 		return new AuraQuantityList((ArrayList<AuraQuantity>) quantityList.clone());
 	}
 

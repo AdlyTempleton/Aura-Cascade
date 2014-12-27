@@ -25,6 +25,9 @@ public class AuraTile extends TileEntity {
     public boolean hasConnected = false;
     public int energy = 0;
 
+    //Used by Orange Aura
+    public HashMap<CoordTuple, Integer> inducedBurstMap = new HashMap<CoordTuple, Integer>();
+
     public AuraTile() {
     }
 
@@ -174,8 +177,26 @@ public class AuraTile extends TileEntity {
             if (burstMap != null) {
                 for (CoordTuple tuple : connected) {
                     if (burstMap.containsKey(tuple)) {
-
                         transferAura(tuple, burstMap.get(tuple), true);
+
+                    }
+                }
+                burstMap = null;
+            }
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
+        if (worldObj.getTotalWorldTime() % 20 == 2) {
+            verifyConnections();
+            if (inducedBurstMap != null) {
+                for (CoordTuple tuple : connected) {
+                    if (inducedBurstMap.containsKey(tuple)) {
+                        int num = inducedBurstMap.get(tuple);
+                        AuraQuantityList auraToSend = (AuraQuantityList)storage.clone();
+                        auraToSend.set(EnumAura.ORANGE_AURA, 0);
+                        if(auraToSend.getTotalAura() > 0) {
+                            auraToSend.percent(Math.min(1F, (float) num / (float) storage.getTotalAura()));
+                            transferAura(tuple, auraToSend, false);
+                        }
                     }
                 }
                 burstMap = null;
