@@ -142,7 +142,7 @@ public class AuraTile extends TileEntity {
                 }
                 //Add a balance so the node doesn't completley discharge
                 //Based off 'sending aura to yourself'
-                totalWeight += this instanceof AuraTileCapacitor ? 0 : 30 * 30;
+                totalWeight += this instanceof AuraTileCapacitor ? 0 : 20 * 20;
 
                 for (CoordTuple tuple : connected) {
                     double factor = getWeight(tuple) / totalWeight;
@@ -235,7 +235,7 @@ public class AuraTile extends TileEntity {
     }
 
     public double getWeight(CoordTuple tuple) {
-        return Math.pow(30 - tuple.dist(this), 2);
+        return Math.pow(20 - tuple.dist(this), 2);
     }
 
     @Override
