@@ -1,24 +1,21 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.CoordTuple;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class AuraTile extends TileEntity {
 
@@ -161,10 +158,11 @@ public class AuraTile extends TileEntity {
                                 quantityList.add(new AuraQuantity(enumAura, (int) (auraHere * (float) factor)));
                             }
 
-                            if(!quantityList.empty()) {
-                                burstMap.put(tuple, quantityList);
-                            }
+
                         }
+                    }
+                    if(!quantityList.empty()) {
+                        burstMap.put(tuple, quantityList);
                     }
                 }
             }
