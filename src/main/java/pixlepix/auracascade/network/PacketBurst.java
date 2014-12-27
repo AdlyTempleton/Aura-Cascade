@@ -4,14 +4,10 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
-import pixlepix.auracascade.main.ClientProxy;
 import pixlepix.auracascade.main.ParticleEffects;
 
 import java.util.Random;
@@ -35,6 +31,9 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     int density = (int) (5D * msg.comp);
                     for (int count = 0; count < dist * density; count++) {
                         double i = ((double) count) / density;
+                        if(msg.comp < 1D){
+                            i += new Random().nextDouble() * (1/density);
+                        }
                         double xp = msg.from.getX() + (velocity.xCoord * i) + .5;
                         double yp = msg.from.getY() + (velocity.yCoord * i) + .5;
                         double zp = msg.from.getZ() + (velocity.zCoord * i) + .5;
