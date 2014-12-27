@@ -146,6 +146,9 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if(stack.stackTagCompound == null){
+            stack.stackTagCompound = new NBTTagCompound();
+        }
         if(!world.isRemote && player.isSneaking()){
             int[] fairyCharms = stack.stackTagCompound.getIntArray("fairyList");
             Random random = new Random();
