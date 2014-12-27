@@ -43,7 +43,7 @@ public class RenderEntityFairy extends Render {
 
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_LIGHTING);
-
+        GL11.glEnable(GL11.GL_BLEND);
 
 
         //This parameter is never used ._.
@@ -56,7 +56,8 @@ public class RenderEntityFairy extends Render {
         entityItem.age = 0;
         renderItem.doRender(entityItem, x, y, z, 0, 0);
 
-        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
 
 
