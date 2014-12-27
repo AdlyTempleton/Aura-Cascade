@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -57,12 +56,6 @@ public class ItemLexicon extends Item implements ITTinkererItem{
             }
         }
         return false;
-    }
-    @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
-        list.add(new ItemStack(item));
-        ItemStack creative = new ItemStack(item);
-        list.add(creative);
     }
     private void addStringToTooltip(String s, List<String> tooltip) {
         tooltip.add(s.replaceAll("&", "\u00a7"));
