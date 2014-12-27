@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class FurnaceTile extends ConsumerTile {
 
-    public static final int COST_PER_SMELT = 200;
+    public static final int COST_PER_SMELT = 1000;
     int heat = 0;
 
     public void readCustomNBT(NBTTagCompound nbt) {
