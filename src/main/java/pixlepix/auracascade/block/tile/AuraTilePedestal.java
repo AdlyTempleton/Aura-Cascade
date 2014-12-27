@@ -30,8 +30,9 @@ public class AuraTilePedestal extends AuraTile implements IInventory{
     public long frames;
 
 
-
+    @Override
     public void verifyConnections(){
+        super.verifyConnections();
         if(direction != ForgeDirection.UNKNOWN){
             TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY,zCoord + direction.offsetZ);
             if(!(tileEntity instanceof CraftingCenterTile)){
