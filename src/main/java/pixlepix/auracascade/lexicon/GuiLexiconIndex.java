@@ -41,7 +41,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
 
 	public GuiLexiconIndex(LexiconCategory category) {
 		this.category = category;
-		title = StatCollector.translateToLocal(category == null ? "botaniamisc.lexiconIndex" : category.getUnlocalizedName());
+		title = StatCollector.translateToLocal(category == null ? "auramisc.lexiconIndex" : category.getUnlocalizedName());
 		parent = new GuiLexicon();
 	}
 

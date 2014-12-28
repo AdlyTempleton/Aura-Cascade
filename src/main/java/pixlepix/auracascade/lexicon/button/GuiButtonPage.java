@@ -39,7 +39,7 @@ public class GuiButtonPage extends GuiButtonLexicon {
 			drawTexturedModalRect(xPosition, yPosition, k == 2 ? 18 : 0, right ? 180 : 190, 18, 10);
 
 			if(k == 2)
-				VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(StatCollector.translateToLocal(right ? "botaniamisc.nextPage" : "botaniamisc.prevPage")));
+				VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(StatCollector.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
 		}
 	}
 

@@ -43,6 +43,6 @@ public class GuiButtonShare extends GuiButtonLexicon {
 	}
 
 	public List<String> getTooltip() {
-		return Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("botaniamisc.clickToShare"));
+		return Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("auramisc.clickToShare"));
 	}
 }

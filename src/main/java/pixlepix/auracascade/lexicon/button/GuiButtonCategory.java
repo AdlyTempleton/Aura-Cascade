@@ -69,7 +69,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
 
 	String getTooltipText() {
 		if(category == null)
-			return "botaniamisc.lexiconIndex";
+			return "auramisc.lexiconIndex";
 		return category.getUnlocalizedName();
 	}
 

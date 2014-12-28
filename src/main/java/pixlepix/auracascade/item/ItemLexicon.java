@@ -67,7 +67,7 @@ public class ItemLexicon extends Item implements ITTinkererItem{
             LexiconEntry entry = getEntryFromForce(par1ItemStack);
             if(entry != null)
                 AuraCascade.proxy.setEntryToOpen(entry);
-            else par3EntityPlayer.addChatMessage(new ChatComponentTranslation("botaniamisc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            else par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             setForcedPage(par1ItemStack, "");
         }
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);

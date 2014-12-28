@@ -175,7 +175,7 @@ public class GuiLexicon extends GuiScreen {
 	void drawHeader() {
 		boolean unicode = fontRendererObj.getUnicodeFlag();
 		fontRendererObj.setUnicodeFlag(true);
-		fontRendererObj.drawSplitString(String.format(StatCollector.translateToLocal("botania.gui.lexicon.header")), left + 18, top + 12, 110, 0);
+		fontRendererObj.drawSplitString(String.format(StatCollector.translateToLocal("aura.gui.lexicon.header")), left + 18, top + 12, 110, 0);
 		fontRendererObj.setUnicodeFlag(unicode);
 	}
 
@@ -256,7 +256,7 @@ public class GuiLexicon extends GuiScreen {
 			if(category != null)
 				button.displayString = StatCollector.translateToLocal(category.getUnlocalizedName());
 			else {
-				button.displayString = StatCollector.translateToLocal("botaniamisc.lexiconIndex");
+				button.displayString = StatCollector.translateToLocal("auramisc.lexiconIndex");
 				break;
 			}
 		}

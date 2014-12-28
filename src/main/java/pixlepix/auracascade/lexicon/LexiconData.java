@@ -42,18 +42,16 @@ public final class LexiconData {
 
 	public static void init() {
 		//Add categories
-		LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("basics");
+		LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics");
 		CategoryManager.addCategory(categoryBasics);
-		LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("auraColors");
+		LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors");
 		CategoryManager.addCategory(categoryAuraColors);
-		LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("auraNodes");
+		LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Aura Nodes");
 		CategoryManager.addCategory(categoryAuraNodes);
-		LexiconCategory categoryConsumers = CategoryManager.categoryConsumers= new LexiconCategory("consumers");
+		LexiconCategory categoryConsumers = CategoryManager.categoryConsumers= new LexiconCategory("Consumers");
 		CategoryManager.addCategory(categoryConsumers);
-		LexiconCategory categoryFairies = CategoryManager.categoryFairies= new LexiconCategory("fairies");
+		LexiconCategory categoryFairies = CategoryManager.categoryFairies= new LexiconCategory("Fairies");
 		CategoryManager.addCategory(categoryFairies);
-		LexiconCategory categoryMisc = CategoryManager.categoryMisc= new LexiconCategory("misc");
-		CategoryManager.addCategory(categoryMisc);
 
 		// BASICS ENTRIES
 		new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
@@ -63,8 +61,8 @@ public final class LexiconData {
 				new PageCraftingRecipe("3", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName(""))));
 		new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
-		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
-				new PageCraftingRecipe("2", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump"))));
+		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
+				new PageCraftingRecipe("3", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump"))));
 
 		//Aura Colors
 		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(3, 4)));

@@ -43,7 +43,7 @@ public class GuiButtonBack extends GuiButtonLexicon {
 	}
 
 	public List<String> getTooltip() {
-		return Arrays.asList(StatCollector.translateToLocal("botaniamisc.back"));
+		return Arrays.asList(StatCollector.translateToLocal("auramisc.back"));
 	}
 
 }

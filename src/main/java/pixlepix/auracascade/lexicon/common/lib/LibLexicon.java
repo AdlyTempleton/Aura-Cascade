@@ -13,7 +13,7 @@ package pixlepix.auracascade.lexicon.common.lib;
 
 public final class LibLexicon {
 
-	public static final String CATEGORY_PREFIX = "botania.category.";
+	public static final String CATEGORY_PREFIX = "aura.category.";
 
 	public static final String CATEGORY_BASICS = "basics";
 	public static final String CATEGORY_MANA = "mana";

@@ -16,7 +16,7 @@ tile.auraNodepumpLight.name=Illumination Aura Pump
 tile.auraNodepumpFall.name=Momentum Aura Pump
 tile.auraNodepumpProjectile.name=Projectile Aura Pump
 tile.auraNodepumpRedstone.name=Redstone Aura Pump
-tile.auraNodepump.name=Aura Pump
+tile.auraNodepump.name=Burning Aura Pump
 vortex.nei.name=Vortex Infusion
 
 tile.consumerBlockmob.name=Cascading Spawner
@@ -83,8 +83,32 @@ item.angelsteelShovel9.name=Angel's Steel shovel of the tenth degree
 item.angelsteelShovel10.name=Angel's Steel shovel of the eleventh degree
 item.angelsteelShovel11.name=Angel's Steel shovel of the twelfth degree
 
-
-
 itemGroup.aura=Aura Cascade
 
-
+auramisc.lexiconIndex=Index
+auramisc.clickToShare=Share
+auramisc.bookmark=Bookmark #%s
+auramisc.clickToSee=Click to read
+auramisc.shiftToRemove=Shift-click to remove
+auramisc.clickToAdd=Add Bookmark
+item.lexicon.name=Encyclopedia Aura
+aura.gui.lexicon.header=Encyclopedia Aura
+aura.entry.basics=Basic Concepts
+aura.entry.auraFlow=Aura Flow Mechanics
+aura.entry.interactions=Controls
+aura.entry.power=Power
+aura.entry.pumps=Pumps
+aura.page.basics0=Aura is a magical fluid, which comes from craftable AuraCrystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy.
+aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura in used to transport and store &1Power&0, in mechanics which will be discussed later.
+aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
+aura.page.auraFlow1=When two nodes are connected, both send aura to each other. This means that the quantity of aura in connected nodes tends toward equilibrium, under normal circumstances.
+aura.page.auraFlow2=Aura Crystals can place Aura in a node
+aura.page.auraFlow3=Aura Nodes store and transport Aura
+aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node to see the stored Aura.
+aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
+aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. Power is equal to (Quantity of Aura)x(Height).
+aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
+aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently.
+aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
+aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Duration: The burn duration in a furnace. Speed: 200.
+aura.page.pumps3=The Burning Aura Pump

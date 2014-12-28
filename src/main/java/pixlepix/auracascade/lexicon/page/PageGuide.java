@@ -28,7 +28,7 @@ public class PageGuide extends PageText {
 
 	@Override
 	public void onOpened(IGuiLexiconEntry gui) {
-		button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, StatCollector.translateToLocal("botaniamisc.playVideo"));
+		button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, StatCollector.translateToLocal("auramisc.playVideo"));
 		gui.getButtonList().add(button);
 	}
 

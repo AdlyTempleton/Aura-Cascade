@@ -20,7 +20,7 @@ public class WIPLexiconEntry extends BLexiconEntry implements IAddonEntry {
 
 	@Override
 	public String getSubtitle() {
-		return "botania.gui.lexicon.wip";
+		return "aura.gui.lexicon.wip";
 	}
 
 }

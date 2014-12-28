@@ -89,7 +89,7 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16, 16);
 
 			if(mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-				VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("botaniamisc.shapeless")));
+				VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("auramisc.shapeless")));
 
 			iconY += 20;
 		}
@@ -101,7 +101,7 @@ public class PageCraftingRecipe extends PageRecipe {
 			((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16, 16);
 
 			if(mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-				VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("botaniamisc.oredict")));
+				VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(StatCollector.translateToLocal("auramisc.oredict")));
 		}
 		GL11.glDisable(GL11.GL_BLEND);
 	}
