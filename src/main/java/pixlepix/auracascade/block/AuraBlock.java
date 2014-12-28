@@ -1,30 +1,21 @@
 package pixlepix.auracascade.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
@@ -40,6 +31,9 @@ import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
 
 	public AuraBlock(String type) {
@@ -49,6 +43,8 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		if (!type.equals("craftingCenter")) {
 			setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
 		}
+
+		setHardness(2F);
 	}
 
 	@Override
@@ -58,6 +54,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 
 	public AuraBlock() {
 		this("");
+		setHardness(2F);
 	}
 
 	//"" is default

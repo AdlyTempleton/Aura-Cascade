@@ -4,13 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -33,12 +31,14 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
     public ConsumerBlock() {
         super(Material.iron);
         this.name = "furnace";
+        setHardness(2F);
     }
 
 
     public ConsumerBlock(String name) {
         super(Material.iron);
         this.name = name;
+        setHardness(2F);
     }
 
     @Override
