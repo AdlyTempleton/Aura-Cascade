@@ -1,14 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
-import pixlepix.auracascade.data.CoordTuple;
 
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
 
     public void onEntityCollidedWithBlock(Entity entity) {
         if(entity instanceof EntityArrow){
-            addFuel(300, 1500);
+            addFuel(20, 2500);
             entity.setDead();
         }
 
