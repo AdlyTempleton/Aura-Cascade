@@ -113,14 +113,13 @@ public enum EnumAura {
 
 		@Override
 		public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
-			if(world.getTotalWorldTime() % 400 == 5) {
+			if(world.getTotalWorldTime() % 20 == 5) {
 				AuraTile tile = (AuraTile) tuple.getTile(world);
 
 				//Achieve growth along logarithmic curve
-				double t = Math.log(tile.storage.get(this));
-				t += .1;
-				int newAura = (int) Math.pow(Math.E, t);
-				tile.storage.set(this, newAura);
+				int num = tile.storage.get(this);
+				int delta = (int) Math.floor(((double)1/num) * 2500);
+				tile.storage.set(this, num + delta);
 			}
 		}
 	};
