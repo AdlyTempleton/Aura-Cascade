@@ -3,22 +3,22 @@ package pixlepix.auracascade.item;
 import baubles.api.BaublesApi;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagInt;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
-import pixlepix.auracascade.registry.*;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,14 +37,17 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
                 ringStack.stackTagCompound = new NBTTagCompound();
             }
             int[] fairies = ringStack.stackTagCompound.getIntArray("fairyList");
-            int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
-            newFairies[newFairies.length - 1] = stack.getItemDamage();
+            if(fairies.length < 15) {
+                int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
+
+                newFairies[newFairies.length - 1] = stack.getItemDamage();
 
 
-            ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
-            //Trigger the re-spawn of fairies
-            ItemFairyRing.killNearby(ringStack, player);
-            ItemFairyRing.makeFaries(ringStack, player);
+                ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
+                //Trigger the re-spawn of fairies
+                ItemFairyRing.killNearby(ringStack, player);
+                ItemFairyRing.makeFaries(ringStack, player);
+            }
 
             player.inventory.consumeInventoryItem(this);
         }

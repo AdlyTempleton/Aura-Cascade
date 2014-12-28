@@ -9,11 +9,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagIntArray;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -23,7 +20,6 @@ import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -138,6 +134,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
             stack.stackTagCompound = new NBTTagCompound();
         }
         int[] tagList = stack.stackTagCompound.getIntArray("fairyList");
+        list.add(tagList.length+"/15");
         for(int i : tagList){
             Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
             list.add(ItemFairyCharm.getNameFromFairy(fairyClass));
