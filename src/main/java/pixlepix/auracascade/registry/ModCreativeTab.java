@@ -36,10 +36,11 @@ public class ModCreativeTab extends CreativeTabs {
     public void addItem(Item item) {
 
         item.getSubItems(item, this, creativeTabQueue);
-        item.setCreativeTab(CreativeTabs.tabAllSearch);
+        item.setCreativeTab(this);
     }
     public void addBlock(Block block) {
-        block.getSubBlocks(Item.getItemFromBlock(block), this, creativeTabQueue);
+        addItem(Item.getItemFromBlock(block));
+        block.setCreativeTab(this);
     }
     public void addAllItemsAndBlocks() {
         Collections.sort(creativeTabQueue, new ItemStackCompatator());
