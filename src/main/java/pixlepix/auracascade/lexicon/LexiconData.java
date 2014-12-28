@@ -11,172 +11,46 @@
  */
 package pixlepix.auracascade.lexicon;
 
-/*
+
+import pixlepix.auracascade.block.AuraBlock;
+import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
+import pixlepix.auracascade.lexicon.page.PageText;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
+
 public final class LexiconData {
-
-	public static LexiconEntry introVideo;
-	public static LexiconEntry flowers;
-	public static LexiconEntry apothecary;
-	public static LexiconEntry lexicon;
-	public static LexiconEntry wand;
-	public static LexiconEntry pureDaisy;
-	public static LexiconEntry runicAltar;
-	public static LexiconEntry terrasteel;
-
-	public static LexiconEntry manaIntro;
-	public static LexiconEntry spreader;
-	public static LexiconEntry pool;
-	public static LexiconEntry lenses;
-	public static LexiconEntry distributor;
-	public static LexiconEntry manaVoid;
-	public static LexiconEntry manaTransport;
-	public static LexiconEntry manaDetector;
-	public static LexiconEntry redstoneSpreader;
-	public static LexiconEntry manastar;
-	public static LexiconEntry dreamwoodSpreader;
-	public static LexiconEntry paintLens;
-	public static LexiconEntry sparks;
-	public static LexiconEntry sparkUpgrades;
-	public static LexiconEntry rfGenerator;
-
-	public static LexiconEntry functionalIntro;
-	public static LexiconEntry jadedAmaranthus;
-	public static LexiconEntry bellethorne;
-	public static LexiconEntry dreadthorne;
-	public static LexiconEntry heiseiDream;
-	public static LexiconEntry tigerseye;
-	public static LexiconEntry orechid;
-	public static LexiconEntry fallenKanade;
-	public static LexiconEntry exoflame;
-	public static LexiconEntry agricarnation;
-	public static LexiconEntry hopperhock;
-	public static LexiconEntry tangleberrie;
-	public static LexiconEntry jiyuulia;
-	public static LexiconEntry rannuncarpus;
-	public static LexiconEntry hyacidus;
-	public static LexiconEntry pollidisiac;
-	public static LexiconEntry clayconia;
-	public static LexiconEntry loonium;
-	public static LexiconEntry daffomill;
-	public static LexiconEntry vinculotus;
-
-	public static LexiconEntry generatingIntro;
-	public static LexiconEntry daybloom;
-	public static LexiconEntry nightshade;
-	public static LexiconEntry endoflame;
-	public static LexiconEntry hydroangeas;
-	public static LexiconEntry thermalily;
-	public static LexiconEntry arcaneRose;
-	public static LexiconEntry munchdew;
-	public static LexiconEntry entropinnyum;
-	public static LexiconEntry kekimurus;
-	public static LexiconEntry gourmaryllis;
-
-	public static LexiconEntry pistonRelay;
-	public static LexiconEntry pylon;
-	public static LexiconEntry manaEnchanting;
-	public static LexiconEntry turntable;
-	public static LexiconEntry alchemy;
-	public static LexiconEntry openCrate;
-	public static LexiconEntry forestEye;
-	public static LexiconEntry forestDrum;
-	public static LexiconEntry platform;
-	public static LexiconEntry conjurationCatalyst;
-	public static LexiconEntry spectralPlatform;
-	public static LexiconEntry gatherDrum;
-	public static LexiconEntry spawnerClaw;
-	public static LexiconEntry craftCrate;
-	public static LexiconEntry enderEyeBlock;
-	public static LexiconEntry brewery;
-	public static LexiconEntry flasks;
-	public static LexiconEntry redString;
-
-	public static LexiconEntry manaBlaster;
-	public static LexiconEntry grassSeeds;
-	public static LexiconEntry dirtRod;
-	public static LexiconEntry terraformRod;
-	public static LexiconEntry manasteelGear;
-	public static LexiconEntry terrasteelArmor;
-	public static LexiconEntry grassHorn;
-	public static LexiconEntry terraBlade;
-	public static LexiconEntry terraPick;
-	public static LexiconEntry enderDagger;
-	public static LexiconEntry waterRod;
-	public static LexiconEntry elfGear;
-	public static LexiconEntry openBucket;
-	public static LexiconEntry spawnerMover;
-	public static LexiconEntry rainbowRod;
-	public static LexiconEntry tornadoRod;
-	public static LexiconEntry fireRod;
-	public static LexiconEntry vineBall;
-	public static LexiconEntry laputaShard;
-	public static LexiconEntry virus;
-	public static LexiconEntry skyDirtRod;
-	public static LexiconEntry enderHand;
-	public static LexiconEntry glassPick;
-	public static LexiconEntry diviningRod;
-	public static LexiconEntry gravityRod;
-	public static LexiconEntry regenIvy;
-	public static LexiconEntry missileRod;
-	public static LexiconEntry craftingHalo;
-
-	public static LexiconEntry baublesIntro;
-	public static LexiconEntry tinyPlanet;
-	public static LexiconEntry manaRing;
-	public static LexiconEntry auraRing;
-	public static LexiconEntry travelBelt;
-	public static LexiconEntry knockbacklBelt;
-	public static LexiconEntry icePendant;
-	public static LexiconEntry lavaPendant;
-	public static LexiconEntry goldLaurel;
-	public static LexiconEntry waterRing;
-	public static LexiconEntry miningRing;
-	public static LexiconEntry magnetRing;
-	public static LexiconEntry divaCharm;
-	public static LexiconEntry flightTiara;
-	public static LexiconEntry pixieRing;
-	public static LexiconEntry superTravelBelt;
-	public static LexiconEntry reachRing;
-	public static LexiconEntry itemFinder;
-	public static LexiconEntry superLavaPendant;
-	public static LexiconEntry bloodPendant;
-	public static LexiconEntry judgementCloaks;
-
-	public static LexiconEntry alfhomancyIntro;
-	public static LexiconEntry elvenMessage;
-	public static LexiconEntry elvenResources;
-	public static LexiconEntry gaiaRitual;
-	public static LexiconEntry elvenLore;
-	
-	public static LexiconEntry unstableBlocks;
-	public static LexiconEntry decorativeBlocks;
-	public static LexiconEntry dispenserTweaks;
-	public static LexiconEntry shinyFlowers;
-	public static LexiconEntry prismarine;
-	public static LexiconEntry shedding;
-	public static LexiconEntry tinyPotato;
-	public static LexiconEntry headCreating;
-	public static LexiconEntry azulejo;
-	public static LexiconEntry starfield;
-	public static LexiconEntry tcIntegration;
-	public static LexiconEntry bcIntegration;
 
 	public static void init() {
 		//Add categories
-		LexiconCategory categoryBasics = CategoryManager.categoryBasics;
-		LexiconCategory categoryMana = CategoryManager.categoryMana;
-		LexiconCategory categoryGenerationFlowers = CategoryManager.categoryGenerationFlowers;
-		LexiconCategory categoryFunctionalFlowers = CategoryManager.categoryFunctionalFlowers;
-		LexiconCategory categoryDevices = CategoryManager.categoryDevices;
-		LexiconCategory categoryTools = CategoryManager.categoryTools;
-		LexiconCategory categoryBaubles = CategoryManager.categoryBaubles;
-		LexiconCategory categoryAlfhomancy = CategoryManager.categoryAlfhomancy;
-		LexiconCategory categoryMisc = CategoryManager.categoryMisc;
+		LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("basics");
+		CategoryManager.addCategory(categoryBasics);
+		LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("auraColors");
+		CategoryManager.addCategory(categoryAuraColors);
+		LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("auraNodes");
+		CategoryManager.addCategory(categoryAuraNodes);
+		LexiconCategory categoryCrafting = CategoryManager.categoryCrafting= new LexiconCategory("crafting");
+		CategoryManager.addCategory(categoryCrafting);
+		LexiconCategory categoryConsumers = CategoryManager.categoryConsumers= new LexiconCategory("consumers");
+		CategoryManager.addCategory(categoryConsumers);
+		LexiconCategory categoryFairies = CategoryManager.categoryFairies= new LexiconCategory("fairies");
+		CategoryManager.addCategory(categoryFairies);
+		LexiconCategory categoryMisc = CategoryManager.categoryMisc= new LexiconCategory("misc");
+		CategoryManager.addCategory(categoryMisc);
 		
 		// BASICS ENTRIES
-		introVideo = new BLexiconEntry(LibLexicon.BASICS_INTRO_VIDEO, categoryBasics);
-		introVideo.setPriority().setLexiconPages(new PageGuide("0"));
-
+		new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
+		ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
+		new BLexiconEntry("auraFlow", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
+				new PageCraftingRecipe("2", ((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(0, 1)),
+				new PageCraftingRecipe("3", ((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(1, 8)),
+				new PageCraftingRecipe("4", (CraftingBenchRecipe)AuraBlock.getBlockFromName("").getRecipeItem()));
+		new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
+		new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
+		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
+				new PageCraftingRecipe("2", (CraftingBenchRecipe)AuraBlock.getBlockFromName("pump").getRecipeItem()));
+		/*
 		flowers = new BLexiconEntry(LibLexicon.BASICS_FLOWERS, categoryBasics);
 		flowers.setPriority().setLexiconPages(new PageText("0"), new PageImage("1", LibResources.ENTRY_FLOWERS), new PageText("2"), new PageCraftingRecipe("3", ModCraftingRecipes.recipesPetals), new PageCraftingRecipe("4", ModCraftingRecipes.recipePestleAndMortar), new PageCraftingRecipe("5", ModCraftingRecipes.recipesDyes),
 				new PageText("6"), new PageCraftingRecipe("7", ModCraftingRecipes.recipeFertilizerPowder), new PageCraftingRecipe("8", ModCraftingRecipes.recipeFerilizerDye));
@@ -656,19 +530,10 @@ public final class LexiconData {
 			bcIntegration = new BLexiconEntry(LibLexicon.MISC_BC_INTEGRATION, categoryMisc);
 			bcIntegration.setLexiconPages(new PageText("0"));
 		}
+		*/
 	}
 
 	public static void postInit() {
-		if(SheddingHandler.hasShedding()) {
-			shedding = new BLexiconEntry(LibLexicon.MISC_SHEDDING, CategoryManager.categoryMisc);
-			shedding.setLexiconPages(new PageText("0"));
-			SheddingHandler.addToLexicon();
-		}
-		
-		if(Botania.thaumcraftLoaded) {
-			tcIntegration = new BLexiconEntry(LibLexicon.MISC_TC_INTEGRATION, CategoryManager.categoryMisc);
-			tcIntegration.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeHelmetOfRevealing), new PageText("3"), new PageManaInfusionRecipe("4", ModManaInfusionRecipes.manaInkwellRecipe), new PageText("5"), new PageBrew(ModBrewRecipes.warpWardBrew, "6a", "6b"));
-		}
 	}
 }
-*/
+

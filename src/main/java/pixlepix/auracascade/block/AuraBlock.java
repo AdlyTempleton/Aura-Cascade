@@ -162,7 +162,16 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		}
 	}
 
-	private ItemStack getAuraNodeItemstack(){
+	public static AuraBlock getBlockFromName(String name){
+		List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
+		for(Block b:blockList){
+			if(((AuraBlock)b).type.equals(name)){
+				return (AuraBlock) b;
+			}
+		}
+	}
+
+	public static ItemStack getAuraNodeItemstack(){
 		List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
 		for(Block b:blockList){
 			if(((AuraBlock)b).type.equals("")){
@@ -173,7 +182,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 		return null;
 	}
 
-	private ItemStack getAuraNodePumpItemstack(){
+	public static ItemStack getAuraNodePumpItemstack(){
 		List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
 		for(Block b:blockList){
 			if(((AuraBlock)b).type.equals("pump")){

@@ -66,6 +66,7 @@ public class CommonProxy{
         FMLCommonHandler.instance().bus().register(eventHandler);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
         GameRegistry.addRecipe(new AngelsteelRecipe());
+        //LexiconData.init();
     }
     public void postInit(FMLPostInitializationEvent event){
         registry.postInit();

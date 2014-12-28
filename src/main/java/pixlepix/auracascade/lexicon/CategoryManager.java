@@ -20,13 +20,11 @@ public final class CategoryManager {
 
 	// All of these categories are initialized during botania's PreInit stage.
 	public static LexiconCategory categoryBasics;
-	public static LexiconCategory categoryMana;
-	public static LexiconCategory categoryFunctionalFlowers;
-	public static LexiconCategory categoryGenerationFlowers;
-	public static LexiconCategory categoryDevices;
-	public static LexiconCategory categoryTools;
-	public static LexiconCategory categoryBaubles;
-	public static LexiconCategory categoryAlfhomancy;
+	public static LexiconCategory categoryAuraColors;
+	public static LexiconCategory categoryAuraNodes;
+	public static LexiconCategory categoryCrafting;
+	public static LexiconCategory categoryConsumers;
+	public static LexiconCategory categoryFairies;
 	public static LexiconCategory categoryMisc;
 
 
