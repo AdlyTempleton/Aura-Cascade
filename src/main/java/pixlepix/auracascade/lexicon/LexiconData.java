@@ -30,8 +30,6 @@ public final class LexiconData {
 		CategoryManager.addCategory(categoryAuraColors);
 		LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("auraNodes");
 		CategoryManager.addCategory(categoryAuraNodes);
-		LexiconCategory categoryCrafting = CategoryManager.categoryCrafting= new LexiconCategory("crafting");
-		CategoryManager.addCategory(categoryCrafting);
 		LexiconCategory categoryConsumers = CategoryManager.categoryConsumers= new LexiconCategory("consumers");
 		CategoryManager.addCategory(categoryConsumers);
 		LexiconCategory categoryFairies = CategoryManager.categoryFairies= new LexiconCategory("fairies");
@@ -44,12 +42,32 @@ public final class LexiconData {
 		ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
 		new BLexiconEntry("auraFlow", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
 				new PageCraftingRecipe("2", ((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(0, 1)),
-				new PageCraftingRecipe("3", ((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(1, 8)),
 				new PageCraftingRecipe("4", (CraftingBenchRecipe)AuraBlock.getBlockFromName("").getRecipeItem()));
 		new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
 				new PageCraftingRecipe("2", (CraftingBenchRecipe)AuraBlock.getBlockFromName("pump").getRecipeItem()));
+
+		//Aura Colors
+		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(3, 4)));
+		new BLexiconEntry("orange", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(4, 5)));
+		new BLexiconEntry("yellow", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(5, 6)));
+		new BLexiconEntry("blue", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(1, 2)));
+		new BLexiconEntry("green", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(6, 7)));
+		new BLexiconEntry("violet", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(7, 8)));
+		new BLexiconEntry("black", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(2, 3)));
+
+		//Aura Nodes
+		new BLexiconEntry("manipulator", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("black").getRecipeItem()).iRecipe), new PageCraftingRecipe("3", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("orange").getRecipeItem()).iRecipe));
+		new BLexiconEntry("conserve", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("conserve").getRecipeItem()).iRecipe));
+		new BLexiconEntry("capacitor", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("capacitor").getRecipeItem()).iRecipe));
+		new BLexiconEntry("pumpProjectile", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpProjectile").getRecipeItem()).iRecipe));
+		new BLexiconEntry("pumpFall", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpFall").getRecipeItem()).iRecipe));
+		new BLexiconEntry("pumpLight", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpLight").getRecipeItem()).iRecipe));
+		new BLexiconEntry("pumpRedstone", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpRedstone").getRecipeItem()).iRecipe));
+
+
+
 		/*
 		flowers = new BLexiconEntry(LibLexicon.BASICS_FLOWERS, categoryBasics);
 		flowers.setPriority().setLexiconPages(new PageText("0"), new PageImage("1", LibResources.ENTRY_FLOWERS), new PageText("2"), new PageCraftingRecipe("3", ModCraftingRecipes.recipesPetals), new PageCraftingRecipe("4", ModCraftingRecipes.recipePestleAndMortar), new PageCraftingRecipe("5", ModCraftingRecipes.recipesDyes),

@@ -169,6 +169,7 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 				return (AuraBlock) b;
 			}
 		}
+		return null;
 	}
 
 	public static ItemStack getAuraNodeItemstack(){
