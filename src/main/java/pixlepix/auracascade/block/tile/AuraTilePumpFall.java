@@ -7,6 +7,6 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
  */
 public class AuraTilePumpFall extends AuraTilePumpBase {
     public void onFall(LivingFallEvent event){
-        addFuel((int) (5 * event.distance), 350);
+        addFuel((int) (2 * event.distance), 250);
     }
 }
