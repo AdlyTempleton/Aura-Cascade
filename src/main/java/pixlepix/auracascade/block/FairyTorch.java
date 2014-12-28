@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockTorch;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -27,8 +27,19 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     }
 
     @Override
+    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+        return true;
+    }
+
+
+    @Override
     public boolean isOpaqueCube() {
         return false;
+    }
+
+    @Override
+    public boolean isAir(IBlockAccess world, int x, int y, int z) {
+        return true;
     }
 
     @Override
@@ -68,7 +79,7 @@ public class FairyTorch extends Block implements ITTinkererBlock {
 
     @Override
     public boolean shouldDisplayInTab() {
-        return true;
+        return false;
     }
 
     @Override
