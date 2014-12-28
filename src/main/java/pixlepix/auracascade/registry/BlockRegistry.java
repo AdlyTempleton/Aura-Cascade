@@ -28,6 +28,16 @@ public class BlockRegistry {
 	private ArrayList<Class> blockClasses = new ArrayList<Class>();
 	private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
 
+	public static HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe> recipeMap = new HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe>();
+
+	public static ThaumicTinkererRecipe getRecipe(ITTinkererRegisterable item){
+		return recipeMap.get(item);
+	}
+
+	public static ThaumicTinkererRecipe getFirstRecipeFromItem(Class<? extends Item> item){
+		return recipeMap.get(getFirstItemFromClass(item));
+	}
+
 	public void registerClasses() {
 		try {
 			ClassPath classPath = ClassPath.from(this.getClass().getClassLoader());
@@ -52,6 +62,7 @@ public class BlockRegistry {
 		ThaumicTinkererRecipe thaumicTinkererRecipe = nextItem.getRecipeItem();
 		if (thaumicTinkererRecipe != null) {
 			thaumicTinkererRecipe.registerRecipe();
+			recipeMap.put(nextItem, thaumicTinkererRecipe);
 		}
 	}
 

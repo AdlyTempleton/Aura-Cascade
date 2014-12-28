@@ -17,6 +17,7 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
+import pixlepix.auracascade.lexicon.LexiconData;
 import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.network.PacketFairyRequestUpdate;
@@ -66,10 +67,12 @@ public class CommonProxy{
         FMLCommonHandler.instance().bus().register(eventHandler);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
         GameRegistry.addRecipe(new AngelsteelRecipe());
-        //LexiconData.init();
+
     }
     public void postInit(FMLPostInitializationEvent event){
         registry.postInit();
+        LexiconData.init();
+        LexiconData.postInit();
     }
 
     public EffectRenderer getEffectRenderer() {

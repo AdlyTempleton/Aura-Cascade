@@ -15,7 +15,6 @@ public class CraftingBenchRecipe extends ThaumicTinkererRecipe {
 
     @Override
     public void registerRecipe() {
-
         iRecipe = GameRegistry.addShapedRecipe(output, stuff);
     }
 }

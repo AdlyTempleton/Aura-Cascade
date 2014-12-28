@@ -2,25 +2,43 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Jan 14, 2014, 9:12:15 PM (GMT)]
  */
 package pixlepix.auracascade.lexicon;
 
 
 import pixlepix.auracascade.block.AuraBlock;
-import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.block.ConsumerBlock;
+import pixlepix.auracascade.block.entity.*;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
+import pixlepix.auracascade.lexicon.page.PagePylon;
 import pixlepix.auracascade.lexicon.page.PageText;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererRegisterable;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 public final class LexiconData {
+
+	public static CraftingBenchRecipe getRecipeFromFairy(Class<? extends EntityFairy> clazz){
+		int num = 0;
+		for(int i=0; i < ItemFairyCharm.fairyClasses.length; i++){
+			Class clazzCompare = ItemFairyCharm.fairyClasses[i];
+			if(clazzCompare.equals(clazz)){
+				num = i;
+				break;
+			}
+		}
+		return (CraftingBenchRecipe) ((ThaumicTinkererRecipeMulti) BlockRegistry.getFirstRecipeFromItem(ItemFairyCharm.class)).recipes.get(num);
+
+	}
 
 	public static void init() {
 		//Add categories
@@ -36,37 +54,87 @@ public final class LexiconData {
 		CategoryManager.addCategory(categoryFairies);
 		LexiconCategory categoryMisc = CategoryManager.categoryMisc= new LexiconCategory("misc");
 		CategoryManager.addCategory(categoryMisc);
-		
+
 		// BASICS ENTRIES
 		new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
 		ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
 		new BLexiconEntry("auraFlow", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
-				new PageCraftingRecipe("2", ((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(0, 1)),
-				new PageCraftingRecipe("4", (CraftingBenchRecipe)AuraBlock.getBlockFromName("").getRecipeItem()));
+				new PageCraftingRecipe("2", ((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(0, 1)),
+				new PageCraftingRecipe("3", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName(""))));
 		new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"),
-				new PageCraftingRecipe("2", (CraftingBenchRecipe)AuraBlock.getBlockFromName("pump").getRecipeItem()));
+				new PageCraftingRecipe("2", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump"))));
 
 		//Aura Colors
-		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(3, 4)));
-		new BLexiconEntry("orange", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(4, 5)));
-		new BLexiconEntry("yellow", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(5, 6)));
-		new BLexiconEntry("blue", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(1, 2)));
-		new BLexiconEntry("green", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(6, 7)));
-		new BLexiconEntry("violet", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(7, 8)));
-		new BLexiconEntry("black", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)itemAuraCrystal.getRecipeItem()).getIRecipies(2, 3)));
+		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(3, 4)));
+		new BLexiconEntry("orange", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(4, 5)));
+		new BLexiconEntry("yellow", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(5, 6)));
+		new BLexiconEntry("blue", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(1, 2)));
+		new BLexiconEntry("green", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(6, 7)));
+		new BLexiconEntry("violet", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(7, 8)));
+		new BLexiconEntry("black", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(2, 3)));
 
 		//Aura Nodes
-		new BLexiconEntry("manipulator", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("black").getRecipeItem()).iRecipe), new PageCraftingRecipe("3", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("orange").getRecipeItem()).iRecipe));
-		new BLexiconEntry("conserve", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("conserve").getRecipeItem()).iRecipe));
-		new BLexiconEntry("capacitor", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("capacitor").getRecipeItem()).iRecipe));
-		new BLexiconEntry("pumpProjectile", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpProjectile").getRecipeItem()).iRecipe));
-		new BLexiconEntry("pumpFall", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpFall").getRecipeItem()).iRecipe));
-		new BLexiconEntry("pumpLight", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpLight").getRecipeItem()).iRecipe));
-		new BLexiconEntry("pumpRedstone", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)AuraBlock.getBlockFromName("pumpRedstone").getRecipeItem()).iRecipe));
+		new BLexiconEntry("manipulator", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("black"))).iRecipe), new PageCraftingRecipe("3", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("orange"))).iRecipe));
+		new BLexiconEntry("conserve", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("conserve"))).iRecipe));
+		new BLexiconEntry("capacitor", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("capacitor"))).iRecipe));
+		new BLexiconEntry("pumpProjectile", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpProjectile"))).iRecipe));
+		new BLexiconEntry("pumpFall", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpFall"))).iRecipe));
+		new BLexiconEntry("pumpLight", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpLight"))).iRecipe));
+		new BLexiconEntry("pumpRedstone", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstone"))).iRecipe));
 
+		//Consumers
+		new BLexiconEntry("crafting", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
+				new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
+				new PageCraftingRecipe("4", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))));
+		new BLexiconEntry("ore", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))));
+		new BLexiconEntry("loot", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("loot"))));
+		new BLexiconEntry("plant", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("plant"))));
+		new BLexiconEntry("mon", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("mob"))));
+		new BLexiconEntry("angel", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("angel"))));
+		new BLexiconEntry("furnace", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", (CraftingBenchRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("furnace"))));
+		new BLexiconEntry("angelsteel", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
+				new PageCraftingRecipe("4", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelAxe.class))),
+				new PageCraftingRecipe("5", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelPickaxe.class))),
+				new PageCraftingRecipe("6", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelShovel.class))));
 
+		//Fairies
+		new BLexiconEntry("fairies", categoryFairies).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
+				new PagePylon("2", (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(ItemFairyRing.class)),
+				new PagePylon("3", (PylonRecipe) ((ThaumicTinkererRecipeMulti) BlockRegistry.getFirstRecipeFromItem(ItemFairyCharm.class)).recipes.get(0)));
+		new BLexiconEntry("fairyCombat", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityCombatFairy.class)));
+		new BLexiconEntry("fairyDebuff", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityDebuffFairy.class)));
+		new BLexiconEntry("fairyBuff", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityBuffFairy.class)));
+		new BLexiconEntry("fairySteal", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityStealFairy.class)));
+		new BLexiconEntry("fairyPush", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityPushFairy.class)));
+		new BLexiconEntry("fairyShoot", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityShooterFairy.class)));
+		new BLexiconEntry("fairySavior", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntitySaviorFairy.class)));
+		new BLexiconEntry("fairyFetch", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityFetchFairy.class)));
+		new BLexiconEntry("fairyBait", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityBaitFairy.class)));
+		new BLexiconEntry("fairyBreed", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityBreederFairy.class)));
+		new BLexiconEntry("fairyScare", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityScareFairy.class)));
+		new BLexiconEntry("fairyExtinguisher", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityExtinguisherFairy.class)));
+		new BLexiconEntry("fairyDigger", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityDigFairy.class)));
+		new BLexiconEntry("fairyFall", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityFallFairy.class)));
+		new BLexiconEntry("fairyLight", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityLightFairy.class)));
+		new BLexiconEntry("fairyTrain", categoryFairies).setLexiconPages(new PageText("0"),
+				new PageCraftingRecipe("1", getRecipeFromFairy(EntityXPFairy.class)));
 
 		/*
 		flowers = new BLexiconEntry(LibLexicon.BASICS_FLOWERS, categoryBasics);
@@ -281,7 +349,7 @@ public final class LexiconData {
 				new PageManaInfusionRecipe("6", ModManaAlchemyRecipes.quartzRecipes).setSkipRegistry(), new PageManaInfusionRecipe("7", ModManaAlchemyRecipes.chiseledBrickRecipe), new PageManaInfusionRecipe("8", ModManaAlchemyRecipes.iceRecipe), new PageManaInfusionRecipe("9", ModManaAlchemyRecipes.swampFolliageRecipes),
 				new PageManaInfusionRecipe("10", ModManaAlchemyRecipes.fishRecipes), new PageManaInfusionRecipe("11", ModManaAlchemyRecipes.cropRecipes), new PageManaInfusionRecipe("12", ModManaAlchemyRecipes.potatoRecipe), new PageManaInfusionRecipe("13", ModManaAlchemyRecipes.netherWartRecipe),
 				new PageManaInfusionRecipe("14", ModManaAlchemyRecipes.gunpowderAndFlintRecipes), new PageManaInfusionRecipe("15", ModManaAlchemyRecipes.nameTagRecipe), new PageManaInfusionRecipe("16", ModManaAlchemyRecipes.stringRecipes), new PageManaInfusionRecipe("17", ModManaAlchemyRecipes.slimeballCactusRecipes),
-				new PageManaInfusionRecipe("18", ModManaAlchemyRecipes.enderPearlRecipe), new PageManaInfusionRecipe("19", ModManaAlchemyRecipes.redstoneToGlowstoneRecipes), new PageManaInfusionRecipe("20", ModManaAlchemyRecipes.sandRecipe), new PageManaInfusionRecipe("21", ModManaAlchemyRecipes.redSandRecipe), 
+				new PageManaInfusionRecipe("18", ModManaAlchemyRecipes.enderPearlRecipe), new PageManaInfusionRecipe("19", ModManaAlchemyRecipes.redstoneToGlowstoneRecipes), new PageManaInfusionRecipe("20", ModManaAlchemyRecipes.sandRecipe), new PageManaInfusionRecipe("21", ModManaAlchemyRecipes.redSandRecipe),
 				new PageManaInfusionRecipe("22", ModManaAlchemyRecipes.clayBreakdownRecipes), new PageManaInfusionRecipe("23", ModManaAlchemyRecipes.coarseDirtRecipe));
 
 		openCrate = new BLexiconEntry(LibLexicon.DEVICE_OPEN_CRATE, categoryDevices);
@@ -316,7 +384,7 @@ public final class LexiconData {
 		enderEyeBlock.setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ModCraftingRecipes.recipeEnderEyeBlock));
 
 		brewery = new BLexiconEntry(LibLexicon.DEVICE_BREWERY, categoryDevices);
-		brewery.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeBrewery), new PageCraftingRecipe("3", ModCraftingRecipes.recipeVial), new PageText("4"), 
+		brewery.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeBrewery), new PageCraftingRecipe("3", ModCraftingRecipes.recipeVial), new PageText("4"),
 				new PageBrew(ModBrewRecipes.speedBrew, "5a", "5b"), new PageBrew(ModBrewRecipes.strengthBrew, "6a", "6b"),
 				new PageBrew(ModBrewRecipes.hasteBrew, "7a", "7b"), new PageBrew(ModBrewRecipes.healingBrew, "8a", "8b"),
 				new PageBrew(ModBrewRecipes.jumpBoostBrew, "9a", "9b"), new PageBrew(ModBrewRecipes.regenerationBrew, "10a", "10b"),
@@ -324,10 +392,10 @@ public final class LexiconData {
 				new PageBrew(ModBrewRecipes.resistanceBrew, "11a", "11b"), new PageBrew(ModBrewRecipes.fireResistanceBrew, "12a", "12b"),
 				new PageBrew(ModBrewRecipes.waterBreathingBrew, "13a", "13b"), new PageBrew(ModBrewRecipes.invisibilityBrew, "14a", "14b"),
 				new PageBrew(ModBrewRecipes.nightVisionBrew, "15a", "15b"), new PageBrew(ModBrewRecipes.absorptionBrew, "16a", "16b"));
-		
+
 		flasks = new ALexiconEntry(LibLexicon.DEVICE_FLASKS, categoryDevices);
 		flasks.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeFlask));
-		
+
 		redString = new ALexiconEntry(LibLexicon.DEVICE_RED_STRING, categoryDevices);
 		redString.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeRedString),
 				new PageText("3"), new PageCraftingRecipe("4", ModCraftingRecipes.recipeRedStringContainer),
@@ -335,7 +403,7 @@ public final class LexiconData {
 				new PageText("7"), new PageCraftingRecipe("8", ModCraftingRecipes.recipeRedStringFertilizer),
 				new PageText("9"), new PageCraftingRecipe("10", ModCraftingRecipes.recipeRedStringComparator),
 				new PageText("11"), new PageCraftingRecipe("12", ModCraftingRecipes.recipeRedStringRelay));
-		
+
 		// TOOLS ENTRIES
 		manaBlaster = new BLexiconEntry(LibLexicon.TOOL_MANA_BLASTER, categoryTools);
 		manaBlaster.setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageCraftingRecipe("3", ModCraftingRecipes.recipeManaBlaster));
@@ -421,10 +489,10 @@ public final class LexiconData {
 
 		missileRod = new ALexiconEntry(LibLexicon.TOOL_MISSILE_ROD, categoryTools);
 		missileRod.setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ModCraftingRecipes.recipeMissileRod));
-		
+
 		craftingHalo = new BLexiconEntry(LibLexicon.TOOL_CRAFTING_HALO, categoryTools);
 		craftingHalo.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeCraftingHalo));
-		
+
 		// BAUBLES ENTRIES
 		baublesIntro = new BLexiconEntry(LibLexicon.BAUBLE_INTRO, categoryBaubles);
 		baublesIntro.setPriority().setLexiconPages(new PageText("0"), new PageImage("1", LibResources.ENTRY_BAUBLES), new PageText("2"));
@@ -485,10 +553,10 @@ public final class LexiconData {
 
 		bloodPendant = new BLexiconEntry(LibLexicon.BAUBLE_BLOOD_PENDANT, categoryBaubles);
 		bloodPendant.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeBloodPendant));
-		
+
 		judgementCloaks = new ALexiconEntry(LibLexicon.BAUBLE_JUDGEMENT_CLOAKS, categoryBaubles);
 		judgementCloaks.setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeHolyCloak), new PageCraftingRecipe("3", ModCraftingRecipes.recipeUnholyCloak));
-		
+
 		// ALFHOMANCY ENTRIES
 		alfhomancyIntro = new BLexiconEntry(LibLexicon.ALF_INTRO, categoryAlfhomancy);
 		alfhomancyIntro.setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ModCraftingRecipes.recipeAlfPortal), new PageCraftingRecipe("3", ModCraftingRecipes.recipeNaturaPylon),
@@ -507,7 +575,7 @@ public final class LexiconData {
 
 		elvenLore = new ALexiconEntry(LibLexicon.ALF_LORE, categoryAlfhomancy);
 		elvenLore.setLexiconPages(new PageText("0"), new PageLoreText("1"), new PageLoreText("2"), new PageLoreText("3"), new PageLoreText("4"), new PageLoreText("5"), new PageLoreText("6"), new PageLoreText("7"));
-		
+
 		// MISCLENAEOUS ENTRIES
 		unstableBlocks = new BLexiconEntry(LibLexicon.MISC_UNSTABLE_BLOCKS, categoryMisc);
 		unstableBlocks.setLexiconPages(new PageText("0"), new PageImage("1", LibResources.ENTRY_UNSTABLE_BLOCK), new PageCraftingRecipe("2", ModCraftingRecipes.recipesUnstableBlocks), new PageText("3"), new PageImage("4", LibResources.ENTRY_UNSTABLE_BEACON), new PageCraftingRecipe("5", ModCraftingRecipes.recipesManaBeacons), new PageText("6"), new PageCraftingRecipe("7", ModCraftingRecipes.recipesSignalFlares));
@@ -543,7 +611,7 @@ public final class LexiconData {
 
 		starfield = new ALexiconEntry(LibLexicon.MISC_STARFIELD, categoryMisc);
 		starfield.setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ModCraftingRecipes.recipeStarfield));
-		
+
 		if(Botania.bcTriggersLoaded) {
 			bcIntegration = new BLexiconEntry(LibLexicon.MISC_BC_INTEGRATION, categoryMisc);
 			bcIntegration.setLexiconPages(new PageText("0"));

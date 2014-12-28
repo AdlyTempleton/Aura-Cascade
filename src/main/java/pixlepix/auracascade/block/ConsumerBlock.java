@@ -22,6 +22,7 @@ import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.
@@ -34,6 +35,15 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
         setHardness(2F);
     }
 
+    public static ConsumerBlock getBlockFromName(String name){
+        List<Block> blockList = BlockRegistry.getBlockFromClass(ConsumerBlock.class);
+        for(Block b:blockList){
+            if(((ConsumerBlock)b).name!= null && ((ConsumerBlock)b).name.equals(name)){
+                return (ConsumerBlock) b;
+            }
+        }
+        return null;
+    }
 
     public ConsumerBlock(String name) {
         super(Material.iron);
