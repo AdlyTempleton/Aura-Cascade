@@ -19,7 +19,6 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import pixlepix.auracascade.lexicon.button.GuiButtonBackWithShift;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
-import pixlepix.auracascade.lexicon.button.GuiButtonShare;
 
 import java.util.List;
 
@@ -51,8 +50,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
 		buttonList.add(backButton = new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8, top + guiHeight + 2));
 		buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight - 10, false));
 		buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18, top + guiHeight - 10, true));
-		buttonList.add(shareButton = new GuiButtonShare(3, left + guiWidth - 6, top - 2));
-
+		
 		LexiconPage page = entry.pages.get(this.page);
 		page.onOpened(this);
 		updatePageButtons();
