@@ -1,6 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,7 +46,7 @@ public class LootTile extends ConsumerTile {
                 }
                 progress += 1;
                 storedPower -= nextBoostCost;
-                nextBoostCost *= 1.05;
+                nextBoostCost *= 200;
             }
         }
     }

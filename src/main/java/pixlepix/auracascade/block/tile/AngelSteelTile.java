@@ -3,11 +3,8 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ChestGenHooks;
 import pixlepix.auracascade.item.ItemAngelsteelIngot;
 import pixlepix.auracascade.registry.BlockRegistry;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/21/14.
@@ -47,7 +44,7 @@ public class AngelSteelTile extends ConsumerTile {
                 }
                 progress += 1;
                 storedPower -= nextBoostCost;
-                nextBoostCost *= 1.05;
+                nextBoostCost *= 2;
             }
         }
     }

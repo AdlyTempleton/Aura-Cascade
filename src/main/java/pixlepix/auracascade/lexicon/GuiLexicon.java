@@ -16,7 +16,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
@@ -25,7 +24,6 @@ import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,7 +38,6 @@ public class GuiLexicon extends GuiScreen {
 	boolean bookmarksNeedPopulation = false;
 
 	public static final ResourceLocation texture = new ResourceLocation(LibResources.GUI_LEXICON);
-	public static final ResourceLocation textureToff = new ResourceLocation(LibResources.GUI_TOFF);
 
 	public float lastTime = 0F;
 	public float partialTicks = 0F;
@@ -116,31 +113,6 @@ public class GuiLexicon extends GuiScreen {
 		if(bookmarksNeedPopulation) {
 			populateBookmarks();
 			bookmarksNeedPopulation = false;
-		}
-		
-		if(mc.thePlayer.getCommandSenderName().equals("haighyorkie")) {
-			GL11.glColor4f(1F, 1F, 1F, 1F);
-			mc.renderEngine.bindTexture(texture);
-			drawTexturedModalRect(left - 19, top + 12, 67, 180, 19, 26);
-			if(par1 >= left - 19 && par1 < left && par2 >= top + 12 && par2 < top + 38) {
-				mc.renderEngine.bindTexture(textureToff);
-				GL11.glPushMatrix();
-				GL11.glScalef(0.5F, 0.5F, 0.5F);
-				GL11.glEnable(GL11.GL_BLEND);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-				GL11.glTranslatef(0F, 0F, 2F);
-				
-				int w = 256;
-				int h = 152;
-				int x = (int) ((ClientTickHandler.ticksInGame + par3) * 6) % (width + w) - w;
-				int y = (int) (top + guiHeight / 2 - h / 4 + Math.sin((ClientTickHandler.ticksInGame + par3) / 6.0) * 40);
-				
-				drawTexturedModalRect(x * 2, y * 2, 0, 0, w, h);
-				GL11.glDisable(GL11.GL_BLEND);				
-				GL11.glPopMatrix();
-				
-				VazkiiRenderHelper.renderTooltip(par1, par2, Arrays.asList(EnumChatFormatting.GOLD + "#goldfishchris", EnumChatFormatting.RED + "INTENSIFY HIM"));
-			}
 		}
 
 		super.drawScreen(par1, par2, par3);

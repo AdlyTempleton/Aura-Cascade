@@ -9,8 +9,8 @@ tile.auraNode.name=Aura Node
 tile.auraNodeblack.name=Aura Manipulator: Black
 tile.auraNodecapacitor.name=Aura Capacitor
 tile.auraNodeconserve.name=Conserving Aura Node
-tile.auraNodecraftingCenter.name=Aura Vortex Controller
-tile.auraNodecraftingPedestal.name=Aura Vortex Pedestal
+tile.auraNodecraftingCenter.name=Vortex Controller
+tile.auraNodecraftingPedestal.name=Vortex Pedestal
 tile.auraNodeorange.name=Aura Manipulator: Orange
 tile.auraNodepumpLight.name=Illumination Aura Pump
 tile.auraNodepumpFall.name=Momentum Aura Pump
@@ -165,4 +165,115 @@ aura.page.pumpRedstone1=Redstone Pump
 aura.entry.pumpProjectile=Projectile Pump
 aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 200. Eggs produce a duration of 90s and a speed of 400. Arrows produce a duration of 20 and a speed of 2500.
 aura.page.pumpProjectile1=Projectile Pump
+
+//Consumers
+aura.entry.consumers=Consumers
+aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.
+
+aura.entry.angel=Cascading synthesizer
+aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 1000 power/s
+aura.page.angel1=Cascading Synthesizer
+
+aura.entry.angelsteel=Angel's Steel
+aura.page.angelsteel0=Angel's Steel is a very rare and valuable metal, which can be made only in the &1Cascading Synthesizer&0. The &1Cascading Synthesizer&0 will create first-degree ingots. Second-degree ingots are made by combining three first-degree ingots in a crafting bench, and higher degrees are made in the same way
+aura.page.angelsteel1=Higher degree Angel's Steel ingots will make better tools. Higher degree ingots will increase the dig speed of the tool. It will also give two additional bonus points per tool. There bonus points are randomly applied to one of four categories:
+aura.page.angelsteel2=&2Efficiency&0 Increases your digging speed <br> &2Fortune&0 Increases drops similar to the vanilla enchantment. <br> &2Shatter&0 Increases digging speed on blocks with hardness greater than 2 <br> &2Disintegrate&0 increases digging speed on blocks with hardness less than 1
+aura.page.angelsteel4=Angel's Steel Axe
+aura.page.angelsteel5=Angel's Steel Pickaxe
+aura.page.angelsteel6=Angel's Steel Shovel
+
+aura.entry.crafting=Vortex Infusion
+aura.page.crafting0=Vortex Infusion is a process for creating many higher-level items. First, place a &1Vortex Controller&0 down, and place four &1Vortex Pedestals&0 adjacent to it. Following a recipe, right-click to place the correct items on all four pedestals.
+aura.page.crafting1=Now, you need to supply the pedestals with power. Each pedestal acts like an Aura Node, unlike most consumer blocks. Each recipe needs different amounts of power per pedestal. Some recipies require a specific color of Aura to be used; These requirements can vary based on the item in the pedestal.
+aura.page.crafting2=Vortex Controller
+aura.page.crafting3=Vortex Pedestal
+
+aura.entry.furnace=Cascading Smelter
+aura.page.furnace1=Cascading Smelter
+aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
+
+aura.entry.processor=Cascading Processor
+aura.page.processor1=Cascading Processor
+aura.page.processor0=The Cascading Processor will turn nearby ores into 3 dusts. It will also keep nearby items from despawning. The processor has a minimum power requirement of 2000 power/second.
+
+aura.entry.loot=Cascading Looter
+aura.page.loot1=Cascading Looter
+aura.page.loot0=The Cascading Looter will summon the loot from dungeon chests. The looter has a minimum power requirement of 1000 power/second.
+
+aura.entry.mob=Cascading Spawner
+aura.page.mob1=Cascading Spawner
+aura.page.mob0=The Cascading Looter will summon mobs directly on top of it. The mobs summoned will represent the full range of mobs which can spawn in a location. The spawner has a minimum power requirement of 190 power/second.
+
+aura.entry.plant=Cascading Grower
+aura.page.plant1=Cascading Grower
+aura.page.plant0=The Cascading Grower will rapidly grow plants directly on top of it. The plant should be placed two blocks above the Cascading Grower, with a block of dirt in the middle. The grower has a minimum power requirement of 150 power/second.
+
+aura.entry.fairies=Fairies
+aura.page.fairies0=Fairies are an end-game system that can help the player out as both a utility and an aid in combat. To start out, equip a &1Ring of Binding&0 in your Baubles slot (Press 'B'). With the ring of binding equipped, right-click a &1Fairy Charm&0 to add the fairy to the ring of binding.
+aura.page.fairies1=Different types of &1Fairy Charms&0 will summon different fairies, which have different effects. <br> A &1Ring of Binding&0 can hold 15 fairies. To empty the ring, shift right-click while holding the ring. The basic fairy charm has no effect, but is used to craft other, more useful, fairy charms.
+aura.page.fairies2=Ring of Binding
+aura.page.fairies3=Fairy Charm.
+aura.entry.fairyCombat=Fighter Fairy
+aura.page.fairyCombat0=Simple fairy that damages mobs.
+aura.page.fairyCombat1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyDebuff=Debuffer Fairy
+aura.page.fairyDebuff0=Fairy that applies a large range of debuffs to mobs.
+aura.page.fairyDebuff1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyBuff=Buffer Fairy
+aura.page.fairyBuff0=Fairy that gives random positive combat buffs to the player.
+aura.page.fairyBuff1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairySteal=Stealer Fairy
+aura.page.fairySteal0=Will very rarely take the held item of other players and drop it on the ground.
+aura.page.fairySteal1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyPush=Pusher Fairy
+aura.page.fairyPush0=Fairy that applies a large knockback, but no damage, to mobs.
+aura.page.fairyPush1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyShoot=Shooter Fairy
+aura.page.fairyShoot0=Fairy that increases the damage of arrows the player shoots
+aura.page.fairyShoot1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairySavior=Savior Fairy
+aura.page.fairySavior0=Fairy that acts like an extremely powerful combat fairy when you are at low life.
+aura.page.fairySavior1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyFetch=Fetcher Fairy
+aura.page.fairyFetch0=Fairy that picks up nearby items.
+aura.page.fairyFetch1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyBait=Baiter Fairy
+aura.page.fairyBait0=Fairy that summons passive mobs.
+aura.page.fairyBait1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyBreed=Breeder Fairy
+aura.page.fairyBreed0=Fairy that make passive mobs fall in love.
+aura.page.fairyBreed1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyScare=Scarer Fairy
+aura.page.fairyScare0=Fairy that decreases hostile mob spawns in a large radius
+aura.page.fairyScare1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyExtinguisher=Extinguisher Fairy
+aura.page.fairyExtinguisher0=Fairy that both removes nearby lava and puts out fires on the player.
+aura.page.fairyExtinguisher1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyDigger=Digger Fairy
+aura.page.fairyDigger0=Fairy that occasionally lets you break a block with superhuman speed.
+aura.page.fairyDigger1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyFall=Faller Fairy
+aura.page.fairyFall0=Fairy that reduces fall damage.
+aura.page.fairyFall1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyLight=Lighter Fairy
+aura.page.fairyLight0=Fairy that, it it's dark, places temporary, invisible, light sources.
+aura.page.fairyLight1=Ring click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyTrain=Training Fairy
+aura.page.fairyTrain0=Fairy that occasionally drops XP orbs.
+aura.page.fairyTrain1=Ring click with &1Ring of Binding&0 to summon
 

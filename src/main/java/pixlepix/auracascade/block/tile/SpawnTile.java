@@ -1,28 +1,21 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.event.ForgeEventFactory;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/21/14.
  */
 public class SpawnTile extends ConsumerTile {
     public int progress;
-    public static int MAX_PROGRESS = 10;
-    public static int POWER_PER_PROGRESS = 1000;
+    public static int MAX_PROGRESS = 15;
+    public static int POWER_PER_PROGRESS = 190;
 
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
@@ -67,7 +60,7 @@ public class SpawnTile extends ConsumerTile {
                 }
                 progress += 1;
                 storedPower -= nextBoostCost;
-                nextBoostCost *= 1.05;
+                nextBoostCost *= 2;
             }
         }
     }

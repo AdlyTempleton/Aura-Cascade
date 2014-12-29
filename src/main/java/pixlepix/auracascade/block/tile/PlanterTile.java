@@ -23,7 +23,7 @@ public class PlanterTile extends ConsumerTile{
                 Block block = worldObj.getBlock(xCoord, yCoord + 2, zCoord);
                 block.updateTick(worldObj, xCoord, yCoord + 2, zCoord, new Random());
                 storedPower -= nextBoostCost;
-                nextBoostCost *= 1.05;
+                nextBoostCost *= 3;
             }
         }
     }
