@@ -68,8 +68,8 @@ public final class LexiconData {
 		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(3, 4)));
 		new BLexiconEntry("orange", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(4, 5)));
 		new BLexiconEntry("yellow", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(5, 6)));
-		new BLexiconEntry("blue", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(1, 2)));
-		new BLexiconEntry("green", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(6, 7)));
+		new BLexiconEntry("blue", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(6, 7)));
+		new BLexiconEntry("green", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(1, 2)));
 		new BLexiconEntry("violet", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(7, 8)));
 		new BLexiconEntry("black", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(2, 3)));
 
