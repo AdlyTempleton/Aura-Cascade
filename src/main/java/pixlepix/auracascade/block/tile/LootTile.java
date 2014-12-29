@@ -11,8 +11,16 @@ import java.util.Random;
  * Created by pixlepix on 12/21/14.
  */
 public class LootTile extends ConsumerTile {
+    @Override
+    public int getMaxProgress() {
+        return MAX_PROGRESS;
+    }
 
-    public int progress;
+    @Override
+    public int getPowerPerProgress() {
+        return POWER_PER_PROGRESS;
+    }
+
     public static int MAX_PROGRESS = 100;
     public static int POWER_PER_PROGRESS = 1000;
 
@@ -29,25 +37,11 @@ public class LootTile extends ConsumerTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if(!worldObj.isRemote){
-            int nextBoostCost = POWER_PER_PROGRESS;
-            while (true){
-                if(progress > MAX_PROGRESS){
-                    progress = 0;
-                    ItemStack lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
-                    EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
-                    entityItem.setVelocity(0, 0, 0);
-                    worldObj.spawnEntityInWorld(entityItem);
-                }
-                if(storedPower < nextBoostCost){
-                    break;
-                }
-                progress += 1;
-                storedPower -= nextBoostCost;
-                nextBoostCost *= 200;
-            }
-        }
+    public void onUsePower() {
+        ItemStack lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
+        EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
+        entityItem.setVelocity(0, 0, 0);
+        worldObj.spawnEntityInWorld(entityItem);
+
     }
 }

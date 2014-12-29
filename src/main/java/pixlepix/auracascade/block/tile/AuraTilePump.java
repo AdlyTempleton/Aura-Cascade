@@ -40,11 +40,7 @@ public class AuraTilePump extends AuraTilePumpBase {
                         } else {
                             stack.stackSize--;
                         }
-
-
                         AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entityItem.posX, entityItem.posY, entityItem.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
-
-
                         break;
                     }
                 }

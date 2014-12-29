@@ -1,25 +1,19 @@
 package pixlepix.auracascade.block.tile;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
-import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/21/14.
  */
-public class ConsumerTile extends TileEntity {
+public abstract class ConsumerTile extends TileEntity {
 
     public int storedPower;
 
@@ -30,8 +24,19 @@ public class ConsumerTile extends TileEntity {
         readCustomNBT(nbt);
     }
 
+    public abstract int getMaxProgress();
+    public abstract int getPowerPerProgress();
+
+    public int progress;
+
     public void readCustomNBT(NBTTagCompound nbt) {
+        progress = nbt.getInteger("progress");
         storedPower = nbt.getInteger("storedPower");
+    }
+
+    public void writeCustomNBT(NBTTagCompound nbt) {
+        nbt.setInteger("progress", progress);
+        nbt.setInteger("storedPower", storedPower);
     }
 
     @Override
@@ -40,9 +45,18 @@ public class ConsumerTile extends TileEntity {
         writeCustomNBT(nbt);
     }
 
-    public void writeCustomNBT(NBTTagCompound nbt) {
-        nbt.setInteger("storedPower", storedPower);
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        writeCustomNBT(nbt);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
     }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        readCustomNBT(pkt.func_148857_g());
+    }
+
 
     @Override
     public void updateEntity() {
@@ -63,9 +77,28 @@ public class ConsumerTile extends TileEntity {
                     }
                 }
             }
+
+            if(worldObj.getTotalWorldTime() % 2400 == 0){
+                AuraUtil.keepAlive(this, 3);
+            }
+
+            int nextBoostCost = getPowerPerProgress();
+            while (true){
+                if(progress > getMaxProgress()) {
+                    progress = 0;
+                    onUsePower();
+                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                }
+                if(storedPower < nextBoostCost){
+                    break;
+                }
+                progress += 1;
+                storedPower -= nextBoostCost;
+                nextBoostCost *= 2;
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
         }
-
-
-
     }
+
+    public abstract void onUsePower();
 }

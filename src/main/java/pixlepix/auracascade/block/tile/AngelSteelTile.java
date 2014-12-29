@@ -2,7 +2,6 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.item.ItemAngelsteelIngot;
 import pixlepix.auracascade.registry.BlockRegistry;
 
@@ -10,42 +9,26 @@ import pixlepix.auracascade.registry.BlockRegistry;
  * Created by pixlepix on 12/21/14.
  */
 public class AngelSteelTile extends ConsumerTile {
-    public int progress;
+
+    @Override
+    public int getMaxProgress() {
+        return MAX_PROGRESS;
+    }
+
+    @Override
+    public int getPowerPerProgress() {
+        return POWER_PER_PROGRESS;
+    }
+
     public static int MAX_PROGRESS = 1000;
     public static int POWER_PER_PROGRESS = 1000;
 
     @Override
-    public void readCustomNBT(NBTTagCompound nbt) {
-        super.readCustomNBT(nbt);
-        progress = nbt.getInteger("progress");
-    }
+    public void onUsePower() {
+        ItemStack lootStack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class));
+        EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
+        entityItem.setVelocity(0, 0, 0);
+        worldObj.spawnEntityInWorld(entityItem);
 
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt) {
-        super.writeCustomNBT(nbt);
-        progress = nbt.getInteger("progress");
-    }
-
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if(!worldObj.isRemote){
-            int nextBoostCost = POWER_PER_PROGRESS;
-            while (true){
-                if(progress > MAX_PROGRESS){
-                    progress = 0;
-                    ItemStack lootStack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class));
-                    EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
-                    entityItem.setVelocity(0, 0, 0);
-                    worldObj.spawnEntityInWorld(entityItem);
-                }
-                if(storedPower < nextBoostCost){
-                    break;
-                }
-                progress += 1;
-                storedPower -= nextBoostCost;
-                nextBoostCost *= 2;
-            }
-        }
     }
 }

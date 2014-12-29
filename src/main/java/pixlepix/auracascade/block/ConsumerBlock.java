@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
@@ -13,6 +14,7 @@ import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.item.ItemAuraCrystal;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * Created by pixlepix on 11/29/14.
  */
-public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
+public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, ITileEntityProvider {
 
     public ConsumerBlock() {
         super(Material.iron);
@@ -153,7 +155,14 @@ public class ConsumerBlock extends Block implements ITTinkererBlock, ITileEntity
     }
 
 
-
-
-
+    @Override
+    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+        List<String> result = new ArrayList<String>();
+        if(world.getTileEntity(x, y, z) instanceof ConsumerTile){
+            ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(x, y, z);
+            result.add(""+consumerTile.progress + " / " + consumerTile.getMaxProgress());
+            result.add("Power per progress: "+consumerTile.getPowerPerProgress());
+        }
+        return result;
+    }
 }
