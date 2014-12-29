@@ -8,10 +8,13 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.lexicon.*;
+import pixlepix.auracascade.render.OverlayRender;
 import pixlepix.auracascade.render.RenderEntityFairy;
 import pixlepix.auracascade.render.RenderPedestal;
 
@@ -27,6 +30,7 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+        MinecraftForge.EVENT_BUS.register(new OverlayRender());
     }
 
     @Override
@@ -34,6 +38,11 @@ public class ClientProxy extends CommonProxy {
         super.postInit(event);
         ClientRegistry.bindTileEntitySpecialRenderer(AuraTilePedestal.class, new RenderPedestal());
         RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderEntityFairy());
+    }
+
+    @Override
+    public EntityPlayer getPlayer() {
+        return Minecraft.getMinecraft().thePlayer;
     }
 
     @Override

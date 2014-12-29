@@ -23,6 +23,7 @@ import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
@@ -34,7 +35,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProvider {
+public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITileEntityProvider {
 
 	public AuraBlock(String type) {
 		super(Material.glass);
@@ -367,4 +368,49 @@ public class AuraBlock extends Block implements ITTinkererBlock, ITileEntityProv
 	public int damageDropped(int meta) {
 		return meta;
 	}
+
+	@Override
+	public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+		List<String> result = new ArrayList<String>();
+		if (world.getTileEntity(x, y, z) instanceof AuraTile) {
+
+			if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor) {
+				AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
+				result.add("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]);
+
+			}
+			if(((AuraTile) world.getTileEntity(x, y, z)).storage.getTotalAura() > 0) {
+				result.add("Aura Stored: ");
+				for (EnumAura aura : EnumAura.values()) {
+					if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
+						result.add("    "+aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura));
+					}
+				}
+			}else{
+				result.add("No Aura");
+			}
+			if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
+				result.add("Time left: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower + " seconds");
+				result.add("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpSpeed + " power per second");
+			}
+		} else if (world.getTileEntity(x, y, z) instanceof CraftingCenterTile) {
+			CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
+			if (tile.getRecipe() != null) {
+				result.add("Making: " + tile.getRecipe().result.getDisplayName());
+				for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
+					AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
+					if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
+						result.add("    " +pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")");
+					} else {
+						AuraCascade.log.warn("Invalid recipe when checking crafting center");
+					}
+				}
+			} else {
+				player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
+			}
+
+		}
+		return result;
+	}
 }
+

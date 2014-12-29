@@ -11,6 +11,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
@@ -53,6 +54,9 @@ public class CommonProxy{
     public static EventHandler eventHandler;
 
     public World getWorld(){
+        return null;
+    }
+    public EntityPlayer getPlayer(){
         return null;
     }
 

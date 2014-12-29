@@ -183,7 +183,6 @@ public class AuraTile extends TileEntity {
                 }
                 burstMap = null;
             }
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
         if (worldObj.getTotalWorldTime() % 20 == 2) {
             verifyConnections();
