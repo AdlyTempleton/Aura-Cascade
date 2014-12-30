@@ -406,7 +406,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 					}
 				}
 			} else {
-				result.add("No Recipe Selected");
+				result.add("No Valid Recipe Selected");
 			}
 
 		}
