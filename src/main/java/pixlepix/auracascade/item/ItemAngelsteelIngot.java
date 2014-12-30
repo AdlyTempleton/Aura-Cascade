@@ -1,11 +1,17 @@
 package pixlepix.auracascade.item;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -27,37 +33,87 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
         return super.getItemStackDisplayName(stack).replace("%n", StatCollector.translateToLocal(stack.getItemDamage()+".aurasteel.name"));
     }
 
-    public static final String name = "ingotAngelSteel";
-
     @Override
-    public String getItemName() {
-        return name;
+    public boolean onEntityItemUpdate(EntityItem entityItem) {
+        if (!entityItem.worldObj.isRemote) {
+            EntityItem[] targetStacks = new EntityItem[3];
+            targetStacks[0] = entityItem;
+            int i = 1;
+
+            if (entityItem.getEntityItem().stackSize == 2) {
+                targetStacks[1] = entityItem;
+                i = 2;
+            } else if (entityItem.getEntityItem().stackSize >= 3) {
+                targetStacks[1] = entityItem;
+                targetStacks[2] = entityItem;
+                i = 3;
+            }
+
+            int degree = entityItem.getEntityItem().getItemDamage();
+
+            if (i != 3) {
+                AxisAlignedBB range = AxisAlignedBB.getBoundingBox(entityItem.posX - 1, entityItem.posY - 1, entityItem.posZ - 1, entityItem.posX + 1, entityItem.posY + 1, entityItem.posZ + 1);
+                List<EntityItem> entityItems = entityItem.worldObj.getEntitiesWithinAABB(EntityItem.class, range);
+                for (EntityItem nearbyItem : entityItems) {
+                    ItemStack nearbyStack = nearbyItem.getEntityItem();
+                    if (nearbyItem != entityItem && nearbyStack.getItem() == this && nearbyStack.getItemDamage() == degree) {
+                        if (nearbyStack.stackSize == 2) {
+                            targetStacks[1] = entityItem;
+                            i = 2;
+                        } else if (nearbyStack.stackSize >= 3) {
+                            targetStacks[1] = entityItem;
+                            targetStacks[2] = entityItem;
+                            i = 3;
+                        }
+
+                    }
+                }
+            }
+
+            if (i == 3) {
+                for (EntityItem item : targetStacks) {
+                    item.getEntityItem().stackSize--;
+                }
+                EntityItem item = new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, new ItemStack(this, 1, degree + 1));
+                entityItem.worldObj.spawnEntityInWorld(item);
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(item.worldObj.provider.dimensionId, item.posX, item.posY, item.posZ, 32));
+            }
+        }
+        return false;
     }
 
-    @Override
-    public boolean shouldRegister() {
-        return true;
-    }
 
-    @Override
-    public boolean shouldDisplayInTab() {
-        return true;
-    }
+        public static final String name = "ingotAngelSteel";
 
-    @Override
-    public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
-    }
+        @Override
+        public String getItemName() {
+            return name;
+        }
 
-    @Override
-    public boolean getHasSubtypes() {
-        return true;
-    }
+        @Override
+        public boolean shouldRegister() {
+            return true;
+        }
 
-    @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
-        for(int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++){
-            list.add(new ItemStack(item, 1, i));
+        @Override
+        public boolean shouldDisplayInTab() {
+            return true;
+        }
+
+        @Override
+        public ThaumicTinkererRecipe getRecipeItem() {
+            return null;
+        }
+
+        @Override
+        public boolean getHasSubtypes() {
+            return true;
+        }
+
+        @Override
+        public void getSubItems(Item item, CreativeTabs tab, List list) {
+            for(int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++){
+                list.add(new ItemStack(item, 1, i));
+            }
         }
     }
-}

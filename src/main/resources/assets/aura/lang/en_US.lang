@@ -175,7 +175,7 @@ aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, 
 aura.page.angel1=Cascading Synthesizer
 
 aura.entry.angelsteel=Angel's Steel
-aura.page.angelsteel0=Angel's Steel is a very rare and valuable metal, which can be made only in the &1Cascading Synthesizer&0. The &1Cascading Synthesizer&0 will create first-degree ingots. Second-degree ingots are made by combining three first-degree ingots in a crafting bench, and higher degrees are made in the same way
+aura.page.angelsteel0=Angel's Steel is a very rare and valuable metal, which can be made only in the &1Cascading Synthesizer&0. The &1Cascading Synthesizer&0 will create first-degree ingots. Second-degree ingots are made by dropping three first-degree ingots into the world near eachother, and higher degrees are made in the same way
 aura.page.angelsteel1=Higher degree Angel's Steel ingots will make better tools. Higher degree ingots will increase the dig speed of the tool. It will also give two additional bonus points per tool. The bonus points are randomly applied to one of four categories:
 aura.page.angelsteel2=&2Efficiency&0 Increases your digging speed <br> &2Fortune&0 Increases drops similar to the vanilla enchantment. <br> &2Shatter&0 Increases digging speed on blocks with hardness greater than 2 <br> &2Disintegrate&0 increases digging speed on blocks with hardness less than 1
 aura.page.angelsteel4=Angel's Steel Axe
