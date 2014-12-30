@@ -66,7 +66,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
-			player.addChatComponentMessage(new ChatComponentText("Aura:"));
 
 			if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()) {
 				AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
@@ -87,7 +86,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 				world.markBlockForUpdate(x, y, z);
 				return true;
 
-			} else if (world.getTileEntity(x, y, z) instanceof AuraTile) {
+			} else if (world.getTileEntity(x, y, z) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
+				player.addChatComponentMessage(new ChatComponentText("Aura:"));
 				for (EnumAura aura : EnumAura.values()) {
 					if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
 						player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
@@ -98,7 +98,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 					player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
 				}
 			}
-		} else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile) {
+		} else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile && player.inventory.getCurrentItem() == null) {
 			CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
 			if (tile.getRecipe() != null) {
 				player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
