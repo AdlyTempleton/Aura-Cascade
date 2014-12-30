@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class AngelsteelToolHelper {
 
-    public static final int MAX_DEGREE = 12;
+    public static final int MAX_DEGREE = 11;
 
     public static ArrayList<Object> getDegreeList(boolean execludeZero){
         ArrayList<Object> integers = new ArrayList<Object>();

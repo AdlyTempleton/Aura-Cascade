@@ -35,7 +35,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (!entityItem.worldObj.isRemote) {
+        if (!entityItem.worldObj.isRemote && entityItem.getEntityItem().getItemDamage() < AngelsteelToolHelper.MAX_DEGREE) {
             EntityItem[] targetStacks = new EntityItem[3];
             targetStacks[0] = entityItem;
             int i = 1;
