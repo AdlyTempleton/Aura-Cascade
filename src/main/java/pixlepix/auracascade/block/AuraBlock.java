@@ -406,7 +406,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 					}
 				}
 			} else {
-				player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
+				result.add("No Recipe Selected");
 			}
 
 		}
