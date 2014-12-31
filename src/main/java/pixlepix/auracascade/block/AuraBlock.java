@@ -58,6 +58,22 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 		setHardness(2F);
 	}
 
+	@Override
+	public boolean hasComparatorInputOverride() {
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(World world, int x, int y, int z, int meta) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if(tileEntity instanceof AuraTile) {
+			int aura = ((AuraTile)tileEntity).storage.getTotalAura();
+			return (int) Math.floor(Math.log10(aura));
+		}else{
+			return super.getComparatorInputOverride(world, x, y, z, meta);
+		}
+	}
+
 	//"" is default
 	//"pump" is AuraTilePump\
 	//"black" is AuraTileBlack etc
@@ -84,6 +100,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
 				pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
 				world.markBlockForUpdate(x, y, z);
+				world.notifyBlockChange(x, y, z, this);
 				return true;
 
 			} else if (world.getTileEntity(x, y, z) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
@@ -128,6 +145,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 				if (te instanceof AuraTile) {
 					((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100 * stack.stackSize));
 					world.markBlockForUpdate(x, y, z);
+					world.notifyBlockChange(x, y, z, this);
 					AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, 32));
 
 					entity.setDead();

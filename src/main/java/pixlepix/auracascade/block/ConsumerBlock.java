@@ -140,6 +140,21 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         return FurnaceTile.class;
     }
 
+    @Override
+    public boolean hasComparatorInputOverride() {
+        return true;
+    }
+
+    @Override
+    public int getComparatorInputOverride(World world, int x, int y, int z, int meta) {
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if(tileEntity instanceof ConsumerTile) {
+            return ((ConsumerTile)tileEntity).progress / ((ConsumerTile)tileEntity).getMaxProgress();
+        }else{
+            return super.getComparatorInputOverride(world, x, y, z, meta);
+        }
+    }
+
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {

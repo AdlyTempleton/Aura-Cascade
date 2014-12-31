@@ -201,6 +201,7 @@ public class AuraTile extends TileEntity {
                 burstMap = null;
             }
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
         }
 
         for(AuraQuantity quantity:storage.quantityList){

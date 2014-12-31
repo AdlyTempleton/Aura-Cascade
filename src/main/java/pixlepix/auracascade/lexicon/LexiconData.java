@@ -63,6 +63,7 @@ public final class LexiconData {
 		new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
 		new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
 				new PageCraftingRecipe("3", (CraftingBenchRecipe)BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump"))));
+		new BLexiconEntry("comparator", categoryBasics).setLexiconPages(new PageText("0"));
 
 		//Aura Colors
 		new BLexiconEntry("red", categoryAuraColors).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1",((ThaumicTinkererRecipeMulti)BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(3, 4)));
