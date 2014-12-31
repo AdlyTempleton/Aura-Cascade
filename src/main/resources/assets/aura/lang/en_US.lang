@@ -163,7 +163,7 @@ aura.entry.pumpRedstone=Redstone Pump
 aura.page.pumpRedstone0=The Redstone Pump is a pump that derives energy from nearby Redstone. When a redstone wire is connected and powered, the pump will consume the redstone wire, generating a power of 1500 and a duration of 10 seconds for the first wire. It will eat a line of redstone up to 15 blocks long, generating a 40% greater duration for subsequent redstone.
 aura.page.pumpRedstone1=Redstone Pump
 aura.entry.pumpProjectile=Projectile Pump
-aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 200. Eggs produce a duration of 90s and a speed of 400. Arrows produce a duration of 20 and a speed of 2500.
+aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 400. Eggs produce a duration of 90s and a speed of 100. Arrows produce a duration of 20 and a speed of 2500.
 aura.page.pumpProjectile1=Projectile Pump
 
 //Consumers

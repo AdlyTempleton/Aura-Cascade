@@ -21,11 +21,11 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
         }
 
         if(entity instanceof EntityEgg){
-            addFuel(90, 400);
+            addFuel(90, 100);
         }
 
         if(entity instanceof EntitySnowball){
-            addFuel(10, 200);
+            addFuel(10, 400);
         }
     }
 
