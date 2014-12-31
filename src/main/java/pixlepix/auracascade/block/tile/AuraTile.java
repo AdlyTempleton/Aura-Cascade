@@ -120,7 +120,7 @@ public class AuraTile extends TileEntity {
         super.updateEntity();
 
         if (!hasConnected) {
-            for (int i = -15; i < 15; i++) {
+            for (int i = -15; i < 16; i++) {
 
                 connect(xCoord + i, yCoord, zCoord);
 
