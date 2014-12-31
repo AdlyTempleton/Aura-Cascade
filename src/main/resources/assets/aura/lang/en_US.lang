@@ -198,7 +198,7 @@ aura.page.ore0=The Cascading Processor will turn nearby ores into 3 dusts. It wi
 
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
-aura.page.loot0=The Cascading Looter will summon the loot from dungeon chests. The looter has a minimum power requirement of 1000 power/second.
+aura.page.loot0=The Cascading Looter will summon the loot from dungeon chests. The looter has a minimum power requirement of 5000 power/second.
 
 aura.entry.mob=Cascading Spawner
 aura.page.mob1=Cascading Spawner

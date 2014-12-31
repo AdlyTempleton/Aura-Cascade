@@ -22,7 +22,7 @@ public class LootTile extends ConsumerTile {
     }
 
     public static int MAX_PROGRESS = 100;
-    public static int POWER_PER_PROGRESS = 1000;
+    public static int POWER_PER_PROGRESS = 5000;
 
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
