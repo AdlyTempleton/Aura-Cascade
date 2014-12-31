@@ -110,7 +110,7 @@ aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a 
 aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
 aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently.
 aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
-aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Duration: The burn duration in a furnace. Speed: 200.
+aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
 aura.page.pumps3=The Burning Aura Pump
 
 //Aura Colors
