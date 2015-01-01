@@ -1,13 +1,16 @@
 package pixlepix.auracascade.block.tile;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.CoordTuple;
@@ -58,6 +61,11 @@ public class AuraTile extends TileEntity {
 
     }
 
+    public boolean connectionBlockedByBlock(CoordTuple tuple){
+        Block block = tuple.getBlock(worldObj);
+        return !block.isAir(worldObj, tuple.getX(), tuple.getY(), tuple.getZ()) && (block instanceof AuraBlock || block.isOpaqueCube());
+    }
+
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
@@ -83,11 +91,28 @@ public class AuraTile extends TileEntity {
         nbt.setInteger("energy", energy);
     }
 
+    public boolean isOpenPath(CoordTuple target){
+        int dist = (int)new CoordTuple(this).dist(target);
+
+        ForgeDirection direction = new CoordTuple(this).getDirectionTo(target);
+        if(direction == ForgeDirection.UNKNOWN){
+            return false;
+        }
+        for(int i=1; i < dist ; i++){
+            CoordTuple between = new CoordTuple(this).add(direction, i);
+            if(connectionBlockedByBlock(between)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void verifyConnections() {
         LinkedList<CoordTuple> result = new LinkedList<CoordTuple>();
+        connectedLoop:
         for(CoordTuple next:connected){
             TileEntity tile = next.getTile(worldObj);
-            if (tile instanceof AuraTile) {
+            if (tile instanceof AuraTile && isOpenPath(next)) {
                 if (!((AuraTile) tile).connected.contains(new CoordTuple(this))) {
                     ((AuraTile) tile).connected.add(new CoordTuple(this));
                 }
@@ -97,16 +122,20 @@ public class AuraTile extends TileEntity {
         connected = result;
     }
 
-    public void connect(int x2, int y2, int z2) {
-        if(!worldObj.isRemote){
-            if (worldObj.getTileEntity(x2, y2, z2) instanceof AuraTile && worldObj.getTileEntity(x2, y2, z2) != this) {
-                AuraTile otherNode = (AuraTile) worldObj.getTileEntity(x2, y2, z2);
-                otherNode.connected.add(new CoordTuple(this));
-                this.connected.add(new CoordTuple(otherNode));
+    public boolean connect(int x2, int y2, int z2) {
+        if (worldObj.getTileEntity(x2, y2, z2) instanceof AuraTile && worldObj.getTileEntity(x2, y2, z2) != this && isOpenPath(new CoordTuple(x2, y2, z2))) {
+            AuraTile otherNode = (AuraTile) worldObj.getTileEntity(x2, y2, z2);
+            otherNode.connected.add(new CoordTuple(this));
+            this.connected.add(new CoordTuple(otherNode));
+            //This should only happen on initial placement
+            //Not on 'follow ups'
+            if(!hasConnected) {
                 burst(new CoordTuple(x2, y2, z2), "spell", EnumAura.WHITE_AURA, 1D);
-
             }
+            return true;
+
         }
+        return false;
     }
 
     public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
@@ -119,15 +148,14 @@ public class AuraTile extends TileEntity {
     public void updateEntity() {
         super.updateEntity();
 
-        if (!hasConnected) {
-            for (int i = -15; i < 16; i++) {
-
-                connect(xCoord + i, yCoord, zCoord);
-
-                connect(xCoord, yCoord, zCoord + i);
-
-                connect(xCoord, yCoord + i, zCoord);
+        if ((!hasConnected || worldObj.getTotalWorldTime() % 200 == 0 )&& !worldObj.isRemote) {
+            for (int i = 1; i < 16; i++) {
+                for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS) {
+                    connect(xCoord + dir.offsetX * i, yCoord + dir.offsetY * i, zCoord + dir.offsetZ * i);
+                }
             }
+            //This initial check does *not* see if connections are blocked
+            verifyConnections();
             hasConnected = true;
         }
 
