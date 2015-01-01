@@ -1,15 +1,21 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -53,9 +59,54 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         setHardness(2F);
     }
 
+    public void onBlockPlacedBy(World p_149689_1_, int p_149689_2_, int p_149689_3_, int p_149689_4_, EntityLivingBase p_149689_5_, ItemStack p_149689_6_)
+    {
+        int l = MathHelper.floor_double((double) (p_149689_5_.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        if (l == 0)
+        {
+            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 2, 2);
+        }
+
+        if (l == 1)
+        {
+            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 5, 2);
+        }
+
+        if (l == 2)
+        {
+            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 3, 2);
+        }
+
+        if (l == 3)
+        {
+            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 4, 2);
+        }
+
+        if (p_149689_6_.hasDisplayName())
+        {
+            ((TileEntityFurnace)p_149689_1_.getTileEntity(p_149689_2_, p_149689_3_, p_149689_4_)).func_145951_a(p_149689_6_.getDisplayName());
+        }
+    }
+
     @Override
-    public void registerBlockIcons(IIconRegister p_149651_1_) {
-        super.registerBlockIcons(p_149651_1_);
+    public void registerBlockIcons(IIconRegister iconRegister) {
+        if(name.equals("furnace")){
+            top = iconRegister.registerIcon("aura:auraFurnace_top");
+            side = iconRegister.registerIcon("aura:auraFurnace_side");
+            front = iconRegister.registerIcon("aura:auraFurnace_front");
+        }
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta){
+        if(side == 1 || side == 0){
+            return top;
+        }
+        if(side == meta){
+            return front;
+        }
+        return this.side;
     }
 
     @Override
@@ -139,6 +190,12 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         }
         return FurnaceTile.class;
     }
+
+    public IIcon front;
+    public IIcon side;
+    public IIcon top;
+
+
 
     @Override
     public boolean hasComparatorInputOverride() {

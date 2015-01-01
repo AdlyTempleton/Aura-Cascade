@@ -2,6 +2,7 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,6 +37,11 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entityLivingBase) {
 
+    }
+
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("aura:fairy_ring");
     }
 
     @Override

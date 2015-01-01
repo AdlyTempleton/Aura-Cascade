@@ -9,6 +9,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -20,6 +21,7 @@ import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
+import javax.imageio.metadata.IIOMetadataController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,9 +56,18 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         return stack;
     }
 
+    //Used in RenderEntityFairy
+    public IIcon fairyIcon;
+
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("aura:fairy_plain");
+        fairyIcon = iconRegister.registerIcon("aura:fairy_plain");
+        itemIcon = iconRegister.registerIcon("aura:fairy_charm");
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int damage) {
+        return damage == 100 ? fairyIcon : itemIcon;
     }
 
     @Override

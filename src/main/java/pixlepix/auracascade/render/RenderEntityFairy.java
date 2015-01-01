@@ -37,7 +37,7 @@ public class RenderEntityFairy extends Render {
         EntityItem entityItem = ((EntityFairy)entity).entityItemRender;
         entityItem.age = 0;
         entityItem.velocityChanged = true;
-        entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class)));
+        entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
 
 
 
