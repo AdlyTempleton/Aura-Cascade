@@ -1,6 +1,5 @@
 package pixlepix.auracascade.data.recipe;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;

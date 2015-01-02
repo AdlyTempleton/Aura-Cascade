@@ -3,8 +3,6 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
  * Created by pixlepix on 12/17/14.
  */

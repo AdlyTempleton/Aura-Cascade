@@ -1,7 +1,6 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,7 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -24,10 +22,7 @@ import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.item.ItemAuraCrystal;
-import pixlepix.auracascade.registry.BlockRegistry;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
-import pixlepix.auracascade.registry.ITTinkererBlock;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -102,10 +102,9 @@ public class ItemLexicon extends Item implements ITTinkererItem{
     private static LexiconEntry getEntryFromForce(ItemStack stack) {
         String force = getForcedPage(stack);
         for(LexiconEntry entry : CategoryManager.getAllEntries())
-            if(entry.unlocalizedName.equals(force))
-                if(entry != null) {
+            if (entry != null)
+                if (entry.unlocalizedName.equals(force))
                     return entry;
-                }
         return null;
     }
     public static int getQueueTicks(ItemStack stack) {

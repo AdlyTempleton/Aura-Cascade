@@ -62,12 +62,15 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
                 try {
                     fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entity).worldObj);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    AuraCascade.log.error("Failed to initialise {}", fairyClass.getClass());
+                    AuraCascade.log.error("Exception thrown:", e);
+                    continue;
                 }
-                fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
-                fairy.player = (EntityPlayer) entity;
+                EntityPlayer player = (EntityPlayer) entity;
+                fairy.player = player;
+                fairy.setPosition(player.posX, player.posY, player.posZ);
 
-                ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
+                player.worldObj.spawnEntityInWorld(fairy);
             }
 
         }

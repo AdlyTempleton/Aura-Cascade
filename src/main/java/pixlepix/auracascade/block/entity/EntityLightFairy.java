@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraft.block.BlockTorch;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.FairyTorch;
 import pixlepix.auracascade.registry.BlockRegistry;

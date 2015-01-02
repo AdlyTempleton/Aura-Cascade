@@ -18,7 +18,7 @@ public class AngelsteelToolHelper {
     public static ArrayList<Object> getDegreeList(boolean execludeZero){
         ArrayList<Object> integers = new ArrayList<Object>();
         for(int i = (execludeZero ? 1 : 0) ; i < MAX_DEGREE; i++){
-            integers.add(new Integer(i));
+            integers.add(Integer.valueOf(i));
         }
         return integers;
     }

@@ -1,9 +1,7 @@
 package pixlepix.auracascade.block.entity;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;

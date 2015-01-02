@@ -11,7 +11,6 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import java.util.List;
  */
 public class CraftingCenterTile extends TileEntity {
 
-    public static List<ForgeDirection> pedestalRelativeLocations = Arrays.asList(new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST});
+    public static List<ForgeDirection> pedestalRelativeLocations = Arrays.asList(ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST);
 
     public boolean pedestalsConnected(){
         for(ForgeDirection direction:pedestalRelativeLocations){

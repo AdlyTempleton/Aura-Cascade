@@ -1,10 +1,7 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockGlowstone;
 import net.minecraft.block.BlockRedstoneWire;
-import net.minecraft.block.BlockTorch;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
