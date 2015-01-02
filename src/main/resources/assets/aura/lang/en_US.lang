@@ -279,3 +279,7 @@ aura.entry.fairyTrain=Training Fairy
 aura.page.fairyTrain0=Fairy that occasionally drops XP orbs.
 aura.page.fairyTrain1=Right click with &1Ring of Binding&0 to summon
 
+auramisc.shiftToRead=Shift-right click to read more
+auramisc.clickToRecipe=Shift click to see recipe
+auramisc.clickToIndex=Shift click for index
+
