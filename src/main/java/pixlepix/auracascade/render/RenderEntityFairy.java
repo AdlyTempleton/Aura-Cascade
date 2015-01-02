@@ -1,18 +1,15 @@
 package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.entity.EntityFairy;
-import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.item.ItemFairyCharm;
 import pixlepix.auracascade.registry.BlockRegistry;
 

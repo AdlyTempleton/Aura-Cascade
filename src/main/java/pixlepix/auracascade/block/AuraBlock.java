@@ -27,10 +27,7 @@ import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
-import pixlepix.auracascade.registry.BlockRegistry;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
-import pixlepix.auracascade.registry.ITTinkererBlock;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -264,7 +261,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
 		if (type.equals("pumpProjectile")) {
 			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.arrow), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
-		};
+		}
 		if (type.equals("pumpFall")) {
 			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.water_bucket), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
 		}
@@ -275,7 +272,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 			return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
 		}
 		return new CraftingBenchRecipe(new ItemStack(this), "PPP", "PRP", "PPP", 'P', new ItemStack(Blocks.glass_pane), 'R', new ItemStack(Blocks.redstone_block));
-	};
+	}
 
 
 	@Override

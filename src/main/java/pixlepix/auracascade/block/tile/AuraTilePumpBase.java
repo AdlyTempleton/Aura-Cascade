@@ -1,17 +1,10 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.AxisAlignedBB;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/24/14.

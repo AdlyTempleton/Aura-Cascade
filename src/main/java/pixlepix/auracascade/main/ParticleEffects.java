@@ -3,7 +3,6 @@ package pixlepix.auracascade.main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.Vec3;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;
 import pixlepix.auracascade.particle.ParticleSphere;
@@ -25,11 +24,6 @@ public class ParticleEffects {
 
         if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null)
         {
-            int var14 = minecraft.gameSettings.particleSetting;
-            if (var14 == 1 && minecraft.theWorld.rand.nextInt(3) == 0)
-            {
-                var14 = 2;
-            }
             double var15 = minecraft.renderViewEntity.posX - posX;
             double var17 = minecraft.renderViewEntity.posY - posY;
             double var19 = minecraft.renderViewEntity.posZ - posZ;

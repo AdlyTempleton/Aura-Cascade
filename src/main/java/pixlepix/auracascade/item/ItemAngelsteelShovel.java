@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -58,7 +57,6 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
     public boolean shouldDisplayInTab() {
         return degree == 0 || degree == AngelsteelToolHelper.MAX_DEGREE;
     }
-
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {

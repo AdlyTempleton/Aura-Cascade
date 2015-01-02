@@ -6,7 +6,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;

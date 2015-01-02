@@ -21,7 +21,6 @@ import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
-import javax.imageio.metadata.IIOMetadataController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

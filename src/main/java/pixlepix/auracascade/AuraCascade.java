@@ -6,11 +6,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.main.ConstantMod;
-import pixlepix.auracascade.registry.BlockRegistry;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles")

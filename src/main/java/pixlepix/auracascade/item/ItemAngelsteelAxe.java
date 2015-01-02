@@ -3,7 +3,6 @@ package pixlepix.auracascade.item;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.IAngelsteelTool;
@@ -58,7 +57,6 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     public boolean shouldDisplayInTab() {
         return degree == 0 || degree == AngelsteelToolHelper.MAX_DEGREE;
     }
-
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {

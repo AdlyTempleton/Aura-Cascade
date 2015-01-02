@@ -5,7 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 
 /**

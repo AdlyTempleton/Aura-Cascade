@@ -1,10 +1,7 @@
 package pixlepix.auracascade.item;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +9,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -100,7 +96,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
             return true;
         }
 
-        @Override
+    @Override
         public ThaumicTinkererRecipe getRecipeItem() {
             return null;
         }

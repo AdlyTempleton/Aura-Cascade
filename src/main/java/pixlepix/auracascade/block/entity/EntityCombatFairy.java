@@ -1,6 +1,5 @@
 package pixlepix.auracascade.block.entity;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.AxisAlignedBB;

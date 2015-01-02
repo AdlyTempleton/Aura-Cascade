@@ -1,9 +1,5 @@
 package pixlepix.auracascade.data.recipe;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import java.util.ArrayList;
 import java.util.List;
 

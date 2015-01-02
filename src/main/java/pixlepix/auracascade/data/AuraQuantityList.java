@@ -2,10 +2,11 @@ package pixlepix.auracascade.data;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import pixlepix.auracascade.AuraCascade;
 
 import java.util.ArrayList;
 
-public class AuraQuantityList {
+public class AuraQuantityList implements Cloneable {
 
 	public ArrayList<AuraQuantity> quantityList;
 
@@ -108,8 +109,17 @@ public class AuraQuantityList {
 		return result;
 	}
 	@Override
-	public Object clone(){
-		return new AuraQuantityList((ArrayList<AuraQuantity>) quantityList.clone());
+	public AuraQuantityList clone() {
+        AuraQuantityList clone;
+        try {
+			clone = (AuraQuantityList) super.clone();
+		} catch (CloneNotSupportedException e) {
+            // Should never be hit.
+            AuraCascade.log.fatal("Failed to create clone of {}", getClass().getName());
+            clone = new AuraQuantityList();
+		}
+        clone.quantityList = (ArrayList) quantityList.clone();
+		return clone;
 	}
 
 	public static final String NBT_AURA_TYPE = "auraType";
