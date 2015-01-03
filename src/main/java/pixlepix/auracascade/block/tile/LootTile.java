@@ -11,6 +11,9 @@ import java.util.Random;
  * Created by pixlepix on 12/21/14.
  */
 public class LootTile extends ConsumerTile {
+    public static int MAX_PROGRESS = 100;
+    public static int POWER_PER_PROGRESS = 5000;
+
     @Override
     public int getMaxProgress() {
         return MAX_PROGRESS;
@@ -20,9 +23,6 @@ public class LootTile extends ConsumerTile {
     public int getPowerPerProgress() {
         return POWER_PER_PROGRESS;
     }
-
-    public static int MAX_PROGRESS = 100;
-    public static int POWER_PER_PROGRESS = 5000;
 
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {

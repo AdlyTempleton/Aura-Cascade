@@ -28,27 +28,28 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(pumpPower > 0){
+        if (pumpPower > 0) {
             hasSearched = false;
         }
 
-        if(pumpPower == 0 && (!hasSearched || worldObj.getTotalWorldTime() % 1200 == 0)){
-            for(CoordTuple tuple:new CoordTuple(this).inRange(5)){
+        if (pumpPower == 0 && (!hasSearched || worldObj.getTotalWorldTime() % 1200 == 0)) {
+            for (CoordTuple tuple : new CoordTuple(this).inRange(5)) {
                 Block block = tuple.getBlock(worldObj);
-                if(block instanceof BlockGlowstone){
+                if (block instanceof BlockGlowstone) {
                     addFuel(180, 750);
-                    if(!worldObj.isRemote) {
-                        for(int j=0; j < 5; j++) {
+                    if (!worldObj.isRemote) {
+                        for (int j = 0; j < 5; j++) {
                             AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
-                        }                    }
+                        }
+                    }
 
                     tuple.setBlockToAir(worldObj);
                     break;
                 }
-                if(block instanceof BlockTorch){
+                if (block instanceof BlockTorch) {
                     addFuel(30, 750);
-                    if(!worldObj.isRemote) {
-                        for(int j=0; j < 5; j++) {
+                    if (!worldObj.isRemote) {
+                        for (int j = 0; j < 5; j++) {
                             AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
                         }
                     }

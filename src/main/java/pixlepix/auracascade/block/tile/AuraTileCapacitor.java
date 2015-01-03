@@ -5,13 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 
 /**
  * Created by pixlepix on 12/5/14.
  */
-public class AuraTileCapacitor extends AuraTile{
+public class AuraTileCapacitor extends AuraTile {
 
     public int[] storageValues = new int[]{100, 1000, 10000, 100000};
     public int storageValueIndex = 1;
@@ -38,7 +37,7 @@ public class AuraTileCapacitor extends AuraTile{
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(!worldObj.isRemote) {
+        if (!worldObj.isRemote) {
             if (ticksDisabled > 0) {
                 ticksDisabled--;
             }

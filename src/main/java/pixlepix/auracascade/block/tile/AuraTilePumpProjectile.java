@@ -15,16 +15,16 @@ import java.util.List;
 public class AuraTilePumpProjectile extends AuraTilePumpBase {
 
     public void onEntityCollidedWithBlock(Entity entity) {
-        if(entity instanceof EntityArrow){
+        if (entity instanceof EntityArrow) {
             addFuel(20, 1000);
             entity.setDead();
         }
 
-        if(entity instanceof EntityEgg){
+        if (entity instanceof EntityEgg) {
             addFuel(90, 100);
         }
 
-        if(entity instanceof EntitySnowball){
+        if (entity instanceof EntitySnowball) {
             addFuel(10, 400);
         }
     }
@@ -33,15 +33,14 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
     public void updateEntity() {
         super.updateEntity();
         List<Entity> entityList = worldObj.getEntitiesWithinAABB(EntityThrowable.class, AxisAlignedBB.getBoundingBox(xCoord - .5, yCoord - .5, zCoord - .5, xCoord + 1.5, yCoord + 1.5, zCoord + 1.5));
-        for(Entity entity:entityList){
-            if(entity instanceof EntitySnowball || entity instanceof EntityEgg){
+        for (Entity entity : entityList) {
+            if (entity instanceof EntitySnowball || entity instanceof EntityEgg) {
                 //Fun fact: Eggs and snowballs use the same particle code
-                for (int i = 0; i < 8; ++i)
-                {
+                for (int i = 0; i < 8; ++i) {
                     this.worldObj.spawnParticle("snowballpoof", entity.posX, entity.posY, entity.posZ, 0.0D, 0.0D, 0.0D);
                 }
                 entity.setDead();
-                if(!worldObj.isRemote) {
+                if (!worldObj.isRemote) {
                     onEntityCollidedWithBlock(entity);
                 }
             }

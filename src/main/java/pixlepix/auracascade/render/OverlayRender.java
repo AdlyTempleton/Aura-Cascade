@@ -19,7 +19,7 @@ import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 public class OverlayRender {
     @SubscribeEvent
     public void onScreenRenderEvent(RenderGameOverlayEvent event) {
-        if(event.type == RenderGameOverlayEvent.ElementType.TEXT){
+        if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
             World world = AuraCascade.proxy.getWorld();
             EntityPlayer player = AuraCascade.proxy.getPlayer();
             Vec3 vec3 = player.getPosition(1.0F);

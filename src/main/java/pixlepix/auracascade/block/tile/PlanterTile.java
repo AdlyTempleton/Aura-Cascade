@@ -7,7 +7,9 @@ import java.util.Random;
 /**
  * Created by pixlepix on 12/21/14.
  */
-public class PlanterTile extends ConsumerTile{
+public class PlanterTile extends ConsumerTile {
+
+    public static final int COST_PER_BOOST = 150;
 
     @Override
     public int getMaxProgress() {
@@ -18,8 +20,6 @@ public class PlanterTile extends ConsumerTile{
     public int getPowerPerProgress() {
         return 50;
     }
-
-    public static final int COST_PER_BOOST = 150;
 
     @Override
     public void onUsePower() {

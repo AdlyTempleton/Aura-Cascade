@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraft.block.BlockTorch;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.FairyTorch;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -16,10 +14,10 @@ public class EntityLightFairy extends EntityFairy {
 
     @Override
     public void onEntityUpdate() {
-        int lightValue = worldObj.getBlockLightValue((int)posX, (int)posY, (int) posZ);
-        if(lightValue < 10 && !worldObj.isRemote){
-            if(worldObj.isAirBlock((int)posX, (int)posY, (int) posZ) ){
-                worldObj.setBlock((int)posX, (int)posY, (int) posZ, BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
+        int lightValue = worldObj.getBlockLightValue((int) posX, (int) posY, (int) posZ);
+        if (lightValue < 10 && !worldObj.isRemote) {
+            if (worldObj.isAirBlock((int) posX, (int) posY, (int) posZ)) {
+                worldObj.setBlock((int) posX, (int) posY, (int) posZ, BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
             }
         }
     }

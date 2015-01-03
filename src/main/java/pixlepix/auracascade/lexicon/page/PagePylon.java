@@ -22,7 +22,7 @@ import java.util.Arrays;
 /**
  * Created by pixlepix on 12/28/14.
  */
-public class PagePylon extends PageRecipe{
+public class PagePylon extends PageRecipe {
     private static final ResourceLocation craftingOverlay = new ResourceLocation("aura:textures/gui/pylonOverlay.png");
 
     PylonRecipe recipe;
@@ -65,19 +65,19 @@ public class PagePylon extends PageRecipe{
 
     @SideOnly(Side.CLIENT)
     public void renderPylonRecipe(IGuiLexiconEntry gui, PylonRecipe recipe, int mx, int my) {
-        for(int i=0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             ForgeDirection direction = CraftingCenterTile.pedestalRelativeLocations.get(i);
 
             int x = 2 + direction.offsetX;
             int y = 2 + direction.offsetZ;
 
-             renderItemAtGridPos(gui,x , y, ((PylonRecipe) recipe).componentList.get(i).itemStack, true);
+            renderItemAtGridPos(gui, x, y, ((PylonRecipe) recipe).componentList.get(i).itemStack, true);
 
-            int xPos = gui.getLeft() + x * 29 + 7 + (y == 0  && x == 3 ? 10 : 0);
+            int xPos = gui.getLeft() + x * 29 + 7 + (y == 0 && x == 3 ? 10 : 0);
             int yPos = gui.getTop() + y * 29 + 24 - (y == 0 ? 7 : 0);
             AuraQuantity quantity = recipe.componentList.get(i).auraQuantity;
-            if(mx >= xPos && my >= yPos && mx < xPos + 16 && my < yPos + 16) {
-                VazkiiRenderHelper.renderTooltip(mx, my + 16, Arrays.asList("" + quantity.getNum() + "("+ (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")"));
+            if (mx >= xPos && my >= yPos && mx < xPos + 16 && my < yPos + 16) {
+                VazkiiRenderHelper.renderTooltip(mx, my + 16, Arrays.asList("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")"));
             }
         }
         renderItemAtGridPos(gui, 2, 0, recipe.result, false);

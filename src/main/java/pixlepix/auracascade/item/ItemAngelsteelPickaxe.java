@@ -6,7 +6,10 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.IAngelsteelTool;
-import pixlepix.auracascade.registry.*;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +18,13 @@ import java.util.List;
  * Created by pixlepix on 12/21/14.
  */
 public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem, IAngelsteelTool {
+    public static final String name = "angelsteelPickaxe";
+    public int degree = 0;
+
     public ItemAngelsteelPickaxe(Integer i) {
-        super(AngelsteelToolHelper.materials[i.intValue()]);
-        this.degree = i.intValue();
+        super(AngelsteelToolHelper.materials[i]);
+        this.degree = i;
     }
-
-
 
     public ItemAngelsteelPickaxe() {
         this(0);
@@ -28,13 +32,13 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        return AngelsteelToolHelper.getDegreeList(true);
+        return AngelsteelToolHelper.getDegreeList();
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
-        if(AngelsteelToolHelper.hasValidBuffs(stack)) {
+        if (AngelsteelToolHelper.hasValidBuffs(stack)) {
             int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
             list.add("Efficiency: " + buffs[0]);
             list.add("Fortune: " + buffs[1]);
@@ -42,10 +46,6 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
             list.add("Disintegrate: " + buffs[3]);
         }
     }
-
-    public int degree = 0;
-
-    public static final String name = "angelsteelPickaxe";
 
     @Override
     public String getItemName() {
@@ -64,7 +64,7 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if(!world.isRemote){
+        if (!world.isRemote) {
             stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
         }
     }

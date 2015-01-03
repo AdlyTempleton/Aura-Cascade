@@ -20,16 +20,16 @@ public class AuraTilePump extends AuraTilePumpBase {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(worldObj.getTotalWorldTime() % 2400 == 0){
+        if (worldObj.getTotalWorldTime() % 2400 == 0) {
             AuraUtil.keepAlive(this, 3);
         }
-        if(!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 ==2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)){
-            if(pumpPower <= 0){
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            if (pumpPower <= 0) {
                 int range = 3;
                 List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
                 for (EntityItem entityItem : nearbyItems) {
                     ItemStack stack = entityItem.getEntityItem();
-                    if(!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0){
+                    if (!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0) {
                         //Worth noting that the burn time should be 2* longer than a furnace
                         pumpPower = TileEntityFurnace.getItemBurnTime(stack) / 5;
                         pumpSpeed = 200;

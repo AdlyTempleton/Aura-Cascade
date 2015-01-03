@@ -3,7 +3,6 @@ package pixlepix.auracascade.item;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.IAngelsteelTool;
@@ -19,9 +18,12 @@ import java.util.List;
  * Created by pixlepix on 12/22/14.
  */
 public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngelsteelTool {
+    public static final String name = "angelsteelAxe";
+    public int degree = 0;
+
     public ItemAngelsteelAxe(Integer i) {
-        super(AngelsteelToolHelper.materials[i.intValue()]);
-        this.degree = i.intValue();
+        super(AngelsteelToolHelper.materials[i]);
+        this.degree = i;
     }
 
     public ItemAngelsteelAxe() {
@@ -30,19 +32,15 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        return AngelsteelToolHelper.getDegreeList(true);
+        return AngelsteelToolHelper.getDegreeList();
     }
-
-    public int degree = 0;
 
     @Override
     public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if(!world.isRemote){
+        if (!world.isRemote) {
             stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
         }
     }
-
-    public static final String name = "angelsteelAxe";
 
     @Override
     public String getItemName() {
@@ -63,7 +61,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
-        if(AngelsteelToolHelper.hasValidBuffs(stack)) {
+        if (AngelsteelToolHelper.hasValidBuffs(stack)) {
             int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
             list.add("Efficiency: " + buffs[0]);
             list.add("Fortune: " + buffs[1]);

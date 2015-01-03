@@ -1,18 +1,12 @@
 package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.shader.TesselatorVertexState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
 
@@ -24,11 +18,11 @@ public class RenderPedestal extends TileEntitySpecialRenderer {
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f) {
         RenderBlocks.getInstance().blockAccess = tileEntity.getWorldObj();
-        RenderBlocks.getInstance().renderBlockAllFaces(tileEntity.blockType, (int)x, (int)y, (int)z);
+        RenderBlocks.getInstance().renderBlockAllFaces(tileEntity.blockType, (int) x, (int) y, (int) z);
 
         AuraTilePedestal pedestal = (AuraTilePedestal) tileEntity;
-        if(pedestal.itemStack != null) {
-            if(pedestal.entityItem == null || !ItemStack.areItemStacksEqual(pedestal.entityItem.getEntityItem(), pedestal.itemStack) ) {
+        if (pedestal.itemStack != null) {
+            if (pedestal.entityItem == null || !ItemStack.areItemStacksEqual(pedestal.entityItem.getEntityItem(), pedestal.itemStack)) {
                 pedestal.entityItem = new EntityItem(tileEntity.getWorldObj(), x, y, z, ((AuraTilePedestal) tileEntity).itemStack);
             }
             EntityItem entityItem = pedestal.entityItem;
@@ -39,7 +33,7 @@ public class RenderPedestal extends TileEntitySpecialRenderer {
             GL11.glPushMatrix();
             GL11.glEnable(GL11.GL_LIGHTING);
 
-            pedestal.frames ++;
+            pedestal.frames++;
             //This parameter is never used ._.
             Minecraft.getMinecraft().entityRenderer.disableLightmap(0D);
 

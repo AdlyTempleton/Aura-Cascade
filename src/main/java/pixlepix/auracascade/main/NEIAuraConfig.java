@@ -6,7 +6,7 @@ import codechicken.nei.api.IConfigureNEI;
 /**
  * Created by pixlepix on 12/26/14.
  */
-public class NEIAuraConfig implements IConfigureNEI{
+public class NEIAuraConfig implements IConfigureNEI {
 
 
     @Override

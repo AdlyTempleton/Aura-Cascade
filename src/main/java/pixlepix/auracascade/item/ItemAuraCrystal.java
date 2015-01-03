@@ -13,8 +13,10 @@ import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.registry.*;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,12 @@ import java.util.List;
 public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     public static final String name = "AuraCrystal";
+    private IIcon[] icons;
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if(te instanceof AuraTile){
+        if (te instanceof AuraTile) {
             stack.stackSize--;
             ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100));
             return true;
@@ -37,13 +40,11 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
         return false;
     }
 
-    private IIcon[] icons;
-
     @Override
     public void registerIcons(IIconRegister iconRegister) {
         icons = new IIcon[EnumAura.values().length];
-        for(int i=0; i<EnumAura.values().length;i++){
-            icons[i] = iconRegister.registerIcon("aura:"+EnumAura.values()[i].name.toLowerCase()+"Crystal");
+        for (int i = 0; i < EnumAura.values().length; i++) {
+            icons[i] = iconRegister.registerIcon("aura:" + EnumAura.values()[i].name.toLowerCase() + "Crystal");
         }
     }
 
@@ -54,7 +55,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + " " +EnumAura.values()[stack.getItemDamage()].name;
+        return super.getItemStackDisplayName(stack) + " " + EnumAura.values()[stack.getItemDamage()].name;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     @Override
     public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
-        for(int i=0; i<EnumAura.values().length; i++) {
+        for (int i = 0; i < EnumAura.values().length; i++) {
             list.add(new ItemStack(item, 1, i));
         }
     }

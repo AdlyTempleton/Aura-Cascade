@@ -18,7 +18,7 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if(id == 0) {
+        if (id == 0) {
             GuiLexicon lex = GuiLexicon.currentOpenLexicon;
             GuiLexicon.stackUsed = player.getCurrentEquippedItem();
             if (GuiLexicon.stackUsed == null || !(GuiLexicon.stackUsed.getItem() instanceof ItemLexicon))

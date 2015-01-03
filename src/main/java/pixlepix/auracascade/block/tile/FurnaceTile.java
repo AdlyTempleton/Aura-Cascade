@@ -41,7 +41,6 @@ public class FurnaceTile extends ConsumerTile {
     }
 
 
-
     @Override
     public void onUsePower() {
         int range = 3;

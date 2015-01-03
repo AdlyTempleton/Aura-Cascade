@@ -1,10 +1,7 @@
 package pixlepix.auracascade.item;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,7 +9,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -23,6 +19,8 @@ import java.util.List;
  * Created by pixlepix on 12/21/14.
  */
 public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
+    public static final String name = "ingotAngelSteel";
+
     @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
@@ -30,7 +28,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack).replace("%n", StatCollector.translateToLocal(stack.getItemDamage()+".aurasteel.name"));
+        return super.getItemStackDisplayName(stack).replace("%n", StatCollector.translateToLocal(stack.getItemDamage() + ".aurasteel.name"));
     }
 
     @Override
@@ -82,38 +80,35 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
         return false;
     }
 
+    @Override
+    public String getItemName() {
+        return name;
+    }
 
-        public static final String name = "ingotAngelSteel";
+    @Override
+    public boolean shouldRegister() {
+        return true;
+    }
 
-        @Override
-        public String getItemName() {
-            return name;
-        }
+    @Override
+    public boolean shouldDisplayInTab() {
+        return true;
+    }
 
-        @Override
-        public boolean shouldRegister() {
-            return true;
-        }
+    @Override
+    public ThaumicTinkererRecipe getRecipeItem() {
+        return null;
+    }
 
-        @Override
-        public boolean shouldDisplayInTab() {
-            return true;
-        }
+    @Override
+    public boolean getHasSubtypes() {
+        return true;
+    }
 
-        @Override
-        public ThaumicTinkererRecipe getRecipeItem() {
-            return null;
-        }
-
-        @Override
-        public boolean getHasSubtypes() {
-            return true;
-        }
-
-        @Override
-        public void getSubItems(Item item, CreativeTabs tab, List list) {
-            for(int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++){
-                list.add(new ItemStack(item, 1, i));
-            }
+    @Override
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
+            list.add(new ItemStack(item, 1, i));
         }
     }
+}

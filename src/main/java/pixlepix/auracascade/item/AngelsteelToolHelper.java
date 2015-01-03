@@ -14,11 +14,13 @@ import java.util.Random;
 public class AngelsteelToolHelper {
 
     public static final int MAX_DEGREE = 11;
+    public static final String NBT_BUFF_ARRAY_NAME = "angelbuffs";
+    public static final Item.ToolMaterial[] materials = new Item.ToolMaterial[MAX_DEGREE];
 
-    public static ArrayList<Object> getDegreeList(boolean execludeZero){
+    public static ArrayList<Object> getDegreeList() {
         ArrayList<Object> integers = new ArrayList<Object>();
-        for(int i = (execludeZero ? 1 : 0) ; i < MAX_DEGREE; i++){
-            integers.add(new Integer(i));
+        for (int i = 1; i < MAX_DEGREE; i++) {
+            integers.add(i);
         }
         return integers;
     }
@@ -29,45 +31,40 @@ public class AngelsteelToolHelper {
     // [1]: Fortune
     // [2]: Shatter
     // [3]: Disintegrate
-    public static int[] getRandomBuffSet(int lvl){
+    public static int[] getRandomBuffSet(int lvl) {
         int[] result = new int[4];
         Random rand = new Random();
-        for(int i=0; i<lvl * 2; i++){
+        for (int i = 0; i < lvl * 2; i++) {
             result[rand.nextInt(4)]++;
         }
         return result;
     }
 
-    public static final String NBT_BUFF_ARRAY_NAME = "angelbuffs";
-
-    public static void writeToNBT(NBTTagCompound nbtTagCompound, int[] buffs){
+    public static void writeToNBT(NBTTagCompound nbtTagCompound, int[] buffs) {
         nbtTagCompound.setIntArray(NBT_BUFF_ARRAY_NAME, buffs);
     }
 
-    public static int[] readFromNBT(NBTTagCompound nbtTagCompound){
+    public static int[] readFromNBT(NBTTagCompound nbtTagCompound) {
         return nbtTagCompound.getIntArray(NBT_BUFF_ARRAY_NAME);
     }
 
-    public static boolean hasValidBuffs(ItemStack stack){
+    public static boolean hasValidBuffs(ItemStack stack) {
         return stack.stackTagCompound != null && stack.stackTagCompound.hasKey(NBT_BUFF_ARRAY_NAME);
     }
 
-    public static NBTTagCompound getRandomBuffCompound(int lvl){
+    public static NBTTagCompound getRandomBuffCompound(int lvl) {
         NBTTagCompound compound = new NBTTagCompound();
         writeToNBT(compound, getRandomBuffSet(lvl));
         return compound;
     }
 
-    public static boolean isAngelsteelTool(Item item){
+    public static boolean isAngelsteelTool(Item item) {
         return item instanceof ItemAngelsteelAxe || item instanceof ItemAngelsteelShovel || item instanceof ItemAngelsteelPickaxe;
     }
 
+    public static void initMaterials() {
 
-    public static final Item.ToolMaterial[] materials = new Item.ToolMaterial[MAX_DEGREE];
-
-    public static void initMaterials(){
-
-        for(int i=0; i<MAX_DEGREE; i++){
+        for (int i = 0; i < MAX_DEGREE; i++) {
             materials[i] = EnumHelper.addToolMaterial("ANGELSTEEL" + i, 4, -1, (float) (8F * Math.pow(1.15, i)), (float) (5F * Math.pow(1.1, i)), 40);
         }
     }

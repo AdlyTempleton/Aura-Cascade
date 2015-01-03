@@ -1,18 +1,15 @@
 package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.entity.EntityFairy;
-import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.item.ItemFairyCharm;
 import pixlepix.auracascade.registry.BlockRegistry;
 
@@ -21,7 +18,7 @@ import pixlepix.auracascade.registry.BlockRegistry;
  */
 public class RenderEntityFairy extends Render {
 
-    RenderItem renderItem = new RenderItem(){
+    RenderItem renderItem = new RenderItem() {
         @Override
         public boolean shouldBob() {
             return false;
@@ -34,11 +31,10 @@ public class RenderEntityFairy extends Render {
 
         renderItem.setRenderManager(RenderManager.instance);
 
-        EntityItem entityItem = ((EntityFairy)entity).entityItemRender;
+        EntityItem entityItem = ((EntityFairy) entity).entityItemRender;
         entityItem.age = 0;
         entityItem.velocityChanged = true;
         entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
-
 
 
         GL11.glPushMatrix();
@@ -75,7 +71,6 @@ public class RenderEntityFairy extends Render {
             GL11.glPopMatrix();
             */
     }
-
 
 
     @Override

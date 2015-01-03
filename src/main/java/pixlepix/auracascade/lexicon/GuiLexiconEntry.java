@@ -2,11 +2,11 @@
  * This class was created by <Vazkii>. It's distributed as
  * part of the Botania Mod. Get the Source Code in github:
  * https://github.com/Vazkii/Botania
- * 
+ *
  * Botania is Open Source and distributed under a
  * Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License
  * (http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_GB)
- * 
+ *
  * File Created @ [Jan 14, 2014, 6:47:06 PM (GMT)]
  */
 package pixlepix.auracascade.lexicon;
@@ -25,256 +25,255 @@ import java.util.List;
 
 public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IParented {
 
-	public int page = 0;
-	LexiconEntry entry;
-	GuiScreen parent;
-	String title;
-	String subtitle;
+    public int page = 0;
+    LexiconEntry entry;
+    GuiScreen parent;
+    String title;
+    String subtitle;
 
-	GuiButton leftButton, rightButton, backButton, shareButton;
+    GuiButton leftButton, rightButton, backButton, shareButton;
+    int fx = 0;
+    boolean swiped = false;
 
-	public GuiLexiconEntry(LexiconEntry entry, GuiScreen parent) {
-		this.entry = entry;
-		this.parent = parent;
+    public GuiLexiconEntry(LexiconEntry entry, GuiScreen parent) {
+        this.entry = entry;
+        this.parent = parent;
 
-		title = StatCollector.translateToLocal(entry.getUnlocalizedName());
-		if(entry instanceof IAddonEntry)
-			subtitle = StatCollector.translateToLocal(((IAddonEntry) entry).getSubtitle());
-		else subtitle = null;
-	}
+        title = StatCollector.translateToLocal(entry.getUnlocalizedName());
+        if (entry instanceof IAddonEntry)
+            subtitle = StatCollector.translateToLocal(((IAddonEntry) entry).getSubtitle());
+        else subtitle = null;
+    }
 
-	@Override
-	public void initGui() {
-		super.initGui();
+    @Override
+    public void initGui() {
+        super.initGui();
 
-		buttonList.add(backButton = new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8, top + guiHeight + 2));
-		buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight - 10, false));
-		buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18, top + guiHeight - 10, true));
+        buttonList.add(backButton = new GuiButtonBackWithShift(0, left + guiWidth / 2 - 8, top + guiHeight + 2));
+        buttonList.add(leftButton = new GuiButtonPage(1, left, top + guiHeight - 10, false));
+        buttonList.add(rightButton = new GuiButtonPage(2, left + guiWidth - 18, top + guiHeight - 10, true));
 
-		LexiconPage page = entry.pages.get(this.page);
-		page.onOpened(this);
-		updatePageButtons();
-	}
+        LexiconPage page = entry.pages.get(this.page);
+        page.onOpened(this);
+        updatePageButtons();
+    }
 
-	@Override
-	public LexiconEntry getEntry() {
-		return entry;
-	}
+    @Override
+    public LexiconEntry getEntry() {
+        return entry;
+    }
 
-	@Override
-	public int getPageOn() {
-		return page;
-	}
+    @Override
+    public int getPageOn() {
+        return page;
+    }
 
-	@Override
-	void drawHeader() {
-		// NO-OP
-	}
+    @Override
+    void drawHeader() {
+        // NO-OP
+    }
 
-	@Override
-	String getTitle() {
-		return String.format("%s " + EnumChatFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
-	}
+    @Override
+    String getTitle() {
+        return String.format("%s " + EnumChatFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
+    }
 
-	@Override
-	String getSubtitle() {
-		return subtitle;
-	}
+    @Override
+    String getSubtitle() {
+        return subtitle;
+    }
 
-	@Override
-	boolean isCategoryIndex() {
-		return false;
-	}
+    @Override
+    boolean isCategoryIndex() {
+        return false;
+    }
 
-	@Override
-	protected void actionPerformed(GuiButton par1GuiButton) {
-		LexiconPage currentPage = entry.pages.get(page);
-		LexiconPage newPage;
+    @Override
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        LexiconPage currentPage = entry.pages.get(page);
+        LexiconPage newPage;
 
-		if(par1GuiButton.id >= BOOKMARK_START)
-			handleBookmark(par1GuiButton);
-		else
-			switch(par1GuiButton.id) {
-			case 0 :
-				currentPage.onClosed(this);
-				mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiLexicon() : parent);
-				ClientTickHandler.notifyPageChange();
-				break;
-			case 1 :
-				currentPage.onClosed(this);
-				page--;
-				newPage = entry.pages.get(page);
-				newPage.onOpened(this);
+        if (par1GuiButton.id >= BOOKMARK_START)
+            handleBookmark(par1GuiButton);
+        else
+            switch (par1GuiButton.id) {
+                case 0:
+                    currentPage.onClosed(this);
+                    mc.displayGuiScreen(GuiScreen.isShiftKeyDown() ? new GuiLexicon() : parent);
+                    ClientTickHandler.notifyPageChange();
+                    break;
+                case 1:
+                    currentPage.onClosed(this);
+                    page--;
+                    newPage = entry.pages.get(page);
+                    newPage.onOpened(this);
 
-				ClientTickHandler.notifyPageChange();
-				break;
-			case 2 :
-				currentPage.onClosed(this);
-				page++;
-				newPage = entry.pages.get(page);
-				newPage.onOpened(this);
+                    ClientTickHandler.notifyPageChange();
+                    break;
+                case 2:
+                    currentPage.onClosed(this);
+                    page++;
+                    newPage = entry.pages.get(page);
+                    newPage.onOpened(this);
 
-				ClientTickHandler.notifyPageChange();
-				break;
-			case 3 :
-				Minecraft mc = Minecraft.getMinecraft();
-				String cmd = "/botania-share " + entry.unlocalizedName;
+                    ClientTickHandler.notifyPageChange();
+                    break;
+                case 3:
+                    Minecraft mc = Minecraft.getMinecraft();
+                    String cmd = "/botania-share " + entry.unlocalizedName;
 
-				mc.ingameGUI.getChatGUI().addToSentMessages(cmd);
-				mc.thePlayer.sendChatMessage(cmd);
-				break;
-			}
+                    mc.ingameGUI.getChatGUI().addToSentMessages(cmd);
+                    mc.thePlayer.sendChatMessage(cmd);
+                    break;
+            }
 
-		updatePageButtons();
-		currentPage.onActionPerformed(this, par1GuiButton);
-	}
+        updatePageButtons();
+        currentPage.onActionPerformed(this, par1GuiButton);
+    }
 
-	public void updatePageButtons() {
-		leftButton.enabled = page != 0;
-		rightButton.enabled = page + 1 < entry.pages.size();
-	}
+    public void updatePageButtons() {
+        leftButton.enabled = page != 0;
+        rightButton.enabled = page + 1 < entry.pages.size();
+    }
 
-	@Override
-	public void drawScreen(int par1, int par2, float par3) {
-		super.drawScreen(par1, par2, par3);
+    @Override
+    public void drawScreen(int par1, int par2, float par3) {
+        super.drawScreen(par1, par2, par3);
 
-		LexiconPage page = entry.pages.get(this.page);
-		page.renderScreen(this, par1, par2);
-	}
+        LexiconPage page = entry.pages.get(this.page);
+        page.renderScreen(this, par1, par2);
+    }
 
-	@Override
-	public void updateScreen() {
-		LexiconPage page = entry.pages.get(this.page);
-		page.updateScreen(this);
-	}
+    @Override
+    public void updateScreen() {
+        LexiconPage page = entry.pages.get(this.page);
+        page.updateScreen(this);
+    }
 
-	@Override
-	public int getLeft() {
-		return left;
-	}
+    @Override
+    public int getLeft() {
+        return left;
+    }
 
-	@Override
-	public int getTop() {
-		return top;
-	}
+    @Override
+    public int getTop() {
+        return top;
+    }
 
-	@Override
-	public int getWidth() {
-		return guiWidth;
-	}
+    @Override
+    public int getWidth() {
+        return guiWidth;
+    }
 
-	@Override
-	public int getHeight() {
-		return guiHeight;
-	}
+    @Override
+    public int getHeight() {
+        return guiHeight;
+    }
 
-	@Override
-	public float getZLevel() {
-		return zLevel;
-	}
+    @Override
+    public float getZLevel() {
+        return zLevel;
+    }
 
-	@Override
-	public void setParent(GuiLexicon gui) {
-		parent = gui;
-	}
+    @Override
+    public void setParent(GuiLexicon gui) {
+        parent = gui;
+    }
 
-	int fx = 0;
-	boolean swiped = false;
+    @Override
+    protected void mouseClickMove(int x, int y, int button, long time) {
+        if (button == 0 && Math.abs(x - fx) > 100 && mc.gameSettings.touchscreen && !swiped) {
+            double swipe = (x - fx) / Math.max(1, (double) time);
+            if (swipe < 0.5) {
+                nextPage();
+                swiped = true;
+            } else if (swipe > 0.5) {
+                prevPage();
+                swiped = true;
+            }
+        }
+    }
 
-	@Override
-	protected void mouseClickMove(int x, int y, int button, long time) {
-		if(button == 0 && Math.abs(x - fx) > 100 && mc.gameSettings.touchscreen && !swiped) {
-			double swipe = (x - fx) / Math.max(1, (double) time);
-			if(swipe < 0.5) {
-				nextPage();
-				swiped = true;
-			} else if(swipe > 0.5) {
-				prevPage();
-				swiped = true;
-			}
-		}
-	}
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+        super.mouseClicked(par1, par2, par3);
 
-	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
-		super.mouseClicked(par1, par2, par3);
+        fx = par1;
+        if (par3 == 1)
+            back();
+    }
 
-		fx = par1;
-		if(par3 == 1)
-			back();
-	}
+    @Override
+    public void handleMouseInput() {
+        super.handleMouseInput();
 
-	@Override
-	public void handleMouseInput() {
-		super.handleMouseInput();
+        if (Mouse.getEventButton() == 0)
+            swiped = false;
 
-		if(Mouse.getEventButton() == 0)
-			swiped = false;
+        int w = Mouse.getEventDWheel();
+        if (w < 0)
+            nextPage();
+        else if (w > 0)
+            prevPage();
+    }
 
-		int w = Mouse.getEventDWheel();
-		if(w < 0)
-			nextPage();
-		else if(w > 0)
-			prevPage();
-	}
+    @Override
+    protected void keyTyped(char par1, int par2) {
+        LexiconPage page = entry.pages.get(this.page);
+        page.onKeyPressed(par1, par2);
 
-	@Override
-	protected void keyTyped(char par1, int par2) {
-		LexiconPage page = entry.pages.get(this.page);
-		page.onKeyPressed(par1, par2);
+        if (par2 == 203 || par2 == 200 || par2 == 201) // Left, Up, Page Up
+            prevPage();
+        else if (par2 == 205 || par2 == 208 || par2 == 209) // Right, Down Page Down
+            nextPage();
+        else if (par2 == 14) // Backspace
+            back();
+        else if (par2 == 199) { // Home
+            mc.displayGuiScreen(new GuiLexicon());
+            ClientTickHandler.notifyPageChange();
+        }
 
-		if(par2 == 203 || par2 == 200 || par2 == 201) // Left, Up, Page Up
-			prevPage();
-		else if(par2 == 205 || par2 == 208 || par2 == 209) // Right, Down Page Down
-			nextPage();
-		else if(par2 == 14) // Backspace
-			back();
-		else if(par2 == 199) { // Home
-			mc.displayGuiScreen(new GuiLexicon());
-			ClientTickHandler.notifyPageChange();
-		}
+        super.keyTyped(par1, par2);
+    }
 
-		super.keyTyped(par1, par2);
-	}
+    void back() {
+        if (backButton.enabled) {
+            actionPerformed(backButton);
+            backButton.func_146113_a(mc.getSoundHandler());
+        }
+    }
 
-	void back() {
-		if(backButton.enabled) {
-			actionPerformed(backButton);
-			backButton.func_146113_a(mc.getSoundHandler());
-		}
-	}
+    void nextPage() {
+        if (rightButton.enabled) {
+            actionPerformed(rightButton);
+            rightButton.func_146113_a(mc.getSoundHandler());
+        }
+    }
 
-	void nextPage() {
-		if(rightButton.enabled) {
-			actionPerformed(rightButton);
-			rightButton.func_146113_a(mc.getSoundHandler());
-		}
-	}
+    void prevPage() {
+        if (leftButton.enabled) {
+            actionPerformed(leftButton);
+            leftButton.func_146113_a(mc.getSoundHandler());
+        }
+    }
 
-	void prevPage() {
-		if(leftButton.enabled) {
-			actionPerformed(leftButton);
-			leftButton.func_146113_a(mc.getSoundHandler());
-		}
-	}
+    @Override
+    public List<GuiButton> getButtonList() {
+        return buttonList;
+    }
 
-	@Override
-	public List<GuiButton> getButtonList() {
-		return buttonList;
-	}
+    @Override
+    public float getElapsedTicks() {
+        return lastTime;
+    }
 
-	@Override
-	public float getElapsedTicks() {
-		return lastTime;
-	}
+    @Override
+    public float getPartialTicks() {
+        return partialTicks;
+    }
 
-	@Override
-	public float getPartialTicks() {
-		return partialTicks;
-	}
-
-	@Override
-	public float getTickDelta() {
-		return timeDelta;
-	}
+    @Override
+    public float getTickDelta() {
+        return timeDelta;
+    }
 }

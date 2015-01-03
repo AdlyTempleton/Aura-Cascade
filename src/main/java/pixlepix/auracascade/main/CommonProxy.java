@@ -7,7 +7,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
@@ -26,12 +25,13 @@ import pixlepix.auracascade.network.PacketFairyUpdate;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
 
-public class CommonProxy{
+public class CommonProxy {
 
+    public static EventHandler eventHandler;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
 
-    public void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event) {
         ModCreativeTab.INSTANCE = new ModCreativeTab();
         AngelsteelToolHelper.initMaterials();
         registry = new BlockRegistry();
@@ -46,21 +46,19 @@ public class CommonProxy{
 
     }
 
-
     public void setEntryToOpen(LexiconEntry entry) {
 
     }
 
-    public static EventHandler eventHandler;
-
-    public World getWorld(){
-        return null;
-    }
-    public EntityPlayer getPlayer(){
+    public World getWorld() {
         return null;
     }
 
-    public void init(FMLInitializationEvent event){
+    public EntityPlayer getPlayer() {
+        return null;
+    }
+
+    public void init(FMLInitializationEvent event) {
         registry.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(AuraCascade.instance, new GuiHandler());
@@ -71,7 +69,8 @@ public class CommonProxy{
         FMLCommonHandler.instance().bus().register(eventHandler);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
     }
-    public void postInit(FMLPostInitializationEvent event){
+
+    public void postInit(FMLPostInitializationEvent event) {
         registry.postInit();
         LexiconData.init();
         LexiconData.postInit();
@@ -81,7 +80,7 @@ public class CommonProxy{
         return null;
     }
 
-    public void addEffectBypassingLimit(EntityFX entityFX){
+    public void addEffectBypassingLimit(EntityFX entityFX) {
 
     }
 }

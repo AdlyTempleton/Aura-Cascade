@@ -16,6 +16,7 @@ import pixlepix.auracascade.main.AuraUtil;
 public abstract class ConsumerTile extends TileEntity {
 
     public int storedPower;
+    public int progress;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -25,9 +26,8 @@ public abstract class ConsumerTile extends TileEntity {
     }
 
     public abstract int getMaxProgress();
-    public abstract int getPowerPerProgress();
 
-    public int progress;
+    public abstract int getPowerPerProgress();
 
     public void readCustomNBT(NBTTagCompound nbt) {
         progress = nbt.getInteger("progress");
@@ -61,16 +61,16 @@ public abstract class ConsumerTile extends TileEntity {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if(!worldObj.isRemote){
-            if(worldObj.getTotalWorldTime() % 20 == 18){
+        if (!worldObj.isRemote) {
+            if (worldObj.getTotalWorldTime() % 20 == 18) {
                 storedPower *= .5;
             }
             //Drain energy from aura Nodes
-            for(ForgeDirection direction:ForgeDirection.VALID_DIRECTIONS){
-                TileEntity tileEntity = worldObj.getTileEntity(xCoord+direction.offsetX, yCoord+direction.offsetY, zCoord+direction.offsetZ);
-                if(tileEntity instanceof AuraTile){
+            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
-                    if(auraTile.energy > 0) {
+                    if (auraTile.energy > 0) {
                         auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
                         storedPower += auraTile.energy;
                         auraTile.energy = 0;
@@ -78,18 +78,18 @@ public abstract class ConsumerTile extends TileEntity {
                 }
             }
 
-            if(worldObj.getTotalWorldTime() % 2400 == 0){
+            if (worldObj.getTotalWorldTime() % 2400 == 0) {
                 AuraUtil.keepAlive(this, 3);
             }
 
             int nextBoostCost = getPowerPerProgress();
-            while (true){
-                if(progress > getMaxProgress()) {
+            while (true) {
+                if (progress > getMaxProgress()) {
                     progress = 0;
                     onUsePower();
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
                 }
-                if(storedPower < nextBoostCost){
+                if (storedPower < nextBoostCost) {
                     break;
                 }
                 progress += 1;

@@ -18,6 +18,8 @@ import java.util.Random;
  */
 public class FairyTorch extends Block implements ITTinkererBlock {
 
+    public final String name = "fairyTorch";
+
     public FairyTorch() {
         super(Material.glass);
         setTickRandomly(true);
@@ -30,7 +32,6 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
         return true;
     }
-
 
     @Override
     public boolean isOpaqueCube() {
@@ -55,7 +56,7 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
         super.updateTick(world, x, y, z, rand);
-        if(!world.isRemote){
+        if (!world.isRemote) {
             world.setBlockToAir(x, y, z);
         }
     }
@@ -64,8 +65,6 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     public ArrayList<Object> getSpecialParameters() {
         return null;
     }
-
-    public final String name = "fairyTorch";
 
     @Override
     public String getBlockName() {

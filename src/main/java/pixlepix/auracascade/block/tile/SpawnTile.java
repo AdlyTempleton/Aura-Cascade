@@ -26,10 +26,10 @@ public class SpawnTile extends ConsumerTile {
     }
 
     @Override
-    public void onUsePower(){
-        BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer)worldObj).spawnRandomCreature(EnumCreatureType.monster, xCoord, yCoord, zCoord);
+    public void onUsePower() {
+        BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer) worldObj).spawnRandomCreature(EnumCreatureType.monster, xCoord, yCoord, zCoord);
         try {
-            EntityLiving entity = (EntityLiving)spawnListEntry.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {worldObj});
+            EntityLiving entity = (EntityLiving) spawnListEntry.entityClass.getConstructor(new Class[]{World.class}).newInstance(worldObj);
             entity.setPosition(xCoord + .5, yCoord + 2, zCoord + .5);
             worldObj.spawnEntityInWorld(entity);
             entity.onSpawnWithEgg(null);

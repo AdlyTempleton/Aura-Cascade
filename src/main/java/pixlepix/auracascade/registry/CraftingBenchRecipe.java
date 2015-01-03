@@ -8,6 +8,7 @@ public class CraftingBenchRecipe extends ThaumicTinkererRecipe {
     private final ItemStack output;
     private final Object[] stuff;
     public IRecipe iRecipe;
+
     public CraftingBenchRecipe(ItemStack output, Object... stuff) {
         this.output = output;
         this.stuff = stuff;

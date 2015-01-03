@@ -22,7 +22,7 @@ public class ClientProxy extends CommonProxy {
 
 
     @Override
-    public World getWorld(){
+    public World getWorld() {
         return Minecraft.getMinecraft().theWorld;
     }
 

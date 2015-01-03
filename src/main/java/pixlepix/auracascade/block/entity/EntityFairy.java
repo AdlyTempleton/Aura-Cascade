@@ -1,12 +1,9 @@
 package pixlepix.auracascade.block.entity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.S3FPacketCustomPayload;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -58,11 +55,11 @@ public class EntityFairy extends Entity {
 
     }
 
-    public double getEffectiveRho(){
+    public double getEffectiveRho() {
         return rho;
     }
 
-    public Entity getOrbitingEntity(){
+    public Entity getOrbitingEntity() {
         return player;
     }
 
@@ -70,7 +67,7 @@ public class EntityFairy extends Entity {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if(player != null) {
+        if (player != null) {
             extinguish();
             phi += dPhi;
             theta += dTheta;
@@ -78,7 +75,7 @@ public class EntityFairy extends Entity {
             phi %= 360;
             theta %= 360;
             if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 400 == 0) {
-                ((WorldServer)worldObj).getEntityTracker().func_151247_a(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
+                ((WorldServer) worldObj).getEntityTracker().func_151247_a(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
             }
 
             double oldX = posX;
@@ -93,16 +90,11 @@ public class EntityFairy extends Entity {
             entityItemRender.setPosition(posX, posY, posZ);
             entityItemRender.setVelocity(oldX, oldY, oldZ);
             setVelocity(0, 0, 0);
-        }else if(worldObj.isRemote){
+        } else if (worldObj.isRemote) {
             AuraCascade.proxy.networkWrapper.sendToServer(new PacketFairyRequestUpdate(this));
-        }else{
+        } else {
             setDead();
         }
-    }
-
-    @Override
-    public void setDead() {
-        super.setDead();
     }
 
     @Override
@@ -125,16 +117,14 @@ public class EntityFairy extends Entity {
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
         nbt.setDouble("phi", phi);
-        nbt.setDouble("dPhi",dPhi);
-        nbt.setDouble("dTheta",dTheta);
-        nbt.setDouble("theta",theta);
-        nbt.setDouble("maxPhi",maxPhi);
-        nbt.setDouble("rho",rho);
+        nbt.setDouble("dPhi", dPhi);
+        nbt.setDouble("dTheta", dTheta);
+        nbt.setDouble("theta", theta);
+        nbt.setDouble("maxPhi", maxPhi);
+        nbt.setDouble("rho", rho);
         nbt.setBoolean("reverseTheta", reverseTheta);
         nbt.setBoolean("reversePhi", reversePhi);
     }
-
-
 
 
 }

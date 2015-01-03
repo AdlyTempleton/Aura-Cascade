@@ -1,9 +1,11 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.EntityAuraFX;
+import net.minecraft.client.particle.EntityCritFX;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntitySpellParticleFX;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.Vec3;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;
 import pixlepix.auracascade.particle.ParticleSphere;
@@ -17,17 +19,15 @@ public class ParticleEffects {
     public static Minecraft minecraft = Minecraft.getMinecraft();
 
 
-    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ){
+    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ) {
         return spawnParticle(particleName, posX, posY, posZ, motX, motY, motZ, 0, 0, 0);
     }
 
-    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b){
+    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b) {
 
-        if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null)
-        {
+        if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null) {
             int var14 = minecraft.gameSettings.particleSetting;
-            if (var14 == 1 && minecraft.theWorld.rand.nextInt(3) == 0)
-            {
+            if (var14 == 1 && minecraft.theWorld.rand.nextInt(3) == 0) {
                 var14 = 2;
             }
             double var15 = minecraft.renderViewEntity.posX - posX;
@@ -37,8 +37,7 @@ public class ParticleEffects {
             double var22 = 16.0D;
             if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22) {
                 return null;
-            }
-            else {
+            } else {
                 if (particleName.equals("fire")) {
                     entityfx = new ParticleSphere(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                 }
@@ -48,25 +47,25 @@ public class ParticleEffects {
                 }
                 if (particleName.equals("happyVillager")) {
                     entityfx = new EntityAuraFX(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
-                    ((EntityFX) entityfx).setParticleTextureIndex(82);
-                    ((EntityFX) entityfx).setRBGColorF(1.0F, 1.0F, 1.0F);
+                    entityfx.setParticleTextureIndex(82);
+                    entityfx.setRBGColorF(1.0F, 1.0F, 1.0F);
                 }
                 if (particleName.equals("magicCrit")) {
                     entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
-                    ((EntityFX) entityfx).setRBGColorF(((EntityFX) entityfx).getRedColorF() * 0.3F, ((EntityFX) entityfx).getGreenColorF() * 0.8F, ((EntityFX) entityfx).getBlueColorF());
-                    ((EntityFX) entityfx).nextTextureIndexX();
+                    entityfx.setRBGColorF(entityfx.getRedColorF() * 0.3F, entityfx.getGreenColorF() * 0.8F, entityfx.getBlueColorF());
+                    entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("crit")) {
                     entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
                     if (r != 0 || g != 0 || b != 0) {
-                        ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
+                        entityfx.setRBGColorF((float) r, (float) g, (float) b);
                     }
                 }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);
 
                     if (r != 0 || g != 0 || b != 0) {
-                        ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
+                        entityfx.setRBGColorF((float) r, (float) g, (float) b);
                     }
 
                 }

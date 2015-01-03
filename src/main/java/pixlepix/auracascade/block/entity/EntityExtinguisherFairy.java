@@ -3,8 +3,6 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 /**
  * Created by pixlepix on 12/17/14.
  */
@@ -16,12 +14,12 @@ public class EntityExtinguisherFairy extends EntityFairy {
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
-        if(!worldObj.isRemote){
-            if(player.isBurning()){
+        if (!worldObj.isRemote) {
+            if (player.isBurning()) {
                 player.extinguish();
             }
-            if(worldObj.getBlock((int)Math.floor(posX), (int)Math.floor(posY), (int)Math.floor(posZ)).getMaterial() == Material.lava){
-                worldObj.setBlockToAir((int)Math.floor(posX), (int)Math.floor(posY), (int)Math.floor(posZ));
+            if (worldObj.getBlock((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ)).getMaterial() == Material.lava) {
+                worldObj.setBlockToAir((int) Math.floor(posX), (int) Math.floor(posY), (int) Math.floor(posZ));
             }
         }
     }

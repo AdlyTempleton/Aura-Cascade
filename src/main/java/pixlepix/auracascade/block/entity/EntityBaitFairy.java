@@ -6,7 +6,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.world.SpawnerAnimals;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
@@ -24,11 +23,11 @@ public class EntityBaitFairy extends EntityFairy {
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
-        if(!worldObj.isRemote) {
+        if (!worldObj.isRemote) {
             if (new Random().nextInt(3600) == 0) {
                 Random random = new Random();
                 Entity entity = null;
-                switch(random.nextInt(4)){
+                switch (random.nextInt(4)) {
                     case 0:
                         entity = new EntityCow(worldObj);
                         break;
@@ -41,7 +40,7 @@ public class EntityBaitFairy extends EntityFairy {
                         entity = new EntityPig(worldObj);
                         break;
 
-                    case 3:
+                    default:
                         entity = new EntitySheep(worldObj);
                         break;
                 }

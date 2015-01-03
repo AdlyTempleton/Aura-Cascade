@@ -10,13 +10,13 @@ import java.util.List;
  * Created by pixlepix on 11/29/14.
  */
 public class AuraUtil {
-    
-    public static void keepAlive(TileEntity te, int range){
+
+    public static void keepAlive(TileEntity te, int range) {
         List<EntityItem> nearbyItems = te.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(te.xCoord - range, te.yCoord - range, te.zCoord - range, te.xCoord + range, te.yCoord + range, te.zCoord + range));
         for (EntityItem entityItem : nearbyItems) {
             entityItem.lifespan = Integer.MAX_VALUE;
             entityItem.age = 0;
         }
     }
-    
+
 }

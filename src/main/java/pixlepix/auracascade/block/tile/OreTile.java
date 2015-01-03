@@ -17,6 +17,21 @@ import java.util.List;
 public class OreTile extends ConsumerTile {
     public static int MAX_PROGRESS = 10;
     public static int POWER_PER_PROGRESS = 2000;
+
+    public static ItemStack getTripleResult(ItemStack stack) {
+        int[] oreIds = OreDictionary.getOreIDs(stack);
+        for (int id : oreIds) {
+            String oreName = OreDictionary.getOreName(id);
+            if (StringUtils.startsWith(oreName, "ore")) {
+                String dustName = StringUtils.replace(oreName, "ore", "dust");
+                if (OreDictionary.getOres(dustName).size() != 0) {
+                    return OreDictionary.getOres(dustName).get(0);
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getMaxProgress() {
         return MAX_PROGRESS;
@@ -57,19 +72,5 @@ public class OreTile extends ConsumerTile {
                 break;
             }
         }
-    }
-
-    public static ItemStack getTripleResult(ItemStack stack){
-        int[] oreIds = OreDictionary.getOreIDs(stack);
-        for(int id:oreIds){
-            String oreName = OreDictionary.getOreName(id);
-            if(StringUtils.startsWith(oreName, "ore")){
-                String dustName = StringUtils.replace(oreName, "ore", "dust");
-                if(OreDictionary.getOres(dustName).size() != 0) {
-                    return OreDictionary.getOres(dustName).get(0);
-                }
-            }
-        }
-        return null;
     }
 }

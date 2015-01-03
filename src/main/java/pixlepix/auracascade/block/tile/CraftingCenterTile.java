@@ -11,7 +11,6 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
@@ -23,28 +22,28 @@ import java.util.List;
  */
 public class CraftingCenterTile extends TileEntity {
 
-    public static List<ForgeDirection> pedestalRelativeLocations = Arrays.asList(new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST});
+    public static List<ForgeDirection> pedestalRelativeLocations = Arrays.asList(ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST);
 
-    public boolean pedestalsConnected(){
-        for(ForgeDirection direction:pedestalRelativeLocations){
-            if(!(new CoordTuple(this).add(direction).getTile(worldObj) instanceof AuraTilePedestal)){
+    public boolean pedestalsConnected() {
+        for (ForgeDirection direction : pedestalRelativeLocations) {
+            if (!(new CoordTuple(this).add(direction).getTile(worldObj) instanceof AuraTilePedestal)) {
                 return false;
             }
         }
         return true;
     }
 
-    public PylonRecipe getRecipe(){
-        if(!pedestalsConnected()){
+    public PylonRecipe getRecipe() {
+        if (!pedestalsConnected()) {
             return null;
         }
         List<ItemStack> stacks = new ArrayList<ItemStack>();
-        for(ForgeDirection direction:pedestalRelativeLocations){
+        for (ForgeDirection direction : pedestalRelativeLocations) {
             AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(this).add(direction).getTile(worldObj);
             stacks.add(pedestal.itemStack);
         }
-        for(PylonRecipe recipe:PylonRecipeRegistry.recipes){
-            if(recipe.matches(stacks)){
+        for (PylonRecipe recipe : PylonRecipeRegistry.recipes) {
+            if (recipe.matches(stacks)) {
                 return recipe;
             }
         }
@@ -54,24 +53,24 @@ public class CraftingCenterTile extends TileEntity {
 
 
     public void checkRecipeComplete() {
-        PylonRecipe recipe= getRecipe();
-        if(recipe == null){
+        PylonRecipe recipe = getRecipe();
+        if (recipe == null) {
             return;
         }
         boolean valid = true;
-        for(ForgeDirection direction:pedestalRelativeLocations) {
+        for (ForgeDirection direction : pedestalRelativeLocations) {
             AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(this).add(direction).getTile(worldObj);
             AuraQuantity targetAura = recipe.getAuraFromItem(pedestal.itemStack);
-            if(targetAura.getNum() > pedestal.powerReceived){
+            if (targetAura.getNum() > pedestal.powerReceived) {
                 valid = false;
             }
         }
-        if(valid) {
+        if (valid) {
             for (ForgeDirection direction : pedestalRelativeLocations) {
                 AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(this).add(direction).getTile(worldObj);
                 //Particles and sparklez
-                for(ForgeDirection beamDir:ForgeDirection.VALID_DIRECTIONS){
-                    if(beamDir != direction && beamDir != direction.getOpposite()){
+                for (ForgeDirection beamDir : ForgeDirection.VALID_DIRECTIONS) {
+                    if (beamDir != direction && beamDir != direction.getOpposite()) {
                         CoordTuple mid = new CoordTuple(pedestal).add(beamDir).add(direction);
                         EnumAura aura = recipe.getAuraFromItem(pedestal.itemStack).getType();
                         burst(mid, new CoordTuple(pedestal), "happyVillager", aura, 1);
@@ -94,7 +93,7 @@ public class CraftingCenterTile extends TileEntity {
 
     public void burst(CoordTuple origin, CoordTuple target, String particle, EnumAura aura, double composition) {
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(worldObj, origin, target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(origin, target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
     }
 

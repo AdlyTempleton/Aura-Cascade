@@ -21,42 +21,16 @@ import java.util.List;
  * Created by pixlepix on 12/26/14.
  */
 public class PylonRecipeHandler extends TemplateRecipeHandler {
-    public class NEIPylonRecipe extends CachedRecipe {
-
-
-        public NEIPylonRecipe(PylonRecipe recipe) {
-            this.recipe = recipe;
-        }
-
-        public PylonRecipe recipe;
-
-        @Override
-        public PositionedStack getResult() {
-            return new PositionedStack(recipe.result, 80, 70);
-        }
-
-        @Override
-        public List<PositionedStack> getIngredients() {
-            ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
-            for(int i=0; i < 4; i++){
-                ForgeDirection d = CraftingCenterTile.pedestalRelativeLocations.get(i);
-                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 80 + d.offsetX * 35, 70 + d.offsetZ * 35));
-            }
-            return stacks;
-        }
-    }
-
     @Override
     public void drawExtras(int recipe) {
         super.drawExtras(recipe);
-        for(int i=0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             ForgeDirection d = CraftingCenterTile.pedestalRelativeLocations.get(i);
-            PylonRecipe recipeObj = ((NEIPylonRecipe)arecipes.get(recipe)).recipe;
+            PylonRecipe recipeObj = ((NEIPylonRecipe) arecipes.get(recipe)).recipe;
             AuraQuantity quantity = recipeObj.componentList.get(i).auraQuantity;
-            Minecraft.getMinecraft().fontRenderer.drawString("" + quantity.getNum() + "("+ (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 50 + d.offsetX * 50, 85 + d.offsetZ * 35, quantity.getType().color.getHex());
+            Minecraft.getMinecraft().fontRenderer.drawString("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 50 + d.offsetX * 50, 85 + d.offsetZ * 35, quantity.getType().color.getHex());
         }
     }
-
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
@@ -73,9 +47,9 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
             return;
         }
         if ("item".equals(inputId)) {
-            for (PylonRecipe r : PylonRecipeRegistry.recipes){
-                for(PylonRecipeComponent component:r.componentList){
-                    if(Arrays.asList(ingredients).contains(component.itemStack)){
+            for (PylonRecipe r : PylonRecipeRegistry.recipes) {
+                for (PylonRecipeComponent component : r.componentList) {
+                    if (Arrays.asList(ingredients).contains(component.itemStack)) {
                         arecipes.add(new NEIPylonRecipe(r));
                         break;
                     }
@@ -83,7 +57,6 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
             }
         }
     }
-
 
     @Override
     public String getOverlayIdentifier() {
@@ -98,6 +71,31 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
     @Override
     public String getRecipeName() {
         return StatCollector.translateToLocal("vortex.nei.name");
+    }
+
+    public class NEIPylonRecipe extends CachedRecipe {
+
+
+        public PylonRecipe recipe;
+
+        public NEIPylonRecipe(PylonRecipe recipe) {
+            this.recipe = recipe;
+        }
+
+        @Override
+        public PositionedStack getResult() {
+            return new PositionedStack(recipe.result, 80, 70);
+        }
+
+        @Override
+        public List<PositionedStack> getIngredients() {
+            ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
+            for (int i = 0; i < 4; i++) {
+                ForgeDirection d = CraftingCenterTile.pedestalRelativeLocations.get(i);
+                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 80 + d.offsetX * 35, 70 + d.offsetZ * 35));
+            }
+            return stacks;
+        }
     }
 
 

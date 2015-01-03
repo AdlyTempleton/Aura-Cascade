@@ -13,19 +13,13 @@ import java.util.List;
  * Created by pixlepix on 12/7/14.
  */
 public class PylonRecipe extends ThaumicTinkererRecipe {
-    @Override
-    public void registerRecipe() {
-        PylonRecipeRegistry.registerRecipe(this);
-    }
-
     public List<PylonRecipeComponent> componentList = new ArrayList<PylonRecipeComponent>();
     public ItemStack result;
-
-    public PylonRecipe(ItemStack result,  PylonRecipeComponent component){
+    public PylonRecipe(ItemStack result, PylonRecipeComponent component) {
         this(result, component, component, component, component);
     }
 
-    public PylonRecipe(ItemStack result, PylonRecipeComponent component1, PylonRecipeComponent component2, PylonRecipeComponent component3, PylonRecipeComponent component4){
+    public PylonRecipe(ItemStack result, PylonRecipeComponent component1, PylonRecipeComponent component2, PylonRecipeComponent component3, PylonRecipeComponent component4) {
         this.result = result;
         componentList.add(component1);
         componentList.add(component2);
@@ -33,9 +27,14 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
         componentList.add(component4);
     }
 
-    public AuraQuantity getAuraFromItem(ItemStack stack){
-        for(PylonRecipeComponent component:componentList){
-            if(ItemStack.areItemStacksEqual(stack, component.itemStack)){
+    @Override
+    public void registerRecipe() {
+        PylonRecipeRegistry.registerRecipe(this);
+    }
+
+    public AuraQuantity getAuraFromItem(ItemStack stack) {
+        for (PylonRecipeComponent component : componentList) {
+            if (ItemStack.areItemStacksEqual(stack, component.itemStack)) {
                 return component.auraQuantity;
             }
         }
@@ -49,14 +48,12 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
         }
 
         //ItemStack.areItemStacksEqual returns a false positive if itemstacks are null
-        for(ItemStack stack: stacks){
-            if(stack == null){
+        for (ItemStack stack : stacks) {
+            if (stack == null) {
                 return false;
             }
         }
-        Iterator stacksIter = stacks.iterator();
-        while (stacksIter.hasNext()) {
-            ItemStack curStack = (ItemStack) stacksIter.next();
+        for (ItemStack curStack : stacks) {
             Iterator recipeStacksIter = new ArrayList<ItemStack>(recipeStacks).iterator();
 
             boolean found = false;

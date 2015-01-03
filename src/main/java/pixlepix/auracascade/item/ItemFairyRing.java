@@ -18,6 +18,7 @@ import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -29,6 +30,42 @@ import java.util.Random;
  * Created by pixlepix on 12/8/14.
  */
 public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
+    public static final String name = "fairyRing";
+
+    public static void makeFaries(ItemStack ringStack, EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer && !((EntityPlayer) entity).worldObj.isRemote) {
+
+            if (ringStack.stackTagCompound == null) {
+                ringStack.stackTagCompound = new NBTTagCompound();
+            }
+            int[] tagList = ringStack.stackTagCompound.getIntArray("fairyList");
+            for (int i : tagList) {
+                Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
+                EntityFairy fairy = null;
+                try {
+                    fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entity).worldObj);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
+                fairy.player = (EntityPlayer) entity;
+
+                ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
+            }
+
+        }
+    }
+
+    public static void killNearby(EntityLivingBase entityLivingBase) {
+        List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 50, entityLivingBase.posY - 50, entityLivingBase.posZ - 50, entityLivingBase.posX + 50, entityLivingBase.posY + 50, entityLivingBase.posZ + 50));
+        for (EntityFairy fairy : fairies) {
+            if (fairy.player == entityLivingBase) {
+                fairy.setDead();
+
+            }
+        }
+    }
+
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
         return BaubleType.RING;
@@ -49,44 +86,10 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
         makeFaries(ringStack, entityLivingBase);
     }
 
-    public static void makeFaries(ItemStack ringStack, EntityLivingBase entity) {
-        if(entity instanceof EntityPlayer && !((EntityPlayer) entity).worldObj.isRemote) {
-
-            if(ringStack.stackTagCompound == null){
-                ringStack.stackTagCompound = new NBTTagCompound();
-            }
-            int[] tagList = ringStack.stackTagCompound.getIntArray("fairyList");
-            for(int i : tagList){
-                Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
-                EntityFairy fairy = null;
-                try {
-                    fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entity).worldObj);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
-                fairy.player = (EntityPlayer) entity;
-
-                ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
-            }
-
-        }
-    }
-
     @Override
     public void onUnequipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        killNearby(itemStack, entityLivingBase);
+        killNearby(entityLivingBase);
 
-    }
-
-    public static void killNearby(ItemStack itemStack, EntityLivingBase entityLivingBase){
-        List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 50, entityLivingBase.posY - 50, entityLivingBase.posZ - 50, entityLivingBase.posX + 50, entityLivingBase.posY + 50, entityLivingBase.posZ + 50));
-        for (EntityFairy fairy : fairies) {
-            if (fairy.player == entityLivingBase) {
-                fairy.setDead();
-
-            }
-        }
     }
 
     @Override
@@ -103,8 +106,6 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     public ArrayList<Object> getSpecialParameters() {
         return null;
     }
-
-    public static final String name = "fairyRing";
 
     @Override
     public String getItemName() {
@@ -136,12 +137,12 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
-        if(stack.stackTagCompound == null){
+        if (stack.stackTagCompound == null) {
             stack.stackTagCompound = new NBTTagCompound();
         }
         int[] tagList = stack.stackTagCompound.getIntArray("fairyList");
-        list.add(tagList.length+"/15");
-        for(int i : tagList){
+        list.add(tagList.length + "/15");
+        for (int i : tagList) {
             Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
             list.add(ItemFairyCharm.getNameFromFairy(fairyClass));
         }
@@ -149,14 +150,14 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if(stack.stackTagCompound == null){
+        if (stack.stackTagCompound == null) {
             stack.stackTagCompound = new NBTTagCompound();
         }
-        if(!world.isRemote && player.isSneaking()){
+        if (!world.isRemote && player.isSneaking()) {
             int[] fairyCharms = stack.stackTagCompound.getIntArray("fairyList");
             Random random = new Random();
-            for(int i: fairyCharms){
-                EntityItem item = new EntityItem(world, player.posX + random.nextDouble() -.5D, player.posY + random.nextDouble() -.5D, player.posZ + random.nextDouble() -.5D, new ItemStack(AuraCascade.proxy.registry.getFirstItemFromClass(ItemFairyCharm.class), 1, i));
+            for (int i : fairyCharms) {
+                EntityItem item = new EntityItem(world, player.posX + random.nextDouble() - .5D, player.posY + random.nextDouble() - .5D, player.posZ + random.nextDouble() - .5D, new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, i));
                 world.spawnEntityInWorld(item);
             }
             stack.stackTagCompound.setIntArray("fairyList", new int[0]);
