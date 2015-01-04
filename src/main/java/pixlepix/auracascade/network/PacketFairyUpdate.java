@@ -21,6 +21,7 @@ public class PacketFairyUpdate implements IMessage, IMessageHandler<PacketFairyU
     double dPhi;
     double dTheta;
     EntityPlayer player;
+
     public PacketFairyUpdate(EntityFairy fairy) {
         this.fairy = fairy;
     }

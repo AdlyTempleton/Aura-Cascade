@@ -5,7 +5,7 @@ import net.minecraft.nbt.NBTTagList;
 
 import java.util.ArrayList;
 
-public class AuraQuantityList implements Cloneable{
+public class AuraQuantityList implements Cloneable {
 
     public static final String NBT_AURA_TYPE = "auraType";
     public static final String NBT_AURA_NUM = "auraNum";

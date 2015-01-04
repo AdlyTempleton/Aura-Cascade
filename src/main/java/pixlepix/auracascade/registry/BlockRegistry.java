@@ -8,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.ConstantMod;
 
 import java.io.IOException;

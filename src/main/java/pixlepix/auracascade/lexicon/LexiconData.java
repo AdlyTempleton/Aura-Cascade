@@ -12,10 +12,14 @@
 package pixlepix.auracascade.lexicon;
 
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.ConsumerBlock;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
 import pixlepix.auracascade.lexicon.page.PagePylon;
@@ -85,9 +89,21 @@ public final class LexiconData {
 
         //Consumers
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
-        new BLexiconEntry("crafting", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"),
+        new BLexiconEntry("crafting", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
                 new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
-                new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))));
+                new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
+                new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.leather))),
+                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.blaze_powder, 20))),
+                new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.saddle, 1))),
+                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
+                new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.arrow, 8))),
+                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.rail, 32))),
+                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.lapis_block, 1))),
+                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.repeater))),
+                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.comparator))),
+                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
+                new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
+                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
         new BLexiconEntry("ore", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))));
         new BLexiconEntry("loot", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("loot"))));
         new BLexiconEntry("plant", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("plant"))));
