@@ -9,6 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
+import pixlepix.auracascade.registry.ISpecialCreativeSort;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -18,13 +19,14 @@ import java.util.List;
 /**
  * Created by pixlepix on 12/21/14.
  */
-public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
+public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecialCreativeSort {
     public static final String name = "ingotAngelSteel";
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
     }
+
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
@@ -110,5 +112,13 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem {
         for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
             list.add(new ItemStack(item, 1, i));
         }
+    }
+
+    @Override
+    public int compare(ItemStack stack, ItemStack otherStack) {
+        if (otherStack.getItem() instanceof ItemAngelsteelIngot) {
+            return (stack.getItemDamage() - otherStack.getItemDamage());
+        }
+        return stack.getDisplayName().compareToIgnoreCase(otherStack.getDisplayName());
     }
 }
