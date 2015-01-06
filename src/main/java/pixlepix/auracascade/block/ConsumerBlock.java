@@ -93,17 +93,24 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             side = iconRegister.registerIcon("aura:auraFurnace_side");
             front = iconRegister.registerIcon("aura:auraFurnace_front");
         }
+
+        if (name.equals("mob")) {
+            blockIcon = iconRegister.registerIcon("aura:auraMob");
+        }
     }
 
     @Override
     public IIcon getIcon(int side, int meta) {
-        if (side == 1 || side == 0) {
-            return top;
+        if (top != null && this.side != null && front != null) {
+            if (side == 1 || side == 0) {
+                return top;
+            }
+            if (side == meta) {
+                return front;
+            }
+            return this.side;
         }
-        if (side == meta) {
-            return front;
-        }
-        return this.side;
+        return blockIcon;
     }
 
     @Override
