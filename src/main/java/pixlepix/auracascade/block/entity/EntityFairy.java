@@ -42,7 +42,7 @@ public class EntityFairy extends Entity {
 
     @Override
     protected void entityInit() {
-        Random random = new Random();
+        Random random = new Random(this.getPersistentID().hashCode());
         rho = random.nextDouble() + 5;
         phi = random.nextDouble() * 180;
         theta = random.nextDouble() * 360;
@@ -69,12 +69,12 @@ public class EntityFairy extends Entity {
         super.onUpdate();
         if (player != null) {
             extinguish();
-            phi += dPhi;
-            theta += dTheta;
+            phi += (dPhi / 2);
+            theta += (dTheta / 2);
 
             phi %= 360;
             theta %= 360;
-            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 400 == 0) {
+            if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 1000 == 0) {
                 ((WorldServer) worldObj).getEntityTracker().func_151247_a(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
             }
 
