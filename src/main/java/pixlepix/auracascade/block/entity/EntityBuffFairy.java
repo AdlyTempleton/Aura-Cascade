@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 
@@ -30,6 +31,7 @@ public class EntityBuffFairy extends EntityFairy {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 5000 == 0) {
             Random random = new Random();
             player.addPotionEffect(potionEffects[random.nextInt(potionEffects.length)]);
+            AuraUtil.diamondBurst(player, "happyVillager");
         }
     }
 }

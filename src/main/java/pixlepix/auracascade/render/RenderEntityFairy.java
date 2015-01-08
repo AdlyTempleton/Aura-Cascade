@@ -41,7 +41,8 @@ public class RenderEntityFairy extends Render {
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
 
-
+        GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT);
+        GL11.glColor3d(0, 0, 0);
         //This parameter is never used ._.
 
         Minecraft.getMinecraft().entityRenderer.disableLightmap(0D);
@@ -52,6 +53,8 @@ public class RenderEntityFairy extends Render {
         entityItem.age = 0;
         renderItem.doRender(entityItem, x, y, z, 0, 0);
 
+
+        GL11.glPopAttrib();
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
