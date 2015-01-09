@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -27,6 +28,10 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
         return null;
     }
 
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:angelsteel");
+    }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {

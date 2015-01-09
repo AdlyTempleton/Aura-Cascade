@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemPickaxe;
@@ -28,6 +29,11 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
 
     public ItemAngelsteelPickaxe() {
         this(0);
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:angel_pickaxe");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemSpade;
@@ -28,6 +29,11 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
 
     public ItemAngelsteelShovel() {
         this(0);
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:angel_shovel");
     }
 
     @Override

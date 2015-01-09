@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
@@ -25,9 +26,13 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
         super(AngelsteelToolHelper.materials[i]);
         this.degree = i;
     }
-
     public ItemAngelsteelAxe() {
         this(0);
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:angel_axe");
     }
 
     @Override
