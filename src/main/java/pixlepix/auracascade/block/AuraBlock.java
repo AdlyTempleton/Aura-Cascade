@@ -199,6 +199,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
         sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
         botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
+
     }
 
     @Override
