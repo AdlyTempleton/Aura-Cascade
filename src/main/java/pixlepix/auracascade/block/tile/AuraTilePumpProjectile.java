@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.AxisAlignedBB;
+import pixlepix.auracascade.main.Config;
 
 import java.util.List;
 
@@ -16,16 +17,16 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
 
     public void onEntityCollidedWithBlock(Entity entity) {
         if (entity instanceof EntityArrow) {
-            addFuel(20, 1000);
+            addFuel(Config.pumpArrowDuration, Config.pumpArrowSpeed);
             entity.setDead();
         }
 
         if (entity instanceof EntityEgg) {
-            addFuel(90, 100);
+            addFuel(Config.pumpArrowDuration, Config.pumpArrowSpeed);
         }
 
         if (entity instanceof EntitySnowball) {
-            addFuel(10, 400);
+            addFuel(Config.pumpSnowballDuration, Config.pumpSnowballSpeed);
         }
     }
 

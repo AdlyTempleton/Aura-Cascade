@@ -5,6 +5,7 @@ import net.minecraft.block.BlockRedstoneWire;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.main.Config;
 
 /**
  * Created by pixlepix on 12/25/14.
@@ -21,7 +22,7 @@ public class AuraTilePumpRedstone extends AuraTilePumpBase {
                     CoordTuple tuple = new CoordTuple(this).add(direction, i);
                     Block block = tuple.getBlock(worldObj);
                     if (block instanceof BlockRedstoneWire && tuple.getMeta(worldObj) > 0) {
-                        addFuel((int) (10 * Math.pow(1.4, i)), 1500);
+                        addFuel((int) (Config.pumpRedstoneDuration * Math.pow(1.4, i)), Config.pumpRedstoneSpeed);
                         if (!worldObj.isRemote) {
                             for (int j = 0; j < 5; j++) {
                                 AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));

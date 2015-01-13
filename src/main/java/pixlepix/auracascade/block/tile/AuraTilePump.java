@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.AxisAlignedBB;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class AuraTilePump extends AuraTilePumpBase {
                     ItemStack stack = entityItem.getEntityItem();
                     if (!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0) {
                         //Worth noting that the burn time should be 2* longer than a furnace
-                        pumpPower = TileEntityFurnace.getItemBurnTime(stack) / 5;
-                        pumpSpeed = 200;
+                        pumpPower = Config.pumpCoalDuration * TileEntityFurnace.getItemBurnTime(stack) / 5;
+                        pumpSpeed = Config.pumpCoalDuration;
 
                         //Kill the stack
                         if (stack.stackSize == 1) {

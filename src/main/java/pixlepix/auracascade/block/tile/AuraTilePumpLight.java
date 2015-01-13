@@ -6,6 +6,7 @@ import net.minecraft.block.BlockTorch;
 import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.main.Config;
 
 /**
  * Created by pixlepix on 12/25/14.
@@ -36,7 +37,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
             for (CoordTuple tuple : new CoordTuple(this).inRange(5)) {
                 Block block = tuple.getBlock(worldObj);
                 if (block instanceof BlockGlowstone) {
-                    addFuel(180, 750);
+                    addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
                     if (!worldObj.isRemote) {
                         for (int j = 0; j < 5; j++) {
                             AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
@@ -47,7 +48,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
                     break;
                 }
                 if (block instanceof BlockTorch) {
-                    addFuel(30, 750);
+                    addFuel(Config.pumpTorchDuration, Config.pumpTorchSpeed);
                     if (!worldObj.isRemote) {
                         for (int j = 0; j < 5; j++) {
                             AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
