@@ -11,7 +11,7 @@
  */
 package pixlepix.auracascade.lexicon;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class LexiconCategory implements Comparable<LexiconCategory> {
     public final String unlocalizedName;
     public final List<LexiconEntry> entries = new ArrayList<LexiconEntry>();
     private final int sortingId;
-    private ResourceLocation icon;
+    private ItemStack icon;
     private int priority = 5;
 
     /**
@@ -61,11 +61,11 @@ public class LexiconCategory implements Comparable<LexiconCategory> {
         return sortingId;
     }
 
-    public ResourceLocation getIcon() {
+    public ItemStack getIcon() {
         return icon;
     }
 
-    public LexiconCategory setIcon(ResourceLocation icon) {
+    public LexiconCategory setIcon(ItemStack icon) {
         this.icon = icon;
         return this;
     }

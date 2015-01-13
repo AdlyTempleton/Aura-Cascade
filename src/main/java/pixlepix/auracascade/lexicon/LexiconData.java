@@ -46,15 +46,16 @@ public final class LexiconData {
 
     public static void init() {
         //Add categories
-        LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics");
+        LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
-        LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors");
+        LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
+        ;
         CategoryManager.addCategory(categoryAuraColors);
-        LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Aura Nodes");
+        LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Aura Nodes").setIcon(new ItemStack(AuraBlock.getBlockFromName("capacitor")));
         CategoryManager.addCategory(categoryAuraNodes);
-        LexiconCategory categoryConsumers = CategoryManager.categoryConsumers = new LexiconCategory("Consumers");
+        LexiconCategory categoryConsumers = CategoryManager.categoryConsumers = new LexiconCategory("Consumers").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("mob")));
         CategoryManager.addCategory(categoryConsumers);
-        LexiconCategory categoryFairies = CategoryManager.categoryFairies = new LexiconCategory("Fairies");
+        LexiconCategory categoryFairies = CategoryManager.categoryFairies = new LexiconCategory("Fairies").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
         CategoryManager.addCategory(categoryFairies);
 
         // BASICS ENTRIES
