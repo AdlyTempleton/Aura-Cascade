@@ -8,6 +8,8 @@ import net.minecraftforge.common.config.Configuration;
  */
 public class Config {
 
+    public static boolean overrideMaxParticleLimit = true;
+    
     public static int pumpCoalSpeed = 200;
     public static int pumpCoalDuration = 1;
     public static int pumpRedstoneSpeed = 10;
@@ -54,6 +56,8 @@ public class Config {
         pumpArrowSpeed = config.getInt("pumpArrowSpeed", Configuration.CATEGORY_GENERAL, pumpArrowSpeed, 1, Integer.MAX_VALUE, "");
         pumpArrowDuration = config.getInt("pumpArrowDuration", Configuration.CATEGORY_GENERAL, pumpArrowDuration, 1, Integer.MAX_VALUE, "");
 
+        overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
+        
         config.save();
     }
 }
