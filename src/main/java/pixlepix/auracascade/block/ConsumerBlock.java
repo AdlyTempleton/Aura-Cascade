@@ -100,6 +100,15 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         if (name.equals("mob")) {
             blockIcon = iconRegister.registerIcon("aura:auraMob");
         }
+
+        if (name.equals("plant")) {
+            blockIcon = iconRegister.registerIcon("aura:auraGrow");
+            top = iconRegister.registerIcon("aura:auraGrowTop");
+        }
+        if (name.equals("angel")) {
+            blockIcon = iconRegister.registerIcon("aura:auraAngel");
+            top = iconRegister.registerIcon("aura:auraAngelTop");
+        }
     }
 
     @Override
@@ -112,6 +121,12 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return front;
             }
             return this.side;
+        }
+        if (top != null) {
+            if (side == 1 || side == 0) {
+                return top;
+            }
+            return blockIcon;
         }
         return blockIcon;
     }
