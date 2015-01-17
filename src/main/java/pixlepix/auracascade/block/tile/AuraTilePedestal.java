@@ -80,6 +80,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
                 }
             }
         }
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
     @Override
