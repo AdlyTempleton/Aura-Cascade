@@ -99,7 +99,7 @@ public class AuraQuantityList implements Cloneable {
     }
 
     public AuraQuantityList percent(float percentage) {
-        AuraQuantityList quantityList = (AuraQuantityList) this.clone();
+        AuraQuantityList quantityList = new AuraQuantityList();
 
         for (AuraQuantity quantity : this.quantityList) {
             quantityList.quantityList.add(new AuraQuantity(quantity.getType(), (int) (quantity.getNum() * percentage)));

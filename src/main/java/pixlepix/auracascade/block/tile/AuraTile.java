@@ -220,7 +220,7 @@ public class AuraTile extends TileEntity {
                         AuraQuantityList auraToSend = (AuraQuantityList) storage.clone();
                         auraToSend.set(EnumAura.ORANGE_AURA, 0);
                         if (auraToSend.getTotalAura() > 0) {
-                            auraToSend = auraToSend.percent(Math.min(1F, (float) num / (float) storage.getTotalAura()));
+                            auraToSend = auraToSend.percent(Math.min(1F, (float) num / (float) storage.getTotalAura()) - storage.get(EnumAura.ORANGE_AURA));
                             transferAura(tuple, auraToSend, false);
                         }
                     }
