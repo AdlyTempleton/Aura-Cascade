@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
@@ -21,6 +22,8 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
+import pixlepix.auracascade.item.ItemLexicon;
+import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,27 @@ import java.util.Random;
  * Created by pixlepix on 12/16/14.
  */
 public class EventHandler {
+    public static final String BOOK_TAG = "HAS_RECEIVED_AURA_BOOK";
     public ArrayList<EntityScareFairy> scareFairies = new ArrayList<EntityScareFairy>();
+
+    @SubscribeEvent
+    public void onWorldLoad(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+        EntityPlayer player = event.player;
+        if (!player.worldObj.isRemote) {
+            if (!player.getEntityData().hasKey(BOOK_TAG) || !player.getEntityData().getBoolean(BOOK_TAG)) {
+                player.getEntityData().setBoolean(BOOK_TAG, true);
+                player.inventory.addItemStackToInventory(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemLexicon.class)));
+            }
+
+        }
+
+    }
+
+    @SubscribeEvent
+    public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
+        EntityPlayer player = event.player;
+        player.getEntityData().setBoolean(BOOK_TAG, true);
+    }
 
     @SubscribeEvent
     public void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {

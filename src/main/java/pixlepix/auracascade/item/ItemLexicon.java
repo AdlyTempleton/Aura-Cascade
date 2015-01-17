@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -63,6 +64,11 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
     public static void setQueueTicks(ItemStack stack, int ticks) {
         ItemNBTHelper.setInt(stack, TAG_QUEUE_TICKS, ticks);
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:book");
     }
 
     @Override
