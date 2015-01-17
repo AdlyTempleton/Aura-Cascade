@@ -284,7 +284,7 @@ aura.page.fairyFall0=Fairy that reduces fall damage.
 aura.page.fairyFall1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyLight=Lighter Fairy
-aura.page.fairyLight0=Fairy that, it it's dark, places temporary, invisible, light sources.
+aura.page.fairyLight0=Fairy that, when it's dark, places temporary, invisible, light sources.
 aura.page.fairyLight1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyTrain=Training Fairy
