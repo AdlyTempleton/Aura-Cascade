@@ -115,7 +115,9 @@ public class AuraTile extends TileEntity {
                 if (!((AuraTile) tile).connected.contains(new CoordTuple(this))) {
                     ((AuraTile) tile).connected.add(new CoordTuple(this));
                 }
-                result.add(next);
+                if (!result.contains(next)) {
+                    result.add(next);
+                }
             }
         }
         connected = result;
