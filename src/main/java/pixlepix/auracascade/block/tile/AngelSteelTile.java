@@ -11,7 +11,7 @@ import pixlepix.auracascade.registry.BlockRegistry;
 public class AngelSteelTile extends ConsumerTile {
 
     public static int MAX_PROGRESS = 1000;
-    public static int POWER_PER_PROGRESS = 1000;
+    public static int POWER_PER_PROGRESS = 600;
 
     @Override
     public int getMaxProgress() {
