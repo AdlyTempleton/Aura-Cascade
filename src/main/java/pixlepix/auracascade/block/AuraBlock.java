@@ -196,14 +196,24 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
-        sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
-        botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
 
+        if (type.equals("craftingCenter")) {
+            blockIcon = iconRegister.registerIcon("aura:craftingCenter");
+
+        } else {
+
+            topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
+            sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
+            botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
+
+        }
     }
 
     @Override
     public IIcon getIcon(int side, int meta) {
+        if (type.equals("craftingCenter")) {
+            return blockIcon;
+        }
         switch (side) {
             case 0:
                 return botIcon;
