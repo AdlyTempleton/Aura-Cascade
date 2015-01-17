@@ -13,10 +13,7 @@ import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
-import pixlepix.auracascade.registry.ITTinkererItem;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
+import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,22 +91,21 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new CraftingBenchRecipe(new ItemStack(this, 64, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.diamond), 'G', new ItemStack(Blocks.glass)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 64, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.diamond), 'G', new ItemStack(Blocks.glass)),
                 //Green
-                new CraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 2), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', "dyeGreen", 'C', new ItemStack(this, 1, 0)),
                 //Black
-                new CraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 0), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', "dyeBlack", 'C', new ItemStack(this, 1, 0)),
                 //Red
-                new CraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 1), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', "dyeRed", 'C', new ItemStack(this, 1, 0)),
                 //Orange
-                new CraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 14), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', "dyeOrange", 'C', new ItemStack(this, 1, 0)),
                 //Yellow
-                new CraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 11), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', "dyeYellow", 'C', new ItemStack(this, 1, 0)),
                 //Blue
-                new CraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 4), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', "dyeBlue", 'C', new ItemStack(this, 1, 0)),
                 //Violet
-                new CraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', new ItemStack(Items.dye, 1, 5), 'C', new ItemStack(this, 1, 0))
-
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0))
         );
     }
 }

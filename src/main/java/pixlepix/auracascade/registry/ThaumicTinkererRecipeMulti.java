@@ -1,6 +1,7 @@
 package pixlepix.auracascade.registry;
 
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,9 @@ public class ThaumicTinkererRecipeMulti extends ThaumicTinkererRecipe {
         for (ThaumicTinkererRecipe recipe : subsetRecipies) {
             if (recipe instanceof CraftingBenchRecipe) {
                 result.add(((CraftingBenchRecipe) recipe).iRecipe);
+            }
+            if (recipe instanceof OreCraftingBenchRecipe) {
+                result.add(((OreCraftingBenchRecipe) recipe).iRecipe);
             }
         }
         return result;
