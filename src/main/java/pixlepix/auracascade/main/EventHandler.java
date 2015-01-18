@@ -7,7 +7,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -91,19 +93,22 @@ public class EventHandler {
             if (event.entityPlayer.inventory.getCurrentItem().stackTagCompound == null) {
                 event.entityPlayer.inventory.getCurrentItem().stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool) event.entityPlayer.inventory.getCurrentItem().getItem()).getDegree());
             }
-            int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
-            int efficiency = buffs[0];
-            event.newSpeed *= Math.pow(1.3, efficiency);
-            int shatter = buffs[2];
-            int disintegrate = buffs[3];
-            //1.5F, the hardness of stone, is used as a dividing point
-            //Stone is not affected by either enchant
-            if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F) {
-                event.newSpeed *= Math.pow(3, disintegrate);
-            }
-            if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F) {
+            ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
+            if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
+                int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
+                int efficiency = buffs[0];
+                event.newSpeed *= Math.pow(1.3, efficiency);
+                int shatter = buffs[2];
+                int disintegrate = buffs[3];
+                //1.5F, the hardness of stone, is used as a dividing point
+                //Stone is not affected by either enchant
+                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F) {
+                    event.newSpeed *= Math.pow(3, disintegrate);
+                }
+                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F) {
 
-                event.newSpeed *= Math.pow(3, shatter);
+                    event.newSpeed *= Math.pow(3, shatter);
+                }
             }
         }
     }
