@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.lexicon.LexiconData;
@@ -74,6 +75,9 @@ public class CommonProxy {
         registry.postInit();
         LexiconData.init();
         LexiconData.postInit();
+    }
+
+    public void addBlockDestroyEffects(CoordTuple tuple) {
     }
 
     public EffectRenderer getEffectRenderer() {

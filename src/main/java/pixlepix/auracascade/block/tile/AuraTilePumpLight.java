@@ -40,7 +40,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
                     addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
                     if (!worldObj.isRemote) {
                         for (int j = 0; j < 5; j++) {
-                            AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
+                            AuraCascade.proxy.addBlockDestroyEffects(tuple);
                         }
                     }
 

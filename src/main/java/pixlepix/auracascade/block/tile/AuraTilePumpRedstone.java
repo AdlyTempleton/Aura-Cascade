@@ -25,7 +25,7 @@ public class AuraTilePumpRedstone extends AuraTilePumpBase {
                         addFuel((int) (Config.pumpRedstoneDuration * Math.pow(1.4, i)), Config.pumpRedstoneSpeed);
                         if (!worldObj.isRemote) {
                             for (int j = 0; j < 5; j++) {
-                                AuraCascade.proxy.getEffectRenderer().addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(worldObj), tuple.getMeta(worldObj));
+                                AuraCascade.proxy.addBlockDestroyEffects(tuple);
                             }
                         }
 
