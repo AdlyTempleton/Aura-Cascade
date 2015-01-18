@@ -41,6 +41,11 @@ public class EntityFairy extends Entity {
     }
 
     @Override
+    public boolean canRenderOnFire() {
+        return false;
+    }
+
+    @Override
     protected void entityInit() {
         Random random = new Random(this.getPersistentID().hashCode());
         rho = random.nextDouble() + 5;
