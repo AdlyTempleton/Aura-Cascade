@@ -172,7 +172,7 @@ aura.page.pumpProjectile1=Projectile Pump
 aura.entry.consumers=Consumers
 aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.
 
-aura.entry.angel=Cascading synthesizer
+aura.entry.angel=Cascading Synthesizer
 aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s
 aura.page.angel1=Cascading Synthesizer
 
