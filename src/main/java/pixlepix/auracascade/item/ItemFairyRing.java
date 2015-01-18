@@ -29,7 +29,13 @@ import java.util.Random;
  * Created by pixlepix on 12/8/14.
  */
 public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
+
     public static final String name = "fairyRing";
+
+    public ItemFairyRing() {
+        super();
+        setMaxStackSize(1);
+    }
 
     public static void makeFaries(ItemStack ringStack, EntityLivingBase entity) {
         if (entity instanceof EntityPlayer && !((EntityPlayer) entity).worldObj.isRemote) {
@@ -54,6 +60,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
 
         }
     }
+
 
     public static void killNearby(EntityLivingBase entityLivingBase) {
         List<EntityFairy> fairies = entityLivingBase.worldObj.getEntitiesWithinAABB(EntityFairy.class, AxisAlignedBB.getBoundingBox(entityLivingBase.posX - 50, entityLivingBase.posY - 50, entityLivingBase.posZ - 50, entityLivingBase.posX + 50, entityLivingBase.posY + 50, entityLivingBase.posZ + 50));
