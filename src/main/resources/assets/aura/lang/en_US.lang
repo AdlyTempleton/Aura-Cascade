@@ -113,7 +113,7 @@ aura.page.pumps1=Each pump has two properties for each type of fuel it consumes:
 aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
 aura.page.pumps3=The Burning Aura Pump
 aura.entry.comparator=Comparator Interactions
-aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their max progress.
+aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their maximum progress.
 
 //Aura Colors
 aura.entry.red=Red Aura
