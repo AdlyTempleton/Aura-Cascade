@@ -109,6 +109,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:auraAngel");
             top = iconRegister.registerIcon("aura:auraAngelTop");
         }
+        if (name.equals("loot")) {
+            blockIcon = iconRegister.registerIcon("aura:auraLoot");
+            top = iconRegister.registerIcon("aura:auraLootTop");
+        }
     }
 
     @Override
