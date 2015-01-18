@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
@@ -25,6 +26,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     public ItemAngelsteelAxe(Integer i) {
         super(AngelsteelToolHelper.materials[i]);
         this.degree = i;
+        setCreativeTab(null);
     }
     public ItemAngelsteelAxe() {
         this(0);

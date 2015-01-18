@@ -25,6 +25,7 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
     public ItemAngelsteelShovel(Integer i) {
         super(AngelsteelToolHelper.materials[i]);
         this.degree = i;
+        setCreativeTab(null);
     }
 
     public ItemAngelsteelShovel() {

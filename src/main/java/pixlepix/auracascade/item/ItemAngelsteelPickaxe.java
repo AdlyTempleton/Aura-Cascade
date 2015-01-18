@@ -25,6 +25,8 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     public ItemAngelsteelPickaxe(Integer i) {
         super(AngelsteelToolHelper.materials[i]);
         this.degree = i;
+
+        setCreativeTab(null);
     }
 
     public ItemAngelsteelPickaxe() {
