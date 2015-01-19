@@ -225,7 +225,7 @@ public class AuraTile extends TileEntity {
                         }
                     }
                 }
-                burstMap = null;
+                inducedBurstMap = new HashMap<CoordTuple, Integer>();
             }
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
@@ -243,13 +243,15 @@ public class AuraTile extends TileEntity {
             ((AuraTile) tuple.getTile(worldObj)).storage.add(list);
             storage.subtract(list);
             for (EnumAura aura : EnumAura.values()) {
-                burst(tuple, "crit", aura, list.getComposition(aura));
-                int power = (int) ((yCoord - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
-                if (power > 0) {
-                    ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
-                }
-                if (!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0) {
-                    aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
+                if (list.get(aura) > 0) {
+                    burst(tuple, "crit", aura, list.getComposition(aura));
+                    int power = (int) ((yCoord - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
+                    if (power > 0) {
+                        ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
+                    }
+                    if (!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0) {
+                        aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
+                    }
                 }
             }
         }
