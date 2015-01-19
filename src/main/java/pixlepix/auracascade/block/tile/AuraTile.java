@@ -166,7 +166,7 @@ public class AuraTile extends TileEntity {
                 burstMap = new HashMap<CoordTuple, AuraQuantityList>();
                 double totalWeight = 0;
                 for (CoordTuple tuple : connected) {
-                    if (canTransfer(tuple, EnumAura.WHITE_AURA)) {
+                    if (canTransfer(tuple)) {
                         totalWeight += getWeight(tuple);
                     }
                 }
@@ -261,7 +261,7 @@ public class AuraTile extends TileEntity {
         energy += power;
     }
 
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+    public boolean canTransfer(CoordTuple tuple) {
         boolean isLower = tuple.getY() < yCoord;
 
         boolean isSame = tuple.getY() == yCoord;
@@ -274,7 +274,15 @@ public class AuraTile extends TileEntity {
         if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !(this instanceof AuraTileBlack)) {
             return false;
         }
-        return !(aura == EnumAura.BLACK_AURA && (xCoord != tuple.getX() || yCoord == tuple.getY())) && ((AuraTile) tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
+        return true;
+
+    }
+    
+    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+        if (!canTransfer(tuple)) {
+            return false;
+        }
+        return ((AuraTile) tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
     }
 
     public boolean canReceive(CoordTuple source, EnumAura aura) {
