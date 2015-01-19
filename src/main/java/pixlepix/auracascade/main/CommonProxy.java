@@ -23,6 +23,7 @@ import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.network.PacketFairyRequestUpdate;
 import pixlepix.auracascade.network.PacketFairyUpdate;
+import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
 
@@ -65,6 +66,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(AuraCascade.instance, new GuiHandler());
 
         PylonRecipeRegistry.init();
+        PotionManager.init();
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         FMLCommonHandler.instance().bus().register(eventHandler);

@@ -26,6 +26,9 @@ public class Config {
     public static int pumpArrowDuration = 20;
     public static int pumpSnowballSpeed = 400;
     public static int pumpSnowballDuration = 10;
+
+    public static int potionStartId = 97;
+    
     static Configuration config;
 
     public static void init(FMLPreInitializationEvent event) {
@@ -57,7 +60,10 @@ public class Config {
         pumpArrowDuration = config.getInt("pumpArrowDuration", Configuration.CATEGORY_GENERAL, pumpArrowDuration, 1, Integer.MAX_VALUE, "");
 
         overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
-        
+
+        potionStartId = config.getInt("Potion Id beginning", Configuration.CATEGORY_GENERAL, potionStartId, 1, 128, "");
+
+
         config.save();
     }
 }
