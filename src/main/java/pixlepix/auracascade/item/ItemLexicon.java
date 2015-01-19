@@ -4,18 +4,22 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.lexicon.CategoryManager;
 import pixlepix.auracascade.lexicon.ILexiconable;
 import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.lexicon.common.core.helper.ItemNBTHelper;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -152,6 +156,6 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
+        return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.book));
     }
 }
