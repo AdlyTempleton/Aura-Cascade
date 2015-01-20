@@ -75,7 +75,7 @@ public enum EnumAura {
                 if (nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction && tuple.getDirectionTo(nearbyNode) != direction.getOpposite()) {
                     AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
                     for (CoordTuple targetNode : auraTile.connected) {
-                        if (nearbyNode.getDirectionTo(targetNode) == direction) {
+                        if (nearbyNode.getDirectionTo(targetNode) == direction && auraTile.canTransfer(targetNode)) {
                             ((AuraTile) nearbyNode.getTile(world)).inducedBurstMap.put(targetNode, quantity.getNum());
                             break;
                         }
