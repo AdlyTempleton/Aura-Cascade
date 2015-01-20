@@ -231,7 +231,7 @@ aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. I
 
 aura.entry.ore=Cascading Processor
 aura.page.ore1=Cascading Processor
-aura.page.ore0=The Cascading Processor will turn nearby ores into 3 dusts. It will also keep nearby items from despawning. The processor has a minimum power requirement of 2000 power/second.
+aura.page.ore0=The Cascading Processor will turn nearby ores into 3 dusts. It will also keep nearby items from despawning. The processor will not function unless a dust for a particular ore is added by others mods. The processor has a minimum power requirement of 2000 power/second.
 
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
