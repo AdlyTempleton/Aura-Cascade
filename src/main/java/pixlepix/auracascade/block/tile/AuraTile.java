@@ -282,6 +282,12 @@ public class AuraTile extends TileEntity {
         if (!canTransfer(tuple)) {
             return false;
         }
+        if (tuple.getY() != yCoord && aura == EnumAura.ORANGE_AURA) {
+            return false;
+        }
+        if (tuple.getY() == yCoord && aura == EnumAura.BLACK_AURA) {
+            return false;
+        }
         return ((AuraTile) tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
     }
 
