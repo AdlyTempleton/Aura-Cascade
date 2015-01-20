@@ -72,7 +72,7 @@ public enum EnumAura {
         @Override
         public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
             for (CoordTuple nearbyNode : tuple.inRange(2)) {
-                if (nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction) {
+                if (nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction && tuple.getDirectionTo(nearbyNode) != direction.getOpposite()) {
                     AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
                     for (CoordTuple targetNode : auraTile.connected) {
                         if (nearbyNode.getDirectionTo(targetNode) == direction) {
