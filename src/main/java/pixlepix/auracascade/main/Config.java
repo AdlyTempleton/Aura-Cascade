@@ -12,8 +12,8 @@ public class Config {
     
     public static int pumpCoalSpeed = 200;
     public static int pumpCoalDuration = 1;
-    public static int pumpRedstoneSpeed = 10;
-    public static int pumpRedstoneDuration = 1500;
+    public static int pumpRedstoneSpeed = 1500;
+    public static int pumpRedstoneDuration = 10;
     public static int pumpTorchSpeed = 750;
     public static int pumpTorchDuration = 30;
     public static int pumpGlowstoneSpeed = 750;
