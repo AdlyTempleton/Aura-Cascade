@@ -70,6 +70,19 @@ item.angelsteelAxe9.name=Angel's Steel axe of the tenth degree
 item.angelsteelAxe10.name=Angel's Steel axe of the eleventh degree
 item.angelsteelAxe11.name=Angel's Steel axe of the twelfth degree
 
+item.angelsteelSword0.name=Angel's Steel sword of the first degree
+item.angelsteelSword1.name=Angel's Steel sword of the second degree
+item.angelsteelSword2.name=Angel's Steel sword of the third degree
+item.angelsteelSword3.name=Angel's Steel sword of the fourth degree
+item.angelsteelSword4.name=Angel's Steel sword of the fifth degree
+item.angelsteelSword5.name=Angel's Steel sword of the sixth degree
+item.angelsteelSword6.name=Angel's Steel sword of the seventh degree
+item.angelsteelSword7.name=Angel's Steel sword of the eighth degree
+item.angelsteelSword8.name=Angel's Steel sword of the ninth degree
+item.angelsteelSword9.name=Angel's Steel sword of the tenth degree
+item.angelsteelSword10.name=Angel's Steel sword of the eleventh degree
+item.angelsteelSword11.name=Angel's Steel sword of the twelfth degree
+
 item.angelsteelShovel0.name=Angel's Steel shovel of the first degree
 item.angelsteelShovel1.name=Angel's Steel shovel of the second degree
 item.angelsteelShovel2.name=Angel's Steel shovel of the third degree
@@ -183,6 +196,16 @@ aura.page.angelsteel2=&2Efficiency&0 Increases your digging speed <br> &2Fortune
 aura.page.angelsteel4=Angel's Steel Axe
 aura.page.angelsteel5=Angel's Steel Pickaxe
 aura.page.angelsteel6=Angel's Steel Shovel
+
+aura.entry.angelsteelSword=Angel's Steel Swords
+aura.page.angelsteelSword0=Angel's Steel also makes a deadly weapon. By shaping it into a blade, you can apply a variety of curses to the enemies you hit.
+aura.page.angelsteelSword1=Higher degrees are possible
+aura.page.angelsteelSword2=A red crystal will make the enemies unstable, causing large patches of flames to randomly break out around them
+aura.page.angelsteelSword3=An orange crystal will make the enemies randomly and uncontrollably fly up into the air
+aura.page.angelsteelSword4=A yellow crystal will cause lightning to frequently strike the enemies
+aura.page.angelsteelSword5=A green crystal will sicken the enemies, causing them to rapidly take damage. This sickness quickly spreads to nearby entities-including yourself!
+aura.page.angelsteelSword6=A blue crystal will apply a curse the seeks out cracks in the enemies defenses. It will rapidly damage the enemy if they drop below half health
+aura.page.angelsteelSword7=A purple crystal will loosen the enemies grip on reality itself. They will periodically switch places with other nearby entities.
 
 aura.entry.crafting=Vortex Infusion
 aura.page.crafting0=Vortex Infusion is a process for creating many higher-level items. First, place a &1Vortex Controller&0 down, and place four &1Vortex Pedestals&0 adjacent to it. Following a recipe, right-click to place the correct items on all four pedestals.

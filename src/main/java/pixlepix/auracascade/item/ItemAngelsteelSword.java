@@ -40,21 +40,26 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         this(0);
     }
 
+    public static ItemStack getStackFirstDegree(EnumAura aura) {
+        return ((ItemAngelsteelSword) BlockRegistry.getFirstItemFromClass(ItemAngelsteelSword.class)).getStack(aura);
+    }
+
     @Override
     public void registerIcons(IIconRegister register) {
         itemIcon = register.registerIcon("aura:angel_sword");
         for (EnumAura aura : auraSwords) {
-            iconHashMap.put(aura, register.registerIcon("aura:angel_sword_" + aura.name));
+            iconHashMap.put(aura, register.registerIcon("aura:angel_sword" + aura.name));
         }
     }
 
     @Override
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
+    public IIcon getIconIndex(ItemStack stack) {
         if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("aura")) {
             EnumAura aura = EnumAura.values()[stack.stackTagCompound.getInteger("aura")];
+            return iconHashMap.get(aura);
 
         }
-        return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+        return super.getIconIndex(stack);
     }
 
     public EnumAura getAura(ItemStack stack) {
@@ -108,29 +113,29 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase attacker) {
         EnumAura aura = getAura(stack);
         if (aura == EnumAura.RED_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.getId(), degree * degree * 100 + 100));
         }
         if (aura == EnumAura.ORANGE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.getId(), degree * degree * 100 + 100));
         }
         if (aura == EnumAura.YELLOW_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.getId(), degree * degree * 100 + 100));
         }
         if (aura == EnumAura.GREEN_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.getId(), degree * degree * 100 + 100));
         }
         if (aura == EnumAura.BLUE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.getId(), degree * degree * 100 + 100));
         }
         if (aura == EnumAura.VIOLET_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.getId(), degree * degree * 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.getId(), degree * degree * 100 + 100));
         }
         return super.hitEntity(stack, entity, attacker);
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + getAura(stack).name;
+        return getAura(stack).name + " " + super.getItemStackDisplayName(stack);
     }
 
     @Override
