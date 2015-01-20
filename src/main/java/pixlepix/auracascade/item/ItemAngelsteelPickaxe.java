@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemPickaxe;
@@ -71,10 +72,12 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     }
 
     @Override
-    public void onCreated(ItemStack stack, World world, EntityPlayer player) {
-        if (!world.isRemote) {
+    public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
+
+        if (!world.isRemote && stack.stackTagCompound == null) {
             stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
         }
+        super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
     }
 
     @Override
