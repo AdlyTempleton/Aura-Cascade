@@ -217,11 +217,28 @@ public class AuraTile extends TileEntity {
                 for (CoordTuple tuple : connected) {
                     if (inducedBurstMap.containsKey(tuple)) {
                         int num = inducedBurstMap.get(tuple);
-                        AuraQuantityList auraToSend = (AuraQuantityList) storage.clone();
-                        auraToSend.set(EnumAura.ORANGE_AURA, 0);
-                        if (auraToSend.getTotalAura() > 0) {
-                            auraToSend = auraToSend.percent(Math.min(1F, (float) num / (float) storage.getTotalAura()) - storage.get(EnumAura.ORANGE_AURA));
-                            transferAura(tuple, auraToSend, false);
+                        AuraTile otherTile = (AuraTile) tuple.getTile(worldObj);
+                        int deltaFlow;
+                        int altNum = 0;
+                        if (otherTile.inducedBurstMap != null) {
+                            altNum = otherTile.inducedBurstMap.containsKey(new CoordTuple(this)) ? otherTile.inducedBurstMap.get(new CoordTuple(this)) : 0;
+                            deltaFlow = num - altNum;
+                        } else {
+                            deltaFlow = num;
+                        }
+                        if (deltaFlow > 0) {
+                            AuraQuantityList auraToSend = (AuraQuantityList) storage.clone();
+                            otherTile.inducedBurstMap.put(new CoordTuple(this), 0);
+                            auraToSend.set(EnumAura.ORANGE_AURA, 0);
+                            if (auraToSend.getTotalAura() > 0) {
+                                auraToSend = auraToSend.percent(Math.min(1F, (float) deltaFlow / (float) storage.getTotalAura()) - storage.get(EnumAura.ORANGE_AURA));
+                                transferAura(tuple, auraToSend, false);
+                            }
+                        } else {
+                            inducedBurstMap.put(tuple, 0);
+                            if (otherTile.inducedBurstMap != null) {
+                                otherTile.inducedBurstMap.put(new CoordTuple(this), altNum - num);
+                            }
                         }
                     }
                 }
