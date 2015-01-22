@@ -23,7 +23,7 @@ public class PotionOrangeCurse extends Potion {
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
         mc.getMinecraft().renderEngine.bindTexture(mc.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x, y, ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA).getIconIndex(), 16, 16);
+        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA).getIconIndex(), 16, 16);
     }
     @Override
     public boolean isReady(int p_76397_1_, int p_76397_2_) {

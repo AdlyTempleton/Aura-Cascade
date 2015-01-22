@@ -28,7 +28,7 @@ public class PotionBlueCurse extends Potion {
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
         mc.getMinecraft().renderEngine.bindTexture(mc.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x, y, ItemAngelsteelSword.getStackFirstDegree(EnumAura.BLUE_AURA).getIconIndex(), 16, 16);
+        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.BLUE_AURA).getIconIndex(), 16, 16);
     }
 
     @Override
