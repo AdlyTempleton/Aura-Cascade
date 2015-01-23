@@ -53,20 +53,18 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
                 return false;
             }
         }
+        search:
         for (ItemStack curStack : stacks) {
-            Iterator recipeStacksIter = new ArrayList<ItemStack>(recipeStacks).iterator();
+            Iterator recipeStacksIter = recipeStacks.iterator();
 
-            boolean found = false;
             while (recipeStacksIter.hasNext()) {
                 ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();
                 if (ItemStack.areItemStacksEqual(curRecipeStack, curStack)) {
-                    found = true;
                     recipeStacksIter.remove();
+                    continue search;
                 }
             }
-            if (!found) {
-                return false;
-            }
+            return false;
         }
 
         return true;
