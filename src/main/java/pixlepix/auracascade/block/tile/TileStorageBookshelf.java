@@ -9,10 +9,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
+import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by localmacaccount on 1/23/15.
@@ -21,6 +24,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     public ItemStack storedBook;
 
     public ArrayList<ItemStack> inv;
+    //Minimalist cache to improve performance
+    private HashMap<ItemStackMapEntry, Boolean> validCache = new HashMap<ItemStackMapEntry, Boolean>();
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -40,6 +45,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
         inv = itemStorageBook.getInventory(storedBook);
+        validCache = new HashMap<ItemStackMapEntry, Boolean>();
     }
 
     public void writeCustomNBT(NBTTagCompound nbt) {
@@ -57,12 +63,10 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
     }
 
-
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
         readCustomNBT(pkt.func_148857_g());
     }
-
 
     @Override
     public int getSizeInventory() {
@@ -107,7 +111,6 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         return getStackInSlot(i);
     }
 
-
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
         if (storedBook == null) {
@@ -127,6 +130,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
         ItemStorageBook.setInventory(storedBook, inv);
+        validCache = new HashMap<ItemStackMapEntry, Boolean>();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
@@ -165,6 +169,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         if (storedBook == null) {
             return false;
         }
+        if (validCache.containsKey(new ItemStackMapEntry(item))) {
+            return validCache.get(new ItemStackMapEntry(item));
+        }
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
         ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
         testInv.add(item);
@@ -183,10 +190,12 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
                     remainingStorage.stackSize -= delta;
                 }
                 if (remainingStorage != null && remainingStorage.stackSize > 0) {
+                    validCache.put(new ItemStackMapEntry(item), false);
                     return false;
                 }
             }
         }
+        validCache.put(new ItemStackMapEntry(item), false);
         return true;
 
     }
