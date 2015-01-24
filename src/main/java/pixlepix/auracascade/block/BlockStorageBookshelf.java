@@ -3,19 +3,23 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by localmacaccount on 1/23/15.
  */
-public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider {
+public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
     public BlockStorageBookshelf() {
         super(Material.wood);
@@ -60,5 +64,23 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public TileEntity createNewTileEntity(World world, int p_149915_2_) {
         return new TileStorageBookshelf();
+    }
+
+    @Override
+    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (!(te instanceof TileStorageBookshelf)) {
+            return null;
+        }
+        TileStorageBookshelf bookshelf = (TileStorageBookshelf) te;
+        List<String> result = new ArrayList<String>();
+        for (int i = 0; i < bookshelf.getSizeInventory(); i++) {
+            ItemStack stack = bookshelf.getStackInSlot(i);
+            if (stack != null) {
+                result.add(stack.getDisplayName() + " x" + stack.stackSize);
+            }
+        }
+        return result;
+        
     }
 }

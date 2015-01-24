@@ -2,6 +2,7 @@ package pixlepix.auracascade.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,30 +27,37 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
         setMaxStackSize(1);
     }
 
-    public static ArrayList<StorageItemStack> getInventory(ItemStack stack) {
-        if (stack.stackTagCompound == null) {
-            return new ArrayList<StorageItemStack>();
-        }
-        ArrayList<StorageItemStack> result = new ArrayList<StorageItemStack>();
-
-        NBTTagCompound compound = stack.stackTagCompound;
-        NBTTagList itemsList = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
-        for (int i = 0; i < itemsList.tagCount(); i++) {
-            NBTTagCompound itemCompound = itemsList.getCompoundTagAt(i);
-            result.add(StorageItemStack.readFromNBT(itemCompound));
-        }
-        return result;
-    }
-
-    public static void setInventory(ItemStack stack, ArrayList<StorageItemStack> newInventory) {
+    public static void setInventory(ItemStack stack, ArrayList<ItemStack> newInventory) {
         if (stack.stackTagCompound == null) {
             stack.stackTagCompound = new NBTTagCompound();
         }
         NBTTagList list = new NBTTagList();
-        for (StorageItemStack storageItemStack : newInventory) {
-            list.appendTag(storageItemStack.writeToNBT());
+        for (ItemStack itemStack : newInventory) {
+            NBTTagCompound nbt = new NBTTagCompound();
+            if (itemStack != null) {
+                itemStack.writeToNBT(nbt);
+            }
+            list.appendTag(nbt);
         }
         stack.stackTagCompound.setTag("items", list);
+    }
+
+    public ArrayList<ItemStack> getInventory(ItemStack stack) {
+        ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+
+        NBTTagCompound compound = stack.stackTagCompound;
+        if (compound != null) {
+            NBTTagList itemsList = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
+            for (int i = 0; i < itemsList.tagCount(); i++) {
+                NBTTagCompound itemCompound = itemsList.getCompoundTagAt(i);
+                //Key "Count" is a key used in itemstack nbt methods
+                result.add(itemCompound.hasKey("Count") ? ItemStack.loadItemStackFromNBT(itemCompound) : null);
+            }
+        }
+        while (result.size() < getActualCount()) {
+            result.add(null);
+        }
+        return result;
     }
 
     @Override
@@ -58,11 +66,12 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        if (world.getBlock(x, y, z) == Blocks.bookshelf) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && world.getBlock(x, y, z) == Blocks.bookshelf) {
             world.setBlock(x, y, z, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class));
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(x, y, z);
             te.storedBook = stack.copy();
+            world.markBlockForUpdate(x, y, z);
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
             return true;
         }
@@ -78,34 +87,14 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
         return 5;
     }
 
-    public ItemStack[] getStacks(ItemStack bookStack) {
-        ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-        ArrayList<StorageItemStack> inv = getInventory(bookStack);
-        for (StorageItemStack storageItemStack : inv) {
-            result.addAll(storageItemStack.getItemStacks(getMaxStackSize()));
-        }
-        return (ItemStack[]) result.toArray();
-    }
-
     public boolean isItemValid(ItemStack stack) {
         return true;
 
     }
 
-    public ItemStack addItemStack(ItemStack bookStack, ItemStack contentStack) {
-        ItemStorageBook book = (ItemStorageBook) bookStack.getItem();
-        ArrayList<StorageItemStack> inv = getInventory(bookStack);
-        StorageItemStack remainingStorage = new StorageItemStack(contentStack);
-        for (StorageItemStack storageItemStack : inv) {
-            remainingStorage = storageItemStack.merge(remainingStorage, getMaxStackSize());
-        }
-        while (inv.size() < getHeldStacks() && remainingStorage.stackSize > 0) {
-            int delta = Math.min(book.getMaxStackSize(), remainingStorage.stackSize);
-            StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
-            inv.add(storageItemStack);
-        }
-        setInventory(bookStack, inv);
-        return remainingStorage.toItemStack();
+    public int getActualCount() {
+        return (int) (Math.floor(getMaxStackSize() / 64) * getHeldStacks());
+        
     }
 
     @Override
