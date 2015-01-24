@@ -79,7 +79,7 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     public int getMaxStackSize() {
-        return 64;
+        return 10;
 
     }
 
@@ -93,7 +93,7 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     public int getActualCount() {
-        return (int) (Math.floor(getMaxStackSize() / 64) * getHeldStacks());
+        return (int) (Math.ceil(getMaxStackSize() / 64F) * getHeldStacks());
         
     }
 

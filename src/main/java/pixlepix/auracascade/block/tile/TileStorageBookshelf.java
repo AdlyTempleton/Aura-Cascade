@@ -20,24 +20,34 @@ import java.util.ArrayList;
 public class TileStorageBookshelf extends TileEntity implements IInventory {
     public ItemStack storedBook;
 
+    public ArrayList<ItemStack> inv;
+
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
+        writeCustomNBT(nbt);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
+        readCustomNBT(nbt);
     }
 
     public void readCustomNBT(NBTTagCompound nbt) {
-        storedBook = ItemStack.loadItemStackFromNBT(nbt);
+        storedBook = ItemStack.loadItemStackFromNBT((NBTTagCompound) nbt.getTag("book"));
+
+
+        ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+        inv = itemStorageBook.getInventory(storedBook);
     }
 
     public void writeCustomNBT(NBTTagCompound nbt) {
+        NBTTagCompound compound = new NBTTagCompound();
         if (storedBook != null) {
-            storedBook.writeToNBT(nbt);
+            compound = storedBook.writeToNBT(compound);
         }
+        nbt.setTag("book", compound);
     }
 
     @Override
@@ -65,8 +75,12 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             return null;
         }
 
-        ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        return itemStorageBook.getInventory(storedBook).get(i);
+        if (inv == null) {
+            ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+            inv = itemStorageBook.getInventory(storedBook);
+        }
+
+        return inv.get(i);
     }
 
     @Override
@@ -99,13 +113,21 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         if (storedBook == null) {
             return;
         }
+        if (inv == null) {
+            ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+            inv = itemStorageBook.getInventory(storedBook);
+        }
+        inv.set(slot, stack);
+        markDirty();
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
 
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        ArrayList<ItemStack> inv = itemStorageBook.getInventory(storedBook);
-        inv.set(slot, stack);
         ItemStorageBook.setInventory(storedBook, inv);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        markDirty();
     }
 
     @Override
@@ -120,7 +142,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return ((ItemStorageBook) storedBook.getItem()).getMaxStackSize();
     }
 
     @Override
@@ -154,7 +176,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
                 for (StorageItemStack storageItemStack : inv) {
                     remainingStorage = storageItemStack.merge(remainingStorage, itemStorageBook.getMaxStackSize());
                 }
-                while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage.stackSize > 0) {
+                while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage != null && remainingStorage.stackSize > 0) {
                     int delta = Math.min(itemStorageBook.getMaxStackSize(), remainingStorage.stackSize);
                     StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
                     inv.add(storageItemStack);
@@ -166,5 +188,6 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             }
         }
         return true;
+
     }
 }

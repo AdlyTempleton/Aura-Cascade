@@ -49,6 +49,9 @@ public class StorageItemStack {
             StorageItemStack storageItemStack = (StorageItemStack) obj;
             if (storageItemStack.damage == damage) {
                 if (storageItemStack.item == item) {
+                    if (storageItemStack.compound == null) {
+                        return compound == null;
+                    }
                     if (storageItemStack.compound.equals(compound)) {
                         return true;
 
@@ -63,7 +66,7 @@ public class StorageItemStack {
     }
 
     public StorageItemStack copy() {
-        return new StorageItemStack(item, stackSize, damage, (NBTTagCompound) compound.copy());
+        return new StorageItemStack(item, stackSize, damage, compound != null ? (NBTTagCompound) compound.copy() : null);
     }
 
     public StorageItemStack merge(StorageItemStack other, int max) {
