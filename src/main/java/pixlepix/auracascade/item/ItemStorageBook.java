@@ -71,6 +71,7 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
             world.setBlock(x, y, z, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class));
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(x, y, z);
             te.storedBook = stack.copy();
+            te.markDirty();
             world.markBlockForUpdate(x, y, z);
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
             return true;

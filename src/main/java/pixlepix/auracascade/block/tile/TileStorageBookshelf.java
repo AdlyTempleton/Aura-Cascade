@@ -23,7 +23,7 @@ import java.util.HashMap;
 public class TileStorageBookshelf extends TileEntity implements IInventory {
     public ItemStack storedBook;
 
-    public ArrayList<ItemStack> inv;
+    public ArrayList<ItemStack> inv = new ArrayList<ItemStack>();
     //Minimalist cache to improve performance
     private HashMap<ItemStackMapEntry, Boolean> validCache = new HashMap<ItemStackMapEntry, Boolean>();
 
@@ -127,9 +127,11 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     @Override
     public void markDirty() {
         super.markDirty();
-
-        ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        ItemStorageBook.setInventory(storedBook, inv);
+        if (storedBook != null) {
+            ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+            ItemStorageBook.setInventory(storedBook, inv);
+            inv = itemStorageBook.getInventory(storedBook);
+        }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
@@ -195,7 +197,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
                 }
             }
         }
-        validCache.put(new ItemStackMapEntry(item), false);
+        validCache.put(new ItemStackMapEntry(item), true);
         return true;
 
     }
