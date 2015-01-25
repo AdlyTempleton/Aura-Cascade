@@ -32,8 +32,8 @@ public class AuraTilePump extends AuraTilePumpBase {
                     ItemStack stack = entityItem.getEntityItem();
                     if (!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0) {
                         //Worth noting that the burn time should be 2* longer than a furnace
-                        pumpPower = Config.pumpCoalDuration * TileEntityFurnace.getItemBurnTime(stack) / 5;
-                        pumpSpeed = Config.pumpCoalDuration;
+                        
+                        addFuel(Config.pumpCoalDuration * TileEntityFurnace.getItemBurnTime(stack) / 5, Config.pumpCoalSpeed);
 
                         //Kill the stack
                         if (stack.stackSize == 1) {
