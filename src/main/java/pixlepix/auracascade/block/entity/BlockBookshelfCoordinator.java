@@ -8,6 +8,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
@@ -70,5 +71,11 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
     @Override
     public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
         return new ArrayList<String>();
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        player.openGui(AuraCascade.instance, 1, world, x, y, z);
+        return true;
     }
 }
