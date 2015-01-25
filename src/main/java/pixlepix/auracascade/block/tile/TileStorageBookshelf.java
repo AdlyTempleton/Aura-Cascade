@@ -201,4 +201,38 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         return true;
 
     }
+
+    public boolean isItemValidForSlotSensitive(int slot, ItemStack item) {
+        //Used by SlotCoordinator
+        //Version of isItemValidForSlot that replaces the item in the certain slot before checking validity
+        //NOT cached, so this is much more performance intensive
+        if (storedBook == null) {
+            return false;
+        }
+        ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+        ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
+        //Only difference from isItemValidForSlot
+        testInv.set(slot, item);
+
+        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
+        for (ItemStack itemStack : testInv) {
+            if (itemStack != null) {
+                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
+                for (StorageItemStack storageItemStack : inv) {
+                    remainingStorage = storageItemStack.merge(remainingStorage, itemStorageBook.getMaxStackSize());
+                }
+                while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage != null && remainingStorage.stackSize > 0) {
+                    int delta = Math.min(itemStorageBook.getMaxStackSize(), remainingStorage.stackSize);
+                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
+                    inv.add(storageItemStack);
+                    remainingStorage.stackSize -= delta;
+                }
+                if (remainingStorage != null && remainingStorage.stackSize > 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
 }

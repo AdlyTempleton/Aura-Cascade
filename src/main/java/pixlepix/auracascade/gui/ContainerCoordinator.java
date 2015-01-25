@@ -5,22 +5,29 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
+import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.StorageItemStack;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by localmacaccount on 1/24/15.
  */
 public class ContainerCoordinator extends Container {
+    public float lastScroll;
     protected TileBookshelfCoordinator tileEntity;
-
 
     public ContainerCoordinator(InventoryPlayer inventoryPlayer, TileBookshelfCoordinator te) {
         tileEntity = te;
-        for (int i = 0; i < te.getSizeInventory(); i++) {
+
+        for (int i = 0; i < 21; i++) {
             int x = i % 7;
             int y = i / 7;
-            addSlotToContainer(new SlotCoordinator(GuiCoordinator.invBasic, i, 8 + x * 18, 17 + y * 18));
+            addSlotToContainer(new SlotCoordinator(i, 8 + x * 18, 17 + y * 18, te, null));
         }
         bindPlayerInventory(inventoryPlayer);
         scrollTo(0);
@@ -31,15 +38,18 @@ public class ContainerCoordinator extends Container {
         return tileEntity.isUseableByPlayer(player);
     }
 
-
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
         int ys = 84;
         int xs = 8;
-        for (int x = 0; x < 3; ++x)
-            for (int y = 0; y < 9; ++y)
+
+        for (int x = 0; x < 3; ++x) {
+            for (int y = 0; y < 9; ++y) {
                 addSlotToContainer(new Slot(inventoryPlayer, y + x * 9 + 9, xs + y * 18, ys + x * 18));
-        for (int x = 0; x < 9; ++x)
+            }
+        }
+        for (int x = 0; x < 9; ++x) {
             addSlotToContainer(new Slot(inventoryPlayer, x, xs + x * 18, ys + 58));
+        }
 
     }
 
@@ -78,24 +88,224 @@ public class ContainerCoordinator extends Container {
         return stack;
     }
 
-    public void scrollTo(float p_148329_1_) {
-        int i = tileEntity.getSizeInventory() / 7 - 3;
-        int j = (int) ((double) (p_148329_1_ * (float) i) + 0.5D);
+    public void update() {
+        scrollTo(lastScroll);
+    }
+
+    public void scrollTo(float scroll) {
+        this.lastScroll = scroll;
+        ArrayList<StorageItemStack> stacks = tileEntity.getAbstractInventory();
+        int i = stacks.size() / 7 - 3;
+        int j = (int) ((double) (scroll * (float) i) + 0.5D);
 
         if (j < 0) {
             j = 0;
         }
 
-        for (int k = 0; k < 2; ++k) {
+
+        for (int k = 0; k < 3; ++k) {
             for (int l = 0; l < 7; ++l) {
                 int i1 = l + (k + j) * 7;
 
-                if (i1 >= 0 && i1 < tileEntity.getSizeInventory()) {
-                    GuiCoordinator.invBasic.setInventorySlotContents(l + k * 9, (ItemStack) tileEntity.getStackInSlot(i1));
+                if (i1 >= 0 && i1 < stacks.size()) {
+                    ((SlotCoordinator) this.getSlot(l + k * 7)).storage = stacks.get(i1);
                 } else {
-                    GuiCoordinator.invBasic.setInventorySlotContents(l + k * 9, (ItemStack) null);
+
+                    ((SlotCoordinator) this.getSlot(l + k * 7)).storage = null;
                 }
             }
         }
+    }
+
+    public ItemStack takeFromInventory(StorageItemStack lost) {
+        int amount = 0;
+        outer:
+        for (TileStorageBookshelf bookshelf : tileEntity.getBookshelves()) {
+            for (int i = 0; i < bookshelf.getSizeInventory(); i++) {
+                ItemStack stackInShelf = bookshelf.getStackInSlot(i);
+                if (stackInShelf != null && new StorageItemStack(stackInShelf).equalsType(lost)) {
+                    int delta = Math.min(lost.stackSize - amount, stackInShelf.stackSize);
+                    amount += delta;
+                    stackInShelf.stackSize -= delta;
+                    if (stackInShelf.stackSize == 0) {
+                        bookshelf.setInventorySlotContents(i, null);
+                    }
+                    bookshelf.markDirty();
+                    if (lost.stackSize <= 0) {
+                        break outer;
+
+                    }
+                }
+            }
+        }
+        lost.stackSize = amount;
+        return lost.stackSize != 0 ? lost.toItemStack() : null;
+    }
+
+    public ItemStack putIntoInventory(StorageItemStack gained) {
+
+        int amount = gained.stackSize;
+        if (amount != 0) {
+            outer:
+            for (TileStorageBookshelf bookshelf : tileEntity.getBookshelves()) {
+                for (int i = 0; i < bookshelf.getSizeInventory(); i++) {
+                    ItemStack stackInShelf = bookshelf.getStackInSlot(i);
+                    ItemStack testStack = null;
+                    if (stackInShelf != null && new StorageItemStack(stackInShelf).equalsType(gained)) {
+                        testStack = stackInShelf.copy();
+                    }
+                    if (stackInShelf == null) {
+                        testStack = gained.toItemStack();
+                        testStack.stackSize = 0;
+                    }
+                    if (testStack != null) {
+                        ItemStack nextTestStack = testStack.copy();
+                        nextTestStack.stackSize++;
+                        while (amount > 0 && bookshelf.isItemValidForSlotSensitive(i, nextTestStack) && nextTestStack.stackSize < testStack.getMaxStackSize()) {
+                            testStack = nextTestStack.copy();
+                            nextTestStack.stackSize++;
+                            amount--;
+                        }
+
+                        if (testStack.stackSize > 0) {
+                            bookshelf.setInventorySlotContents(i, testStack);
+                        }
+                        if (gained.stackSize <= 0) {
+                            break outer;
+                        }
+                    }
+                }
+            }
+        }
+
+        StorageItemStack result = gained.copy();
+        result.stackSize = amount;
+        return result.toItemStack();
+
+    }
+
+    @Override
+    public ItemStack slotClick(int slot, int clickedButton, int mode, EntityPlayer player) {
+        ItemStack itemstack = null;
+
+        if (player.inventory.getItemStack() != null && slot == -999) {
+            if (clickedButton == 0) {
+                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);
+                player.inventory.setItemStack((ItemStack) null);
+            }
+
+            if (clickedButton == 1) {
+                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack().splitStack(1), true);
+
+                if (player.inventory.getItemStack().stackSize == 0) {
+                    player.inventory.setItemStack((ItemStack) null);
+                }
+            }
+        } else if (slot != -999 && inventorySlots.get(slot) instanceof SlotCoordinator) {
+            if (clickedButton == 0 && mode == 0) {
+                StorageItemStack target = ((SlotCoordinator) inventorySlots.get(slot)).storage;
+                if (target != null && player.inventory.getItemStack() == null) {
+                    target = target.copy();
+                    target.stackSize = 64;
+                    ItemStack result = takeFromInventory(target);
+                    player.inventory.setItemStack(result);
+                    ((SlotCoordinator) inventorySlots.get(slot)).onPickupFromSlot(player, result);
+                    update();
+                } else if (player.inventory.getItemStack() != null) {
+                    ItemStack placedStack = player.inventory.getItemStack().copy();
+                    player.inventory.setItemStack(putIntoInventory(new StorageItemStack(placedStack)));
+                    update();
+                }
+            }
+
+        } else {
+
+            if (slot < 0) {
+                return null;
+            }
+
+            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+
+            if (slot2 != null) {
+                ItemStack stackInSlot = slot2.getStack();
+                ItemStack stackInPlayer = player.inventory.getItemStack();
+                ItemStack stackPickedUp = null;
+                int l1 = 0;
+
+                if (stackInSlot != null) {
+                    itemstack = stackInSlot.copy();
+                }
+
+                if (stackInSlot == null) {
+                    if (stackInPlayer != null && slot2.isItemValid(stackInPlayer)) {
+                        l1 = clickedButton == 0 ? stackInPlayer.stackSize : 1;
+
+                        if (l1 > slot2.getSlotStackLimit()) {
+                            l1 = slot2.getSlotStackLimit();
+                        }
+
+                        if (stackInPlayer.stackSize >= l1) {
+                            slot2.putStack(stackInPlayer.splitStack(l1));
+                        }
+
+                        if (stackInPlayer.stackSize == 0) {
+                            player.inventory.setItemStack((ItemStack) null);
+                        }
+                    }
+                } else if (slot2.canTakeStack(player)) {
+                    if (stackInPlayer == null) {
+                        l1 = clickedButton == 0 ? stackInSlot.stackSize : (stackInSlot.stackSize + 1) / 2;
+                        stackPickedUp = slot2.decrStackSize(l1);
+                        player.inventory.setItemStack(stackPickedUp);
+
+                        if (stackInSlot.stackSize == 0) {
+                            slot2.putStack((ItemStack) null);
+                        }
+
+                        slot2.onPickupFromSlot(player, player.inventory.getItemStack());
+                    } else if (slot2.isItemValid(stackInPlayer)) {
+                        if (stackInSlot.getItem() == stackInPlayer.getItem() && stackInSlot.getItemDamage() == stackInPlayer.getItemDamage() && ItemStack.areItemStackTagsEqual(stackInPlayer, stackInSlot)) {
+                            l1 = clickedButton == 0 ? stackInPlayer.stackSize : 1;
+
+                            if (l1 > slot2.getSlotStackLimit() - stackInSlot.stackSize) {
+                                l1 = slot2.getSlotStackLimit() - stackInSlot.stackSize;
+                            }
+
+                            if (l1 > stackInPlayer.getMaxStackSize() - stackInSlot.stackSize) {
+                                l1 = stackInPlayer.getMaxStackSize() - stackInSlot.stackSize;
+                            }
+
+                            stackInPlayer.splitStack(l1);
+
+                            if (stackInPlayer.stackSize == 0) {
+                                player.inventory.setItemStack((ItemStack) null);
+                            }
+
+                            stackInSlot.stackSize += l1;
+                        } else if (stackInPlayer.stackSize <= slot2.getSlotStackLimit()) {
+                            slot2.putStack(stackInPlayer);
+                            player.inventory.setItemStack(stackInSlot);
+                        }
+                    } else if (stackInSlot.getItem() == stackInPlayer.getItem() && stackInPlayer.getMaxStackSize() > 1 && (!stackInSlot.getHasSubtypes() || stackInSlot.getItemDamage() == stackInPlayer.getItemDamage()) && ItemStack.areItemStackTagsEqual(stackInSlot, stackInPlayer)) {
+                        l1 = stackInSlot.stackSize;
+
+                        if (l1 > 0 && l1 + stackInPlayer.stackSize <= stackInPlayer.getMaxStackSize()) {
+                            stackInPlayer.stackSize += l1;
+                            stackInSlot = slot2.decrStackSize(l1);
+
+                            if (stackInSlot.stackSize == 0) {
+                                slot2.putStack((ItemStack) null);
+                            }
+
+                            slot2.onPickupFromSlot(player, player.inventory.getItemStack());
+                        }
+                    }
+                }
+
+                slot2.onSlotChanged();
+            }
+        }
+
+        return itemstack;
     }
 }

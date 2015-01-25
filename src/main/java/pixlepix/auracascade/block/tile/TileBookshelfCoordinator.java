@@ -9,9 +9,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.ItemStackMapEntry;
+import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
 import scala.collection.mutable.ArrayStack;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
@@ -23,6 +25,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     public ArrayList<TileStorageBookshelf> bookshelfLocations = new ArrayList<TileStorageBookshelf>();
 
+
+    public boolean hasCheckedShelves;
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
@@ -44,7 +48,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (worldObj.getTotalWorldTime() % 100 == 0) {
+        if (worldObj.getTotalWorldTime() % 20 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayStack<CoordTuple> toSearch = new ArrayStack<CoordTuple>();
             toSearch.push(new CoordTuple(this));
@@ -59,6 +63,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                     }
                 }
             }
+            hasCheckedShelves = true;
         }
     }
 
@@ -178,11 +183,37 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     }
 
+    public ArrayList<StorageItemStack> getAbstractInventory() {
+        ArrayList<ItemStack> startInv = getInv();
+        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
+        for (ItemStack itemStack : startInv) {
+            if (itemStack != null) {
+                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
+                for (StorageItemStack storageItemStack : inv) {
+                    remainingStorage = storageItemStack.merge(remainingStorage, Integer.MAX_VALUE);
+                }
+                while (remainingStorage != null && remainingStorage.stackSize > 0) {
+                    int delta = remainingStorage.stackSize;
+                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
+                    inv.add(storageItemStack);
+                    remainingStorage.stackSize -= delta;
+                }
+            }
+        }
+        return inv;
+    }
+
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
 
         TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
-        //Note that the bookshelf's implementation of isItemValidForSlot isn't slot-sensitive
-        return bookshelf.isItemValidForSlot(0, stack);
+        return bookshelf.isItemValidForSlot(getIndexWithinBookshelf(i), stack);
+    }
+
+    //Used by SlotCoordinator.
+    public boolean isItemValidForSlotSensitive(int i, ItemStack stack) {
+
+        TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
+        return bookshelf.isItemValidForSlotSensitive(getIndexWithinBookshelf(i), stack);
     }
 }

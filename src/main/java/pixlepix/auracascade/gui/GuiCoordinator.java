@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class GuiCoordinator extends GuiContainer {
 
-    public static InventoryBasic invBasic = new InventoryBasic("tmp", true, 21);
+    public static InventoryBasic invBasic = new InventoryBasic("tmp", true, 66);
     public TileBookshelfCoordinator te;
     public ContainerCoordinator containerCoordinator;
     /**
