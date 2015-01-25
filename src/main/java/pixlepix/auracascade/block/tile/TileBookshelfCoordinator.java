@@ -21,7 +21,7 @@ import java.util.Queue;
  */
 public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
-    public ArrayList<CoordTuple> bookshelfLocations = new ArrayList<CoordTuple>();
+    public ArrayList<TileStorageBookshelf> bookshelfLocations = new ArrayList<TileStorageBookshelf>();
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -45,16 +45,17 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public void updateEntity() {
         super.updateEntity();
         if (worldObj.getTotalWorldTime() % 100 == 0) {
-            bookshelfLocations = new ArrayList<CoordTuple>();
+            bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayStack<CoordTuple> toSearch = new ArrayStack<CoordTuple>();
             toSearch.push(new CoordTuple(this));
             while (toSearch.size() > 0) {
                 CoordTuple nextTuple = toSearch.pop();
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     CoordTuple newTuple = nextTuple.add(direction);
-                    if (newTuple.getTile(worldObj) instanceof TileStorageBookshelf && !bookshelfLocations.contains(newTuple)) {
+                    TileEntity storageBookshelf = newTuple.getTile(worldObj);
+                    if (storageBookshelf instanceof TileStorageBookshelf && !bookshelfLocations.contains(newTuple.getTile(worldObj))) {
                         toSearch.push(newTuple);
-                        bookshelfLocations.add(newTuple);
+                        bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
                     }
                 }
             }
@@ -62,13 +63,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     public ArrayList<TileStorageBookshelf> getBookshelves() {
-        ArrayList<TileStorageBookshelf> result = new ArrayList<TileStorageBookshelf>();
-        for (CoordTuple tuple : bookshelfLocations) {
-            if (tuple.getTile(worldObj) instanceof TileStorageBookshelf) {
-                result.add((TileStorageBookshelf) tuple.getTile(worldObj));
-            }
-        }
-        return result;
+        return bookshelfLocations;
     }
 
     @Override
