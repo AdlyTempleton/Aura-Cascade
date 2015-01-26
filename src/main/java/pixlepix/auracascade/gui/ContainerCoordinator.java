@@ -27,7 +27,7 @@ public class ContainerCoordinator extends Container {
         for (int i = 0; i < 21; i++) {
             int x = i % 7;
             int y = i / 7;
-            addSlotToContainer(new SlotCoordinator(i, 8 + x * 18, 17 + y * 18, te, null));
+            addSlotToContainer(new SlotCoordinator(i, 8 + x * 20, 17 + y * 18, te, null));
         }
         bindPlayerInventory(inventoryPlayer);
         scrollTo(0);
@@ -95,7 +95,7 @@ public class ContainerCoordinator extends Container {
     public void scrollTo(float scroll) {
         this.lastScroll = scroll;
         ArrayList<StorageItemStack> stacks = tileEntity.getAbstractInventory();
-        int i = stacks.size() / 7 - 3;
+        int i = stacks.size() / 7 - 2;
         int j = (int) ((double) (scroll * (float) i) + 0.5D);
 
         if (j < 0) {
@@ -188,7 +188,7 @@ public class ContainerCoordinator extends Container {
     public ItemStack slotClick(int slot, int clickedButton, int mode, EntityPlayer player) {
         ItemStack itemstack = null;
 
-        if (player.inventory.getItemStack() != null && slot == -999) {
+        if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
                 player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);
                 player.inventory.setItemStack((ItemStack) null);
@@ -202,18 +202,31 @@ public class ContainerCoordinator extends Container {
                 }
             }
         } else if (slot != -999 && inventorySlots.get(slot) instanceof SlotCoordinator) {
-            if (clickedButton == 0 && mode == 0) {
+            if ((clickedButton == 0 || clickedButton == 1) && mode == 0) {
                 StorageItemStack target = ((SlotCoordinator) inventorySlots.get(slot)).storage;
                 if (target != null && player.inventory.getItemStack() == null) {
                     target = target.copy();
-                    target.stackSize = 64;
+                    target.stackSize = clickedButton == 0 ? 64 : 32;
                     ItemStack result = takeFromInventory(target);
                     player.inventory.setItemStack(result);
                     ((SlotCoordinator) inventorySlots.get(slot)).onPickupFromSlot(player, result);
                     update();
                 } else if (player.inventory.getItemStack() != null) {
                     ItemStack placedStack = player.inventory.getItemStack().copy();
-                    player.inventory.setItemStack(putIntoInventory(new StorageItemStack(placedStack)));
+                    int reservedItems = 0;
+                    if (clickedButton == 1) {
+                        reservedItems = placedStack.stackSize - 1;
+                        placedStack.stackSize = 1;
+
+                    }
+                    ItemStack leftovers = putIntoInventory(new StorageItemStack(placedStack));
+                    if (leftovers != null) {
+                        leftovers.stackSize += reservedItems;
+                    } else if (reservedItems > 0) {
+                        leftovers = placedStack.copy();
+                        leftovers.stackSize = reservedItems;
+                    }
+                    player.inventory.setItemStack(leftovers);
                     update();
                 }
             }
@@ -308,4 +321,6 @@ public class ContainerCoordinator extends Container {
 
         return itemstack;
     }
+
+
 }
