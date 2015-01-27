@@ -1,11 +1,13 @@
 package pixlepix.auracascade.block.tile;
 
 import com.sun.jmx.remote.internal.ArrayQueue;
+import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.ItemStackMapEntry;
@@ -17,6 +19,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
+import java.util.Vector;
 
 /**
  * Created by localmacaccount on 1/24/15.
@@ -45,11 +48,44 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public void writeCustomNBT(NBTTagCompound nbt) {
     }
 
+
+    public boolean hasClearLineOfSight(CoordTuple tuple) {
+        int x = (int) (xCoord);
+        int y = (int) (yCoord);
+        int z = (int) (zCoord);
+
+        Vec3 originalVector = Vec3.createVectorHelper(tuple.getX() - x, tuple.getY() - y, tuple.getZ() - z);
+        Vec3 vec3 = originalVector.normalize();
+        double f = 0;
+        while (true) {
+            f += .1;
+            x = (int) (xCoord + f * vec3.xCoord);
+            y = (int) (yCoord + f * vec3.yCoord);
+            z = (int) (zCoord + f * vec3.zCoord);
+
+            if (new CoordTuple(x, y, z).equals(tuple)) {
+                return true;
+            }
+            if (new CoordTuple(x, y, z).equals(new CoordTuple(xCoord, yCoord, zCoord))) {
+                continue;
+            }
+            if (!worldObj.isAirBlock(x, y, z) && new CoordTuple(x, y, z).dist(this) >= 2) {
+                return false;
+            }
+            if (f < originalVector.lengthVector()) {
+                return true;
+
+            }
+        }
+
+    }
+
     @Override
     public void updateEntity() {
         super.updateEntity();
         if (worldObj.getTotalWorldTime() % 20 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
+            ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
             ArrayStack<CoordTuple> toSearch = new ArrayStack<CoordTuple>();
             toSearch.push(new CoordTuple(this));
             while (toSearch.size() > 0) {
@@ -57,9 +93,16 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     CoordTuple newTuple = nextTuple.add(direction);
                     TileEntity storageBookshelf = newTuple.getTile(worldObj);
-                    if (storageBookshelf instanceof TileStorageBookshelf && !bookshelfLocations.contains(newTuple.getTile(worldObj))) {
+                    if (storageBookshelf instanceof TileStorageBookshelf && !checkedLocations.contains(newTuple)) {
                         toSearch.push(newTuple);
-                        bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
+                        if (hasClearLineOfSight(newTuple)) {
+                            bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
+                        }
+                        checkedLocations.add(newTuple);
+                    }
+                    if (newTuple.getBlock(worldObj) instanceof BlockBookshelf && !checkedLocations.contains(newTuple)) {
+                        toSearch.push(newTuple);
+                        checkedLocations.add(newTuple);
                     }
                 }
             }
@@ -214,6 +257,6 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public boolean isItemValidForSlotSensitive(int i, ItemStack stack) {
 
         TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
-        return bookshelf.isItemValidForSlotSensitive(getIndexWithinBookshelf(i), stack);
+        return bookshelf != null ? bookshelf.isItemValidForSlotSensitive(getIndexWithinBookshelf(i), stack) : false;
     }
 }
