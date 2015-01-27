@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
+import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -74,10 +75,11 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
         }
         TileStorageBookshelf bookshelf = (TileStorageBookshelf) te;
         List<String> result = new ArrayList<String>();
-        for (int i = 0; i < bookshelf.getSizeInventory(); i++) {
-            ItemStack stack = bookshelf.getStackInSlot(i);
+        ArrayList<StorageItemStack> abstractInv = bookshelf.getAbstractInventory();
+        for (StorageItemStack stack : abstractInv) {
+
             if (stack != null) {
-                result.add(stack.getDisplayName() + " x" + stack.stackSize);
+                result.add(stack.toItemStack().getDisplayName() + " x" + stack.stackSize);
             }
         }
         return result;

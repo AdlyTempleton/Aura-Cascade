@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by localmacaccount on 1/23/15.
  */
-public class ItemStorageBook extends Item implements ITTinkererItem {
+public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     public ItemStorageBook() {
         super();
         setMaxStackSize(1);
@@ -79,30 +79,15 @@ public class ItemStorageBook extends Item implements ITTinkererItem {
         return false;
     }
 
-    public int getMaxStackSize() {
-        return 10;
+    public abstract int getMaxStackSize();
 
-    }
+    public abstract int getHeldStacks();
 
-    public int getHeldStacks() {
-        return 5;
-    }
-
-    public boolean isItemValid(ItemStack stack) {
-        return true;
-
-    }
-
+    public abstract boolean isItemValid(ItemStack stack);
     public int getActualCount() {
         return (int) (Math.ceil(getMaxStackSize() / 64F) * getHeldStacks());
         
     }
-
-    @Override
-    public String getItemName() {
-        return "storageBook";
-    }
-
     @Override
     public boolean shouldRegister() {
         return true;

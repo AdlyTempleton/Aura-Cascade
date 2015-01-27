@@ -42,9 +42,10 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     public void readCustomNBT(NBTTagCompound nbt) {
         storedBook = ItemStack.loadItemStackFromNBT((NBTTagCompound) nbt.getTag("book"));
 
-
-        ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        inv = itemStorageBook.getInventory(storedBook);
+        if (storedBook != null) {
+            ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+            inv = itemStorageBook.getInventory(storedBook);
+        }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
     }
 
@@ -175,6 +176,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             return validCache.get(new ItemStackMapEntry(item));
         }
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item)) {
+            return false;
+        }
         ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
         testInv.add(item);
 
@@ -210,6 +214,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             return false;
         }
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item)) {
+            return false;
+        }
         ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
         //Only difference from isItemValidForSlot
         testInv.set(slot, item);
@@ -234,5 +241,25 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         }
         return true;
 
+    }
+
+    public ArrayList<StorageItemStack> getAbstractInventory() {
+        ArrayList<ItemStack> startInv = inv;
+        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
+        for (ItemStack itemStack : startInv) {
+            if (itemStack != null) {
+                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
+                for (StorageItemStack storageItemStack : inv) {
+                    remainingStorage = storageItemStack.merge(remainingStorage, Integer.MAX_VALUE);
+                }
+                while (remainingStorage != null && remainingStorage.stackSize > 0) {
+                    int delta = remainingStorage.stackSize;
+                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
+                    inv.add(storageItemStack);
+                    remainingStorage.stackSize -= delta;
+                }
+            }
+        }
+        return inv;
     }
 }
