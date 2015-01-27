@@ -9,7 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
-import scala.actors.threadpool.Arrays;
+
+import java.util.Arrays;
 
 /**
  * Created by localmacaccount on 1/27/15.
