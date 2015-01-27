@@ -18,8 +18,8 @@ import java.util.Arrays;
  * Created by localmacaccount on 1/27/15.
  */
 public class MineralStorageBlock extends ItemStorageBook {
-    public Block[] blocks = new Block[]{Blocks.lapis_block, Blocks.coal_block, Blocks.diamond_block, Blocks.gold_block, Blocks.iron_block, Blocks.redstone_block, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.redstone_ore};
-    public Item[] items = new Item[]{Items.quartz, Items.dye, Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.coal, Items.redstone};
+    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.coal_block, Blocks.diamond_block, Blocks.gold_block, Blocks.iron_block, Blocks.redstone_block, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.redstone_ore};
+    public Item[] items = new Item[]{Items.quartz, Items.dye, Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.coal, Items.redstone, Items.emerald};
     public String[] ores = new String[]{"ore", "ingot", "dust"};
 
     @Override
@@ -48,6 +48,9 @@ public class MineralStorageBlock extends ItemStorageBook {
         for (int i : ids) {
             String s = OreDictionary.getOreName(i);
             if (Arrays.asList(ores).contains(s.toLowerCase())) {
+                return true;
+            }
+            if (s.startsWith("block")) {
                 return true;
             }
         }
