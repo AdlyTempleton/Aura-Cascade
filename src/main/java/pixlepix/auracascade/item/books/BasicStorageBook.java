@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item.books;
 
 import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
 
 /**
@@ -18,7 +19,7 @@ public class BasicStorageBook extends ItemStorageBook {
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack) {
+    public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         return true;
     }
 

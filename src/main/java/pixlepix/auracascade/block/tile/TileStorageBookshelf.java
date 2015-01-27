@@ -2,7 +2,6 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -12,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -176,7 +174,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             return validCache.get(new ItemStackMapEntry(item));
         }
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item)) {
+        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item, this)) {
             return false;
         }
         ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
@@ -214,7 +212,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             return false;
         }
         ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
-        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item)) {
+        if (!((ItemStorageBook) storedBook.getItem()).isItemValid(item, this)) {
             return false;
         }
         ArrayList<ItemStack> testInv = itemStorageBook.getInventory(storedBook);
