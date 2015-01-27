@@ -9,6 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.Arrays;
 
@@ -59,5 +62,11 @@ public class FarmingStorageBook extends ItemStorageBook {
     @Override
     public String getItemName() {
         return "farmingBook";
+    }
+
+    @Override
+    public ThaumicTinkererRecipe getRecipeItem() {
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.wheat_seeds));
     }
 }

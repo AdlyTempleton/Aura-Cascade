@@ -1,9 +1,10 @@
-package pixlepix.auracascade.block.entity;
+package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -11,7 +12,11 @@ import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -59,7 +64,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return null;
+        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 250000), new ItemStack(Blocks.bookshelf)));
     }
 
 
@@ -78,4 +83,6 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
         player.openGui(AuraCascade.instance, 1, world, x, y, z);
         return true;
     }
+
+
 }

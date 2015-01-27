@@ -1,12 +1,16 @@
 package pixlepix.auracascade.item.books;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.Arrays;
 
@@ -53,5 +57,11 @@ public class MobStorageBook extends ItemStorageBook {
     @Override
     public String getItemName() {
         return "mobDropBook";
+    }
+
+    @Override
+    public ThaumicTinkererRecipe getRecipeItem() {
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.rotten_flesh));
     }
 }

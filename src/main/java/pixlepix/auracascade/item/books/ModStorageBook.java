@@ -1,9 +1,15 @@
 package pixlepix.auracascade.item.books;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 
@@ -36,5 +42,11 @@ public class ModStorageBook extends ItemStorageBook {
     @Override
     public String getItemName() {
         return "modBook";
+    }
+
+    @Override
+    public ThaumicTinkererRecipe getRecipeItem() {
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
     }
 }
