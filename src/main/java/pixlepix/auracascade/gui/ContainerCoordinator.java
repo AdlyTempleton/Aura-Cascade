@@ -60,31 +60,34 @@ public class ContainerCoordinator extends Container {
 
         //null checks and checks if the item can be stacked (maxStackSize > 1)
         if (slotObject != null && slotObject.getHasStack()) {
-            ItemStack stackInSlot = slotObject.getStack();
-            stack = stackInSlot.copy();
+            stack = slotObject.getStack();
+            ItemStack stackLeftover;
 
             //merges the item into player inventory since its in the tileEntity
-            if (slot < 9) {
-                if (!this.mergeItemStack(stackInSlot, 0, 35, true)) {
-                    return null;
+            if (slot < 21) {
+                StorageItemStack storageItemStack = ((SlotCoordinator) inventorySlots.get(slot)).storage;
+                storageItemStack.stackSize = 64;
+                stackLeftover = takeFromInventory(storageItemStack);
+                if (stackLeftover != null) {
+                    this.mergeItemStack(stackLeftover, 21, 21 + 36, true);
                 }
+                update();
+                slotObject.onSlotChange(stack, slotObject.getStack());
+                return null;
+                
             }
             //places it into the tileEntity is possible since its in the player inventory
-            else if (!this.mergeItemStack(stackInSlot, 0, 9, false)) {
-                return null;
+            else {
+                ItemStack stackToTransfer = slotObject.getStack();
+                stackLeftover = putIntoInventory(new StorageItemStack(stackToTransfer));
+                if (stackLeftover != null && stackLeftover.stackSize == stackToTransfer.stackSize) {
+                    return null;
+                }
+                slotObject.putStack(stackLeftover);
+                slotObject.onSlotChange(stack, stackLeftover);
             }
-
-            if (stackInSlot.stackSize == 0) {
-                slotObject.putStack(null);
-            } else {
-                slotObject.onSlotChanged();
-            }
-
-            if (stackInSlot.stackSize == stack.stackSize) {
-                return null;
-            }
-            slotObject.onPickupFromSlot(player, stackInSlot);
         }
+        update();
         return stack;
     }
 
@@ -201,7 +204,7 @@ public class ContainerCoordinator extends Container {
                     player.inventory.setItemStack((ItemStack) null);
                 }
             }
-        } else if (slot != -999 && inventorySlots.get(slot) instanceof SlotCoordinator) {
+        } else if (slot >= 0 && inventorySlots.get(slot) instanceof SlotCoordinator && mode != 1) {
             if ((clickedButton == 0 || clickedButton == 1) && mode == 0) {
                 StorageItemStack target = ((SlotCoordinator) inventorySlots.get(slot)).storage;
                 if (target != null && player.inventory.getItemStack() == null) {
@@ -231,6 +234,25 @@ public class ContainerCoordinator extends Container {
                 }
             }
 
+        } else if (mode == 1) {
+            if (slot < 0) {
+                return null;
+            }
+
+            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+
+            if (slot2 != null && slot2.canTakeStack(player)) {
+                ItemStack itemstack3 = this.transferStackInSlot(player, slot);
+
+                if (itemstack3 != null) {
+                    Item item = itemstack3.getItem();
+                    itemstack = itemstack3.copy();
+
+                    if (slot2.getStack() != null && slot2.getStack().getItem() == item) {
+                        this.retrySlotClick(slot, clickedButton, true, player);
+                    }
+                }
+            }
         } else {
 
             if (slot < 0) {
