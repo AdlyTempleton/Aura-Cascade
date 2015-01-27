@@ -93,8 +93,14 @@ public class EntityFairy extends Entity {
                 entityItemRender = new EntityItem(worldObj);
             }
             entityItemRender.setPosition(posX, posY, posZ);
-            entityItemRender.setVelocity(oldX, oldY, oldZ);
-            setVelocity(0, 0, 0);
+            entityItemRender.motionX = oldX;
+            entityItemRender.motionY = oldY;
+            entityItemRender.motionZ = oldZ;
+
+            motionX = 0;
+            motionY = 0;
+            motionZ = 0;
+
         } else if (worldObj.isRemote) {
             AuraCascade.proxy.networkWrapper.sendToServer(new PacketFairyRequestUpdate(this));
         } else {
