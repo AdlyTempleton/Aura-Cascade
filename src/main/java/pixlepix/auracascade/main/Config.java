@@ -9,8 +9,8 @@ import net.minecraftforge.common.config.Configuration;
 public class Config {
 
     public static boolean overrideMaxParticleLimit = true;
-    
-    public static int pumpCoalSpeed = 200;
+
+    public static int pumpCoalSpeed = 300;
     public static int pumpCoalDuration = 1;
     public static int pumpRedstoneSpeed = 1500;
     public static int pumpRedstoneDuration = 10;
@@ -35,8 +35,8 @@ public class Config {
         config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
 
-        pumpCoalSpeed = config.getInt("pumpCoalSpeed", Configuration.CATEGORY_GENERAL, pumpCoalSpeed, 1, Integer.MAX_VALUE, "");
-        pumpCoalDuration = config.getInt("pumpCoalDuration", Configuration.CATEGORY_GENERAL, pumpCoalDuration, 1, Integer.MAX_VALUE, "");
+        pumpCoalSpeed = config.getInt("pumpBurningSpeed", Configuration.CATEGORY_GENERAL, pumpCoalSpeed, 1, Integer.MAX_VALUE, "");
+        pumpCoalDuration = config.getInt("pumpBurningDuration", Configuration.CATEGORY_GENERAL, pumpCoalDuration, 1, Integer.MAX_VALUE, "");
 
         pumpRedstoneSpeed = config.getInt("pumpRedstoneSpeed", Configuration.CATEGORY_GENERAL, pumpRedstoneSpeed, 1, Integer.MAX_VALUE, "");
         pumpRedstoneDuration = config.getInt("pumpRedstoneDuration", Configuration.CATEGORY_GENERAL, pumpRedstoneDuration, 1, Integer.MAX_VALUE, "");
