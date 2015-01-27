@@ -71,6 +71,9 @@ public class ContainerCoordinator extends Container {
                 if (stackLeftover != null) {
                     this.mergeItemStack(stackLeftover, 21, 21 + 36, true);
                 }
+                if (stackLeftover != null) {
+                    putIntoInventory(new StorageItemStack(stackLeftover));
+                }
                 update();
                 slotObject.onSlotChange(stack, slotObject.getStack());
                 return null;
@@ -205,7 +208,7 @@ public class ContainerCoordinator extends Container {
                 }
             }
         } else if (slot >= 0 && inventorySlots.get(slot) instanceof SlotCoordinator && mode != 1) {
-            if ((clickedButton == 0 || clickedButton == 1) && mode == 0) {
+            if ((clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 5)) {
                 StorageItemStack target = ((SlotCoordinator) inventorySlots.get(slot)).storage;
                 if (target != null && player.inventory.getItemStack() == null) {
                     target = target.copy();
