@@ -52,7 +52,7 @@ public class FarmingStorageBook extends ItemStorageBook {
                 return true;
             }
         }
-        if (GameRegistry.findUniqueIdentifierFor(item).modId == "HarvestCraft") {
+        if (GameRegistry.findUniqueIdentifierFor(item).modId.equals("HarvestCraft")) {
             return true;
 
         }
