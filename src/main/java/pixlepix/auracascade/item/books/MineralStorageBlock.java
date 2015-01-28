@@ -62,3 +62,4 @@ public class MineralStorageBlock extends ItemStorageBook {
         return "mineralBook";
     }
 }
+
