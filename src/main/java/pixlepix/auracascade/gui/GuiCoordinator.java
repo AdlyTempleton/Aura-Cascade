@@ -97,13 +97,6 @@ public class GuiCoordinator extends GuiContainer {
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
-        //Render slots
-        for (int i = 0; i < te.getSizeInventory(); i++) {
-            int xi = x + i % 7;
-            int yi = y + i / 7;
-            this.drawTexturedModalRect(16 + xi * 18, 17 + yi * 18, 0, ySize, xSize, ySize);
-        }
-
         this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
 
