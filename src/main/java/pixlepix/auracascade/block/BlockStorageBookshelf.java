@@ -82,6 +82,9 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
                 result.add(stack.toItemStack().getDisplayName() + " x" + stack.stackSize);
             }
         }
+        if (bookshelf.storedBook != null) {
+            result.add(bookshelf.storedBook.getDisplayName());
+        }
         return result;
         
     }
