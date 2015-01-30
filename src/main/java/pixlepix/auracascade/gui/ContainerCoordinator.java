@@ -167,7 +167,7 @@ public class ContainerCoordinator extends Container {
                     if (testStack != null) {
                         ItemStack nextTestStack = testStack.copy();
                         nextTestStack.stackSize++;
-                        while (amount > 0 && bookshelf.isItemValidForSlotSensitive(i, nextTestStack) && nextTestStack.stackSize < testStack.getMaxStackSize()) {
+                        while (amount > 0 && bookshelf.isItemValidForSlotSensitive(i, nextTestStack) && nextTestStack.stackSize <= testStack.getMaxStackSize()) {
                             testStack = nextTestStack.copy();
                             nextTestStack.stackSize++;
                             amount--;
