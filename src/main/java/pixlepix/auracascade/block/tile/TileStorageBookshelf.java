@@ -43,6 +43,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         if (storedBook != null) {
             ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
             inv = itemStorageBook.getInventory(storedBook);
+        } else {
+            inv = new ArrayList<ItemStack>();
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
     }
@@ -130,6 +132,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
             ItemStorageBook.setInventory(storedBook, inv);
             inv = itemStorageBook.getInventory(storedBook);
+        } else {
+            inv = new ArrayList<ItemStack>();
+            
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
