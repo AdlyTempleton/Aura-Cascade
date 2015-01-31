@@ -66,7 +66,7 @@ public class ContainerCoordinator extends Container {
             //merges the item into player inventory since its in the tileEntity
             if (slot < 21) {
                 StorageItemStack storageItemStack = ((SlotCoordinator) inventorySlots.get(slot)).storage;
-                storageItemStack.stackSize = 64;
+                storageItemStack.stackSize = storageItemStack.item.getItemStackLimit(storageItemStack.toItemStack());
                 stackLeftover = takeFromInventory(storageItemStack);
                 if (stackLeftover != null) {
                     this.mergeItemStack(stackLeftover, 21, 21 + 36, true);
@@ -217,7 +217,8 @@ public class ContainerCoordinator extends Container {
                 StorageItemStack target = ((SlotCoordinator) inventorySlots.get(slot)).storage;
                 if (target != null && player.inventory.getItemStack() == null) {
                     target = target.copy();
-                    target.stackSize = clickedButton == 0 ? 64 : 32;
+                    int maxStackSize = target.item.getItemStackLimit(target.toItemStack());
+                    target.stackSize = clickedButton == 0 ? maxStackSize : maxStackSize / 2;
                     ItemStack result = takeFromInventory(target);
                     player.inventory.setItemStack(result);
                     ((SlotCoordinator) inventorySlots.get(slot)).onPickupFromSlot(player, result);
