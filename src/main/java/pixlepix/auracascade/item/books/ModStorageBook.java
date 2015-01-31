@@ -31,6 +31,9 @@ public class ModStorageBook extends ItemStorageBook {
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         ArrayList<ItemStack> inv = tileStorageBookshelf.inv;
         GameRegistry.UniqueIdentifier uid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
+        if (uid == null || uid.modId == null) {
+            return false;
+        }
         for (ItemStack stackInInv : inv) {
             if (stackInInv != null && !uid.modId.equals(GameRegistry.findUniqueIdentifierFor(stackInInv.getItem()).modId)) {
                 return false;
