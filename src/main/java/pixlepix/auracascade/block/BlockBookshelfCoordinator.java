@@ -3,6 +3,7 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -67,6 +68,10 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
         return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 250000), new ItemStack(Blocks.bookshelf)));
     }
 
+    @Override
+    public void registerBlockIcons(IIconRegister register) {
+        blockIcon = register.registerIcon("aura:coordinator");
+    }
 
     @Override
     public TileEntity createNewTileEntity(World world, int p_149915_2_) {

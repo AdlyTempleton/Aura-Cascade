@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -58,6 +59,11 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
             result.add(null);
         }
         return result;
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:storageBook");
     }
 
     @Override

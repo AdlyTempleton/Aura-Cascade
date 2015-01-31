@@ -3,6 +3,7 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -10,6 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
@@ -26,6 +29,8 @@ import java.util.Random;
  * Created by localmacaccount on 1/23/15.
  */
 public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
+
+    public IIcon top;
 
     public BlockStorageBookshelf() {
         super(Material.wood);
@@ -66,7 +71,6 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
         return null;
     }
 
-
     @Override
     public TileEntity createNewTileEntity(World world, int p_149915_2_) {
         return new TileStorageBookshelf();
@@ -91,6 +95,25 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
             result.add(bookshelf.storedBook.getDisplayName());
         }
         return result;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister register) {
+        top = register.registerIcon("aura:magicBookshelf_Top");
+        blockIcon = register.registerIcon("aura:magicBookshelf");
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (side == 0 || side == 1) {
+            return top;
+        }
+        return blockIcon;
+    }
+
+    @Override
+    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
+        return super.getIcon(p_149673_1_, p_149673_2_, p_149673_3_, p_149673_4_, p_149673_5_);
     }
 
     @Override
