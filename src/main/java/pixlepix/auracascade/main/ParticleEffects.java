@@ -1,10 +1,7 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityAuraFX;
-import net.minecraft.client.particle.EntityCritFX;
-import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.particle.EntitySpellParticleFX;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureManager;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;
@@ -53,6 +50,10 @@ public class ParticleEffects {
                 if (particleName.equals("magicCrit")) {
                     entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                     entityfx.setRBGColorF(entityfx.getRedColorF() * 0.3F, entityfx.getGreenColorF() * 0.8F, entityfx.getBlueColorF());
+                    entityfx.nextTextureIndexX();
+                }
+                if (particleName.equals("enchantmenttable")) {
+                    entityfx = new EntityEnchantmentTableParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                     entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("crit")) {

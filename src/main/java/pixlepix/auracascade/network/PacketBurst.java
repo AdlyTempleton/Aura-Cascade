@@ -18,7 +18,7 @@ import java.util.Random;
 public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMessage> {
 
 
-    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark"};
+    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark", "enchantmenttable"};
     public double x;
     public double y;
     public double z;

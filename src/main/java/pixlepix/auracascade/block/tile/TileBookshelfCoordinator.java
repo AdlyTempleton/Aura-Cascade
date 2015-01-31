@@ -1,6 +1,7 @@
 package pixlepix.auracascade.block.tile;
 
 import com.sun.jmx.remote.internal.ArrayQueue;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -9,10 +10,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.network.PacketBurst;
 import scala.collection.mutable.ArrayStack;
 
 import java.lang.reflect.Array;
@@ -69,10 +73,10 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
             if (new CoordTuple(x, y, z).equals(new CoordTuple(xCoord, yCoord, zCoord))) {
                 continue;
             }
-            if (!worldObj.isAirBlock(x, y, z) && new CoordTuple(x, y, z).dist(this) >= 2) {
+            if (!worldObj.isAirBlock(x, y, z) && new CoordTuple(x, y, z).dist(this) >= 1.5 && new CoordTuple(x, y, z).dist(tuple) >= 1.5) {
                 return false;
             }
-            if (f < originalVector.lengthVector()) {
+            if (f > originalVector.lengthVector()) {
                 return true;
 
             }
@@ -97,6 +101,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                         toSearch.push(newTuple);
                         if (hasClearLineOfSight(newTuple)) {
                             bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
+                            burst(newTuple, "enchantmenttable", EnumAura.WHITE_AURA, 1);
                         }
                         checkedLocations.add(newTuple);
                     }
@@ -244,6 +249,10 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
             }
         }
         return inv;
+    }
+
+    public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
     }
 
     @Override
