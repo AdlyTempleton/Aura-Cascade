@@ -350,8 +350,8 @@ item.extremelyDenseBook.name=Extremely Dense Storage Book
 item.veryDenseBook.name=Very Dense Storage Book
 item.superDenseBook.name=Super Dense Storage Book
 
-item.LightBook.name=Light Storage Book
-item.extremelyLightBook.name =Extremely Light Storage Book
+item.lightBook.name=Light Storage Book
+item.extremelyLightBook.name=Extremely Light Storage Book
 item.veryLightBook.name=Very Light Storage Book
 item.superLightBook.name=Super Light Storage Book
 
