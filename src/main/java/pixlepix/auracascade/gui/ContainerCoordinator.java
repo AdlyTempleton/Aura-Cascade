@@ -180,6 +180,10 @@ public class ContainerCoordinator extends Container {
                             break outer;
                         }
                     }
+                    if (bookshelf.getStackInSlot(i) == null) {
+                        break;
+
+                    }
                 }
             }
         }
