@@ -109,7 +109,6 @@ public class GuiCoordinator extends GuiContainer {
         this.drawTexturedModalRect(i1, k + (int) ((float) (l - k - 17) * this.currentScroll), 232, 0, 12, 15);
     }
 
-
     public void drawScreen(int x, int y, float p_73863_3_) {
 
         //Code handling scrolling

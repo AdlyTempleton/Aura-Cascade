@@ -35,7 +35,7 @@ public class ContainerCoordinator extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return tileEntity.isUseableByPlayer(player);
+        return tileEntity.neededPower <= tileEntity.lastPower;
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -93,6 +93,7 @@ public class ContainerCoordinator extends Container {
         update();
         return stack;
     }
+
 
     public void update() {
         scrollTo(lastScroll);

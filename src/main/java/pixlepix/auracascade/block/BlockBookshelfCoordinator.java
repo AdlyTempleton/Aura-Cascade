@@ -80,7 +80,11 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
-        return new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<String>();
+        TileBookshelfCoordinator coordinator = (TileBookshelfCoordinator) world.getTileEntity(x, y, z);
+        result.add("Power used last second: " + coordinator.lastPower);
+        result.add("Power needed: " + coordinator.neededPower);
+        return result;
     }
 
     @Override

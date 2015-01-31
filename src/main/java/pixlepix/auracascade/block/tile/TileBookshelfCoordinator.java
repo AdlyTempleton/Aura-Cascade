@@ -7,6 +7,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -34,6 +37,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
 
     public boolean hasCheckedShelves;
+    public int neededPower = 0;
+    public int lastPower = 0;
+
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
@@ -47,11 +53,27 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     public void readCustomNBT(NBTTagCompound nbt) {
+        lastPower = nbt.getInteger("lastPower");
+        neededPower = nbt.getInteger("neededPower");
     }
 
     public void writeCustomNBT(NBTTagCompound nbt) {
+
+        nbt.setInteger("lastPower", lastPower);
+        nbt.setInteger("neededPower", neededPower);
     }
 
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        writeCustomNBT(nbt);
+        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+        readCustomNBT(pkt.func_148857_g());
+    }
 
     public boolean hasClearLineOfSight(CoordTuple tuple) {
         int x = (int) (xCoord);
@@ -86,7 +108,24 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
-        super.updateEntity();
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 5) {
+            int numShelves = getBookshelves().size();
+            neededPower = (int) (5 * numShelves * Math.pow(1.05, numShelves));
+            //Drain power from aura nodes
+            lastPower = 0;
+            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+                if (tileEntity instanceof AuraTile) {
+                    AuraTile auraTile = (AuraTile) tileEntity;
+                    if (auraTile.energy > 0) {
+                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        lastPower += auraTile.energy;
+                        auraTile.energy = 0;
+                    }
+                }
+            }
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        }
         if (worldObj.getTotalWorldTime() % 20 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
@@ -121,6 +160,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     @Override
     public int getSizeInventory() {
+        if (lastPower < neededPower) {
+            return 0;
+        }
         int result = 0;
         for (TileStorageBookshelf bookshelf : getBookshelves()) {
             result += bookshelf.getSizeInventory();
@@ -257,7 +299,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
-
+        if (lastPower < neededPower) {
+            return false;
+        }
         TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
         return bookshelf.isItemValidForSlot(getIndexWithinBookshelf(i), stack);
     }
