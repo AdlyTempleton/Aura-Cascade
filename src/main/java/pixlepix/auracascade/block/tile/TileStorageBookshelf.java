@@ -125,6 +125,17 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         markDirty();
     }
 
+    public void onStoredBookChange() {
+        if (storedBook != null) {
+            ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
+            inv = itemStorageBook.getInventory(storedBook);
+        } else {
+            inv = new ArrayList<ItemStack>();
+        }
+        validCache = new HashMap<ItemStackMapEntry, Boolean>();
+        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
     @Override
     public void markDirty() {
         super.markDirty();

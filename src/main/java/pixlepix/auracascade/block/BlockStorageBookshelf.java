@@ -124,16 +124,14 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
                 EntityItem entityItem = new EntityItem(world, player.posX, player.posY, player.posZ, bookshelf.storedBook);
                 world.spawnEntityInWorld(entityItem);
                 bookshelf.storedBook = null;
-                bookshelf.markDirty();
-                world.markBlockForUpdate(x, y, z);
+                bookshelf.onStoredBookChange();
                 return true;
             }
         }
         if (!world.isRemote && !player.isSneaking() && bookshelf.storedBook == null && player.inventory.getCurrentItem() != null && player.inventory.getCurrentItem().getItem() instanceof ItemStorageBook) {
             bookshelf.storedBook = player.inventory.getCurrentItem();
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            bookshelf.markDirty();
-            world.markBlockForUpdate(x, y, z);
+            bookshelf.onStoredBookChange();
             return true;
         }
         return false;
