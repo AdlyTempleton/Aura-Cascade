@@ -9,6 +9,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentStyle;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
@@ -18,6 +21,7 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -89,7 +93,12 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-        player.openGui(AuraCascade.instance, 1, world, x, y, z);
+        TileBookshelfCoordinator coordinator = (TileBookshelfCoordinator) world.getTileEntity(x, y, z);
+        if (coordinator.lastPower >= coordinator.neededPower) {
+            player.openGui(AuraCascade.instance, 1, world, x, y, z);
+        } else if (!world.isRemote) {
+            player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_RED + "Not enough power to activate the Coordinator"));
+        }
         return true;
     }
 
