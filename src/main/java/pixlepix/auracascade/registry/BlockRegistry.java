@@ -34,6 +34,10 @@ public class BlockRegistry {
         return recipeMap.get(getFirstItemFromClass(item));
     }
 
+    public static ThaumicTinkererRecipe getFirstRecipeFromBlock(Class<? extends Block> item) {
+        return recipeMap.get(getFirstBlockFromClass(item));
+    }
+
     public static ArrayList<Item> getItemFromClass(Class clazz) {
         return itemRegistry.get(clazz);
     }
