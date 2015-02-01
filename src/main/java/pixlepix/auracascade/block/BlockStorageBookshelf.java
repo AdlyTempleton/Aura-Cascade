@@ -1,6 +1,7 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -44,6 +45,11 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public String getBlockName() {
         return "storageBookshelf";
+    }
+
+    @Override
+    public float getEnchantPowerBonus(World world, int x, int y, int z) {
+        return 1;
     }
 
     @Override

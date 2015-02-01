@@ -10,9 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockStorageBookshelf;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.StorageItemStack;
+import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -73,7 +75,7 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && world.getBlock(x, y, z) == Blocks.bookshelf) {
+        if (!world.isRemote && ((world.getBlock(x, y, z) != null && world.getBlock(x, y, z) == AuraCascade.proxy.chiselBookshelf) || world.getBlock(x, y, z) == Blocks.bookshelf)) {
             world.setBlock(x, y, z, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class));
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(x, y, z);
             te.storedBook = stack.copy();

@@ -7,7 +7,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +34,8 @@ public class CommonProxy {
     public static EventHandler eventHandler;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
+
+    public Block chiselBookshelf;
 
     public void preInit(FMLPreInitializationEvent event) {
         ModCreativeTab.INSTANCE = new ModCreativeTab();
@@ -77,6 +81,7 @@ public class CommonProxy {
         registry.postInit();
         LexiconData.init();
         LexiconData.postInit();
+        chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
     }
 
     public void addBlockDestroyEffects(CoordTuple tuple) {

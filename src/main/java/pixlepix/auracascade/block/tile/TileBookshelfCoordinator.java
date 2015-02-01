@@ -2,6 +2,7 @@ package pixlepix.auracascade.block.tile;
 
 import com.sun.jmx.remote.internal.ArrayQueue;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -19,6 +20,7 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 import scala.collection.mutable.ArrayStack;
 
@@ -144,7 +146,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                         }
                         checkedLocations.add(newTuple);
                     }
-                    if (newTuple.getBlock(worldObj) instanceof BlockBookshelf && !checkedLocations.contains(newTuple)) {
+                    if ((newTuple.getBlock(worldObj) instanceof BlockBookshelf || (newTuple.getBlock(worldObj) != null && newTuple.getBlock(worldObj) == AuraCascade.proxy.chiselBookshelf))
+                            && !checkedLocations.contains(newTuple)) {
                         toSearch.push(newTuple);
                         checkedLocations.add(newTuple);
                     }
