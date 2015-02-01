@@ -1,5 +1,7 @@
 package pixlepix.auracascade.gui;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -100,6 +102,9 @@ public class ContainerCoordinator extends Container {
     }
 
     public void scrollTo(float scroll) {
+        if (!tileEntity.getWorldObj().isRemote) {
+            tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        }
         this.lastScroll = scroll;
         ArrayList<StorageItemStack> stacks = tileEntity.getAbstractInventory();
         int i = stacks.size() / 7 - 2;
