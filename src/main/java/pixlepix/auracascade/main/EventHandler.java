@@ -173,5 +173,22 @@ public class EventHandler {
         }
     }
 
+    @SubscribeEvent
+    public void onPlayerLogout(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
+        ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
+        if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
+            ItemFairyRing.killNearby(event.player);
+        }
+
+    }
+
+    @SubscribeEvent
+    public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+        ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
+        if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
+            ItemFairyRing.makeFaries(item, event.player);
+        }
+
+    }
 
 }
