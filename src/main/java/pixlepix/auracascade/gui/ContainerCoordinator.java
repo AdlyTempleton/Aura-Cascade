@@ -9,6 +9,7 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.StorageItemStack;
@@ -22,6 +23,7 @@ import java.util.Iterator;
 public class ContainerCoordinator extends Container {
     public float lastScroll;
     protected TileBookshelfCoordinator tileEntity;
+    private String lastFilter = "";
 
     public ContainerCoordinator(InventoryPlayer inventoryPlayer, TileBookshelfCoordinator te) {
         tileEntity = te;
@@ -102,11 +104,26 @@ public class ContainerCoordinator extends Container {
     }
 
     public void scrollTo(float scroll) {
+        scrollTo(scroll, lastFilter);
+
+    }
+
+    public void scrollTo(float scroll, String filter) {
         if (!tileEntity.getWorldObj().isRemote) {
             tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
         }
+        lastFilter = filter;
+
+        ArrayList<StorageItemStack> stacks = (ArrayList<StorageItemStack>) tileEntity.getAbstractInventory().clone();
+        Iterator iter = stacks.iterator();
+        while (iter.hasNext()) {
+            StorageItemStack storageItemStack = (StorageItemStack) iter.next();
+            String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName()).toUpperCase();
+            if (!name.contains(filter)) {
+                iter.remove();
+            }
+        }
         this.lastScroll = scroll;
-        ArrayList<StorageItemStack> stacks = tileEntity.getAbstractInventory();
         int i = stacks.size() / 7 - 2;
         int j = (int) ((double) (scroll * (float) i) + 0.5D);
 

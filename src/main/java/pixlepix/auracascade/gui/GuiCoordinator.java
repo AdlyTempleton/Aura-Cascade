@@ -3,15 +3,18 @@ package pixlepix.auracascade.gui;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
@@ -20,10 +23,14 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.StorageItemStack;
+import pixlepix.auracascade.network.PacketCoordinatorScroll;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +42,7 @@ public class GuiCoordinator extends GuiContainer {
     public static InventoryBasic invBasic = new InventoryBasic("tmp", true, 66);
     public TileBookshelfCoordinator te;
     public ContainerCoordinator containerCoordinator;
+    public GuiTextField searchField;
     /**
      * Amount scrolled in Creative mode inventory (0 = top, 1 = bottom)
      */
@@ -47,9 +55,11 @@ public class GuiCoordinator extends GuiContainer {
      * True if the left mouse button was held down last time drawScreen was called.
      */
     private boolean wasClicking;
-
+    private boolean unfocused = false;
+    
     public GuiCoordinator(InventoryPlayer inventoryPlayer, TileBookshelfCoordinator tileEntity) {
         super(new ContainerCoordinator(inventoryPlayer, tileEntity));
+        this.containerCoordinator = (ContainerCoordinator) inventorySlots;
         this.te = tileEntity;
     }
 
@@ -57,6 +67,41 @@ public class GuiCoordinator extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         ResourceLocation tex = new ResourceLocation("aura", "textures/gui/coordinator.png");
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(tex);
+    }
+
+    @Override
+    public void initGui() {
+        super.initGui();
+        this.searchField = new GuiTextField(this.fontRendererObj, this.guiLeft + 82, this.guiTop + 6, 89, this.fontRendererObj.FONT_HEIGHT);
+        this.searchField.setMaxStringLength(15);
+        this.searchField.setEnableBackgroundDrawing(true);
+        this.searchField.setVisible(true);
+        this.searchField.setFocused(true);
+        this.searchField.setCanLoseFocus(false);
+        this.searchField.setTextColor(16777215);
+    }
+
+    @Override
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) {
+        if (this.unfocused) {
+            this.unfocused = false;
+            this.searchField.setText("");
+        }
+
+        if (!this.checkHotbarKeys(p_73869_2_)) {
+            if (this.searchField.textboxKeyTyped(p_73869_1_, p_73869_2_)) {
+                this.updateSearch();
+            } else {
+                super.keyTyped(p_73869_1_, p_73869_2_);
+            }
+        }
+    }
+
+    private void updateSearch() {
+        ContainerCoordinator container = (ContainerCoordinator) this.inventorySlots;
+        String filter = searchField.getText().toUpperCase();
+        container.scrollTo(container.lastScroll, filter);
+        AuraCascade.proxy.networkWrapper.sendToServer(new PacketCoordinatorScroll(Minecraft.getMinecraft().thePlayer, filter, containerCoordinator.lastScroll));
     }
 
     public void handleMouseInput() {
@@ -84,7 +129,10 @@ public class GuiCoordinator extends GuiContainer {
                 this.currentScroll = 1.0F;
             }
 
+            String filter = searchField.getText().toUpperCase();
             ((ContainerCoordinator) this.inventorySlots).scrollTo(this.currentScroll);
+            AuraCascade.proxy.networkWrapper.sendToServer(new PacketCoordinatorScroll(Minecraft.getMinecraft().thePlayer, filter, ((ContainerCoordinator) this.inventorySlots).lastScroll));
+
         }
     }
 
@@ -103,6 +151,8 @@ public class GuiCoordinator extends GuiContainer {
         int i1 = this.guiLeft + 161;
         int k = this.guiTop + 18;
         int l = k + 52;
+
+        this.searchField.drawTextBox();
 
         this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/container/creative_inventory/tabs.png"));
 
@@ -143,7 +193,10 @@ public class GuiCoordinator extends GuiContainer {
                 this.currentScroll = 1.0F;
             }
 
+            String filter = searchField.getText().toUpperCase();
             ((ContainerCoordinator) this.inventorySlots).scrollTo(this.currentScroll);
+            AuraCascade.proxy.networkWrapper.sendToServer(new PacketCoordinatorScroll(Minecraft.getMinecraft().thePlayer, filter, containerCoordinator.lastScroll));
+
         }
         //Override super drawScreen to make use of custom item rendering
         this.drawDefaultBackground();

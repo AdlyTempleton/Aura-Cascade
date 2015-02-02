@@ -22,9 +22,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.lexicon.LexiconData;
 import pixlepix.auracascade.lexicon.LexiconEntry;
-import pixlepix.auracascade.network.PacketBurst;
-import pixlepix.auracascade.network.PacketFairyRequestUpdate;
-import pixlepix.auracascade.network.PacketFairyUpdate;
+import pixlepix.auracascade.network.*;
 import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
@@ -49,7 +47,7 @@ public class CommonProxy {
 
         networkWrapper.registerMessage(PacketFairyUpdate.class, PacketFairyUpdate.class, 1, Side.CLIENT);
         networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 2, Side.SERVER);
-
+        networkWrapper.registerMessage(CoordinatorScrollHandler.class, PacketCoordinatorScroll.class, 3, Side.SERVER);
     }
 
     public void setEntryToOpen(LexiconEntry entry) {
