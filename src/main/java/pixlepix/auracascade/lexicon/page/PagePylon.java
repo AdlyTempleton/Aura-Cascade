@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
@@ -17,6 +18,8 @@ import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconRecipeMappings;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.ITTinkererItem;
 
 import java.util.Arrays;
 
@@ -31,6 +34,11 @@ public class PagePylon extends PageRecipe {
     public PagePylon(String unlocalizedName, PylonRecipe recipe) {
         super(unlocalizedName);
         this.recipe = recipe;
+    }
+
+    public PagePylon(String unlocalizedName, Class<? extends Item> item) {
+        super(unlocalizedName);
+        this.recipe = (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(item);
     }
 
     @Override

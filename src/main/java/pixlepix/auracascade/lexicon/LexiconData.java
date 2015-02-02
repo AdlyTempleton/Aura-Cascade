@@ -92,6 +92,13 @@ public final class LexiconData {
 
         //Consumers
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
+        new BLexiconEntry("protection", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"),
+                new PagePylon("2", ItemRedAmulet.class),
+                new PagePylon("3", ItemOrangeAmulet.class),
+                new PagePylon("4", ItemYellowAmulet.class),
+                new PagePylon("5", ItemGreenAmulet.class),
+                new PagePylon("6", ItemBlueAmulet.class),
+                new PagePylon("7", ItemPurpleAmulet.class));
         new BLexiconEntry("books", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PagePylon("3", (PylonRecipe) BlockRegistry.getFirstRecipeFromBlock(BlockBookshelfCoordinator.class)),
                 new PagePylon("4", ((PylonRecipe) BlockRegistry.getFirstRecipeFromItem(BasicStorageBook.class))),
                 new PageText("5"),

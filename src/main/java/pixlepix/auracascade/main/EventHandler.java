@@ -1,18 +1,22 @@
 package pixlepix.auracascade.main;
 
 import baubles.api.BaublesApi;
+import baubles.api.IBauble;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -22,9 +26,7 @@ import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.IAngelsteelTool;
-import pixlepix.auracascade.item.AngelsteelToolHelper;
-import pixlepix.auracascade.item.ItemFairyRing;
-import pixlepix.auracascade.item.ItemLexicon;
+import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.ArrayList;
@@ -69,6 +71,61 @@ public class EventHandler {
         if (scareCount > 0) {
             if (random.nextInt(25) <= scareCount) {
                 event.setResult(Event.Result.DENY);
+            }
+        }
+    }
+
+    public ItemStack getBaubleFromInv(Class<? extends IBauble> clazz, EntityPlayer player) {
+        IInventory inv = BaublesApi.getBaubles(player);
+        for (int i = 0; i < 4; i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (stack != null && clazz.isInstance(stack.getItem())) {
+                return stack;
+            }
+        }
+        return null;
+    }
+
+    @SubscribeEvent
+    public void onEntityAttacked(LivingHurtEvent event) {
+        if (event.entity instanceof EntityPlayer && (event.source == DamageSource.lava || event.source == DamageSource.onFire || event.source == DamageSource.inFire)) {
+            ItemStack stack = getBaubleFromInv(ItemRedAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                ((EntityPlayer) event.entity).heal(event.ammount);
+                event.ammount = 0;
+            }
+        }
+        if (event.entity instanceof EntityPlayer && event.source.isExplosion()) {
+            ItemStack stack = getBaubleFromInv(ItemOrangeAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                ((EntityPlayer) event.entity).heal(event.ammount);
+                event.ammount = 0;
+            }
+        }
+        if (event.entity instanceof EntityPlayer && event.source.isProjectile()) {
+            ItemStack stack = getBaubleFromInv(ItemYellowAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                event.ammount /= 2;
+            }
+        }
+        if (event.entity instanceof EntityPlayer && event.source == DamageSource.fall) {
+            ItemStack stack = getBaubleFromInv(ItemGreenAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                ((EntityPlayer) event.entity).heal(event.ammount);
+                event.ammount = 0;
+            }
+        }
+        if (event.entity instanceof EntityPlayer && event.source == DamageSource.drown) {
+            ItemStack stack = getBaubleFromInv(ItemBlueAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                ((EntityPlayer) event.entity).heal(event.ammount);
+                event.ammount = 0;
+            }
+        }
+        if (event.entity instanceof EntityPlayer && event.source == DamageSource.wither) {
+            ItemStack stack = getBaubleFromInv(ItemPurpleAmulet.class, (EntityPlayer) event.entity);
+            if (stack != null) {
+                event.ammount = 0;
             }
         }
     }
