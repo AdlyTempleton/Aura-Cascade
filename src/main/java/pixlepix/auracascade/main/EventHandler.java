@@ -153,18 +153,20 @@ public class EventHandler {
             ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
             if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
                 int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
-                int efficiency = buffs[0];
-                event.newSpeed *= Math.pow(1.3, efficiency);
-                int shatter = buffs[2];
-                int disintegrate = buffs[3];
-                //1.5F, the hardness of stone, is used as a dividing point
-                //Stone is not affected by either enchant
-                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F) {
-                    event.newSpeed *= Math.pow(3, disintegrate);
-                }
-                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F) {
+                if (buffs.length > 0) {
+                    int efficiency = buffs[0];
+                    event.newSpeed *= Math.pow(1.3, efficiency);
+                    int shatter = buffs[2];
+                    int disintegrate = buffs[3];
+                    //1.5F, the hardness of stone, is used as a dividing point
+                    //Stone is not affected by either enchant
+                    if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F) {
+                        event.newSpeed *= Math.pow(3, disintegrate);
+                    }
+                    if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F) {
 
-                    event.newSpeed *= Math.pow(3, shatter);
+                        event.newSpeed *= Math.pow(3, shatter);
+                    }
                 }
             }
         }
