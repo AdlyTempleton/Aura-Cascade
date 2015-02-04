@@ -14,6 +14,7 @@ package pixlepix.auracascade.lexicon;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.BlockBookshelfCoordinator;
@@ -59,7 +60,8 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryConsumers);
         LexiconCategory categoryFairies = CategoryManager.categoryFairies = new LexiconCategory("Fairies").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
         CategoryManager.addCategory(categoryFairies);
-
+        LexiconCategory catagoryAccessories = CategoryManager.categoryAccessories = new LexiconCategory("Accessories").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemGreenAmulet.class)));
+        CategoryManager.addCategory(catagoryAccessories);
         // BASICS ENTRIES
         new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
         ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
@@ -91,8 +93,9 @@ public final class LexiconData {
         new BLexiconEntry("pumpRedstone", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstone"))).iRecipe));
 
         //Consumers
+        new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemRedHole.class));
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
-        new BLexiconEntry("protection", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"),
+        new BLexiconEntry("protection", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"),
                 new PagePylon("2", ItemRedAmulet.class),
                 new PagePylon("3", ItemOrangeAmulet.class),
                 new PagePylon("4", ItemYellowAmulet.class),
@@ -142,7 +145,7 @@ public final class LexiconData {
                 new PageCraftingRecipe("4", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelAxe.class))),
                 new PageCraftingRecipe("5", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelPickaxe.class))),
                 new PageCraftingRecipe("6", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelShovel.class))));
-        new BLexiconEntry("angelsteelSword", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", angelSwordRecipe.getIRecipies(0, 6))
+        new BLexiconEntry("angelsteelSword", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", angelSwordRecipe.getIRecipies(0, 6))
                 , new PageText("2"), new PageText("3"), new PageText("4"), new PageText("5"), new PageText("6"), new PageText("7"));
         
 

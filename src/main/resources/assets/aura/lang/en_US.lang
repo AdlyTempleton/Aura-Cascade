@@ -278,6 +278,11 @@ aura.page.protection5=Mama, I can fly!
 aura.page.protection6=I'm a fish now!
 aura.page.protection7=Wither b' gone (tm)
 
+aura.entry.redHole=Portable Red Hole
+item.redHole.name=Portable Red Hole
+aura.page.redHole0=The &1Portable Red Hole&0 is a simple device that, every five seconds, will create an extremely large explosion around itself. It will take five times longer to despawn when dropped on the ground. &1Orange Protection Amulets&0 are strongly reccommended.
+aura.page.redHole1=Don't drop this
+
 aura.entry.fairies=Fairies
 aura.page.fairies0=Fairies are an end-game system that can help the player out as both a utility and an aid in combat. To start out, equip a &1Ring of Binding&0 in your Baubles slot (Press 'B'). With the ring of binding equipped, right-click a &1Fairy Charm&0 to add the fairy to the ring of binding.
 aura.page.fairies1=Different types of &1Fairy Charms&0 will summon different fairies, which have different effects. <br> A &1Ring of Binding&0 can hold 15 fairies. To empty the ring, shift right-click while holding the ring. The basic fairy charm has no effect, but is used to craft other, more useful, fairy charms.

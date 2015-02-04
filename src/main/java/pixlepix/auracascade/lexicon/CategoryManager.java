@@ -24,6 +24,7 @@ public final class CategoryManager {
     public static LexiconCategory categoryCrafting;
     public static LexiconCategory categoryConsumers;
     public static LexiconCategory categoryFairies;
+    public static LexiconCategory categoryAccessories;
     public static LexiconCategory categoryMisc;
     private static List<LexiconCategory> categories = new ArrayList<LexiconCategory>();
     private static List<LexiconEntry> allEntries = new ArrayList<LexiconEntry>();
