@@ -2,6 +2,7 @@ package pixlepix.auracascade.lexicon.page;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -36,9 +37,14 @@ public class PagePylon extends PageRecipe {
         this.recipe = recipe;
     }
 
-    public PagePylon(String unlocalizedName, Class<? extends Item> item) {
+    public PagePylon(String unlocalizedName, Class item) {
         super(unlocalizedName);
-        this.recipe = (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(item);
+        if (Item.class.isAssignableFrom(item)) {
+            this.recipe = (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(item);
+        }
+        if (Block.class.isAssignableFrom(item)) {
+            this.recipe = (PylonRecipe) BlockRegistry.getFirstRecipeFromBlock(item);
+        }
     }
 
     @Override

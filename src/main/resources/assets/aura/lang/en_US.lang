@@ -381,3 +381,8 @@ item.orangeAmulet.name=Orange Protection Amulet
 item.yellowAmulet.name=Yellow Protection Amulet
 item.greenAmulet.name=Green Protection Amulet
 item.blueAmulet.name=Blue Protection Amulet
+
+tile.magicRoad.name=Traveler's Bricks
+aura.entry.magicRoad=Traveler's Bricks
+aura.page.magicRoad0=&1Traveler's Bricks&0 are a block that will make incredibly efficient roads. Sprinting on these blocks will accelerate players in their direction of motion at near-instant speeds.
+aura.page.magicRoad1=Roads are back in style

@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.BlockBookshelfCoordinator;
+import pixlepix.auracascade.block.BlockMagicRoad;
 import pixlepix.auracascade.block.ConsumerBlock;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
@@ -94,6 +95,7 @@ public final class LexiconData {
 
         //Consumers
         new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemRedHole.class));
+        new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockMagicRoad.class));
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("protection", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"),
                 new PagePylon("2", ItemRedAmulet.class),

@@ -79,7 +79,7 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 100000),
+        return new PylonRecipe(new ItemStack(this, 16), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000),
                 new ItemStack(Blocks.stonebrick)));
     }
 }
