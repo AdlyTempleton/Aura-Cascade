@@ -14,9 +14,11 @@ package pixlepix.auracascade.lexicon.page;
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -26,7 +28,9 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.lwjgl.opengl.GL11;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.lexicon.*;
+import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 
 import java.util.ArrayList;
@@ -55,6 +59,17 @@ public class PageCraftingRecipe extends PageRecipe {
     public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
         this(unlocalizedName, Arrays.asList(recipe));
     }
+
+    public PageCraftingRecipe(String unlocalizedName, Class clazz) {
+        super(unlocalizedName);
+        if (Item.class.isAssignableFrom(clazz)) {
+            this.recipes = Arrays.asList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(clazz)).iRecipe);
+        }
+        if (Block.class.isAssignableFrom(clazz)) {
+            this.recipes = Arrays.asList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromBlock(clazz)).iRecipe);
+        }
+    }
+
 
     @Override
     public void onPageAdded(LexiconEntry entry, int index) {

@@ -391,3 +391,8 @@ tile.magicRoad.name=Traveler's Bricks
 aura.entry.magicRoad=Traveler's Bricks
 aura.page.magicRoad0=&1Traveler's Bricks&0 are a block that will make incredibly efficient roads. Sprinting on these blocks will accelerate players in their direction of motion at near-instant speeds.
 aura.page.magicRoad1=Roads are back in style
+
+item.swordThief.name=Sword of the Thief
+aura.entry.swordThief=Sword of the Thief
+aura.page.swordThief0=&1Sword of the Thief&0 is a sword that allows you to steal items from villages. Upon slaying a villager with this sword, the villager has a 25% chance to drop whatever item is was offering to trade.
+aura.page.swordThief1=Grand Theft Auto Style

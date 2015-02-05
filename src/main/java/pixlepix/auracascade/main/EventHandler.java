@@ -6,18 +6,18 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.village.MerchantRecipe;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
@@ -126,6 +126,22 @@ public class EventHandler {
             ItemStack stack = getBaubleFromInv(ItemPurpleAmulet.class, (EntityPlayer) event.entity);
             if (stack != null) {
                 event.ammount = 0;
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingDrops(LivingDropsEvent event) {
+        if (!event.entity.worldObj.isRemote && event.source.getSourceOfDamage() instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+            ItemStack swordStack = player.getCurrentEquippedItem();
+            if (swordStack != null && swordStack.getItem() instanceof ItemThiefSword) {
+                if (event.entity instanceof EntityVillager && new Random().nextInt(4) == 0) {
+                    EntityVillager villager = (EntityVillager) event.entity;
+                    ItemStack dropStack = ((MerchantRecipe) villager.getRecipes(player).get(0)).getItemToSell();
+                    EntityItem entityItem = new EntityItem(player.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, dropStack);
+                    event.drops.add(entityItem);
+                }
             }
         }
     }

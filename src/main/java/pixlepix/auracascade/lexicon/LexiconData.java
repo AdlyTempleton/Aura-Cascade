@@ -94,6 +94,8 @@ public final class LexiconData {
         new BLexiconEntry("pumpRedstone", categoryAuraNodes).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstone"))).iRecipe));
 
         //Consumers
+
+        new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
         new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemRedHole.class));
         new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemBlackHole.class));
         new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockMagicRoad.class));
