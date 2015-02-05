@@ -1,6 +1,7 @@
 package pixlepix.auracascade.data;
 
 import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -38,32 +39,15 @@ public enum EnumAura {
             for (EntityTNTPrimed tntPrimed : tntList) {
                 if (tntPrimed.fuse <= 2 && !tntPrimed.isDead) {
                     tntPrimed.setDead();
+                    explosionPushUp(world, tuple, 200000);
+                }
+            }
 
-                    //Make graphical explosion
-                    Explosion explosion = new Explosion(world, null, tuple.getX(), tuple.getY(), tuple.getZ(), 4F);
-                    explosion.isFlaming = false;
-                    explosion.isSmoking = true;
-                    explosion.doExplosionB(false);
-
-                    //Move up mana
-
-                    if (tuple.getTile(world) instanceof AuraTile) {
-                        AuraTile tile = (AuraTile) tuple.getTile(world);
-                        tile.verifyConnections();
-                        for (CoordTuple connectedNode : tile.connected) {
-                            if (connectedNode.getY() > tile.yCoord) {
-                                AuraTile transferTile = (AuraTile) connectedNode.getTile(world);
-
-                                int auraPower = 200000 / (connectedNode.getY() - tile.yCoord);
-                                auraPower = Math.min(auraPower, tile.storage.get(this));
-
-                                tile.burst(connectedNode, "magicCrit", this, 1D);
-                                tile.storage.subtract(this, auraPower);
-                                transferTile.storage.add(new AuraQuantity(this, auraPower));
-
-                            }
-                        }
-                    }
+            List<EntityCreeper> creeperList = world.getEntitiesWithinAABB(EntityCreeper.class, search);
+            for (EntityCreeper creeper : creeperList) {
+                if (creeper.timeSinceIgnited + 2 >= creeper.fuseTime && !creeper.isDead) {
+                    creeper.setDead();
+                    explosionPushUp(world, tuple, 50000);
                 }
             }
         }
@@ -149,5 +133,33 @@ public enum EnumAura {
     }
 
     public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
+    }
+
+    public void explosionPushUp(World world, CoordTuple tuple, int power) {
+        //Make graphical explosion
+        Explosion explosion = new Explosion(world, null, tuple.getX(), tuple.getY(), tuple.getZ(), 4F);
+        explosion.isFlaming = false;
+        explosion.isSmoking = true;
+        explosion.doExplosionB(false);
+
+        //Move up mana
+
+        if (tuple.getTile(world) instanceof AuraTile) {
+            AuraTile tile = (AuraTile) tuple.getTile(world);
+            tile.verifyConnections();
+            for (CoordTuple connectedNode : tile.connected) {
+                if (connectedNode.getY() > tile.yCoord) {
+                    AuraTile transferTile = (AuraTile) connectedNode.getTile(world);
+
+                    int auraPower = power / (connectedNode.getY() - tile.yCoord);
+                    auraPower = Math.min(auraPower, tile.storage.get(this));
+
+                    tile.burst(connectedNode, "magicCrit", this, 1D);
+                    tile.storage.subtract(this, auraPower);
+                    transferTile.storage.add(new AuraQuantity(this, auraPower));
+                }
+            }
+        }
+        
     }
 }
