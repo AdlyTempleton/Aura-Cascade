@@ -11,14 +11,19 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.entity.EntityFallFairy;
@@ -40,6 +45,7 @@ public class EventHandler {
     public static final String BOOK_TAG = "HAS_RECEIVED_AURA_BOOK";
     public ArrayList<EntityScareFairy> scareFairies = new ArrayList<EntityScareFairy>();
 
+    //Lexicon auto give
     @SubscribeEvent
     public void onWorldLoad(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
@@ -53,12 +59,14 @@ public class EventHandler {
 
     }
 
+    //Lexicon auto give
     @SubscribeEvent
     public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         player.getEntityData().setBoolean(BOOK_TAG, true);
     }
 
+    //Scarer Fairies
     @SubscribeEvent
     public void onLivingSpawn(LivingSpawnEvent.CheckSpawn event) {
         int scareCount = 0;
@@ -75,6 +83,7 @@ public class EventHandler {
         }
     }
 
+    //Helper method
     public ItemStack getBaubleFromInv(Class<? extends IBauble> clazz, EntityPlayer player) {
         IInventory inv = BaublesApi.getBaubles(player);
         for (int i = 0; i < 4; i++) {
@@ -86,6 +95,7 @@ public class EventHandler {
         return null;
     }
 
+    //Amulets of protection
     @SubscribeEvent
     public void onEntityAttacked(LivingHurtEvent event) {
         if (event.entity instanceof EntityPlayer && (event.source == DamageSource.lava || event.source == DamageSource.onFire || event.source == DamageSource.inFire)) {
@@ -130,6 +140,7 @@ public class EventHandler {
         }
     }
 
+    //Sword of the Thief
     @SubscribeEvent
     public void onLivingDrops(LivingDropsEvent event) {
         if (!event.entity.worldObj.isRemote && event.source.getSourceOfDamage() instanceof EntityPlayer) {
@@ -146,6 +157,8 @@ public class EventHandler {
         }
     }
 
+    //Differ fairies
+    //Angelsteel tool speed buffs
     @SubscribeEvent
     public void onGetBreakSpeed(PlayerEvent.BreakSpeed event) {
         ItemStack item = BaublesApi.getBaubles(event.entityPlayer).getStackInSlot(1);
@@ -188,6 +201,7 @@ public class EventHandler {
         }
     }
 
+    //Angelsteel fortune buff
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onHarvestEvent(BlockEvent.HarvestDropsEvent event) {
 
@@ -205,6 +219,7 @@ public class EventHandler {
     }
 
 
+    //Faller fairy
     @SubscribeEvent
     public void onFall(LivingFallEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
@@ -248,6 +263,7 @@ public class EventHandler {
         }
     }
 
+    //Kill fairies on logout
     @SubscribeEvent
     public void onPlayerLogout(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
         ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
@@ -257,6 +273,7 @@ public class EventHandler {
 
     }
 
+    //Respawn fairies on login
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
         ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
@@ -264,6 +281,28 @@ public class EventHandler {
             ItemFairyRing.makeFaries(item, event.player);
         }
 
+    }
+
+    @SubscribeEvent
+    public void onEatEvent(PlayerUseItemEvent.Finish finishEvent) {
+        EntityPlayer player = finishEvent.entityPlayer;
+        ItemStack heldStack = player.inventory.getCurrentItem();
+        if (getBaubleFromInv(ItemFoodAmulet.class, player) != null) {
+            //Check if item is food
+            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.eat || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.drink)) {
+                String name = heldStack.getUnlocalizedName();
+                Random random = new Random(name.hashCode());
+                //Limit within vanilla potions, which go up to 24
+                Potion potion;
+                do {
+                    potion = Potion.potionTypes[random.nextInt(24)];
+                } while (potion.isInstant());
+                int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
+                int amplified = random.nextInt(6);
+                PotionEffect potionEffect = new PotionEffect(potion.id, duration, amplified);
+                player.addPotionEffect(potionEffect);
+            }
+        }
     }
 
 }
