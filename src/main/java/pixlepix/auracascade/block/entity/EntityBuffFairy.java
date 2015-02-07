@@ -16,19 +16,19 @@ public class EntityBuffFairy extends EntityFairy {
     public EntityBuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
-                new PotionEffect(Potion.regeneration.getId(), 5000),
-                new PotionEffect(Potion.resistance.getId(), 5000),
-                new PotionEffect(Potion.damageBoost.getId(), 5000),
+                new PotionEffect(Potion.regeneration.getId(), 2400),
+                new PotionEffect(Potion.resistance.getId(), 2400),
+                new PotionEffect(Potion.damageBoost.getId(), 2400),
                 //absorbtion
-                new PotionEffect(Potion.field_76444_x.getId(), 5000),
-                new PotionEffect(Potion.jump.getId(), 5000),
-                new PotionEffect(Potion.moveSpeed.getId(), 5000)};
+                new PotionEffect(Potion.field_76444_x.getId(), 2400),
+                new PotionEffect(Potion.jump.getId(), 2400),
+                new PotionEffect(Potion.moveSpeed.getId(), 2400)};
     }
 
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 5000 == 0) {
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 2400 == 0) {
             Random random = new Random();
             player.addPotionEffect(potionEffects[random.nextInt(potionEffects.length)]);
             AuraUtil.diamondBurst(player, "happyVillager");
