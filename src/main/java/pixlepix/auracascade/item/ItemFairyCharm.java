@@ -16,6 +16,7 @@ import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.main.EventHandler;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -99,7 +100,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote && BaublesApi.getBaubles(player).getStackInSlot(1) != null && BaublesApi.getBaubles(player).getStackInSlot(1).getItem() instanceof ItemFairyRing) {
-            ItemStack ringStack = BaublesApi.getBaubles(player).getStackInSlot(1);
+            ItemStack ringStack = EventHandler.getBaubleFromInv(ItemFairyRing.class, player);
             if (ringStack.stackTagCompound == null) {
                 ringStack.stackTagCompound = new NBTTagCompound();
             }

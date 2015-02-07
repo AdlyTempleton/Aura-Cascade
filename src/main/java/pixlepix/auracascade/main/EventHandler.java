@@ -45,6 +45,18 @@ public class EventHandler {
     public static final String BOOK_TAG = "HAS_RECEIVED_AURA_BOOK";
     public ArrayList<EntityScareFairy> scareFairies = new ArrayList<EntityScareFairy>();
 
+    //Helper method
+    public static ItemStack getBaubleFromInv(Class<? extends IBauble> clazz, EntityPlayer player) {
+        IInventory inv = BaublesApi.getBaubles(player);
+        for (int i = 0; i < 4; i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (stack != null && clazz.isInstance(stack.getItem())) {
+                return stack;
+            }
+        }
+        return null;
+    }
+
     //Lexicon auto give
     @SubscribeEvent
     public void onWorldLoad(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
@@ -81,18 +93,6 @@ public class EventHandler {
                 event.setResult(Event.Result.DENY);
             }
         }
-    }
-
-    //Helper method
-    public ItemStack getBaubleFromInv(Class<? extends IBauble> clazz, EntityPlayer player) {
-        IInventory inv = BaublesApi.getBaubles(player);
-        for (int i = 0; i < 4; i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (stack != null && clazz.isInstance(stack.getItem())) {
-                return stack;
-            }
-        }
-        return null;
     }
 
     //Amulets of protection
