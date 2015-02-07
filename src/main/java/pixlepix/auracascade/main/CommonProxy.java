@@ -38,6 +38,7 @@ public class CommonProxy {
     public Block chiselBookshelf;
 
     public void preInit(FMLPreInitializationEvent event) {
+        Config.init(event);
         ModCreativeTab.INSTANCE = new ModCreativeTab();
         AngelsteelToolHelper.initMaterials();
         registry = new BlockRegistry();

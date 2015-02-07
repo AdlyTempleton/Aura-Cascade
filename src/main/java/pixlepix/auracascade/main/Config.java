@@ -27,6 +27,8 @@ public class Config {
     public static int pumpSnowballSpeed = 400;
     public static int pumpSnowballDuration = 10;
 
+    public static boolean giveBook = true;
+
     public static int potionStartId = 97;
     
     static Configuration config;
@@ -63,6 +65,7 @@ public class Config {
 
         potionStartId = config.getInt("Potion Id beginning", Configuration.CATEGORY_GENERAL, potionStartId, 1, 128, "");
 
+        giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
 
         config.save();
     }

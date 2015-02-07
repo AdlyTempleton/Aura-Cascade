@@ -49,7 +49,7 @@ public class EventHandler {
     @SubscribeEvent
     public void onWorldLoad(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
-        if (!player.worldObj.isRemote) {
+        if (!player.worldObj.isRemote && Config.giveBook) {
             if (!player.getEntityData().hasKey(BOOK_TAG) || !player.getEntityData().getBoolean(BOOK_TAG)) {
                 player.getEntityData().setBoolean(BOOK_TAG, true);
                 player.inventory.addItemStackToInventory(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemLexicon.class)));
