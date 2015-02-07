@@ -401,3 +401,8 @@ item.swordThief.name=Sword of the Thief
 aura.entry.swordThief=Sword of the Thief
 aura.page.swordThief0=&1Sword of the Thief&0 is a sword that allows you to steal items from villages. Upon slaying a villager with this sword, the villager has a 25% chance to drop whatever item is was offering to trade.
 aura.page.swordThief1=Grand Theft Auto Style
+
+item.amuletFood.name=Amulet of the Forbidden Fruit
+aura.entry.amuletFood=Amulet of the Forbidden Fruit
+aura.page.amuletFood0=The &1Amulet of the Forbidden Fruit&0 will apply a random potion effect each time you eat a food, either positive or negative. The potion effect is consistent when eating the same type of food-for example, carrots will always give invisibility.
+aura.page.amuletFood1=Apples are hardcoded

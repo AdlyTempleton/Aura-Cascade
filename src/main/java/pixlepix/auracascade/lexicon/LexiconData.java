@@ -97,6 +97,7 @@ public final class LexiconData {
         new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemBlackHole.class));
         new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockMagicRoad.class));
         new BLexiconEntry("trampoline", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockTrampoline.class));
+        new BLexiconEntry("amuletFood", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemFoodAmulet.class));
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("protection", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"),
                 new PagePylon("2", ItemRedAmulet.class),

@@ -290,17 +290,21 @@ public class EventHandler {
         if (getBaubleFromInv(ItemFoodAmulet.class, player) != null) {
             //Check if item is food
             if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.eat || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.drink)) {
-                String name = heldStack.getUnlocalizedName();
-                Random random = new Random(name.hashCode());
-                //Limit within vanilla potions, which go up to 24
-                Potion potion;
-                do {
-                    potion = Potion.potionTypes[random.nextInt(24)];
-                } while (potion.isInstant());
-                int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
-                int amplified = random.nextInt(6);
-                PotionEffect potionEffect = new PotionEffect(potion.id, duration, amplified);
-                player.addPotionEffect(potionEffect);
+                if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
+                    player.addPotionEffect(new PotionEffect(Potion.wither.id, 6 * 60 * 20, 1));
+                } else {
+                    String name = heldStack.getUnlocalizedName();
+                    Random random = new Random(name.hashCode());
+                    //Limit within vanilla potions, which go up to 24
+                    Potion potion;
+                    do {
+                        potion = Potion.potionTypes[random.nextInt(24)];
+                    } while (potion.isInstant());
+                    int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
+                    int amplified = random.nextInt(6);
+                    PotionEffect potionEffect = new PotionEffect(potion.id, duration, amplified);
+                    player.addPotionEffect(potionEffect);
+                }
             }
         }
     }
