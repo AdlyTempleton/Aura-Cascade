@@ -146,6 +146,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                         player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
                     }
                 }
+
                 if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
 
                     player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
@@ -408,6 +409,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
             } else {
                 result.add("No Aura");
+            }
+            if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor) {
+                if (((AuraTileCapacitor) world.getTileEntity(x, y, z)).ticksDisabled > 0) {
+                    result.add("Time until functional: " + ((AuraTileCapacitor) world.getTileEntity(x, y, z)).ticksDisabled / 20);
+                }
             }
             if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
                 result.add("Time left: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower + " seconds");
