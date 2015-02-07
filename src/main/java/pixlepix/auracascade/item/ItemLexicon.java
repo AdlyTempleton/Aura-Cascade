@@ -84,6 +84,8 @@ public class ItemLexicon extends Item implements ITTinkererItem {
                     LexiconEntry entry = ((ILexiconable) block).getEntry(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
                     if (entry != null) {
                         AuraCascade.proxy.setEntryToOpen(entry);
+                        AuraCascade.proxy.setLexiconStack(par1ItemStack);
+
                         par2EntityPlayer.openGui(AuraCascade.instance, 0, par3World, 0, 0, 0);
                         if (!par3World.isRemote) {
                             par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
@@ -105,12 +107,14 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         String force = getForcedPage(par1ItemStack);
         if (force != null && !force.isEmpty()) {
             LexiconEntry entry = getEntryFromForce(par1ItemStack);
-            if (entry != null)
+            if (entry != null) {
                 AuraCascade.proxy.setEntryToOpen(entry);
-            else
+            } else {
                 par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            }
             setForcedPage(par1ItemStack, "");
         }
+        AuraCascade.proxy.setLexiconStack(par1ItemStack);
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound)
             par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);

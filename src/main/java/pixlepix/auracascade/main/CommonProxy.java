@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
@@ -20,6 +21,7 @@ import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
+import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.LexiconData;
 import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.network.*;
@@ -80,6 +82,9 @@ public class CommonProxy {
         LexiconData.init();
         LexiconData.postInit();
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
+    }
+
+    public void setLexiconStack(ItemStack stack) {
     }
 
     public void addBlockDestroyEffects(CoordTuple tuple) {

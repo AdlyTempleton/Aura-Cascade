@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
@@ -64,6 +65,11 @@ public class ClientProxy extends CommonProxy {
         Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(Minecraft.getMinecraft().theWorld), tuple.getMeta(Minecraft.getMinecraft().theWorld));
 
 
+    }
+
+    @Override
+    public void setLexiconStack(ItemStack stack) {
+        GuiLexicon.stackUsed = stack;
     }
 
     @Override
