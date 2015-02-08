@@ -160,6 +160,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("angel")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 300000), new ItemStack(Blocks.nether_brick)));
             }
+            if (name.equals("nether")) {
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Blocks.nether_brick)));
+
+            }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }

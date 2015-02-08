@@ -406,3 +406,8 @@ item.amuletFood.name=Amulet of the Forbidden Fruit
 aura.entry.amuletFood=Amulet of the Forbidden Fruit
 aura.page.amuletFood0=The &1Amulet of the Forbidden Fruit&0 will apply a random potion effect each time you eat a food, either positive or negative. The potion effect is consistent when eating the same type of food-for example, carrots will always give invisibility.
 aura.page.amuletFood1=Apples are hardcoded
+
+tile.consumerBlocknether.name=Ritual of the Nether
+aura.entry.nether=Ritual of the Nether
+aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
+aura.page.nether1=Better than fire
