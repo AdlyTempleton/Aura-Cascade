@@ -180,7 +180,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             ItemStack stack = ((EntityItem) entity).getEntityItem();
             if (stack.getItem() instanceof ItemAuraCrystal) {
                 if (te instanceof AuraTile) {
-                    ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100 * stack.stackSize));
+                    ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000 * stack.stackSize));
                     world.markBlockForUpdate(x, y, z);
                     world.notifyBlockChange(x, y, z, this);
                     AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, 32));

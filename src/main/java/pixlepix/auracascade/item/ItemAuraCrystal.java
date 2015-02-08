@@ -35,7 +35,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof AuraTile) {
             stack.stackSize--;
-            ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 100));
+            ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
             return true;
         }
         return false;
