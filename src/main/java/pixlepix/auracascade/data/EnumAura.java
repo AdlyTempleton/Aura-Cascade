@@ -6,6 +6,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.main.EnumColor;
 
@@ -103,7 +104,13 @@ public enum EnumAura {
                 //Achieve growth along logarithmic curve
                 int num = quantity.getNum();
                 int delta = Math.max(10, (int) Math.floor(((double) 1 / num) * 2500));
-                tile.storage.set(this, num + delta);
+                if (tile == null) {
+                    AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());
+                } else if (tile.storage == null) {
+                    AuraCascade.log.error("Storage data is null in updateTick of EnumAura");
+                } else {
+                    tile.storage.set(this, num + delta);
+                }
             }
         }
     };
