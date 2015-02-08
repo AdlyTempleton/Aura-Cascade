@@ -296,9 +296,10 @@ public class EventHandler {
                     String name = heldStack.getUnlocalizedName();
                     Random random = new Random(name.hashCode());
                     //Limit within vanilla potions, which go up to 24
+                    //Note that there is no potion with id 0
                     Potion potion;
                     do {
-                        potion = Potion.potionTypes[random.nextInt(24)];
+                        potion = Potion.potionTypes[random.nextInt(23) + 1];
                     } while (potion.isInstant());
                     int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
                     int amplified = random.nextInt(6);
