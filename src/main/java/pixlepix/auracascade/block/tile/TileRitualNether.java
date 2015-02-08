@@ -18,19 +18,24 @@ import java.util.Random;
 /**
  * Created by localmacaccount on 2/8/15.
  */
-public class TileRitualNether extends TileEntity {
+public class TileRitualNether extends ConsumerTile {
     LinkedList<CoordTuple> toSearch = new LinkedList<CoordTuple>();
     BiomeGenBase targetBiome;
-    boolean started = true;
+    boolean started = false;
+
+    @Override
+    public int getMaxProgress() {
+        return 100;
+    }
+
+    @Override
+    public int getPowerPerProgress() {
+        return 5000;
+    }
 
     @Override
     public void updateEntity() {
-        if (!worldObj.isRemote && !(worldObj.getBiomeGenForCoords(xCoord, zCoord) instanceof BiomeGenHell)) {
-            //Coordtuples are used for convenience, but y-values are irrelavent
-            toSearch.addFirst(new CoordTuple(this));
-            targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
-            started = true;
-        }
+        super.updateEntity();
         int count = 0;
         if (!worldObj.isRemote && toSearch.size() == 0 && started) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
@@ -78,6 +83,16 @@ public class TileRitualNether extends TileEntity {
             }
         }
 
+    }
+
+    @Override
+    public void onUsePower() {
+        if (!worldObj.isRemote && !(worldObj.getBiomeGenForCoords(xCoord, zCoord) instanceof BiomeGenHell)) {
+            //Coordtuples are used for convenience, but y-values are irrelavent
+            toSearch.addFirst(new CoordTuple(this));
+            targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+            started = true;
+        }
     }
 
     public Block getMappedBlock(Block b) {

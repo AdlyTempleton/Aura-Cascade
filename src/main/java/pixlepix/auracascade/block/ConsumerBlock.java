@@ -113,6 +113,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:auraLoot");
             top = iconRegister.registerIcon("aura:auraLootTop");
         }
+        if (name.equals("nether")) {
+            blockIcon = iconRegister.registerIcon("aura:ritualNether");
+
+        }
     }
 
     @Override
@@ -153,6 +157,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("angel")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Blocks.diamond_block)));
             }
+            if (name.equals("angel")) {
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 300000), new ItemStack(Blocks.nether_brick)));
+            }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }
@@ -165,6 +172,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("loot");
         result.add("mob");
         result.add("angel");
+        result.add("nether");
         return result;
     }
 
@@ -210,6 +218,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             }
             if (name.equals("angel")) {
                 return AngelSteelTile.class;
+            }
+            if (name.equals("nether")) {
+                return TileRitualNether.class;
             }
         }
         return FurnaceTile.class;
