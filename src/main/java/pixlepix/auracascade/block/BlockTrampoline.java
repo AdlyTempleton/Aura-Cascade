@@ -42,7 +42,7 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
 
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        entity.addVelocity(0, 10, 0);
+        entity.motionY = 10;
 
     }
 
