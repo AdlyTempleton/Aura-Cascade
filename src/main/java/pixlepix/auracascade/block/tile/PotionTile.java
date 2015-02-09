@@ -70,7 +70,7 @@ public class PotionTile extends ConsumerTile {
 
                 worldObj.spawnEntityInWorld(newEntity);
 
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(6, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
                 break;
             }
