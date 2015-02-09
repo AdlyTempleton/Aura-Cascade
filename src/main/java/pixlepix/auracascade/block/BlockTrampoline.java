@@ -28,6 +28,8 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
     public BlockTrampoline() {
         super(Material.cloth);
         setBlockBounds(0F, 0F, 0F, 1F, .8F, 1F);
+        setLightLevel(1F);
+        setHardness(2F);
     }
 
     @Override

@@ -26,6 +26,8 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
     public BlockMagicRoad() {
         super(Material.rock);
         setBlockBounds(0F, 0F, 0F, 1F, .8F, 1F);
+        setHardness(2F);
+        setLightLevel(1F);
     }
 
     @Override

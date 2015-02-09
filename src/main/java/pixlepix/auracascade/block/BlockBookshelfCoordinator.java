@@ -35,6 +35,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     public BlockBookshelfCoordinator() {
         super(Material.wood);
+        setHardness(2F);
     }
 
     @Override

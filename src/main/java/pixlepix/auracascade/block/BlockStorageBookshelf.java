@@ -35,6 +35,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
 
     public BlockStorageBookshelf() {
         super(Material.wood);
+        setHardness(2F);
     }
 
     @Override
