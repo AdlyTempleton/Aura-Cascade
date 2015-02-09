@@ -45,6 +45,9 @@ public class TileRitualNether extends ConsumerTile {
             toSearch.removeFirst();
             int x = tuple.getX();
             int z = tuple.getZ();
+            if (new CoordTuple(this).dist(tuple) > 150) {
+                continue;
+            }
             Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
             byte[] biomeData = chunk.getBiomeArray();
             //8 is hardcoded value for hell biome
