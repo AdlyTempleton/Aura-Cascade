@@ -101,7 +101,9 @@ public class EventHandler {
         if (event.entity instanceof EntityPlayer && (event.source == DamageSource.lava || event.source == DamageSource.onFire || event.source == DamageSource.inFire)) {
             ItemStack stack = getBaubleFromInv(ItemRedAmulet.class, (EntityPlayer) event.entity);
             if (stack != null) {
-                ((EntityPlayer) event.entity).heal(event.ammount);
+                if (event.source != DamageSource.lava) {
+                    ((EntityPlayer) event.entity).heal(event.ammount);
+                }
                 event.ammount = 0;
             }
         }
