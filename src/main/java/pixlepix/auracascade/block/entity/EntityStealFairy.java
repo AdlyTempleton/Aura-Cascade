@@ -27,7 +27,9 @@ public class EntityStealFairy extends EntityFairy {
 
                 if (stack != null && entity != player) {
                     EntityItem item = new EntityItem(worldObj, player.posX, player.posY, player.posZ, stack);
-                    item.setVelocity(0, 0, 0);
+                    item.motionX = 0;
+                    item.motionY = 0;
+                    item.motionZ = 0;
                     item.delayBeforeCanPickup = 0;
                     worldObj.spawnEntityInWorld(item);
 

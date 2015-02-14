@@ -40,7 +40,9 @@ public class LootTile extends ConsumerTile {
     public void onUsePower() {
         ItemStack lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
         EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
-        entityItem.setVelocity(0, 0, 0);
+        entityItem.motionX = 0;
+        entityItem.motionY = 0;
+        entityItem.motionZ = 0;
         worldObj.spawnEntityInWorld(entityItem);
 
     }
