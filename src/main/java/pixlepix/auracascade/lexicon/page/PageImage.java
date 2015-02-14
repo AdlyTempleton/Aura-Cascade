@@ -39,13 +39,15 @@ public class PageImage extends LexiconPage {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(1F, 1F, 1F, 1F);
-        ((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(), gui.getTop(), 0, 0, gui.getWidth(), gui.getHeight());
+        GL11.glTranslated(gui.getLeft() + gui.getWidth() / 8, gui.getTop() + gui.getHeight() / 8, 0);
+        GL11.glScaled(.5, .5, .5);
+        ((GuiScreen) gui).drawTexturedModalRect(0, 0, 0, 0, (int) (gui.getWidth() * 1.5) + 5, (int) (gui.getHeight() * 1.5) - 15);
         GL11.glDisable(GL11.GL_BLEND);
 
         int width = gui.getWidth() - 30;
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + height - 40;
-        PageText.renderText(x, y, width, height, getUnlocalizedName());
+        //PageText.renderText(x, y, width, height, getUnlocalizedName());
     }
 }

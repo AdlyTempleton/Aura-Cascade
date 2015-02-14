@@ -23,6 +23,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
+import pixlepix.auracascade.lexicon.page.PageImage;
 import pixlepix.auracascade.lexicon.page.PagePylon;
 import pixlepix.auracascade.lexicon.page.PageText;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -60,6 +61,9 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryFairies);
         LexiconCategory catagoryAccessories = CategoryManager.categoryAccessories = new LexiconCategory("Accessories").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemGreenAmulet.class)));
         CategoryManager.addCategory(catagoryAccessories);
+
+        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
+        CategoryManager.addCategory(categoryWalkthrough);
         // BASICS ENTRIES
         new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
         ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
@@ -191,6 +195,11 @@ public final class LexiconData {
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityLightFairy.class)));
         new BLexiconEntry("fairyTrain", categoryFairies).setLexiconPages(new PageText("0"),
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityXPFairy.class)));
+        //Walkthrough
+        new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
+        new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/0.png"), new PageText("2"));
+        new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/1.png"));
+
     }
 
     public static void postInit() {
