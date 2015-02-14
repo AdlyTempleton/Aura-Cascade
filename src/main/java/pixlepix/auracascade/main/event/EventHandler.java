@@ -1,4 +1,4 @@
-package pixlepix.auracascade.main;
+package pixlepix.auracascade.main.event;
 
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
@@ -32,6 +32,7 @@ import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.item.*;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.ArrayList;
