@@ -33,6 +33,7 @@ import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
+import scala.actors.threadpool.Arrays;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ import java.util.Random;
  * Created by localmacaccount on 2/14/15.
  */
 public class EnchantEventHandler {
+
+    Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
 
     public int[] getEffectData(ItemStack stack) {
         return new int[]{
@@ -137,8 +140,7 @@ public class EnchantEventHandler {
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.world.isRemote) {
             Block block = event.world.getBlock(event.x, event.y, event.z);
-            String oreName = OreDictionary.getOreIDs(new ItemStack(block)).length != 0 ? OreDictionary.getOreName(OreDictionary.getOreIDs(new ItemStack(block))[0]) : null;
-            if (block == Blocks.log || block == Blocks.log2 || (oreName != null && oreName.contains("log"))) {
+            if (block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
                 ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
                 ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
                 toSearch.add(new CoordTuple(event.x, event.y, event.z));
@@ -163,14 +165,44 @@ public class EnchantEventHandler {
         if (event.entityPlayer.inventory.getCurrentItem() != null) {
             ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
             if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
+                Block block = event.block;
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
                 event.newSpeed *= Math.pow(1.3, efficiency);
                 int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
                 if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 4F) {
                     event.newSpeed *= Math.pow(2, shatter);
                 }
+
+                int oreSpeed = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.ORANGE_AURA);
+
+                if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.block) || containsOredict(block, "ore"))) {
+                    event.newSpeed *= Math.pow(1.5, oreSpeed);
+                }
+                int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
+
+                if (stone > 0 && Blocks.stone == block) {
+                    event.newSpeed *= Math.pow(1.5, stone);
+                }
+
+                int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
+                if (logSpeed > 0 && block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
+                    event.newSpeed *= Math.pow(1.4, logSpeed);
+                }
+
+                int digSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
+                if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.gravel || block == Blocks.sand) {
+                    event.newSpeed *= Math.pow(1.4, digSpeed);
+
+                }
+                
             }
         }
+    }
+
+    public boolean containsOredict(Block block, String name) {
+
+        String oreName = OreDictionary.getOreIDs(new ItemStack(block)).length != 0 ? OreDictionary.getOreName(OreDictionary.getOreIDs(new ItemStack(block))[0]) : null;
+        return oreName != null && oreName.contains(name);
     }
 
     //Copied from Block
