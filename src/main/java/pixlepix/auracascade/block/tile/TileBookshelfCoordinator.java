@@ -131,15 +131,15 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         if (worldObj.getTotalWorldTime() % 20 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
-            ArrayStack<CoordTuple> toSearch = new ArrayStack<CoordTuple>();
-            toSearch.push(new CoordTuple(this));
+            ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
+            toSearch.add(new CoordTuple(this));
             while (toSearch.size() > 0) {
-                CoordTuple nextTuple = toSearch.pop();
+                CoordTuple nextTuple = toSearch.remove(0);
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     CoordTuple newTuple = nextTuple.add(direction);
                     TileEntity storageBookshelf = newTuple.getTile(worldObj);
                     if (storageBookshelf instanceof TileStorageBookshelf && !checkedLocations.contains(newTuple)) {
-                        toSearch.push(newTuple);
+                        toSearch.add(newTuple);
                         if (hasClearLineOfSight(newTuple)) {
                             bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
                             burst(newTuple, "enchantmenttable", EnumAura.WHITE_AURA, 1);
@@ -148,7 +148,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                     }
                     if ((newTuple.getBlock(worldObj) instanceof BlockBookshelf || (newTuple.getBlock(worldObj) != null && newTuple.getBlock(worldObj) == AuraCascade.proxy.chiselBookshelf))
                             && !checkedLocations.contains(newTuple)) {
-                        toSearch.push(newTuple);
+                        toSearch.add(newTuple);
                         checkedLocations.add(newTuple);
                     }
                 }

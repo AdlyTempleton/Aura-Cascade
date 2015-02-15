@@ -24,6 +24,7 @@ import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.lexicon.LexiconData;
 import pixlepix.auracascade.lexicon.LexiconEntry;
+import pixlepix.auracascade.main.event.EnchantEventHandler;
 import pixlepix.auracascade.main.event.EventHandler;
 import pixlepix.auracascade.network.*;
 import pixlepix.auracascade.potions.PotionManager;
@@ -33,6 +34,8 @@ import pixlepix.auracascade.registry.ModCreativeTab;
 public class CommonProxy {
 
     public static EventHandler eventHandler;
+
+    public static EnchantEventHandler eventHandlerEnch;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
 
@@ -77,6 +80,9 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(eventHandler);
         EnchantmentManager.init();
         FMLCommonHandler.instance().bus().register(eventHandler);
+        eventHandlerEnch = new EnchantEventHandler();
+        MinecraftForge.EVENT_BUS.register(eventHandlerEnch);
+        FMLCommonHandler.instance().bus().register(eventHandlerEnch);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
     }
 

@@ -1,0 +1,197 @@
+package pixlepix.auracascade.main.event;
+
+import baubles.api.BaublesApi;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBookshelf;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.entity.EntityDigFairy;
+import pixlepix.auracascade.block.tile.TileStorageBookshelf;
+import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.IAngelsteelTool;
+import pixlepix.auracascade.enchant.EnchantmentManager;
+import pixlepix.auracascade.item.AngelsteelToolHelper;
+import pixlepix.auracascade.item.ItemFairyRing;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * Created by localmacaccount on 2/14/15.
+ */
+public class EnchantEventHandler {
+
+    public int[] getEffectData(ItemStack stack) {
+        return new int[]{
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack)
+        };
+    }
+
+    public int getIndexFromAura(EnumAura aura) {
+        if (aura == EnumAura.RED_AURA) {
+            return 0;
+        }
+        if (aura == EnumAura.ORANGE_AURA) {
+            return 1;
+        }
+        if (aura == EnumAura.YELLOW_AURA) {
+            return 2;
+        }
+        if (aura == EnumAura.GREEN_AURA) {
+            return 3;
+        }
+        if (aura == EnumAura.BLUE_AURA) {
+            return 4;
+        }
+        if (aura == EnumAura.VIOLET_AURA) {
+            return 5;
+        }
+        return -1;
+    }
+
+    public int getEffectStrength(ItemStack stack, EnumAura aura) {
+        return getEffectData(stack)[getIndexFromAura(aura)];
+    }
+
+    public int getEffectStrength(ItemStack stack, EnumAura aura, EnumAura aura2) {
+        return (int) Math.ceil(Math.sqrt(getEffectStrength(stack, aura) * getEffectStrength(stack, aura2)));
+    }
+
+    //Start event handling
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onHarvestEvent(BlockEvent.HarvestDropsEvent event) {
+        Block block = event.block;
+        World world = event.world;
+        if (event.harvester != null && event.harvester.inventory.getCurrentItem() != null) {
+            ItemStack stack = event.harvester.inventory.getCurrentItem();
+            //Silk touch
+            if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.harvester, event.x, event.y, event.z, event.blockMetadata)) {
+                event.dropChance = 0;
+                ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
+                if (itemstack != null) {
+                    dropBlockAsItem(world, event.x, event.y, event.z, itemstack);
+                }
+            } else {
+                int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
+                if (fortune != 0 && event.fortuneLevel < fortune) {
+                    //Cancels the event and breaks the block again
+                    event.dropChance = 0;
+                    event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onAttack(AttackEntityEvent event) {
+        EntityPlayer player = event.entityPlayer;
+        ItemStack tool = player.getHeldItem();
+        int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
+        if (knockback > 0) {
+            event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
+        }
+    }
+
+    @SubscribeEvent
+    public void getDamage(LivingHurtEvent attackEvent) {
+        if (attackEvent.source != null && attackEvent.source.getEntity() instanceof EntityPlayer) {
+            ItemStack tool = ((EntityPlayer) attackEvent.source.getEntity()).getHeldItem();
+            int sharpness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
+            if (sharpness > 0) {
+                attackEvent.ammount += 1.25;
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onBreakBlock(BlockEvent.BreakEvent event) {
+        ItemStack stack = event.getPlayer().getCurrentEquippedItem();
+        int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
+        if (treeFeller > 0 && !event.world.isRemote) {
+            Block block = event.world.getBlock(event.x, event.y, event.z);
+            String oreName = OreDictionary.getOreIDs(new ItemStack(block)).length != 0 ? OreDictionary.getOreName(OreDictionary.getOreIDs(new ItemStack(block))[0]) : null;
+            if (block == Blocks.log || block == Blocks.log2 || (oreName != null && oreName.contains("log"))) {
+                ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
+                ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
+                toSearch.add(new CoordTuple(event.x, event.y, event.z));
+                while (toSearch.size() > 0 && treeFeller > 0) {
+                    CoordTuple nextTuple = toSearch.remove(0);
+                    event.world.func_147480_a(nextTuple.getX(), nextTuple.getY(), nextTuple.getZ(), true);
+                    treeFeller--;
+                    for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                        CoordTuple newTuple = nextTuple.add(direction);
+                        if ((newTuple.getBlock(event.world) == block) && !checkedLocations.contains(newTuple)) {
+                            toSearch.add(newTuple);
+                            checkedLocations.add(newTuple);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onGetBreakSpeed(PlayerEvent.BreakSpeed event) {
+        if (event.entityPlayer.inventory.getCurrentItem() != null) {
+            ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
+            if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
+                int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
+                event.newSpeed *= Math.pow(1.3, efficiency);
+                int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
+                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 4F) {
+                    event.newSpeed *= Math.pow(2, shatter);
+                }
+            }
+        }
+    }
+
+    //Copied from Block
+    public ItemStack createStackedBlock(Block block, int meta) {
+        int j = 0;
+        Item item = Item.getItemFromBlock(block);
+        if (item != null && item.getHasSubtypes()) {
+            j = meta;
+        }
+        return new ItemStack(item, 1, j);
+    }
+
+    protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {
+        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) { // do not drop items while restoring blockstates, prevents item dupe
+            float f = 0.7F;
+            double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+            double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+            double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+            EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, stack);
+            entityitem.delayBeforeCanPickup = 10;
+            world.spawnEntityInWorld(entityitem);
+        }
+    }
+}

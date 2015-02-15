@@ -55,7 +55,6 @@ public class EnchanterTile extends ConsumerTile {
                             if (crystalStack.stackSize <= 0) {
                                 crystal.setDead();
                             }
-                            return;
                         }
                     }
 
