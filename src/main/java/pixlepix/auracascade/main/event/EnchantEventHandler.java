@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.StringUtils;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
@@ -46,6 +47,22 @@ import java.util.Random;
 public class EnchantEventHandler {
 
     Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
+
+    public static ItemStack getTripleResult(ItemStack stack) {
+        int[] oreIds = OreDictionary.getOreIDs(stack);
+        for (int id : oreIds) {
+            String oreName = OreDictionary.getOreName(id);
+            if (StringUtils.startsWith(oreName, "ore")) {
+                String dustName = StringUtils.replace(oreName, "ore", "ingot");
+                if (OreDictionary.getOres(dustName).size() != 0) {
+                    ItemStack result = OreDictionary.getOres(dustName).get(0);
+                    result.stackSize = 3;
+                    return result;
+                }
+            }
+        }
+        return stack;
+    }
 
     public int[] getEffectData(ItemStack stack) {
         return new int[]{
@@ -96,18 +113,29 @@ public class EnchantEventHandler {
         if (event.harvester != null && event.harvester.inventory.getCurrentItem() != null) {
             ItemStack stack = event.harvester.inventory.getCurrentItem();
             //Silk touch
-            if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.harvester, event.x, event.y, event.z, event.blockMetadata)) {
-                event.dropChance = 0;
-                ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
-                if (itemstack != null) {
-                    dropBlockAsItem(world, event.x, event.y, event.z, itemstack);
+            int multiply = getEffectStrength(stack, EnumAura.RED_AURA, EnumAura.YELLOW_AURA);
+            if (new Random().nextInt(4) < multiply) {
+                ArrayList newDrops = new ArrayList(event.drops.size());
+                for (ItemStack dropStack : event.drops) {
+                    newDrops.add(getTripleResult(dropStack));
                 }
+                event.drops.clear();
+                event.drops.addAll(newDrops);
             } else {
-                int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
-                if (fortune != 0 && event.fortuneLevel < fortune) {
-                    //Cancels the event and breaks the block again
+                if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.harvester, event.x, event.y, event.z, event.blockMetadata)) {
                     event.dropChance = 0;
-                    event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                    ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
+                    if (itemstack != null) {
+                        dropBlockAsItem(world, event.x, event.y, event.z, itemstack);
+                    }
+                } else {
+
+                    int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
+                    if (fortune != 0 && event.fortuneLevel < fortune) {
+                        //Cancels the event and breaks the block again
+                        event.dropChance = 0;
+                        event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                    }
                 }
             }
         }
@@ -169,7 +197,7 @@ public class EnchantEventHandler {
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
                 event.newSpeed *= Math.pow(1.3, efficiency);
                 int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
-                if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 4F) {
+                if (shatter > 0 && event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 3F) {
                     event.newSpeed *= Math.pow(2, shatter);
                 }
 
@@ -194,7 +222,7 @@ public class EnchantEventHandler {
                     event.newSpeed *= Math.pow(1.4, digSpeed);
 
                 }
-                
+
             }
         }
     }

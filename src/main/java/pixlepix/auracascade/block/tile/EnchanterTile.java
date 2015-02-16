@@ -23,12 +23,12 @@ import java.util.Map;
 public class EnchanterTile extends ConsumerTile {
     @Override
     public int getMaxProgress() {
-        return 100;
+        return 10;
     }
 
     @Override
     public int getPowerPerProgress() {
-        return 100;
+        return 10;
     }
 
     @Override
