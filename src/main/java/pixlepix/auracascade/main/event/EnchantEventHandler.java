@@ -5,6 +5,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBookshelf;
+import net.minecraft.block.IGrowable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityItem;
@@ -13,9 +14,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -149,6 +152,16 @@ public class EnchantEventHandler {
         if (knockback > 0) {
             event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
         }
+
+        int recoil = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.BLUE_AURA);
+        if (recoil > 0) {
+            event.entityPlayer.attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.entityPlayer, event.entityPlayer), recoil);
+        }
+
+        int lifeSteal = getEffectStrength(tool, EnumAura.GREEN_AURA, EnumAura.BLUE_AURA);
+        if (lifeSteal > 0) {
+            event.entityPlayer.heal((float) Math.ceil(lifeSteal / 2));
+        }
     }
 
     @SubscribeEvent
@@ -157,7 +170,16 @@ public class EnchantEventHandler {
             ItemStack tool = ((EntityPlayer) attackEvent.source.getEntity()).getHeldItem();
             int sharpness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
             if (sharpness > 0) {
-                attackEvent.ammount += 1.25;
+                attackEvent.ammount += .5 * sharpness;
+            }
+        }
+        if (attackEvent.entity instanceof EntityPlayer) {
+            ItemStack heldStack = ((EntityPlayer) attackEvent.entity).getHeldItem();
+            if (heldStack != null) {
+                int protection = getEffectStrength(heldStack, EnumAura.RED_AURA, EnumAura.VIOLET_AURA);
+                if (protection > 0) {
+                    attackEvent.ammount *= Math.pow(.9, protection);
+                }
             }
         }
     }
@@ -186,12 +208,42 @@ public class EnchantEventHandler {
                 }
             }
         }
+
+        //Similar code to tree feller
+        int harvester = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.YELLOW_AURA) * 25;
+        if (harvester > 0 && !event.world.isRemote) {
+            Block block = event.world.getBlock(event.x, event.y, event.z);
+            int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
+            if (block instanceof IGrowable && block != Blocks.grass) {
+                ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
+                ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
+                toSearch.add(new CoordTuple(event.x, event.y, event.z));
+                while (toSearch.size() > 0 && harvester > 0) {
+                    CoordTuple nextTuple = toSearch.remove(0);
+                    event.world.func_147480_a(nextTuple.getX(), nextTuple.getY(), nextTuple.getZ(), true);
+                    harvester--;
+                    for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                        CoordTuple newTuple = nextTuple.add(direction);
+                        if ((newTuple.getBlock(event.world) == block) && !checkedLocations.contains(newTuple) && newTuple.getMeta(event.world) == meta) {
+                            toSearch.add(newTuple);
+                            checkedLocations.add(newTuple);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @SubscribeEvent
     public void onGetBreakSpeed(PlayerEvent.BreakSpeed event) {
         if (event.entityPlayer.inventory.getCurrentItem() != null) {
             ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
+
+            int miningDebuff = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.GREEN_AURA);
+            if (miningDebuff > 0) {
+                event.newSpeed /= Math.pow(3, miningDebuff);
+            }
+            
             if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
                 Block block = event.block;
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
@@ -206,6 +258,8 @@ public class EnchantEventHandler {
                 if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.block) || containsOredict(block, "ore"))) {
                     event.newSpeed *= Math.pow(1.5, oreSpeed);
                 }
+
+
                 int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
 
                 if (stone > 0 && Blocks.stone == block) {
