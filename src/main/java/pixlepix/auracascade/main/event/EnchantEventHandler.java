@@ -8,12 +8,15 @@ import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.IGrowable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -22,6 +25,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -148,6 +152,18 @@ public class EnchantEventHandler {
     public void onAttack(AttackEntityEvent event) {
         EntityPlayer player = event.entityPlayer;
         ItemStack tool = player.getHeldItem();
+
+        int areaOfEffect = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.BLUE_AURA);
+        if (areaOfEffect != 0) {
+            World world = event.target.worldObj;
+            List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(event.target.posX - 2, event.target.posY - 2, event.target.posZ - 2, event.target.posX + 2, event.target.posY + 2, event.target.posZ + 2));
+            for (EntityLivingBase entityLivingBase : list) {
+                if (entityLivingBase != event.entityLiving && entityLivingBase != event.target) {
+                    entityLivingBase.attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.entityPlayer, event.target), areaOfEffect);
+                }
+            }
+        }
+        
         int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
         if (knockback > 0) {
             event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
@@ -162,6 +178,12 @@ public class EnchantEventHandler {
         if (lifeSteal > 0) {
             event.entityPlayer.heal((float) Math.ceil(lifeSteal / 2));
         }
+
+        int fire = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.BLUE_AURA);
+        if (fire > 0) {
+            event.target.setFire(20 * fire);
+        }
+        
     }
 
     @SubscribeEvent
@@ -171,6 +193,11 @@ public class EnchantEventHandler {
             int sharpness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
             if (sharpness > 0) {
                 attackEvent.ammount += .5 * sharpness;
+            }
+
+            int dullness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
+            if (sharpness > 0) {
+                attackEvent.ammount -= 1 * sharpness;
             }
         }
         if (attackEvent.entity instanceof EntityPlayer) {
@@ -230,6 +257,18 @@ public class EnchantEventHandler {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onDrops(LivingDropsEvent event) {
+        Entity entity = event.source.getSourceOfDamage();
+        if (entity instanceof EntityPlayer) {
+            ItemStack stack = ((EntityPlayer) entity).getHeldItem();
+            int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
+            for (EntityItem item : event.drops) {
+                item.getEntityItem().stackSize *= looting;
             }
         }
     }
