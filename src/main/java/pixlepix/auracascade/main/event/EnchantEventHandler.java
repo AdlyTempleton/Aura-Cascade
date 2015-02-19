@@ -183,7 +183,7 @@ public class EnchantEventHandler {
         if (fire > 0) {
             event.target.setFire(20 * fire);
         }
-        
+
     }
 
     @SubscribeEvent
@@ -195,9 +195,13 @@ public class EnchantEventHandler {
                 attackEvent.ammount += .5 * sharpness;
             }
 
-            int dullness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
-            if (sharpness > 0) {
-                attackEvent.ammount -= 1 * sharpness;
+            int dullness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.GREEN_AURA);
+            if (dullness > 0) {
+                attackEvent.ammount -= dullness;
+                if (attackEvent.ammount < 0) {
+                    attackEvent.ammount = 0;
+
+                }
             }
         }
         if (attackEvent.entity instanceof EntityPlayer) {
