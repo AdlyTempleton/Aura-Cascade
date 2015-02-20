@@ -446,7 +446,7 @@ aura.page.basicEffects5=&Violet&0 will grant efficiency.
 
 aura.entry.areaOfEffect=Area of Effect interactions
 aura.page.areaOfEffect0=&1Yellow&0 and &1Green&0 will allow your tool to harvest fields of crops at once.
-aura.page.areaOfEffect1=&1Blue&0 and &1Violet&0 will inflict damage on enemies near your target. Higher levels results. in more damage.
+aura.page.areaOfEffect1=&1Blue&0 and &1Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
 
 aura.entry.combat=Combat interactions
 aura.page.combat0=&1Green&0 and &1Blue&0 will grant life steal.
