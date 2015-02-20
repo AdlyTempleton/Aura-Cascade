@@ -64,6 +64,9 @@ public final class LexiconData {
 
         LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
         CategoryManager.addCategory(categoryWalkthrough);
+
+        LexiconCategory categoryEnchants = CategoryManager.categoryEnchants = new LexiconCategory("Enchantments").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("enchant")));
+        CategoryManager.addCategory(categoryEnchants);
         // BASICS ENTRIES
         new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
         ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
@@ -127,6 +130,7 @@ public final class LexiconData {
                 new PageCraftingRecipe("18", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(MobStorageBook.class)).iRecipe),
                 new PageCraftingRecipe("19", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(FarmingStorageBook.class)).iRecipe),
                 new PageCraftingRecipe("20", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(ModStorageBook.class)).iRecipe));
+
         new BLexiconEntry("crafting", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
                 new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
@@ -157,7 +161,17 @@ public final class LexiconData {
                 new PageCraftingRecipe("6", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelShovel.class))));
         new BLexiconEntry("angelsteelSword", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", angelSwordRecipe.getIRecipies(0, 6))
                 , new PageText("2"), new PageText("3"), new PageText("4"), new PageText("5"), new PageText("6"), new PageText("7"));
-        
+
+
+        new BLexiconEntry("enchanter", categoryEnchants).setPriority().setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("enchant"))), new PageText("2"), new PageText("3"));
+
+        new BLexiconEntry("basicEffects", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageText("3"), new PageText("4"), new PageText("5"));
+        new BLexiconEntry("speedBoosts", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageText("3"), new PageText("4"));
+        new BLexiconEntry("looting", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"));
+        new BLexiconEntry("areaOfEffect", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"));
+        new BLexiconEntry("negative", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"));
+        new BLexiconEntry("combat", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"));
+
 
         //Fairies
         new BLexiconEntry("fairies", categoryFairies).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),

@@ -21,7 +21,7 @@ public final class CategoryManager {
     public static LexiconCategory categoryBasics;
     public static LexiconCategory categoryAuraColors;
     public static LexiconCategory categoryAuraNodes;
-    public static LexiconCategory categoryCrafting;
+    public static LexiconCategory categoryEnchants;
     public static LexiconCategory categoryConsumers;
     public static LexiconCategory categoryFairies;
     public static LexiconCategory categoryAccessories;

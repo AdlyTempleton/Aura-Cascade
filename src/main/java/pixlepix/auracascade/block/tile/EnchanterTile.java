@@ -16,6 +16,7 @@ import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 2/14/15.
@@ -23,12 +24,12 @@ import java.util.Map;
 public class EnchanterTile extends ConsumerTile {
     @Override
     public int getMaxProgress() {
-        return 10;
+        return 1000;
     }
 
     @Override
     public int getPowerPerProgress() {
-        return 10;
+        return 500;
     }
 
     @Override
@@ -46,9 +47,11 @@ public class EnchanterTile extends ConsumerTile {
                         Enchantment enchant = getEnchantFromAura(aura);
                         if (enchant != null) {
                             int level = EnchantmentHelper.getEnchantmentLevel(enchant.effectId, toolStack);
-                            Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
-                            enchantMap.put(enchant.effectId, level + 1);
-                            EnchantmentHelper.setEnchantments(enchantMap, toolStack);
+                            if (isSuccessful(toolStack)) {
+                                Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
+                                enchantMap.put(enchant.effectId, level + 1);
+                                EnchantmentHelper.setEnchantments(enchantMap, toolStack);
+                            }
                             crystalStack.stackSize--;
                             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
@@ -61,6 +64,25 @@ public class EnchanterTile extends ConsumerTile {
                 }
             }
         }
+    }
+
+    public int getTotalLevel(ItemStack stack) {
+        return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack);
+    }
+
+    public double getSuccessRate(ItemStack stack) {
+        int totalLevel = getTotalLevel(stack);
+        return Math.pow(.75, totalLevel);
+    }
+
+    public boolean isSuccessful(ItemStack stack) {
+        return new Random().nextDouble() < getSuccessRate(stack);
+
     }
 
     public Enchantment getEnchantFromAura(EnumAura aura) {

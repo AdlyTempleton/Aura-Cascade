@@ -427,3 +427,44 @@ aura.page.basicSetup0=The most basic power generating setup is referred to as a 
 aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed next to the Power Node.
 
 aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0. These four Vortex pedestals surround the &1Vortex Controller&0.
+
+tile.consumerBlockenchanter.name=Kaleidoscopic Enchanter
+
+aura.entry.enchanter=Kaleidoscopic Enchantments
+aura.page.enchanter0=Kaleidoscopic Enchantments are a series of 6 enchantments, each with a different color, that can be applied to swords or tools. Each enchantment gives a different effect by themselves. However, when two or more different enchantments are combined, each one interacts with every other enchantment, creating dozens of unique effects - some negative.
+aura.page.enchanter1=Mana still unobtainable
+aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying kaleidoscopic enchantments. It functions as a cascading consumer, and requires 500 power/second minimum. Drop the item to be enchanted, as well as an appropriately colored Aura Crystal near the enchanter.
+aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic enchantments on an item. When adding a second level, it has a 75% chance of success. Each additional level has three-quarters success rate of the previous one.
+
+aura.entry.basicEffects=Basic Effects
+aura.page.basicEffects0=&1Red&0 will grant silk touch. Additional levels have no effect.
+aura.page.basicEffects1=&1Orange&0 will grant efficiency.
+aura.page.basicEffects2=&Yellow&0 will grant efficiency.
+aura.page.basicEffects3=&Blue&0 will grant knockback.
+aura.page.basicEffects4=&Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
+aura.page.basicEffects5=&Violet&0 will grant efficiency.
+
+aura.entry.areaOfEffect=Area of Effect interactions
+aura.page.areaOfEffect0=&1Yellow&0 and &1Green&0 will allow your tool to harvest fields of crops at once.
+aura.page.areaOfEffect1=&1Blue&0 and &1Purple&0 will inflict damage on enemies near your target. Higher levels results. in more damage.
+
+aura.entry.combat=Combat interactions
+aura.page.combat0=&1Green&0 and &1Blue&0 will grant life steal.
+aura.page.combat1=&1Yellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
+aura.page.combat2=&1Red&0 and &1Purple&0 will act as a secondary armor, lowering the damage sustained from enemies.
+
+aura.entry.looting=Resource interactions
+aura.page.looting0=&1Yellow&0 and &1Purple&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
+aura.page.looting1=&1Yellow&0 and &1Red will multiply ores mined, dropping three ingots.
+
+aura.entry.negative=Negative interactions
+aura.page.negative0=&1Red&0 and &1Green&0 will lower mining speed.
+aura.page.negative1=&1Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
+aura.page.negative2=&1Green&0 and &Purple&0 will lower the attack damage a tool produces.
+
+aura.entry.speedBoosts=Mining Speed boosts
+aura.page.speedBoosts0=&1Red&0 and &1Orange&0 grant higher mining speed on ores.
+aura.page.speedBoosts1=&1Yellow&0 and &1Orange&0 grant higher mining speed on stone.
+aura.page.speedBoosts2=&1Blue&0 and &1Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
+aura.page.speedBoosts3=&1Green&0 and &1Orange&0 grant higher mining speed on wood.
+aura.page.speedBoosts4=&1Purple&0 and &1Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
