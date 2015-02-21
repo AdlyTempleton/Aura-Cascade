@@ -41,9 +41,9 @@ public class PageGuide extends PageText {
     public void onActionPerformed(IGuiLexiconEntry gui, GuiButton button) {
         if (button == this.button && Desktop.isDesktopSupported())
             try {
-                Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=rx0xyejC6fI"));
-                if (Math.random() < 0.01)
-                    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
+                Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=f2FaoaHXOGo"));
+                //if (Math.random() < 0.01)
+                //    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
             } catch (Exception e) {
             }
     }

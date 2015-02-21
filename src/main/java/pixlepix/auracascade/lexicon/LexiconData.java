@@ -22,10 +22,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.item.books.*;
-import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
-import pixlepix.auracascade.lexicon.page.PageImage;
-import pixlepix.auracascade.lexicon.page.PagePylon;
-import pixlepix.auracascade.lexicon.page.PageText;
+import pixlepix.auracascade.lexicon.page.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererRegisterable;
@@ -210,6 +207,7 @@ public final class LexiconData {
         new BLexiconEntry("fairyTrain", categoryFairies).setLexiconPages(new PageText("0"),
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityXPFairy.class)));
         //Walkthrough
+        new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0"));
         new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/0.png"), new PageText("2"));
         new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/1.png"));
