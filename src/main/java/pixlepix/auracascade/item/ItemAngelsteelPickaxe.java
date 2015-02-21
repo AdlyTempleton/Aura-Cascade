@@ -49,10 +49,10 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
         super.addInformation(stack, player, list, p_77624_4_);
         if (AngelsteelToolHelper.hasValidBuffs(stack)) {
             int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
-            list.add("Efficiency: " + buffs[0]);
-            list.add("Fortune: " + buffs[1]);
-            list.add("Shatter: " + buffs[2]);
-            list.add("Disintegrate: " + buffs[3]);
+            list.add("Angel's Efficiency: " + buffs[0]);
+            list.add("Angel's Fortune: " + buffs[1]);
+            list.add("Angel's Shatter: " + buffs[2]);
+            list.add("Angel's Disintegrate: " + buffs[3]);
         }
     }
 
