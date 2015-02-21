@@ -437,34 +437,34 @@ aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying k
 aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic enchantments on an item. When adding a second level, it has a 75% chance of success. Each additional level has three-quarters success rate of the previous one.
 
 aura.entry.basicEffects=Basic Effects
-aura.page.basicEffects0=&1Red&0 will grant silk touch. Additional levels have no effect.
-aura.page.basicEffects1=&1Orange&0 will grant efficiency.
-aura.page.basicEffects2=&Yellow&0 will grant efficiency.
-aura.page.basicEffects3=&Blue&0 will grant knockback.
-aura.page.basicEffects4=&Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
-aura.page.basicEffects5=&Violet&0 will grant efficiency.
+aura.page.basicEffects0=&4Red&0 will grant silk touch. Additional levels have no effect.
+aura.page.basicEffects1=&6Orange&0 will grant efficiency.
+aura.page.basicEffects2=&eYellow&0 will grant efficiency.
+aura.page.basicEffects3=&1Blue&0 will grant knockback.
+aura.page.basicEffects4=&2Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
+aura.page.basicEffects5=&5Violet&0 will grant efficiency.
 
 aura.entry.areaOfEffect=Area of Effect interactions
-aura.page.areaOfEffect0=&1Yellow&0 and &1Green&0 will allow your tool to harvest fields of crops at once.
-aura.page.areaOfEffect1=&1Blue&0 and &1Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
+aura.page.areaOfEffect0=&eYellow&0 and &2Green&0 will allow your tool to harvest fields of crops at once.
+aura.page.areaOfEffect1=&1Blue&0 and &5Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
 
 aura.entry.combat=Combat interactions
-aura.page.combat0=&1Green&0 and &1Blue&0 will grant life steal.
-aura.page.combat1=&1Yellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
-aura.page.combat2=&1Red&0 and &1Violet&0 will act as a secondary armor, lowering the damage sustained from enemies.
+aura.page.combat0=&2Green&0 and &1Blue&0 will grant life steal.
+aura.page.combat1=&eYellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
+aura.page.combat2=&4Red&0 and &5Violet&0 will act as a secondary armor, lowering the damage sustained from enemies.
 
 aura.entry.looting=Resource interactions
-aura.page.looting0=&1Yellow&0 and &1Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
-aura.page.looting1=&1Yellow&0 and &1Red will multiply ores mined, dropping three ingots.
+aura.page.looting0=&eYellow&0 and &5Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
+aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping three ingots.
 
 aura.entry.negative=Negative interactions
-aura.page.negative0=&1Red&0 and &1Green&0 will lower mining speed.
-aura.page.negative1=&1Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
-aura.page.negative2=&1Green&0 and &Violet&0 will lower the attack damage a tool produces.
+aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.
+aura.page.negative1=&4Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
+aura.page.negative2=&2Green&0 and &Violet&0 will lower the attack damage a tool produces.
 
 aura.entry.speedBoosts=Mining Speed boosts
-aura.page.speedBoosts0=&1Red&0 and &1Orange&0 grant higher mining speed on ores.
-aura.page.speedBoosts1=&1Yellow&0 and &1Orange&0 grant higher mining speed on stone.
-aura.page.speedBoosts2=&1Blue&0 and &1Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
-aura.page.speedBoosts3=&1Green&0 and &1Orange&0 grant higher mining speed on wood.
-aura.page.speedBoosts4=&1Violet&0 and &1Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
+aura.page.speedBoosts0=&4Red&0 and &6Orange&0 grant higher mining speed on ores.
+aura.page.speedBoosts1=&eYellow&0 and &6Orange&0 grant higher mining speed on stone.
+aura.page.speedBoosts2=&1Blue&0 and &6Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
+aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on wood.
+aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
