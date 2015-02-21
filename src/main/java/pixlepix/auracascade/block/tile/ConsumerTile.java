@@ -78,7 +78,7 @@ public abstract class ConsumerTile extends TileEntity {
                 }
             }
 
-            if (worldObj.getTotalWorldTime() % 2400 == 0) {
+            if (worldObj.getTotalWorldTime() % 500 == 0) {
                 AuraUtil.keepAlive(this, 3);
             }
 
