@@ -160,7 +160,12 @@ public class EnchantEventHandler {
             for (EntityLivingBase entityLivingBase : list) {
                 if (entityLivingBase != event.entityLiving && entityLivingBase != event.target) {
                     entityLivingBase.attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.entityPlayer, event.target), areaOfEffect);
+                    int fire = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.BLUE_AURA);
+                    if (fire > 0) {
+                        entityLivingBase.setFire(10 * fire);
+                    }
                 }
+
             }
         }
         
