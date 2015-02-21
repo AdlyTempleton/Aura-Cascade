@@ -216,6 +216,7 @@ public class EventHandler {
             if (event.fortuneLevel < fortune) {
                 //Cancels the event and breaks the block again
                 event.dropChance = 0;
+                event.drops.clear();
                 event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
             }
         }

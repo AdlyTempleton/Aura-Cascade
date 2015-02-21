@@ -131,6 +131,7 @@ public class EnchantEventHandler {
             } else {
                 if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.harvester, event.x, event.y, event.z, event.blockMetadata)) {
                     event.dropChance = 0;
+                    event.drops.clear();
                     ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
                     if (itemstack != null) {
                         dropBlockAsItem(world, event.x, event.y, event.z, itemstack);
@@ -141,6 +142,7 @@ public class EnchantEventHandler {
                     if (fortune != 0 && event.fortuneLevel < fortune) {
                         //Cancels the event and breaks the block again
                         event.dropChance = 0;
+                        event.drops.clear();
                         event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
                     }
                 }
