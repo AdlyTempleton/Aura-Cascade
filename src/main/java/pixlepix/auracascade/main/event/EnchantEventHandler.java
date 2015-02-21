@@ -305,33 +305,33 @@ public class EnchantEventHandler {
             if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
                 Block block = event.block;
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
-                event.newSpeed *= Math.pow(1.3, efficiency);
+                event.newSpeed *= Math.pow(1.15, efficiency);
                 int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
                 if (shatter > 0 && event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 3F) {
-                    event.newSpeed *= Math.pow(2, shatter);
+                    event.newSpeed *= Math.pow(1.5, shatter);
                 }
 
                 int oreSpeed = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.ORANGE_AURA);
 
                 if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.block) || containsOredict(block, "ore"))) {
-                    event.newSpeed *= Math.pow(1.5, oreSpeed);
+                    event.newSpeed *= Math.pow(1.25, oreSpeed);
                 }
 
 
                 int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
 
                 if (stone > 0 && Blocks.stone == block) {
-                    event.newSpeed *= Math.pow(1.5, stone);
+                    event.newSpeed *= Math.pow(1.25, stone);
                 }
 
                 int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
                 if (logSpeed > 0 && block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
-                    event.newSpeed *= Math.pow(1.4, logSpeed);
+                    event.newSpeed *= Math.pow(1.25, logSpeed);
                 }
 
                 int digSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
                 if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.gravel || block == Blocks.sand) {
-                    event.newSpeed *= Math.pow(1.4, digSpeed);
+                    event.newSpeed *= Math.pow(1.25, digSpeed);
 
                 }
 
