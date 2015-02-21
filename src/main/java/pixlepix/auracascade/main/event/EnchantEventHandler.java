@@ -112,6 +112,7 @@ public class EnchantEventHandler {
         return (int) Math.ceil(Math.sqrt(getEffectStrength(stack, aura) * getEffectStrength(stack, aura2)));
     }
 
+
     //Start event handling
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onHarvestEvent(BlockEvent.HarvestDropsEvent event) {
@@ -269,6 +270,13 @@ public class EnchantEventHandler {
                     }
                 }
             }
+        }
+
+        //Silk touch handling is done in another location
+        //But this prevents XP drops
+        int silk = getEffectStrength(stack, EnumAura.RED_AURA);
+        if (silk > 0) {
+            event.setExpToDrop(0);
         }
     }
 
