@@ -215,9 +215,11 @@ public class EventHandler {
             int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().stackTagCompound)[1];
             if (event.fortuneLevel < fortune) {
                 //Cancels the event and breaks the block again
-                event.dropChance = 0;
-                event.drops.clear();
-                event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                if (event.dropChance <= 0 && event.drops.size() > 0) {
+                    event.dropChance = 0;
+                    event.drops.clear();
+                    event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                }
             }
         }
     }
