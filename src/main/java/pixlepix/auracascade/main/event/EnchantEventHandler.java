@@ -41,10 +41,10 @@ import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemFairyRing;
-import scala.actors.threadpool.Arrays;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 

@@ -8,7 +8,6 @@ import net.minecraft.world.biome.BiomeGenHell;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
-import scala.collection.mutable.ArrayStack;
 
 import java.util.ArrayList;
 import java.util.Iterator;

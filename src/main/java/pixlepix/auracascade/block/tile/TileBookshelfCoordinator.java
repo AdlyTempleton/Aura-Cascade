@@ -22,7 +22,6 @@ import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
-import scala.collection.mutable.ArrayStack;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
