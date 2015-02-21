@@ -1,8 +1,10 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
@@ -67,7 +69,16 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
         return degree == 0 || degree == AngelsteelToolHelper.MAX_DEGREE;
     }
 
+    @Override
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+        return true;
+    }
 
+    @Override
+    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
+        return true;
+    }
+    
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);

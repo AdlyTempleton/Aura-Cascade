@@ -1,7 +1,9 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemSpade;
@@ -38,6 +40,15 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
         itemIcon = register.registerIcon("aura:angel_shovel");
     }
 
+    @Override
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+        return true;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
+        return true;
+    }
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {

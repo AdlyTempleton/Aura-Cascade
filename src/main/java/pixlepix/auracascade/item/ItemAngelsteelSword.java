@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.potions.PotionManager;
@@ -50,6 +52,11 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         for (EnumAura aura : auraSwords) {
             iconHashMap.put(aura, register.registerIcon("aura:angel_sword" + aura.name));
         }
+    }
+
+    @Override
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+        return true;
     }
 
     @Override
@@ -130,7 +137,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         if (aura == EnumAura.VIOLET_AURA) {
             entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.getId(), degree * degree * 100 + 100));
         }
-        return super.hitEntity(stack, entity, attacker);
+        return true;
     }
 
     @Override
