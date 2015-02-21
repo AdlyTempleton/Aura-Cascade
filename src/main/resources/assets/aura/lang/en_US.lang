@@ -468,3 +468,11 @@ aura.page.speedBoosts1=&eYellow&0 and &6Orange&0 grant higher mining speed on st
 aura.page.speedBoosts2=&1Blue&0 and &6Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
 aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on wood.
 aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
+
+tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
+enchantment.red=Kaleidoscopic Red
+enchantment.orange=Kaleidoscopic Orange
+enchantment.yellow=Kaleidoscopic Yellow
+enchantment.green=Kaleidoscopic Green
+enchantment.blue=Kaleidoscopic Blue
+enchantment.violet=Kaleidoscopic Violet
