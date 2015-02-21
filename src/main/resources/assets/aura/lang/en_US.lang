@@ -470,12 +470,12 @@ aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on woo
 aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
 
 tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
-enchantment.red=Kaleidoscopic Red
-enchantment.orange=Kaleidoscopic Orange
-enchantment.yellow=Kaleidoscopic Yellow
-enchantment.green=Kaleidoscopic Green
-enchantment.blue=Kaleidoscopic Blue
-enchantment.violet=Kaleidoscopic Violet
+enchantment.Red=Kaleidoscopic Red
+enchantment.Orange=Kaleidoscopic Orange
+enchantment.Yellow=Kaleidoscopic Yellow
+enchantment.Green=Kaleidoscopic Green
+enchantment.Blue=Kaleidoscopic Blue
+enchantment.Violet=Kaleidoscopic Violet
 
 aura.entry.video=Video Walkthrough
 aura.page.video0=This video, by SilverContrails, provides a good walkthrough of the basic aura mechanics.
