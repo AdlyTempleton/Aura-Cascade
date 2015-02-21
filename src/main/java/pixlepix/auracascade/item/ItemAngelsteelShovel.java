@@ -95,7 +95,7 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
 
-        return new CraftingBenchRecipe(new ItemStack(this, 1, degree), " A ", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), " A ", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
     }
 
     @Override

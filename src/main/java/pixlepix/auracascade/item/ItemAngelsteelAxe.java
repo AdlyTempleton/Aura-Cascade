@@ -94,7 +94,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
 
-        return new CraftingBenchRecipe(new ItemStack(this, 1, degree), "AA ", "AS ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AA ", "AS ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
     }
 
     @Override

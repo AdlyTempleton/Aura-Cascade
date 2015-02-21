@@ -85,7 +85,7 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this, 1, degree), "AAA", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AAA", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
     }
 
     @Override
