@@ -455,7 +455,7 @@ aura.page.combat2=&4Red&0 and &5Violet&0 will act as a secondary armor, lowering
 
 aura.entry.looting=Resource interactions
 aura.page.looting0=&eYellow&0 and &5Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
-aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping three ingots.
+aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping two ingots.
 
 aura.entry.negative=Negative interactions
 aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.

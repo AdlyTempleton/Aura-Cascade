@@ -1,12 +1,9 @@
 package pixlepix.auracascade.main.event;
 
-import baubles.api.BaublesApi;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.IGrowable;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,16 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -32,17 +25,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.entity.EntityDigFairy;
-import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.enchant.EnchantmentManager;
-import pixlepix.auracascade.item.AngelsteelToolHelper;
-import pixlepix.auracascade.item.ItemFairyRing;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +41,7 @@ public class EnchantEventHandler {
 
     Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
 
-    public static ItemStack getTripleResult(ItemStack stack) {
+    public static ItemStack getDoubleResult(ItemStack stack) {
         int[] oreIds = OreDictionary.getOreIDs(stack);
         for (int id : oreIds) {
             String oreName = OreDictionary.getOreName(id);
@@ -63,7 +49,7 @@ public class EnchantEventHandler {
                 String dustName = StringUtils.replace(oreName, "ore", "ingot");
                 if (OreDictionary.getOres(dustName).size() != 0) {
                     ItemStack result = OreDictionary.getOres(dustName).get(0);
-                    result.stackSize = 3;
+                    result.stackSize = 2;
                     return result;
                 }
             }
@@ -125,7 +111,7 @@ public class EnchantEventHandler {
             if (new Random().nextInt(4) < multiply) {
                 ArrayList newDrops = new ArrayList(event.drops.size());
                 for (ItemStack dropStack : event.drops) {
-                    newDrops.add(getTripleResult(dropStack));
+                    newDrops.add(getDoubleResult(dropStack));
                 }
                 event.drops.clear();
                 event.drops.addAll(newDrops);
