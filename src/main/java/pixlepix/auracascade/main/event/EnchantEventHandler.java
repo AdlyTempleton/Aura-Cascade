@@ -162,7 +162,7 @@ public class EnchantEventHandler {
         }
 
         int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
-        if (knockback > 0) {
+        if (knockback > 0 && !event.target.isEntityInvulnerable()) {
             event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
         }
 
