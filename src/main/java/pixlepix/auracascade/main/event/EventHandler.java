@@ -5,6 +5,7 @@ import baubles.api.IBauble;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
@@ -215,7 +216,7 @@ public class EventHandler {
             int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().stackTagCompound)[1];
             if (event.fortuneLevel < fortune) {
                 //Cancels the event and breaks the block again
-                if (event.dropChance <= 0 && event.drops.size() > 0) {
+                if (event.dropChance <= 0 && event.drops.size() > 0 && !(event.block instanceof BlockCrops)) {
                     event.dropChance = 0;
                     event.drops.clear();
                     event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);

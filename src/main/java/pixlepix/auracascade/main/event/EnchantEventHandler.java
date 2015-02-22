@@ -3,6 +3,7 @@ package pixlepix.auracascade.main.event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -126,7 +128,8 @@ public class EnchantEventHandler {
                 } else {
 
                     int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
-                    if (fortune != 0 && event.fortuneLevel < fortune) {
+                    //Crops nullifies the fortune level passed to dropBlockAsItemWithChance
+                    if (fortune != 0 && event.fortuneLevel < fortune && !(event.block instanceof BlockCrops)) {
                         //Cancels the event and breaks the block again
                         event.dropChance = 0;
                         event.drops.clear();
@@ -157,7 +160,7 @@ public class EnchantEventHandler {
 
             }
         }
-        
+
         int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
         if (knockback > 0) {
             event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
@@ -287,7 +290,7 @@ public class EnchantEventHandler {
             if (miningDebuff > 0) {
                 event.newSpeed /= Math.pow(3, miningDebuff);
             }
-            
+
             if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
                 Block block = event.block;
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
