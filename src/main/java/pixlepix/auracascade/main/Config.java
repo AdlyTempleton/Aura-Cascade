@@ -29,8 +29,8 @@ public class Config {
 
     public static boolean giveBook = true;
 
-    public static int potionStartId = 97;
-    public static int enchantStartId = 97;
+    public static int potionStartId = 123;
+    public static int enchantStartId = 78;
     
     static Configuration config;
 
