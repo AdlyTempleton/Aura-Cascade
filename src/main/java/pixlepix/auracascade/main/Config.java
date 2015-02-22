@@ -30,7 +30,7 @@ public class Config {
     public static boolean giveBook = true;
 
     public static int potionStartId = 123;
-    public static int enchantStartId = 78;
+    public static int enchantStartId = 110;
     
     static Configuration config;
 
@@ -65,7 +65,7 @@ public class Config {
         overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
 
         potionStartId = config.getInt("Potion Id beginning", Configuration.CATEGORY_GENERAL, potionStartId, 1, 128, "");
-        potionStartId = config.getInt("Enchant Id beginning", Configuration.CATEGORY_GENERAL, enchantStartId, 1, 128, "");
+        enchantStartId = config.getInt("Enchant Id beginning", Configuration.CATEGORY_GENERAL, enchantStartId, 1, 128, "");
 
         giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
 
