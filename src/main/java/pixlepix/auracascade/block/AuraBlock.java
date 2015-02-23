@@ -95,6 +95,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
+    public String getHarvestTool(int metadata) {
+        return "pickaxe";
+    }
+
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
