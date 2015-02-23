@@ -275,8 +275,10 @@ public class EnchantEventHandler {
         if (entity instanceof EntityPlayer) {
             ItemStack stack = ((EntityPlayer) entity).getHeldItem();
             int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
-            for (EntityItem item : event.drops) {
-                item.getEntityItem().stackSize *= looting;
+            if (looting > 0) {
+                for (EntityItem item : event.drops) {
+                    item.getEntityItem().stackSize *= looting + 1;
+                }
             }
         }
     }
