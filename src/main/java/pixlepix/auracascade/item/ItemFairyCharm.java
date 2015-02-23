@@ -115,9 +115,10 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
                 //Trigger the re-spawn of fairies
                 ItemFairyRing.killNearby(player);
                 ItemFairyRing.makeFaries(ringStack, player);
-            }
 
-            player.inventory.consumeInventoryItem(this);
+
+                player.inventory.consumeInventoryItem(this);
+            }
         }
         return stack;
     }
