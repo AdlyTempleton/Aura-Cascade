@@ -305,6 +305,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("pumpFall");
         result.add("pumpLight");
         result.add("pumpRedstone");
+        result.add("rf");
         return result;
     }
 
@@ -354,6 +355,10 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
         if (type.equals("craftingCenter")) {
             return CraftingCenterTile.class;
+        }
+        if (type.equals("rf")) {
+            return AuraTileRF.class;
+
         }
 
 
