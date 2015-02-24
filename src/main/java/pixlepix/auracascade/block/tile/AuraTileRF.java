@@ -22,7 +22,7 @@ public class AuraTileRF extends AuraTile {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (worldObj.getTotalWorldTime() % 200 == 0) {
+        if (worldObj.getTotalWorldTime() % 100 == 0) {
             foundTiles.clear();
             LinkedList<CoordTuple> nextTiles = new LinkedList<CoordTuple>();
             nextTiles.add(new CoordTuple(this));
@@ -45,7 +45,7 @@ public class AuraTileRF extends AuraTile {
             for (CoordTuple tuple : foundTiles) {
                 TileEntity entity = tuple.getTile(worldObj);
                 if (entity instanceof IEnergyReceiver) {
-                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, lastPower, false);
+                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * .25 / foundTiles.size()), false);
                 }
 
             }
