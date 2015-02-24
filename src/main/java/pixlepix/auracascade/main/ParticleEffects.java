@@ -62,6 +62,13 @@ public class ParticleEffects {
                         entityfx.setRBGColorF((float) r, (float) g, (float) b);
                     }
                 }
+                if (particleName.equals("witchMagic")) {
+                    entityfx = new EntitySpellParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);
+                    float f = Minecraft.getMinecraft().theWorld.rand.nextFloat() * 0.5F + 0.35F;
+                    ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
+                    ((EntityFX) entityfx).motionY = -.07;
+                }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);
 
