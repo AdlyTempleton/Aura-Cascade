@@ -1,6 +1,7 @@
 package pixlepix.auracascade.block.tile;
 
 import cofh.api.energy.IEnergyReceiver;
+import cofh.api.transport.IEnderEnergyHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
@@ -20,6 +21,8 @@ public class AuraTileRF extends AuraTile {
     public HashSet<CoordTuple> particleTiles = new HashSet<CoordTuple>();
     
     public int lastPower = 0;
+
+    public boolean disabled = false;
 
     @Override
     public void updateEntity() {
@@ -60,6 +63,15 @@ public class AuraTileRF extends AuraTile {
                     }
                 }
             }
+
+            disabled = foundTiles.size() > 8;
+
+            for (CoordTuple tuple : foundTiles) {
+                TileEntity te = tuple.getTile(worldObj);
+                if (te instanceof IEnderEnergyHandler) {
+                    disabled = false;
+                }
+            }
         }
 
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
@@ -68,13 +80,12 @@ public class AuraTileRF extends AuraTile {
                 double x = tuple.getX() + random.nextDouble();
                 double y = tuple.getY() + random.nextDouble();
                 double z = tuple.getZ() + random.nextDouble();
-                boolean valid = foundTiles.size() <= 8;
-                ParticleEffects.spawnParticle("witchMagic", x, y, z, 0, 0, 0, 255, 0, valid ? 50 : 0);
+                ParticleEffects.spawnParticle("witchMagic", x, y, z, 0, 0, 0, 255, 0, !disabled ? 50 : 0);
             }
 
         }
 
-        if (foundTiles.size() <= 8) {
+        if (!disabled) {
             for (CoordTuple tuple : foundTiles) {
                 TileEntity entity = tuple.getTile(worldObj);
                 if (entity instanceof IEnergyReceiver) {
