@@ -1,5 +1,7 @@
 package pixlepix.auracascade.block;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModAPIManager;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -285,6 +287,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("pumpRedstone")) {
             return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
         }
+        if (type.equals("flux")) {
+            return new CraftingBenchRecipe(new ItemStack(this), "III", "RNR", "III", 'R', new ItemStack(Items.redstone), 'I', new ItemStack(Items.gold_ingot), 'N', getAuraNodeItemstack());
+        }
         return new CraftingBenchRecipe(new ItemStack(this), "PPP", "PRP", "PPP", 'P', new ItemStack(Blocks.glass_pane), 'R', new ItemStack(Blocks.redstone_block));
     }
 
@@ -305,7 +310,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("pumpFall");
         result.add("pumpLight");
         result.add("pumpRedstone");
-        result.add("rf");
+        if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
+            result.add("flux");
+        }
         return result;
     }
 
@@ -356,7 +363,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("craftingCenter")) {
             return CraftingCenterTile.class;
         }
-        if (type.equals("rf")) {
+        if (type.equals("flux")) {
             return AuraTileRF.class;
 
         }

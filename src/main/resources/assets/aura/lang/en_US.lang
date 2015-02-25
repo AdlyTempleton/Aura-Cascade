@@ -480,3 +480,9 @@ enchantment.Violet=Kaleidoscopic Violet
 aura.entry.video=Video Walkthrough
 aura.page.video0=This video, by SilverContrails, provides a good walkthrough of the basic aura mechanics.
 auramisc.playVideo=Play Video
+
+aura.entry.flux=Fluxing Node
+tile.auraNodeflux.name=Fluxing Node
+aura.page.flux0=The fluxing node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and and blocks adjacent to those ones, and so on, providing power to all of them.
+aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 8 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It also won't power blocks that transmit power wirelessly.
+aura.page.flux2=The bullet, guys. I bit it. Copied some stuff, too.
