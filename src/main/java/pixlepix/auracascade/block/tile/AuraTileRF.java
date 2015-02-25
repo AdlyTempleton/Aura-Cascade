@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.main.ParticleEffects;
 
 import java.util.*;
@@ -89,7 +90,7 @@ public class AuraTileRF extends AuraTile {
             for (CoordTuple tuple : foundTiles) {
                 TileEntity entity = tuple.getTile(worldObj);
                 if (entity instanceof IEnergyReceiver) {
-                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * .25 / foundTiles.size()), false);
+                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / foundTiles.size()), false);
                 }
 
             }
