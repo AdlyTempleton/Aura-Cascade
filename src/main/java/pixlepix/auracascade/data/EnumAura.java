@@ -78,21 +78,21 @@ public enum EnumAura {
     YELLOW_AURA("Yellow", 1, 1, .1, EnumColor.YELLOW) {
         @Override
         public double getAscentBoost(World world) {
-            return 10D;
+            return 2D;
         }
 
         @Override
         public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
             if (world.getTotalWorldTime() % 1200 == 5) {
                 AuraTile tile = (AuraTile) tuple.getTile(world);
-                tile.storage.set(this, (int) (.9D * (double) tile.storage.get(this)));
+                tile.storage.set(this, (int) (.8D * (double) tile.storage.get(this)));
             }
         }
     },
     BLUE_AURA("Blue", .1, .1, 1, EnumColor.DARK_BLUE) {
         @Override
         public double getAscentBoost(World world) {
-            return world.isRaining() ? 50 : .5;
+            return world.isRaining() ? 4 : .5;
         }
     },
     VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE) {
