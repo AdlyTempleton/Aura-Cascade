@@ -69,6 +69,11 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
+    public int recipiesPerPage() {
+        return 1;
+    }
+
+    @Override
     public String getRecipeName() {
         return StatCollector.translateToLocal("vortex.nei.name");
     }
