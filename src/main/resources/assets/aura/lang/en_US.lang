@@ -460,7 +460,7 @@ aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping two
 aura.entry.negative=Negative interactions
 aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.
 aura.page.negative1=&4Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
-aura.page.negative2=&2Green&0 and &Violet&0 will lower the attack damage a tool produces.
+aura.page.negative2=&2Green&0 and &5Violet&0 will lower the attack damage a tool produces.
 
 aura.entry.speedBoosts=Mining Speed boosts
 aura.page.speedBoosts0=&4Red&0 and &6Orange&0 grant higher mining speed on ores.
