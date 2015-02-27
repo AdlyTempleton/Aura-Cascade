@@ -4,6 +4,7 @@ import baubles.api.BaublesApi;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -117,10 +118,37 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
                 ItemFairyRing.makeFaries(ringStack, player);
 
 
-                player.inventory.consumeInventoryItem(this);
+                consumeInventoryItem(player.inventory, this, stack.getItemDamage());
             }
         }
         return stack;
+    }
+    
+    //Metadata sensitive version of InventoryPlayer.consumeInventoryItem
+    public boolean consumeInventoryItem(InventoryPlayer inventoryPlayer, Item item, int meta)
+    {
+        int i = -1;
+        for (int j = 0; j < inventoryPlayer.mainInventory.length; ++j)
+        {
+            if (inventoryPlayer.mainInventory[j] != null && inventoryPlayer.mainInventory[j].getItem() == item && inventoryPlayer.mainInventory[j].getItemDamage() == meta)
+            {
+                i = j;
+            }
+        }
+
+        if (i < 0)
+        {
+            return false;
+        }
+        else
+        {
+            if (--inventoryPlayer.mainInventory[i].stackSize <= 0)
+            {
+                inventoryPlayer.mainInventory[i] = null;
+            }
+
+            return true;
+        }
     }
 
     @Override
