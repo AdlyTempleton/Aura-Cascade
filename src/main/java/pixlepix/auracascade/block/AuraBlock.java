@@ -2,6 +2,7 @@ package pixlepix.auracascade.block;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModAPIManager;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -55,7 +56,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (!type.equals("craftingCenter")) {
             setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
         }
-
+        FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(this));
         setHardness(2F);
     }
 
@@ -94,6 +95,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
         AuraCascade.log.warn("Failed to find aura node pump itemstack. Something has gone horribly wrong");
         return null;
+    }
+
+    //Prevents being moved by RIM
+    public static boolean _Immovable() {
+        return true;
     }
 
     @Override
@@ -243,7 +249,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             }
         }
     }
-
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
@@ -400,7 +405,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
         return null;
     }
-
 
     @Override
     public int damageDropped(int meta) {
