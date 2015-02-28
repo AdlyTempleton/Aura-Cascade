@@ -439,10 +439,10 @@ aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic 
 aura.entry.basicEffects=Basic Effects
 aura.page.basicEffects0=&4Red&0 will grant silk touch. Additional levels have no effect.
 aura.page.basicEffects1=&6Orange&0 will grant efficiency.
-aura.page.basicEffects2=&eYellow&0 will grant efficiency.
+aura.page.basicEffects2=&eYellow&0 will grant fortune.
 aura.page.basicEffects3=&1Blue&0 will grant knockback.
 aura.page.basicEffects4=&2Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
-aura.page.basicEffects5=&5Violet&0 will grant efficiency.
+aura.page.basicEffects5=&5Violet&0 will grant a powerful efficiency boost on hard materials such as obsidian.
 
 aura.entry.areaOfEffect=Area of Effect interactions
 aura.page.areaOfEffect0=&eYellow&0 and &2Green&0 will allow your tool to harvest fields of crops at once.
