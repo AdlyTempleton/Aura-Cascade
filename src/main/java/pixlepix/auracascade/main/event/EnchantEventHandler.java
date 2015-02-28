@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -277,7 +278,9 @@ public class EnchantEventHandler {
             int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
             if (looting > 0) {
                 for (EntityItem item : event.drops) {
-                    item.getEntityItem().stackSize *= looting + 1;
+                    if(item.getEntityItem().getItem() != Items.nether_star) {
+                        item.getEntityItem().stackSize *= looting + 1;
+                    }
                 }
             }
         }
