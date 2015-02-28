@@ -100,25 +100,27 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (!world.isRemote && BaublesApi.getBaubles(player).getStackInSlot(1) != null && BaublesApi.getBaubles(player).getStackInSlot(1).getItem() instanceof ItemFairyRing) {
+        if (!world.isRemote) {
             ItemStack ringStack = EventHandler.getBaubleFromInv(ItemFairyRing.class, player);
-            if (ringStack.stackTagCompound == null) {
-                ringStack.stackTagCompound = new NBTTagCompound();
-            }
-            int[] fairies = ringStack.stackTagCompound.getIntArray("fairyList");
-            if (fairies.length < 15) {
-                int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
+            if(ringStack != null) {
+                if (ringStack.stackTagCompound == null) {
+                    ringStack.stackTagCompound = new NBTTagCompound();
+                }
+                int[] fairies = ringStack.stackTagCompound.getIntArray("fairyList");
+                if (fairies.length < 15) {
+                    int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
 
-                newFairies[newFairies.length - 1] = stack.getItemDamage();
-
-
-                ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
-                //Trigger the re-spawn of fairies
-                ItemFairyRing.killNearby(player);
-                ItemFairyRing.makeFaries(ringStack, player);
+                    newFairies[newFairies.length - 1] = stack.getItemDamage();
 
 
-                consumeInventoryItem(player.inventory, this, stack.getItemDamage());
+                    ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
+                    //Trigger the re-spawn of fairies
+                    ItemFairyRing.killNearby(player);
+                    ItemFairyRing.makeFaries(ringStack, player);
+
+
+                    consumeInventoryItem(player.inventory, this, stack.getItemDamage());
+                }
             }
         }
         return stack;
