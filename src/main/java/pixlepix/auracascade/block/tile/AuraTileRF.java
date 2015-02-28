@@ -106,7 +106,6 @@ public class AuraTileRF extends AuraTile {
 
     @Override
     public void receivePower(int power, EnumAura type) {
-        super.receivePower(power, type);
         lastPower += power;
     }
 }
