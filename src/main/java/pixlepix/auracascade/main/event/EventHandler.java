@@ -260,12 +260,14 @@ public class EventHandler {
     //Kill fairies on death
     @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent event) {
-        if (event.entityLiving instanceof EntityPlayer && !((EntityPlayer) event.entityLiving).worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+        if (event.entityLiving instanceof EntityPlayer) {
+            if (!((EntityPlayer) event.entityLiving).worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
 
-            EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
-            ItemStack item = BaublesApi.getBaubles(entityPlayer).getStackInSlot(1);
-            if (item != null && item.getItem() instanceof ItemFairyRing && !entityPlayer.worldObj.isRemote) {
-                ItemFairyRing.killNearby(entityPlayer);
+                EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
+                ItemStack item = getBaubleFromInv(ItemFairyRing.class, entityPlayer);
+                if (item != null && item.getItem() instanceof ItemFairyRing) {
+                    ItemFairyRing.killNearby(entityPlayer);
+                }
             }
         }
     }
@@ -273,7 +275,7 @@ public class EventHandler {
     //Kill fairies on logout
     @SubscribeEvent
     public void onPlayerLogout(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
-        ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
+        ItemStack item = getBaubleFromInv(ItemFairyRing.class, event.player);
         if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
             ItemFairyRing.killNearby(event.player);
         }
@@ -283,7 +285,7 @@ public class EventHandler {
     //Respawn fairies on login
     @SubscribeEvent
     public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
-        ItemStack item = BaublesApi.getBaubles(event.player).getStackInSlot(1);
+        ItemStack item = getBaubleFromInv(ItemFairyRing.class, event.player);
         if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
             ItemFairyRing.makeFaries(item, event.player);
         }
