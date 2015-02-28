@@ -24,6 +24,7 @@ import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.lexicon.LexiconData;
 import pixlepix.auracascade.lexicon.LexiconEntry;
+import pixlepix.auracascade.main.compat.TCCompat;
 import pixlepix.auracascade.main.event.EnchantEventHandler;
 import pixlepix.auracascade.main.event.EventHandler;
 import pixlepix.auracascade.network.*;
@@ -91,6 +92,8 @@ public class CommonProxy {
         LexiconData.init();
         LexiconData.postInit();
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
+
+        TCCompat.postInit();
     }
 
     public void setLexiconStack(ItemStack stack) {
