@@ -70,7 +70,7 @@ public class AuraTileRF extends AuraTile {
             for (CoordTuple tuple : foundTiles) {
                 TileEntity te = tuple.getTile(worldObj);
                 if (te instanceof IEnderEnergyHandler) {
-                    disabled = false;
+                    disabled = true;
                 }
             }
         }
