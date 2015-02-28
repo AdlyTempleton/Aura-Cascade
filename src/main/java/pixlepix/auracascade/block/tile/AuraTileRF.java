@@ -65,7 +65,7 @@ public class AuraTileRF extends AuraTile {
                 }
             }
 
-            disabled = foundTiles.size() > 8;
+            disabled = foundTiles.size() > 4;
 
             for (CoordTuple tuple : foundTiles) {
                 TileEntity te = tuple.getTile(worldObj);
