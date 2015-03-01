@@ -31,7 +31,7 @@ public class AuraTileRF extends AuraTile {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (worldObj.getTotalWorldTime() % 100 == 0) {
+        if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();
             LinkedList<CoordTuple> nextTiles = new LinkedList<CoordTuple>();
             nextTiles.add(new CoordTuple(this));
@@ -40,7 +40,7 @@ public class AuraTileRF extends AuraTile {
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     CoordTuple adjacent = target.add(direction);
                     TileEntity entity = adjacent.getTile(worldObj);
-                    if (entity instanceof IEnergyReceiver) {
+                    if (entity instanceof IEnergyReceiver && !(entity instanceof IEnergyProvider)) {
                         if (!nextTiles.contains(adjacent) && !foundTiles.contains(adjacent)) {
                             nextTiles.add(adjacent);
                             foundTiles.add(adjacent);
@@ -69,18 +69,6 @@ public class AuraTileRF extends AuraTile {
             }
 
             disabled = foundTiles.size() > 4;
-
-            for (CoordTuple tuple : foundTiles) {
-                TileEntity te = tuple.getTile(worldObj);
-                if (te instanceof IEnderEnergyHandler) {
-                    disabled = true;
-                }
-                for(String clazz : blacklist) {
-                    if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
-                        disabled = true;
-                    }
-                }
-            }
         }
 
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
