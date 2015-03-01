@@ -102,6 +102,12 @@ public class AuraTileRF extends AuraTile {
                 TileEntity entity = tuple.getTile(worldObj);
                 if (entity instanceof IEnergyReceiver) {
                     ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / foundTiles.size()), false);
+                    if(entity instanceof IEnergyProvider){
+                        if (((IEnergyProvider) entity).extractEnergy(ForgeDirection.UNKNOWN, 1, true) > 0){
+                            disabled = true;
+                        }
+                        
+                    }
                 }
 
             }
@@ -118,7 +124,7 @@ public class AuraTileRF extends AuraTile {
     public boolean isConsumer(IEnergyReceiver receiver){
         if(receiver instanceof IEnergyProvider){
             for(ForgeDirection direction:ForgeDirection.VALID_DIRECTIONS){
-                if(((IEnergyProvider) receiver).extractEnergy(direction, 1, true) > 0&& receiver.getEnergyStored(direction) > 0) {
+                if(((IEnergyProvider) receiver).extractEnergy(direction, 1, true) > 0) {
                     return true;
                 }
             }
