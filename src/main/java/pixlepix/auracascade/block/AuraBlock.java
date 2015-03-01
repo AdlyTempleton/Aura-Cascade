@@ -344,6 +344,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         // TODO Auto-generated method stub
         return null;
     }
+    
+    
 
     @Override
     public Class<? extends TileEntity> getTileEntity() {

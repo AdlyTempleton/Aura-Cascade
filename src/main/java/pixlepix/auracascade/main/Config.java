@@ -29,7 +29,7 @@ public class Config {
 
     public static boolean giveBook = true;
 
-    public static int potionStartId = 123;
+    public static int potionStartId = 93;
     public static int enchantStartId = 110;
 
     public static float powerFactor = .75F;
