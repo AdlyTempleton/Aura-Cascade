@@ -69,6 +69,18 @@ public class AuraTileRF extends AuraTile {
             }
 
             disabled = foundTiles.size() > 4;
+
+            for (CoordTuple tuple : foundTiles) {
+                TileEntity te = tuple.getTile(worldObj);
+                if (te instanceof IEnderEnergyHandler) {
+                    disabled = true;
+                }
+                for(String clazz : blacklist) {
+                    if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
+                        disabled = true;
+                    }
+                }
+            }
         }
 
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
