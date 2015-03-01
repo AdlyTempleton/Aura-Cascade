@@ -50,7 +50,7 @@ public class AuraTilePumpBase extends AuraTile {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
             if (pumpPower > 0) {
                 AuraTile upNode = null;
-                for (int i = 1; i < 15; i++) {
+                for (int i = 1; i < 16; i++) {
                     TileEntity te = worldObj.getTileEntity(xCoord, yCoord + i, zCoord);
                     if (te instanceof AuraTile) {
                         upNode = (AuraTile) te;
