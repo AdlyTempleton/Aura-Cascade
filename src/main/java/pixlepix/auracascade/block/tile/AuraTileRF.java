@@ -24,6 +24,8 @@ public class AuraTileRF extends AuraTile {
     public int lastPower = 0;
 
     public boolean disabled = false;
+    
+    public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "Charger", "TileEntityTransferNodeEnergy"};
 
     @Override
     public void updateEntity() {
@@ -71,6 +73,11 @@ public class AuraTileRF extends AuraTile {
                 TileEntity te = tuple.getTile(worldObj);
                 if (te instanceof IEnderEnergyHandler) {
                     disabled = true;
+                }
+                for(String clazz : blacklist) {
+                    if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
+                        disabled = true;
+                    }
                 }
             }
         }
