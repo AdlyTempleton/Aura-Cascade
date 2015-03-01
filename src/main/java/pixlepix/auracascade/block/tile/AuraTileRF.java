@@ -80,9 +80,6 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
-                if(isConsumer((IEnergyReceiver)te)){
-                    disabled = true;
-                }
             }
         }
 
@@ -122,17 +119,6 @@ public class AuraTileRF extends AuraTile {
         }
 
 
-    }
-    
-    public boolean isConsumer(IEnergyReceiver receiver){
-        if(receiver instanceof IEnergyProvider){
-            for(ForgeDirection direction:ForgeDirection.values()){
-                if(((IEnergyProvider) receiver).extractEnergy(direction, 1, true) > 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
