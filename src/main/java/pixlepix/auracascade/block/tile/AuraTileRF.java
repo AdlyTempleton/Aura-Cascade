@@ -80,6 +80,9 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
+                if(isConsumer((IEnergyReceiver)te)){
+                    disabled = true;
+                }
             }
         }
 
@@ -95,8 +98,20 @@ public class AuraTileRF extends AuraTile {
         }
 
         if (!disabled) {
+            int divisions = foundTiles.size();
+            for(CoordTuple tuple:foundTiles){
+
+                TileEntity entity = tuple.getTile(worldObj);
+                if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver)entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
+                    divisions --;
+                }
+            }
             for (CoordTuple tuple : foundTiles) {
                 TileEntity entity = tuple.getTile(worldObj);
+                if (entity instanceof IEnergyReceiver) {
+                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);
+                }
+
             }
         }
 
@@ -106,6 +121,17 @@ public class AuraTileRF extends AuraTile {
         }
 
 
+    }
+    
+    public boolean isConsumer(IEnergyReceiver receiver){
+        if(receiver instanceof IEnergyProvider){
+            for(ForgeDirection direction:ForgeDirection.values()){
+                if(((IEnergyProvider) receiver).extractEnergy(direction, 1, true) > 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
