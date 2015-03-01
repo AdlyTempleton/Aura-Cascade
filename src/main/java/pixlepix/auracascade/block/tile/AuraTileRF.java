@@ -106,12 +106,13 @@ public class AuraTileRF extends AuraTile {
                     divisions --;
                 }
             }
-            for (CoordTuple tuple : foundTiles) {
-                TileEntity entity = tuple.getTile(worldObj);
-                if (entity instanceof IEnergyReceiver) {
-                    ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);
+            if(divisions > 0) {
+                for (CoordTuple tuple : foundTiles) {
+                    TileEntity entity = tuple.getTile(worldObj);
+                    if (entity instanceof IEnergyReceiver) {
+                        ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);
+                    }
                 }
-
             }
         }
 
