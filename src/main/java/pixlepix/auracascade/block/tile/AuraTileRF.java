@@ -40,7 +40,7 @@ public class AuraTileRF extends AuraTile {
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     CoordTuple adjacent = target.add(direction);
                     TileEntity entity = adjacent.getTile(worldObj);
-                    if (entity instanceof IEnergyReceiver && !(entity instanceof IEnergyProvider)) {
+                    if (entity instanceof IEnergyReceiver) {
                         if (!nextTiles.contains(adjacent) && !foundTiles.contains(adjacent)) {
                             nextTiles.add(adjacent);
                             foundTiles.add(adjacent);
@@ -79,6 +79,10 @@ public class AuraTileRF extends AuraTile {
                     if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
                         disabled = true;
                     }
+                }
+                if(te instanceof IEnergyProvider){
+                    disabled = true;
+                    
                 }
             }
         }
