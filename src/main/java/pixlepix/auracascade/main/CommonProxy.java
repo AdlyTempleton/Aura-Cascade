@@ -1,6 +1,7 @@
 package pixlepix.auracascade.main;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -92,8 +93,9 @@ public class CommonProxy {
         LexiconData.init();
         LexiconData.postInit();
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
-
-        TCCompat.postInit();
+        if(Loader.isModLoaded("Thaumcraft")) {
+            TCCompat.postInit();
+        }
     }
 
     public void setLexiconStack(ItemStack stack) {
