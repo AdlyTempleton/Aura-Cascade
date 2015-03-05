@@ -28,6 +28,8 @@ public class AuraTileRF extends AuraTile {
     
     public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy"};
 
+    public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
+    
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -80,9 +82,17 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
+                System.out.println(te.getClass().getName().toLowerCase());
                 if(te instanceof IEnergyProvider){
-                    disabled = true;
-                    
+                    boolean isWhitelisted = false;
+                    for(String clazz : whitelist) {
+                        if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
+                            isWhitelisted = true;
+                        }
+                    }
+                    if(!isWhitelisted){
+                        disabled = true;
+                    }
                 }
             }
         }
