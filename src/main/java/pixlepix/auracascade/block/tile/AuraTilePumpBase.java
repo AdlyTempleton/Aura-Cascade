@@ -27,6 +27,10 @@ public class AuraTilePumpBase extends AuraTile {
         nbt.setInteger("pumpSpeed", pumpSpeed);
     }
 
+    public boolean isAlternator(){
+        return false;
+    }
+
     @Override
     public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
         return false;
@@ -63,6 +67,10 @@ public class AuraTilePumpBase extends AuraTile {
                     for (EnumAura aura : EnumAura.values()) {
                         int dist = upNode.yCoord - yCoord;
                         int quantity = pumpSpeed / dist;
+                        if(isAlternator()){
+                            float f = (float) Math.abs(Math.sin(Math.PI * worldObj.getTotalWorldTime() / 10000));
+                            quantity *= f;
+                        }
                         quantity *= storage.getComposition(aura);
                         quantity = aura.getRelativeMass(worldObj) == 0 ? 0 : (int) ((double) quantity / aura.getRelativeMass(worldObj));
                         quantity *= aura.getAscentBoost(worldObj);

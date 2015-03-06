@@ -311,10 +311,14 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
         result.add("craftingPedestal");
         result.add("orange");
-        result.add("pumpProjectile");
-        result.add("pumpFall");
-        result.add("pumpLight");
-        result.add("pumpRedstone");
+
+        result.add("pumpAlt");
+        result.add("pumpProjectileAlt");
+        result.add("pumpFallAlt");
+        result.add("pumpLightAlt");
+        result.add("pumpRedstoneAlt");
+        
+        
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             result.add("flux");
         }
@@ -379,7 +383,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("orange")) {
             return AuraTileOrange.class;
         }
-
         if (type.equals("pumpProjectile")) {
             return AuraTilePumpProjectile.class;
         }
@@ -390,6 +393,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return AuraTilePumpLight.class;
         }
         if (type.equals("pumpRedstone")) {
+            return AuraTilePumpRedstone.class;
+        }
+        if (type.equals("pumpAlt")) {
+            return AuraTilePump.class;
+        }
+        if (type.equals("pumpProjectileAlt")) {
+            return AuraTilePumpProjectile.class;
+        }
+        if (type.equals("pumpFallAlt")) {
+            return AuraTilePumpFall.class;
+        }
+        if (type.equals("pumpLightAlt")) {
+            return AuraTilePumpLight.class;
+        }
+        if (type.equals("pumpRedstoneAlt")) {
             return AuraTilePumpRedstone.class;
         }
         return AuraTile.class;
