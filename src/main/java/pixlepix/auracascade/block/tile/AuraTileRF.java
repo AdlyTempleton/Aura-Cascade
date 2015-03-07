@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.tile;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.transport.IEnderEnergyHandler;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
@@ -23,6 +24,18 @@ public class AuraTileRF extends AuraTile {
     public HashSet<CoordTuple> particleTiles = new HashSet<CoordTuple>();
     
     public int lastPower = 0;
+
+    @Override
+    protected void readCustomNBT(NBTTagCompound nbt) {
+        super.readCustomNBT(nbt);
+        lastPower = nbt.getInteger("lastPower");
+    }
+
+    @Override
+    protected void writeCustomNBT(NBTTagCompound nbt) {
+        super.writeCustomNBT(nbt);
+        nbt.setInteger("lastPower", lastPower);
+    }
 
     public boolean disabled = false;
     
@@ -128,8 +141,11 @@ public class AuraTileRF extends AuraTile {
         }
 
         //Just before aura moves
-        if (worldObj.getTotalWorldTime() % 20 == 0) {
+        if (worldObj.getTotalWorldTime() % 20 == 0 && !worldObj.isRemote) {
             lastPower = 0;
+        }
+        if(worldObj.getTotalWorldTime() % 20 == 1){
+            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
 
 

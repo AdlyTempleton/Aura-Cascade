@@ -28,6 +28,7 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -313,6 +314,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("orange");
 
         result.add("pumpAlt");
+
+        result.add("pumpProjectile");
+        result.add("pumpFall");
+        result.add("pumpLight");
+        result.add("pumpRedstone");
         result.add("pumpProjectileAlt");
         result.add("pumpFallAlt");
         result.add("pumpLightAlt");
@@ -459,6 +465,14 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
                 result.add("Time left: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower + " seconds");
                 result.add("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpSpeed + " power per second");
+            }
+
+            if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
+                if(world.getTileEntity(x, y, z) instanceof AuraTileRF){
+                    AuraTileRF auraTileRF = (AuraTileRF) world.getTileEntity(x, y, z);
+                    result.add("RF/t Output: " + auraTileRF.lastPower * Config.powerFactor);
+                }
+                
             }
         } else if (world.getTileEntity(x, y, z) instanceof CraftingCenterTile) {
             CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
