@@ -484,5 +484,5 @@ auramisc.playVideo=Play Video
 aura.entry.flux=Fluxing Node
 tile.auraNodeflux.name=Fluxing Node
 aura.page.flux0=The fluxing node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and and blocks adjacent to those ones, and so on, providing power to all of them.
-aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 4 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It also won't power blocks that transmit power wirelessly, such as tesseracts.
+aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 4 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It won't connect to blocks such as pipes or energy cubes or tesseracts
 aura.page.flux2=The bullet, guys. I bit it. Copied some stuff, too.
