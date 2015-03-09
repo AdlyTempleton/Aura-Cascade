@@ -39,7 +39,7 @@ public class AuraTileRF extends AuraTile {
 
     public boolean disabled = false;
     
-    public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy"};
+    public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
 
     public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
     
