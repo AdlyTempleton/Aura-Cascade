@@ -17,6 +17,13 @@ tile.auraNodepumpFall.name=Momentum Aura Pump
 tile.auraNodepumpProjectile.name=Projectile Aura Pump
 tile.auraNodepumpRedstone.name=Redstone Aura Pump
 tile.auraNodepump.name=Burning Aura Pump
+
+
+tile.auraNodepumpLightAlt.name=Alternating Illumination Aura Pump
+tile.auraNodepumpFallAlt.name=Alternating Momentum Aura Pump
+tile.auraNodepumpProjectileAlt.name=Alternating Projectile Aura Pump
+tile.auraNodepumpRedstoneAlt.name=Alternating Redstone Aura Pump
+tile.auraNodepumpAlt.name=Alternating Burning Aura Pump
 vortex.nei.name=Vortex Infusion
 
 tile.consumerBlockmob.name=Cascading Spawner
