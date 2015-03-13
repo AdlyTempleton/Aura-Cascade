@@ -323,8 +323,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("pumpFallAlt");
         result.add("pumpLightAlt");
         result.add("pumpRedstoneAlt");
-        
-        
+
+
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             result.add("flux");
         }
@@ -354,8 +354,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
+
+
 
     @Override
     public Class<? extends TileEntity> getTileEntity() {
@@ -440,42 +440,48 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     @Override
     public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
         List<String> result = new ArrayList<String>();
-        if (world.getTileEntity(x, y, z) instanceof AuraTile) {
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity instanceof AuraTile) {
 
-            if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor) {
-                AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
+            if (tileEntity instanceof AuraTileCapacitor) {
+                AuraTileCapacitor capacitor = (AuraTileCapacitor) tileEntity;
                 result.add("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]);
 
             }
-            if (((AuraTile) world.getTileEntity(x, y, z)).storage.getTotalAura() > 0) {
+            if (((AuraTile) tileEntity).storage.getTotalAura() > 0) {
                 result.add("Aura Stored: ");
                 for (EnumAura aura : EnumAura.values()) {
-                    if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
-                        result.add("    " + aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura));
+                    if (((AuraTile) tileEntity).storage.get(aura) != 0) {
+                        result.add("    " + aura.name + " Aura: " + ((AuraTile) tileEntity).storage.get(aura));
                     }
                 }
             } else {
                 result.add("No Aura");
             }
-            if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor) {
-                if (((AuraTileCapacitor) world.getTileEntity(x, y, z)).ticksDisabled > 0) {
-                    result.add("Time until functional: " + ((AuraTileCapacitor) world.getTileEntity(x, y, z)).ticksDisabled / 20);
+            if (tileEntity instanceof AuraTileCapacitor) {
+                if (((AuraTileCapacitor) tileEntity).ticksDisabled > 0) {
+                    result.add("Time until functional: " + ((AuraTileCapacitor) tileEntity).ticksDisabled / 20);
                 }
             }
-            if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
-                result.add("Time left: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower + " seconds");
-                result.add("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpSpeed + " power per second");
+            if (tileEntity instanceof AuraTilePumpBase) {
+                result.add("Time left: " + ((AuraTilePumpBase) tileEntity).pumpPower + " seconds");
+                result.add("Power: " + ((AuraTilePumpBase) tileEntity).pumpSpeed + " power per second");
             }
 
             if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
-                if(world.getTileEntity(x, y, z) instanceof AuraTileRF){
-                    AuraTileRF auraTileRF = (AuraTileRF) world.getTileEntity(x, y, z);
+                if(tileEntity instanceof AuraTileRF){
+                    AuraTileRF auraTileRF = (AuraTileRF) tileEntity;
                     result.add("RF/t Output: " + auraTileRF.lastPower * Config.powerFactor);
                 }
-                
+
             }
-        } else if (world.getTileEntity(x, y, z) instanceof CraftingCenterTile) {
-            CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
+            if(tileEntity instanceof AuraTilePumpAlt){
+                AuraTilePumpAlt altPump = (AuraTilePumpAlt) tileEntity;
+                int power = (int) (altPump.pumpSpeed * (float) Math.abs(Math.sin(Math.PI * tileEntity.getWorldObj().getTotalWorldTime() / 10000)));
+                result.add("Phase Power: " + power);
+            }
+        } else if (tileEntity instanceof CraftingCenterTile) {
+            CraftingCenterTile tile = (CraftingCenterTile) tileEntity;
             if (tile.getRecipe() != null) {
                 result.add("Making: " + tile.getRecipe().result.getDisplayName());
                 for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
