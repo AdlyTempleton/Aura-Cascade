@@ -45,6 +45,10 @@ public class AuraTilePumpBase extends AuraTile {
         if (time * speed > pumpSpeed * pumpPower) {
             pumpSpeed = speed;
             pumpPower = time;
+            if(isAlternator()){
+                pumpSpeed *=5;
+                
+            }
         }
     }
 

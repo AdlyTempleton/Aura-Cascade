@@ -402,19 +402,19 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return AuraTilePumpRedstone.class;
         }
         if (type.equals("pumpAlt")) {
-            return AuraTilePump.class;
+            return AuraTilePumpAlt.class;
         }
         if (type.equals("pumpProjectileAlt")) {
-            return AuraTilePumpProjectile.class;
+            return AuraTilePumpProjectileAlt.class;
         }
         if (type.equals("pumpFallAlt")) {
-            return AuraTilePumpFall.class;
+            return AuraTilePumpFallAlt.class;
         }
         if (type.equals("pumpLightAlt")) {
-            return AuraTilePumpLight.class;
+            return AuraTilePumpLightAlt.class;
         }
         if (type.equals("pumpRedstoneAlt")) {
-            return AuraTilePumpRedstone.class;
+            return AuraTilePumpRedstoneAlt.class;
         }
         return AuraTile.class;
     }
@@ -466,6 +466,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             if (tileEntity instanceof AuraTilePumpBase) {
                 result.add("Time left: " + ((AuraTilePumpBase) tileEntity).pumpPower + " seconds");
                 result.add("Power: " + ((AuraTilePumpBase) tileEntity).pumpSpeed + " power per second");
+                if(((AuraTilePumpBase) tileEntity).isAlternator()){
+                    AuraTilePumpBase altPump = (AuraTilePumpBase) tileEntity;
+                    int power = (int) (altPump.pumpSpeed * (float) Math.abs(Math.sin(Math.PI * tileEntity.getWorldObj().getTotalWorldTime() / 10000)));
+                    result.add("Phase Power: " + power);
+                }
             }
 
             if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
@@ -475,11 +480,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
 
             }
-            if(tileEntity instanceof AuraTilePumpAlt){
-                AuraTilePumpAlt altPump = (AuraTilePumpAlt) tileEntity;
-                int power = (int) (altPump.pumpSpeed * (float) Math.abs(Math.sin(Math.PI * tileEntity.getWorldObj().getTotalWorldTime() / 10000)));
-                result.add("Phase Power: " + power);
-            }
+            
         } else if (tileEntity instanceof CraftingCenterTile) {
             CraftingCenterTile tile = (CraftingCenterTile) tileEntity;
             if (tile.getRecipe() != null) {
