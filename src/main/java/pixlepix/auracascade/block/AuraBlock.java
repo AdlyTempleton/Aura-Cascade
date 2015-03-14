@@ -57,7 +57,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (!type.equals("craftingCenter")) {
             setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
         }
-        FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(this));
+        
         setHardness(2F);
     }
 

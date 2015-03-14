@@ -3,6 +3,7 @@ package pixlepix.auracascade.main;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -18,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
@@ -95,6 +97,11 @@ public class CommonProxy {
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
         if(Loader.isModLoaded("Thaumcraft")) {
             TCCompat.postInit();
+        }
+        
+        //RiM IMC for blacklisting aura nodes
+        for(Block block:BlockRegistry.getBlockFromClass(AuraBlock.class)){
+            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block));
         }
     }
 
