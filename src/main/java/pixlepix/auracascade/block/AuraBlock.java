@@ -468,7 +468,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 result.add("Power: " + ((AuraTilePumpBase) tileEntity).pumpSpeed + " power per second");
                 if(((AuraTilePumpBase) tileEntity).isAlternator()){
                     AuraTilePumpBase altPump = (AuraTilePumpBase) tileEntity;
-                    int power = (int) (altPump.pumpSpeed * (float) Math.abs(Math.sin(Math.PI * tileEntity.getWorldObj().getTotalWorldTime() / 10000)));
+                    int power = (int) (altPump.pumpSpeed * altPump.getAlternatingFactor());
                     result.add("Phase Power: " + power);
                 }
             }

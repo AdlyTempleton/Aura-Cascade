@@ -72,7 +72,7 @@ public class AuraTilePumpBase extends AuraTile {
                         int dist = upNode.yCoord - yCoord;
                         int quantity = pumpSpeed / dist;
                         if(isAlternator()){
-                            float f = (float) Math.abs(Math.sin(Math.PI * worldObj.getTotalWorldTime() / 10000));
+                            float f = getAlternatingFactor();
                             quantity *= f;
                         }
                         quantity *= storage.getComposition(aura);
@@ -86,5 +86,10 @@ public class AuraTilePumpBase extends AuraTile {
                 }
             }
         }
+    }
+    
+    public float getAlternatingFactor(){
+        return (float) (1 + Math.sin(Math.PI * worldObj.getTotalWorldTime() / 10000))/2;
+        
     }
 }
