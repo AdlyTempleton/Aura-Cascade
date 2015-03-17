@@ -302,6 +302,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("pumpRedstone")) {
             return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_ingot), 'P', getAuraNodePumpItemstack());
         }
+        if(type.equals("pumpAlt")){
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")));
+        }
+        if(type.equals("pumpRedstoneAlt")){
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")));
+        }
+        if(type.equals("pumpLightAlt")){
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")));
+        }
+        if(type.equals("pumpFallAlt")){
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")));
+        }
+        if(type.equals("pumpProjectileAlt")){
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpProjectile")));
+        }
         if (type.equals("flux")) {
             return new CraftingBenchRecipe(new ItemStack(this), "III", "RNR", "III", 'R', new ItemStack(Items.redstone), 'I', new ItemStack(Items.gold_ingot), 'N', getAuraNodeItemstack());
         }

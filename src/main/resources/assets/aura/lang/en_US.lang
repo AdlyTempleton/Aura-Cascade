@@ -232,6 +232,9 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
+aura.entry.alternating=Alternating Pumps
+aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally over an eight minute period.
+
 aura.entry.furnace=Cascading Smelter
 aura.page.furnace1=Cascading Smelter
 aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.

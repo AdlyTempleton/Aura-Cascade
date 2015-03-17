@@ -52,7 +52,9 @@ public class PageRecipe extends LexiconPage {
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + height - 40;
-        PageText.renderText(x, y, width, height, getUnlocalizedName());
+        if(!StatCollector.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
+            PageText.renderText(x, y, width, height, getUnlocalizedName());
+        }
 
         if (tooltipStack != null) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().thePlayer, false);
