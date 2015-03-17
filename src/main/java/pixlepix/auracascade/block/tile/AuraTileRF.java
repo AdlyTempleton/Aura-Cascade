@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.tile;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.transport.IEnderEnergyHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -42,6 +43,8 @@ public class AuraTileRF extends AuraTile {
     public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
 
     public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
+    
+    public String[] blacklistModId = new String[]{"quantumflux"};
     
     @Override
     public void updateEntity() {
@@ -95,7 +98,12 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
-                System.out.println(te.getClass().getName().toLowerCase());
+                String modid = GameRegistry.findUniqueIdentifierFor(tuple.getBlock(worldObj)).modId;
+                for(String blacklistMod : blacklistModId){
+                    if(modid.equals(blacklistMod)){
+                        disabled = true;
+                    }
+                }
                 if(te instanceof IEnergyProvider){
                     boolean isWhitelisted = false;
                     for(String clazz : whitelist) {
