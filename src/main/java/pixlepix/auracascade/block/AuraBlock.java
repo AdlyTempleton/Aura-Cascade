@@ -57,7 +57,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (!type.equals("craftingCenter")) {
             setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
         }
-        
+        setLightOpacity(0)
         setHardness(2F);
     }
 
