@@ -10,13 +10,13 @@ import net.minecraft.world.World;
  * Created by localmacaccount on 3/21/15.
  */
 public class ParticleBeam extends EntityFX {
-    private  double tx;
-    private  double ty;
-    private  double tz;
-    private  float r;
-    private  float g;
-    private  float b;
-    private  boolean pump;
+    public double tx;
+    public double ty;
+    public double tz;
+    public float r;
+    public float g;
+    public float b;
+    public boolean pump;
 
     public ParticleBeam(World world, double x, double y, double z, double tx, double ty, double tz, float r, float g, float b, boolean pump) {
         super(world, x, y, z, 0, 0, 0);
@@ -29,16 +29,14 @@ public class ParticleBeam extends EntityFX {
         this.pump = pump;
         setParticleTextureIndex(0);
 
-        this.motionX *= (tx - x) / 10;
-        this.motionY *= (tx - x) / 10;
-        this.motionZ *= (tx - x) / 10;
+        this.motionX = (tx - x) / 10;
+        this.motionY = (ty - y) / 10;
+        this.motionZ = (tz - z) / 10;
         this.particleRed = this.particleGreen = this.particleBlue = (float)(Math.random() * 0.30000001192092896D + 0.6000000238418579D);
         this.particleScale *= 0.75F;
         this.particleAge = 0;
-        this.particleMaxAge = 20;
-        this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.6D));
-        this.particleMaxAge = (int)((float)this.particleMaxAge);
-        this.noClip = false;
+        this.particleMaxAge = 10;
+        this.noClip = true;
         onUpdate();
     }
 

@@ -89,8 +89,11 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
 
                     }
                     */
-                    EntityFX entityFX = new ParticleBeam(msg.world, msg.from.getX(), msg.from.getY(), msg.from.getZ(),  msg.to.getX(), msg.to.getY(), msg.to.getZ(), (float)msg.r, (float)msg.g, (float)msg.b, msg.particle.equals("magicCrit"));
+                    EntityFX entityFX = new ParticleBeam(msg.world, msg.from.getX() + .5, msg.from.getY() + .5, msg.from.getZ() + .5, msg.to.getX() + .5, msg.to.getY() + .5, msg.to.getZ() + .5, (float) msg.r, (float) msg.g, (float) msg.b, msg.particle.equals("magicCrit"));
+
+                    AuraCascade.proxy.addEffectBypassingLimit(entityFX);
                 }
+                    
             }
             if (msg.type == 1) {
                 for (int i = 0; i < 50; i++) {
