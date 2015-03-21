@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;
 import pixlepix.auracascade.particle.ParticleSphere;
+import pixlepix.auracascade.render.ParticleBeam;
 
 /**
  * Created by pixlepix on 11/30/14.
@@ -57,10 +58,11 @@ public class ParticleEffects {
                     entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("crit")) {
-                    entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
-                    if (r != 0 || g != 0 || b != 0) {
-                        entityfx.setRBGColorF((float) r, (float) g, (float) b);
-                    }
+                    //entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    //if (r != 0 || g != 0 || b != 0) {
+                    //    entityfx.setRBGColorF((float) r, (float) g, (float) b);
+                    //}
+                    entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, posX, posY, posZ, 0, 0, 0, false);
                 }
                 if (particleName.equals("witchMagic")) {
                     entityfx = new EntitySpellParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);

@@ -4,11 +4,13 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.ParticleEffects;
+import pixlepix.auracascade.render.ParticleBeam;
 
 import java.util.Random;
 
@@ -69,6 +71,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
         if (msg.world.isRemote) {
             if (msg.type == 0) {
                 if (msg.comp != 0D) {
+                    /*
                     Vec3 velocity = CoordTuple.vec(msg.to.subtract(msg.from));
                     velocity = velocity.normalize();
                     double dist = msg.to.dist(msg.from);
@@ -85,6 +88,8 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                         ParticleEffects.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
 
                     }
+                    */
+                    EntityFX entityFX = new ParticleBeam(msg.world, msg.from.getX(), msg.from.getY(), msg.from.getZ(),  msg.to.getX(), msg.to.getY(), msg.to.getZ(), (float)msg.r, (float)msg.g, (float)msg.b, msg.particle.equals("magicCrit"));
                 }
             }
             if (msg.type == 1) {
