@@ -118,7 +118,7 @@ public class AuraTileRF extends AuraTile {
             }
         }
 
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
+        if (worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
             for (CoordTuple tuple : particleTiles) {
                 Random random = new Random();
                 double x = tuple.getX() + random.nextDouble();
