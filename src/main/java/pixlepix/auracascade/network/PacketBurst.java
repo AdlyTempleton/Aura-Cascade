@@ -20,7 +20,7 @@ import java.util.Random;
 public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMessage> {
 
 
-    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark", "enchantmenttable"};
+    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark", "enchantmenttable", "square"};
     public double x;
     public double y;
     public double z;
@@ -71,7 +71,6 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
         if (msg.world.isRemote) {
             if (msg.type == 0) {
                 if (msg.comp != 0D) {
-                    /*
                     Vec3 velocity = CoordTuple.vec(msg.to.subtract(msg.from));
                     velocity = velocity.normalize();
                     double dist = msg.to.dist(msg.from);
@@ -88,10 +87,6 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                         ParticleEffects.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
 
                     }
-                    */
-                    EntityFX entityFX = new ParticleBeam(msg.world, msg.from.getX() + .5, msg.from.getY() + .5, msg.from.getZ() + .5, msg.to.getX() + .5, msg.to.getY() + .5, msg.to.getZ() + .5, (float) msg.r, (float) msg.g, (float) msg.b, msg.particle.equals("magicCrit"));
-
-                    AuraCascade.proxy.addEffectBypassingLimit(entityFX);
                 }
                     
             }

@@ -58,11 +58,13 @@ public class ParticleEffects {
                     entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("crit")) {
-                    //entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
-                    //if (r != 0 || g != 0 || b != 0) {
-                    //    entityfx.setRBGColorF((float) r, (float) g, (float) b);
-                    //}
-                    entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, posX, posY, posZ, 0, 0, 0, false);
+                    entityfx = new EntityCritFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    if (r != 0 || g != 0 || b != 0) {
+                        entityfx.setRBGColorF((float) r, (float) g, (float) b);
+                    }
+                }
+                if (particleName.equals("square")) {
+                    entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) r, (float) g, (float) b);
                 }
                 if (particleName.equals("witchMagic")) {
                     entityfx = new EntitySpellParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);

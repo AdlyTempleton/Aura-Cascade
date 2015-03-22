@@ -14,19 +14,16 @@ import net.minecraft.world.World;
 public class ParticleSphere extends EntityFX {
     public ParticleSphere(World par1World, double x, double y, double z, float motionX, float motionY, float motionZ) {
         super(par1World, x, y, z, 0.0D, 0.0D, 0.0D);
-        this.motionX = motionX;
-        this.motionY = motionY;
-        this.motionZ = motionZ;
-        if (motionX == 0.0F) {
-            motionX = 1.0F;
-        }
-        this.particleTextureIndexX = 0; //
-        this.particleTextureIndexY = 0;
-        this.particleRed = 1.0F;//RGB of your particle
-        this.particleGreen = .2F;
-        this.particleBlue = .2F;
-        this.particleScale *= .1F;
-        this.particleScale *= 1.0F;
+        this.motionX *= 0.10000000149011612D;
+        this.motionY *= 0.10000000149011612D;
+        this.motionZ *= 0.10000000149011612D;
+        this.motionX += motionX * 0.4D;
+        this.motionY += motionY * 0.4D;
+        this.motionZ += motionZ * 0.4D;
+        this.particleRed = this.particleGreen = this.particleBlue = (float)(Math.random() * 0.30000001192092896D + 0.6000000238418579D);
+        this.particleScale *= 0.75F;
+        this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.6D));
+        this.noClip = false;
 
         this.particleMaxAge = 20;
         this.noClip = false;

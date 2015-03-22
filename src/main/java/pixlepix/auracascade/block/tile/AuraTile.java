@@ -261,7 +261,7 @@ public class AuraTile extends TileEntity {
             storage.subtract(list);
             for (EnumAura aura : EnumAura.values()) {
                 if (list.get(aura) > 0) {
-                    burst(tuple, "crit", aura, list.getComposition(aura));
+                    burst(tuple, "square", aura, list.getComposition(aura));
                     int power = (int) ((yCoord - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
                     if (power > 0) {
                         ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
