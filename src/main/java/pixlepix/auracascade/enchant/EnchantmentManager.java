@@ -17,12 +17,11 @@ public class EnchantmentManager {
     public static Enchantment purple;
 
     public static void init() {
-        int id = Config.enchantStartId;
-        red = new KaleidoscopeEnchantment(id++, EnumAura.RED_AURA);
-        orange = new KaleidoscopeEnchantment(id++, EnumAura.ORANGE_AURA);
-        yellow = new KaleidoscopeEnchantment(id++, EnumAura.YELLOW_AURA);
-        green = new KaleidoscopeEnchantment(id++, EnumAura.GREEN_AURA);
-        blue = new KaleidoscopeEnchantment(id++, EnumAura.BLUE_AURA);
-        purple = new KaleidoscopeEnchantment(id++, EnumAura.VIOLET_AURA);
+        red = new KaleidoscopeEnchantment(Config.enchantRed, EnumAura.RED_AURA);
+        orange = new KaleidoscopeEnchantment(Config.enchantOrange, EnumAura.ORANGE_AURA);
+        yellow = new KaleidoscopeEnchantment(Config.enchantYellow, EnumAura.YELLOW_AURA);
+        green = new KaleidoscopeEnchantment(Config.enchantGreen, EnumAura.GREEN_AURA);
+        blue = new KaleidoscopeEnchantment(Config.enchantBlue, EnumAura.BLUE_AURA);
+        purple = new KaleidoscopeEnchantment(Config.enchantViolet, EnumAura.VIOLET_AURA);
     }
 }

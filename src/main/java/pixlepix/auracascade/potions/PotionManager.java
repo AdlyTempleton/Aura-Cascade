@@ -43,13 +43,12 @@ public class PotionManager {
             }
         }
 
-        int potionId = Config.potionStartId;
-        potionRed = new PotionRedCurse(potionId++);
-        potionOrange = new PotionOrangeCurse(potionId++);
-        potionYellow = new PotionYellowCurse(potionId++);
-        potionGreen = new PotionGreenCurse(potionId++);
-        potionBlue = new PotionBlueCurse(potionId++);
-        potionPurple = new PotionVioletCurse(potionId++);
+        potionRed = new PotionRedCurse(Config.potionRed);
+        potionOrange = new PotionOrangeCurse(Config.potionOrange);
+        potionYellow = new PotionYellowCurse(Config.potionYellow);
+        potionGreen = new PotionGreenCurse(Config.potionGreen);
+        potionBlue = new PotionBlueCurse(Config.potionBlue);
+        potionPurple = new PotionVioletCurse(Config.potionViolet);
     }
 
 }
