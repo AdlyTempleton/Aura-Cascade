@@ -17,6 +17,7 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.AuraBlock;
@@ -34,6 +35,7 @@ import pixlepix.auracascade.network.*;
 import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
+import pixlepix.auracascade.village.ComponentAuraHut;
 
 public class CommonProxy {
 
@@ -59,6 +61,9 @@ public class CommonProxy {
         networkWrapper.registerMessage(PacketFairyUpdate.class, PacketFairyUpdate.class, 1, Side.CLIENT);
         networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 2, Side.SERVER);
         networkWrapper.registerMessage(CoordinatorScrollHandler.class, PacketCoordinatorScroll.class, 3, Side.SERVER);
+
+
+        MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
     }
 
     public void setEntryToOpen(LexiconEntry entry) {
