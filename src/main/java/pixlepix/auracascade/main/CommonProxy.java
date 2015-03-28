@@ -10,6 +10,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.EffectRenderer;
@@ -35,6 +36,7 @@ import pixlepix.auracascade.network.*;
 import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ModCreativeTab;
+import pixlepix.auracascade.village.AuraHutHandler;
 import pixlepix.auracascade.village.ComponentAuraHut;
 
 public class CommonProxy {
@@ -62,6 +64,9 @@ public class CommonProxy {
         networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 2, Side.SERVER);
         networkWrapper.registerMessage(CoordinatorScrollHandler.class, PacketCoordinatorScroll.class, 3, Side.SERVER);
 
+
+
+        VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
 
         MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
     }
