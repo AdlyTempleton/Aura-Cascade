@@ -100,6 +100,7 @@ public final class LexiconData {
                         new PageCraftingRecipe("5", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpLightAlt"))).iRecipe),
                         new PageCraftingRecipe("6", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstoneAlt"))).iRecipe));
         //Consumers
+        new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemExplosionRing.class));
 
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
         new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PagePylon("2", ItemTransmutingSword.class));

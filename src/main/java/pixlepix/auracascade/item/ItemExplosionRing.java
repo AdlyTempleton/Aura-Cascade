@@ -2,6 +2,7 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -54,7 +55,7 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
-        return BaubleType.AMULET;
+        return BaubleType.RING;
     }
 
     @Override
@@ -70,6 +71,11 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public void onUnequipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {
 
+    }
+
+    @Override
+    public void registerIcons(IIconRegister register) {
+        itemIcon = register.registerIcon("aura:explosion_ring");
     }
 
     @Override
