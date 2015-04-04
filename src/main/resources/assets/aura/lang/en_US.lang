@@ -232,6 +232,11 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
+aura.entry.swordTransmute=Transmuting Sword
+item.transmutingSword.name=Transmuting Sword
+aura.page.swordTransmute0=The transmuting sword will change one form of an entity into another. A full list of effected entities can be found on the next page.
+aura.page.swordTransmute1=Cow <-> Mooshroom <br> Creeper <-> Enderman <br> Sheep <-> Pig <br> Ghast <-> Blaze <br> Slime <-> Magma Cube <br> Ocelot <-> Wolf
+
 aura.entry.alternating=Alternating Pumps
 aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally over an eight minute period.
 

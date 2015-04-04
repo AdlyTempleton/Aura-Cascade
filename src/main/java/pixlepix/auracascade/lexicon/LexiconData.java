@@ -12,11 +12,9 @@
 package pixlepix.auracascade.lexicon;
 
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModAPIManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.block.entity.*;
@@ -104,6 +102,7 @@ public final class LexiconData {
         //Consumers
 
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
+        new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PagePylon("2", ItemTransmutingSword.class));
         new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemRedHole.class));
         new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemBlackHole.class));
         new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockMagicRoad.class));
