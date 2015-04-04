@@ -1,8 +1,6 @@
 package pixlepix.auracascade.block;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -130,7 +128,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float hitX, float hitY, float hitZ) {
+    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
 
             if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()) {
@@ -151,7 +149,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
                 world.markBlockForUpdate(x, y, z);
                 world.notifyBlockChange(x, y, z, this);
-                return true;
+                return;
 
             } else if (world.getTileEntity(x, y, z) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
                 player.addChatComponentMessage(new ChatComponentText("Aura:"));
@@ -182,8 +180,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
             }
         }
-        return false;
     }
+
 
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
@@ -504,7 +502,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
 
             }
-            
+
         } else if (tileEntity instanceof CraftingCenterTile) {
             CraftingCenterTile tile = (CraftingCenterTile) tileEntity;
             if (tile.getRecipe() != null) {
