@@ -5,6 +5,7 @@ import baubles.api.IBauble;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -13,19 +14,20 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.village.MerchantRecipe;
+import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.entity.EntityFallFairy;
 import pixlepix.auracascade.block.entity.EntityScareFairy;
@@ -36,9 +38,7 @@ import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by pixlepix on 12/16/14.
@@ -79,6 +79,30 @@ public class EventHandler {
         EntityPlayer player = event.player;
         player.getEntityData().setBoolean(BOOK_TAG, true);
     }
+
+
+    //Amulet of the shattered stone
+    @SubscribeEvent
+    public void onExplode(ExplosionEvent.Detonate event) {
+        List<Block> affectedBlocks = Arrays.asList(Blocks.sandstone, Blocks.stone, Blocks.sand, Blocks.dirt, Blocks.cobblestone, Blocks.gravel);
+        if (!event.world.isRemote) {
+            Explosion explosion = event.explosion;
+            AxisAlignedBB axisAlignedBB = AxisAlignedBB.getBoundingBox(explosion.explosionX - 3, explosion.explosionY - 3, explosion.explosionZ - 3, explosion.explosionX + 3, explosion.explosionY + 3, explosion.explosionZ + 3);
+            List<EntityPlayer> players = event.world.getEntitiesWithinAABB(EntityPlayer.class, axisAlignedBB);
+            for (EntityPlayer player : players) {
+                if (getBaubleFromInv(ItemExplosionAmulet.class, player) != null) {
+                    Iterator iterator = explosion.affectedBlockPositions.iterator();
+                    while (iterator.hasNext()) {
+                        ChunkPosition position = (ChunkPosition) iterator.next();
+                        Block block = event.world.getBlock(position.chunkPosX, position.chunkPosY, position.chunkPosZ);
+                        if (!affectedBlocks.contains(block))
+                            iterator.remove();
+                    }
+                }
+            }
+        }
+    }
+
 
     //Scarer Fairies
     @SubscribeEvent
