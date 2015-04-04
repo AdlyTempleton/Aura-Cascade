@@ -84,23 +84,25 @@ public class EventHandler {
     //Amulet of the shattered stone
     @SubscribeEvent
     public void onExplode(ExplosionEvent.Detonate event) {
-        List<Block> affectedBlocks = Arrays.asList(Blocks.sandstone, Blocks.stone, Blocks.sand, Blocks.dirt, Blocks.cobblestone, Blocks.gravel);
+        List<Block> affectedBlocks = Arrays.asList(Blocks.grass, Blocks.sandstone, Blocks.stone, Blocks.sand, Blocks.dirt, Blocks.cobblestone, Blocks.gravel);
         if (!event.world.isRemote) {
             Explosion explosion = event.explosion;
             AxisAlignedBB axisAlignedBB = AxisAlignedBB.getBoundingBox(explosion.explosionX - 3, explosion.explosionY - 3, explosion.explosionZ - 3, explosion.explosionX + 3, explosion.explosionY + 3, explosion.explosionZ + 3);
             List<EntityPlayer> players = event.world.getEntitiesWithinAABB(EntityPlayer.class, axisAlignedBB);
             for (EntityPlayer player : players) {
-                if (getBaubleFromInv(ItemExplosionAmulet.class, player) != null) {
+                if (getBaubleFromInv(ItemExplosionRing.class, player) != null) {
                     Iterator iterator = explosion.affectedBlockPositions.iterator();
                     while (iterator.hasNext()) {
                         ChunkPosition position = (ChunkPosition) iterator.next();
                         Block block = event.world.getBlock(position.chunkPosX, position.chunkPosY, position.chunkPosZ);
-                        if (!affectedBlocks.contains(block))
+                        if (!affectedBlocks.contains(block) && block != Blocks.air) {
                             iterator.remove();
+                        }
                     }
                 }
             }
         }
+        return;
     }
 
 

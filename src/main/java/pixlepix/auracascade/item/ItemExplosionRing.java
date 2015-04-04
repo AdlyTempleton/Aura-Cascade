@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by localmacaccount on 4/4/15.
  */
-public class ItemExplosionAmulet extends Item implements ITTinkererItem, IBauble {
+public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
@@ -27,7 +27,7 @@ public class ItemExplosionAmulet extends Item implements ITTinkererItem, IBauble
 
     @Override
     public String getItemName() {
-        return "explosionAmulet";
+        return "explosionRing";
     }
 
     @Override
