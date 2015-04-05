@@ -45,10 +45,11 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
         entityMap.put(EntityEnderman.class, EntityCreeper.class);
     }
 
+
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         if(!target.worldObj.isRemote) {
-            if (entityMap.get(target.getClass()) != null) {
+            if (entityMap.get(target.getClass()) != null && target.getHealth() > 0) {
                 target.setDead();
                 Class clazz = entityMap.get(target.getClass());
                 Entity newEntity = null;
@@ -64,7 +65,15 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
                     e.printStackTrace();
                 }
                 newEntity.setPosition(target.posX, target.posY, target.posZ);
+
                 target.worldObj.spawnEntityInWorld(newEntity);
+                if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {
+                    ((EntitySlime) newEntity).setSlimeSize(((EntitySlime) target).getSlimeSize());
+                }
+                if (newEntity instanceof EntityLivingBase) {
+                    ((EntityLivingBase) newEntity).setHealth(Math.min(((EntityLivingBase) newEntity).getMaxHealth(), target.getHealth()));
+
+                }
             }
 
         }
