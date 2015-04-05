@@ -125,6 +125,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:enchanter");
 
         }
+
+        if (name.equals("dye")) {
+            blockIcon = iconRegister.registerIcon("aura:dye");
+        }
     }
 
     @Override
@@ -177,6 +181,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("enchant")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Blocks.enchanting_table)));
             }
+            if (name.equals("enchant")) {
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 200000), new ItemStack(Blocks.wool)));
+            }
+            
         }
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }
@@ -192,6 +200,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("nether");
         result.add("enchant");
         result.add("potion");
+        result.add("dye");
         return result;
     }
 
@@ -246,6 +255,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             }
             if (name.equals("enchant")) {
                 return EnchanterTile.class;
+            }
+            if (name.equals("dye")) {
+                return DyeTile.class;
             }
         }
         return FurnaceTile.class;
