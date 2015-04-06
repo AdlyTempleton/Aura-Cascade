@@ -181,10 +181,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("enchant")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Blocks.enchanting_table)));
             }
-            if (name.equals("enchant")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 200000), new ItemStack(Blocks.wool)));
+            if (name.equals("dye")) {
+                return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Items.shears), 'C', new ItemStack(Blocks.wool));
             }
-            
         }
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Blocks.furnace), 'C', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }

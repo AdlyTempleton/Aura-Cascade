@@ -232,6 +232,11 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
+tile.consumerBlockdye.name=Cascading Rainbow
+aura.entry.dye=Cascading Rainbow
+aura.page.dye0=The cascading rainbow is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
+
+
 aura.entry.swordTransmute=Transmuting Sword
 item.transmutingSword.name=Transmuting Sword
 aura.page.swordTransmute0=The &1transmuting sword&0 will change one form of an entity into another. A full list of effected entities can be found on the next page.
