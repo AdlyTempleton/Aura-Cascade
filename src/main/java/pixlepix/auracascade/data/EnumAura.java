@@ -13,9 +13,11 @@ import pixlepix.auracascade.main.EnumColor;
 import java.util.List;
 
 public enum EnumAura {
-    WHITE_AURA("White", 1, 1, 1, EnumColor.BLACK),
 
-    GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN) {
+
+    WHITE_AURA("White", 1, 1, 1, EnumColor.BLACK, new int[]{15}),
+
+    GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN, new int[]{2, 10}) {
         @Override
         public double getRelativeMass(World world) {
             if (world.isDaytime()) {
@@ -25,13 +27,13 @@ public enum EnumAura {
         }
     },
 
-    BLACK_AURA("Black", .1, .1, .1, EnumColor.BLACK) {
+    BLACK_AURA("Black", .1, .1, .1, EnumColor.BLACK, new int[]{0, 3, 7, 8}) {
         @Override
         public double getRelativeMass(World world) {
             return 0D;
         }
     },
-    RED_AURA("Red", 1, .1, .1, EnumColor.RED) {
+    RED_AURA("Red", 1, .1, .1, EnumColor.RED, new int[]{1}) {
         @Override
         public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
             //Implementation loosely based off of Vazkii's Botania
@@ -53,7 +55,7 @@ public enum EnumAura {
             }
         }
     },
-    ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE) {
+    ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE, new int[]{14}) {
         @Override
         public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
             for (CoordTuple nearbyNode : tuple.inRange(2)) {
@@ -75,7 +77,7 @@ public enum EnumAura {
             return 0D;
         }
     },
-    YELLOW_AURA("Yellow", 1, 1, .1, EnumColor.YELLOW) {
+    YELLOW_AURA("Yellow", 1, 1, .1, EnumColor.YELLOW, new int[]{11}) {
         @Override
         public double getAscentBoost(World world) {
             return 2D;
@@ -89,13 +91,13 @@ public enum EnumAura {
             }
         }
     },
-    BLUE_AURA("Blue", .1, .1, 1, EnumColor.DARK_BLUE) {
+    BLUE_AURA("Blue", .1, .1, 1, EnumColor.DARK_BLUE, new int[]{4, 6, 12}) {
         @Override
         public double getAscentBoost(World world) {
             return world.isRaining() ? 4 : .5;
         }
     },
-    VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE) {
+    VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE, new int[]{5, 9, 13}) {
         @Override
         public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
             if (world.getTotalWorldTime() % 600 == 5) {
@@ -120,12 +122,26 @@ public enum EnumAura {
     public double b;
     public EnumColor color;
 
-    EnumAura(String name, double r, double g, double b, EnumColor color) {
+    public int[] dyes;
+
+    EnumAura(String name, double r, double g, double b, EnumColor color, int[] dyes) {
         this.name = name;
         this.r = r;
         this.g = g;
         this.b = b;
         this.color = color;
+        this.dyes = dyes;
+    }
+
+    public static EnumAura getColorFromDyeMeta(int i) {
+        for (EnumAura aura : EnumAura.values()) {
+            for (int dyeMeta : aura.dyes) {
+                if (dyeMeta == i) {
+                    return aura;
+                }
+            }
+        }
+        return null;
     }
 
     public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {

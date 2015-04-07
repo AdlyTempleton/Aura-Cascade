@@ -48,6 +48,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     private IIcon sideIcon;
     private IIcon botIcon;
 
+
     public AuraBlock(String type) {
         super(Material.glass);
         this.type = type;
