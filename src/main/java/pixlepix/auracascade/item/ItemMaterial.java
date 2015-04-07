@@ -50,7 +50,15 @@ public class ItemMaterial extends Item implements ITTinkererItem {
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        return null;
+        ArrayList<Object> result = new ArrayList<Object>();
+        for (int i = 0; i < 4; i++) {
+            for (EnumAura auraCons : EnumAura.values()) {
+                if (!(i == 0 && auraCons == EnumAura.WHITE_AURA)) {
+                    result.add(new MaterialPair(auraCons, i));
+                }
+            }
+        }
+        return result;
     }
 
     @Override
