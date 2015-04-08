@@ -14,12 +14,12 @@ import java.util.List;
  */
 public class ItemMaterial extends Item implements ITTinkererItem {
 
-    public static String[] names = new String[]{"nugget", "ingot", "gem", "prism"};
+    public static String[] names = new String[]{"ingot", "gem", "prism"};
     EnumAura aura;
-    //0 = Nugget
-    //1 = Ingot
-    //2 = Gem
-    //3 = Prism
+    //0 = Ingot
+    //1 = Gem
+    //2 = Prism (Only 1 color)
+    //Note that the prism only comes in "White" color
     int materialIndex;
 
     public ItemMaterial(EnumAura aura, int materialIndex) {
@@ -34,7 +34,7 @@ public class ItemMaterial extends Item implements ITTinkererItem {
     }
 
     public ItemMaterial() {
-        this(EnumAura.WHITE_AURA, 0);
+        this(EnumAura.WHITE_AURA, 2);
     }
 
     public static ItemMaterial getItemFromName(MaterialPair pair) {
@@ -51,7 +51,7 @@ public class ItemMaterial extends Item implements ITTinkererItem {
     @Override
     public ArrayList<Object> getSpecialParameters() {
         ArrayList<Object> result = new ArrayList<Object>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             for (EnumAura auraCons : EnumAura.values()) {
                 if (!(i == 0 && auraCons == EnumAura.WHITE_AURA)) {
                     result.add(new MaterialPair(auraCons, i));
