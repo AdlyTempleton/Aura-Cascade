@@ -1,7 +1,13 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.PylonRecipe;
+import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -77,6 +83,14 @@ public class ItemMaterial extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
+        if (materialIndex == 1) {
+            PylonRecipeRegistry.registerRecipe(new PylonRecipe(
+                    new ItemStack(this),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 600000), new ItemStack(Items.diamond)),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0))))));
+        }
         return null;
     }
 
