@@ -58,8 +58,8 @@ public class OreTile extends ConsumerTile {
             if (stack.getItem() == Items.iron_ingot) {
 
                 List<EntityItem> nearbyItemsColor = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                for (EntityItem entityItemColor : nearbyItems) {
-                    ItemStack woolStack = entityItem.getEntityItem();
+                for (EntityItem entityItemColor : nearbyItemsColor) {
+                    ItemStack woolStack = entityItemColor.getEntityItem();
                     if (woolStack.getItem() == Item.getItemFromBlock(Blocks.wool)) {
 
                         //Get stack
@@ -85,26 +85,27 @@ public class OreTile extends ConsumerTile {
                 //Array containing found gems of different materials
                 //Position corresponds to EnumAura.ordinal
                 //Initially found itemstack does NOT get species treatment
-
-                //Find gems
-                EntityItem[] foundGems = new EntityItem[8];
-                List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                for (EntityItem entityItemGem : nearbyItems) {
-                    Item item = entityItemGem.getEntityItem().getItem();
-                    if (item instanceof ItemMaterial) {
-                        ItemMaterial itemMaterial = (ItemMaterial) item;
-                        if (itemMaterial.materialIndex == 1) {
-                            foundGems[itemMaterial.aura.ordinal()] = entityItemGem;
+                if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
+                    //Find gems
+                    EntityItem[] foundGems = new EntityItem[8];
+                    List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                    for (EntityItem entityItemGem : nearbyItems) {
+                        Item item = entityItemGem.getEntityItem().getItem();
+                        if (item instanceof ItemMaterial) {
+                            ItemMaterial itemMaterial = (ItemMaterial) item;
+                            if (itemMaterial.materialIndex == 1) {
+                                foundGems[itemMaterial.aura.ordinal()] = entityItemGem;
+                            }
                         }
                     }
-                }
 
-                //Check if 8 gems have been found
-                if (!Arrays.asList(foundGems).contains(null)) {
-                    resultStack = new ItemStack(ItemMaterial.getItemFromSpecs(new ItemMaterial.MaterialPair(EnumAura.WHITE_AURA, 2)));
-                    //Decr
-                    for (EntityItem itemToDecr : foundGems) {
-                        itemToDecr.getEntityItem().stackSize--;
+                    //Check if 8 gems have been found
+                    if (!Arrays.asList(foundGems).contains(null)) {
+                        resultStack = new ItemStack(ItemMaterial.getItemFromSpecs(new ItemMaterial.MaterialPair(EnumAura.WHITE_AURA, 2)));
+                        //Decr
+                        for (EntityItem itemToDecr : foundGems) {
+                            itemToDecr.getEntityItem().stackSize--;
+                        }
                     }
                 }
             }
