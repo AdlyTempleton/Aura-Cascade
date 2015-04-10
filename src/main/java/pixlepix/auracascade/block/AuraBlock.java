@@ -183,7 +183,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             }
             return true;
         }
-        return false;
+        return true;
     }
 
 
