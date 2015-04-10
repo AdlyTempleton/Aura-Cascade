@@ -129,7 +129,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
-    public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
 
             if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()) {
@@ -137,7 +137,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
                 player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
                 world.markBlockForUpdate(x, y, z);
-
+                return true;
             } else if (world.getTileEntity(x, y, z) instanceof AuraTilePedestal && !player.isSneaking()) {
                 AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(x, y, z);
 
@@ -150,7 +150,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
                 world.markBlockForUpdate(x, y, z);
                 world.notifyBlockChange(x, y, z, this);
-                return;
+                return true;
 
             } else if (world.getTileEntity(x, y, z) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
                 player.addChatComponentMessage(new ChatComponentText("Aura:"));
@@ -164,6 +164,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
                     player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
                 }
+                return true;
             }
         } else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile && player.inventory.getCurrentItem() == null) {
             CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
@@ -180,7 +181,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             } else {
                 player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
             }
+            return true;
         }
+        return false;
     }
 
 
