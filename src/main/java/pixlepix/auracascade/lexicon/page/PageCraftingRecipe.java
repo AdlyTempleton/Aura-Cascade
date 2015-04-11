@@ -28,10 +28,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.lwjgl.opengl.GL11;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.lexicon.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,10 +52,13 @@ public class PageCraftingRecipe extends PageRecipe {
         this.recipes = recipes;
     }
 
+    public PageCraftingRecipe(String unlocalizedName, ThaumicTinkererRecipe recipe) {
+        this(unlocalizedName, ((CraftingBenchRecipe) recipe).iRecipe);
+    }
+    
     public PageCraftingRecipe(String unlocalizedName, CraftingBenchRecipe recipe) {
         this(unlocalizedName, recipe.iRecipe);
     }
-
     public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
         this(unlocalizedName, Arrays.asList(recipe));
     }

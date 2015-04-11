@@ -100,25 +100,25 @@ public final class LexiconData {
                         new PageCraftingRecipe("5", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpLightAlt"))).iRecipe),
                         new PageCraftingRecipe("6", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstoneAlt"))).iRecipe));
         //Consumers
-        new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemExplosionRing.class));
+        new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemExplosionRing.class));
 
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
-        new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PagePylon("2", ItemTransmutingSword.class));
-        new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemRedHole.class));
-        new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemBlackHole.class));
-        new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockMagicRoad.class));
-        new BLexiconEntry("trampoline", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", BlockTrampoline.class));
-        new BLexiconEntry("amuletFood", catagoryAccessories).setLexiconPages(new PageText("0"), new PagePylon("1", ItemFoodAmulet.class));
+        new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ItemTransmutingSword.class));
+        new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemRedHole.class));
+        new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemBlackHole.class));
+        new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockMagicRoad.class));
+        new BLexiconEntry("trampoline", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockTrampoline.class));
+        new BLexiconEntry("amuletFood", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemFoodAmulet.class));
         new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("protection", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"),
-                new PagePylon("2", ItemRedAmulet.class),
-                new PagePylon("3", ItemOrangeAmulet.class),
-                new PagePylon("4", ItemYellowAmulet.class),
-                new PagePylon("5", ItemGreenAmulet.class),
-                new PagePylon("6", ItemBlueAmulet.class),
-                new PagePylon("7", ItemPurpleAmulet.class));
-        new BLexiconEntry("books", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PagePylon("3", (PylonRecipe) BlockRegistry.getFirstRecipeFromBlock(BlockBookshelfCoordinator.class)),
-                new PagePylon("4", ((PylonRecipe) BlockRegistry.getFirstRecipeFromItem(BasicStorageBook.class))),
+                new PageCraftingRecipe("2", ItemRedAmulet.class),
+                new PageCraftingRecipe("3", ItemOrangeAmulet.class),
+                new PageCraftingRecipe("4", ItemYellowAmulet.class),
+                new PageCraftingRecipe("5", ItemGreenAmulet.class),
+                new PageCraftingRecipe("6", ItemBlueAmulet.class),
+                new PageCraftingRecipe("7", ItemPurpleAmulet.class));
+        new BLexiconEntry("books", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageCraftingRecipe("3", BlockRegistry.getFirstRecipeFromBlock(BlockBookshelfCoordinator.class)),
+                new PageCraftingRecipe("4", (BlockRegistry.getFirstRecipeFromItem(BasicStorageBook.class))),
                 new PageText("5"),
                 new PageCraftingRecipe("6", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(DenseStorageBook.class)).iRecipe),
                 new PageCraftingRecipe("7", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(VeryDenseStorageBook.class)).iRecipe),
@@ -150,7 +150,7 @@ public final class LexiconData {
                 new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
                 new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
                 new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
-        new BLexiconEntry("ore", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))));
+        new BLexiconEntry("ore", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))));
 
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             new BLexiconEntry("flux", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("flux"))).iRecipe));
@@ -185,7 +185,7 @@ public final class LexiconData {
         //Fairies
         new BLexiconEntry("fairies", categoryFairies).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
                 new PagePylon("2", (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(ItemFairyRing.class)),
-                new PagePylon("3", (PylonRecipe) ((ThaumicTinkererRecipeMulti) BlockRegistry.getFirstRecipeFromItem(ItemFairyCharm.class)).recipes.get(0)));
+                new PageCraftingRecipe("3", ((ThaumicTinkererRecipeMulti) BlockRegistry.getFirstRecipeFromItem(ItemFairyCharm.class)).recipes.get(0)));
         new BLexiconEntry("fairyCombat", categoryFairies).setLexiconPages(new PageText("0"),
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityCombatFairy.class)));
         new BLexiconEntry("fairyDebuff", categoryFairies).setLexiconPages(new PageText("0"),

@@ -194,7 +194,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new CraftingBenchRecipe(new ItemStack(this), "BGB", "B", new ItemStack(Items.brick), 'G', ItemMaterial.getGem(EnumAura.WHITE_AURA)),
+                new CraftingBenchRecipe(new ItemStack(this), "BGB", 'B', new ItemStack(Items.brick), 'G', ItemMaterial.getGem(EnumAura.WHITE_AURA)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 1), " X ", "XCX", " X ", 'X', new ItemStack(Items.golden_sword), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 2), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem, 1, 8196), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem, 1, 8257), 'C', new ItemStack(this)),
