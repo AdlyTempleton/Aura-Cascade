@@ -65,7 +65,7 @@ public class AngelsteelToolHelper {
     public static void initMaterials() {
 
         for (int i = 0; i < MAX_DEGREE; i++) {
-            materials[i] = EnumHelper.addToolMaterial("ANGELSTEEL" + i, 5, 10, (float) (5F * Math.pow(1.15, i)), (float) (3F * Math.pow(1.1, i)), 10);
+            materials[i] = EnumHelper.addToolMaterial("ANGELSTEEL" + i, 5, 10, (int) (5F * Math.pow(1.15, i)), (int) (3F * Math.pow(1.15, i)), 10);
         }
     }
 
