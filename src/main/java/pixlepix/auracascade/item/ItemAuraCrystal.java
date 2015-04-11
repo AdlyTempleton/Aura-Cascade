@@ -95,7 +95,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new OreCraftingBenchRecipe(new ItemStack(this, 64, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.diamond), 'G', new ItemStack(Blocks.glass)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 16, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.diamond), 'G', new ItemStack(Blocks.glass)),
                 //Green
                 new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', "dyeGreen", 'C', new ItemStack(this, 1, 0)),
                 //Black

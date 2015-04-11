@@ -10,10 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -81,7 +80,6 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this, 16), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000),
-                new ItemStack(Blocks.stonebrick)));
+        return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.stonebrick));
     }
 }

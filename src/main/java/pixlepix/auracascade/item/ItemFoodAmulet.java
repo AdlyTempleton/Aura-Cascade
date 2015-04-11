@@ -7,10 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -87,6 +85,7 @@ public class ItemFoodAmulet extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Items.apple)));
+        return new CraftingBenchRecipe(new ItemStack(this), " R ", "GAB", " Y "
+                , 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'G', ItemMaterial.getGem(EnumAura.GREEN_AURA), 'Y', ItemMaterial.getGem(EnumAura.YELLOW_AURA), 'B', ItemMaterial.getGem(EnumAura.BLUE_AURA), 'A', new ItemStack(Items.apple));
     }
 }

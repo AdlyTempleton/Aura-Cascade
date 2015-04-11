@@ -3,11 +3,10 @@ package pixlepix.auracascade.item.books;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 /**
@@ -36,6 +35,6 @@ public class BasicStorageBook extends ItemStorageBook {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Items.book)));
+        return new CraftingBenchRecipe(new ItemStack(this), " B ", "BIB", " B ", 'B', new ItemStack(Items.book), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
     }
 }

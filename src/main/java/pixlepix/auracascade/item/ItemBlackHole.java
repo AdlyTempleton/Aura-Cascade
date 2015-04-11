@@ -3,17 +3,14 @@ package pixlepix.auracascade.item;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -57,7 +54,7 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 100000), new ItemStack(Blocks.cobblestone)));
+        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.cobblestone), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
     }
 
     @Override

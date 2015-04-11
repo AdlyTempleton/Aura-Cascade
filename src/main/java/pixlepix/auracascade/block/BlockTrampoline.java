@@ -1,21 +1,17 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -80,7 +76,6 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this, 16), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000),
-                new ItemStack(Items.slime_ball)));
+        return new CraftingBenchRecipe(new ItemStack(this), " S ", "SIS", " S ", 'I', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'S', new ItemStack(Items.slime_ball));
     }
 }

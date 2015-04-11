@@ -4,12 +4,11 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -81,6 +80,6 @@ public class ItemBlueAmulet extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), ItemAuraCrystal.getCrystalFromAura(EnumAura.BLUE_AURA)));
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.BLUE_AURA), 'S', new ItemStack(Items.string));
     }
 }

@@ -55,6 +55,18 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         return null;
     }
 
+    public static ItemStack getPrism() {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.WHITE_AURA, 2)));
+    }
+
+    public static ItemStack getGem(EnumAura color) {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 1)));
+    }
+
+    public static ItemStack getIngot(EnumAura color) {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 0)));
+    }
+
     @Override
     public ArrayList<Object> getSpecialParameters() {
         ArrayList<Object> result = new ArrayList<Object>();
@@ -86,10 +98,10 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         if (materialIndex == 1) {
             PylonRecipeRegistry.registerRecipe(new PylonRecipe(
                     new ItemStack(this),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 600000), new ItemStack(Items.diamond)),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0))))));
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.diamond)),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0))))));
         }
         return null;
     }

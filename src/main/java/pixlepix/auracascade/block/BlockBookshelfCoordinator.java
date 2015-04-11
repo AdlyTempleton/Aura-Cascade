@@ -9,19 +9,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentStyle;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
-import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
-import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.main.EnumColor;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -70,7 +66,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 250000), new ItemStack(Blocks.bookshelf)));
+        return new CraftingBenchRecipe(new ItemStack(this), "IPI", "IBI", "III", 'P', ItemMaterial.getPrism(), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'B', new ItemStack(Blocks.bookshelf));
     }
 
     @Override
