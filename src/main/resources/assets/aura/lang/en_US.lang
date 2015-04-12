@@ -276,8 +276,8 @@ aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. I
 aura.entry.materials=Materials
 aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
 aura.page.materials2=First off, it will turn ores dropped nearby into two dust. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Rainbow&0
-aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &Arcane Ingots&0 of the same color.
-aura.page.materials5=The final tier of materials is the &Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
+aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
+aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
 
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
