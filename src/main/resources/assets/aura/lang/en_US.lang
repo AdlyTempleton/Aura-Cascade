@@ -165,6 +165,26 @@ aura.page.blue1=Blue Aura Crystal
 aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth.
 aura.page.violet1=Violet Aura Crystal
 
+item.gemWhite.name=Arcane White Gem
+item.gemBlack.name=Arcane Black Gem
+item.gemOrange.name=Arcane Red Gem
+item.gemYellow.name=Arcane Orange Gem
+item.gemBlue.name=Arcane Blue Gem
+item.gemGreen.name=Arcane Green Gem
+item.gemBlue.name=Arcane Blue Gem
+item.gemViolet.name=Arcane Violet Gem
+
+item.ingotWhite.name=Arcane White Ingot
+item.ingotBlack.name=Arcane Black Ingot
+item.ingotOrange.name=Arcane Red Ingot
+item.ingotYellow.name=Arcane Orange Ingot
+item.ingotBlue.name=Arcane Blue Ingot
+item.ingotGreen.name=Arcane Green Ingot
+item.ingotBlue.name=Arcane Blue Ingot
+item.ingotViolet.name=Arcane Violet Ingot
+
+item.prismWhite.name=Arcane Prism
+
 aura.entry.capacitor=Aura Capacitor
 aura.page.capacitor0=The Aura Capacitor, unlike other aura nodes, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive Aura for a few seconds.
 aura.page.capacitor1=Aura Capacitor
