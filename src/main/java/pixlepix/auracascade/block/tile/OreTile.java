@@ -118,7 +118,6 @@ public class OreTile extends ConsumerTile {
                 } else {
                     stack.stackSize--;
                 }
-                break;
             }
 
             //Spawn in world
