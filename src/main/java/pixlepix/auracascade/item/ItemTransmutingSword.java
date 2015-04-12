@@ -41,6 +41,11 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
         entityMap.put(EntityEnderman.class, EntityCreeper.class);
     }
 
+    public ItemTransmutingSword() {
+        super();
+        setMaxStackSize(1);
+    }
+
     @Override
     public int getCreativeTabPriority() {
         return -50;

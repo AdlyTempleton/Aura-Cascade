@@ -19,6 +19,11 @@ import java.util.ArrayList;
  * Created by localmacaccount on 4/4/15.
  */
 public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
+    public ItemExplosionRing() {
+        super();
+        setMaxStackSize(1);
+    }
+
     @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
