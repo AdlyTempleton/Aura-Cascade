@@ -24,7 +24,7 @@ public class OreTile extends ConsumerTile {
     public static int MAX_PROGRESS = 60;
     public static int POWER_PER_PROGRESS = 150;
 
-    public static ItemStack getTripleResult(ItemStack stack) {
+    public static ItemStack getDoubleResult(ItemStack stack) {
         int[] oreIds = OreDictionary.getOreIDs(stack);
         for (int id : oreIds) {
             String oreName = OreDictionary.getOreName(id);
@@ -109,9 +109,9 @@ public class OreTile extends ConsumerTile {
                     }
                 }
             }
-            if (getTripleResult(stack) != null) {
-                resultStack = getTripleResult(stack);
-                resultStack.stackSize = 3;
+            if (getDoubleResult(stack) != null) {
+                resultStack = getDoubleResult(stack);
+                resultStack.stackSize = 2;
                 //Kill the stack
                 if (stack.stackSize == 0) {
                     entityItem.setDead();
