@@ -13,8 +13,8 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.network.PacketBurst;
-import scala.actors.threadpool.Arrays;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
