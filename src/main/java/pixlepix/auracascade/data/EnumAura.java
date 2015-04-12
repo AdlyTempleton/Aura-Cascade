@@ -17,7 +17,7 @@ public enum EnumAura {
 
     WHITE_AURA("White", 1, 1, 1, EnumColor.BLACK, new int[]{0}),
 
-    GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN, new int[]{3, 5, 13}) {
+    GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN, new int[]{5, 13}) {
         @Override
         public double getRelativeMass(World world) {
             if (world.isDaytime()) {
