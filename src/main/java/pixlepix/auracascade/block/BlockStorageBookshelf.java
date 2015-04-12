@@ -1,14 +1,12 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockBookshelf;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -24,7 +22,6 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/23/15.
@@ -76,6 +73,11 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return null;
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -18;
     }
 
     @Override

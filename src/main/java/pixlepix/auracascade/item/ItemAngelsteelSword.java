@@ -4,10 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,6 +49,11 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         for (EnumAura aura : auraSwords) {
             iconHashMap.put(aura, register.registerIcon("aura:angel_sword" + aura.name));
         }
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -5;
     }
 
     @Override

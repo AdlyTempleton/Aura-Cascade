@@ -108,6 +108,11 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        return -5;
+    }
+
+    @Override
     public boolean getHasSubtypes() {
         return true;
     }

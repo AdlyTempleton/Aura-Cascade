@@ -41,6 +41,10 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
         entityMap.put(EntityEnderman.class, EntityCreeper.class);
     }
 
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {

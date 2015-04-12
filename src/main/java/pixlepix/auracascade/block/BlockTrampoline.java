@@ -78,4 +78,9 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), " S ", "SIS", " S ", 'I', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'S', new ItemStack(Items.slime_ball));
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 }

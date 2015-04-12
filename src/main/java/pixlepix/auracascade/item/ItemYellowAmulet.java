@@ -39,6 +39,11 @@ public class ItemYellowAmulet extends Item implements IBauble, ITTinkererItem {
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        return -48;
+    }
+
+    @Override
     public boolean canEquip(ItemStack itemStack, EntityLivingBase entityLivingBase) {
         return true;
     }

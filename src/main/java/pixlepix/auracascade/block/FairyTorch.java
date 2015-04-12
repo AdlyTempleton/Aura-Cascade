@@ -95,4 +95,9 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     public ThaumicTinkererRecipe getRecipeItem() {
         return null;
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return 0;
+    }
 }

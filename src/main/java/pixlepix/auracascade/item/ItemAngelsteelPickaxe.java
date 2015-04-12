@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -57,6 +56,11 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
             list.add("Angel's Shatter: " + buffs[2]);
             list.add("Angel's Disintegrate: " + buffs[3]);
         }
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -5;
     }
 
     @Override

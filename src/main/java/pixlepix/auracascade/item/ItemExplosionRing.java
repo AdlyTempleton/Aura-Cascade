@@ -78,4 +78,9 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
     public boolean canUnequip(ItemStack itemStack, EntityLivingBase entityLivingBase) {
         return true;
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 }

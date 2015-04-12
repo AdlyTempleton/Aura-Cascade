@@ -1,6 +1,8 @@
 package pixlepix.auracascade.registry;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Comparator;
@@ -12,6 +14,23 @@ import java.util.Comparator;
 public class ItemStackCompatator implements Comparator<ItemStack> {
     @Override
     public int compare(ItemStack o1, ItemStack o2) {
+
+        Object itemObj1 = o1.getItem();
+        Object itemObj2 = o2.getItem();
+
+        //Convert to block if it is a block
+        itemObj1 = Block.getBlockFromItem((Item) itemObj1) != Blocks.air ? Block.getBlockFromItem((Item) itemObj1) : itemObj1;
+        itemObj2 = Block.getBlockFromItem((Item) itemObj2) != Blocks.air ? Block.getBlockFromItem((Item) itemObj2) : itemObj2;
+
+        if (itemObj1 instanceof ITTinkererRegisterable && itemObj2 instanceof ITTinkererRegisterable) {
+            int p1 = ((ITTinkererRegisterable) itemObj1).getCreativeTabPriority();
+            int p2 = ((ITTinkererRegisterable) itemObj2).getCreativeTabPriority();
+            int comp = p2 - p1;
+            if (comp != 0) {
+                return comp;
+            }
+        }
+        
         if (o1.getItem() instanceof ISpecialCreativeSort) {
             return ((ISpecialCreativeSort) o1.getItem()).compare(o1, o2);
         }

@@ -187,6 +187,11 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        return 0;
+    }
+
+    @Override
     public ArrayList<Object> getSpecialParameters() {
         ArrayList result = new ArrayList<Object>();
         result.add("plant");

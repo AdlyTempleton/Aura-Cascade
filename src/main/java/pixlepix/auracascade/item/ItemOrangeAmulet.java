@@ -82,4 +82,9 @@ public class ItemOrangeAmulet extends Item implements IBauble, ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.ORANGE_AURA), 'S', new ItemStack(Items.string));
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -48;
+    }
 }

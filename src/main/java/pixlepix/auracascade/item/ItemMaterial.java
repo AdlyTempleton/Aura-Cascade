@@ -112,6 +112,11 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         return null;
     }
 
+    @Override
+    public int getCreativeTabPriority() {
+        return 25;
+    }
+
     //Private class for constructor
     public static class MaterialPair {
         private final EnumAura aura;

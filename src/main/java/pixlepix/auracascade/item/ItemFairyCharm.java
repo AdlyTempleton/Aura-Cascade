@@ -225,4 +225,9 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public boolean getHasSubtypes() {
         return true;
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -11;
+    }
 }

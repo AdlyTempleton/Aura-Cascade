@@ -3,7 +3,6 @@ package pixlepix.auracascade.item;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,8 +12,6 @@ import net.minecraftforge.common.util.Constants;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockStorageBookshelf;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.StorageItemStack;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -109,5 +106,10 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return null;
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -18;
     }
 }

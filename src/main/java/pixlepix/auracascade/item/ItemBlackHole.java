@@ -61,4 +61,9 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
     public void registerIcons(IIconRegister register) {
         itemIcon = register.registerIcon("aura:blackHole");
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 }

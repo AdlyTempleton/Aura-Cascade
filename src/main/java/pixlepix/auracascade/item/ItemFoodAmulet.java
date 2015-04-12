@@ -88,4 +88,9 @@ public class ItemFoodAmulet extends Item implements IBauble, ITTinkererItem {
         return new CraftingBenchRecipe(new ItemStack(this), " R ", "GAB", " Y "
                 , 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'G', ItemMaterial.getGem(EnumAura.GREEN_AURA), 'Y', ItemMaterial.getGem(EnumAura.YELLOW_AURA), 'B', ItemMaterial.getGem(EnumAura.BLUE_AURA), 'A', new ItemStack(Items.apple));
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 }

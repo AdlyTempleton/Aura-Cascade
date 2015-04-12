@@ -112,4 +112,9 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
                 new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0))
         );
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return 74;
+    }
 }

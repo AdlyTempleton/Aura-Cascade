@@ -70,6 +70,11 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        return -18;
+    }
+
+    @Override
     public void registerBlockIcons(IIconRegister register) {
         blockIcon = register.registerIcon("aura:coordinator");
     }

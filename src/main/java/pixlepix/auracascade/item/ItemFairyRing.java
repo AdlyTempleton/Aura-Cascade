@@ -171,4 +171,9 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
         }
         return stack;
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -10;
+    }
 }

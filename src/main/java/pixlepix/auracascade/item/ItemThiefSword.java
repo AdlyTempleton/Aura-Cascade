@@ -51,4 +51,9 @@ public class ItemThiefSword extends ItemSword implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), " A ", " A ", " E ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, 2), 'E', ItemMaterial.getGem(EnumAura.GREEN_AURA));
     }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -50;
+    }
 }

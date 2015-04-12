@@ -51,6 +51,11 @@ public class ItemAngelsteelShovel extends ItemSpade implements ITTinkererItem, I
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        return -5;
+    }
+
+    @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
 
         if (!world.isRemote && stack.stackTagCompound == null) {

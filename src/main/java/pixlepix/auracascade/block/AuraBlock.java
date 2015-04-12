@@ -327,6 +327,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
+    public int getCreativeTabPriority() {
+        if (type.equals("pump") || type.equals("") || type.equals("flux")) {
+            return 100;
+        }
+        if (type.contains("Alt")) {
+            return -25;
+        }
+
+        if (type.contains("pump")) {
+            return 75;
+        }
+        return 50;
+    }
+
+    @Override
     public ArrayList<Object> getSpecialParameters() {
         // TODO Auto-generated method stub
         ArrayList result = new ArrayList<Object>();

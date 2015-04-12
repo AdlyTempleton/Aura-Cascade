@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,6 +51,11 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
             stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
         }
         super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return -5;
     }
 
     @Override

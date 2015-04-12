@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
@@ -161,5 +160,10 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.book));
+    }
+
+    @Override
+    public int getCreativeTabPriority() {
+        return 150;
     }
 }
