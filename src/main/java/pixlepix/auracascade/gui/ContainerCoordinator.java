@@ -1,11 +1,8 @@
 package pixlepix.auracascade.gui;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -118,7 +115,7 @@ public class ContainerCoordinator extends Container {
         Iterator iter = stacks.iterator();
         while (iter.hasNext()) {
             StorageItemStack storageItemStack = (StorageItemStack) iter.next();
-            String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName()).toUpperCase();
+            String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
             if (!name.contains(filter)) {
                 iter.remove();
             }
