@@ -21,6 +21,7 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
+import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
@@ -158,7 +159,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.GREEN_AURA, 100000), ItemMaterial.getGem(EnumAura.GREEN_AURA)));
             }
             if (name.equals("ore")) {
-                new CraftingBenchRecipe(new ItemStack(this), "IFI", "FIF", "IFI", 'F', new ItemStack(Blocks.furnace), 'I', ItemMaterial.getIngot(EnumAura.WHITE_AURA));
+                new CraftingBenchRecipe(new ItemStack(this), "IFI", "FIF", "IFI", 'F', new ItemStack(Blocks.furnace), 'I', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
             }
             if (name.equals("loot")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 100000), ItemMaterial.getGem(EnumAura.YELLOW_AURA)));
