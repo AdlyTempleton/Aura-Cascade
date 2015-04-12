@@ -78,7 +78,7 @@ public class OreTile extends ConsumerTile {
                         if (entityItem.getEntityItem().stackSize <= 0) {
                             entityItem.setDead();
                         }
-
+                        break;
                     }
                 }
             } else if (stack.getItem() instanceof ItemMaterial) {
