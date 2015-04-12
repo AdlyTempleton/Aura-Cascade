@@ -18,6 +18,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.block.entity.*;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
@@ -150,7 +151,7 @@ public final class LexiconData {
                 new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
                 new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
                 new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
-        new BLexiconEntry("ore", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))));
+        new BLexiconEntry("materials", categoryBasics).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))), new PageText("2"), new PageText("3"), new PagePylon("4", (PylonRecipe) BlockRegistry.getFirstRecipeFromItem(ItemMaterial.getGem(EnumAura.WHITE_AURA).getItem().getClass())), new PageText("5"));
 
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             new BLexiconEntry("flux", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("flux"))).iRecipe));
