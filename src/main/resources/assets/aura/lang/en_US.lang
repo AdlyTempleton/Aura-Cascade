@@ -167,18 +167,18 @@ aura.page.violet1=Violet Aura Crystal
 
 item.gemWhite.name=Arcane White Gem
 item.gemBlack.name=Arcane Black Gem
-item.gemOrange.name=Arcane Red Gem
-item.gemYellow.name=Arcane Orange Gem
-item.gemBlue.name=Arcane Blue Gem
+item.gemOrange.name=Arcane Orange Gem
+item.gemYellow.name=Arcane Yellow Gem
+item.gemRed.name=Arcane Red Gem
 item.gemGreen.name=Arcane Green Gem
 item.gemBlue.name=Arcane Blue Gem
 item.gemViolet.name=Arcane Violet Gem
 
 item.ingotWhite.name=Arcane White Ingot
 item.ingotBlack.name=Arcane Black Ingot
-item.ingotOrange.name=Arcane Red Ingot
-item.ingotYellow.name=Arcane Orange Ingot
-item.ingotBlue.name=Arcane Blue Ingot
+item.ingotRed.name=Arcane Red Ingot
+item.ingotOrange.name=Arcane Orange Ingot
+item.ingotYellow.name=Arcane Yellow Ingot
 item.ingotGreen.name=Arcane Green Ingot
 item.ingotBlue.name=Arcane Blue Ingot
 item.ingotViolet.name=Arcane Violet Ingot
