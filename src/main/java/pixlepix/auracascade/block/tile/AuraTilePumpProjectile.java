@@ -22,7 +22,7 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
         }
 
         if (entity instanceof EntityEgg) {
-            addFuel(Config.pumpArrowDuration, Config.pumpArrowSpeed);
+            addFuel(Config.pumpEggDuration, Config.pumpEggSpeed);
         }
 
         if (entity instanceof EntitySnowball) {
