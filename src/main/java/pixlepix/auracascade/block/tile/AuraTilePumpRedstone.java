@@ -18,7 +18,7 @@ public class AuraTilePumpRedstone extends AuraTilePumpBase {
         super.updateEntity();
         if (pumpPower == 0) {
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                for (int i = 1; i < 15; i++) {
+                for (int i = 1; i < 16; i++) {
                     CoordTuple tuple = new CoordTuple(this).add(direction, i);
                     Block block = tuple.getBlock(worldObj);
                     if (block instanceof BlockRedstoneWire && tuple.getMeta(worldObj) > 0) {
