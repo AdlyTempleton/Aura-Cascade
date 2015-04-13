@@ -196,7 +196,7 @@ aura.page.manipulator0=The Aura Manipulator comes in two colors: Orange and Blac
 aura.page.manipulator1=Black Aura Manipulator
 aura.page.manipulator2=Orange Aura Manipulator
 aura.entry.pumpFall=Momentum Pump
-aura.page.pumpFall0=The Momentum Pump is a pump that derives energy from the falling of mobs. When mobs fall near the pump, they will provide a speed of 2 seconds for every block the mob fell, and a speed of 250
+aura.page.pumpFall0=The Momentum Pump is a pump that derives energy from the falling of mobs. When mobs fall near the pump, they will provide a duration of 2 seconds for every block the mob fell, and a speed of 500
 aura.page.pumpFall1=Momentum Pump
 aura.entry.pumpLight=Illumination Pump
 aura.page.pumpLight0=The Illumination Pump is a pump that derives energy from nearby light sources. It will consume nearby Glowstone and Torches, producing a speed of 750 power/s and a duration of 3 minutes for glowstone and 30 seconds for a torch.
@@ -205,7 +205,7 @@ aura.entry.pumpRedstone=Redstone Pump
 aura.page.pumpRedstone0=The Redstone Pump is a pump that derives energy from nearby Redstone. When a redstone wire is connected and powered, the pump will consume the redstone wire, generating a power of 1500 and a duration of 10 seconds for the first wire. It will eat a line of redstone up to 15 blocks long, generating a 40% greater duration for subsequent redstone.
 aura.page.pumpRedstone1=Redstone Pump
 aura.entry.pumpProjectile=Projectile Pump
-aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 400. Eggs produce a duration of 90s and a speed of 100. Arrows produce a duration of 20 and a speed of 1000.
+aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
 aura.page.pumpProjectile1=Projectile Pump
 
 //Consumers

@@ -18,13 +18,13 @@ public class Config {
     public static int pumpTorchDuration = 30;
     public static int pumpGlowstoneSpeed = 750;
     public static int pumpGlowstoneDuration = 180;
-    public static int pumpFallSpeed = 250;
+    public static int pumpFallSpeed = 500;
     public static int pumpFallDuration = 2;
-    public static int pumpEggSpeed = 100;
+    public static int pumpEggSpeed = 500;
     public static int pumpEggDuration = 90;
     public static int pumpArrowSpeed = 1000;
     public static int pumpArrowDuration = 20;
-    public static int pumpSnowballSpeed = 400;
+    public static int pumpSnowballSpeed = 500;
     public static int pumpSnowballDuration = 10;
 
     public static boolean giveBook = true;
@@ -59,7 +59,7 @@ public class Config {
         pumpRedstoneSpeed = config.getInt("pumpRedstoneSpeed", Configuration.CATEGORY_GENERAL, pumpRedstoneSpeed, 1, Integer.MAX_VALUE, "");
         pumpRedstoneDuration = config.getInt("pumpRedstoneDuration", Configuration.CATEGORY_GENERAL, pumpRedstoneDuration, 1, Integer.MAX_VALUE, "");
 
-        pumpFallSpeed = config.getInt("pumpFallSpeed", Configuration.CATEGORY_GENERAL, pumpFallSpeed, 1, Integer.MAX_VALUE, "");
+        pumpFallSpeed = config.getInt("pumpFallPumpSpeed", Configuration.CATEGORY_GENERAL, pumpFallSpeed, 1, Integer.MAX_VALUE, "");
         pumpFallDuration = config.getInt("pumpFallDuration", Configuration.CATEGORY_GENERAL, pumpFallDuration, 1, Integer.MAX_VALUE, "");
 
         pumpTorchSpeed = config.getInt("pumpTorchSpeed", Configuration.CATEGORY_GENERAL, pumpTorchSpeed, 1, Integer.MAX_VALUE, "");
@@ -68,10 +68,10 @@ public class Config {
         pumpGlowstoneSpeed = config.getInt("pumpGlowstoneSpeed", Configuration.CATEGORY_GENERAL, pumpGlowstoneSpeed, 1, Integer.MAX_VALUE, "");
         pumpGlowstoneDuration = config.getInt("pumpGlowstoneDuration", Configuration.CATEGORY_GENERAL, pumpGlowstoneDuration, 1, Integer.MAX_VALUE, "");
 
-        pumpEggSpeed = config.getInt("pumpEggSpeed", Configuration.CATEGORY_GENERAL, pumpEggSpeed, 1, Integer.MAX_VALUE, "");
+        pumpEggSpeed = config.getInt("pumpEggPumpSpeed", Configuration.CATEGORY_GENERAL, pumpEggSpeed, 1, Integer.MAX_VALUE, "");
         pumpEggDuration = config.getInt("pumpEggDuration", Configuration.CATEGORY_GENERAL, pumpEggDuration, 1, Integer.MAX_VALUE, "");
 
-        pumpSnowballSpeed = config.getInt("pumpSnowballSpeed", Configuration.CATEGORY_GENERAL, pumpSnowballSpeed, 1, Integer.MAX_VALUE, "");
+        pumpSnowballSpeed = config.getInt("pumpSnowballPumpSpeed", Configuration.CATEGORY_GENERAL, pumpSnowballSpeed, 1, Integer.MAX_VALUE, "");
         pumpSnowballDuration = config.getInt("pumpSnowballDuration", Configuration.CATEGORY_GENERAL, pumpSnowballDuration, 1, Integer.MAX_VALUE, "");
 
         pumpArrowSpeed = config.getInt("pumpArrowSpeed", Configuration.CATEGORY_GENERAL, pumpArrowSpeed, 1, Integer.MAX_VALUE, "");
