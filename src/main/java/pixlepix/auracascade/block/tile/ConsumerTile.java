@@ -16,6 +16,7 @@ import pixlepix.auracascade.main.AuraUtil;
 public abstract class ConsumerTile extends TileEntity {
 
     public int storedPower;
+    public int lastPower;
     public int progress;
 
     @Override
@@ -32,11 +33,13 @@ public abstract class ConsumerTile extends TileEntity {
     public void readCustomNBT(NBTTagCompound nbt) {
         progress = nbt.getInteger("progress");
         storedPower = nbt.getInteger("storedPower");
+        lastPower = nbt.getInteger("lastPower");
     }
 
     public void writeCustomNBT(NBTTagCompound nbt) {
         nbt.setInteger("progress", progress);
         nbt.setInteger("storedPower", storedPower);
+        nbt.setInteger("lastPower", lastPower);
     }
 
     @Override
@@ -65,6 +68,8 @@ public abstract class ConsumerTile extends TileEntity {
             if (worldObj.getTotalWorldTime() % 20 == 18) {
                 storedPower *= .5;
             }
+
+            boolean changeLastPower = false;
             //Drain energy from aura Nodes
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
@@ -74,8 +79,22 @@ public abstract class ConsumerTile extends TileEntity {
                         auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
                         storedPower += auraTile.energy;
                         auraTile.energy = 0;
+                        changeLastPower = true;
                     }
                 }
+            }
+            if (worldObj.getTotalWorldTime() % 20 == 0) {
+                lastPower = 0;
+            }
+            if (changeLastPower) {
+                lastPower = storedPower;
+
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+            } else if (worldObj.getTotalWorldTime() % 20 == 2) {
+
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
             }
 
             if (worldObj.getTotalWorldTime() % 500 == 0) {

@@ -302,6 +302,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(x, y, z);
             result.add("" + consumerTile.progress + " / " + consumerTile.getMaxProgress());
             result.add("Power per progress: " + consumerTile.getPowerPerProgress());
+            result.add("Last Power: " + consumerTile.lastPower);
         }
         return result;
     }
