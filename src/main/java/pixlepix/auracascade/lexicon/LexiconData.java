@@ -222,8 +222,8 @@ public final class LexiconData {
         //Walkthrough
         new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0"));
         new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
-        new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/0.png"), new PageText("2"));
-        new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:/textures/gui/walkthrough/1.png"));
+        new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/0.png"), new PageText("2"));
+        new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/1.png"));
 
     }
 
