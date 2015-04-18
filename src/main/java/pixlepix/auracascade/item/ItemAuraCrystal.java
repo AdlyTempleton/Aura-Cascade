@@ -31,12 +31,11 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof AuraTile) {
             stack.stackSize--;
             ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
-            return true;
         }
         return false;
     }
