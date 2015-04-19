@@ -36,72 +36,72 @@ tile.consumerBlockfurnace.name=Cascading Smelter
 
 //Used for angelsteel ingots
 //Take careful note of the off-by-one in the naming
-0.aurasteel.name=first
-1.aurasteel.name=second
-2.aurasteel.name=third
-3.aurasteel.name=fourth
-4.aurasteel.name=fifth
-5.aurasteel.name=sixth
-6.aurasteel.name=seventh
-7.aurasteel.name=eighth
-8.aurasteel.name=ninth
-9.aurasteel.name=tenth
-10.aurasteel.name=eleventh
-11.aurasteel.name=twelfth
+0.aurasteel.name=First
+1.aurasteel.name=Second
+2.aurasteel.name=Third
+3.aurasteel.name=Fourth
+4.aurasteel.name=Fifth
+5.aurasteel.name=Sixth
+6.aurasteel.name=Seventh
+7.aurasteel.name=Eighth
+8.aurasteel.name=Ninth
+9.aurasteel.name=Tenth
+10.aurasteel.name=Eleventh
+11.aurasteel.name=Twelfth
 
 
 //Angelsteel tools
-item.angelsteelPickaxe0.name=Angel's Steel pickaxe of the first degree
-item.angelsteelPickaxe1.name=Angel's Steel pickaxe of the second degree
-item.angelsteelPickaxe2.name=Angel's Steel pickaxe of the third degree
-item.angelsteelPickaxe3.name=Angel's Steel pickaxe of the fourth degree
-item.angelsteelPickaxe4.name=Angel's Steel pickaxe of the fifth degree
-item.angelsteelPickaxe5.name=Angel's Steel pickaxe of the sixth degree
-item.angelsteelPickaxe6.name=Angel's Steel pickaxe of the seventh degree
-item.angelsteelPickaxe7.name=Angel's Steel pickaxe of the eighth degree
-item.angelsteelPickaxe8.name=Angel's Steel pickaxe of the ninth degree
-item.angelsteelPickaxe9.name=Angel's Steel pickaxe of the tenth degree
-item.angelsteelPickaxe10.name=Angel's Steel pickaxe of the eleventh degree
-item.angelsteelPickaxe11.name=Angel's Steel pickaxe of the twelfth degree
+item.angelsteelPickaxe0.name=Angel's Steel Pickaxe of the First degree
+item.angelsteelPickaxe1.name=Angel's Steel Pickaxe of the Second degree
+item.angelsteelPickaxe2.name=Angel's Steel Pickaxe of the Third degree
+item.angelsteelPickaxe3.name=Angel's Steel Pickaxe of the Fourth degree
+item.angelsteelPickaxe4.name=Angel's Steel Pickaxe of the Fifth degree
+item.angelsteelPickaxe5.name=Angel's Steel Pickaxe of the Sixth degree
+item.angelsteelPickaxe6.name=Angel's Steel Pickaxe of the Seventh degree
+item.angelsteelPickaxe7.name=Angel's Steel Pickaxe of the eighth degree
+item.angelsteelPickaxe8.name=Angel's Steel Pickaxe of the Ninth degree
+item.angelsteelPickaxe9.name=Angel's Steel Pickaxe of the Tenth degree
+item.angelsteelPickaxe10.name=Angel's Steel Pickaxe of the Eleventh degree
+item.angelsteelPickaxe11.name=Angel's Steel Pickaxe of the Twelfth degree
 
-item.angelsteelAxe0.name=Angel's Steel axe of the first degree
-item.angelsteelAxe1.name=Angel's Steel axe of the second degree
-item.angelsteelAxe2.name=Angel's Steel axe of the third degree
-item.angelsteelAxe3.name=Angel's Steel axe of the fourth degree
-item.angelsteelAxe4.name=Angel's Steel axe of the fifth degree
-item.angelsteelAxe5.name=Angel's Steel axe of the sixth degree
-item.angelsteelAxe6.name=Angel's Steel axe of the seventh degree
-item.angelsteelAxe7.name=Angel's Steel axe of the eighth degree
-item.angelsteelAxe8.name=Angel's Steel axe of the ninth degree
-item.angelsteelAxe9.name=Angel's Steel axe of the tenth degree
-item.angelsteelAxe10.name=Angel's Steel axe of the eleventh degree
-item.angelsteelAxe11.name=Angel's Steel axe of the twelfth degree
+item.angelsteelAxe0.name=Angel's Steel Axe of the First degree
+item.angelsteelAxe1.name=Angel's Steel Axe of the Second degree
+item.angelsteelAxe2.name=Angel's Steel Axe of the Third degree
+item.angelsteelAxe3.name=Angel's Steel Axe of the Fourth degree
+item.angelsteelAxe4.name=Angel's Steel Axe of the Fifth degree
+item.angelsteelAxe5.name=Angel's Steel Axe of the Sixth degree
+item.angelsteelAxe6.name=Angel's Steel Axe of the Seventh degree
+item.angelsteelAxe7.name=Angel's Steel Axe of the Eighth degree
+item.angelsteelAxe8.name=Angel's Steel Axe of the Ninth degree
+item.angelsteelAxe9.name=Angel's Steel Axe of the Tenth degree
+item.angelsteelAxe10.name=Angel's Steel Axe of the Eleventh degree
+item.angelsteelAxe11.name=Angel's Steel Axe of the Twelfth degree
 
-item.angelsteelSword0.name=Angel's Steel sword of the first degree
-item.angelsteelSword1.name=Angel's Steel sword of the second degree
-item.angelsteelSword2.name=Angel's Steel sword of the third degree
-item.angelsteelSword3.name=Angel's Steel sword of the fourth degree
-item.angelsteelSword4.name=Angel's Steel sword of the fifth degree
-item.angelsteelSword5.name=Angel's Steel sword of the sixth degree
-item.angelsteelSword6.name=Angel's Steel sword of the seventh degree
-item.angelsteelSword7.name=Angel's Steel sword of the eighth degree
-item.angelsteelSword8.name=Angel's Steel sword of the ninth degree
-item.angelsteelSword9.name=Angel's Steel sword of the tenth degree
-item.angelsteelSword10.name=Angel's Steel sword of the eleventh degree
-item.angelsteelSword11.name=Angel's Steel sword of the twelfth degree
+item.angelsteelSword0.name=Angel's Steel Sword of the First degree
+item.angelsteelSword1.name=Angel's Steel Sword of the Second degree
+item.angelsteelSword2.name=Angel's Steel Sword of the Third degree
+item.angelsteelSword3.name=Angel's Steel Sword of the Fourth degree
+item.angelsteelSword4.name=Angel's Steel Sword of the Fifth degree
+item.angelsteelSword5.name=Angel's Steel Sword of the Sixth degree
+item.angelsteelSword6.name=Angel's Steel Sword of the Seventh degree
+item.angelsteelSword7.name=Angel's Steel Sword of the Eighth degree
+item.angelsteelSword8.name=Angel's Steel Sword of the Ninth degree
+item.angelsteelSword9.name=Angel's Steel Sword of the Tenth degree
+item.angelsteelSword10.name=Angel's Steel Sword of the Eleventh degree
+item.angelsteelSword11.name=Angel's Steel Sword of the Twelfth degree
 
-item.angelsteelShovel0.name=Angel's Steel shovel of the first degree
-item.angelsteelShovel1.name=Angel's Steel shovel of the second degree
-item.angelsteelShovel2.name=Angel's Steel shovel of the third degree
-item.angelsteelShovel3.name=Angel's Steel shovel of the fourth degree
-item.angelsteelShovel4.name=Angel's Steel shovel of the fifth degree
-item.angelsteelShovel5.name=Angel's Steel shovel of the sixth degree
-item.angelsteelShovel6.name=Angel's Steel shovel of the seventh degree
-item.angelsteelShovel7.name=Angel's Steel shovel of the eighth degree
-item.angelsteelShovel8.name=Angel's Steel shovel of the ninth degree
-item.angelsteelShovel9.name=Angel's Steel shovel of the tenth degree
-item.angelsteelShovel10.name=Angel's Steel shovel of the eleventh degree
-item.angelsteelShovel11.name=Angel's Steel shovel of the twelfth degree
+item.angelsteelShovel0.name=Angel's Steel Shovel of the First degree
+item.angelsteelShovel1.name=Angel's Steel Shovel of the Second degree
+item.angelsteelShovel2.name=Angel's Steel Shovel of the Third degree
+item.angelsteelShovel3.name=Angel's Steel Shovel of the Fourth degree
+item.angelsteelShovel4.name=Angel's Steel Shovel of the Fifth degree
+item.angelsteelShovel5.name=Angel's Steel Shovel of the Sixth degree
+item.angelsteelShovel6.name=Angel's Steel Shovel of the Seventh degree
+item.angelsteelShovel7.name=Angel's Steel Shovel of the Eighth degree
+item.angelsteelShovel8.name=Angel's Steel shovel of the Ninth degree
+item.angelsteelShovel9.name=Angel's Steel Shovel of the Tenth degree
+item.angelsteelShovel10.name=Angel's Steel Shovel of the Eleventh degree
+item.angelsteelShovel11.name=Angel's Steel Shovel of the Twelfth degree
 
 itemGroup.aura=Aura Cascade
 
@@ -116,21 +116,21 @@ aura.gui.lexicon.header=Encyclopedia Aura
 aura.entry.basics=Basic Concepts
 aura.entry.auraFlow=Aura Flow Mechanics
 aura.entry.interactions=Controls
-aura.entry.power=Power
+aura.entry.power=Generating Power
 aura.entry.pumps=Pumps
-aura.page.basics0=Aura is a magical fluid, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy.
+aura.page.basics0=Aura is a magical substance, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy between themselves.
 aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura is used to transport and store &1Power&0, in mechanics which will be discussed later.
-aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
+aura.page.auraFlow0=Every second, an Aura Nodes will send a percentage of its Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes. The further the distance the less aura is sent.
 aura.page.auraFlow1=When two nodes are connected, both send aura to each other. This means that the quantity of aura in connected nodes tends toward equilibrium, under normal circumstances.
 aura.page.auraFlow2=Aura Crystals can place Aura in a node
 aura.page.auraFlow3=Aura Nodes store and transport Aura
 aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
-aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
-aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. Power is equal to (Quantity of Aura)x(Height).
+aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will still allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
+aura.page.power0=Power is equal to (Quantity of Aura)x(Height). <br> You can think of it being similar to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work.
 aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
 aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently.
 aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
-aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
+aura.page.pumps2=The most basic and simple pump. The Burning Aura Pump uses any type of fuel that can be placed in a furnace. Items such as buckets will not be returned. Duration: The burn duration in a furnace. Speed: 200.
 aura.page.pumps3=The Burning Aura Pump
 aura.entry.comparator=Comparator Interactions
 aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their required progress.
@@ -141,7 +141,7 @@ aura.entry.blue=Blue Aura
 aura.entry.green=Green Aura
 aura.entry.orange=Orange Aura
 aura.entry.yellow=Yellow Aura
-aura.entry.violet=Violet Aura
+aura.entry.violet=Magenta Aura
 
 auramisc.nextPage=Next Page
 auramisc.prevPage=Previous Page
@@ -150,11 +150,11 @@ auramisc.craftingContainer=Returns on Crafting
 auramisc.shapeless=Shapeless Recipe
 auramisc.oredict=Ore Dictionary Recipe
 aura.entry.black=Black Aura
-aura.page.black0=Black aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
+aura.page.black0=Black Aura has three special properties. Firstly, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. <br> Secondly, it can't flow horizontally, it only can flow vertically. <br> Lastly, and most importantly, it can be created or destroyed by an &1Aura Manipulator&0
 aura.page.black1=Black Aura Crystal
 aura.page.red0=When TNT is detonated near an &1Aura Node&0 containing Red Aura, it will absorb the explosion and it will push Red Aura uphill, acting like a pump. Each TNT block generated 200,000 power.
 aura.page.red1=Red Aura Crystal
-aura.page.orange0=Orange Aura shares the properties of &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby aura nodes, causing aura to flow in the same direction.
+aura.page.orange0=Orange Aura has the same properties as &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby aura nodes, causing aura to flow in the same direction.
 aura.page.orange1=Orange Aura Crystal
 aura.page.yellow0=Yellow Aura provides a x2 ascent boost, meaning that it takes half of the energy to pump up, while producing the normal amount of power falling down. However, Yellow Aura rapidly breaks down in &1Aura Nodes&0.
 aura.page.yellow1=Yellow Aura Crystal
@@ -162,8 +162,8 @@ aura.page.green0=Green Aura's weight changes during the day. During the day, it 
 aura.page.green1=Green Aura Crystal
 aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it takes a fourth of the energy to pump up, while producing the normal amount of power falling down, but only when it's raining. At other times, it has a detrimental x0.5 ascent boost.
 aura.page.blue1=Blue Aura Crystal
-aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth.
-aura.page.violet1=Violet Aura Crystal
+aura.page.violet0=Magenta Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Magenta Aura per node. Spreading Magenta Aura among many nodes will increase growth.
+aura.page.violet1=Magenta Aura Crystal
 
 item.gemWhite.name=Arcane White Gem
 item.gemBlack.name=Arcane Black Gem
@@ -172,7 +172,7 @@ item.gemYellow.name=Arcane Yellow Gem
 item.gemRed.name=Arcane Red Gem
 item.gemGreen.name=Arcane Green Gem
 item.gemBlue.name=Arcane Blue Gem
-item.gemViolet.name=Arcane Violet Gem
+item.gemViolet.name=Arcane Magenta Gem
 
 item.ingotWhite.name=Arcane White Ingot
 item.ingotBlack.name=Arcane Black Ingot
@@ -181,7 +181,7 @@ item.ingotOrange.name=Arcane Orange Ingot
 item.ingotYellow.name=Arcane Yellow Ingot
 item.ingotGreen.name=Arcane Green Ingot
 item.ingotBlue.name=Arcane Blue Ingot
-item.ingotViolet.name=Arcane Violet Ingot
+item.ingotViolet.name=Arcane Magenta Ingot
 
 item.prismWhite.name=Arcane Prism
 
@@ -192,7 +192,7 @@ aura.entry.conserve=Conserving Aura Node
 aura.page.conserve0=The Conserving Aura Node functions much like a regular &1Aura Node&0, with one caveat: it will not send aura downhill. This can be used in conjunction with &1Red Aura&0, or to achieve compact builds.
 aura.page.conserve1=Conserving Aura Node
 aura.entry.manipulator=Aura Manipulator
-aura.page.manipulator0=The Aura Manipulator comes in two colors: Orange and Black. When not given a redstone signal, it will accept only aura of it's chosen color, and destroy it. When powered by redstone, it will rapidly generate extremely large amounts of it's chosen color of Aura.
+aura.page.manipulator0=The Aura Manipulator comes in two colors: Orange and Black. When not given a redstone signal, it will accept only aura of it's respective color, and then destroy it. When powered by redstone, it will rapidly generate extremely large amounts of it's chosen color of Aura.
 aura.page.manipulator1=Black Aura Manipulator
 aura.page.manipulator2=Orange Aura Manipulator
 aura.entry.pumpFall=Momentum Pump
@@ -210,7 +210,7 @@ aura.page.pumpProjectile1=Projectile Pump
 
 //Consumers
 aura.entry.consumers=Consumers
-aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.
+aura.page.consumers0=Consumers are blocks which use power to perform some function. When Aura flows downhill, the lower node will automatically distribute power to adjacent &1Consumers&0. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.
 
 aura.entry.angel=Cascading Synthesizer
 aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s
@@ -232,7 +232,7 @@ aura.page.angelsteelSword3=An orange crystal will make the enemies randomly and 
 aura.page.angelsteelSword4=A yellow crystal will cause lightning to frequently strike the enemies
 aura.page.angelsteelSword5=A green crystal will sicken the enemies, causing them to rapidly take damage. This sickness quickly spreads to nearby entities-including yourself!
 aura.page.angelsteelSword6=A blue crystal will apply a curse the seeks out cracks in the enemies defenses. It will rapidly damage the enemy if they drop below half health
-aura.page.angelsteelSword7=A violet crystal will loosen the enemies grip on reality itself. They will periodically switch places with other nearby entities.
+aura.page.angelsteelSword7=A magenta crystal will loosen the enemies grip on reality itself. They will periodically switch places with other nearby entities.
 
 aura.entry.crafting=Vortex Infusion
 aura.page.crafting0=Vortex Infusion is a process for creating many higher-level items. First, place a &1Vortex Controller&0 down, and place four &1Vortex Pedestals&0 adjacent to it. Following a recipe, right-click to place the correct items on all four pedestals.
@@ -252,14 +252,14 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
-tile.consumerBlockdye.name=Cascading Rainbow
-aura.entry.dye=Cascading Rainbow
-aura.page.dye0=The cascading rainbow is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
+tile.consumerBlockdye.name=Cascading Colourer
+aura.entry.dye=Cascading Colourer
+aura.page.dye0=The Cascading Colourer is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
 
 
 aura.entry.swordTransmute=Transmuting Sword
 item.transmutingSword.name=Transmuting Sword
-aura.page.swordTransmute0=The &1transmuting sword&0 will change one form of an entity into another. A full list of effected entities can be found on the next page.
+aura.page.swordTransmute0=The &1Transmuting Sword&0 will change one form of an entity into another. A full list of effected entities can be found on the next page.
 aura.page.swordTransmute1=Cow <-> Mooshroom <br> Creeper <-> Enderman <br> Sheep <-> Pig <br> Ghast <-> Blaze <br> Slime <-> Magma Cube <br> Ocelot <-> Wolf
 
 aura.entry.explosionRing=Ring of the Shattered Stone
@@ -273,7 +273,7 @@ aura.entry.furnace=Cascading Smelter
 aura.page.furnace1=Cascading Smelter
 aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
 
-aura.entry.materials=Materials
+aura.entry.materials=Making Materials
 aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
 aura.page.materials2=First off, it will turn ores dropped nearby into two dust. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Rainbow&0
 aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
@@ -316,7 +316,7 @@ aura.page.books20=64 stacks of 100
 
 aura.entry.protection=Protection Amulets
 aura.page.protection0=Protection Amulets are baubles that will protect the player from certain types of damage, and channel the energy towards healing the player. They come in all the colors of the rainbow! &1Red Protection Amulet&0 will grant immunity from Fire and Lava. &1Orange Protection Amulet&0 will grant immunity from Explosions. &1Yellow Protection Amulet&0 will grant partial immunity from projectiles.
-aura.page.protection1= &1Green Protection Amulet&0 will grant immunity from Fall damage. &1Blue Protection Amulet&0 will grant immunity from Drowning. &1Violet Protection Amulet&0 will grant immunity from wither debuffs, but will not heal the player.
+aura.page.protection1= &1Green Protection Amulet&0 will grant immunity from Fall damage. &1Blue Protection Amulet&0 will grant immunity from Drowning. &1Magenta Protection Amulet&0 will grant immunity from wither debuffs, but will not heal the player.
 aura.page.protection2=Embrace the fire!
 aura.page.protection3=Hey Creeper, that tickles!
 aura.page.protection4=You can't shoot me
@@ -426,7 +426,7 @@ item.mobDropBook.name=Mob Drop Book
 item.modBook.name=Mod Specific Book
 item.farmingBook.name=Farming Book
 
-item.purpleAmulet.name=Violet Protection Amulet
+item.purpleAmulet.name=Magenta Protection Amulet
 item.redAmulet.name=Red Protection Amulet
 item.orangeAmulet.name=Orange Protection Amulet
 item.yellowAmulet.name=Yellow Protection Amulet
@@ -470,7 +470,7 @@ aura.entry.vortexInfusion=Vortex Infusion
 aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
 
 aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup
-aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed next to the Power Node.
+aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed adjacent to the Power Node.
 
 aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0. These four Vortex pedestals surround the &1Vortex Controller&0.
 
@@ -488,32 +488,32 @@ aura.page.basicEffects1=&6Orange&0 will grant efficiency.
 aura.page.basicEffects2=&eYellow&0 will grant fortune.
 aura.page.basicEffects3=&1Blue&0 will grant knockback.
 aura.page.basicEffects4=&2Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
-aura.page.basicEffects5=&5Violet&0 will grant a powerful efficiency boost on hard materials such as obsidian.
+aura.page.basicEffects5=&5Magenta&0 will grant a powerful efficiency boost on hard materials such as obsidian.
 
 aura.entry.areaOfEffect=Area of Effect interactions
 aura.page.areaOfEffect0=&eYellow&0 and &2Green&0 will allow your tool to harvest fields of crops at once.
-aura.page.areaOfEffect1=&1Blue&0 and &5Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
+aura.page.areaOfEffect1=&1Blue&0 and &5Magenta&0 will inflict damage on enemies near your target. Higher levels results in more damage.
 
 aura.entry.combat=Combat interactions
 aura.page.combat0=&2Green&0 and &1Blue&0 will grant life steal.
 aura.page.combat1=&eYellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
-aura.page.combat2=&4Red&0 and &5Violet&0 will act as a secondary armor, lowering the damage sustained from enemies.
+aura.page.combat2=&4Red&0 and &5Magenta&0 will act as a secondary armor, lowering the damage sustained from enemies.
 
 aura.entry.looting=Resource interactions
-aura.page.looting0=&eYellow&0 and &5Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
+aura.page.looting0=&eYellow&0 and &5Magenta&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
 aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping two ingots.
 
 aura.entry.negative=Negative interactions
 aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.
 aura.page.negative1=&4Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
-aura.page.negative2=&2Green&0 and &5Violet&0 will lower the attack damage a tool produces.
+aura.page.negative2=&2Green&0 and &5Magenta&0 will lower the attack damage a tool produces.
 
 aura.entry.speedBoosts=Mining Speed boosts
 aura.page.speedBoosts0=&4Red&0 and &6Orange&0 grant higher mining speed on ores.
 aura.page.speedBoosts1=&eYellow&0 and &6Orange&0 grant higher mining speed on stone.
 aura.page.speedBoosts2=&1Blue&0 and &6Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
 aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on wood.
-aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
+aura.page.speedBoosts4=&5Magenta&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
 
 tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
 enchantment.Red=Kaleidoscopic Red
@@ -521,10 +521,10 @@ enchantment.Orange=Kaleidoscopic Orange
 enchantment.Yellow=Kaleidoscopic Yellow
 enchantment.Green=Kaleidoscopic Green
 enchantment.Blue=Kaleidoscopic Blue
-enchantment.Violet=Kaleidoscopic Violet
+enchantment.Violet=Kaleidoscopic Magenta
 
 aura.entry.video=Video Walkthrough
-aura.page.video0=This video, by SilverContrails, provides a good walkthrough of the basic aura mechanics.
+aura.page.video0=This Youtube Video, by SilverContrails, provides a good walkthrough of the basic aura and mod mechanics.
 auramisc.playVideo=Play Video
 
 aura.entry.flux=Fluxing Node
