@@ -110,7 +110,7 @@ auramisc.clickToShare=Share
 auramisc.bookmark=Bookmark #%s
 auramisc.clickToSee=Click to read
 auramisc.shiftToRemove=Shift-click to remove
-auramisc.clickToAdd=Add Bookmark
+auramisc.clickToAdd=Click to Add Bookmark
 item.lexicon.name=Encyclopedia Aura
 aura.gui.lexicon.header=Encyclopedia Aura
 aura.entry.basics=Basic Concepts
@@ -126,7 +126,7 @@ aura.page.auraFlow2=Aura Crystals can place Aura in a node
 aura.page.auraFlow3=Aura Nodes store and transport Aura
 aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
 aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will still allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
-aura.page.power0=Power is equal to (Quantity of Aura)x(Height). <br> You can think of it being similar to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work.
+aura.page.power0=Power is equal to the Quantity of Aura times the height from which the Aura fell. <br> You can think of it being similar to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work.
 aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
 aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently.
 aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
@@ -165,23 +165,23 @@ aura.page.blue1=Blue Aura Crystal
 aura.page.violet0=Magenta Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Magenta Aura per node. Spreading Magenta Aura among many nodes will increase growth.
 aura.page.violet1=Magenta Aura Crystal
 
-item.gemWhite.name=Arcane White Gem
-item.gemBlack.name=Arcane Black Gem
-item.gemOrange.name=Arcane Orange Gem
-item.gemYellow.name=Arcane Yellow Gem
-item.gemRed.name=Arcane Red Gem
-item.gemGreen.name=Arcane Green Gem
-item.gemBlue.name=Arcane Blue Gem
-item.gemViolet.name=Arcane Magenta Gem
+item.gemWhite.name=White Arcane Gem
+item.gemBlack.name=Black Arcane Gem
+item.gemOrange.name=Orange Arcane Gem
+item.gemYellow.name=Yellow Arcane Gem
+item.gemRed.name=Red Arcane Gem
+item.gemGreen.name=Green Arcane Gem
+item.gemBlue.name=Blue Arcane Gem
+item.gemViolet.name=Magenta Arcane Gem
 
-item.ingotWhite.name=Arcane White Ingot
-item.ingotBlack.name=Arcane Black Ingot
-item.ingotRed.name=Arcane Red Ingot
-item.ingotOrange.name=Arcane Orange Ingot
-item.ingotYellow.name=Arcane Yellow Ingot
-item.ingotGreen.name=Arcane Green Ingot
-item.ingotBlue.name=Arcane Blue Ingot
-item.ingotViolet.name=Arcane Magenta Ingot
+item.ingotWhite.name=White Arcane Ingot
+item.ingotBlack.name=Black Arcane Ingot
+item.ingotRed.name=Red Arcane Ingot
+item.ingotOrange.name=Orange Arcane Ingot
+item.ingotYellow.name=Yellow Arcane Ingot
+item.ingotGreen.name=Green Arcane Ingot
+item.ingotBlue.name=Blue Arcane Ingot
+item.ingotViolet.name=Magenta Arcane Ingot
 
 item.prismWhite.name=Arcane Prism
 
@@ -275,7 +275,7 @@ aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. I
 
 aura.entry.materials=Making Materials
 aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
-aura.page.materials2=First off, it will turn ores dropped nearby into two dust. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Rainbow&0
+aura.page.materials2=First off, it will turn ores dropped nearby into two dust. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Colourer&0
 aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
 aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
 
