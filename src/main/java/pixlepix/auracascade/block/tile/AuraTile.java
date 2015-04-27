@@ -8,6 +8,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.Explosion;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.AuraBlock;
@@ -27,6 +28,7 @@ public class AuraTile extends TileEntity {
     public LinkedList<CoordTuple> connected = new LinkedList<CoordTuple>();
     public boolean hasConnected = false;
     public int energy = 0;
+    public int initialYValue = -1;
 
     //Used by Orange Aura
     public HashMap<CoordTuple, Integer> inducedBurstMap = new HashMap<CoordTuple, Integer>();
@@ -58,6 +60,7 @@ public class AuraTile extends TileEntity {
 
         hasConnected = nbt.getBoolean("hasConnected");
         energy = nbt.getInteger("energy");
+        initialYValue = nbt.getInteger("initialYValue");
 
     }
 
@@ -89,6 +92,7 @@ public class AuraTile extends TileEntity {
 
         nbt.setBoolean("hasConnected", hasConnected);
         nbt.setInteger("energy", energy);
+        nbt.setInteger("initialYValue", initialYValue);
     }
 
     public boolean isOpenPath(CoordTuple target) {
@@ -158,9 +162,21 @@ public class AuraTile extends TileEntity {
             hasConnected = true;
         }
 
+        if (initialYValue != yCoord) {
+            if (initialYValue == -1) {
+                initialYValue = yCoord;
+            } else {
+                Explosion explosion = new Explosion(worldObj, null, xCoord, yCoord, zCoord, 2F);
+                explosion.doExplosionA();
+                explosion.doExplosionB(false);
+                worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            }
+        }
+
         if (!worldObj.isRemote) {
 
             if (worldObj.getTotalWorldTime() % 20 == 0) {
+
                 verifyConnections();
                 energy = 0;
                 burstMap = new HashMap<CoordTuple, AuraQuantityList>();
