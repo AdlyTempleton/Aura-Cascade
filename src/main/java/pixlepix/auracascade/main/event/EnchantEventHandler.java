@@ -2,6 +2,7 @@ package pixlepix.auracascade.main.event;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
@@ -11,7 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
@@ -20,7 +20,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -32,6 +31,8 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -277,10 +278,19 @@ public class EnchantEventHandler {
             ItemStack stack = ((EntityPlayer) entity).getHeldItem();
             int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
             if (looting > 0) {
-                for (EntityItem item : event.drops) {
-                    if(item.getEntityItem().getItem() != Items.nether_star) {
-                        item.getEntityItem().stackSize *= looting + 1;
+                Method dropCommon = ReflectionHelper.findMethod((Class<? super EntityLivingBase>) event.entityLiving.getClass(), event.entityLiving, new String[]{"func_70628_a", "dropFewItems"}, new Class[]{Boolean.class, Integer.class});
+                Method dropRare = ReflectionHelper.findMethod((Class<? super EntityLivingBase>) event.entityLiving.getClass(), event.entityLiving, new String[]{"func_70600_l", "dropRareDrop"}, new Class[]{Integer.class});
+                try {
+                    dropCommon.invoke(entity, true, looting);
+                    int j = new Random().nextInt(200) - looting;
+
+                    if (j < 5) {
+                        dropRare.invoke(entity, j <= 0 ? 1 : 0);
                     }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
                 }
             }
         }
