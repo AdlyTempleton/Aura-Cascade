@@ -283,7 +283,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BNB", "BBB", 'B', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'N', getAuraNodeItemstack());
         }
 
-
         if (type.equals("craftingCenter")) {
             return new CraftingBenchRecipe(new ItemStack(this), "GGG", "RDR", "RRR", 'G', new ItemStack(Items.gold_ingot), 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'D', new ItemStack(Items.diamond));
         }
@@ -363,6 +362,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("pumpRedstone");
         result.add("pumpProjectileAlt");
         result.add("pumpFallAlt");
+        result.add("pumpCreative");
         result.add("pumpLightAlt");
         result.add("pumpRedstoneAlt");
 
@@ -426,6 +426,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return AuraTileRF.class;
 
         }
+        if (type.equals("pumpCreative")) {
+            return AuraTilePumpCreative.class;
+        }
 
 
         if (type.equals("orange")) {
@@ -435,6 +438,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return AuraTilePumpProjectile.class;
         }
         if (type.equals("pumpFall")) {
+            return AuraTilePumpFall.class;
+        }
+        if (type.equals("pumpCreative")) {
             return AuraTilePumpFall.class;
         }
         if (type.equals("pumpLight")) {

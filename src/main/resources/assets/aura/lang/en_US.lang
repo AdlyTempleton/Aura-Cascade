@@ -251,7 +251,7 @@ aura.page.crafting12=Comparator
 aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
-
+tile.auraNodepumpCreative.name=Creative Pump (Creative Only)
 tile.consumerBlockdye.name=Cascading Rainbow
 aura.entry.dye=Cascading Rainbow
 aura.page.dye0=The cascading rainbow is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
