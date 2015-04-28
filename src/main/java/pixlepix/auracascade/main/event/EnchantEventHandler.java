@@ -43,7 +43,14 @@ import java.util.Random;
  */
 public class EnchantEventHandler {
 
+    static Method dropCommon;
+    static Method dropRare;
     Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
+
+    public static void init() {
+        dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, new Class[]{boolean.class, int.class});
+        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70600_l", "dropRareDrop"}, new Class[]{int.class});
+    }
 
     public static ItemStack getDoubleResult(ItemStack stack) {
         int[] oreIds = OreDictionary.getOreIDs(stack);
@@ -274,18 +281,16 @@ public class EnchantEventHandler {
     @SubscribeEvent
     public void onDrops(LivingDropsEvent event) {
         Entity entity = event.source.getSourceOfDamage();
-        if (entity instanceof EntityPlayer) {
+        if (entity instanceof EntityPlayer && !entity.worldObj.isRemote) {
             ItemStack stack = ((EntityPlayer) entity).getHeldItem();
             int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
             if (looting > 0) {
-                Method dropCommon = ReflectionHelper.findMethod((Class<? super EntityLivingBase>) event.entityLiving.getClass(), event.entityLiving, new String[]{"func_70628_a", "dropFewItems"}, new Class[]{Boolean.class, Integer.class});
-                Method dropRare = ReflectionHelper.findMethod((Class<? super EntityLivingBase>) event.entityLiving.getClass(), event.entityLiving, new String[]{"func_70600_l", "dropRareDrop"}, new Class[]{Integer.class});
                 try {
-                    dropCommon.invoke(entity, true, looting);
+                    dropCommon.invoke(event.entity, true, looting);
                     int j = new Random().nextInt(200) - looting;
 
                     if (j < 5) {
-                        dropRare.invoke(entity, j <= 0 ? 1 : 0);
+                        dropRare.invoke(event.entity, j <= 0 ? 1 : 0);
                     }
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();

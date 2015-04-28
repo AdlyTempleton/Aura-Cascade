@@ -55,6 +55,7 @@ public class CommonProxy {
         AngelsteelToolHelper.initMaterials();
         registry = new BlockRegistry();
         registry.preInit();
+        EnchantEventHandler.init();
 
 
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ConstantMod.modId);
