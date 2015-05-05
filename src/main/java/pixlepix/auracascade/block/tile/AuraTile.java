@@ -163,7 +163,7 @@ public class AuraTile extends TileEntity {
         }
 
         if (initialYValue != yCoord) {
-            if (initialYValue == -1) {
+            if (initialYValue == -1 || initialYValue == 0) {
                 initialYValue = yCoord;
             } else {
                 Explosion explosion = new Explosion(worldObj, null, xCoord, yCoord, zCoord, 2F);
