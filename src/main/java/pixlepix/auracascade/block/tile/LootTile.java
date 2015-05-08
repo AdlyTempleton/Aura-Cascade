@@ -4,6 +4,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ChestGenHooks;
+import pixlepix.auracascade.compat.IMCManager;
 
 import java.util.Random;
 
@@ -38,7 +39,10 @@ public class LootTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        ItemStack lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
+        ItemStack lootStack;
+        do {
+            lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
+        } while (IMCManager.isStackBlacklistedFromLoot(lootStack));
         EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
         entityItem.motionX = 0;
         entityItem.motionY = 0;

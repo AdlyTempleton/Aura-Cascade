@@ -122,7 +122,6 @@ public class AuraTileRF extends AuraTile {
                     if(!isWhitelisted){
                         disabled = true;
                     }
-                    System.out.println(te.getClass().getName());
                 }
             }
         }

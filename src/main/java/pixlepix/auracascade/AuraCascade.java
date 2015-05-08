@@ -6,9 +6,11 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
+import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.main.ConstantMod;
 
@@ -36,6 +38,12 @@ public class AuraCascade {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+
+    }
+
+    @EventHandler
+    public void onIMC(FMLInterModComms.IMCEvent event) {
+        IMCManager.onIMC(event);
 
     }
 }
