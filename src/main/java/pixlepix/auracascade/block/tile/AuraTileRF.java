@@ -28,6 +28,7 @@ public class AuraTileRF extends AuraTile {
     public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
     public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
     public String[] blacklistModId = new String[]{"quantumflux"};
+    public String[] whitelistModId = new String[]{"buildcraft"};
 
     @Override
     protected void readCustomNBT(NBTTagCompound nbt) {
@@ -82,16 +83,25 @@ public class AuraTileRF extends AuraTile {
             disabled = foundTiles.size() > 4;
 
             for (CoordTuple tuple : foundTiles) {
+
+                String modid = GameRegistry.findUniqueIdentifierFor(tuple.getBlock(worldObj)).modId;
                 TileEntity te = tuple.getTile(worldObj);
                 if (te instanceof IEnderEnergyHandler) {
                     disabled = true;
                 }
                 for(String clazz : blacklist) {
                     if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
-                        disabled = true;
+                        boolean whitelistedByMod = false;
+                        for (String whitelistMod : whitelistModId) {
+                            if (modid.toLowerCase().contains(whitelistMod)) {
+                                whitelistedByMod = true;
+                            }
+                        }
+                        if (!whitelistedByMod) {
+                            disabled = true;
+                        }
                     }
                 }
-                String modid = GameRegistry.findUniqueIdentifierFor(tuple.getBlock(worldObj)).modId;
                 for(String blacklistMod : blacklistModId){
                     if(modid.equals(blacklistMod)){
                         disabled = true;
@@ -104,9 +114,15 @@ public class AuraTileRF extends AuraTile {
                             isWhitelisted = true;
                         }
                     }
+                    for (String whitelistMod : whitelistModId) {
+                        if (modid.toLowerCase().contains(whitelistMod)) {
+                            isWhitelisted = true;
+                        }
+                    }
                     if(!isWhitelisted){
                         disabled = true;
                     }
+                    System.out.println(te.getClass().getName());
                 }
             }
         }
