@@ -7,7 +7,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.Config;
@@ -23,8 +22,12 @@ public class AuraTileRF extends AuraTile {
     public ArrayList<CoordTuple> foundTiles = new ArrayList<CoordTuple>();
 
     public HashSet<CoordTuple> particleTiles = new HashSet<CoordTuple>();
-    
+
     public int lastPower = 0;
+    public boolean disabled = false;
+    public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
+    public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
+    public String[] blacklistModId = new String[]{"quantumflux"};
 
     @Override
     protected void readCustomNBT(NBTTagCompound nbt) {
@@ -38,14 +41,6 @@ public class AuraTileRF extends AuraTile {
         nbt.setInteger("lastPower", lastPower);
     }
 
-    public boolean disabled = false;
-    
-    public String[] blacklist = new String[]{"TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
-
-    public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
-    
-    public String[] blacklistModId = new String[]{"quantumflux"};
-    
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -66,24 +61,22 @@ public class AuraTileRF extends AuraTile {
                     }
                 }
             }
+            particleTiles.clear();
+            //First, find all things near tiles
+            for (CoordTuple tuple : foundTiles) {
+                for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                    particleTiles.add(tuple.add(direction));
+                }
+            }
 
-            if (!worldObj.isRemote) {
-                particleTiles.clear();
-                //First, find all things near tiles
-                for (CoordTuple tuple : foundTiles) {
-                    for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                        particleTiles.add(tuple.add(direction));
-                    }
+            //Remove things that are 'inside' the bubble
+            Iterator iterator = particleTiles.iterator();
+            while (iterator.hasNext()) {
+                CoordTuple tuple = (CoordTuple) iterator.next();
+                if (foundTiles.contains(tuple)) {
+                    iterator.remove();
                 }
 
-                //Remove things that are 'inside' the bubble
-                Iterator iterator = particleTiles.iterator();
-                while (iterator.hasNext()) {
-                    CoordTuple tuple = (CoordTuple) iterator.next();
-                    if (foundTiles.contains(tuple)) {
-                        iterator.remove();
-                    }
-                }
             }
 
             disabled = foundTiles.size() > 4;

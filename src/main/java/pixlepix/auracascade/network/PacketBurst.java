@@ -4,13 +4,11 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.ParticleEffects;
-import pixlepix.auracascade.render.ParticleBeam;
 
 import java.util.Random;
 
@@ -20,7 +18,7 @@ import java.util.Random;
 public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMessage> {
 
 
-    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark", "enchantmenttable", "square"};
+    public static final String[] particles = {"spell", "magicCrit", "crit", "happyVillager", "fireworksSpark", "enchantmenttable", "square", "witchMagic"};
     public double x;
     public double y;
     public double z;
@@ -28,8 +26,6 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
     public double g;
     public double b;
     public double comp;
-    //Type = 0: Straight light between from and to
-    //Type = 1: Fire sphere
     int type = 0;
     private World world;
     private CoordTuple from;
