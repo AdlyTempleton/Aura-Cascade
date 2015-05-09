@@ -3,7 +3,6 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -74,6 +73,10 @@ public class EntityFairy extends Entity {
     public void onUpdate() {
         super.onUpdate();
         if (player != null) {
+            if (player.isDead) {
+                setDead();
+            }
+            
             extinguish();
             phi += (dPhi / 2);
             theta += (dTheta / 2);
