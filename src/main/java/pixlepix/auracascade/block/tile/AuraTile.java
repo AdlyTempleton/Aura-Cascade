@@ -261,7 +261,7 @@ public class AuraTile extends TileEntity {
                 inducedBurstMap = new HashMap<CoordTuple, Integer>();
             }
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+            worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
         }
 
         for (AuraQuantity quantity : storage.quantityList) {

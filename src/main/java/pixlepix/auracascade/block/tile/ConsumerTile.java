@@ -115,7 +115,7 @@ public abstract class ConsumerTile extends TileEntity {
                 storedPower -= nextBoostCost;
                 nextBoostCost *= 2;
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, blockType);
+                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
             }
         }
     }
