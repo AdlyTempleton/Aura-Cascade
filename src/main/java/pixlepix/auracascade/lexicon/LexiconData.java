@@ -104,6 +104,7 @@ public final class LexiconData {
         new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemExplosionRing.class));
 
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
+        new BLexiconEntry("swordCombo", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemComboSword.class));
         new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ItemTransmutingSword.class));
         new BLexiconEntry("redHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemRedHole.class));
         new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemBlackHole.class));

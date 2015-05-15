@@ -15,6 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -133,6 +134,26 @@ public class EventHandler {
                     ((EntityPlayer) event.entity).heal(event.ammount);
                 }
                 event.ammount = 0;
+            }
+        }
+        if (event.source != null && event.source.getEntity() instanceof EntityPlayer) {
+            ItemStack stack = ((EntityPlayer) event.source.getEntity()).getHeldItem();
+            if (stack != null && stack.getItem() instanceof ItemComboSword) {
+                if (stack.stackTagCompound == null) {
+                    stack.stackTagCompound = new NBTTagCompound();
+                }
+
+                if (Math.abs(event.entity.worldObj.getTotalWorldTime() - stack.stackTagCompound.getLong(ItemComboSword.NBT_TAG_LAST_TIME)) < 200) {
+                    int combo = stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT);
+
+                    double comboMultiplier = ItemComboSword.getComboMultiplier(combo);
+                    event.ammount *= comboMultiplier;
+                    stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT) + 1);
+
+                } else {
+                    stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, 0);
+                }
+                stack.stackTagCompound.setLong(ItemComboSword.NBT_TAG_LAST_TIME, event.entity.worldObj.getTotalWorldTime());
             }
         }
         if (event.entity instanceof EntityPlayer && event.source.isExplosion()) {
