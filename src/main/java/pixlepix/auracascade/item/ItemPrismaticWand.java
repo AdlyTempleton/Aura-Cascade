@@ -171,6 +171,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         if (item instanceof ItemBlock) {
                                             if (!world.isRemote) {
                                                 ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx, y + dy, z + dz, 0, 0, 0, 0, 0);
+                                                world.setBlockMetadataWithNotify(x + dx, y + dy, z + dz, dmg, 3);
                                             }
                                             player.inventory.decrStackSize(slot, 1);
                                         }
