@@ -101,6 +101,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         nbt.setInteger("cy2", nbt.getInteger("y2"));
                         nbt.setInteger("cz2", nbt.getInteger("z2"));
 
+                        //This is how far away the player is from the copy/paste
+                        nbt.setInteger("cxo", (int) (nbt.getInteger("x1") - player.posX));
+                        nbt.setInteger("cyo", (int) (nbt.getInteger("y1") - player.posY));
+                        nbt.setInteger("czo", (int) (nbt.getInteger("z1") - player.posZ));
+
                         if (!world.isRemote) {
                             player.addChatComponentMessage(new ChatComponentText("Copied to clipboard"));
                         }
@@ -123,6 +128,10 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         int cx2 = nbt.getInteger("cx2");
                         int cy2 = nbt.getInteger("cy2");
                         int cz2 = nbt.getInteger("cz2");
+
+                        int xo = nbt.getInteger("cxo");
+                        int yo = nbt.getInteger("cyo");
+                        int zo = nbt.getInteger("czo");
 
 
                         //For simplicities sake, c*1 is lower than c*2
@@ -170,8 +179,8 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                         if (item instanceof ItemBlock) {
                                             if (!world.isRemote) {
-                                                ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx, y + dy, z + dz, 0, 0, 0, 0, 0);
-                                                world.setBlockMetadataWithNotify(x + dx, y + dy, z + dz, dmg, 3);
+                                                ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, 0);
+                                                world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, dmg, 3);
                                             }
                                             player.inventory.decrStackSize(slot, 1);
                                         }
