@@ -142,14 +142,16 @@ public class EventHandler {
                 if (stack.stackTagCompound == null) {
                     stack.stackTagCompound = new NBTTagCompound();
                 }
+                int timeDiff = (int) Math.abs(event.entity.worldObj.getTotalWorldTime() - stack.stackTagCompound.getLong(ItemComboSword.NBT_TAG_LAST_TIME));
 
-                if (Math.abs(event.entity.worldObj.getTotalWorldTime() - stack.stackTagCompound.getLong(ItemComboSword.NBT_TAG_LAST_TIME)) < 200) {
+                if (timeDiff < 100 && timeDiff > 4) {
                     int combo = stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT);
 
                     double comboMultiplier = ItemComboSword.getComboMultiplier(combo);
                     event.ammount *= comboMultiplier;
-                    stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT) + 1);
-
+                    if (combo < 100) {
+                        stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT) + 1);
+                    }
                 } else {
                     stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, 0);
                 }

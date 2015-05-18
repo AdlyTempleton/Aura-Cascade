@@ -450,7 +450,7 @@ aura.page.swordThief1=Grand Theft Auto Style
 
 item.comboSword.name=Sword of the Barbarian
 aura.entry.swordCombo=Sword of the Barbarian
-aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 10 seconds will add to the combo. The damage increases by 7% each hit.
+aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 5 seconds will add to the combo. The damage increases by 7% each hit, and caps out after 100 hits.
 aura.page.swordCombo1=COMBO BREAKER!
 
 
