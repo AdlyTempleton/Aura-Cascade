@@ -162,7 +162,7 @@ aura.page.green0=Green Aura's weight changes during the day. During the day, it 
 aura.page.green1=Green Aura Crystal
 aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it takes a fourth of the energy to pump up, while producing the normal amount of power falling down, but only when it's raining. At other times, it has a detrimental x0.5 ascent boost.
 aura.page.blue1=Blue Aura Crystal
-aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if there is 25 or less violet aura in a single node, the violet aura will drain itself.
+aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth.
 aura.page.violet1=Violet Aura Crystal
 
 item.gemWhite.name=Arcane White Gem
@@ -251,11 +251,10 @@ aura.page.crafting12=Comparator
 aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
-tile.auraNodepumpCreative.name=Creative Pump (Creative Only)
-tile.consumerBlockdye.name=Cascading Rainbow
-aura.entry.dye=Cascading Rainbow
-aura.page.dye0=The cascading rainbow is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
 
+tile.consumerBlockdye.name=Cascading Colourer
+aura.entry.dye=Cascading Colourer
+aura.page.dye0=The Cascading Colourer is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
 
 aura.entry.swordTransmute=Transmuting Sword
 item.transmutingSword.name=Transmuting Sword
@@ -292,7 +291,7 @@ aura.page.plant1=Cascading Grower
 aura.page.plant0=The Cascading Grower will rapidly grow plants directly on top of it. The plant should be placed two blocks above the Cascading Grower, with a block of dirt in the middle. The grower has a minimum power requirement of 150 power/second.
 
 aura.entry.books=Book Storage
-aura.page.books0=Books are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
+aura.page.books0=Book's are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
 aura.page.books1=A &1Bookshelf Coordinator&0 will allow you to access any connected bookshelves. To connect a storage-book-containing bookshelf, two requirements must be met: There must be a connection made of bookshelves, either empty or full. There must also be a clear line-of-sight between the coordinator and the bookshelf storing items.
 aura.page.books2=The coordinator requires power from an adjacent node. It will consume 5 power per bookshelf for small systems. Larger quantities of bookshelves make it less efficient: The cost will increase by 5% for each added bookshelf.
 aura.page.books3=The brain of the storage system
@@ -447,12 +446,6 @@ item.swordThief.name=Sword of the Thief
 aura.entry.swordThief=Sword of the Thief
 aura.page.swordThief0=&1Sword of the Thief&0 is a sword that allows you to steal items from villages. Upon slaying a villager with this sword, the villager has a 25% chance to drop whatever item is was offering to trade.
 aura.page.swordThief1=Grand Theft Auto Style
-
-item.comboSword.name=Sword of the Barbarian
-aura.entry.swordCombo=Sword of the Barbarian
-aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 5 seconds will add to the combo. The damage increases by 7% each hit, and caps out after 100 hits.
-aura.page.swordCombo1=COMBO BREAKER!
-
 
 item.amuletFood.name=Amulet of the Forbidden Fruit
 aura.entry.amuletFood=Amulet of the Forbidden Fruit
