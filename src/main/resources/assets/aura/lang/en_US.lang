@@ -292,7 +292,7 @@ aura.page.plant1=Cascading Grower
 aura.page.plant0=The Cascading Grower will rapidly grow plants directly on top of it. The plant should be placed two blocks above the Cascading Grower, with a block of dirt in the middle. The grower has a minimum power requirement of 150 power/second.
 
 aura.entry.books=Book Storage
-aura.page.books0=Book's are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
+aura.page.books0=Books are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
 aura.page.books1=A &1Bookshelf Coordinator&0 will allow you to access any connected bookshelves. To connect a storage-book-containing bookshelf, two requirements must be met: There must be a connection made of bookshelves, either empty or full. There must also be a clear line-of-sight between the coordinator and the bookshelf storing items.
 aura.page.books2=The coordinator requires power from an adjacent node. It will consume 5 power per bookshelf for small systems. Larger quantities of bookshelves make it less efficient: The cost will increase by 5% for each added bookshelf.
 aura.page.books3=The brain of the storage system
