@@ -252,6 +252,12 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
+item.comboSword.name=Sword of the Barbarian
+aura.entry.swordCombo=Sword of the Barbarian
+aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 5 seconds will add to the combo. The damage increases by 7% each hit, and caps out after 100 hits.
+aura.page.swordCombo1=COMBO BREAKER!
+
+tile.auraNodepumpCreative.name=Creative Pump (Creative Only)
 tile.consumerBlockdye.name=Cascading Colourer
 aura.entry.dye=Cascading Colourer
 aura.page.dye0=The Cascading Colourer is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
