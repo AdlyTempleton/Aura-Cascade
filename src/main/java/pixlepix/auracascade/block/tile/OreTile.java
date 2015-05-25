@@ -31,7 +31,7 @@ public class OreTile extends ConsumerTile {
             if (StringUtils.startsWith(oreName, "ore")) {
                 String dustName = StringUtils.replace(oreName, "ore", "dust");
                 if (OreDictionary.getOres(dustName).size() != 0) {
-                    return OreDictionary.getOres(dustName).get(0);
+                    return OreDictionary.getOres(dustName).get(0).copy();
                 }
             }
         }
