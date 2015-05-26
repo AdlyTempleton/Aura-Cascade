@@ -168,7 +168,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.VIOLET_AURA, 100000), ItemMaterial.getGem(EnumAura.VIOLET_AURA)));
             }
             if (name.equals("angel")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 300000), ItemMaterial.getPrism()));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 300000), ItemMaterial.getPrism()),
+                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.iron_ingot)),
+                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.iron_ingot)),
+                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.iron_ingot)));
             }
             if (name.equals("nether")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 100000), ItemMaterial.getGem(EnumAura.RED_AURA)));
