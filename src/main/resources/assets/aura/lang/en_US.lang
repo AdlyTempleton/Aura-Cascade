@@ -185,6 +185,10 @@ item.ingotViolet.name=Arcane Violet Ingot
 
 item.prismWhite.name=Arcane Prism
 
+item.prismaticWand.name=Prismatic Wand
+aura.entry.prismaticWand=Prismatic Wand
+aura.page.prismaticWand0=The &1Prismatic Wand&0 is a tool that allows you to copy structures. It has three modes, which can be cycled via shift-right-click. First, place it in selection mode, and right click two corners to form a cuboid. Then, put it in copy mode, and right click to copy. Finally, put it in paste mode, and right click to paste. It consumers items from the users's inventory.
+
 aura.entry.capacitor=Aura Capacitor
 aura.page.capacitor0=The Aura Capacitor, unlike other aura nodes, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive Aura for a few seconds.
 aura.page.capacitor1=Aura Capacitor
