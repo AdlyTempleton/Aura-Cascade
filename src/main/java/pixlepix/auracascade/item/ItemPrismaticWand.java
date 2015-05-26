@@ -146,17 +146,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         }
 
                         if (cy1 > cy2) {
-                            //Yes, yes, bitwise
-                            //But thats just a party trick
-                            //I mean, if you go to some nerdy parties
                             int t = cy1;
                             cy1 = cy2;
                             cy2 = t;
                         }
                         if (cz1 > cz2) {
-                            //Yes, yes, bitwise
-                            //But thats just a party trick
-                            //I mean, if you go to some nerdy parties
                             int t = cz1;
                             cz1 = cz2;
                             cz2 = t;
@@ -180,8 +174,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                         if (item instanceof ItemBlock) {
                                             if (!world.isRemote) {
-                                                ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, 0);
-                                                world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, dmg, 3);
+                                                ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
                                             }
                                             player.inventory.decrStackSize(slot, 1);
                                         }
