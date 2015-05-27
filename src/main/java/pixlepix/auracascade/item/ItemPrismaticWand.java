@@ -167,32 +167,34 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                     int dx = xi - cx1;
                                     int dy = yi - cy1;
                                     int dz = zi - cz1;
-                                    if (world.isAirBlock(x + dx + xo, y + dy + yo, z + dz + zo)) {
+                                    if (world.isAirBlock(x + dx + xo, y + dy + yo, z + dz + zo) && !world.isRemote) {
                                         Block block = world.getBlock(cx1 + dx, cy1 + dy, cz1 + dz);
                                         Item item = block.getItem(world, cx1 + dx, cy1 + dy, cz1 + dz);
+                                        int worldDmg = world.getBlockMetadata(cx1 + dx, cy1 + dy, cz1 + dz);
                                         int dmg = block.getDamageValue(world, cx1 + dx, cy1 + dy, cz1 + dz);
 
                                         boolean usesMetadataForPlacing = false;
                                         ArrayList<ItemStack> drops = block.getDrops(world, cx1 + dx, cy1 + dy, cz1 + dz, dmg, 0);
                                         if (drops.size() == 1) {
                                             ItemStack dropStack = drops.get(0);
-                                            usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && dmg != 0;
+                                            usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
                                         }
-                                        
-                                        if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
+
+                                        if (player.capabilities.isCreativeMode) {
+                                            world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, worldDmg, 3);
+
+                                        } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
                                             int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                             if (item instanceof ItemBlock) {
                                                 if (!world.isRemote) {
                                                     ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
                                                     if (usesMetadataForPlacing) {
-                                                        world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, dmg, 3);
+                                                        world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, worldDmg, 3);
                                                     }
                                                 }
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
-                                        } else if (player.capabilities.isCreativeMode) {
-                                            world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, dmg, 3);
                                         }
                                     }
 
