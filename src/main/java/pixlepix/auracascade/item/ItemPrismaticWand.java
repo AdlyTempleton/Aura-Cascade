@@ -172,7 +172,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                     int dx = xi - cx1;
                                     int dy = yi - cy1;
                                     int dz = zi - cz1;
-                                    if (world.isAirBlock(x + dx + xo, y + dy + yo, z + dz + zo) && !world.isRemote) {
+                                    if (world.isAirBlock(x + dx + xo, y + dy + yo, z + dz + zo)) {
                                         Block block = world.getBlock(cx1 + dx, cy1 + dy, cz1 + dz);
                                         Item item = block.getItem(world, cx1 + dx, cy1 + dy, cz1 + dz);
                                         int worldDmg = world.getBlockMetadata(cx1 + dx, cy1 + dy, cz1 + dz);
@@ -185,7 +185,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                             usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
                                         }
 
-                                        if (player.capabilities.isCreativeMode) {
+                                        if (player.capabilities.isCreativeMode && !world.isRemote) {
                                             world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, worldDmg, 3);
 
                                         } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
