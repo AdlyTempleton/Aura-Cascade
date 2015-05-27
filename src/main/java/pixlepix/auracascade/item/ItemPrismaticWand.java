@@ -11,13 +11,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.main.EnumColor;
+import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 5/16/15.
@@ -185,8 +188,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                             usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
                                         }
 
-                                        if (player.capabilities.isCreativeMode && !world.isRemote) {
-                                            world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, worldDmg, 3);
+                                        if (player.capabilities.isCreativeMode) {
+                                            if (!world.isRemote) {
+                                                world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, worldDmg, 3);
+                                                particles(x + dx + xo, y + dy + yo, z + dz + zo);
+                                            }
 
                                         } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
                                             int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
@@ -197,6 +203,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                                         world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, worldDmg, 3);
                                                     }
                                                 }
+                                                particles(x + dx + xo, y + dy + yo, z + dz + zo);
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
@@ -225,6 +232,19 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
             }
         }
         return stack;
+    }
+
+    private void particles(int bx, int by, int bz) {
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            for (int i = 0; i < 3; i++) {
+                Random random = new Random();
+                double x = bx + random.nextDouble();
+                double y = by + random.nextDouble();
+                double z = bz + random.nextDouble();
+                ParticleEffects.spawnParticle("witchMagic", x, y, z, 0, 0, 0, 0, 34, 264);
+            }
+        }
+
     }
 
     //Adapted from InventoryPlayer.hasItemStack
