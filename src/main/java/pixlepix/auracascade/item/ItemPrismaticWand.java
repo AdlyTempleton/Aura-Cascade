@@ -171,12 +171,22 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         Block block = world.getBlock(cx1 + dx, cy1 + dy, cz1 + dz);
                                         Item item = block.getItem(world, cx1 + dx, cy1 + dy, cz1 + dz);
                                         int dmg = block.getDamageValue(world, cx1 + dx, cy1 + dy, cz1 + dz);
+
+                                        boolean usesMetadataForPlacing = false;
+                                        ArrayList<ItemStack> drops = block.getDrops(world, cx1 + dx, cy1 + dy, cz1 + dz, dmg, 0);
+                                        if (drops.size() == 1) {
+                                            ItemStack dropStack = drops.get(0);
+                                            usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && dmg != 0;
+                                        }
+                                        
                                         if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
                                             int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                             if (item instanceof ItemBlock) {
                                                 if (!world.isRemote) {
                                                     ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
-                                                    world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, dmg, 3);
+                                                    if (usesMetadataForPlacing) {
+                                                        world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, dmg, 3);
+                                                    }
                                                 }
 
                                                 player.inventory.decrStackSize(slot, 1);
