@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -23,7 +24,8 @@ import java.util.List;
  */
 public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
-    public static String[] modes = new String[]{"Selection", "Copy", "Paste"};
+    public static String[] modes = new String[]{EnumColor.AQUA + "Selection", EnumColor.YELLOW + "Copy", EnumColor.ORANGE + "Paste"};
+
 
     public ItemPrismaticWand() {
         super();
@@ -71,6 +73,9 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
             mode = mode % modes.length;
             stack.setItemDamage(mode);
             stack.stackTagCompound = nbt;
+            if (!world.isRemote) {
+                player.addChatComponentMessage(new ChatComponentText("Switched to: " + modes[mode]));
+            }
         } else {
             if (stack.stackTagCompound == null) {
                 stack.stackTagCompound = new NBTTagCompound();
