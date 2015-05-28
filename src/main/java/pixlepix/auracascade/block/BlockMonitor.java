@@ -33,7 +33,7 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
 
     @Override
     public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
-        ForgeDirection powerDirection = ForgeDirection.getOrientation(side);
+        ForgeDirection powerDirection = ForgeDirection.getOrientation(side).getOpposite();
         Block b = world.getBlock(x + powerDirection.offsetX, y + powerDirection.offsetY, z + powerDirection.offsetZ);
 
         if (b instanceof AuraBlock || b instanceof ConsumerBlock) {
