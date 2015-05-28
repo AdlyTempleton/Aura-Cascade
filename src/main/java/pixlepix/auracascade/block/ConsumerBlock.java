@@ -11,12 +11,13 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
+import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
@@ -63,28 +64,46 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         return null;
     }
 
-    public void onBlockPlacedBy(World p_149689_1_, int p_149689_2_, int p_149689_3_, int p_149689_4_, EntityLivingBase p_149689_5_, ItemStack p_149689_6_) {
-        int l = MathHelper.floor_double((double) (p_149689_5_.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+    public void onBlockPlacedBy(World w, int x, int y, int z, EntityLivingBase livingBase, ItemStack stack) {
+        int l = MathHelper.floor_double((double) (livingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0) {
-            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 2, 2);
+            w.setBlockMetadataWithNotify(x, y, z, 2, 2);
         }
 
         if (l == 1) {
-            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 5, 2);
+            w.setBlockMetadataWithNotify(x, y, z, 5, 2);
         }
 
         if (l == 2) {
-            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 3, 2);
+            w.setBlockMetadataWithNotify(x, y, z, 3, 2);
         }
 
         if (l == 3) {
-            p_149689_1_.setBlockMetadataWithNotify(p_149689_2_, p_149689_3_, p_149689_4_, 4, 2);
+            w.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
 
-        if (p_149689_6_.hasDisplayName()) {
-            ((TileEntityFurnace) p_149689_1_.getTileEntity(p_149689_2_, p_149689_3_, p_149689_4_)).func_145951_a(p_149689_6_.getDisplayName());
+        updateMonitor(w, x, y, z);
+    }
+
+    public void updateMonitor(World w, int x, int y, int z) {
+        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
+            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
+            if (b instanceof BlockMonitor) {
+
+                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
+                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
+                    Block b2 = tuple.getBlock(w);
+                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                }
+            }
         }
+    }
+
+    @Override
+    public void breakBlock(World w, int x, int y, int z, Block b, int p_149749_6_) {
+        super.breakBlock(w, x, y, z, b, p_149749_6_);
+        updateMonitor(w, x, y, z);
     }
 
     @Override

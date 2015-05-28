@@ -65,6 +65,20 @@ public abstract class ConsumerTile extends TileEntity {
         readCustomNBT(pkt.func_148857_g());
     }
 
+    public void updateMonitor() {
+        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
+            Block b = new CoordTuple(this).add(d1).getBlock(worldObj);
+            if (b instanceof BlockMonitor) {
+
+                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
+                    CoordTuple tuple = new CoordTuple(this).add(d2).add(d1);
+                    Block b2 = tuple.getBlock(worldObj);
+                    b2.onNeighborBlockChange(worldObj, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                }
+            }
+        }
+    }
+    
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -76,17 +90,7 @@ public abstract class ConsumerTile extends TileEntity {
             if (worldObj.getTotalWorldTime() % 20 == 0) {
                 if (lastValidState != validItemsNearby()) {
                     lastValidState = !lastValidState;
-                    for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-                        Block b = new CoordTuple(this).add(d1).getBlock(worldObj);
-                        if (b instanceof BlockMonitor) {
-
-                            for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                                CoordTuple tuple = new CoordTuple(this).add(d2).add(d1);
-                                Block b2 = tuple.getBlock(worldObj);
-                                b2.onNeighborBlockChange(worldObj, tuple.getX(), tuple.getY(), tuple.getZ(), b);
-                            }
-                        }
-                    }
+                    updateMonitor();
                 }
             }
 
