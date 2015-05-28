@@ -32,6 +32,11 @@ public class LootTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        return true;
+    }
+
+    @Override
     public void writeCustomNBT(NBTTagCompound nbt) {
         super.writeCustomNBT(nbt);
         progress = nbt.getInteger("progress");

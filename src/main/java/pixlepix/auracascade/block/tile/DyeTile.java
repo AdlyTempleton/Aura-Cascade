@@ -21,6 +21,12 @@ public class DyeTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, new CoordTuple(this).getBoundingBox(2));
+        return nearbySheep.size() > 0;
+    }
+
+    @Override
     public void onUsePower() {
         List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, new CoordTuple(this).getBoundingBox(2));
         if (nearbySheep.size() > 0) {

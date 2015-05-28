@@ -22,6 +22,11 @@ public class PlanterTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        return true;
+    }
+
+    @Override
     public void onUsePower() {
         Block block = worldObj.getBlock(xCoord, yCoord + 2, zCoord);
         block.updateTick(worldObj, xCoord, yCoord + 2, zCoord, new Random());

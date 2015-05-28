@@ -26,6 +26,11 @@ public class SpawnTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        return true;
+    }
+
+    @Override
     public void onUsePower() {
         BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer) worldObj).spawnRandomCreature(EnumCreatureType.monster, xCoord, yCoord, zCoord);
         try {

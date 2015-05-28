@@ -1,6 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import codechicken.nei.ContainerEnchantmentModifier;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -30,6 +29,24 @@ public class EnchanterTile extends ConsumerTile {
     @Override
     public int getPowerPerProgress() {
         return 500;
+    }
+
+    @Override
+    public boolean validItemsNearby() {
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+        for (EntityItem item : items) {
+            ItemStack toolStack = item.getEntityItem();
+            if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
+
+                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+                for (EntityItem crystal : nextItems) {
+                    if (crystal.getEntityItem().getItem() instanceof ItemAuraCrystal) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override

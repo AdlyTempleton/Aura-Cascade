@@ -35,6 +35,19 @@ public class FurnaceTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        int range = 3;
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        for (EntityItem entityItem : nearbyItems) {
+            ItemStack stack = entityItem.getEntityItem();
+            if (FurnaceRecipes.smelting().getSmeltingResult(stack) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void writeCustomNBT(NBTTagCompound nbt) {
         super.writeCustomNBT(nbt);
         progress = nbt.getInteger("progress");

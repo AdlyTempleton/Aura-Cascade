@@ -1,11 +1,13 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.block.BlockMonitor;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
@@ -18,6 +20,7 @@ public abstract class ConsumerTile extends TileEntity {
     public int storedPower;
     public int lastPower;
     public int progress;
+    private boolean lastValidState;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -35,6 +38,8 @@ public abstract class ConsumerTile extends TileEntity {
         storedPower = nbt.getInteger("storedPower");
         lastPower = nbt.getInteger("lastPower");
     }
+
+    public abstract boolean validItemsNearby();
 
     public void writeCustomNBT(NBTTagCompound nbt) {
         nbt.setInteger("progress", progress);
@@ -60,13 +65,29 @@ public abstract class ConsumerTile extends TileEntity {
         readCustomNBT(pkt.func_148857_g());
     }
 
-
     @Override
     public void updateEntity() {
         super.updateEntity();
         if (!worldObj.isRemote) {
             if (worldObj.getTotalWorldTime() % 20 == 18) {
                 storedPower *= .5;
+            }
+
+            if (worldObj.getTotalWorldTime() % 20 == 0) {
+                if (lastValidState != validItemsNearby()) {
+                    lastValidState = !lastValidState;
+                    for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
+                        Block b = new CoordTuple(this).add(d1).getBlock(worldObj);
+                        if (b instanceof BlockMonitor) {
+
+                            for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
+                                CoordTuple tuple = new CoordTuple(this).add(d2).add(d1);
+                                Block b2 = tuple.getBlock(worldObj);
+                                b2.onNeighborBlockChange(worldObj, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                            }
+                        }
+                    }
+                }
             }
 
             boolean changeLastPower = false;

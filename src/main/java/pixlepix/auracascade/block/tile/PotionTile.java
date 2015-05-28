@@ -4,9 +4,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
@@ -36,6 +34,20 @@ public class PotionTile extends ConsumerTile {
     public void readCustomNBT(NBTTagCompound nbt) {
         super.readCustomNBT(nbt);
         progress = nbt.getInteger("progress");
+    }
+
+    @Override
+    public boolean validItemsNearby() {
+        int range = 3;
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        for (EntityItem entityItem : nearbyItems) {
+            ItemStack stack = entityItem.getEntityItem();
+            ItemStack smeltingResult = getBrewResult(stack);
+            if (smeltingResult != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

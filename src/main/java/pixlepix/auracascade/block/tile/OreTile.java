@@ -49,6 +49,54 @@ public class OreTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        int range = 3;
+        ItemStack resultStack = null;
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        for (EntityItem entityItem : nearbyItems) {
+            ItemStack stack = entityItem.getEntityItem();
+            if (stack.getItem() == Items.iron_ingot) {
+
+                List<EntityItem> nearbyItemsColor = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                for (EntityItem entityItemColor : nearbyItemsColor) {
+                    ItemStack woolStack = entityItemColor.getEntityItem();
+                    if (woolStack.getItem() == Item.getItemFromBlock(Blocks.wool)) {
+
+                        return true;
+                    }
+                }
+            } else if (stack.getItem() instanceof ItemMaterial) {
+                //Array containing found gems of different materials
+                //Position corresponds to EnumAura.ordinal
+                //Initially found itemstack does NOT get species treatment
+                if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
+                    //Find gems
+                    EntityItem[] foundGems = new EntityItem[8];
+                    List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                    for (EntityItem entityItemGem : nearbyItems) {
+                        Item item = entityItemGem.getEntityItem().getItem();
+                        if (item instanceof ItemMaterial) {
+                            ItemMaterial itemMaterial = (ItemMaterial) item;
+                            if (itemMaterial.materialIndex == 1) {
+                                foundGems[itemMaterial.aura.ordinal()] = entityItemGem;
+                            }
+                        }
+                    }
+
+                    //Check if 8 gems have been found
+                    if (!Arrays.asList(foundGems).contains(null)) {
+                        return true;
+                    }
+                }
+            }
+            if (getDoubleResult(stack) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void onUsePower() {
         int range = 3;
         ItemStack resultStack = null;

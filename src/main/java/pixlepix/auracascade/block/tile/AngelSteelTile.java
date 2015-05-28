@@ -24,6 +24,11 @@ public class AngelSteelTile extends ConsumerTile {
     }
 
     @Override
+    public boolean validItemsNearby() {
+        return true;
+    }
+
+    @Override
     public void onUsePower() {
         ItemStack lootStack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class));
         EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
