@@ -216,13 +216,13 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     public void registerBlockIcons(IIconRegister iconRegister) {
 
 
-        if(type.contains("Alt")){
+        if (type.contains("Alt")) {
 
             topIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Top");
             sideIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Side_Alt");
 
             botIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Bottom");
-        }else {
+        } else {
             sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
 
             botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
@@ -304,16 +304,16 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("pumpRedstone")) {
             return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', ItemMaterial.getGem(EnumAura.RED_AURA), 'G', ItemMaterial.getIngot(EnumAura.RED_AURA), 'P', getAuraNodePumpItemstack());
         }
-        if(type.equals("pumpAlt")){
+        if (type.equals("pumpAlt")) {
             return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")));
         }
-        if(type.equals("pumpRedstoneAlt")){
+        if (type.equals("pumpRedstoneAlt")) {
             return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")));
         }
-        if(type.equals("pumpLightAlt")){
+        if (type.equals("pumpLightAlt")) {
             return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")));
         }
-        if(type.equals("pumpFallAlt")){
+        if (type.equals("pumpFallAlt")) {
             return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")));
         }
         if (type.equals("pumpProjectileAlt")) {
@@ -396,7 +396,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         // TODO Auto-generated method stub
         return null;
     }
-
 
 
     @Override
@@ -514,7 +513,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             if (tileEntity instanceof AuraTilePumpBase) {
                 result.add("Time left: " + ((AuraTilePumpBase) tileEntity).pumpPower + " seconds");
                 result.add("Power: " + ((AuraTilePumpBase) tileEntity).pumpSpeed + " power per second");
-                if(((AuraTilePumpBase) tileEntity).isAlternator()){
+                if (((AuraTilePumpBase) tileEntity).isAlternator()) {
                     AuraTilePumpBase altPump = (AuraTilePumpBase) tileEntity;
                     int power = (int) (altPump.pumpSpeed * altPump.getAlternatingFactor());
                     result.add("Phase Power: " + power);
@@ -522,7 +521,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             }
 
             if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
-                if(tileEntity instanceof AuraTileRF){
+                if (tileEntity instanceof AuraTileRF) {
                     AuraTileRF auraTileRF = (AuraTileRF) tileEntity;
                     result.add("RF/t Output: " + auraTileRF.lastPower * Config.powerFactor);
                 }

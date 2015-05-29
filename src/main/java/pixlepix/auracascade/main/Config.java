@@ -44,9 +44,8 @@ public class Config {
     public static int enchantViolet = 115;
 
     public static float powerFactor = .75F;
-    
-    
-    
+
+
     static Configuration config;
 
     public static void init(FMLPreInitializationEvent event) {
@@ -97,7 +96,7 @@ public class Config {
         giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
 
         powerFactor = config.getFloat("Power -> RF conversion factor", Configuration.CATEGORY_GENERAL, powerFactor, 0F, 1F, "Keep in mind that this translates power/second to RF/tick.");
-        
+
         config.save();
     }
 }

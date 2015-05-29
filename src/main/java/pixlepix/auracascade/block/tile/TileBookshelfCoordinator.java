@@ -1,8 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -17,17 +15,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
-import pixlepix.auracascade.item.ItemStorageBook;
-import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.network.PacketBurst;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Queue;
-import java.util.Vector;
 
 /**
  * Created by localmacaccount on 1/24/15.

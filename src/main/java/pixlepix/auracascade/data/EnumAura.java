@@ -183,6 +183,6 @@ public enum EnumAura {
                 }
             }
         }
-        
+
     }
 }

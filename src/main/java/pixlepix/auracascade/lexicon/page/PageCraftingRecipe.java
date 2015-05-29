@@ -55,10 +55,11 @@ public class PageCraftingRecipe extends PageRecipe {
     public PageCraftingRecipe(String unlocalizedName, ThaumicTinkererRecipe recipe) {
         this(unlocalizedName, ((CraftingBenchRecipe) recipe).iRecipe);
     }
-    
+
     public PageCraftingRecipe(String unlocalizedName, CraftingBenchRecipe recipe) {
         this(unlocalizedName, recipe.iRecipe);
     }
+
     public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
         this(unlocalizedName, Arrays.asList(recipe));
     }

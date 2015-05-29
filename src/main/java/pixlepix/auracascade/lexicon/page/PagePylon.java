@@ -14,13 +14,11 @@ import pixlepix.auracascade.block.tile.CraftingCenterTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
-import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconRecipeMappings;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 import pixlepix.auracascade.registry.BlockRegistry;
-import pixlepix.auracascade.registry.ITTinkererItem;
 
 import java.util.Arrays;
 

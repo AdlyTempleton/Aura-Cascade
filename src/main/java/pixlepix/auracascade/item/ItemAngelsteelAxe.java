@@ -30,6 +30,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
         this.degree = i;
         setCreativeTab(null);
     }
+
     public ItemAngelsteelAxe() {
         this(0);
     }
@@ -82,7 +83,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
         return true;
     }
-    
+
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);

@@ -1,7 +1,6 @@
 package pixlepix.auracascade.registry;
 
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;

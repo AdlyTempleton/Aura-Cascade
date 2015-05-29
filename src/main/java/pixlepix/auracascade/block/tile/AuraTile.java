@@ -310,7 +310,7 @@ public class AuraTile extends TileEntity {
         return true;
 
     }
-    
+
     public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
         if (!canTransfer(tuple)) {
             return false;

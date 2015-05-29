@@ -1,6 +1,5 @@
 package pixlepix.auracascade.data;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**

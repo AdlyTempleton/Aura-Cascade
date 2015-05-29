@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
     public HashMap<Class<? extends Entity>, Class<? extends Entity>> entityMap = new HashMap<Class<? extends Entity>, Class<? extends Entity>>();
+
     {
         entityMap.put(EntityCow.class, EntityMooshroom.class);
         entityMap.put(EntitySheep.class, EntityPig.class);
@@ -53,7 +54,7 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        if(!target.worldObj.isRemote) {
+        if (!target.worldObj.isRemote) {
             if (entityMap.get(target.getClass()) != null && target.getHealth() > 0) {
                 target.setDead();
                 Class clazz = entityMap.get(target.getClass());

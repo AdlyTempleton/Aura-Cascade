@@ -25,7 +25,7 @@ public class PylonRecipeRegistry {
         }
         return null;
     }
-    
+
     public static void init() {
         recipes.add(new PylonRecipe(new ItemStack(Items.leather),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.rotten_flesh))));

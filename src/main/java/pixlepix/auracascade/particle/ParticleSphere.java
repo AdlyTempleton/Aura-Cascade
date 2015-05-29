@@ -20,9 +20,9 @@ public class ParticleSphere extends EntityFX {
         this.motionX += motionX * 0.4D;
         this.motionY += motionY * 0.4D;
         this.motionZ += motionZ * 0.4D;
-        this.particleRed = this.particleGreen = this.particleBlue = (float)(Math.random() * 0.30000001192092896D + 0.6000000238418579D);
+        this.particleRed = this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D + 0.6000000238418579D);
         this.particleScale *= 0.75F;
-        this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.6D));
+        this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.6D));
         this.noClip = false;
 
         this.particleMaxAge = 20;

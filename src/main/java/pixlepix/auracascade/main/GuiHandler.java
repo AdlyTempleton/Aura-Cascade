@@ -2,12 +2,10 @@ package pixlepix.auracascade.main;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.gui.ContainerCoordinator;
 import pixlepix.auracascade.gui.GuiCoordinator;
-import pixlepix.auracascade.item.ItemLexicon;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 
 /**
@@ -30,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
         }
         if (id == 1) {
             return new GuiCoordinator(player.inventory, (TileBookshelfCoordinator) world.getTileEntity(x, y, z));
-            
+
         }
         return null;
 

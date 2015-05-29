@@ -3,7 +3,6 @@ package pixlepix.auracascade.potions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import pixlepix.auracascade.data.EnumAura;
@@ -25,6 +24,7 @@ public class PotionOrangeCurse extends Potion {
         mc.getMinecraft().renderEngine.bindTexture(mc.getMinecraft().renderEngine.getResourceLocation(1));
         mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA).getIconIndex(), 16, 16);
     }
+
     @Override
     public boolean isReady(int p_76397_1_, int p_76397_2_) {
         return new Random().nextInt(100) == 0;

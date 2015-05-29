@@ -30,7 +30,7 @@ public class ItemStackCompatator implements Comparator<ItemStack> {
                 return comp;
             }
         }
-        
+
         if (o1.getItem() instanceof ISpecialCreativeSort) {
             return ((ISpecialCreativeSort) o1.getItem()).compare(o1, o2);
         }

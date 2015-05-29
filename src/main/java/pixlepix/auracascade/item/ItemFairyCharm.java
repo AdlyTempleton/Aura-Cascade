@@ -98,7 +98,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (!world.isRemote) {
             ItemStack ringStack = EventHandler.getBaubleFromInv(ItemFairyRing.class, player);
-            if(ringStack != null) {
+            if (ringStack != null) {
                 if (ringStack.stackTagCompound == null) {
                     ringStack.stackTagCompound = new NBTTagCompound();
                 }
@@ -121,27 +121,20 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         }
         return stack;
     }
-    
+
     //Metadata sensitive version of InventoryPlayer.consumeInventoryItem
-    public boolean consumeInventoryItem(InventoryPlayer inventoryPlayer, Item item, int meta)
-    {
+    public boolean consumeInventoryItem(InventoryPlayer inventoryPlayer, Item item, int meta) {
         int i = -1;
-        for (int j = 0; j < inventoryPlayer.mainInventory.length; ++j)
-        {
-            if (inventoryPlayer.mainInventory[j] != null && inventoryPlayer.mainInventory[j].getItem() == item && inventoryPlayer.mainInventory[j].getItemDamage() == meta)
-            {
+        for (int j = 0; j < inventoryPlayer.mainInventory.length; ++j) {
+            if (inventoryPlayer.mainInventory[j] != null && inventoryPlayer.mainInventory[j].getItem() == item && inventoryPlayer.mainInventory[j].getItemDamage() == meta) {
                 i = j;
             }
         }
 
-        if (i < 0)
-        {
+        if (i < 0) {
             return false;
-        }
-        else
-        {
-            if (--inventoryPlayer.mainInventory[i].stackSize <= 0)
-            {
+        } else {
+            if (--inventoryPlayer.mainInventory[i].stackSize <= 0) {
                 inventoryPlayer.mainInventory[i] = null;
             }
 

@@ -66,7 +66,6 @@ public class CommonProxy {
         networkWrapper.registerMessage(CoordinatorScrollHandler.class, PacketCoordinatorScroll.class, 3, Side.SERVER);
 
 
-
         VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
 
         MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
@@ -106,12 +105,12 @@ public class CommonProxy {
         LexiconData.init();
         LexiconData.postInit();
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
-        if(Loader.isModLoaded("Thaumcraft")) {
+        if (Loader.isModLoaded("Thaumcraft")) {
             TCCompat.postInit();
         }
-        
+
         //RiM IMC for blacklisting aura nodes
-        for(Block block:BlockRegistry.getBlockFromClass(AuraBlock.class)){
+        for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
             FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block));
         }
     }

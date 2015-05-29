@@ -1,11 +1,6 @@
 package pixlepix.auracascade.render;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 /**
@@ -20,17 +15,17 @@ public class ParticleBeam extends EntityFX {
         this.motionX += motionX * 0.4D;
         this.motionY += motionY * 0.4D;
         this.motionZ += motionZ * 0.4D;
-        float offset = (float)(Math.random() * 0.30000001192092896D);
-        
+        float offset = (float) (Math.random() * 0.30000001192092896D);
+
         red -= offset;
         blue -= offset;
         green -= offset;
-        
+
 
         setRBGColorF(red, blue, green);
-        
+
         this.particleScale *= 2F;
-        this.particleMaxAge = (int)(6.0D / (Math.random() * 0.8D + 0.6D));
+        this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.6D));
         this.noClip = false;
         this.noClip = false;
     }

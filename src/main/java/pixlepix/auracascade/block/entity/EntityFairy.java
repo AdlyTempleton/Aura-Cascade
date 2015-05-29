@@ -76,7 +76,7 @@ public class EntityFairy extends Entity {
             if (player.isDead) {
                 setDead();
             }
-            
+
             extinguish();
             phi += (dPhi / 2);
             theta += (dTheta / 2);

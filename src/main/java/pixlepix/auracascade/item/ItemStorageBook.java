@@ -89,10 +89,12 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     public abstract int getHeldStacks();
 
     public abstract boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf);
+
     public int getActualCount() {
         return (int) (Math.ceil(getMaxStackSize() / 64F) * getHeldStacks());
-        
+
     }
+
     @Override
     public boolean shouldRegister() {
         return true;

@@ -145,7 +145,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             inv = itemStorageBook.getInventory(storedBook);
         } else {
             inv = new ArrayList<ItemStack>();
-            
+
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

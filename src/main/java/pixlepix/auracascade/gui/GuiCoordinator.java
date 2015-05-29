@@ -5,16 +5,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
@@ -25,14 +22,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
-import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.network.PacketCoordinatorScroll;
-
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by localmacaccount on 1/24/15.
@@ -56,7 +46,7 @@ public class GuiCoordinator extends GuiContainer {
      */
     private boolean wasClicking;
     private boolean unfocused = false;
-    
+
     public GuiCoordinator(InventoryPlayer inventoryPlayer, TileBookshelfCoordinator tileEntity) {
         super(new ContainerCoordinator(inventoryPlayer, tileEntity));
         this.containerCoordinator = (ContainerCoordinator) inventorySlots;

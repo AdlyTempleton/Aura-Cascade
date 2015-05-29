@@ -31,7 +31,7 @@ public class AuraTilePumpBase extends AuraTile {
         nbt.setInteger("pumpSpeed", pumpSpeed);
     }
 
-    public boolean isAlternator(){
+    public boolean isAlternator() {
         return false;
     }
 
@@ -49,9 +49,9 @@ public class AuraTilePumpBase extends AuraTile {
         if (time * speed > pumpSpeed * pumpPower) {
             pumpSpeed = speed;
             pumpPower = time;
-            if(isAlternator()){
+            if (isAlternator()) {
                 pumpSpeed *= 3;
-                
+
             }
         }
         updateMonitor(worldObj, xCoord, yCoord, zCoord);
@@ -94,7 +94,7 @@ public class AuraTilePumpBase extends AuraTile {
                     for (EnumAura aura : EnumAura.values()) {
                         int dist = upNode.yCoord - yCoord;
                         int quantity = pumpSpeed / dist;
-                        if(isAlternator()){
+                        if (isAlternator()) {
                             float f = getAlternatingFactor();
                             quantity *= f;
                         }
@@ -110,9 +110,9 @@ public class AuraTilePumpBase extends AuraTile {
             }
         }
     }
-    
-    public float getAlternatingFactor(){
-        return (float) (1 + Math.sin(Math.PI * worldObj.getTotalWorldTime() / 10000))/2;
-        
+
+    public float getAlternatingFactor() {
+        return (float) (1 + Math.sin(Math.PI * worldObj.getTotalWorldTime() / 10000)) / 2;
+
     }
 }

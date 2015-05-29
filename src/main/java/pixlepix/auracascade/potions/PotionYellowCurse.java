@@ -27,6 +27,7 @@ public class PotionYellowCurse extends Potion {
         mc.getMinecraft().renderEngine.bindTexture(mc.getMinecraft().renderEngine.getResourceLocation(1));
         mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.YELLOW_AURA).getIconIndex(), 16, 16);
     }
+
     @Override
     public boolean isReady(int p_76397_1_, int p_76397_2_) {
         return new Random().nextInt(250) == 0;

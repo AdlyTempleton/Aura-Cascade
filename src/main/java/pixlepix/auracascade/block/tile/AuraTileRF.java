@@ -89,8 +89,8 @@ public class AuraTileRF extends AuraTile {
                 if (te instanceof IEnderEnergyHandler) {
                     disabled = true;
                 }
-                for(String clazz : blacklist) {
-                    if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
+                for (String clazz : blacklist) {
+                    if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())) {
                         boolean whitelistedByMod = false;
                         for (String whitelistMod : whitelistModId) {
                             if (modid.toLowerCase().contains(whitelistMod)) {
@@ -102,15 +102,15 @@ public class AuraTileRF extends AuraTile {
                         }
                     }
                 }
-                for(String blacklistMod : blacklistModId){
-                    if(modid.equals(blacklistMod)){
+                for (String blacklistMod : blacklistModId) {
+                    if (modid.equals(blacklistMod)) {
                         disabled = true;
                     }
                 }
-                if(te instanceof IEnergyProvider){
+                if (te instanceof IEnergyProvider) {
                     boolean isWhitelisted = false;
-                    for(String clazz : whitelist) {
-                        if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())){
+                    for (String clazz : whitelist) {
+                        if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())) {
                             isWhitelisted = true;
                         }
                     }
@@ -119,7 +119,7 @@ public class AuraTileRF extends AuraTile {
                             isWhitelisted = true;
                         }
                     }
-                    if(!isWhitelisted){
+                    if (!isWhitelisted) {
                         disabled = true;
                     }
                 }
@@ -139,14 +139,14 @@ public class AuraTileRF extends AuraTile {
 
         if (!disabled) {
             int divisions = foundTiles.size();
-            for(CoordTuple tuple:foundTiles){
+            for (CoordTuple tuple : foundTiles) {
 
                 TileEntity entity = tuple.getTile(worldObj);
-                if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver)entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
-                    divisions --;
+                if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
+                    divisions--;
                 }
             }
-            if(divisions > 0) {
+            if (divisions > 0) {
                 for (CoordTuple tuple : foundTiles) {
                     TileEntity entity = tuple.getTile(worldObj);
                     if (entity instanceof IEnergyReceiver) {
@@ -160,7 +160,7 @@ public class AuraTileRF extends AuraTile {
         if (worldObj.getTotalWorldTime() % 20 == 0 && !worldObj.isRemote) {
             lastPower = 0;
         }
-        if(worldObj.getTotalWorldTime() % 20 == 1){
+        if (worldObj.getTotalWorldTime() % 20 == 1) {
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
 

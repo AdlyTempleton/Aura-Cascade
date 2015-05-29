@@ -18,7 +18,6 @@ import java.util.List;
 public class AuraTilePump extends AuraTilePumpBase {
 
 
-
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -33,7 +32,7 @@ public class AuraTilePump extends AuraTilePumpBase {
                     ItemStack stack = entityItem.getEntityItem();
                     if (!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0) {
                         //Worth noting that the burn time should be 2* longer than a furnace
-                        
+
                         addFuel(Config.pumpCoalDuration * TileEntityFurnace.getItemBurnTime(stack) / 5, Config.pumpCoalSpeed);
 
                         //Kill the stack

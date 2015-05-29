@@ -78,7 +78,7 @@ public class ContainerCoordinator extends Container {
                 update();
                 slotObject.onSlotChange(stack, slotObject.getStack());
                 return null;
-                
+
             }
             //places it into the tileEntity is possible since its in the player inventory
             else {

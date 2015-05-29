@@ -84,7 +84,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
 
                     }
                 }
-                    
+
             }
             if (msg.type == 1) {
                 for (int i = 0; i < 50; i++) {

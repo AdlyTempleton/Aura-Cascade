@@ -52,7 +52,7 @@ public class PageRecipe extends LexiconPage {
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + height - 40;
-        if(!StatCollector.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
+        if (!StatCollector.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
             PageText.renderText(x, y, width, height, getUnlocalizedName());
         }
 
