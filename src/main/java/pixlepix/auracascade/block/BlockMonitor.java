@@ -23,6 +23,8 @@ import java.util.ArrayList;
 public class BlockMonitor extends Block implements ITTinkererBlock {
     public BlockMonitor() {
         super(Material.redstoneLight);
+        setHardness(3);
+        setHarvestLevel("pickaxe", 2);
     }
 
     @Override
