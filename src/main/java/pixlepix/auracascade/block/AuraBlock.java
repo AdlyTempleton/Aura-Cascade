@@ -261,6 +261,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
             }
         }
+        updateMonitor(world, x, y, z);
     }
 
     @Override
@@ -323,6 +324,20 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return new CraftingBenchRecipe(new ItemStack(this), "III", "RNR", "III", 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'I', ItemMaterial.getIngot(EnumAura.ORANGE_AURA), 'N', getAuraNodeItemstack());
         }
         return new CraftingBenchRecipe(new ItemStack(this), "PPP", "PRP", "PPP", 'P', new ItemStack(Blocks.glass_pane), 'R', new ItemStack(Blocks.redstone_block));
+    }
+
+    public void updateMonitor(World w, int x, int y, int z) {
+        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
+            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
+            if (b instanceof BlockMonitor) {
+
+                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
+                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
+                    Block b2 = tuple.getBlock(w);
+                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                }
+            }
+        }
     }
 
     @Override
