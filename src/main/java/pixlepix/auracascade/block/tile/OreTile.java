@@ -96,6 +96,10 @@ public class OreTile extends ConsumerTile {
         return false;
     }
 
+    public int oreMultFactor() {
+        return 2;
+    }
+
     @Override
     public void onUsePower() {
         int range = 3;
@@ -159,7 +163,7 @@ public class OreTile extends ConsumerTile {
             }
             if (getDoubleResult(stack) != null) {
                 resultStack = getDoubleResult(stack);
-                resultStack.stackSize = 2;
+                resultStack.stackSize = oreMultFactor();
                 //Kill the stack
                 if (stack.stackSize == 0) {
                     entityItem.setDead();
@@ -169,20 +173,27 @@ public class OreTile extends ConsumerTile {
             }
 
             //Spawn in world
-            if (resultStack != null) {
-                EntityItem newEntity = new EntityItem(worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, resultStack);
-
-                newEntity.delayBeforeCanPickup = entityItem.delayBeforeCanPickup;
-                newEntity.motionX = entityItem.motionX;
-                newEntity.motionY = entityItem.motionY;
-                newEntity.motionZ = entityItem.motionZ;
-
-                worldObj.spawnEntityInWorld(newEntity);
-
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
-
+            if (spawnInWorld(resultStack, entityItem)) {
                 return;
             }
         }
+    }
+
+    public boolean spawnInWorld(ItemStack resultStack, EntityItem entityItem) {
+        if (resultStack != null) {
+            EntityItem newEntity = new EntityItem(worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, resultStack);
+
+            newEntity.delayBeforeCanPickup = entityItem.delayBeforeCanPickup;
+            newEntity.motionX = entityItem.motionX;
+            newEntity.motionY = entityItem.motionY;
+            newEntity.motionZ = entityItem.motionZ;
+
+            worldObj.spawnEntityInWorld(newEntity);
+
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+
+            return true;
+        }
+        return false;
     }
 }

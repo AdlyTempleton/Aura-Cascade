@@ -166,6 +166,9 @@ aura.page.blue1=Blue Aura Crystal
 aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth.
 aura.page.violet1=Violet Aura Crystal
 
+tile.consumerBlockoreAdv.name=Prismatic Processor
+
+
 item.gemWhite.name=Arcane White Gem
 item.gemBlack.name=Arcane Black Gem
 item.gemOrange.name=Arcane Orange Gem
@@ -288,6 +291,8 @@ aura.page.materials0=The &1Cascading Processor&0 is the basis of material proces
 aura.page.materials2=First off, it will turn ores dropped nearby into two dust. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Rainbow&0
 aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
 aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
+aura.page.materials6=By upgrading the &1Cascading Processor&0 with &1Arcane Prisms&0, you can make a more advanced version, the &Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
+aura.page.materials7=It has two additional operations. First, it will create three dusts per ore instead of two. It will also destroy colored wool, leaving behind the precious dye. Note that this can be a good source of materials such as ink or Lapis Lazuli.
 
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter

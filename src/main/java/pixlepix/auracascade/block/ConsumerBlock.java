@@ -145,6 +145,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:enchanter");
 
         }
+        if (name.equals("oreAdv")) {
+            blockIcon = iconRegister.registerIcon("aura:auraOreAdv");
+
+        }
 
         if (name.equals("dye")) {
             blockIcon = iconRegister.registerIcon("aura:dye");
@@ -201,6 +205,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("enchant")) {
                 return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 250000), ItemMaterial.getGem(EnumAura.BLACK_AURA)));
             }
+            if (name.equals("oreAdv")) {
+                return new CraftingBenchRecipe(new ItemStack(this), "GPG", "GCG", "GGG", 'P', ItemMaterial.getPrism(), 'G', new ItemStack(Blocks.glass), 'C', new ItemStack(getBlockFromName("ore")));
+            }
             if (name.equals("dye")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Items.shears), 'C', new ItemStack(Blocks.wool));
             }
@@ -225,6 +232,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("enchant");
         result.add("potion");
         result.add("dye");
+        result.add("oreAdv");
         return result;
     }
 
@@ -260,6 +268,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             }
             if (name.equals("ore")) {
                 return OreTile.class;
+            }
+            if (name.equals("oreAdv")) {
+                return OreTileAdv.class;
             }
             if (name.equals("loot")) {
                 return LootTile.class;
