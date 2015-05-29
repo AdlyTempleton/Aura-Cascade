@@ -163,7 +163,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
     @Override
     public int getInventoryStackLimit() {
-        return ((ItemStorageBook) storedBook.getItem()).getMaxStackSize();
+        return storedBook != null ? ((ItemStorageBook) storedBook.getItem()).getMaxStackSize() : 0;
     }
 
     @Override
