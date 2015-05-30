@@ -43,6 +43,20 @@ public abstract class LexiconPage {
         // NO-OP
     }
 
+    @SideOnly(Side.CLIENT)
+    public void updateScreen() {
+        // NO-OP
+    }
+
+    /**
+     * Called per update tick. Feel free to override fully, the
+     * call to updateScreen() is for backwards compatibility.
+     */
+    @SideOnly(Side.CLIENT)
+    public void updateScreen(IGuiLexiconEntry gui) {
+        updateScreen();
+    }
+
     /**
      * Called when this page is opened, be it via closing the gui or when the player changes page.
      * Make sure to dispose of anything you don't use any more, such as buttons in the gui's buttonList.

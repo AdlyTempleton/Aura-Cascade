@@ -40,9 +40,6 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         this.parent = parent;
 
         title = StatCollector.translateToLocal(entry.getUnlocalizedName());
-        if (entry instanceof IAddonEntry)
-            subtitle = StatCollector.translateToLocal(((IAddonEntry) entry).getSubtitle());
-        else subtitle = null;
     }
 
     @Override
