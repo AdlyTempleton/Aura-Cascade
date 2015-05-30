@@ -50,7 +50,7 @@ tile.consumerBlockfurnace.name=Cascading Smelter
 11.aurasteel.name=twelfth
 
 
-//Angelsteel tools
+//Angelsteel tool
 item.angelsteelPickaxe0.name=Angel's Steel pickaxe of the first degree
 item.angelsteelPickaxe1.name=Angel's Steel pickaxe of the second degree
 item.angelsteelPickaxe2.name=Angel's Steel pickaxe of the third degree
@@ -192,6 +192,10 @@ item.prismWhite.name=Arcane Prism
 item.prismaticWand.name=Prismatic Wand
 aura.entry.prismaticWand=Prismatic Wand
 aura.page.prismaticWand0=The &1Prismatic Wand&0 is a tool that allows you to copy structures. It has three modes, which can be cycled via shift-right-click. First, place it in selection mode, and right click two corners to form a cuboid. Then, put it in copy mode, and right click to copy. Finally, put it in paste mode, and right click to paste. It consumers items from the users's inventory.
+
+item.mirror.name=Mirror of the Angel
+aura.entry.mirror=Mirror of the Angel
+aura.page.mirror0=The &1Mirror of the Angel&0 is a tool that will reflect back Ghast's fireballs. Left clicking on the fireball, as you would with a sword, or right clicking near the fireball will deflect it. The deflected fireball will travel directly towards the nearest Ghast, at a considerably faster rate than most fireballs.
 
 aura.entry.capacitor=Aura Capacitor
 aura.page.capacitor0=The Aura Capacitor, unlike other aura nodes, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive Aura for a few seconds.

@@ -72,6 +72,7 @@ public class AuraUtil {
         }
     }
 
+
     public static void diamondBurst(Entity entity, String particle) {
         CoordTuple centerTuple = new CoordTuple((int) entity.posX, (int) entity.posY + 1, (int) entity.posZ);
         CoordTuple topTuple = centerTuple.add(ForgeDirection.UP, 5);
