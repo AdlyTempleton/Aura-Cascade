@@ -47,6 +47,7 @@ public class OreTileAdv extends OreTile {
                         stack.stackSize--;
                         ItemStack resultStack = new ItemStack(Items.dye, 1, 15 - stack.getItemDamage());
                         spawnInWorld(resultStack, entityItem);
+                        break;
                     }
                 }
             }
