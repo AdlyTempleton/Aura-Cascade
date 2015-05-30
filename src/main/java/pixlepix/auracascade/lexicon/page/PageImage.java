@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconPage;
 
+@SuppressWarnings("UnusedAssignment")
 public class PageImage extends LexiconPage {
 
     ResourceLocation resource;

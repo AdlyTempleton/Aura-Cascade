@@ -30,7 +30,7 @@ public class StorageItemStack {
         Item item = (Item) Item.itemRegistry.getObject(compound.getString("item"));
         int stackSize = compound.getInteger("stackSize");
         int damage = compound.getInteger("damage");
-        NBTTagCompound itemCompound = compound.getCompoundTag("compound");
+        compound = compound.getCompoundTag("compound");
         return new StorageItemStack(item, stackSize, damage, compound);
     }
 

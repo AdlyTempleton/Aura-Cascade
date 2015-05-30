@@ -30,10 +30,12 @@ public class BlockRegistry {
         return recipeMap.get(item);
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromItem(Class<? extends Item> item) {
         return recipeMap.get(getFirstItemFromClass(item));
     }
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromBlock(Class<? extends Block> item) {
         return recipeMap.get(getFirstBlockFromClass(item));
     }

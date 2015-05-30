@@ -103,7 +103,6 @@ public class EventHandler {
                 }
             }
         }
-        return;
     }
 
 
@@ -125,6 +124,7 @@ public class EventHandler {
     }
 
     //Amulets of protection
+    @SuppressWarnings("ConstantConditions")
     @SubscribeEvent
     public void onEntityAttacked(LivingHurtEvent event) {
         if (event.entity instanceof EntityPlayer && (event.source == DamageSource.lava || event.source == DamageSource.onFire || event.source == DamageSource.inFire)) {

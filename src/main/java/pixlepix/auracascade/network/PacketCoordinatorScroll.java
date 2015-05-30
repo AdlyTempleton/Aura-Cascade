@@ -32,7 +32,6 @@ public class PacketCoordinatorScroll implements IMessage {
         World world = DimensionManager.getWorld(buf.readInt());
         player = (EntityPlayer) world.getEntityByID(buf.readInt());
         scroll = buf.readFloat();
-        int size = buf.readInt();
         filter = ByteBufUtils.readUTF8String(buf);
     }
 
@@ -41,7 +40,6 @@ public class PacketCoordinatorScroll implements IMessage {
         buf.writeInt(player.worldObj.provider.dimensionId);
         buf.writeInt(player.getEntityId());
         buf.writeFloat(scroll);
-        buf.writeInt(filter.getBytes().length);
         ByteBufUtils.writeUTF8String(buf, filter);
     }
 

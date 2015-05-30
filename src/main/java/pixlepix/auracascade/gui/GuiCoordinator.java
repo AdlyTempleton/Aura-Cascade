@@ -207,7 +207,6 @@ public class GuiCoordinator extends GuiContainer {
         short short2 = 240;
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) short1 / 1.0F, (float) short2 / 1.0F);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        k1 = 0;
 
         for (i1 = 0; i1 < this.inventorySlots.inventorySlots.size(); ++i1) {
             Slot slot = (Slot) this.inventorySlots.inventorySlots.get(i1);
@@ -271,7 +270,7 @@ public class GuiCoordinator extends GuiContainer {
             int j2 = this.returningStackDestSlot.yDisplayPosition - this.field_147010_z;
             l1 = this.field_147011_y + (int) ((float) k1 * f1);
             int i2 = this.field_147010_z + (int) ((float) j2 * f1);
-            this.drawItemStack(this.returningStack, l1, i2, (String) null);
+            this.drawItemStack(this.returningStack, l1, i2, null);
         }
 
         GL11.glPopMatrix();
@@ -299,7 +298,7 @@ public class GuiCoordinator extends GuiContainer {
         itemRender.zLevel = 0.0F;
     }
 
-    private void drawItemStackLarge(ItemStack stack, int x, int y, String str) {
+    private void drawItemStackLarge(ItemStack stack, int x, int y) {
 
 
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
@@ -316,14 +315,14 @@ public class GuiCoordinator extends GuiContainer {
 
             number = "" + stack.stackSize;
             if (stack.stackSize > 1000) {
-                number = ((int) (stack.stackSize / 1000)) + "k";
+                number = ((stack.stackSize / 1000)) + "k";
             }
 
             if (stack.stackSize > 1000000) {
-                number = ((int) (stack.stackSize / 1000000)) + "M";
+                number = ((stack.stackSize / 1000000)) + "M";
             }
             if (stack.stackSize > 1000000000) {
-                number = ((int) (stack.stackSize / 1000000000)) + "B";
+                number = ((stack.stackSize / 1000000000)) + "B";
             }
             if (stack.stackSize == 0) {
                 number = null;
@@ -400,7 +399,7 @@ public class GuiCoordinator extends GuiContainer {
 
             GL11.glEnable(GL11.GL_DEPTH_TEST);
             if (itemstack != null && itemstack.stackSize > 999) {
-                drawItemStackLarge(itemstack, i, j, s);
+                drawItemStackLarge(itemstack, i, j);
             } else {
                 drawItemStack(itemstack, i, j, s);
 

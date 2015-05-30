@@ -70,6 +70,7 @@ public class LexiconCategory implements Comparable<LexiconCategory> {
         return this;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(LexiconCategory category) {
         return priority == category.priority ? sortingId - category.sortingId : category.priority - priority;

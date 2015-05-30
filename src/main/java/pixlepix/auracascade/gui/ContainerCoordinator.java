@@ -221,14 +221,14 @@ public class ContainerCoordinator extends Container {
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
                 player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);
-                player.inventory.setItemStack((ItemStack) null);
+                player.inventory.setItemStack(null);
             }
 
             if (clickedButton == 1) {
                 player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack().splitStack(1), true);
 
                 if (player.inventory.getItemStack().stackSize == 0) {
-                    player.inventory.setItemStack((ItemStack) null);
+                    player.inventory.setItemStack(null);
                 }
             }
         } else if (slot >= 0 && inventorySlots.get(slot) instanceof SlotCoordinator && mode != 1) {
@@ -292,8 +292,8 @@ public class ContainerCoordinator extends Container {
             if (slot2 != null) {
                 ItemStack stackInSlot = slot2.getStack();
                 ItemStack stackInPlayer = player.inventory.getItemStack();
-                ItemStack stackPickedUp = null;
-                int l1 = 0;
+                ItemStack stackPickedUp;
+                int l1;
 
                 if (stackInSlot != null) {
                     itemstack = stackInSlot.copy();
@@ -312,7 +312,7 @@ public class ContainerCoordinator extends Container {
                         }
 
                         if (stackInPlayer.stackSize == 0) {
-                            player.inventory.setItemStack((ItemStack) null);
+                            player.inventory.setItemStack(null);
                         }
                     }
                 } else if (slot2.canTakeStack(player)) {
@@ -322,7 +322,7 @@ public class ContainerCoordinator extends Container {
                         player.inventory.setItemStack(stackPickedUp);
 
                         if (stackInSlot.stackSize == 0) {
-                            slot2.putStack((ItemStack) null);
+                            slot2.putStack(null);
                         }
 
                         slot2.onPickupFromSlot(player, player.inventory.getItemStack());
@@ -341,7 +341,7 @@ public class ContainerCoordinator extends Container {
                             stackInPlayer.splitStack(l1);
 
                             if (stackInPlayer.stackSize == 0) {
-                                player.inventory.setItemStack((ItemStack) null);
+                                player.inventory.setItemStack(null);
                             }
 
                             stackInSlot.stackSize += l1;
@@ -357,7 +357,7 @@ public class ContainerCoordinator extends Container {
                             stackInSlot = slot2.decrStackSize(l1);
 
                             if (stackInSlot.stackSize == 0) {
-                                slot2.putStack((ItemStack) null);
+                                slot2.putStack(null);
                             }
 
                             slot2.onPickupFromSlot(player, player.inventory.getItemStack());

@@ -75,6 +75,7 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
         return (priority ? 0 : 1) + StatCollector.translateToLocal(getUnlocalizedName());
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(LexiconEntry o) {
         return getNameForSorting().compareTo(o.getNameForSorting());

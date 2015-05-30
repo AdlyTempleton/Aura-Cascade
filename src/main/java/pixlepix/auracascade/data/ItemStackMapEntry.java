@@ -23,6 +23,7 @@ public class ItemStackMapEntry {
         return stack.getItem().getUnlocalizedName().hashCode() * -2134 + stack.stackSize * 3245879 + stack.getItemDamage() * -234569 + (stack.stackTagCompound != null ? stack.stackTagCompound.hashCode() * 2345798 : 0);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public boolean equals(Object obj) {
         return obj instanceof ItemStackMapEntry && ((stack == null && ((ItemStackMapEntry) obj).stack == null) || ((ItemStackMapEntry) obj).stack.isItemEqual(stack));

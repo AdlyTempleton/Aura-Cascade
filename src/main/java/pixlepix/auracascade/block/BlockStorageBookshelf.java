@@ -11,7 +11,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
@@ -118,11 +117,6 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
             return top;
         }
         return blockIcon;
-    }
-
-    @Override
-    public IIcon getIcon(IBlockAccess p_149673_1_, int p_149673_2_, int p_149673_3_, int p_149673_4_, int p_149673_5_) {
-        return super.getIcon(p_149673_1_, p_149673_2_, p_149673_3_, p_149673_4_, p_149673_5_);
     }
 
     @Override

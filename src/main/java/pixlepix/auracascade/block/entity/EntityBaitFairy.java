@@ -26,7 +26,7 @@ public class EntityBaitFairy extends EntityFairy {
         if (!worldObj.isRemote) {
             if (new Random().nextInt(3600) == 0) {
                 Random random = new Random();
-                Entity entity = null;
+                Entity entity;
                 switch (random.nextInt(4)) {
                     case 0:
                         entity = new EntityCow(worldObj);

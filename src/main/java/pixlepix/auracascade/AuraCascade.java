@@ -14,6 +14,7 @@ import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.main.ConstantMod;
 
+@SuppressWarnings("UnusedDeclaration")
 @Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles")
 public class AuraCascade {
 

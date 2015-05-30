@@ -64,9 +64,6 @@ public class PagePylon extends PageRecipe {
         GL11.glColor4f(1F, 1F, 1F, 1F);
         ((GuiScreen) gui).drawTexturedModalRect(gui.getLeft(), gui.getTop(), 0, 0, gui.getWidth(), gui.getHeight());
 
-        int iconX = gui.getLeft() + 115;
-        int iconY = gui.getTop() + 12;
-
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -84,7 +81,7 @@ public class PagePylon extends PageRecipe {
             int x = 2 + direction.offsetX;
             int y = 2 + direction.offsetZ;
 
-            renderItemAtGridPos(gui, x, y, ((PylonRecipe) recipe).componentList.get(i).itemStack, true);
+            renderItemAtGridPos(gui, x, y, recipe.componentList.get(i).itemStack, true);
 
             int xPos = gui.getLeft() + x * 29 + 7 + (y == 0 && x == 3 ? 10 : 0);
             int yPos = gui.getTop() + y * 29 + 24 - (y == 0 ? 7 : 0);

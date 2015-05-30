@@ -294,6 +294,7 @@ public class AuraTile extends TileEntity {
         energy += power;
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     public boolean canTransfer(CoordTuple tuple) {
         boolean isLower = tuple.getY() < yCoord;
 
@@ -304,13 +305,11 @@ public class AuraTile extends TileEntity {
         if (!(isSame || isLower)) {
             return false;
         }
-        if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !(this instanceof AuraTileBlack)) {
-            return false;
-        }
-        return true;
+        return !(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !(this instanceof AuraTileBlack));
 
     }
 
+    @SuppressWarnings("SimplifiableIfStatement")
     public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
         if (!canTransfer(tuple)) {
             return false;

@@ -50,6 +50,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     private IIcon botIcon;
 
 
+    @SuppressWarnings("SameParameterValue")
     public AuraBlock(String type) {
         super(Material.glass);
         this.type = type;
@@ -99,6 +100,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     //Prevents being moved by RIM
+    @SuppressWarnings({"SameReturnValue", "UnusedDeclaration"})
     public static boolean _Immovable() {
         return true;
     }

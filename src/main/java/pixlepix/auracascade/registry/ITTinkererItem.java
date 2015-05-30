@@ -11,6 +11,7 @@ public interface ITTinkererItem extends ITTinkererRegisterable {
 
     public String getItemName();
 
+    @SuppressWarnings("SameReturnValue")
     public boolean shouldRegister();
 
     public boolean shouldDisplayInTab();

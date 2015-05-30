@@ -23,7 +23,7 @@ public class PotionManager {
     public static void init() {
         //Code based on potion code from WayOfTime
         //This extends the potion array, removing the ridiculously-low vanilla limit
-        Potion[] potionTypes = null;
+        Potion[] potionTypes;
         for (Field f : Potion.class.getDeclaredFields()) {
             f.setAccessible(true);
             try {

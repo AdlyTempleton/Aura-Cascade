@@ -46,16 +46,17 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
             int[] tagList = ringStack.stackTagCompound.getIntArray("fairyList");
             for (int i : tagList) {
                 Class<? extends EntityFairy> fairyClass = ItemFairyCharm.fairyClasses[i];
-                EntityFairy fairy = null;
+                EntityFairy fairy;
                 try {
                     fairy = fairyClass.getConstructor(World.class).newInstance(((EntityPlayer) entity).worldObj);
+
+                    fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
+                    fairy.player = (EntityPlayer) entity;
+
+                    ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                fairy.setPosition(((EntityPlayer) entity).posX, ((EntityPlayer) entity).posY, ((EntityPlayer) entity).posZ);
-                fairy.player = (EntityPlayer) entity;
-
-                ((EntityPlayer) entity).worldObj.spawnEntityInWorld(fairy);
             }
 
         }

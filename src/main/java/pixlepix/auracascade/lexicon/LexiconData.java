@@ -49,7 +49,6 @@ public final class LexiconData {
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
         LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
-        ;
         CategoryManager.addCategory(categoryAuraColors);
         LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Aura Nodes").setIcon(new ItemStack(AuraBlock.getBlockFromName("capacitor")));
         CategoryManager.addCategory(categoryAuraNodes);
@@ -155,7 +154,7 @@ public final class LexiconData {
                 new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
                 new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
                 new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
-        new BLexiconEntry("materials", categoryBasics).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))), new PageText("2"), new PageText("3"), new PagePylon("4", (PylonRecipe) PylonRecipeRegistry.getRecipe(ItemMaterial.getGem(EnumAura.WHITE_AURA))), new PageText("5")
+        new BLexiconEntry("materials", categoryBasics).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))), new PageText("2"), new PageText("3"), new PagePylon("4", PylonRecipeRegistry.getRecipe(ItemMaterial.getGem(EnumAura.WHITE_AURA))), new PageText("5")
                 , new PageText("6"), new PageText("7"), new PageCraftingRecipe("8", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("oreAdv"))));
 
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
@@ -232,7 +231,5 @@ public final class LexiconData {
 
     }
 
-    public static void postInit() {
-    }
 }
 

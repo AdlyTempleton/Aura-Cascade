@@ -61,6 +61,7 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
                 Entity newEntity = null;
                 try {
                     newEntity = (Entity) clazz.getConstructor(World.class).newInstance(target.worldObj);
+                    newEntity.setPosition(target.posX, target.posY, target.posZ);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -70,7 +71,6 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 }
-                newEntity.setPosition(target.posX, target.posY, target.posZ);
 
                 target.worldObj.spawnEntityInWorld(newEntity);
                 if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {

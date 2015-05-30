@@ -103,7 +103,6 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         registry.postInit();
         LexiconData.init();
-        LexiconData.postInit();
         chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
         if (Loader.isModLoaded("Thaumcraft")) {
             TCCompat.postInit();

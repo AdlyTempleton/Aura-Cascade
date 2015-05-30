@@ -17,7 +17,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import pixlepix.auracascade.item.ItemLexicon;
 import pixlepix.auracascade.lexicon.button.GuiButtonBack;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
@@ -90,7 +89,6 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
 
     void buildEntries() {
         entriesToDisplay.clear();
-        ItemLexicon lex = (ItemLexicon) stackUsed.getItem();
         for (LexiconEntry entry : category == null ? CategoryManager.getAllEntries() : category.entries) {
             if (StatCollector.translateToLocal(entry.getUnlocalizedName()).toLowerCase().contains(searchField.getText().toLowerCase().trim()))
                 entriesToDisplay.add(entry);

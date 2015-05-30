@@ -35,23 +35,6 @@ public abstract class LexiconPage {
     public abstract void renderScreen(IGuiLexiconEntry gui, int mx, int my);
 
     /**
-     * Called per update tick. Non gui-sensitive version, kept for backwards compatibility only.
-     */
-    @SideOnly(Side.CLIENT)
-    public void updateScreen() {
-        // NO-OP
-    }
-
-    /**
-     * Called per update tick. Feel free to override fully, the
-     * call to updateScreen() is for backwards compatibility.
-     */
-    @SideOnly(Side.CLIENT)
-    public void updateScreen(IGuiLexiconEntry gui) {
-        updateScreen();
-    }
-
-    /**
      * Called when this page is opened, be it via initGui() or when the player changes page.
      * You can add buttons and whatever you'd do on initGui() here.
      */
@@ -73,13 +56,14 @@ public abstract class LexiconPage {
      * Called when a button is pressed, equivalent to GuiScreen.actionPerformed.
      */
     @SideOnly(Side.CLIENT)
-    public void onActionPerformed(IGuiLexiconEntry gui, GuiButton button) {
+    public void onActionPerformed(GuiButton button) {
         // NO-OP
     }
 
     /**
      * Called when a key is pressed.
      */
+    @SuppressWarnings("EmptyMethod")
     @SideOnly(Side.CLIENT)
     public void onKeyPressed(char c, int key) {
         // NO-OP

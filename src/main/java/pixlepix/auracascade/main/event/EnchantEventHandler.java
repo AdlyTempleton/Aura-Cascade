@@ -48,8 +48,8 @@ public class EnchantEventHandler {
     Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
 
     public static void init() {
-        dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, new Class[]{boolean.class, int.class});
-        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70600_l", "dropRareDrop"}, new Class[]{int.class});
+        dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, boolean.class, int.class);
+        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70600_l", "dropRareDrop"}, int.class);
     }
 
     public static ItemStack getDoubleResult(ItemStack stack) {

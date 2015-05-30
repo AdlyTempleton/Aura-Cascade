@@ -68,9 +68,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     public boolean hasClearLineOfSight(CoordTuple tuple) {
-        int x = (int) (xCoord);
-        int y = (int) (yCoord);
-        int z = (int) (zCoord);
+        int x = (xCoord);
+        int y = (yCoord);
+        int z = (zCoord);
 
         Vec3 originalVector = Vec3.createVectorHelper(tuple.getX() - x, tuple.getY() - y, tuple.getZ() - z);
         Vec3 vec3 = originalVector.normalize();
@@ -303,6 +303,6 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public boolean isItemValidForSlotSensitive(int i, ItemStack stack) {
 
         TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
-        return bookshelf != null ? bookshelf.isItemValidForSlotSensitive(getIndexWithinBookshelf(i), stack) : false;
+        return bookshelf != null && bookshelf.isItemValidForSlotSensitive(getIndexWithinBookshelf(i), stack);
     }
 }

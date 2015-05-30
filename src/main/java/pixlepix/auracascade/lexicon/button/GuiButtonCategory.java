@@ -59,7 +59,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
 
         mc.renderEngine.bindTexture(resource);
         */
-        float s = 1F / 48F;
+        //float s = 1F / 48F;
         float defAlpha = 0.3F;
         float alpha = ticksHovered / time * (1F - defAlpha) + defAlpha;
 

@@ -17,11 +17,11 @@ public class ParticleEffects {
     public static Minecraft minecraft = Minecraft.getMinecraft();
 
 
-    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ) {
-        return spawnParticle(particleName, posX, posY, posZ, motX, motY, motZ, 0, 0, 0);
+    public static void spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ) {
+        spawnParticle(particleName, posX, posY, posZ, motX, motY, motZ, 0, 0, 0);
     }
 
-    public static EntityFX spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b) {
+    public static void spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b) {
 
         if (minecraft != null && minecraft.renderViewEntity != null && minecraft.effectRenderer != null) {
             int var14 = minecraft.gameSettings.particleSetting;
@@ -33,9 +33,7 @@ public class ParticleEffects {
             double var19 = minecraft.renderViewEntity.posZ - posZ;
             EntityFX entityfx = null;
             double var22 = 16.0D;
-            if (var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22) {
-                return null;
-            } else {
+            if (!(var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)) {
                 if (particleName.equals("fire")) {
                     entityfx = new ParticleSphere(minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                 }
@@ -70,8 +68,8 @@ public class ParticleEffects {
                     entityfx = new EntitySpellParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
                     ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);
                     float f = Minecraft.getMinecraft().theWorld.rand.nextFloat() * 0.5F + 0.35F;
-                    ((EntityFX) entityfx).setRBGColorF((float) r, (float) g, (float) b);
-                    ((EntityFX) entityfx).motionY = -.07;
+                    entityfx.setRBGColorF((float) r, (float) g, (float) b);
+                    entityfx.motionY = -.07;
                 }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);
@@ -83,11 +81,9 @@ public class ParticleEffects {
                 }
 
                 AuraCascade.proxy.addEffectBypassingLimit(entityfx);
-                return entityfx;
             }
         }
 
-        return null;
     }
 
 }

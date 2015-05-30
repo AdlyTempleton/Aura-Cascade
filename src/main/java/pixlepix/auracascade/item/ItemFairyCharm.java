@@ -123,7 +123,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     }
 
     //Metadata sensitive version of InventoryPlayer.consumeInventoryItem
-    public boolean consumeInventoryItem(InventoryPlayer inventoryPlayer, Item item, int meta) {
+    public void consumeInventoryItem(InventoryPlayer inventoryPlayer, Item item, int meta) {
         int i = -1;
         for (int j = 0; j < inventoryPlayer.mainInventory.length; ++j) {
             if (inventoryPlayer.mainInventory[j] != null && inventoryPlayer.mainInventory[j].getItem() == item && inventoryPlayer.mainInventory[j].getItemDamage() == meta) {
@@ -131,14 +131,10 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             }
         }
 
-        if (i < 0) {
-            return false;
-        } else {
+        if (i >= 0) {
             if (--inventoryPlayer.mainInventory[i].stackSize <= 0) {
                 inventoryPlayer.mainInventory[i] = null;
             }
-
-            return true;
         }
     }
 

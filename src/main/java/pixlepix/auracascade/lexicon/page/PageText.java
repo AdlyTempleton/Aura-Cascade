@@ -31,7 +31,7 @@ public class PageText extends LexiconPage {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void renderText(int x, int y, int width, int height, String unlocalizedText) {
+    public static void renderText(int x, int y, int width, String unlocalizedText) {
         FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
         boolean unicode = renderer.getUnicodeFlag();
         renderer.setUnicodeFlag(true);
@@ -95,7 +95,7 @@ public class PageText extends LexiconPage {
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + 2;
 
-        renderText(x, y, width, gui.getHeight(), getUnlocalizedName());
+        renderText(x, y, width, getUnlocalizedName());
     }
 
 }

@@ -56,7 +56,7 @@ public class SlotCoordinator extends Slot {
                 }
             } else {
                 lost = storage != null ? storage.copy() : null;
-                gained = newStack != null ? newStack.copy() : null;
+                gained = newStack.copy();
             }
             if (lost != null) {
                 outer:

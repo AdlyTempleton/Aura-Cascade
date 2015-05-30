@@ -51,7 +51,6 @@ public class OreTile extends ConsumerTile {
     @Override
     public boolean validItemsNearby() {
         int range = 3;
-        ItemStack resultStack = null;
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
@@ -72,7 +71,7 @@ public class OreTile extends ConsumerTile {
                 if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
                     //Find gems
                     EntityItem[] foundGems = new EntityItem[8];
-                    List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                    //List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
                     for (EntityItem entityItemGem : nearbyItems) {
                         Item item = entityItemGem.getEntityItem().getItem();
                         if (item instanceof ItemMaterial) {
@@ -140,7 +139,7 @@ public class OreTile extends ConsumerTile {
                 if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
                     //Find gems
                     EntityItem[] foundGems = new EntityItem[8];
-                    List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                    //List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
                     for (EntityItem entityItemGem : nearbyItems) {
                         Item item = entityItemGem.getEntityItem().getItem();
                         if (item instanceof ItemMaterial) {

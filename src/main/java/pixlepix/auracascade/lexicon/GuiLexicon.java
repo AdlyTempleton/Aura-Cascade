@@ -72,7 +72,7 @@ public class GuiLexicon extends GuiScreen {
         } else if (isCategoryIndex()) {
             int categories = allCategories.size();
             for (int i = 0; i < categories + 1; i++) {
-                LexiconCategory category = null;
+                LexiconCategory category;
                 category = i >= categories ? null : allCategories.get(i);
                 int x = i % 4;
                 int y = i / 4;

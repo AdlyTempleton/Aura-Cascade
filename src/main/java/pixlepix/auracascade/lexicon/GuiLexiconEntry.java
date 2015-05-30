@@ -128,7 +128,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
             }
 
         updatePageButtons();
-        currentPage.onActionPerformed(this, par1GuiButton);
+        currentPage.onActionPerformed(par1GuiButton);
     }
 
     public void updatePageButtons() {
@@ -147,7 +147,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     @Override
     public void updateScreen() {
         LexiconPage page = entry.pages.get(this.page);
-        page.updateScreen(this);
+        page.updateScreen();
     }
 
     @Override

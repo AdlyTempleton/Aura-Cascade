@@ -117,16 +117,17 @@ public class AuraQuantityList implements Cloneable {
         return result;
     }
 
+    @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override
     public Object clone() {
 
         AuraQuantityList result = null;
         try {
             result = (AuraQuantityList) super.clone();
+            result.quantityList = (ArrayList<AuraQuantity>) quantityList.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-        result.quantityList = (ArrayList<AuraQuantity>) quantityList.clone();
         return result;
     }
 

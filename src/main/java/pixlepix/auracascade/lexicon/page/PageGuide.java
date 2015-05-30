@@ -38,13 +38,14 @@ public class PageGuide extends PageText {
     }
 
     @Override
-    public void onActionPerformed(IGuiLexiconEntry gui, GuiButton button) {
+    public void onActionPerformed(GuiButton button) {
         if (button == this.button && Desktop.isDesktopSupported())
             try {
                 Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=f2FaoaHXOGo"));
                 //if (Math.random() < 0.01)
                 //    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
             } catch (Exception e) {
+                e.printStackTrace();
             }
     }
 
