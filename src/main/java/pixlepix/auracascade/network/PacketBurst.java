@@ -149,6 +149,12 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                     msg.world.spawnParticle("wake", posX, posY, posZ, 0, 0, 0);
                 }
             }
+            if (msg.type == 8) {
+                for (int i = 0; i < 50; i++) {
+                    Random rand = new Random();
+                    msg.world.spawnParticle("enchantmenttable", msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) * 4, rand.nextDouble() / 64, (rand.nextDouble() - .5) * 4);
+                }
+            }
         }
         return null;
     }
