@@ -26,6 +26,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.lexicon.page.*;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererRegisterable;
@@ -48,11 +49,11 @@ public final class LexiconData {
 
     public static void init() {
         //Add categories
-
-
-        LexiconCategory categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.diamond_sword));
-        CategoryManager.addCategory(categoryQuest);
-
+        LexiconCategory categoryQuest = null;
+        if (Config.questline) {
+            categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.diamond_sword));
+            CategoryManager.addCategory(categoryQuest);
+        }
 
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
@@ -75,9 +76,11 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryEnchants);
 
         //Procedurally generate quest entries
-        for (Quest quest : QuestManager.quests) {
-            int id = quest.id;
-            new LexiconEntryQuest((id > 9 ? "" : "0") + id + "quest", categoryQuest, quest).setLexiconPages(new PageText("Desc"), new PageQuest(quest));
+        if (Config.questline) {
+            for (Quest quest : QuestManager.quests) {
+                int id = quest.id;
+                new LexiconEntryQuest((id > 9 ? "" : "0") + id + "quest", categoryQuest, quest).setLexiconPages(new PageText("Desc"), new PageQuest(quest));
+            }
         }
         
         // BASICS ENTRIES

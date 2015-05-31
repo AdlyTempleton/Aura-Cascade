@@ -10,6 +10,7 @@ import pixlepix.auracascade.block.ConsumerBlock;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.Quest;
 import pixlepix.auracascade.item.*;
+import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.ArrayList;
@@ -19,13 +20,12 @@ import java.util.ArrayList;
  */
 public class QuestManager {
 
-    public static final String PLAYER_QUEST_BASE_NBT = "AuraCascadeQuests";
     public static ArrayList<Quest> quests = new ArrayList<Quest>();
 
 
     public static void check(EntityPlayer player) {
         for (Quest quest : quests) {
-            if (!quest.hasCompleted(player)) {
+            if (!quest.hasCompleted(player) && Config.questline) {
                 if (player.inventory.hasItemStack(quest.target)) {
                     if (!player.worldObj.isRemote) {
                         EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, quest.result.copy());

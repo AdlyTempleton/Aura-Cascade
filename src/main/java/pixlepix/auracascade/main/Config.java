@@ -28,6 +28,7 @@ public class Config {
     public static int pumpSnowballDuration = 10;
 
     public static boolean giveBook = true;
+    public static boolean questline = true;
 
     public static int potionRed = 93;
     public static int potionOrange = 94;
@@ -94,6 +95,8 @@ public class Config {
 
 
         giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
+        questline = config.getBoolean("Questline enabled", Configuration.CATEGORY_GENERAL, questline, "");
+
 
         powerFactor = config.getFloat("Power -> RF conversion factor", Configuration.CATEGORY_GENERAL, powerFactor, 0F, 1F, "Keep in mind that this translates power/second to RF/tick.");
 
