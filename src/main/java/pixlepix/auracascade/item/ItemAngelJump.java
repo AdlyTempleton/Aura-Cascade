@@ -16,6 +16,11 @@ import java.util.ArrayList;
  * Created by localmacaccount on 5/30/15.
  */
 public class ItemAngelJump extends Item implements IBauble, ITTinkererItem {
+    public ItemAngelJump() {
+        super();
+        setMaxStackSize(1);
+    }
+
     @Override
     public BaubleType getBaubleType(ItemStack itemStack) {
         return BaubleType.AMULET;
