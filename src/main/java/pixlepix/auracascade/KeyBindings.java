@@ -10,9 +10,12 @@ import org.lwjgl.input.Keyboard;
 public class KeyBindings {
 
     public static KeyBinding jumpKeyBind;
+    public static KeyBinding jumpDownKeyBind;
 
     public static void init() {
         jumpKeyBind = new KeyBinding("aura.angelJump", Keyboard.KEY_UP, "aura.keyBindCategory");
+        jumpDownKeyBind = new KeyBinding("aura.angelJumpDown", Keyboard.KEY_DOWN, "aura.keyBindCategory");
+        ClientRegistry.registerKeyBinding(jumpKeyBind);
         ClientRegistry.registerKeyBinding(jumpKeyBind);
     }
 }

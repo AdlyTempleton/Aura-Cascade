@@ -13,7 +13,10 @@ public class ClientEventHandler {
     @SubscribeEvent
     public void onKey(InputEvent.KeyInputEvent event) {
         if (KeyBindings.jumpKeyBind.isPressed()) {
-            AuraCascade.proxy.networkWrapper.sendToServer(new PacketAngelJump(AuraCascade.proxy.getPlayer()));
+            AuraCascade.proxy.networkWrapper.sendToServer(new PacketAngelJump(AuraCascade.proxy.getPlayer(), true));
+        }
+        if (KeyBindings.jumpDownKeyBind.isPressed()) {
+            AuraCascade.proxy.networkWrapper.sendToServer(new PacketAngelJump(AuraCascade.proxy.getPlayer(), false));
         }
     }
 }

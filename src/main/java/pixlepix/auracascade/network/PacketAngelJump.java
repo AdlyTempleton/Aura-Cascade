@@ -18,9 +18,11 @@ import pixlepix.auracascade.main.event.EventHandler;
 public class PacketAngelJump implements IMessage {
 
     public EntityPlayer entityPlayer;
+    public boolean up;
 
-    public PacketAngelJump(EntityPlayer player) {
+    public PacketAngelJump(EntityPlayer player, boolean up) {
         this.entityPlayer = player;
+        this.up = up;
     }
 
     public PacketAngelJump() {
@@ -32,22 +34,24 @@ public class PacketAngelJump implements IMessage {
         if (world != null) {
             entityPlayer = (EntityPlayer) world.getEntityByID(buf.readInt());
         }
+        up = buf.readBoolean();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeInt(entityPlayer.worldObj.provider.dimensionId);
         buf.writeInt(entityPlayer.getEntityId());
+        buf.writeBoolean(up);
     }
 
     public static class PacketAngelJumpHandler implements IMessageHandler<PacketAngelJump, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketAngelJump message, MessageContext ctx) {
-            if (message.entityPlayer != null) {
-                EntityPlayer player = message.entityPlayer;
+        public IMessage onMessage(PacketAngelJump msg, MessageContext ctx) {
+            if (msg.entityPlayer != null) {
+                EntityPlayer player = msg.entityPlayer;
                 if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
-                    for (int y = (int) (player.posY + 2); y < 255; y++) {
+                    for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
                         if (!player.worldObj.isAirBlock((int) Math.floor(player.posX), y, (int) Math.floor(player.posZ)) &&
                                 player.worldObj.isAirBlock((int) Math.floor(player.posX), y + 1, (int) Math.floor(player.posZ)) &&
                                 player.worldObj.isAirBlock((int) Math.floor(player.posX), y + 2, (int) Math.floor(player.posZ))) {

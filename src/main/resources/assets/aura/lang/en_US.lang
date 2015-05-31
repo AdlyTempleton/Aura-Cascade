@@ -220,7 +220,8 @@ aura.entry.pumpProjectile=Projectile Pump
 aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
 aura.page.pumpProjectile1=Projectile Pump
 
-aura.angelJump=Amulet of the Angel's Wing
+aura.angelJump=Ascend
+aura.angelJumpDown=Descend
 aura.keyBindCategory=Aura Cascade
 
 //Consumers
