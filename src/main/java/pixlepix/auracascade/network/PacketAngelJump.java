@@ -57,7 +57,7 @@ public class PacketAngelJump implements IMessage {
                                 player.worldObj.isAirBlock((int) Math.floor(player.posX), y + 2, (int) Math.floor(player.posZ))) {
                             player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
                             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
-
+                            break;
                         }
                     }
                 }
