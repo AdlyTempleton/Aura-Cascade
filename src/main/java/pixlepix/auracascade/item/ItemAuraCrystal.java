@@ -30,6 +30,10 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
         return new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, aura.ordinal());
     }
 
+    public static ItemStack getCrystalFromAuraMax(EnumAura aura) {
+        return new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 64, aura.ordinal());
+    }
+
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
         TileEntity te = world.getTileEntity(x, y, z);

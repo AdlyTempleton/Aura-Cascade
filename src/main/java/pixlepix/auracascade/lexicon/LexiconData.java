@@ -16,9 +16,11 @@ import cpw.mods.fml.common.ModAPIManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.Quest;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
@@ -46,6 +48,12 @@ public final class LexiconData {
 
     public static void init() {
         //Add categories
+
+
+        LexiconCategory categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.diamond_sword));
+        CategoryManager.addCategory(categoryQuest);
+
+
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
         LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
@@ -62,8 +70,16 @@ public final class LexiconData {
         LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
         CategoryManager.addCategory(categoryWalkthrough);
 
+
         LexiconCategory categoryEnchants = CategoryManager.categoryEnchants = new LexiconCategory("Enchantments").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("enchant")));
         CategoryManager.addCategory(categoryEnchants);
+
+        //Procedurally generate quest entries
+        for (Quest quest : QuestManager.quests) {
+            int id = quest.id;
+            new LexiconEntryQuest((id > 9 ? "" : "0") + id + "quest", categoryQuest, quest).setLexiconPages(new PageText("Desc"), new PageQuest(quest));
+        }
+        
         // BASICS ENTRIES
         new BLexiconEntry("basics", categoryBasics).setPriority().setLexiconPages(new PageText("0"), new PageText("1"));
         ItemAuraCrystal itemAuraCrystal = (ItemAuraCrystal) BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);

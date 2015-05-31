@@ -24,6 +24,7 @@ import net.minecraft.village.MerchantRecipe;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
@@ -35,6 +36,7 @@ import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.IAngelsteelTool;
+import pixlepix.auracascade.data.QuestData;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -72,6 +74,15 @@ public class EventHandler {
 
         }
 
+    }
+
+    //QuestData management
+    @SubscribeEvent
+    public void constructEntity(EntityEvent.EntityConstructing event) {
+        if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(QuestData.EXT_PROP_NAME) == null) {
+            QuestData.register((EntityPlayer) event.entity);
+            event.entity.registerExtendedProperties(QuestData.EXT_PROP_NAME, new QuestData());
+        }
     }
 
     //Lexicon auto give

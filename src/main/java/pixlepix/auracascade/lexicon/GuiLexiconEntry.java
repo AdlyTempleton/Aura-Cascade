@@ -39,7 +39,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         this.entry = entry;
         this.parent = parent;
 
-        title = StatCollector.translateToLocal(entry.getUnlocalizedName());
+        title = StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
     }
 
     @Override

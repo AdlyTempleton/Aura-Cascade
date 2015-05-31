@@ -13,6 +13,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.lexicon.CategoryManager;
 import pixlepix.auracascade.lexicon.ILexiconable;
@@ -113,6 +114,9 @@ public class ItemLexicon extends Item implements ITTinkererItem {
             }
             setForcedPage(par1ItemStack, "");
         }
+
+        QuestManager.check(par3EntityPlayer);
+
         AuraCascade.proxy.setLexiconStack(par1ItemStack);
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound)

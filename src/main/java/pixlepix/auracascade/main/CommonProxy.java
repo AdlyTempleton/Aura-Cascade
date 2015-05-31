@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.data.CoordTuple;
@@ -99,6 +100,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(eventHandlerEnch);
         FMLCommonHandler.instance().bus().register(eventHandlerEnch);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
+        QuestManager.init();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

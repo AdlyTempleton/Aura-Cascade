@@ -102,7 +102,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i - page * 12);
             LexiconEntry entry = i >= entriesToDisplay.size() ? null : entriesToDisplay.get(i);
             if (entry != null)
-                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StatCollector.translateToLocal(entry.getUnlocalizedName());
+                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
             else button.displayString = "";
         }
     }

@@ -40,6 +40,11 @@ public class PageRecipe extends LexiconPage {
         super(unlocalizedName);
     }
 
+    protected int getTextOffset(IGuiLexiconEntry gui) {
+        return gui.getHeight() - 40;
+
+    }
+    
     @Override
     @SideOnly(Side.CLIENT)
     public void renderScreen(IGuiLexiconEntry gui, int mx, int my) {
@@ -51,7 +56,7 @@ public class PageRecipe extends LexiconPage {
         int width = gui.getWidth() - 30;
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
-        int y = gui.getTop() + height - 40;
+        int y = gui.getTop() + getTextOffset(gui);
         if (!StatCollector.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
             PageText.renderText(x, y, width, getUnlocalizedName());
         }

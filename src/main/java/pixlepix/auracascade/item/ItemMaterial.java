@@ -56,16 +56,30 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         return null;
     }
 
+
     public static ItemStack getPrism() {
-        return new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.WHITE_AURA, 2)));
+        return getPrism(1);
+        
+    }
+
+    public static ItemStack getPrism(int size) {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.WHITE_AURA, 2)), size);
+    }
+
+    public static ItemStack getGem(EnumAura color, int size) {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 1)), 1);
     }
 
     public static ItemStack getGem(EnumAura color) {
-        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 1)));
+        return getGem(color, 1);
     }
 
     public static ItemStack getIngot(EnumAura color) {
-        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 0)));
+        return getIngot(color, 1);
+    }
+
+    public static ItemStack getIngot(EnumAura color, int size) {
+        return new ItemStack(getItemFromSpecs(new MaterialPair(color, 0)), size);
     }
 
     @Override

@@ -71,7 +71,7 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
         pages.add(page);
     }
 
-    public final String getNameForSorting() {
+    public String getNameForSorting() {
         return (priority ? 0 : 1) + StatCollector.translateToLocal(getUnlocalizedName());
     }
 
@@ -79,5 +79,9 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
     @Override
     public int compareTo(LexiconEntry o) {
         return getNameForSorting().compareTo(o.getNameForSorting());
+    }
+
+    public String getSuffix() {
+        return "";
     }
 }
