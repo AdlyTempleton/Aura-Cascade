@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
@@ -25,11 +26,13 @@ import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.entity.EntityFallFairy;
 import pixlepix.auracascade.block.entity.EntityScareFairy;
@@ -39,6 +42,7 @@ import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.data.QuestData;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.Config;
+import pixlepix.auracascade.network.PacketSyncQuestData;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.*;
@@ -81,8 +85,14 @@ public class EventHandler {
     public void constructEntity(EntityEvent.EntityConstructing event) {
         if (event.entity instanceof EntityPlayer && event.entity.getExtendedProperties(QuestData.EXT_PROP_NAME) == null) {
             QuestData.register((EntityPlayer) event.entity);
-            event.entity.registerExtendedProperties(QuestData.EXT_PROP_NAME, new QuestData());
         }
+    }
+
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        NBTTagCompound compound = new NBTTagCompound();
+        event.original.getExtendedProperties(QuestData.EXT_PROP_NAME).saveNBTData(compound);
+        event.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME).loadNBTData(compound);
     }
 
     //Lexicon auto give
@@ -90,6 +100,16 @@ public class EventHandler {
     public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         player.getEntityData().setBoolean(BOOK_TAG, true);
+        AuraCascade.proxy.networkWrapper.sendTo(new PacketSyncQuestData((EntityPlayer) event.player), (EntityPlayerMP) event.player);
+
+
+    }
+
+    @SubscribeEvent
+    public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+        if (event.entity instanceof EntityPlayerMP && !event.entity.worldObj.isRemote) {
+            AuraCascade.proxy.networkWrapper.sendTo(new PacketSyncQuestData((EntityPlayer) event.entity), (EntityPlayerMP) event.entity);
+        }
     }
 
 
