@@ -110,7 +110,8 @@ public final class LexiconData {
         new BLexiconEntry("blackHole", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemBlackHole.class));
         new BLexiconEntry("prismaticWand", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemPrismaticWand.class));
         new BLexiconEntry("mirror", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemMirror.class));
-
+        new BLexiconEntry("amuletAngel", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemAngelJump.class));
+        new BLexiconEntry("beltAngel", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemAngelStep.class));
         new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockMagicRoad.class));
         new BLexiconEntry("trampoline", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockTrampoline.class));
         new BLexiconEntry("amuletFood", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemFoodAmulet.class));

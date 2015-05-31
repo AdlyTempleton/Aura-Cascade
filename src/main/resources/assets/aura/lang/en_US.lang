@@ -224,6 +224,14 @@ aura.angelJump=Ascend
 aura.angelJumpDown=Descend
 aura.keyBindCategory=Aura Cascade
 
+item.angelJumpAmulet.name=Amulet of the Angel's Wing
+aura.entry.amuletAngel=Amulet of the Angel's Wing
+aura.page.amuletAngel0=The &1Amulet of the Angel's Wing&0 allows the player to transcend layers of terrain quickly. Pressing 'up' will jump up through terrain to the next open spot where a player can stand. Pressing 'down' will do the same thing in reverse.
+
+item.angelStepBelt.name=Sash of the Angel's heels
+aura.entry.beltAngel=Sash of the Angel's heels
+aura.page.beltAngel0=The &1Sash of the Angel's heels&0 allows the player to traverse mountains easily. It will passively allow the player to trivially traverse hills of three blocks or less. If the player runs into a wall, however, the sash will charge up and, after a short period, the player can climb walls of any height.
+
 //Consumers
 aura.entry.consumers=Consumers
 aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.

@@ -3,6 +3,7 @@ package pixlepix.auracascade.item;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -39,6 +40,11 @@ public class ItemAngelStep extends Item implements IBauble, ITTinkererItem {
             player.stepHeight = 2;
 
         }
+    }
+
+    @Override
+    public void registerIcons(IIconRegister reg) {
+        itemIcon = reg.registerIcon("aura:beltAngel");
     }
 
     @Override
