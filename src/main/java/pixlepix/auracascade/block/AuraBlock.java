@@ -234,6 +234,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     }
 
+    /**
+     * Called after a block is placed
+     *
+     * @param world
+     * @param x
+     * @param z
+     * @param z
+     * @param p_149714_5_
+     */
+    @Override
+    public void onPostBlockPlaced(World world, int x, int y, int z, int p_149714_5_) {
+        super.onPostBlockPlaced(world, x, y, z, p_149714_5_);
+        updateMonitor(world, x, y, z);
+    }
+
     @Override
     public IIcon getIcon(int side, int meta) {
         switch (side) {
@@ -263,6 +278,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
             }
         }
+        super.breakBlock(world, x, y, z, block, p_149749_6_);
         updateMonitor(world, x, y, z);
     }
 
