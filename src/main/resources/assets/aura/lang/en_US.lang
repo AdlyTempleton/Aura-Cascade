@@ -220,6 +220,9 @@ aura.entry.pumpProjectile=Projectile Pump
 aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
 aura.page.pumpProjectile1=Projectile Pump
 
+aura.angelJump=Amulet of the Angel's Wing
+aura.keyBindCategory=Aura Cascade
+
 //Consumers
 aura.entry.consumers=Consumers
 aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.

@@ -12,10 +12,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import pixlepix.auracascade.KeyBindings;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.lexicon.*;
+import pixlepix.auracascade.main.event.ClientEventHandler;
 import pixlepix.auracascade.render.OverlayRender;
 import pixlepix.auracascade.render.RenderEntityFairy;
 import pixlepix.auracascade.render.RenderPedestal;
@@ -33,6 +35,13 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new OverlayRender());
+
+        KeyBindings.init();
+
+        ClientEventHandler clientEventHandler = new ClientEventHandler();
+        MinecraftForge.EVENT_BUS.register(clientEventHandler);
+        FMLCommonHandler.instance().bus().register(clientEventHandler);
+
     }
 
     @Override
