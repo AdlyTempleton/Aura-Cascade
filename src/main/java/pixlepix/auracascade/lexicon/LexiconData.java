@@ -60,11 +60,11 @@ public final class LexiconData {
         
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
-        LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
+        LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Special Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
         CategoryManager.addCategory(categoryAuraColors);
-        LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Aura Nodes").setIcon(new ItemStack(AuraBlock.getBlockFromName("capacitor")));
+        LexiconCategory categoryAuraNodes = CategoryManager.categoryAuraNodes = new LexiconCategory("Special Aura Nodes").setIcon(new ItemStack(AuraBlock.getBlockFromName("capacitor")));
         CategoryManager.addCategory(categoryAuraNodes);
-        LexiconCategory categoryConsumers = CategoryManager.categoryConsumers = new LexiconCategory("Consumers").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("mob")));
+        LexiconCategory categoryConsumers = CategoryManager.categoryConsumers = new LexiconCategory("Power Consumers").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("mob")));
         CategoryManager.addCategory(categoryConsumers);
         LexiconCategory categoryFairies = CategoryManager.categoryFairies = new LexiconCategory("Fairies").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
         CategoryManager.addCategory(categoryFairies);
@@ -90,7 +90,7 @@ public final class LexiconData {
                 new PageCraftingRecipe("2", ((ThaumicTinkererRecipeMulti) BlockRegistry.getRecipe(itemAuraCrystal)).getIRecipies(0, 1)),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName(""))));
         new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
-        new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
+        new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1")).setPriority();
         new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump"))));
         new BLexiconEntry("comparator", categoryBasics).setLexiconPages(new PageText("0"));
