@@ -38,14 +38,16 @@ public class EntityShooterFairy extends EntityFairy {
         }
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
             List<EntityArrow> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityArrow.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
-            EntityArrow entity = nearbyEntities.get(0);
-            if (entity.shootingEntity == player && arrow == null) {
-                arrow = entity;
-                if (arrow.getDamage() < 10) {
-                    arrow.setDamage(arrow.getDamage() + 10);
-                    arrow.setIsCritical(true);
-                }
+            if (nearbyEntities.size() > 0) {
+                EntityArrow entity = nearbyEntities.get(0);
+                if (entity.shootingEntity == player && arrow == null) {
+                    arrow = entity;
+                    if (arrow.getDamage() < 10) {
+                        arrow.setDamage(arrow.getDamage() + 10);
+                        arrow.setIsCritical(true);
+                    }
 
+                }
             }
         }
     }

@@ -33,12 +33,13 @@ public class EntityDebuffFairy extends EntityFairy {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
             List<EntityMob> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
-            EntityMob entity = nearbyEntities.get(0);
-            for (PotionEffect potionEffect : potionEffects) {
-                entity.addPotionEffect(potionEffect);
+            if (nearbyEntities.size() > 0) {
+                EntityMob entity = nearbyEntities.get(0);
+                for (PotionEffect potionEffect : potionEffects) {
+                    entity.addPotionEffect(potionEffect);
+                }
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
             }
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
-
         }
     }
 }

@@ -21,9 +21,10 @@ public class EntitySaviorFairy extends EntityFairy {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0 && player.getHealth() < 5) {
             List<Entity> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
-            Entity entity = nearbyEntities.get(0);
-            entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 10F);
-
+            if (nearbyEntities.size() > 0) {
+                Entity entity = nearbyEntities.get(0);
+                entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 10F);
+            }
         }
     }
 }

@@ -22,9 +22,10 @@ public class EntityPushFairy extends EntityFairy {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
             List<EntityMob> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
-            EntityMob entity = nearbyEntities.get(0);
-            entity.knockBack(this, 0, player.posX - entity.posX, player.posZ - entity.posZ);
-
+            if (nearbyEntities.size() > 0) {
+                EntityMob entity = nearbyEntities.get(0);
+                entity.knockBack(this, 0, player.posX - entity.posX, player.posZ - entity.posZ);
+            }
         }
     }
 }
