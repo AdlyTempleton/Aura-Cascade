@@ -55,6 +55,9 @@ public final class LexiconData {
             CategoryManager.addCategory(categoryQuest);
         }
 
+        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
+        CategoryManager.addCategory(categoryWalkthrough);
+        
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
         LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
@@ -67,9 +70,6 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryFairies);
         LexiconCategory catagoryAccessories = CategoryManager.categoryAccessories = new LexiconCategory("Accessories").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemGreenAmulet.class)));
         CategoryManager.addCategory(catagoryAccessories);
-
-        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
-        CategoryManager.addCategory(categoryWalkthrough);
 
 
         LexiconCategory categoryEnchants = CategoryManager.categoryEnchants = new LexiconCategory("Enchantments").setIcon(new ItemStack(ConsumerBlock.getBlockFromName("enchant")));
