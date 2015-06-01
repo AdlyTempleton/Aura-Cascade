@@ -53,7 +53,7 @@ public class QuestManager {
         quests.add(new Quest(ItemMaterial.getGem(EnumAura.WHITE_AURA), ItemMaterial.getGem(EnumAura.WHITE_AURA, 8)));
         quests.add(new Quest(ItemMaterial.getPrism(), ItemMaterial.getPrism()));
         quests.add(new Quest(new ItemStack(ConsumerBlock.getBlockFromName("angel")), ItemAuraCrystal.getCrystalFromAuraMax(EnumAura.WHITE_AURA)));
-        quests.add(new Quest(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, 1), new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 0, 15)));
+        quests.add(new Quest(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, 1), new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 15, 0)));
         quests.add(new Quest(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyRing.class)), new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class))));
     }
 
