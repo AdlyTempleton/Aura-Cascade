@@ -95,7 +95,30 @@ public final class LexiconData {
         new BLexiconEntry("power", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1")).setPriority().tutorial();
         new BLexiconEntry("pumps", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pump")))).tutorial();
+        new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0")).tutorial();
 
+        new BLexiconEntry("furnace", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", (CraftingBenchRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("furnace")))).tutorial();
+        new BLexiconEntry("dye", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", (CraftingBenchRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("dye")))).tutorial();
+
+        new BLexiconEntry("materials", categoryBasics).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))), new PageText("2"), new PageText("3"), new PagePylon("4", PylonRecipeRegistry.getRecipe(ItemMaterial.getGem(EnumAura.WHITE_AURA))), new PageText("5")
+                , new PageText("6"), new PageText("7"), new PageCraftingRecipe("8", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("oreAdv")))).tutorial();
+
+        new BLexiconEntry("crafting", categoryConsumers).tutorial().setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
+                new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
+                new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
+                new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.leather))),
+                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.blaze_powder, 20))),
+                new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.saddle, 1))),
+                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
+                new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.arrow, 8))),
+                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.rail, 32))),
+                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.lapis_block, 1))),
+                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.repeater))),
+                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.comparator))),
+                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
+                new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
+                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
+        
 
         // BASICS ENTRIES
         new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
@@ -140,7 +163,6 @@ public final class LexiconData {
         new BLexiconEntry("magicRoad", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockMagicRoad.class));
         new BLexiconEntry("trampoline", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockTrampoline.class));
         new BLexiconEntry("amuletFood", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemFoodAmulet.class));
-        new BLexiconEntry("consumers", categoryConsumers).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("protection", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"),
                 new PageCraftingRecipe("2", ItemRedAmulet.class),
                 new PageCraftingRecipe("3", ItemOrangeAmulet.class),
@@ -166,24 +188,6 @@ public final class LexiconData {
                 new PageCraftingRecipe("19", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(FarmingStorageBook.class)).iRecipe),
                 new PageCraftingRecipe("20", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(ModStorageBook.class)).iRecipe));
 
-        new BLexiconEntry("crafting", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
-                new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
-                new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
-                new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.leather))),
-                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.blaze_powder, 20))),
-                new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.saddle, 1))),
-                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
-                new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.arrow, 8))),
-                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.rail, 32))),
-                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.lapis_block, 1))),
-                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.repeater))),
-                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.comparator))),
-                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
-                new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
-                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
-        new BLexiconEntry("materials", categoryBasics).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("ore"))), new PageText("2"), new PageText("3"), new PagePylon("4", PylonRecipeRegistry.getRecipe(ItemMaterial.getGem(EnumAura.WHITE_AURA))), new PageText("5")
-                , new PageText("6"), new PageText("7"), new PageCraftingRecipe("8", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("oreAdv"))));
-
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             new BLexiconEntry("flux", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("flux"))).iRecipe));
         }
@@ -191,10 +195,8 @@ public final class LexiconData {
         new BLexiconEntry("loot", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("loot"))));
         new BLexiconEntry("plant", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("plant"))));
         new BLexiconEntry("mob", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("mob"))));
-        new BLexiconEntry("dye", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", (CraftingBenchRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("dye"))));
         new BLexiconEntry("brewer", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("potion"))));
         new BLexiconEntry("angel", categoryConsumers).setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("angel"))));
-        new BLexiconEntry("furnace", categoryConsumers).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", (CraftingBenchRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("furnace"))));
         ThaumicTinkererRecipeMulti angelSwordRecipe = (ThaumicTinkererRecipeMulti) BlockRegistry.getFirstRecipeFromItem(ItemAngelsteelSword.class);
         new BLexiconEntry("angelsteel", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"),
                 new PageCraftingRecipe("4", (CraftingBenchRecipe) BlockRegistry.getRecipe((ITTinkererRegisterable) BlockRegistry.getFirstItemFromClass(ItemAngelsteelAxe.class))),
