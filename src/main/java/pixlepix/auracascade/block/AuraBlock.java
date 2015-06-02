@@ -568,7 +568,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
                     AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
                     if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
-                        result.add("    " + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")");
+                        result.add("    Power received:" + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")");
                     } else {
                         AuraCascade.log.warn("Invalid recipe when checking crafting center");
                     }
