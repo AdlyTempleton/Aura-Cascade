@@ -505,7 +505,7 @@ aura.entry.vortexInfusion=Vortex Infusion
 
 aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
 
-aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup
+aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with aura, and place coal near the pump.
 aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed next to the Power Node.
 
 aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0. These four Vortex pedestals surround the &1Vortex Controller&0.
