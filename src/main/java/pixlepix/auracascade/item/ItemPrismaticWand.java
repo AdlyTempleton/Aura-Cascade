@@ -123,7 +123,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         int cy2 = nbt.getInteger("cy2");
                         int cz2 = nbt.getInteger("cz2");
 
-                        //Offset
+                        //Offset from where the player standed as they calculated
                         int xo = nbt.getInteger("cxo");
                         int yo = nbt.getInteger("cyo");
                         int zo = nbt.getInteger("czo");
@@ -134,17 +134,30 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                             //Yes, yes, bitwise
                             //But thats just a party trick
                             //I mean, if you go to some nerdy parties
+
+                            //xo, yo, zo were originally calculated relative to x1, y1, z1
+                            //When we swap x1, we need to recalculate xo
+                            //The players position when they copy-pasted = cx1 - xo
+                            //New xo = newX1 - playerPos 
+                            //= cx2 - (cx1 - xo)
+                            //= xo + (cx2 - cx1)
+                            xo += (cx2 - cx1);
                             int t = cx1;
                             cx1 = cx2;
                             cx2 = t;
+
+
                         }
 
                         if (cy1 > cy2) {
+
+                            yo += (cy2 - cy1);
                             int t = cy1;
                             cy1 = cy2;
                             cy2 = t;
                         }
                         if (cz1 > cz2) {
+                            zo += (cz2 - cz1);
                             int t = cz1;
                             cz1 = cz2;
                             cz2 = t;
