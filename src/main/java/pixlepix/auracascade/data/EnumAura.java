@@ -105,7 +105,7 @@ public enum EnumAura {
 
                 //Achieve growth along logarithmic curve
                 int num = quantity.getNum();
-                int delta = num <= 25 ? -25 : 5 * (Math.max(10, (int) Math.floor(((double) 1 / num) * 2500)));
+                int delta = num <= 25 ? -num : 5 * (Math.max(10, (int) Math.floor(((double) 1 / num) * 2500)));
                 if (tile == null) {
                     AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());
                 } else if (tile.storage == null) {
