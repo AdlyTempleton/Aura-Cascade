@@ -85,23 +85,6 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
             }
             NBTTagCompound nbt = stack.stackTagCompound;
             switch (mode) {
-                    /*
-                    case 0:
-
-                        //Make sure onItemUseFirst hasn't already grabbed it
-
-
-                        if (nbt.hasKey("x1")) {
-                            nbt.setInteger("x2", nbt.getInteger("x1"));
-                            nbt.setInteger("y2", nbt.getInteger("y1"));
-                            nbt.setInteger("z2", nbt.getInteger("z1"));
-                        }
-                        nbt.setInteger("x1", (int) player.posX);
-                        nbt.setInteger("y1", (int) player.posY);
-                        nbt.setInteger("z1", (int) player.posZ);
-                        player.addChatComponentMessage(new ChatComponentText("Position set"));
-                        break;
-                        */
                 case 1:
                     if (nbt.hasKey("x1") && nbt.hasKey("x2")) {
                         nbt.setInteger("cx1", nbt.getInteger("x1"));
@@ -112,9 +95,9 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         nbt.setInteger("cz2", nbt.getInteger("z2"));
 
                         //This is how far away the player is from the copy/paste
-                        nbt.setInteger("cxo", (int) Math.floor(nbt.getInteger("x1") - player.posX) + 1);
+                        nbt.setInteger("cxo", (int) Math.floor(nbt.getInteger("x1") - player.posX));
                         nbt.setInteger("cyo", (int) Math.floor(nbt.getInteger("y1") - player.posY));
-                        nbt.setInteger("czo", (int) Math.floor(nbt.getInteger("z1") - player.posZ) + 1);
+                        nbt.setInteger("czo", (int) Math.floor(nbt.getInteger("z1") - player.posZ));
 
                         if (!world.isRemote) {
                             player.addChatComponentMessage(new ChatComponentText("Copied to clipboard"));
@@ -132,6 +115,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                     int z = (int) player.posZ;
 
                     if (nbt.hasKey("cx1")) {
+                        //Selection boundaries
                         int cx1 = nbt.getInteger("cx1");
                         int cy1 = nbt.getInteger("cy1");
                         int cz1 = nbt.getInteger("cz1");
@@ -139,6 +123,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         int cy2 = nbt.getInteger("cy2");
                         int cz2 = nbt.getInteger("cz2");
 
+                        //Offset
                         int xo = nbt.getInteger("cxo");
                         int yo = nbt.getInteger("cyo");
                         int zo = nbt.getInteger("czo");
@@ -165,6 +150,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                             cz2 = t;
                         }
 
+                        //itetate through selection
                         int xi = cx1;
                         do {
                             int yi = cy1;
@@ -172,17 +158,27 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                 int zi = cz1;
                                 do {
 
+                                    //Offsets are calculated. These offsets should be the same between the target and the destination
                                     int dx = xi - cx1;
                                     int dy = yi - cy1;
                                     int dz = zi - cz1;
-                                    if (world.isAirBlock(x + dx + xo, y + dy + yo, z + dz + zo)) {
-                                        Block block = world.getBlock(cx1 + dx, cy1 + dy, cz1 + dz);
-                                        Item item = block.getItem(world, cx1 + dx, cy1 + dy, cz1 + dz);
-                                        int worldDmg = world.getBlockMetadata(cx1 + dx, cy1 + dy, cz1 + dz);
-                                        int dmg = block.getDamageValue(world, cx1 + dx, cy1 + dy, cz1 + dz);
+
+                                    int oldX = cx1 + dx;
+                                    int oldY = cy1 + dy;
+                                    int oldZ = cz1 + dz;
+
+                                    int newX = x + dx + xo;
+                                    int newY = y + dy + yo;
+                                    int newZ = z + dz + zo;
+
+                                    if (world.isAirBlock(newX, newY, newZ)) {
+                                        Block block = world.getBlock(oldX, oldY, oldZ);
+                                        Item item = block.getItem(world, oldX, oldY, oldZ);
+                                        int worldDmg = world.getBlockMetadata(oldX, oldY, oldZ);
+                                        int dmg = block.getDamageValue(world, oldX, oldY, oldZ);
 
                                         boolean usesMetadataForPlacing = false;
-                                        ArrayList<ItemStack> drops = block.getDrops(world, cx1 + dx, cy1 + dy, cz1 + dz, dmg, 0);
+                                        ArrayList<ItemStack> drops = block.getDrops(world, oldX, oldY, oldZ, dmg, 0);
                                         if (drops.size() == 1) {
                                             ItemStack dropStack = drops.get(0);
                                             usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
@@ -190,8 +186,8 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
                                         if (player.capabilities.isCreativeMode) {
                                             if (!world.isRemote) {
-                                                world.setBlock(x + dx + xo, y + dy + yo, z + dz + zo, block, worldDmg, 3);
-                                                particles(x + dx + xo, y + dy + yo, z + dz + zo);
+                                                world.setBlock(newX, newY, newZ, block, worldDmg, 3);
+                                                particles(newX, newY, newZ);
                                             }
 
                                         } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
@@ -200,10 +196,10 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                                 if (!world.isRemote) {
                                                     ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
                                                     if (usesMetadataForPlacing) {
-                                                        world.setBlockMetadataWithNotify(x + dx + xo, y + dy + yo, z + dz + zo, worldDmg, 3);
+                                                        world.setBlockMetadataWithNotify(newX, newY, newZ, worldDmg, 3);
                                                     }
                                                 }
-                                                particles(x + dx + xo, y + dy + yo, z + dz + zo);
+                                                particles(newX, newY, newZ);
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
