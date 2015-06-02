@@ -310,6 +310,11 @@ aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can
 aura.page.materials6=By upgrading the &1Cascading Processor&0 with &1Arcane Prisms&0, you can make a more advanced version, the &1Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
 aura.page.materials7=It has two additional operations. First, it will create three dusts per ore instead of two. It will also destroy colored wool, leaving behind the precious dye. Note that this can be a good source of materials such as ink or Lapis Lazuli.
 
+aura.tutorialEnded=Tutorial Finished
+aura.entry.tutorial=Tutorial
+aura.page.tutorial0=This tutorial will guide you through the most important pages of this book
+aura.startTutorial=Begin
+
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
 aura.page.loot0=The Cascading Looter will summon the loot from dungeon chests. The looter has a minimum power requirement of 5000 power/second.

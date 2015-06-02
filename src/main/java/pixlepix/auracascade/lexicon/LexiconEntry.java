@@ -33,6 +33,11 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
         this.category = category;
     }
 
+    public LexiconEntry tutorial() {
+        GuiLexicon.tutorialMaster.add(this);
+        return this;
+    }
+
     /**
      * Sets this page as prioritized, as in, will appear before others in the lexicon.
      */

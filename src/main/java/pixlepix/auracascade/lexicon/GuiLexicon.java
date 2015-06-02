@@ -23,28 +23,39 @@ import pixlepix.auracascade.lexicon.button.GuiButtonBookmark;
 import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class GuiLexicon extends GuiScreen {
 
     public static final int BOOKMARK_START = 1337;
     public static final ResourceLocation texture = new ResourceLocation(LibResources.GUI_LEXICON);
+    private static final int TUTORIAL_ARROW_WIDTH = 10;
+    private static final int TUTORIAL_ARROW_HEIGHT = 12;
     public static GuiLexicon currentOpenLexicon = new GuiLexicon();
     public static ItemStack stackUsed;
     public static List<GuiLexicon> bookmarks = new ArrayList();
+    public static Queue<LexiconEntry> tutorial = new ArrayDeque();
+    public static ArrayList<LexiconEntry> tutorialMaster = new ArrayList<LexiconEntry>();
     public float lastTime = 0F;
     public float partialTicks = 0F;
     public float timeDelta = 0F;
     boolean bookmarksNeedPopulation = false;
     List<LexiconCategory> allCategories;
-
+    boolean hasTutorialArrow;
+    int tutorialArrowX, tutorialArrowY;
+    
     String title;
     int guiWidth = 146;
     int guiHeight = 180;
     int left, top;
+
+    public static void startTutorial() {
+        tutorial.clear();
+        for (LexiconEntry entry : tutorialMaster) {
+            tutorial.add(entry);
+        }
+    }
 
     @Override
     public void initGui() {
@@ -83,6 +94,9 @@ public class GuiLexicon extends GuiScreen {
             }
         }
         populateBookmarks();
+
+
+        putTutorialArrow();
     }
 
     @Override
@@ -112,6 +126,15 @@ public class GuiLexicon extends GuiScreen {
         }
 
         super.drawScreen(par1, par2, par3);
+
+        if (hasTutorialArrow) {
+            mc.renderEngine.bindTexture(texture);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glColor4f(1F, 1F, 1F, 0.7F + (float) (Math.sin((ClientTickHandler.ticksInGame + par3) * 0.3F) + 1) * 0.15F);
+            drawTexturedModalRect(tutorialArrowX, tutorialArrowY, 20, 200, TUTORIAL_ARROW_WIDTH, TUTORIAL_ARROW_HEIGHT);
+            GL11.glDisable(GL11.GL_BLEND);
+        }
     }
 
     public void drawBookmark(int x, int y, String s, boolean drawLeft) {
@@ -266,4 +289,29 @@ public class GuiLexicon extends GuiScreen {
         super.keyTyped(par1, par2);
     }
 
+    public final void putTutorialArrow() {
+        hasTutorialArrow = !tutorial.isEmpty();
+        if (hasTutorialArrow)
+            positionTutorialArrow();
+    }
+
+    public void positionTutorialArrow() {
+        LexiconEntry entry = tutorial.peek();
+        LexiconCategory category = entry.category;
+
+        List<GuiButton> buttons = buttonList;
+        for (GuiButton button : buttons)
+            if (button instanceof GuiButtonCategory) {
+                GuiButtonCategory catButton = (GuiButtonCategory) button;
+                if (catButton.getCategory() == category) {
+                    orientTutorialArrowWithButton(button);
+                    break;
+                }
+            }
+    }
+
+    public void orientTutorialArrowWithButton(GuiButton button) {
+        tutorialArrowX = button.xPosition - TUTORIAL_ARROW_WIDTH;
+        tutorialArrowY = button.yPosition - TUTORIAL_ARROW_HEIGHT;
+    }
 }

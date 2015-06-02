@@ -14,6 +14,8 @@ package pixlepix.auracascade.lexicon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
@@ -53,6 +55,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         LexiconPage page = entry.pages.get(this.page);
         page.onOpened(this);
         updatePageButtons();
+        positionTutorialArrow();
     }
 
     @Override
@@ -145,6 +148,31 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     public void updateScreen() {
         LexiconPage page = entry.pages.get(this.page);
         page.updateScreen();
+
+        if (this.page == entry.pages.size() - 1) {
+            LexiconEntry entry = tutorial.peek();
+            if (entry == this.entry) {
+                tutorial.poll();
+                positionTutorialArrow();
+                if (tutorial.isEmpty()) {
+                    mc.thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialEnded").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    hasTutorialArrow = false;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void positionTutorialArrow() {
+        LexiconEntry entry = tutorial.peek();
+        if (entry != this.entry) {
+            orientTutorialArrowWithButton(backButton);
+            return;
+        }
+
+        if (rightButton != null && rightButton.enabled && rightButton.visible) {
+            orientTutorialArrowWithButton(rightButton);
+        }
     }
 
     @Override
