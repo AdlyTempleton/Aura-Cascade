@@ -333,7 +333,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         List<String> result = new ArrayList<String>();
         if (world.getTileEntity(x, y, z) instanceof ConsumerTile) {
             ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(x, y, z);
-            result.add("" + consumerTile.progress + " / " + consumerTile.getMaxProgress());
+            result.add("Progress: " + consumerTile.progress + " / " + consumerTile.getMaxProgress());
             result.add("Power per progress: " + consumerTile.getPowerPerProgress());
             result.add("Last Power: " + consumerTile.lastPower);
         }
