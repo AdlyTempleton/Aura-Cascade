@@ -112,7 +112,22 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
                 //Blue
                 new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', "dyeBlue", 'C', new ItemStack(this, 1, 0)),
                 //Violet
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0))
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0)),
+                //Green
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 13), 'C', new ItemStack(this, 1, 0)),
+                //Black
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 15), 'C', new ItemStack(this, 1, 0)),
+                //Red
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 14), 'C', new ItemStack(this, 1, 0)),
+                //Orange
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 1), 'C', new ItemStack(this, 1, 0)),
+                //Yellow
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 4), 'C', new ItemStack(this, 1, 0)),
+                //Blue
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 11), 'C', new ItemStack(this, 1, 0)),
+                //Violet
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 10), 'C', new ItemStack(this, 1, 0))
+
         );
     }
 
