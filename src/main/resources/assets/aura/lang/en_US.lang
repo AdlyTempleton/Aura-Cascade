@@ -426,7 +426,7 @@ aura.page.fairyExtinguisher0=Fairy that both removes nearby lava and puts out fi
 aura.page.fairyExtinguisher1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyDigger=Digger Fairy
-aura.page.fairyDigger0=Fairy that occasionally lets you break a block with superhuman speed.
+aura.page.fairyDigger0=Fairy that will increase your dig speed
 aura.page.fairyDigger1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyFall=Glider Fairy

@@ -246,7 +246,7 @@ public class EventHandler {
     @SubscribeEvent
     public void onGetBreakSpeed(PlayerEvent.BreakSpeed event) {
         ItemStack item = BaublesApi.getBaubles(event.entityPlayer).getStackInSlot(1);
-        if (event.block == Blocks.stone && item != null && item.getItem() instanceof ItemFairyRing && !event.entityPlayer.worldObj.isRemote) {
+        if (item != null && item.getItem() instanceof ItemFairyRing && !event.entityPlayer.worldObj.isRemote) {
             List<EntityDigFairy> fairyList = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityDigFairy.class, event.entityPlayer.boundingBox.expand(20, 20, 20));
             int count = -1;
             for (EntityDigFairy digFairy : fairyList) {
@@ -255,9 +255,7 @@ public class EventHandler {
                 }
             }
             count = Math.min(count, 15);
-            if (new Random().nextInt(50) <= count) {
-                event.newSpeed = Float.MAX_VALUE;
-            }
+            event.newSpeed *= Math.pow(1.08, count);
         }
         if (event.entityPlayer.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.entityPlayer.inventory.getCurrentItem().getItem())) {
             if (event.entityPlayer.inventory.getCurrentItem().stackTagCompound == null) {
