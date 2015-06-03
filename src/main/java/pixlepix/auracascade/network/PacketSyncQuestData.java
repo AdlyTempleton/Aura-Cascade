@@ -73,8 +73,10 @@ public class PacketSyncQuestData implements IMessage {
          */
         @Override
         public IMessage onMessage(PacketSyncQuestData message, MessageContext ctx) {
-            QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
-            data.completedQuests = message.completed;
+            if (message.entityPlayer != null) {
+                QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
+                data.completedQuests = message.completed;
+            }
             return null;
         }
     }
