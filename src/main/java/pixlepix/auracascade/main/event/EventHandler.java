@@ -320,7 +320,7 @@ public class EventHandler {
                         count++;
                     }
                 }
-                event.distance *= Math.pow(.85F, count);
+                event.distance *= Math.pow(.5F, count);
             }
         }
 
