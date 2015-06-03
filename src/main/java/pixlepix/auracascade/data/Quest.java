@@ -11,12 +11,15 @@ public class Quest {
     public final ItemStack target;
     public final ItemStack result;
     public final int id;
+    public String string;
 
-    public Quest(ItemStack target, ItemStack result) {
+    public Quest(String string, ItemStack target, ItemStack result) {
         this.target = target;
         this.result = result;
+        this.string = string;
         this.id = nextId;
         nextId++;
+
     }
 
     public boolean hasCompleted(EntityPlayer player) {
