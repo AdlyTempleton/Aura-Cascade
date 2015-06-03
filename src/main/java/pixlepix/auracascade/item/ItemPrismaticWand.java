@@ -95,9 +95,9 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         nbt.setInteger("cz2", nbt.getInteger("z2"));
 
                         //This is how far away the player is from the copy/paste
-                        nbt.setInteger("cxo", (int) (nbt.getInteger("x1") - Math.floor(player.posX)));
-                        nbt.setInteger("cyo", (int) (nbt.getInteger("y1") - Math.floor(player.posY)));
-                        nbt.setInteger("czo", (int) (nbt.getInteger("z1") - Math.floor(player.posZ)));
+                        nbt.setInteger("cxo", (int) (nbt.getInteger("x1") - roundToZero(player.posX)));
+                        nbt.setInteger("cyo", (int) (nbt.getInteger("y1") - roundToZero(player.posY)));
+                        nbt.setInteger("czo", (int) (nbt.getInteger("z1") - roundToZero(player.posZ)));
 
                         if (!world.isRemote) {
                             player.addChatComponentMessage(new ChatComponentText("Copied to clipboard"));
@@ -241,6 +241,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
             }
         }
         return stack;
+    }
+
+    public int roundToZero(double d) {
+        return (int) (d > 0 ? Math.floor(d) : Math.ceil(d));
+
     }
 
     private void particles(int bx, int by, int bz) {
