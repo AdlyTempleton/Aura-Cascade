@@ -165,7 +165,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     @Override
     public void positionTutorialArrow() {
         LexiconEntry entry = tutorial.peek();
-        if (entry != this.entry) {
+        if (backButton != null && entry != this.entry) {
             orientTutorialArrowWithButton(backButton);
             return;
         }
