@@ -311,7 +311,9 @@ public class GuiLexicon extends GuiScreen {
     }
 
     public void orientTutorialArrowWithButton(GuiButton button) {
-        tutorialArrowX = button.xPosition - TUTORIAL_ARROW_WIDTH;
-        tutorialArrowY = button.yPosition - TUTORIAL_ARROW_HEIGHT;
+        if (button != null) {
+            tutorialArrowX = button.xPosition - TUTORIAL_ARROW_WIDTH;
+            tutorialArrowY = button.yPosition - TUTORIAL_ARROW_HEIGHT;
+        }
     }
 }
