@@ -38,7 +38,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     }
 
     public void readCustomNBT(NBTTagCompound nbt) {
-        storedBook = ItemStack.loadItemStackFromNBT((NBTTagCompound) nbt.getTag("book"));
+        if (nbt.getTag("book") != null) {
+            storedBook = ItemStack.loadItemStackFromNBT((NBTTagCompound) nbt.getTag("book"));
+        }
 
         if (storedBook != null) {
             ItemStorageBook itemStorageBook = (ItemStorageBook) storedBook.getItem();
