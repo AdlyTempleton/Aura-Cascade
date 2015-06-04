@@ -44,11 +44,14 @@ public class ExploderTile extends ConsumerTile {
     public void onUsePower() {
         if (explosion != null && !explosion.isDead) {
             explosion.charge++;
+            explosion.lastCharged = worldObj.getTotalWorldTime();
         } else {
             explosion = new EntityMinerExplosion(worldObj);
             explosion.setPosition(xCoord + .5, yCoord - 5, zCoord + .5);
             explosion.charge = 1;
+            explosion.lastCharged = worldObj.getTotalWorldTime();
             worldObj.spawnEntityInWorld(explosion);
+
         }
     }
 }

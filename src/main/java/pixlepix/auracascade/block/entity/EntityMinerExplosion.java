@@ -9,6 +9,7 @@ import net.minecraft.world.World;
  */
 public class EntityMinerExplosion extends Entity {
     public int charge;
+    public long lastCharged;
 
     public EntityMinerExplosion(World world) {
         super(world);
@@ -25,14 +26,19 @@ public class EntityMinerExplosion extends Entity {
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
-        if (worldObj.isRemote && worldObj.getTotalWorldTime() % 10 == 0) {
-            this.worldObj.spawnParticle("hugeexplosion", posX, posY, posZ, 1.0D, 0.0D, 0.0D);
+        if (!worldObj.isRemote && lastCharged + 100 < worldObj.getTotalWorldTime()) {
+            setDead();
+
+        }
+        if (worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
+            this.worldObj.spawnParticle("largeexplode", posX, posY, posZ, 1.0D, 0.0D, 0.0D);
         }
     }
 
     @Override
     protected void readEntityFromNBT(NBTTagCompound nbt) {
         charge = nbt.getInteger("charge");
+        lastCharged = nbt.getLong("lastCharged");
 
     }
 
@@ -44,5 +50,6 @@ public class EntityMinerExplosion extends Entity {
     @Override
     protected void writeEntityToNBT(NBTTagCompound nbt) {
         nbt.setInteger("charge", charge);
+        nbt.setLong("lastCharged", lastCharged);
     }
 }
