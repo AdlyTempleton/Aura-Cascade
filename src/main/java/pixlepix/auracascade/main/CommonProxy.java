@@ -24,6 +24,7 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.block.entity.EntityMinerExplosion;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.enchant.EnchantmentManager;
@@ -104,6 +105,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(eventHandlerEnch);
         FMLCommonHandler.instance().bus().register(eventHandlerEnch);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
+        EntityRegistry.registerModEntity(EntityMinerExplosion.class, "ExplosionMiner", 1, AuraCascade.instance, 50, 250, true);
         QuestManager.init();
     }
 
@@ -120,7 +122,6 @@ public class CommonProxy {
             FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block));
         }
     }
-
     public void setLexiconStack(ItemStack stack) {
     }
 
