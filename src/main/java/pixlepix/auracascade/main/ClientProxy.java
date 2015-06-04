@@ -45,6 +45,12 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
+    public void addToTutorial(LexiconEntry entry) {
+
+        GuiLexicon.tutorialMaster.add(entry);
+    }
+
+    @Override
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
         ClientRegistry.bindTileEntitySpecialRenderer(AuraTilePedestal.class, new RenderPedestal());

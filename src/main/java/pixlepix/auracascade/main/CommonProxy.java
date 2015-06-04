@@ -74,6 +74,9 @@ public class CommonProxy {
         MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
     }
 
+    public void addToTutorial(LexiconEntry entry) {
+    }
+
     public void setEntryToOpen(LexiconEntry entry) {
 
     }

@@ -12,6 +12,7 @@
 package pixlepix.auracascade.lexicon;
 
 import net.minecraft.util.StatCollector;
+import pixlepix.auracascade.AuraCascade;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +35,7 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
     }
 
     public LexiconEntry tutorial() {
-        GuiLexicon.tutorialMaster.add(this);
+        AuraCascade.proxy.addToTutorial(this);
         return this;
     }
 
