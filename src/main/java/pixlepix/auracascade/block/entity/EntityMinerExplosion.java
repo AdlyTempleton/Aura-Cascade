@@ -27,9 +27,9 @@ public class EntityMinerExplosion extends Entity {
 
     public void bounce() {
         Random r = new Random();
-        motionX = (r.nextDouble() / 5) - .1;
-        motionY = (r.nextDouble() / 5) - .1;
-        motionZ = (r.nextDouble() / 5) - .1;
+        motionX = (r.nextDouble() / 2) - .25;
+        motionY = (r.nextDouble() / 2) - .25;
+        motionZ = (r.nextDouble() / 2) - .25;
     }
 
 
