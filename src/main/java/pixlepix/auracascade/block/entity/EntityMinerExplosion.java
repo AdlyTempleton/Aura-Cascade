@@ -82,9 +82,11 @@ public class EntityMinerExplosion extends Entity {
                             if (r.nextDouble() > ((BlockExplosionContainer) block).getChanceToResist()) {
 
                                 if (meta > 15) {
-                                    worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
-                                } else {
+
                                     worldObj.setBlockToAir(xCoord + i, yCoord + j, zCoord + k);
+                                } else {
+
+                                    worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
                                 }
                             }
                         }
