@@ -21,7 +21,7 @@ public class EntityMinerExplosion extends Entity {
 
     @Override
     protected void entityInit() {
-        
+
     }
 
 
@@ -44,15 +44,19 @@ public class EntityMinerExplosion extends Entity {
             setDead();
 
         }
-        if (!worldObj.isRemote) {
-            //.05^2
-            if (isCollided) {
+
+        if (isCollided) {
+            if (!worldObj.isRemote) {
                 bounce();
+            } else {
+
+                this.worldObj.spawnParticle("hugeexplosion", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+                
             }
         }
         moveEntity(motionX, motionY, motionZ);
         if (worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
-            this.worldObj.spawnParticle("largeexplode", posX, posY, posZ, 1.0D, 0.0D, 0.0D);
+            this.worldObj.spawnParticle("largeexplode", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
         }
     }
 
