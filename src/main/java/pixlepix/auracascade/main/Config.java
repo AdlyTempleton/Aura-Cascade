@@ -86,12 +86,12 @@ public class Config {
         potionGreen = config.getInt("potionGreen", Configuration.CATEGORY_GENERAL, potionGreen, 1, 128, "Green Potion ID");
         potionViolet = config.getInt("potionViolet", Configuration.CATEGORY_GENERAL, potionViolet, 1, 128, "Violet Potion ID");
 
-        enchantRed = config.getInt("enchantRed", Configuration.CATEGORY_GENERAL, enchantRed, 1, 128, "Red Enchant ID");
-        enchantOrange = config.getInt("enchantOrange", Configuration.CATEGORY_GENERAL, enchantOrange, 1, 128, "Orange Enchant ID");
-        enchantYellow = config.getInt("enchantYellow", Configuration.CATEGORY_GENERAL, enchantYellow, 1, 128, "Yellow Enchant ID");
-        enchantBlue = config.getInt("enchantBlue", Configuration.CATEGORY_GENERAL, enchantBlue, 1, 128, "Blue Enchant ID");
-        enchantGreen = config.getInt("enchantGreen", Configuration.CATEGORY_GENERAL, enchantGreen, 1, 128, "Green Enchant ID");
-        enchantViolet = config.getInt("enchantViolet", Configuration.CATEGORY_GENERAL, enchantViolet, 1, 128, "Violet Enchant ID");
+        enchantRed = config.getInt("enchantRed", Configuration.CATEGORY_GENERAL, enchantRed, 1, 256, "Red Enchant ID");
+        enchantOrange = config.getInt("enchantOrange", Configuration.CATEGORY_GENERAL, enchantOrange, 1, 256, "Orange Enchant ID");
+        enchantYellow = config.getInt("enchantYellow", Configuration.CATEGORY_GENERAL, enchantYellow, 1, 256, "Yellow Enchant ID");
+        enchantBlue = config.getInt("enchantBlue", Configuration.CATEGORY_GENERAL, enchantBlue, 1, 256, "Blue Enchant ID");
+        enchantGreen = config.getInt("enchantGreen", Configuration.CATEGORY_GENERAL, enchantGreen, 1, 256, "Green Enchant ID");
+        enchantViolet = config.getInt("enchantViolet", Configuration.CATEGORY_GENERAL, enchantViolet, 1, 256, "Violet Enchant ID");
 
 
         giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
