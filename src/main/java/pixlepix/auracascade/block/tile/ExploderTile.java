@@ -50,6 +50,7 @@ public class ExploderTile extends ConsumerTile {
             explosion.setPosition(xCoord + .5, yCoord - 5, zCoord + .5);
             explosion.charge = 1;
             explosion.lastCharged = worldObj.getTotalWorldTime();
+            explosion.bounce();
             worldObj.spawnEntityInWorld(explosion);
 
         }
