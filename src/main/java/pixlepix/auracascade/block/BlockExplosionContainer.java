@@ -1,5 +1,7 @@
 package pixlepix.auracascade.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,8 +19,30 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     String type;
 
-    protected BlockExplosionContainer() {
+    public BlockExplosionContainer() {
         super(Material.rock);
+        //Same as obby
+        setResistance(2000F);
+        type = "Dirt";
+    }
+
+    public BlockExplosionContainer(String s) {
+        this();
+        type = s;
+    }
+
+
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass() {
+        return 1;
+    }
+
+    /**
+     * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
+     */
+    @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 
     public double getChanceToResist() {
@@ -74,7 +98,6 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public ArrayList<Object> getSpecialParameters() {
         // TODO Auto-generated method stub
         ArrayList result = new ArrayList<Object>();
-        result.add("Dirt");
         result.add("Wood");
         result.add("Glass");
         result.add("Cobblestone");

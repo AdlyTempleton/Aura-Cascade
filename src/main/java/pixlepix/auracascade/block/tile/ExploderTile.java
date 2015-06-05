@@ -47,7 +47,7 @@ public class ExploderTile extends ConsumerTile {
             explosion.lastCharged = worldObj.getTotalWorldTime();
         } else {
             explosion = new EntityMinerExplosion(worldObj);
-            explosion.setPosition(xCoord + .5, yCoord - 5, zCoord + .5);
+            explosion.setPosition(xCoord + .5, yCoord - 1.5, zCoord + .5);
             explosion.charge = 1;
             explosion.lastCharged = worldObj.getTotalWorldTime();
             explosion.bounce();
