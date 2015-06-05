@@ -30,6 +30,7 @@ public class EntityMinerExplosion extends Entity {
         motionX = (r.nextDouble() / 2) - .25;
         motionY = (r.nextDouble() / 2) - .25;
         motionZ = (r.nextDouble() / 2) - .25;
+        velocityChanged = true;
     }
 
 
