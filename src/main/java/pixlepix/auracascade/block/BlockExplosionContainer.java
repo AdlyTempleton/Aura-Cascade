@@ -2,6 +2,7 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -62,6 +63,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
             return .1;
         }
         return 0;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister register) {
+        blockIcon = register.registerIcon("aura:fortifiedCobblestone");
     }
 
     @Override
