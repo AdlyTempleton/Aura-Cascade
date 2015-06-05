@@ -5,6 +5,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.data.Quest;
@@ -34,11 +35,14 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void fromBytes(ByteBuf data) {
-        entityPlayer = (EntityPlayer) DimensionManager.getWorld(data.readInt()).getEntityByID(data.readInt());
-        int desiredSize = data.readByte();
-        completed = new ArrayList<Quest>();
-        for (int i = 0; i < desiredSize; i++) {
-            completed.add(QuestManager.quests.get(data.readByte()));
+        World world = DimensionManager.getWorld(data.readInt());
+        if (world != null) {
+            entityPlayer = (EntityPlayer) world.getEntityByID(data.readInt());
+            int desiredSize = data.readByte();
+            completed = new ArrayList<Quest>();
+            for (int i = 0; i < desiredSize; i++) {
+                completed.add(QuestManager.quests.get(data.readByte()));
+            }
         }
     }
 
