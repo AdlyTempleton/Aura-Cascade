@@ -2,8 +2,10 @@ package pixlepix.auracascade.main.event;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.KeyBindings;
+import pixlepix.auracascade.main.ClientProxy;
 import pixlepix.auracascade.network.PacketAngelJump;
 
 /**
@@ -17,6 +19,14 @@ public class ClientEventHandler {
         }
         if (KeyBindings.jumpDownKeyBind.isPressed()) {
             AuraCascade.proxy.networkWrapper.sendToServer(new PacketAngelJump(AuraCascade.proxy.getPlayer(), false));
+        }
+    }
+
+    @SubscribeEvent
+    public void registerEvent(TextureStitchEvent.Pre event) {
+        ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
+        for (int i = 0; i < 10; i++) {
+            clientProxy.breakingIcons[i] = event.map.registerIcon("blocks/destroy_stage_" + i);
         }
     }
 }

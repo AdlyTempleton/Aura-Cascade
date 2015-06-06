@@ -1,6 +1,7 @@
 package pixlepix.auracascade.main;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -10,6 +11,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.KeyBindings;
@@ -20,10 +22,13 @@ import pixlepix.auracascade.lexicon.*;
 import pixlepix.auracascade.main.event.ClientEventHandler;
 import pixlepix.auracascade.render.OverlayRender;
 import pixlepix.auracascade.render.RenderEntityFairy;
+import pixlepix.auracascade.render.RenderFortified;
 import pixlepix.auracascade.render.RenderPedestal;
 
 public class ClientProxy extends CommonProxy {
 
+
+    public IIcon[] breakingIcons = new IIcon[10];
 
     @Override
     public World getWorld() {
@@ -41,6 +46,10 @@ public class ClientProxy extends CommonProxy {
         ClientEventHandler clientEventHandler = new ClientEventHandler();
         MinecraftForge.EVENT_BUS.register(clientEventHandler);
         FMLCommonHandler.instance().bus().register(clientEventHandler);
+
+        renderIdFortified = RenderingRegistry.getNextAvailableRenderId();
+        ISimpleBlockRenderingHandler fortifiedRender = new RenderFortified();
+        RenderingRegistry.registerBlockHandler(renderIdFortified, fortifiedRender);
 
     }
 

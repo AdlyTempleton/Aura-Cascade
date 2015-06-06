@@ -19,6 +19,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     String type;
 
+
     public BlockExplosionContainer() {
         super(Material.rock);
         //Same as obby
@@ -104,6 +105,14 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         result.add("Stone");
         result.add("Obsidian");
         return result;
+    }
+
+    /**
+     * The type of render function that is called for this block
+     */
+    @Override
+    public int getRenderType() {
+        return super.getRenderType();
     }
 
     @Override

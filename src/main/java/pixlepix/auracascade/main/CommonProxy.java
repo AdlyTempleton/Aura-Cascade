@@ -46,9 +46,9 @@ public class CommonProxy {
     public static EventHandler eventHandler;
 
     public static EnchantEventHandler eventHandlerEnch;
+    public static int renderIdFortified;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
-
     public Block chiselBookshelf;
 
     public void preInit(FMLPreInitializationEvent event) {
