@@ -30,9 +30,10 @@ public class EntityMinerExplosion extends Entity {
 
     public void bounce() {
         Random r = new Random();
-        motionX = (r.nextDouble() / 2) - .25;
-        motionY = (r.nextDouble() / 2) - .25;
-        motionZ = (r.nextDouble() / 2) - .25;
+        double speed = .25 * (1 + Math.log10(charge));
+        motionX = (r.nextDouble() * speed) - (speed / 2);
+        motionY = (r.nextDouble() * speed) - (speed / 2);
+        motionZ = (r.nextDouble() * speed) - (speed / 2);
         velocityChanged = true;
     }
 
@@ -63,7 +64,8 @@ public class EntityMinerExplosion extends Entity {
     }
 
     public void explode() {
-        if (lastExplosion + 40 < worldObj.getTotalWorldTime()) {
+        int delay = (int) Math.max(0, (40 - 6 * Math.log10(charge)));
+        if (lastExplosion + delay < worldObj.getTotalWorldTime()) {
             lastExplosion = worldObj.getTotalWorldTime();
             int xCoord = (int) posX;
             int yCoord = (int) posY;
@@ -94,7 +96,8 @@ public class EntityMinerExplosion extends Entity {
                 }
             }
             if (!contained) {
-                worldObj.createExplosion(this, posX, posY, posZ, 12F, true);
+                worldObj.createExplosion(this, posX, posY, posZ, 50F, true);
+                setDead();
             }
         }
     }
