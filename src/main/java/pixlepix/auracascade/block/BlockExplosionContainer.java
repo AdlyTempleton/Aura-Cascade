@@ -1,11 +1,14 @@
 package pixlepix.auracascade.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -81,52 +84,61 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     public double getChanceToResist() {
+        return 1 / (getVirtualHealth() / 16);
+    }
+
+    public double getChanceToRepair() {
+        return 1 / (getRepairSeconds() * 20);
+    }
+
+    public int getRepairSeconds() {
         if (type.equals("Dirt")) {
-            return .1;
+            return 120;
         }
         if (type.equals("Wood")) {
-            return .25;
+            return 30;
         }
         if (type.equals("Glass")) {
-            return .25;
+            return 120;
         }
         if (type.equals("Cobblestone")) {
-            return .4;
+            return 30;
         }
         if (type.equals("Stone")) {
-            return .25;
+            return 60;
         }
         if (type.equals("Obsidian")) {
-            return .99;
+            return 6000;
         }
         return 0;
     }
 
-    public double getChanceToRepair() {
+    public int getVirtualHealth() {
         if (type.equals("Dirt")) {
-            return .5;
+            return 50;
         }
         if (type.equals("Wood")) {
-            return .75;
+            return 50;
         }
         if (type.equals("Glass")) {
-            return .25;
+            return 16;
         }
         if (type.equals("Cobblestone")) {
-            return .5;
+            return 75;
         }
         if (type.equals("Stone")) {
-            return .25;
+            return 100;
         }
         if (type.equals("Obsidian")) {
-            return .05;
+            return 1600;
         }
         return 0;
+
     }
 
     @Override
     public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:fortifiedCobblestone");
+        blockIcon = register.registerIcon("aura:fortified" + type);
     }
 
     @Override
@@ -139,6 +151,15 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         result.add("Stone");
         result.add("Obsidian");
         return result;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+        if (!type.equals("Glass")) {
+            return true;
+        }
+        Block block = world.getBlock(x, y, z);
+        return block == this ? false : super.shouldSideBeRendered(world, x, y, z, side);
     }
 
     /**
