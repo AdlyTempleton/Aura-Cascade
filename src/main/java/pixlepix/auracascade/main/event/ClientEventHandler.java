@@ -24,9 +24,11 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public void registerEvent(TextureStitchEvent.Pre event) {
-        ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
-        for (int i = 0; i < 10; i++) {
-            clientProxy.breakingIcons[i] = event.map.registerIcon("blocks/destroy_stage_" + i);
+        if (event.map.getTextureType() == 0) {
+            ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
+            for (int i = 0; i < 10; i++) {
+                clientProxy.breakingIcons[i] = event.map.registerIcon("destroy_stage_" + i);
+            }
         }
     }
 }

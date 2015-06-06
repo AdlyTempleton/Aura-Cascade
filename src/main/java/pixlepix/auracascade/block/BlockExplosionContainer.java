@@ -1,12 +1,12 @@
 package pixlepix.auracascade.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -32,10 +32,16 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         type = s;
     }
 
-
-    @SideOnly(Side.CLIENT)
-    public int getRenderBlockPass() {
-        return 1;
+    /**
+     * Determines if this block should render in this pass.
+     *
+     * @param pass The pass in question
+     * @return True to render
+     */
+    @Override
+    public boolean canRenderInPass(int pass) {
+        AuraCascade.proxy.renderPass = pass;
+        return true;
     }
 
     /**
@@ -108,11 +114,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     /**
-     * The type of render function that is called for this block
+     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
      */
     @Override
-    public int getRenderType() {
-        return super.getRenderType();
+    public int getRenderBlockPass() {
+        return 1;
     }
 
     @Override
@@ -130,6 +136,29 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         return true;
     }
 
+    /**
+     * Gets the block's texture. Args: side, meta
+     *
+     * @param side
+     * @param meta
+     */
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        if (AuraCascade.proxy.renderPass == 1 && meta != 0) {
+            return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
+        }
+        return blockIcon;
+    }
+
+    public int getCrackedStage(int meta) {
+        if (meta <= 5) {
+            return meta - 1;
+        } else {
+            return (int) (4 + Math.ceil((meta - 5) / 2));
+        }
+
+    }
+
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
         return null;
@@ -138,6 +167,15 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     @Override
     public Class<? extends TileEntity> getTileEntity() {
         return null;
+    }
+
+    /**
+     * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
+     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     */
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
     }
 
     @Override

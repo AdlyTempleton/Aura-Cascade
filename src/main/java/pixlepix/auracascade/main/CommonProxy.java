@@ -17,6 +17,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,7 +47,10 @@ public class CommonProxy {
     public static EventHandler eventHandler;
 
     public static EnchantEventHandler eventHandlerEnch;
-    public static int renderIdFortified;
+    public IIcon[] breakingIcons = new IIcon[10];
+
+
+    public int renderPass;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
     public Block chiselBookshelf;
