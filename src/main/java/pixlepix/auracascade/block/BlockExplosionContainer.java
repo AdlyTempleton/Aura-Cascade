@@ -80,15 +80,15 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public boolean renderAsNormalBlock() {
-        return false;
+        return true;
     }
 
     public double getChanceToResist() {
-        return 1 / (getVirtualHealth() / 16);
+        return 1 / (getVirtualHealth() / 16D);
     }
 
     public double getChanceToRepair() {
-        return 1 / (getRepairSeconds() * 20);
+        return 1 / (getRepairSeconds() / 15D);
     }
 
     public int getRepairSeconds() {
@@ -224,7 +224,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public boolean isOpaqueCube() {
-        return false;
+        return true;
     }
 
     @Override
