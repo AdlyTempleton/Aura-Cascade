@@ -153,6 +153,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         if (name.equals("dye")) {
             blockIcon = iconRegister.registerIcon("aura:dye");
         }
+        if (name.equals("miner")) {
+            blockIcon = iconRegister.registerIcon("aura:miner");
+        }
     }
 
     @Override
@@ -211,6 +214,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("dye")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Items.shears), 'C', new ItemStack(Blocks.wool));
             }
+            if (name.equals("miner")) {
+                return new CraftingBenchRecipe(new ItemStack(this), "PAP", "IRI", "IRI", 'P', ItemMaterial.getPrism(), 'A', new ItemStack(Items.diamond_pickaxe), 'I', new ItemStack(Items.iron_ingot), 'R', new ItemStack(Items.redstone));
+            }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "FFF", "FIF", "FFF", 'F', new ItemStack(Blocks.furnace), 'I', ItemMaterial.getIngot(EnumAura.WHITE_AURA));
     }
@@ -233,6 +239,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("potion");
         result.add("dye");
         result.add("oreAdv");
+        result.add("miner");
         return result;
     }
 
@@ -294,6 +301,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("dye")) {
                 return DyeTile.class;
             }
+            if (name.equals("miner")) {
+                return ExploderTile.class;
+            }
         }
         return FurnaceTile.class;
     }
@@ -336,6 +346,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             result.add("Progress: " + consumerTile.progress + " / " + consumerTile.getMaxProgress());
             result.add("Power per progress: " + consumerTile.getPowerPerProgress());
             result.add("Last Power: " + consumerTile.lastPower);
+
         }
         return result;
     }

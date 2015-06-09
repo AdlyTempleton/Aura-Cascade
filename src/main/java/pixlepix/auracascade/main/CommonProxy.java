@@ -17,6 +17,7 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +25,9 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.block.entity.EntityMinerExplosion;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.OreDropManager;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
@@ -45,9 +48,12 @@ public class CommonProxy {
     public static EventHandler eventHandler;
 
     public static EnchantEventHandler eventHandlerEnch;
+    public IIcon[] breakingIcons = new IIcon[10];
+
+
+    public int renderPass;
     public BlockRegistry registry;
     public SimpleNetworkWrapper networkWrapper;
-
     public Block chiselBookshelf;
 
     public void preInit(FMLPreInitializationEvent event) {
@@ -104,6 +110,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(eventHandlerEnch);
         FMLCommonHandler.instance().bus().register(eventHandlerEnch);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
+        EntityRegistry.registerModEntity(EntityMinerExplosion.class, "ExplosionMiner", 1, AuraCascade.instance, 50, 40, true);
         QuestManager.init();
     }
 
@@ -119,8 +126,8 @@ public class CommonProxy {
         for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
             FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block));
         }
+        OreDropManager.init();
     }
-
     public void setLexiconStack(ItemStack stack) {
     }
 

@@ -14,6 +14,14 @@ public class KaleidoscopeEnchantment extends Enchantment {
         setName(aura.name);
     }
 
+    /**
+     * Returns the maximum level that the enchantment can have.
+     */
+    @Override
+    public int getMaxLevel() {
+        return 3;
+    }
+
     @Override
     public boolean canApply(ItemStack stack) {
         return EnumEnchantmentType.digger.canEnchantItem(stack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(stack.getItem());
