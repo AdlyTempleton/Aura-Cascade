@@ -2,6 +2,7 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -46,6 +47,11 @@ public class BlockPhantomOre extends Block implements ITTinkererBlock {
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
         return null;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister icon) {
+        blockIcon = icon.registerIcon("aura:phantomOre");
     }
 
     @Override

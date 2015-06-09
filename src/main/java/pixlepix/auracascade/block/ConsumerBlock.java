@@ -153,6 +153,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         if (name.equals("dye")) {
             blockIcon = iconRegister.registerIcon("aura:dye");
         }
+        if (name.equals("miner")) {
+            blockIcon = iconRegister.registerIcon("aura:miner");
+        }
     }
 
     @Override

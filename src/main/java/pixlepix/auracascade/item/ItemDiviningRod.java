@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -110,6 +111,11 @@ public class ItemDiviningRod extends Item implements ITTinkererItem {
             }
         }
         return stack;
+    }
+
+    @Override
+    public void registerIcons(IIconRegister icon) {
+        itemIcon = icon.registerIcon("aura:diviner");
     }
 
     @Override
