@@ -193,8 +193,12 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public IIcon getIcon(int side, int meta) {
-        if (AuraCascade.proxy.renderPass == 1 && meta != 0) {
-            return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
+        if (AuraCascade.proxy.renderPass == 1) {
+            if (meta != 0) {
+                return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
+            } else {
+                return AuraCascade.proxy.blankIcon;
+            }
         }
         return blockIcon;
     }

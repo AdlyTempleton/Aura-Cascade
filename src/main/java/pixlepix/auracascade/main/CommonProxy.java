@@ -49,6 +49,7 @@ public class CommonProxy {
 
     public static EnchantEventHandler eventHandlerEnch;
     public IIcon[] breakingIcons = new IIcon[10];
+    public IIcon blankIcon;
 
 
     public int renderPass;

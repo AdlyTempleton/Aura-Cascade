@@ -29,6 +29,7 @@ public class ClientEventHandler {
             for (int i = 0; i < 10; i++) {
                 clientProxy.breakingIcons[i] = event.map.registerIcon("destroy_stage_" + i);
             }
+            clientProxy.blankIcon = event.map.registerIcon("aura:blank");
         }
     }
 }
