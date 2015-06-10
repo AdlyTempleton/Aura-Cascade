@@ -113,36 +113,8 @@ auramisc.shiftToRemove=Shift-click to remove
 auramisc.clickToAdd=Add Bookmark
 item.lexicon.name=Encyclopedia Aura
 aura.gui.lexicon.header=Encyclopedia Aura
-aura.entry.basics=Basic Concepts
-aura.entry.auraFlow=Aura Flow Mechanics
-aura.entry.interactions=Controls
-aura.entry.power=Power
-aura.entry.pumps=Pumps
-aura.page.basics0=Aura is a magical fluid, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy.
-aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura is used to transport and store &1Power&0, in mechanics which will be discussed later.
-aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
-aura.page.auraFlow1=When two nodes are connected, both send aura to each other. This means that the quantity of aura in connected nodes tends toward equilibrium, under normal circumstances.
-aura.page.auraFlow2=Aura Crystals can place Aura in a node
-aura.page.auraFlow3=Aura Nodes store and transport Aura
-aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
-aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
-aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. Power is equal to (Quantity of Aura)x(Height).
-aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
-aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently. Note that pumps can't send energy horizontally to each other, so using multiple pumps horizontally requires supplying aura to each one individually.
-aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
-aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
-aura.page.pumps3=The Burning Aura Pump
-aura.entry.comparator=Comparator Interactions
-aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their required progress.
+
 tile.monitor.name=Monitor
-aura.entry.monitor=Monitor
-aura.page.monitor0=The monitor is a block that can read additional state from pumps and consumer blocks. When placed next to a pump, it will output a redstone signal when the pump runs out of fuel. <br> When placed next to a consumer, it will output a redstone signal when the consumer has no work to do (ie. when the Cascading Smelter has no nearby smeltable items).
-aura.entry.red=Red Aura
-aura.entry.blue=Blue Aura
-aura.entry.green=Green Aura
-aura.entry.orange=Orange Aura
-aura.entry.yellow=Yellow Aura
-aura.entry.violet=Violet Aura
 
 auramisc.nextPage=Next Page
 auramisc.prevPage=Previous Page
@@ -150,21 +122,7 @@ auramisc.back=Back
 auramisc.craftingContainer=Returns on Crafting
 auramisc.shapeless=Shapeless Recipe
 auramisc.oredict=Ore Dictionary Recipe
-aura.entry.black=Black Aura
-aura.page.black0=Black aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
-aura.page.black1=Black Aura Crystal
-aura.page.red0=When TNT is detonated near an &1Aura Node&0 containing Red Aura, it will absorb the explosion and it will push Red Aura uphill, acting like a pump. Each TNT block generated 200,000 power.
-aura.page.red1=Red Aura Crystal
-aura.page.orange0=Orange Aura shares the properties of &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby aura nodes, causing aura to flow in the same direction.
-aura.page.orange1=Orange Aura Crystal
-aura.page.yellow0=Yellow Aura provides a x2 ascent boost, meaning that it takes half of the energy to pump up, while producing the normal amount of power falling down. However, Yellow Aura rapidly breaks down in &1Aura Nodes&0.
-aura.page.yellow1=Yellow Aura Crystal
-aura.page.green0=Green Aura's weight changes during the day. During the day, it weights 2x as much as normal, meaning it takes more energy to pump up and releases more energy going down. At night, however, it weighs a quarter of it's daytime weight.
-aura.page.green1=Green Aura Crystal
-aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it takes a fourth of the energy to pump up, while producing the normal amount of power falling down, but only when it's raining. At other times, it has a detrimental x0.5 ascent boost.
-aura.page.blue1=Blue Aura Crystal
-aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate.
-aura.page.violet1=Violet Aura Crystal
+
 
 tile.consumerBlockoreAdv.name=Prismatic Processor
 
@@ -190,12 +148,150 @@ item.ingotViolet.name=Arcane Violet Ingot
 item.prismWhite.name=Arcane Prism
 
 item.prismaticWand.name=Prismatic Wand
-aura.entry.prismaticWand=Prismatic Wand
-aura.page.prismaticWand0=The &1Prismatic Wand&0 is a tool that allows you to copy structures. It has three modes, which can be cycled via shift-right-click. First, place it in selection mode, and right click two corners to form a cuboid. Then, put it in copy mode, and right click to copy. Finally, put it in paste mode, and right click to paste. It consumers items from the users's inventory.
 
-item.mirror.name=Mirror of the Angel
-aura.entry.mirror=Mirror of the Angel
-aura.page.mirror0=The &1Mirror of the Angel&0 is a tool that will reflect back Ghast's fireballs. Left clicking on the fireball, as you would with a sword, or right clicking near the fireball will deflect it. The deflected fireball will travel directly towards the nearest Ghast, at a considerably faster rate than most fireballs.
+aura.angelJump=Ascend
+aura.angelJumpDown=Descend
+aura.keyBindCategory=Aura Cascade
+
+item.angelJumpAmulet.name=Amulet of the Angel's Wing
+item.angelStepBelt.name=Sash of the Angel's heels
+
+//Consumers
+
+aura.tutorialstarted=Tutorial Started
+
+
+item.comboSword.name=Sword of the Barbarian
+
+tile.auraNodepumpCreative.name=Creative Pump (Creative Only)
+tile.consumerBlockdye.name=Cascading Colorer
+
+item.transmutingSword.name=Transmuting Sword
+item.explosionRing.name=Ring of the Shattered Stone
+
+
+
+
+aura.tutorialEnded=Tutorial Finished
+
+auramisc.shiftToRead=Shift-right click to read more
+auramisc.clickToRecipe=Shift click to see recipe
+auramisc.clickToIndex=Shift click for index
+
+tile.storageBookshelfCoordinator.name=Bookshelf Coordinator
+tile.storageBookshelf.name=Storage Bookshelf
+
+item.basicBook.name=Storage Book
+item.denseBook.name=Dense Storage Book
+item.extremelyDenseBook.name=Extremely Dense Storage Book
+item.veryDenseBook.name=Very Dense Storage Book
+item.superDenseBook.name=Super Dense Storage Book
+
+item.lightBook.name=Light Storage Book
+item.extremelyLightBook.name=Extremely Light Storage Book
+item.veryLightBook.name=Very Light Storage Book
+item.superLightBook.name=Super Light Storage Book
+
+item.mineralBook.name=Mineral Storage Book
+item.mobDropBook.name=Mob Drop Book
+item.modBook.name=Mod Specific Book
+item.farmingBook.name=Farming Book
+
+item.purpleAmulet.name=Violet Protection Amulet
+item.redAmulet.name=Red Protection Amulet
+item.orangeAmulet.name=Orange Protection Amulet
+item.yellowAmulet.name=Yellow Protection Amulet
+item.greenAmulet.name=Green Protection Amulet
+item.blueAmulet.name=Blue Protection Amulet
+
+
+tile.consumerBlockpotion.name=Cascading Brewer
+
+aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
+
+aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with aura, and place coal near the pump.
+aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed next to the Power Node.
+
+aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0. These four Vortex pedestals surround the &1Vortex Controller&0.
+
+tile.consumerBlockenchanter.name=Kaleidoscopic Enchanter
+
+tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
+enchantment.Red=Kaleidoscopic Red
+enchantment.Orange=Kaleidoscopic Orange
+enchantment.Yellow=Kaleidoscopic Yellow
+enchantment.Green=Kaleidoscopic Green
+enchantment.Blue=Kaleidoscopic Blue
+enchantment.Violet=Kaleidoscopic Violet
+
+#Start Lexicon
+
+aura.entry.basics=Basic Concepts
+aura.page.basics0=Aura is a magical fluid, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy.
+aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura is used to transport and store &1Power&0, in mechanics which will be discussed later.
+aura.entry.power=Power
+aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. Power is equal to (Quantity of Aura)x(Height).
+aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
+aura.entry.auraFlow=Aura Flow Mechanics
+aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
+aura.page.auraFlow1=When two nodes are connected, both send aura to each other. This means that the quantity of aura in connected nodes tends toward equilibrium, under normal circumstances.
+aura.page.auraFlow2=Aura Crystals can place Aura in a node
+aura.page.auraFlow3=Aura Nodes store and transport Aura
+aura.entry.interactions=Controls
+aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
+aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
+aura.entry.materials=Materials
+aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
+aura.page.materials2=First off, it will turn ores dropped nearby into two dust, if appropriate dusts exist. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Colorer&0
+aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
+aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
+aura.page.materials6=By upgrading the &1Cascading Processor&0 with &1Arcane Prisms&0, you can make a more advanced version, the &1Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
+aura.page.materials7=It has two additional operations. First, it will create three dusts per ore instead of two. It will also destroy colored wool, leaving behind the precious dye. Note that this can be a good source of materials such as ink or Lapis Lazuli.
+
+aura.entry.monitor=Monitor
+aura.page.monitor0=The monitor is a block that can read additional state from pumps and consumer blocks. When placed next to a pump, it will output a redstone signal when the pump runs out of fuel. <br> When placed next to a consumer, it will output a redstone signal when the consumer has no work to do (ie. when the Cascading Smelter has no nearby smeltable items).
+
+aura.entry.pumps=Pumps
+aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently. Note that pumps can't send energy horizontally to each other, so using multiple pumps horizontally requires supplying aura to each one individually.
+aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
+aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
+aura.page.pumps3=The Burning Aura Pump
+aura.entry.comparator=Comparator Interactions
+aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their required progress.
+
+aura.entry.black=Black Aura
+aura.page.black0=Black aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
+aura.page.black1=Black Aura Crystal
+aura.entry.red=Red Aura
+aura.page.red0=When TNT is detonated near an &1Aura Node&0 containing Red Aura, it will absorb the explosion and it will push Red Aura uphill, acting like a pump. Each TNT block generated 200,000 power.
+aura.page.red1=Red Aura Crystal
+
+aura.entry.orange=Orange Aura
+aura.page.orange0=Orange Aura shares the properties of &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby aura nodes, causing aura to flow in the same direction.
+aura.page.orange1=Orange Aura Crystal
+aura.entry.yellow=Yellow Aura
+aura.page.yellow0=Yellow Aura provides a x2 ascent boost, meaning that it takes half of the energy to pump up, while producing the normal amount of power falling down. However, Yellow Aura rapidly breaks down in &1Aura Nodes&0.
+aura.page.yellow1=Yellow Aura Crystal
+aura.entry.green=Green Aura
+aura.page.green0=Green Aura's weight changes during the day. During the day, it weights 2x as much as normal, meaning it takes more energy to pump up and releases more energy going down. At night, however, it weighs a quarter of it's daytime weight.
+aura.page.green1=Green Aura Crystal
+aura.entry.blue=Blue Aura
+aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it takes a fourth of the energy to pump up, while producing the normal amount of power falling down, but only when it's raining. At other times, it has a detrimental x0.5 ascent boost.
+aura.page.blue1=Blue Aura Crystal
+
+aura.entry.violet=Violet Aura
+aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate.
+aura.page.violet1=Violet Aura Crystal
+aura.entry.alternating=Alternating Pumps
+aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally over an eight minute period.
+
+
+aura.entry.flux=Fluxing Node
+tile.auraNodeflux.name=Fluxing Node
+aura.page.flux0=The fluxing node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and and blocks adjacent to those ones, and so on, providing power to all of them.
+aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 4 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It won't connect to blocks such as pipes or energy cubes or tesseracts
+aura.page.flux2=The bullet, guys. I bit it. Copied some stuff, too.
+
 
 aura.entry.capacitor=Aura Capacitor
 aura.page.capacitor0=The Aura Capacitor, unlike other aura nodes, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive Aura for a few seconds.
@@ -219,46 +315,10 @@ aura.page.pumpRedstone1=Redstone Pump
 aura.entry.pumpProjectile=Projectile Pump
 aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
 aura.page.pumpProjectile1=Projectile Pump
+#Consumers
 
-aura.angelJump=Ascend
-aura.angelJumpDown=Descend
-aura.keyBindCategory=Aura Cascade
-
-item.angelJumpAmulet.name=Amulet of the Angel's Wing
-aura.entry.amuletAngel=Amulet of the Angel's Wing
-aura.page.amuletAngel0=The &1Amulet of the Angel's Wing&0 allows the player to transcend layers of terrain quickly. Pressing 'up' will jump up through terrain to the next open spot where a player can stand. Pressing 'down' will do the same thing in reverse.
-
-item.angelStepBelt.name=Sash of the Angel's heels
-aura.entry.beltAngel=Sash of the Angel's heels
-aura.page.beltAngel0=The &1Sash of the Angel's heels&0 allows the player to traverse mountains easily. It will passively allow the player to trivially traverse hills of three blocks or less. If the player runs into a wall, however, the sash will charge up and, after a short period, the player can climb walls of any height.
-
-//Consumers
 aura.entry.consumers=Consumers
 aura.page.consumers0=Consumers are blocks which use power to accomplish some task. When Aura flows from uphill to downhill, the downhill node will automatically distribute. All consumer blocks experience extreme diminishing returns: It takes 3x the energy for 2x the speed, 7x energy for 3x speed, and 15x energy for 4x speed.
-
-aura.entry.angel=Cascading Synthesizer
-aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s
-aura.page.angel1=Cascading Synthesizer
-
-aura.tutorialstarted=Tutorial Started
-
-aura.entry.angelsteel=Angel's Steel
-aura.page.angelsteel0=Angel's Steel is a very rare and valuable metal, which can be made only in the &1Cascading Synthesizer&0. The &1Cascading Synthesizer&0 will create first-degree ingots. Second-degree ingots are made by dropping three first-degree ingots into the world near eachother, and higher degrees are made in the same way
-aura.page.angelsteel1=Higher degree Angel's Steel ingots will make better tools. Higher degree ingots will increase the dig speed of the tool. It will also give two additional bonus points per tool. The bonus points are randomly applied to one of four categories:
-aura.page.angelsteel2=&2Efficiency&0 Increases your digging speed <br> &2Fortune&0 Increases drops similar to the vanilla enchantment. <br> &2Shatter&0 Increases digging speed on blocks with hardness greater than 2 <br> &2Disintegrate&0 increases digging speed on blocks with hardness less than 1
-aura.page.angelsteel4=Angel's Steel Axe
-aura.page.angelsteel5=Angel's Steel Pickaxe
-aura.page.angelsteel6=Angel's Steel Shovel
-
-aura.entry.angelsteelSword=Angel's Steel Swords
-aura.page.angelsteelSword0=Angel's Steel also makes a deadly weapon. By shaping it into a blade, you can apply a variety of curses to the enemies you hit.
-aura.page.angelsteelSword1=Higher degrees are possible
-aura.page.angelsteelSword2=A red crystal will make the enemies unstable, causing large patches of flames to randomly break out around them
-aura.page.angelsteelSword3=An orange crystal will make the enemies randomly and uncontrollably fly up into the air
-aura.page.angelsteelSword4=A yellow crystal will cause lightning to frequently strike the enemies
-aura.page.angelsteelSword5=A green crystal will sicken the enemies, causing them to rapidly take damage. This sickness quickly spreads to nearby entities-including yourself!
-aura.page.angelsteelSword6=A blue crystal will apply a curse the seeks out cracks in the enemies defenses. It will rapidly damage the enemy if they drop below half health
-aura.page.angelsteelSword7=A violet crystal will loosen the enemies grip on reality itself. They will periodically switch places with other nearby entities.
 
 aura.entry.crafting=Vortex Infusion
 aura.page.crafting0=Vortex Infusion is a process for creating many higher-level items. First, place a &1Vortex Controller&0 down, and place four &1Vortex Pedestals&0 adjacent to it. Following a recipe, right-click to place the correct items on all four pedestals.
@@ -278,44 +338,19 @@ aura.page.crafting13=Soul Sand
 aura.page.crafting14=Gold
 aura.page.crafting15=Diamond
 
-item.comboSword.name=Sword of the Barbarian
-aura.entry.swordCombo=Sword of the Barbarian
-aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 5 seconds will add to the combo. The damage increases by 7% each hit, and caps out after 100 hits.
-aura.page.swordCombo1=COMBO BREAKER!
 
-tile.auraNodepumpCreative.name=Creative Pump (Creative Only)
-tile.consumerBlockdye.name=Cascading Colorer
 aura.entry.dye=Cascading Colorer
 aura.page.dye0=The Cascading Colorer is designed to ensure an easy supply of wool. It will, when given an extremely small amount of power, both replenish the wool on nearby sheep and dye them into a random color.
 
-aura.entry.swordTransmute=Transmuting Sword
-item.transmutingSword.name=Transmuting Sword
-aura.page.swordTransmute0=The &1transmuting sword&0 will change one form of an entity into another. A full list of effected entities can be found on the next page.
-aura.page.swordTransmute1=Cow <-> Mooshroom <br> Creeper <-> Enderman <br> Sheep <-> Pig <br> Ghast <-> Blaze <br> Slime <-> Magma Cube <br> Ocelot <-> Wolf
 
-aura.entry.explosionRing=Ring of the Shattered Stone
-item.explosionRing.name=Ring of the Shattered Stone
-aura.page.explosionRing0=The &1Explosion Ring&0 will channel the destructive power of explosions in a short radius. Explosions within 4 blocks of a player wearing the ring will only affect blocks such as dirt, stone, sand or gravel, leaving more valuable resources untouched.
+aura.entry.angel=Cascading Synthesizer
+aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s
+aura.page.angel1=Cascading Synthesizer
 
-aura.entry.alternating=Alternating Pumps
-aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally over an eight minute period.
 
 aura.entry.furnace=Cascading Smelter
 aura.page.furnace1=Cascading Smelter
 aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
-
-aura.entry.materials=Materials
-aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
-aura.page.materials2=First off, it will turn ores dropped nearby into two dust, if appropriate dusts exist. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Colorer&0
-aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
-aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
-aura.page.materials6=By upgrading the &1Cascading Processor&0 with &1Arcane Prisms&0, you can make a more advanced version, the &1Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
-aura.page.materials7=It has two additional operations. First, it will create three dusts per ore instead of two. It will also destroy colored wool, leaving behind the precious dye. Note that this can be a good source of materials such as ink or Lapis Lazuli.
-
-aura.tutorialEnded=Tutorial Finished
-aura.entry.tutorial=Tutorial
-aura.page.tutorial0=This tutorial will guide you through the most important pages of this book
-aura.startTutorial=Begin
 
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
@@ -352,6 +387,52 @@ aura.page.books18=32 stacks of 100,000
 aura.page.books19=32 stacks of 100,000
 aura.page.books20=64 stacks of 100
 
+
+tile.consumerBlocknether.name=Ritual of the Nether
+aura.entry.nether=Ritual of the Nether
+aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
+aura.page.nether1=Better than fire
+
+
+aura.entry.brewer=Cascading brewer
+aura.page.brewer0=The &1Cascading Brewer&0 is an extremely useful device. Dropping water bottles nearby will randomly add brewing ingredients, creating potions for just the cost of the water bottle. It requires a minimum of 500 power/second to run.
+aura.page.brewer1=Don't drink potions from strangers
+
+#Accessories
+
+aura.entry.amuletAngel=Amulet of the Angel's Wing
+aura.page.amuletAngel0=The &1Amulet of the Angel's Wing&0 allows the player to transcend layers of terrain quickly. Pressing 'up' will jump up through terrain to the next open spot where a player can stand. Pressing 'down' will do the same thing in reverse.
+
+aura.entry.beltAngel=Sash of the Angel's heels
+aura.page.beltAngel0=The &1Sash of the Angel's heels&0 allows the player to traverse mountains easily. It will passively allow the player to trivially traverse hills of three blocks or less. If the player runs into a wall, however, the sash will charge up and, after a short period, the player can climb walls of any height.
+
+aura.entry.prismaticWand=Prismatic Wand
+aura.page.prismaticWand0=The &1Prismatic Wand&0 is a tool that allows you to copy structures. It has three modes, which can be cycled via shift-right-click. First, place it in selection mode, and right click two corners to form a cuboid. Then, put it in copy mode, and right click to copy. Finally, put it in paste mode, and right click to paste. It consumers items from the users's inventory.
+
+item.mirror.name=Mirror of the Angel
+aura.entry.mirror=Mirror of the Angel
+aura.page.mirror0=The &1Mirror of the Angel&0 is a tool that will reflect back Ghast's fireballs. Left clicking on the fireball, as you would with a sword, or right clicking near the fireball will deflect it. The deflected fireball will travel directly towards the nearest Ghast, at a considerably faster rate than most fireballs.
+
+
+aura.entry.angelsteel=Angel's Steel
+aura.page.angelsteel0=Angel's Steel is a very rare and valuable metal, which can be made only in the &1Cascading Synthesizer&0. The &1Cascading Synthesizer&0 will create first-degree ingots. Second-degree ingots are made by dropping three first-degree ingots into the world near eachother, and higher degrees are made in the same way
+aura.page.angelsteel1=Higher degree Angel's Steel ingots will make better tools. Higher degree ingots will increase the dig speed of the tool. It will also give two additional bonus points per tool. The bonus points are randomly applied to one of four categories:
+aura.page.angelsteel2=&2Efficiency&0 Increases your digging speed <br> &2Fortune&0 Increases drops similar to the vanilla enchantment. <br> &2Shatter&0 Increases digging speed on blocks with hardness greater than 2 <br> &2Disintegrate&0 increases digging speed on blocks with hardness less than 1
+aura.page.angelsteel4=Angel's Steel Axe
+aura.page.angelsteel5=Angel's Steel Pickaxe
+aura.page.angelsteel6=Angel's Steel Shovel
+
+aura.entry.angelsteelSword=Angel's Steel Swords
+aura.page.angelsteelSword0=Angel's Steel also makes a deadly weapon. By shaping it into a blade, you can apply a variety of curses to the enemies you hit.
+aura.page.angelsteelSword1=Higher degrees are possible
+aura.page.angelsteelSword2=A red crystal will make the enemies unstable, causing large patches of flames to randomly break out around them
+aura.page.angelsteelSword3=An orange crystal will make the enemies randomly and uncontrollably fly up into the air
+aura.page.angelsteelSword4=A yellow crystal will cause lightning to frequently strike the enemies
+aura.page.angelsteelSword5=A green crystal will sicken the enemies, causing them to rapidly take damage. This sickness quickly spreads to nearby entities-including yourself!
+aura.page.angelsteelSword6=A blue crystal will apply a curse the seeks out cracks in the enemies defenses. It will rapidly damage the enemy if they drop below half health
+aura.page.angelsteelSword7=A violet crystal will loosen the enemies grip on reality itself. They will periodically switch places with other nearby entities.
+
+
 aura.entry.protection=Protection Amulets
 aura.page.protection0=Protection Amulets are baubles that will protect the player from certain types of damage, and channel the energy towards healing the player. They come in all the colors of the rainbow! &1Red Protection Amulet&0 will grant immunity from Fire and Lava. &1Orange Protection Amulet&0 will grant immunity from Explosions. &1Yellow Protection Amulet&0 will grant partial immunity from projectiles.
 aura.page.protection1= &1Green Protection Amulet&0 will grant immunity from Fall damage. &1Blue Protection Amulet&0 will grant immunity from Drowning. &1Violet Protection Amulet&0 will grant immunity from wither debuffs, but will not heal the player.
@@ -362,6 +443,17 @@ aura.page.protection5=Mama, I can fly!
 aura.page.protection6=I'm a fish now!
 aura.page.protection7=Wither b' gone (tm)
 
+aura.entry.swordTransmute=Transmuting Sword
+aura.page.swordTransmute0=The &1transmuting sword&0 will change one form of an entity into another. A full list of effected entities can be found on the next page.
+aura.page.swordTransmute1=Cow <-> Mooshroom <br> Creeper <-> Enderman <br> Sheep <-> Pig <br> Ghast <-> Blaze <br> Slime <-> Magma Cube <br> Ocelot <-> Wolf
+
+aura.entry.swordCombo=Sword of the Barbarian
+aura.page.swordCombo0=the &1Sword of the Barbarian&0 will become more powerful with each successive hit. Hits within 5 seconds will add to the combo. The damage increases by 7% each hit, and caps out after 100 hits.
+aura.page.swordCombo1=COMBO BREAKER!
+
+aura.entry.explosionRing=Ring of the Shattered Stone
+aura.page.explosionRing0=The &1Explosion Ring&0 will channel the destructive power of explosions in a short radius. Explosions within 4 blocks of a player wearing the ring will only affect blocks such as dirt, stone, sand or gravel, leaving more valuable resources untouched.
+
 aura.entry.redHole=Portable Red Hole
 item.redHole.name=Portable Red Hole
 aura.page.redHole0=The &1Portable Red Hole&0 is a simple device that, every five seconds, will create an extremely large explosion around itself. It will take five times longer to despawn when dropped on the ground. &1Orange Protection Amulets&0 are strongly reccommended.
@@ -371,6 +463,72 @@ aura.entry.blackHole=Portable Black Hole
 item.blackHole.name=Portable Black Hole
 aura.page.blackHole0=The &1Portable Black Hole&0 is an item which will consume all cobblestone in a players inventory. It will take five times longer to despawn when dropped on the ground.
 aura.page.blackHole1=I miss EE
+
+
+
+tile.magicRoad.name=Traveler's Bricks
+aura.entry.magicRoad=Traveler's Bricks
+aura.page.magicRoad0=&1Traveler's Bricks&0 are a block that will make incredibly efficient roads. Sprinting on these blocks will accelerate players in their direction of motion at near-instant speeds.
+aura.page.magicRoad1=Roads are back in style
+
+tile.trampoline.name=Rebounding Enigma
+aura.entry.trampoline=Rebounding Enigma
+aura.page.trampoline0=A &Rebounding Enigma&0 will send any entities walking on it hundreds of blocks into the air. Be warned that the fall back down cal be quite deadly, a &1Green Amulet of Protection&0 or similar item is recommended.
+aura.page.trampoline1=Just a glorified trampoline
+
+item.swordThief.name=Sword of the Thief
+aura.entry.swordThief=Sword of the Thief
+aura.page.swordThief0=&1Sword of the Thief&0 is a sword that allows you to steal items from villages. Upon slaying a villager with this sword, the villager has a 25% chance to drop whatever item is was offering to trade.
+aura.page.swordThief1=Grand Theft Auto Style
+
+item.amuletFood.name=Amulet of the Forbidden Fruit
+aura.entry.amuletFood=Amulet of the Forbidden Fruit
+aura.page.amuletFood0=The &1Amulet of the Forbidden Fruit&0 will apply a random potion effect each time you eat a food, either positive or negative. The potion effect is consistent when eating the same type of food-for example, carrots will always give invisibility.
+aura.page.amuletFood1=Apples are hardcoded
+
+#Kaleidoscope
+
+aura.entry.enchanter=Kaleidoscopic Enchantments
+aura.page.enchanter0=Kaleidoscopic Enchantments are a series of 6 enchantments, each with a different color, that can be applied to swords or tools. Each enchantment gives a different effect by themselves. However, when two or more different enchantments are combined, each one interacts with every other enchantment, creating dozens of unique effects - some negative.
+aura.page.enchanter1=Mana still unobtainable
+aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying kaleidoscopic enchantments. It functions as a cascading consumer, and requires 500 power/second minimum. Drop the item to be enchanted, as well as an appropriately colored Aura Crystal near the enchanter.
+aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic enchantments on an item. When adding a second level, it has a 75% chance of success. Each additional level has three-quarters success rate of the previous one.
+
+aura.entry.basicEffects=Basic Effects
+aura.page.basicEffects0=&4Red&0 will grant silk touch. Additional levels have no effect.
+aura.page.basicEffects1=&6Orange&0 will grant efficiency.
+aura.page.basicEffects2=&eYellow&0 will grant fortune.
+aura.page.basicEffects3=&1Blue&0 will grant knockback.
+aura.page.basicEffects4=&2Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
+aura.page.basicEffects5=&5Violet&0 will grant a powerful efficiency boost on hard materials such as obsidian.
+
+aura.entry.areaOfEffect=Area of Effect interactions
+aura.page.areaOfEffect0=&eYellow&0 and &2Green&0 will allow your tool to harvest fields of crops at once.
+aura.page.areaOfEffect1=&1Blue&0 and &5Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
+
+aura.entry.combat=Combat interactions
+aura.page.combat0=&2Green&0 and &1Blue&0 will grant life steal.
+aura.page.combat1=&eYellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
+aura.page.combat2=&4Red&0 and &5Violet&0 will act as a secondary armor, lowering the damage sustained from enemies.
+
+aura.entry.looting=Resource interactions
+aura.page.looting0=&eYellow&0 and &5Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
+aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping two ingots.
+
+aura.entry.negative=Negative interactions
+aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.
+aura.page.negative1=&4Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
+aura.page.negative2=&2Green&0 and &5Violet&0 will lower the attack damage a tool produces.
+
+aura.entry.speedBoosts=Mining Speed boosts
+aura.page.speedBoosts0=&4Red&0 and &6Orange&0 grant higher mining speed on ores.
+aura.page.speedBoosts1=&eYellow&0 and &6Orange&0 grant higher mining speed on stone.
+aura.page.speedBoosts2=&1Blue&0 and &6Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
+aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on wood.
+aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
+
+#Fairies
+
 
 aura.entry.fairies=Fairies
 aura.page.fairies0=Fairies are an end-game system that can help the player out as both a utility and an aid in combat. To start out, equip a &1Ring of Binding&0 in your Baubles slot (Press 'B'). With the ring of binding equipped, right-click a &1Fairy Charm&0 to add the fairy to the ring of binding.
@@ -441,136 +599,12 @@ aura.entry.fairyTrain=Training Fairy
 aura.page.fairyTrain0=Fairy that occasionally drops XP orbs.
 aura.page.fairyTrain1=Right click with &1Ring of Binding&0 to summon
 
-auramisc.shiftToRead=Shift-right click to read more
-auramisc.clickToRecipe=Shift click to see recipe
-auramisc.clickToIndex=Shift click for index
 
-tile.storageBookshelfCoordinator.name=Bookshelf Coordinator
-tile.storageBookshelf.name=Storage Bookshelf
-
-item.basicBook.name=Storage Book
-item.denseBook.name=Dense Storage Book
-item.extremelyDenseBook.name=Extremely Dense Storage Book
-item.veryDenseBook.name=Very Dense Storage Book
-item.superDenseBook.name=Super Dense Storage Book
-
-item.lightBook.name=Light Storage Book
-item.extremelyLightBook.name=Extremely Light Storage Book
-item.veryLightBook.name=Very Light Storage Book
-item.superLightBook.name=Super Light Storage Book
-
-item.mineralBook.name=Mineral Storage Book
-item.mobDropBook.name=Mob Drop Book
-item.modBook.name=Mod Specific Book
-item.farmingBook.name=Farming Book
-
-item.purpleAmulet.name=Violet Protection Amulet
-item.redAmulet.name=Red Protection Amulet
-item.orangeAmulet.name=Orange Protection Amulet
-item.yellowAmulet.name=Yellow Protection Amulet
-item.greenAmulet.name=Green Protection Amulet
-item.blueAmulet.name=Blue Protection Amulet
-
-tile.magicRoad.name=Traveler's Bricks
-aura.entry.magicRoad=Traveler's Bricks
-aura.page.magicRoad0=&1Traveler's Bricks&0 are a block that will make incredibly efficient roads. Sprinting on these blocks will accelerate players in their direction of motion at near-instant speeds.
-aura.page.magicRoad1=Roads are back in style
-
-tile.trampoline.name=Rebounding Enigma
-aura.entry.trampoline=Rebounding Enigma
-aura.page.trampoline0=A &Rebounding Enigma&0 will send any entities walking on it hundreds of blocks into the air. Be warned that the fall back down cal be quite deadly, a &1Green Amulet of Protection&0 or similar item is recommended.
-aura.page.trampoline1=Just a glorified trampoline
-
-item.swordThief.name=Sword of the Thief
-aura.entry.swordThief=Sword of the Thief
-aura.page.swordThief0=&1Sword of the Thief&0 is a sword that allows you to steal items from villages. Upon slaying a villager with this sword, the villager has a 25% chance to drop whatever item is was offering to trade.
-aura.page.swordThief1=Grand Theft Auto Style
-
-item.amuletFood.name=Amulet of the Forbidden Fruit
-aura.entry.amuletFood=Amulet of the Forbidden Fruit
-aura.page.amuletFood0=The &1Amulet of the Forbidden Fruit&0 will apply a random potion effect each time you eat a food, either positive or negative. The potion effect is consistent when eating the same type of food-for example, carrots will always give invisibility.
-aura.page.amuletFood1=Apples are hardcoded
-
-tile.consumerBlocknether.name=Ritual of the Nether
-aura.entry.nether=Ritual of the Nether
-aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
-aura.page.nether1=Better than fire
-
-tile.consumerBlockpotion.name=Cascading Brewer
-aura.entry.brewer=Cascading brewer
-aura.page.brewer0=The &1Cascading Brewer&0 is an extremely useful device. Dropping water bottles nearby will randomly add brewing ingredients, creating potions for just the cost of the water bottle. It requires a minimum of 500 power/second to run.
-aura.page.brewer1=Don't drink potions from strangers
-
-aura.entry.basicSetup=Basic Setup
-aura.entry.introduction=Introduction to this Walkthrough
-aura.entry.vortexInfusion=Vortex Infusion
-
-aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
-
-aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with aura, and place coal near the pump.
-aura.page.basicSetup2=The red node is the &1Pump&0 and requires fuel. <br> The node on the top of the pump is the &1Receiving Node&0 <br> The node adjacent to the Receiving Node is the &1Transfer Node&0. The last node is the &1Power Node&0. Cascading blocks will be powered when placed next to the Power Node.
-
-aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0. These four Vortex pedestals surround the &1Vortex Controller&0.
-
-tile.consumerBlockenchanter.name=Kaleidoscopic Enchanter
-
-aura.entry.enchanter=Kaleidoscopic Enchantments
-aura.page.enchanter0=Kaleidoscopic Enchantments are a series of 6 enchantments, each with a different color, that can be applied to swords or tools. Each enchantment gives a different effect by themselves. However, when two or more different enchantments are combined, each one interacts with every other enchantment, creating dozens of unique effects - some negative.
-aura.page.enchanter1=Mana still unobtainable
-aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying kaleidoscopic enchantments. It functions as a cascading consumer, and requires 500 power/second minimum. Drop the item to be enchanted, as well as an appropriately colored Aura Crystal near the enchanter.
-aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic enchantments on an item. When adding a second level, it has a 75% chance of success. Each additional level has three-quarters success rate of the previous one.
-
-aura.entry.basicEffects=Basic Effects
-aura.page.basicEffects0=&4Red&0 will grant silk touch. Additional levels have no effect.
-aura.page.basicEffects1=&6Orange&0 will grant efficiency.
-aura.page.basicEffects2=&eYellow&0 will grant fortune.
-aura.page.basicEffects3=&1Blue&0 will grant knockback.
-aura.page.basicEffects4=&2Green&0 will allow your axe to fell trees with one hit. Additional levels increase the maximum blocks broken by 25 blocks per level.
-aura.page.basicEffects5=&5Violet&0 will grant a powerful efficiency boost on hard materials such as obsidian.
-
-aura.entry.areaOfEffect=Area of Effect interactions
-aura.page.areaOfEffect0=&eYellow&0 and &2Green&0 will allow your tool to harvest fields of crops at once.
-aura.page.areaOfEffect1=&1Blue&0 and &5Violet&0 will inflict damage on enemies near your target. Higher levels results in more damage.
-
-aura.entry.combat=Combat interactions
-aura.page.combat0=&2Green&0 and &1Blue&0 will grant life steal.
-aura.page.combat1=&eYellow&0 and &1Blue&0 will set enemies you hit on fire for a short time.
-aura.page.combat2=&4Red&0 and &5Violet&0 will act as a secondary armor, lowering the damage sustained from enemies.
-
-aura.entry.looting=Resource interactions
-aura.page.looting0=&eYellow&0 and &5Violet&0 will grant an especially potent form of looting, multiplying all items dropped on mob death.
-aura.page.looting1=&eYellow&0 and &4Red&0 will multiply ores mined, dropping two ingots.
-
-aura.entry.negative=Negative interactions
-aura.page.negative0=&4Red&0 and &2Green&0 will lower mining speed.
-aura.page.negative1=&4Red&0 and &1Blue&0 will grant recoil, causing you to take some damage when attacking.
-aura.page.negative2=&2Green&0 and &5Violet&0 will lower the attack damage a tool produces.
-
-aura.entry.speedBoosts=Mining Speed boosts
-aura.page.speedBoosts0=&4Red&0 and &6Orange&0 grant higher mining speed on ores.
-aura.page.speedBoosts1=&eYellow&0 and &6Orange&0 grant higher mining speed on stone.
-aura.page.speedBoosts2=&1Blue&0 and &6Orange&0 grant higher mining speed on dirt, sand, grass and gravel.
-aura.page.speedBoosts3=&2Green&0 and &6Orange&0 grant higher mining speed on wood.
-aura.page.speedBoosts4=&5Violet&0 and &6Orange&0 grant higher mining speed on blocks with high durability, such as obsidian.
-
-tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
-enchantment.Red=Kaleidoscopic Red
-enchantment.Orange=Kaleidoscopic Orange
-enchantment.Yellow=Kaleidoscopic Yellow
-enchantment.Green=Kaleidoscopic Green
-enchantment.Blue=Kaleidoscopic Blue
-enchantment.Violet=Kaleidoscopic Violet
+#END-WEB#
 
 aura.entry.video=Video Walkthrough
 aura.page.video0=This video, by SilverContrails, provides a good walkthrough of the basic aura mechanics.
 auramisc.playVideo=Play Video
-
-aura.entry.flux=Fluxing Node
-tile.auraNodeflux.name=Fluxing Node
-aura.page.flux0=The fluxing node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and and blocks adjacent to those ones, and so on, providing power to all of them.
-aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 4 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It won't connect to blocks such as pipes or energy cubes or tesseracts
-aura.page.flux2=The bullet, guys. I bit it. Copied some stuff, too.
-
 aura.entry.00quest=Crystals
 aura.entry.01quest=Nodes
 aura.entry.02quest=Pumps
@@ -601,3 +635,13 @@ aura.page.10questDesc=Arcane Prisms are made by combining 8 arcane gems of diffe
 aura.page.11questDesc=The Cascading Synthesizer is used to make Angel's Steel, a valuable resource
 aura.page.12questDesc=Angel's Steel can be made into higher tiers by dropping it on the ground. It is a valuable resource for making tools and swords
 aura.page.13questDesc=Fairies are entities that circle any player with a Ring of Binding. They provide a number of useful effects, and many types can be crafted.
+
+aura.entry.tutorial=Tutorial
+aura.page.tutorial0=This tutorial will guide you through the most important pages of this book
+aura.startTutorial=Begin
+
+
+
+aura.entry.basicSetup=Basic Setup
+aura.entry.introduction=Introduction to this Walkthrough
+aura.entry.vortexInfusion=Vortex Infusion
