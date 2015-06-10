@@ -587,13 +587,15 @@ aura.entry.fairyDigger=Digger Fairy
 aura.page.fairyDigger0=Fairy that will increase your dig speed
 aura.page.fairyDigger1=Right click with &1Ring of Binding&0 to summon
 
-aura.entry.fairyFall=Glider Fairy
-aura.page.fairyFall0=Fairy that reduces fall damage.
-aura.page.fairyFall1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyLight=Lighter Fairy
 aura.page.fairyLight0=Fairy that, when it's dark, places temporary, invisible, light sources.
 aura.page.fairyLight1=Right click with &1Ring of Binding&0 to summon
+
+aura.entry.fairyFall=Glider Fairy
+aura.page.fairyFall0=Fairy that reduces fall damage.
+aura.page.fairyFall1=Right click with &1Ring of Binding&0 to summon
+
 
 aura.entry.fairyTrain=Training Fairy
 aura.page.fairyTrain0=Fairy that occasionally drops XP orbs.

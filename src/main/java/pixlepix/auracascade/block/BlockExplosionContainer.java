@@ -11,6 +11,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.itemblock.ItemblockExplosionContainer;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -22,7 +23,7 @@ import java.util.Random;
  */
 public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
-    String type;
+    public String type;
 
 
     public BlockExplosionContainer() {
@@ -214,7 +215,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
-        return null;
+        return ItemblockExplosionContainer.class;
     }
 
     @Override
