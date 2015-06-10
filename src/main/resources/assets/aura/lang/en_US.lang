@@ -535,6 +535,7 @@ aura.page.fairies0=Fairies are an end-game system that can help the player out a
 aura.page.fairies1=Different types of &1Fairy Charms&0 will summon different fairies, which have different effects. <br> A &1Ring of Binding&0 can hold 15 fairies. To empty the ring, shift right-click while holding the ring. The basic fairy charm has no effect, but is used to craft other, more useful, fairy charms.
 aura.page.fairies2=Ring of Binding
 aura.page.fairies3=Fairy Charm.
+
 aura.entry.fairyCombat=Fighter Fairy
 aura.page.fairyCombat0=Simple fairy that damages mobs.
 aura.page.fairyCombat1=Right click with &1Ring of Binding&0 to summon
