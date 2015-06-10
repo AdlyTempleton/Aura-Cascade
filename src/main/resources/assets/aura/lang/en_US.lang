@@ -537,7 +537,7 @@ aura.page.fairies2=Ring of Binding
 aura.page.fairies3=Fairy Charm.
 
 aura.entry.fairyCombat=Fighter Fairy
-aura.page.fairyCombat0=Simple fairy that damages mobs.
+aura.page.fairyCombat0=Simple fairy that damages nearby mobs as it passes by.
 aura.page.fairyCombat1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyDebuff=Debuffer Fairy
@@ -565,15 +565,15 @@ aura.page.fairySavior0=Fairy that acts like an extremely powerful combat fairy w
 aura.page.fairySavior1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyFetch=Fetcher Fairy
-aura.page.fairyFetch0=Fairy that picks up nearby items.
+aura.page.fairyFetch0=Fairy that picks up nearby items and brings them to the player.
 aura.page.fairyFetch1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyBait=Baiter Fairy
-aura.page.fairyBait0=Fairy that summons passive mobs.
+aura.page.fairyBait0=Fairy that summons passive mobs. It will summon mobs that naturally spawn in the area.
 aura.page.fairyBait1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyBreed=Breeder Fairy
-aura.page.fairyBreed0=Fairy that make passive mobs fall in love.
+aura.page.fairyBreed0=Fairy that make passive mobs fall in love, as if they were fed the appropriate food.
 aura.page.fairyBreed1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyScare=Scarer Fairy
@@ -585,7 +585,7 @@ aura.page.fairyExtinguisher0=Fairy that both removes nearby lava and puts out fi
 aura.page.fairyExtinguisher1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyDigger=Digger Fairy
-aura.page.fairyDigger0=Fairy that will increase your dig speed
+aura.page.fairyDigger0=Fairy that will increase your dig speed. Each fairy will increase dig speed by 8%.
 aura.page.fairyDigger1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyLight=Lighter Fairy
@@ -593,11 +593,11 @@ aura.page.fairyLight0=Fairy that, when it's dark, places temporary, invisible, l
 aura.page.fairyLight1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyFall=Glider Fairy
-aura.page.fairyFall0=Fairy that reduces fall damage.
+aura.page.fairyFall0=Fairy that reduces fall damage. Each fairy reduces damage by 50%
 aura.page.fairyFall1=Right click with &1Ring of Binding&0 to summon
 
 aura.entry.fairyTrain=Training Fairy
-aura.page.fairyTrain0=Fairy that occasionally drops XP orbs.
+aura.page.fairyTrain0=Fairy that occasionally drops XP orbs. A fairy will spawn an XP orb approximately every minute.
 aura.page.fairyTrain1=Right click with &1Ring of Binding&0 to summon
 
 
