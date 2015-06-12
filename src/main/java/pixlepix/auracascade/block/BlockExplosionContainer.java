@@ -160,7 +160,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
             return true;
         }
         Block block = world.getBlock(x, y, z);
-        return block == this ? false : super.shouldSideBeRendered(world, x, y, z, side);
+        return block != this;
     }
 
     /**
@@ -229,7 +229,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public boolean isOpaqueCube() {
-        return true;
+        return type == null || !type.equals("Glass");
     }
 
     @Override
