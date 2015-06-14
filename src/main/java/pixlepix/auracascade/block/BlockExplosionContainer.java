@@ -11,7 +11,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.itemblock.ItemblockExplosionContainer;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -75,6 +74,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         AuraCascade.proxy.renderPass = pass;
         return true;
     }
+
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
@@ -194,6 +194,13 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public IIcon getIcon(int side, int meta) {
+
+        return blockIcon;
+    }
+
+    @Override
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int meta) {
+
         if (AuraCascade.proxy.renderPass == 1) {
             if (meta != 0) {
                 return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
@@ -215,7 +222,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
-        return ItemblockExplosionContainer.class;
+        return null;
     }
 
     @Override
