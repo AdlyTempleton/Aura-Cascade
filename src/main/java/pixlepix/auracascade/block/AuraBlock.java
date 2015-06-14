@@ -341,7 +341,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (type.equals("flux")) {
             return new CraftingBenchRecipe(new ItemStack(this), "III", "RNR", "III", 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'I', ItemMaterial.getIngot(EnumAura.ORANGE_AURA), 'N', getAuraNodeItemstack());
         }
-        return new CraftingBenchRecipe(new ItemStack(this), "PPP", "PRP", "PPP", 'P', new ItemStack(Blocks.glass_pane), 'R', new ItemStack(Blocks.redstone_block));
+        return new CraftingBenchRecipe(new ItemStack(this, 4), "PPP", "PRP", "PPP", 'P', new ItemStack(Items.gold_nugget), 'R', new ItemStack(Items.redstone));
     }
 
     public void updateMonitor(World w, int x, int y, int z) {
