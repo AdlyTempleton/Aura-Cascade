@@ -253,7 +253,7 @@ public final class LexiconData {
         new BLexiconEntry("fairyTrain", categoryFairies).setLexiconPages(new PageText("0"),
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityXPFairy.class)));
         //Walkthrough
-        new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0"));
+        new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), new PageGuide("1", "https://www.youtube.com/watch?v=bbtr85S5m4Q"));
         new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
         new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/0.png"), new PageText("2"));
         new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/1.png"));

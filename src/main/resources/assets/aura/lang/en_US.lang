@@ -604,7 +604,9 @@ aura.page.fairyTrain1=Right click with &1Ring of Binding&0 to summon
 #END-WEB#
 
 aura.entry.video=Video Walkthrough
-aura.page.video0=This video, by SilverContrails, provides a good walkthrough of the basic aura mechanics.
+aura.page.video0=This video, by SilverContrails, provides a good solid walkthrough of the basic concepts of the mod
+
+aura.page.video1=This video, by nicolbw, provides an incredibly concise (15 minutes) guide to all blocks and items.
 auramisc.playVideo=Play Video
 aura.entry.00quest=Crystals
 aura.entry.01quest=Nodes

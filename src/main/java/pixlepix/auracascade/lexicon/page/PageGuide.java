@@ -22,7 +22,7 @@ public class PageGuide extends PageText {
 
     GuiButton button;
 
-    public PageGuide(String unlocalizedName) {
+    public PageGuide(String unlocalizedName, String url) {
         super(unlocalizedName);
     }
 
