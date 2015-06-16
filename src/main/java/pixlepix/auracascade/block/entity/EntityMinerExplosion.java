@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.BlockExplosionContainer;
-import pixlepix.auracascade.block.BlockPhantomOre;
 
 import java.util.Random;
 
@@ -92,9 +91,6 @@ public class EntityMinerExplosion extends Entity {
                                     worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
                                 }
                             }
-                        }
-                        if (block instanceof BlockPhantomOre) {
-                            contained = true;
                         }
                     }
                 }
