@@ -11,10 +11,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
+import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -36,6 +39,20 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public BlockExplosionContainer(String s) {
         this();
         type = s;
+    }
+
+    public static ConsumerBlock getBlockFromName(String name) {
+        List<Block> blockList = BlockRegistry.getBlockFromClass(ConsumerBlock.class);
+        for (Block b : blockList) {
+            if (((ConsumerBlock) b).name != null && ((ConsumerBlock) b).name.equals(name)) {
+                return (ConsumerBlock) b;
+            }
+        }
+        return null;
+    }
+
+    public static PageCraftingRecipe getRecipe(String unloc, String name) {
+        return new PageCraftingRecipe(unloc, BlockRegistry.getRecipe(getBlockFromName(name)));
     }
 
     @Override
@@ -74,7 +91,6 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         AuraCascade.proxy.renderPass = pass;
         return true;
     }
-
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)

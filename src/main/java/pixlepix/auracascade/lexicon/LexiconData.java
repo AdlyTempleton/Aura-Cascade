@@ -57,7 +57,7 @@ public final class LexiconData {
 
         LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
         CategoryManager.addCategory(categoryWalkthrough);
-        
+
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
         CategoryManager.addCategory(categoryBasics);
         LexiconCategory categoryAuraColors = CategoryManager.categoryAuraColors = new LexiconCategory("Special Aura Colors").setIcon(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, 2));
@@ -118,7 +118,7 @@ public final class LexiconData {
                 new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
                 new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
                 new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
-        
+
 
         // BASICS ENTRIES
         new BLexiconEntry("interactions", categoryBasics).setLexiconPages(new PageText("0"), new PageText("1"));
@@ -150,6 +150,14 @@ public final class LexiconData {
                 new PageCraftingRecipe("6", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("pumpRedstoneAlt"))).iRecipe));
         //Consumers
         new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemExplosionRing.class));
+        new BLexiconEntry("miner", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageCraftingRecipe("3", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("miner"))),
+                new PageText("4"),
+                new PageText("5"), BlockExplosionContainer.getRecipe("6", "Dirt"),
+                new PageText("7"), BlockExplosionContainer.getRecipe("8", "Glass"),
+                new PageText("9"), BlockExplosionContainer.getRecipe("10", "Cobblestone"),
+                new PageText("11"), BlockExplosionContainer.getRecipe("12", "Stone"),
+                new PageText("13"), BlockExplosionContainer.getRecipe("14", "Wood"),
+                new PageText("15"), BlockExplosionContainer.getRecipe("16", "Obsidian"));
 
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
         new BLexiconEntry("swordCombo", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemComboSword.class));
