@@ -41,11 +41,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         type = s;
     }
 
-    public static ConsumerBlock getBlockFromName(String name) {
-        List<Block> blockList = BlockRegistry.getBlockFromClass(ConsumerBlock.class);
+    public static BlockExplosionContainer getBlockFromName(String name) {
+        List<Block> blockList = BlockRegistry.getBlockFromClass(BlockExplosionContainer.class);
         for (Block b : blockList) {
-            if (((ConsumerBlock) b).name != null && ((ConsumerBlock) b).name.equals(name)) {
-                return (ConsumerBlock) b;
+            if (((BlockExplosionContainer) b).type != null && ((BlockExplosionContainer) b).type.equals(name)) {
+                return (BlockExplosionContainer) b;
             }
         }
         return null;
