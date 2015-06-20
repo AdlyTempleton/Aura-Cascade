@@ -80,7 +80,7 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.stonebrick));
+        return new CraftingBenchRecipe(new ItemStack(this, 32), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.stonebrick));
     }
 
     @Override

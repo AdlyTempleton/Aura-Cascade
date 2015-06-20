@@ -152,13 +152,7 @@ public final class LexiconData {
         new BLexiconEntry("explosionRing", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemExplosionRing.class));
         new BLexiconEntry("miner", categoryConsumers).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageCraftingRecipe("3", BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("miner"))),
                 new PageText("4"),
-                new PageText("5"), BlockExplosionContainer.getRecipe("6", "Dirt"),
-                new PageText("7"), BlockExplosionContainer.getRecipe("8", "Glass"),
-                new PageText("9"), BlockExplosionContainer.getRecipe("10", "Cobblestone"),
-                new PageText("11"), BlockExplosionContainer.getRecipe("12", "Stone"),
-                new PageText("13"), BlockExplosionContainer.getRecipe("14", "Wood"),
-                new PageText("15"), BlockExplosionContainer.getRecipe("16", "Obsidian"));
-
+                new PageText("5"));
         new BLexiconEntry("swordThief", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemThiefSword.class));
         new BLexiconEntry("swordCombo", catagoryAccessories).setLexiconPages(new PageText("0"), new PageCraftingRecipe("1", ItemComboSword.class));
         new BLexiconEntry("swordTransmute", catagoryAccessories).setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ItemTransmutingSword.class));
