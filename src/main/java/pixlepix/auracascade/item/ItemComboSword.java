@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -68,7 +69,7 @@ public class ItemComboSword extends ItemSword implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " d ", " d ", " p ", 'd', new ItemStack(Items.diamond), 'p', ItemMaterial.getPrism());
+        return new CraftingBenchRecipe(new ItemStack(this), " d ", " d ", " p ", 'd', new ItemStack(Items.diamond), 'p', ItemMaterial.getGem(EnumAura.RED_AURA));
     }
 
     @Override

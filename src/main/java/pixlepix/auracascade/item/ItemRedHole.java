@@ -53,7 +53,7 @@ public class ItemRedHole extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "IGI", "GIG", "IGI", 'G', ItemMaterial.getGem(EnumAura.RED_AURA), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), "IGI", " I ", "IGI", 'G', ItemMaterial.getGem(EnumAura.RED_AURA), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
     }
 
     @Override

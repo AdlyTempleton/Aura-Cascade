@@ -35,6 +35,6 @@ public class BasicStorageBook extends ItemStorageBook {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " B ", "BIB", " B ", 'B', new ItemStack(Items.book), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), "BIB", 'B', new ItemStack(Items.book), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
     }
 }

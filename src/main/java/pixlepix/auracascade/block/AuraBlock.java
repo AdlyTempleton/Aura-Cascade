@@ -289,7 +289,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
         }
         if (type.equals("black")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " I ", "INI", " I ", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), " I ", " N ", " I ", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'N', getAuraNodeItemstack());
         }
         if (type.equals("conserve")) {
             return new CraftingBenchRecipe(new ItemStack(this), "B", "N", "B", 'B', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'N', getAuraNodeItemstack());
@@ -299,7 +299,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
 
         if (type.equals("craftingPedestal")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BNB", "BBB", 'B', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BNB", "BBB", 'B', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
         }
 
         if (type.equals("craftingCenter")) {
@@ -308,38 +308,38 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
 
         if (type.equals("orange")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " O ", "ONO", " O ", 'O', ItemMaterial.getIngot(EnumAura.ORANGE_AURA), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), " O ", " N ", " O ", 'O', ItemMaterial.getIngot(EnumAura.ORANGE_AURA), 'N', getAuraNodeItemstack());
         }
 
         if (type.equals("pumpProjectile")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.arrow), 'I', ItemMaterial.getGem(EnumAura.VIOLET_AURA), 'G', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.arrow), 'G', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpFall")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Items.water_bucket), 'I', ItemMaterial.getGem(EnumAura.BLUE_AURA), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.water_bucket), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpLight")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.glowstone), 'I', ItemMaterial.getGem(EnumAura.YELLOW_AURA), 'G', ItemMaterial.getIngot(EnumAura.YELLOW_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.glowstone), 'G', ItemMaterial.getIngot(EnumAura.YELLOW_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpRedstone")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "IPI", "GIG", 'X', new ItemStack(Blocks.redstone_block), 'I', ItemMaterial.getGem(EnumAura.RED_AURA), 'G', ItemMaterial.getIngot(EnumAura.RED_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.redstone_block), 'G', ItemMaterial.getIngot(EnumAura.RED_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")));
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")), 'E', Items.redstone);
         }
         if (type.equals("pumpRedstoneAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")));
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")), 'E', Items.redstone);
         }
         if (type.equals("pumpLightAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")));
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")), 'E', Items.redstone);
         }
         if (type.equals("pumpFallAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")));
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")), 'E', Items.redstone);
         }
         if (type.equals("pumpProjectileAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpProjectile")));
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpProjectile")), 'E', Items.redstone);
         }
         if (type.equals("flux")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "III", "RNR", "III", 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'I', ItemMaterial.getIngot(EnumAura.ORANGE_AURA), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "RNR", 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'N', getAuraNodeItemstack());
         }
         if (type.equals("pumpCreative")) {
             return null;
