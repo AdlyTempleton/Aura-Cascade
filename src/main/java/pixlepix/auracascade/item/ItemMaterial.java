@@ -1,17 +1,19 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.recipe.ProcessorRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
-import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,13 +117,31 @@ public class ItemMaterial extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
+        if (materialIndex == 0) {
+            ThaumicTinkererRecipeMulti multi = new ThaumicTinkererRecipeMulti();
+            for (int i : aura.dyes) {
+                multi.addRecipe(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Items.iron_ingot), new ItemStack(Blocks.wool, 1, i)));
+            }
+            return multi;
+        }
         if (materialIndex == 1) {
-            PylonRecipeRegistry.registerRecipe(new PylonRecipe(
+            return new PylonRecipe(
                     new ItemStack(this),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.diamond)),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0))))));
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))));
+        }
+        if (materialIndex == 2) {
+            return new ProcessorRecipe(new ItemStack(this), false,
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.RED_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.ORANGE_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.YELLOW_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.BLUE_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.GREEN_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.VIOLET_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.BLACK_AURA, 1))),
+                    new ItemStack(getItemFromSpecs(new MaterialPair(EnumAura.WHITE_AURA, 1))));
         }
         return null;
     }

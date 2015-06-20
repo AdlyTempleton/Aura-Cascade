@@ -28,6 +28,7 @@ import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.entity.EntityMinerExplosion;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.OreDropManager;
+import pixlepix.auracascade.data.recipe.ProcessorRecipeRegistry;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
@@ -102,6 +103,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(AuraCascade.instance, new GuiHandler());
 
         PylonRecipeRegistry.init();
+        ProcessorRecipeRegistry.init();
         PotionManager.init();
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);

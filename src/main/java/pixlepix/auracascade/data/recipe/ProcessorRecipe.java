@@ -15,9 +15,12 @@ public class ProcessorRecipe extends ThaumicTinkererRecipe {
     public List<ItemStack> componentList = new ArrayList<ItemStack>();
     public ItemStack result;
 
-    public ProcessorRecipe(ItemStack result, ItemStack... components) {
+    public boolean prismaticOnly = false;
+
+    public ProcessorRecipe(ItemStack result, boolean prismaticOnly, ItemStack... components) {
         this.result = result;
         this.componentList = Arrays.asList(components);
+        this.prismaticOnly = prismaticOnly;
     }
 
 
@@ -39,7 +42,7 @@ public class ProcessorRecipe extends ThaumicTinkererRecipe {
             while (recipeStacksIter.hasNext()) {
                 ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();
                 if (curOutsideStack != null && curRecipeStack.getItem() == curOutsideStack.getItem() && curOutsideStack.getItemDamage() == curRecipeStack.getItemDamage()
-                        && curOutsideStack.stackSize <= curRecipeStack.stackSize) {
+                        && curOutsideStack.stackSize >= curRecipeStack.stackSize) {
                     recipeStacksIter.remove();
                     continue search;
                 }

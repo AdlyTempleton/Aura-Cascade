@@ -2,19 +2,17 @@ package pixlepix.auracascade.block.tile;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.data.recipe.ProcessorRecipe;
+import pixlepix.auracascade.data.recipe.ProcessorRecipeRegistry;
 import pixlepix.auracascade.network.PacketBurst;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,45 +52,16 @@ public class ProcessorTile extends ConsumerTile {
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
-            if (stack.getItem() == Items.iron_ingot) {
-
-                List<EntityItem> nearbyItemsColor = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                for (EntityItem entityItemColor : nearbyItemsColor) {
-                    ItemStack woolStack = entityItemColor.getEntityItem();
-                    if (woolStack.getItem() == Item.getItemFromBlock(Blocks.wool)) {
-
-                        return true;
-                    }
-                }
-            } else if (stack.getItem() instanceof ItemMaterial) {
-                //Array containing found gems of different materials
-                //Position corresponds to EnumAura.ordinal
-                //Initially found itemstack does NOT get species treatment
-                if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
-                    //Find gems
-                    EntityItem[] foundGems = new EntityItem[8];
-                    //List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                    for (EntityItem entityItemGem : nearbyItems) {
-                        Item item = entityItemGem.getEntityItem().getItem();
-                        if (item instanceof ItemMaterial) {
-                            ItemMaterial itemMaterial = (ItemMaterial) item;
-                            if (itemMaterial.materialIndex == 1) {
-                                foundGems[itemMaterial.aura.ordinal()] = entityItemGem;
-                            }
-                        }
-                    }
-
-                    //Check if 8 gems have been found
-                    if (!Arrays.asList(foundGems).contains(null)) {
-                        return true;
-                    }
-                }
-            }
             if (getDoubleResult(stack) != null) {
                 return true;
             }
         }
+        return ProcessorRecipeRegistry.getRecipeFromEntity(nearbyItems, isPrismatic()) != null;
+    }
+
+    public boolean isPrismatic() {
         return false;
+
     }
 
     public int oreMultFactor() {
@@ -106,75 +75,33 @@ public class ProcessorTile extends ConsumerTile {
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
-            if (stack.getItem() == Items.iron_ingot) {
-
-                List<EntityItem> nearbyItemsColor = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                for (EntityItem entityItemColor : nearbyItemsColor) {
-                    ItemStack woolStack = entityItemColor.getEntityItem();
-                    if (woolStack.getItem() == Item.getItemFromBlock(Blocks.wool)) {
-
-                        //Get stack
-                        int meta = woolStack.getItemDamage();
-                        EnumAura color = EnumAura.getColorFromDyeMeta(meta);
-                        Item ingotItem = ItemMaterial.getItemFromSpecs(new ItemMaterial.MaterialPair(color, 0));
-                        resultStack = new ItemStack(ingotItem);
-
-                        //Decr both stacks
-                        entityItemColor.getEntityItem().stackSize--;
-                        if (entityItemColor.getEntityItem().stackSize <= 0) {
-                            entityItemColor.setDead();
-                        }
-
-                        entityItem.getEntityItem().stackSize--;
-                        if (entityItem.getEntityItem().stackSize <= 0) {
-                            entityItem.setDead();
-                        }
-                        break;
-                    }
-                }
-            } else if (stack.getItem() instanceof ItemMaterial) {
-                //Array containing found gems of different materials
-                //Position corresponds to EnumAura.ordinal
-                //Initially found itemstack does NOT get species treatment
-                if (((ItemMaterial) stack.getItem()).materialIndex == 1) {
-                    //Find gems
-                    EntityItem[] foundGems = new EntityItem[8];
-                    //List<EntityItem> nearbyItemsGem = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
-                    for (EntityItem entityItemGem : nearbyItems) {
-                        Item item = entityItemGem.getEntityItem().getItem();
-                        if (item instanceof ItemMaterial) {
-                            ItemMaterial itemMaterial = (ItemMaterial) item;
-                            if (itemMaterial.materialIndex == 1) {
-                                foundGems[itemMaterial.aura.ordinal()] = entityItemGem;
-                            }
-                        }
-                    }
-
-                    //Check if 8 gems have been found
-                    if (!Arrays.asList(foundGems).contains(null)) {
-                        resultStack = new ItemStack(ItemMaterial.getItemFromSpecs(new ItemMaterial.MaterialPair(EnumAura.WHITE_AURA, 2)));
-                        //Decr
-                        for (EntityItem itemToDecr : foundGems) {
-                            itemToDecr.getEntityItem().stackSize--;
-                        }
-                    }
-                }
-            }
             if (getDoubleResult(stack) != null) {
                 resultStack = getDoubleResult(stack);
                 resultStack.stackSize = oreMultFactor();
-                //Kill the stack
-                if (stack.stackSize == 0) {
-                    entityItem.setDead();
-                } else {
-                    stack.stackSize--;
+                stack.stackSize--;
+                spawnInWorld(resultStack, entityItem);
+                return;
+            }
+        }
+        ProcessorRecipe recipe = ProcessorRecipeRegistry.getRecipeFromEntity(nearbyItems, isPrismatic());
+        if (recipe != null) {
+            List<ItemStack> ingredients = new ArrayList<ItemStack>(recipe.componentList);
+            for (EntityItem entityItem : nearbyItems) {
+
+                ItemStack entityStack = entityItem.getEntityItem();
+
+                Iterator recipeItemIter = ingredients.iterator();
+                while (recipeItemIter.hasNext()) {
+                    ItemStack curStack = (ItemStack) recipeItemIter.next();
+                    if (curStack.stackSize <= entityStack.stackSize && curStack.getItemDamage() == entityStack.getItemDamage() && curStack.getItem() == entityStack.getItem()) {
+                        entityStack.stackSize -= curStack.stackSize;
+                        recipeItemIter.remove();
+                        break;
+                    }
                 }
             }
 
-            //Spawn in world
-            if (spawnInWorld(resultStack, entityItem)) {
-                return;
-            }
+            spawnInWorld(recipe.result.copy(), nearbyItems.get(0));
         }
     }
 
