@@ -26,32 +26,26 @@ public class ProcessorRecipe extends ThaumicTinkererRecipe {
         ProcessorRecipeRegistry.registerRecipe(this);
     }
 
-    public boolean matches(List<ItemStack> stacks) {
+    public boolean matches(List<ItemStack> outsideStacks) {
         List<ItemStack> recipeStacks = new ArrayList<ItemStack>();
         for (ItemStack component : componentList) {
             recipeStacks.add(component);
         }
 
-        //ItemStack.areItemStacksEqual returns a false positive if itemstacks are null
-        for (ItemStack stack : stacks) {
-            if (stack == null) {
-                return false;
-            }
-        }
         search:
-        for (ItemStack curStack : stacks) {
+        for (ItemStack curOutsideStack : outsideStacks) {
             Iterator recipeStacksIter = recipeStacks.iterator();
 
             while (recipeStacksIter.hasNext()) {
                 ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();
-                if (ItemStack.areItemStacksEqual(curRecipeStack, curStack)) {
+                if (curOutsideStack != null && curRecipeStack.getItem() == curOutsideStack.getItem() && curOutsideStack.getItemDamage() == curRecipeStack.getItemDamage()
+                        && curOutsideStack.stackSize <= curRecipeStack.stackSize) {
                     recipeStacksIter.remove();
                     continue search;
                 }
             }
-            return false;
         }
 
-        return true;
+        return recipeStacks.size() == 0;
     }
 }
