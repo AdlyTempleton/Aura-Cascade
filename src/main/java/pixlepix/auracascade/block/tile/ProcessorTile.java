@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by pixlepix on 12/21/14.
  */
-public class OreTile extends ConsumerTile {
+public class ProcessorTile extends ConsumerTile {
     public static int MAX_PROGRESS = 60;
     public static int POWER_PER_PROGRESS = 150;
 

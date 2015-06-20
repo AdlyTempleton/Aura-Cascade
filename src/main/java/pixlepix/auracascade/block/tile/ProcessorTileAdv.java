@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by localmacaccount on 5/29/15.
  */
-public class OreTileAdv extends OreTile {
+public class ProcessorTileAdv extends ProcessorTile {
 
     @Override
     public boolean validItemsNearby() {

@@ -274,10 +274,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return PlanterTile.class;
             }
             if (name.equals("ore")) {
-                return OreTile.class;
+                return ProcessorTile.class;
             }
             if (name.equals("oreAdv")) {
-                return OreTileAdv.class;
+                return ProcessorTileAdv.class;
             }
             if (name.equals("loot")) {
                 return LootTile.class;

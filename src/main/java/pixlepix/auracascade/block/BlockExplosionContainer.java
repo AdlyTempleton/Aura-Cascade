@@ -255,6 +255,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         return type == null || !type.equals("Glass");
     }
 
+
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return null;
