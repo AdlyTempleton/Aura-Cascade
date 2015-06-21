@@ -64,7 +64,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public int tickRate(World world) {
-        return 300;
+        return 100;
     }
 
     @Override
@@ -101,11 +101,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     public double getChanceToResist() {
-        return 1 / (getVirtualHealth() / 16D);
+        return 1 - (1 / (getVirtualHealth() / 16D));
     }
 
     public double getChanceToRepair() {
-        return 1 / (getRepairSeconds() / 15D);
+        return 1 / (getRepairSeconds() / 5D);
     }
 
     public int getRepairSeconds() {
@@ -113,7 +113,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
             return 120;
         }
         if (type.equals("Wood")) {
-            return 30;
+            return 5;
         }
         if (type.equals("Glass")) {
             return 120;
@@ -124,6 +124,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         if (type.equals("Stone")) {
             return 60;
         }
+        //10m
         if (type.equals("Obsidian")) {
             return 6000;
         }
@@ -135,7 +136,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
             return 50;
         }
         if (type.equals("Wood")) {
-            return 50;
+            return 30;
         }
         if (type.equals("Glass")) {
             return 16;
@@ -215,8 +216,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int meta) {
-
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+        int meta = world.getBlockMetadata(x, y, z);
         if (AuraCascade.proxy.renderPass == 1) {
             if (meta != 0) {
                 return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];

@@ -302,7 +302,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return DyeTile.class;
             }
             if (name.equals("miner")) {
-                return ExploderTile.class;
+                return MinerTile.class;
             }
         }
         return FurnaceTile.class;

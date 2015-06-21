@@ -9,7 +9,7 @@ import pixlepix.auracascade.data.OreDropManager;
 /**
  * Created by localmacaccount on 6/4/15.
  */
-public class ExploderTile extends ConsumerTile {
+public class MinerTile extends ConsumerTile {
     public EntityMinerExplosion explosion;
 
     @Override
@@ -67,8 +67,8 @@ public class ExploderTile extends ConsumerTile {
 
                 if (worldObj.isRemote) {
                     this.worldObj.spawnParticle("hugeexplosion", explosion.posX, explosion.posY, explosion.posZ, 0.0D, 0.0D, 0.0D);
-                } else if (explosion.charge > 30) {
-                    int oresSpawned = (explosion.charge * explosion.charge) / 100;
+                } else if (explosion.charge > 20) {
+                    int oresSpawned = (int) ((Math.pow(explosion.charge, 1.5)) / 50);
                     for (int i = 0; i < oresSpawned; i++) {
                         ItemStack stack = OreDropManager.getOreToPut();
                         EntityItem item = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, stack);

@@ -107,7 +107,7 @@ public class OreDropManager {
                 continue;
             }
 
-            return stack;
+            return stack.copy();
         }
 
         return getOreToPut();

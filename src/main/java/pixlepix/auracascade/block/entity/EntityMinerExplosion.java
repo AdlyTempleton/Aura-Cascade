@@ -64,7 +64,7 @@ public class EntityMinerExplosion extends Entity {
     }
 
     public void explode() {
-        int delay = (int) Math.max(0, (40 - 6 * Math.log10(charge)));
+        int delay = (int) Math.max(0, (100 - 20 * Math.log10(charge)));
         if (lastExplosion + delay < worldObj.getTotalWorldTime()) {
             lastExplosion = worldObj.getTotalWorldTime();
             int xCoord = (int) posX;
