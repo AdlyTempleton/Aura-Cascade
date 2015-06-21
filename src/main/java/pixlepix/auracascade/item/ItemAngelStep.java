@@ -35,10 +35,8 @@ public class ItemAngelStep extends Item implements IBauble, ITTinkererItem {
         if (player.isCollidedHorizontally) {
             player.stepHeight += .3;
             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 1.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
-
-        } else {
+        } else if (player.stepHeight > 2) {
             player.stepHeight = 2;
-
         }
     }
 
