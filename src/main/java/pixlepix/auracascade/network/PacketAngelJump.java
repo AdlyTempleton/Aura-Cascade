@@ -52,15 +52,25 @@ public class PacketAngelJump implements IMessage {
                 EntityPlayer player = msg.entityPlayer;
                 if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
                     for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
-                        if (!player.worldObj.isAirBlock((int) Math.floor(player.posX), y, (int) Math.floor(player.posZ)) &&
-                                player.worldObj.isAirBlock((int) Math.floor(player.posX), y + 1, (int) Math.floor(player.posZ)) &&
-                                player.worldObj.isAirBlock((int) Math.floor(player.posX), y + 2, (int) Math.floor(player.posZ))) {
+
+                        int z = (int) Math.floor(player.posZ);
+                        int x = (int) Math.floor(player.posX);
+
+                        //If the player is going down, we want them to be able to land on bedrock
+                        //But not the other way around
+                        if (player.worldObj.getBlock(x, msg.up ? y : y + 1, z).getBlockHardness(player.worldObj, x, y, z) < 0) {
+                            break;
+                        }
+                        if (!player.worldObj.isAirBlock(x, y, z) &&
+                                player.worldObj.isAirBlock(x, y + 1, z) &&
+                                player.worldObj.isAirBlock(x, y + 2, z)) {
                             player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
                             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
                             break;
                         }
                     }
                 }
+
             }
             return null;
         }
