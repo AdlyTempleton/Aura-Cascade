@@ -96,6 +96,7 @@ public class EntityMinerExplosion extends Entity {
                 }
             }
             if (!contained) {
+                System.out.println("Uncontained Explosion");
                 worldObj.createExplosion(this, posX, posY, posZ, 50F, true);
                 setDead();
             }
