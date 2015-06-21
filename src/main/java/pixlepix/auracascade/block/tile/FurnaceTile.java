@@ -15,7 +15,7 @@ import java.util.List;
  * Created by pixlepix on 11/29/14.
  */
 public class FurnaceTile extends ConsumerTile {
-    public static int MAX_PROGRESS = 10;
+    public static int MAX_PROGRESS = 3;
     public static int POWER_PER_PROGRESS = 190;
 
     @Override
