@@ -169,8 +169,13 @@ tile.consumerBlockdye.name=Cascading Colorer
 item.transmutingSword.name=Transmuting Sword
 item.explosionRing.name=Ring of the Shattered Stone
 
-
-
+tile.fortifiedCobblestone.name=Fortified Cobblestone
+tile.fortifiedStone.name=Fortified Stone
+tile.fortifiedWood.name=Fortified Planks
+tile.fortifiedGlass.name=Fortified Glass
+tile.fortifiedObsidian.name=Fortified Obsidian
+tile.fortifiedDirt.name=Fortified Dirt
+tile.consumerBlockminer.name=Cascading Miner
 
 aura.tutorialEnded=Tutorial Finished
 
@@ -387,6 +392,12 @@ aura.page.books18=32 stacks of 100,000
 aura.page.books19=32 stacks of 100,000
 aura.page.books20=64 stacks of 100
 
+aura.entry.miner=Cascading Miner
+aura.page.miner0=The &1Cascading Miner&0 is an end-game system that provides a steady supply of ores. When powered, the Cascading Miner will create a &1Prismatic Singularity&0 1.5 blocks below itself.
+aura.page.miner1=When a redstone signal is applied, the Prismatic Singularity will implode, generating a number ores corresponding quadratically to the time the Singularity has existed. The singularity must have existed for 20 seconds before any ores are generated.
+aura.page.miner2=However, the singularity is incredible dangerous and must be contained with a chamber of &1Fortified Blocks&0. If the singularity touches any non-fortified blocks, it will create a massive explosion. When it hits any fortified blocks, it will bounce, dealing damage to the fortified blocks. The longer the singularity has existed, the faster it moves and the more frequently it does damage to fortified blocks
+aura.page.miner3=Fortified blocks come in six varieties - Dirt, Cobblestone, Wood, Obsidian, Glass, and Stone. Each type has two properties - resistance and repair speed.
+aura.page.miner4=For instance, &1Fortified Wood&0 has relatively low resistance, meaning it quickly racks up damage, but extremely high repair speed. &1Fortified Obsidian&0 is the other end of the spectrum, with incredibly high resistance but incredibly slow repair speed. <br> To make fortified blocks, mix &1End Stone&0 and the corresponding block in a Cascading Processor.
 
 tile.consumerBlocknether.name=Ritual of the Nether
 aura.entry.nether=Ritual of the Nether

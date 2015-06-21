@@ -5,16 +5,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.data.recipe.ProcessorRecipe;
 import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -259,6 +263,29 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
+        if (type.equals("Dirt")) {
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.dirt));
+        }
+        if (type.equals("Wood")) {
+            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 1)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 2)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 3)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 4)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 5)));
+        }
+        if (type.equals("Glass")) {
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.glass));
+        }
+        if (type.equals("Cobblestone")) {
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.cobblestone));
+        }
+        if (type.equals("Stone")) {
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.stone));
+        }
+        if (type.equals("Obsidian")) {
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.obsidian));
+        }
         return null;
     }
 

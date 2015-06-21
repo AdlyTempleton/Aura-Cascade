@@ -24,6 +24,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.item.ItemRedHole;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -215,7 +216,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CFC", "CCC", 'F', new ItemStack(Items.shears), 'C', Blocks.wool);
             }
             if (name.equals("miner")) {
-                return new CraftingBenchRecipe(new ItemStack(this), "PAP", "IRI", "IRI", 'P', ItemMaterial.getPrism(), 'A', new ItemStack(Items.diamond_pickaxe), 'I', new ItemStack(Items.iron_ingot), 'R', new ItemStack(Items.redstone));
+                return new CraftingBenchRecipe(new ItemStack(this), "PAP", "IRI", "IRI", 'P', ItemMaterial.getPrism(), 'A', new ItemStack(Items.diamond_pickaxe), 'I', new ItemStack(Items.iron_ingot), 'R', BlockRegistry.getFirstItemFromClass(ItemRedHole.class));
             }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "FFF", "FIF", "FFF", 'F', new ItemStack(Blocks.furnace), 'I', ItemMaterial.getIngot(EnumAura.WHITE_AURA));
