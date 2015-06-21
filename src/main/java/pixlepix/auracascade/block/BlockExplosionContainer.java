@@ -38,11 +38,16 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         setResistance(2000F);
         type = "Dirt";
         setTickRandomly(true);
+        setHardness(2F);
     }
 
     public BlockExplosionContainer(String s) {
         this();
         type = s;
+        if (type.equals("Glass")) {
+            setLightLevel(15);
+            setLightOpacity(0);
+        }
     }
 
     public static BlockExplosionContainer getBlockFromName(String name) {
