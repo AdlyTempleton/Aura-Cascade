@@ -2,9 +2,9 @@ package pixlepix.auracascade.data.recipe;
 
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
