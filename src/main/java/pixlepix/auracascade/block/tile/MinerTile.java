@@ -12,11 +12,14 @@ import pixlepix.auracascade.data.OreDropManager;
 public class MinerTile extends ConsumerTile {
     public EntityMinerExplosion explosion;
 
+    public boolean hasBeenPulsed = false;
+
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
         super.readCustomNBT(nbt);
         if (nbt.hasKey("explosion")) {
             explosion = (EntityMinerExplosion) worldObj.getEntityByID(nbt.getInteger("explosion"));
+            nbt.setBoolean("hasBeenPulsed", hasBeenPulsed);
         }
     }
 
@@ -25,6 +28,7 @@ public class MinerTile extends ConsumerTile {
         super.writeCustomNBT(nbt);
         if (explosion != null) {
             nbt.setInteger("explosion", explosion.getEntityId());
+            nbt.setBoolean("hasBeenPulsed", hasBeenPulsed);
         }
     }
 
@@ -43,11 +47,18 @@ public class MinerTile extends ConsumerTile {
         return true;
     }
 
+    @Override
+    public void updateEntity() {
+        if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            hasBeenPulsed = true;
+        }
+        super.updateEntity();
+    }
 
     @Override
     public void onUsePower() {
 
-        if (!worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+        if (!hasBeenPulsed) {
             if (explosion != null && !explosion.isDead) {
                 explosion.charge++;
                 explosion.lastCharged = worldObj.getTotalWorldTime();
@@ -76,6 +87,7 @@ public class MinerTile extends ConsumerTile {
                     }
                 }
             }
+            hasBeenPulsed = false;
         }
     }
 }
