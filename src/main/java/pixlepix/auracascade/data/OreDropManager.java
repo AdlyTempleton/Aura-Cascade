@@ -14,6 +14,10 @@ public class OreDropManager {
     public static HashMap<String, Integer> oreNames = new HashMap<String, Integer>();
 
     public static void addOreWeight(String name, int value) {
+        //Nether ores registers stuff whether or not the overworld version exists
+        if (name.contains("Nether") && !(OreDictionary.getOres(name.replace("Nether", "")).size() > 0)) {
+            return;
+        }
         oreNames.put(name, value);
     }
 
