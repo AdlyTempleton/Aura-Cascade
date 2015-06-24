@@ -85,7 +85,6 @@ public class OreDropManager {
         addOreWeight("oreNetherSteel", 1690); // Nether Ores
         addOreWeight("oreNetherTin", 3750); // Nether Ores
         addOreWeight("oreFyrite", 1000); // Netherrocks
-        addOreWeight("oreMalachite", 1000); // Netherrocks
         addOreWeight("oreAshstone", 1000); // Netherrocks
         addOreWeight("oreDragonstone", 175); // Netherrocks
         addOreWeight("oreArgonite", 1000); // Netherrocks
