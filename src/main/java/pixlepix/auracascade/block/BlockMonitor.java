@@ -38,10 +38,9 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
         ForgeDirection powerDirection = ForgeDirection.getOrientation(side).getOpposite();
         Block b = world.getBlock(x + powerDirection.offsetX, y + powerDirection.offsetY, z + powerDirection.offsetZ);
 
-        if (b instanceof AuraBlock || b instanceof ConsumerBlock) {
-            return 0;
-        } else {
-            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+
+        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+            if (direction != powerDirection) {
                 TileEntity auraTile = world.getTileEntity(x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ);
 
                 if (auraTile instanceof AuraTilePumpBase) {
@@ -51,7 +50,6 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
                     return ((ConsumerTile) auraTile).validItemsNearby() ? 0 : 15;
                 }
             }
-
         }
         return 0;
     }
