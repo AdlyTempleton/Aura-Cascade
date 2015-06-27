@@ -50,7 +50,7 @@ public class AuraTileCapacitor extends AuraTile {
 
             if (worldObj.getTotalWorldTime() % 5 == 0 && aboutToBurst) {
                 aboutToBurst = false;
-                ticksDisabled = 410;
+                ticksDisabled = 110;
 
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
                 worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
