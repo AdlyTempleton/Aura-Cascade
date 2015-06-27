@@ -100,7 +100,7 @@ public enum EnumAura {
     VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE, new int[]{2, 6, 10}) {
         @Override
         public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
-            if (world.getTotalWorldTime() % 40 == 5) {
+            if (world.getTotalWorldTime() % 100 == 5) {
                 AuraTile tile = (AuraTile) tuple.getTile(world);
 
                 //Achieve growth along logarithmic curve
