@@ -53,7 +53,7 @@ public class AuraTileCapacitor extends AuraTile {
                 ticksDisabled = 410;
 
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-                worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, blockType);
+                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
             }
         }
     }

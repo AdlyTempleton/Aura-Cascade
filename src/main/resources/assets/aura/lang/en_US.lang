@@ -191,7 +191,7 @@ item.denseBook.name=Dense Storage Book
 item.extremelyDenseBook.name=Extremely Dense Storage Book
 item.veryDenseBook.name=Very Dense Storage Book
 item.superDenseBook.name=Super Dense Storage Book
-
+tile.fake.name=Sticky Piston
 item.lightBook.name=Light Storage Book
 item.extremelyLightBook.name=Extremely Light Storage Book
 item.veryLightBook.name=Very Light Storage Book
