@@ -66,6 +66,7 @@ public abstract class LexiconPage {
         // NO-OP
     }
 
+
     /**
      * Called when a button is pressed, equivalent to GuiScreen.actionPerformed.
      */

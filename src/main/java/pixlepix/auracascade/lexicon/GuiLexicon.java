@@ -44,7 +44,8 @@ public class GuiLexicon extends GuiScreen {
     List<LexiconCategory> allCategories;
     boolean hasTutorialArrow;
     int tutorialArrowX, tutorialArrowY;
-    
+
+
     String title;
     int guiWidth = 146;
     int guiHeight = 180;

@@ -12,8 +12,10 @@
 package pixlepix.auracascade.lexicon;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -42,6 +44,21 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         this.parent = parent;
 
         title = StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
+    }
+
+    public void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_) {
+        List list = p_146285_1_.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+
+        for (int k = 0; k < list.size(); ++k) {
+            if (k == 0) {
+                list.set(k, p_146285_1_.getRarity().rarityColor + (String) list.get(k));
+            } else {
+                list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
+            }
+        }
+
+        FontRenderer font = p_146285_1_.getItem().getFontRenderer(p_146285_1_);
+        drawHoveringText(list, p_146285_2_, p_146285_3_, (font == null ? fontRendererObj : font));
     }
 
     @Override

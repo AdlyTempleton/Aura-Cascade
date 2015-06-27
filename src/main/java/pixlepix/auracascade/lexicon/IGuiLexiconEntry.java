@@ -12,6 +12,7 @@
 package pixlepix.auracascade.lexicon;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ import java.util.List;
  */
 public interface IGuiLexiconEntry {
 
+    public void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_);
+    
     /**
      * Gets the entry currently portrayed in this gui.
      */

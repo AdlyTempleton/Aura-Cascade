@@ -222,8 +222,10 @@ aura.entry.accumulate=Energy Storage
 aura.page.accumulate0=By moving the cobblestone in or out with a sticky piston, you can store energy simply. Storage is limited by the amount of spare aura.
 
 aura.entry.autoOff=Power Saver
-aura.page.autoOff0=A monitor will output a signal when next to
-aura.entry.autooff
+aura.page.autoOff0=A monitor will output a signal when next to a consumer that has finished all it's work. By placing it next to the pump, it will turn off when the job is done.
+
+aura.entry.multiplePumps=More power
+aura.page.multiplePumps=Some consumers require power faster than a single pump can provide. You can easily stack multiple pumps to gain more power per second.
 tile.consumerBlockenchanter.name=Kaleidoscopic Enchanter
 
 tile.consumerBlockenchant.name=Kaleidoscopic Enchanter

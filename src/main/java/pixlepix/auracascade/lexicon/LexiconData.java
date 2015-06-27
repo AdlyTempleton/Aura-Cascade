@@ -255,8 +255,43 @@ public final class LexiconData {
         //Walkthrough
         new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), new PageGuide("1", "https://www.youtube.com/watch?v=bbtr85S5m4Q"));
         new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
-        new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/0.png"), new PageText("2"));
-        new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new PageText("0"), new PageImage("1", "aura:textures/gui/walkthrough/1.png"));
+        ItemStack node = AuraBlock.getAuraNodeItemstack();
+        ItemStack pumpnode = AuraBlock.getAuraNodePumpItemstack();
+        ItemStack furnacenode = new ItemStack(ConsumerBlock.getBlockFromName("furnace"));
+        ItemStack pedestal = new ItemStack(AuraBlock.getBlockFromName("craftingPedestal"));
+        ItemStack vortex = new ItemStack(AuraBlock.getBlockFromName("craftingCenter"));
+        ItemStack monitor = new ItemStack(BlockRegistry.getFirstBlockFromClass(BlockMonitor.class));
+        ItemStack cobble = new ItemStack(Blocks.cobblestone);
+        new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new MultiblockPage("1", new ItemStack[][][]{
+                {{pumpnode, node, furnacenode}},
+                {}, {},
+                {{node, node}}
+
+        }
+        ), new PageText("2"));
+        new BLexiconEntry("autoOff", categoryWalkthrough).setLexiconPages(new MultiblockPage("0", new ItemStack[][][]{
+                {{pumpnode, node}, {monitor, furnacenode}},
+                {}, {},
+                {{node, node}}
+        }));
+        new BLexiconEntry("accumulate", categoryWalkthrough).setLexiconPages(new MultiblockPage("0", new ItemStack[][][]{
+
+                {{null, null, pumpnode, node, furnacenode}},
+                {{null, null, cobble}},
+                {{null, null, node, node}}
+        }));
+        new BLexiconEntry("multiplePumps", categoryWalkthrough).setLexiconPages(new MultiblockPage("0", new ItemStack[][][]{
+                {{null, pumpnode}, {pumpnode, node, furnacenode}, {null, pumpnode}},
+                {}, {},
+                {{null, node}, {node, node}, {null, node}}
+        }));
+
+        new BLexiconEntry("vortexInfusion", categoryWalkthrough).setLexiconPages(new MultiblockPage("0", new ItemStack[][][]{
+                {{null, null, pumpnode, null, null}, {null, null, pedestal, null, null}, {pumpnode, pedestal, vortex, pedestal, pumpnode}, {null, null, pedestal, null, null}, {null, null, pumpnode, null, null}},
+                {},
+                {{null, null, node, null, null}, {null, null, node, null, null}, {node, node, cobble, node, node}, {null, null, node, null, null}, {null, null, node, null, null}}
+
+        }));
 
     }
 
