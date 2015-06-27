@@ -100,12 +100,12 @@ public enum EnumAura {
     VIOLET_AURA("Violet", 1, .1, 1, EnumColor.PURPLE, new int[]{2, 6, 10}) {
         @Override
         public void updateTick(World world, CoordTuple tuple, AuraQuantity quantity) {
-            if (world.getTotalWorldTime() % 600 == 5) {
+            if (world.getTotalWorldTime() % 40 == 5) {
                 AuraTile tile = (AuraTile) tuple.getTile(world);
 
                 //Achieve growth along logarithmic curve
                 int num = quantity.getNum();
-                int delta = num <= 25 ? -num : 5 * (Math.max(10, (int) Math.floor(((double) 1 / num) * 2500)));
+                int delta = num <= 25 ? -num : 5 * (Math.min(100, (int) Math.floor(((double) 2500 / num))));
                 if (tile == null) {
                     AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());
                 } else if (tile.storage == null) {
