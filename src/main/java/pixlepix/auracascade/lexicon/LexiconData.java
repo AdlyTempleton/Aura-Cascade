@@ -253,7 +253,7 @@ public final class LexiconData {
         new BLexiconEntry("fairyTrain", categoryFairies).setLexiconPages(new PageText("0"),
                 new PageCraftingRecipe("1", getRecipeFromFairy(EntityXPFairy.class)));
         //Walkthrough
-        new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), new PageGuide("1", "https://www.youtube.com/watch?v=bbtr85S5m4Q"));
+        new BLexiconEntry("video", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "auramisc.playVideo", "https://www.youtube.com/watch?v=dQw4w9WgXcQ"), new PageGuide("1", "auramisc.playVideo", "https://www.youtube.com/watch?v=bbtr85S5m4Q"));
         new BLexiconEntry("introduction", categoryWalkthrough).setPriority().setLexiconPages(new PageText("0"));
         ItemStack node = AuraBlock.getAuraNodeItemstack();
         ItemStack pumpnode = AuraBlock.getAuraNodePumpItemstack();
@@ -262,6 +262,7 @@ public final class LexiconData {
         ItemStack vortex = new ItemStack(AuraBlock.getBlockFromName("craftingCenter"));
         ItemStack monitor = new ItemStack(BlockRegistry.getFirstBlockFromClass(BlockMonitor.class));
         ItemStack cobble = new ItemStack(Blocks.cobblestone);
+        new BLexiconEntry("patreon", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "auramisc.support", "https://www.patreon.com/pixlepix"));
         new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new MultiblockPage("1", new ItemStack[][][]{
                 {{pumpnode, node, furnacenode}},
                 {}, {},

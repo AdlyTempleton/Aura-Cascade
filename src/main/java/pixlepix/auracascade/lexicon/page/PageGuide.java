@@ -20,15 +20,19 @@ import java.net.URI;
 
 public class PageGuide extends PageText {
 
+    private final String desc;
+    private final String url;
     GuiButton button;
 
-    public PageGuide(String unlocalizedName, String url) {
+    public PageGuide(String unlocalizedName, String desc, String url) {
         super(unlocalizedName);
+        this.desc = desc;
+        this.url = url;
     }
 
     @Override
     public void onOpened(IGuiLexiconEntry gui) {
-        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, StatCollector.translateToLocal("auramisc.playVideo"));
+        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, StatCollector.translateToLocal(desc));
         gui.getButtonList().add(button);
     }
 
@@ -41,7 +45,7 @@ public class PageGuide extends PageText {
     public void onActionPerformed(GuiButton button) {
         if (button == this.button && Desktop.isDesktopSupported())
             try {
-                Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=f2FaoaHXOGo"));
+                Desktop.getDesktop().browse(new URI(url));
                 //if (Math.random() < 0.01)
                 //    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ"));
             } catch (Exception e) {

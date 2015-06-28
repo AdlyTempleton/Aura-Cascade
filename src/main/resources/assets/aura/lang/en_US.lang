@@ -641,6 +641,9 @@ aura.entry.11quest=Synthesizer
 aura.entry.12quest=Angel's Steel
 aura.entry.13quest=Fairies
 
+aura.entry.patreon=Support the Author
+aura.page.patreon0=I make this mod in my free time, and it is a huge commitment. Aura Cascade will always be free, but I will appreciate any money you have to give.
+auramisc.support=Donate
 
 aura.page.00questDesc=First, you need to make Aura Crystals. These crystals supply aura to your system, which acts as a sort of 'lubricant'.
 aura.page.01questDesc=Now, you need Aura Nodes. Nodes are the basis of any sort of power system.
