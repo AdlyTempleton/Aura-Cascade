@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import pixlepix.auracascade.lexicon.GuiLexiconEntry;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 
 /**
@@ -119,7 +120,7 @@ public class MultiblockPage extends PageText {
 
             Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(false);
             if (highlighted != null) {
-                gui.renderToolTip(highlighted, mx, my);
+                ((GuiLexiconEntry) gui).renderToolTip(highlighted, mx, my);
             }
             RenderHelper.disableStandardItemLighting();
             /*
