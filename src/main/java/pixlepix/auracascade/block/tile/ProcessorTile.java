@@ -85,6 +85,7 @@ public class ProcessorTile extends ConsumerTile {
         }
         ProcessorRecipe recipe = ProcessorRecipeRegistry.getRecipeFromEntity(nearbyItems, isPrismatic());
         if (recipe != null) {
+            EntityItem spawnNear = nearbyItems.get(0);
             List<ItemStack> ingredients = new ArrayList<ItemStack>(recipe.componentList);
             for (EntityItem entityItem : nearbyItems) {
 
@@ -94,6 +95,7 @@ public class ProcessorTile extends ConsumerTile {
                 while (recipeItemIter.hasNext()) {
                     ItemStack curStack = (ItemStack) recipeItemIter.next();
                     if (curStack.stackSize <= entityStack.stackSize && curStack.getItemDamage() == entityStack.getItemDamage() && curStack.getItem() == entityStack.getItem()) {
+                        spawnNear = entityItem;
                         entityStack.stackSize -= curStack.stackSize;
                         recipeItemIter.remove();
                         break;
@@ -101,7 +103,7 @@ public class ProcessorTile extends ConsumerTile {
                 }
             }
 
-            spawnInWorld(recipe.result.copy(), nearbyItems.get(0));
+            spawnInWorld(recipe.result.copy(), spawnNear);
         }
     }
 
