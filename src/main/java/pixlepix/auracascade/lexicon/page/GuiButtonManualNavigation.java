@@ -8,6 +8,17 @@ import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 
 /**
+ * Created by BluSunrize
+ package pixlepix.auracascade.lexicon.page;
+
+ import net.minecraft.client.Minecraft;
+ import net.minecraft.client.gui.GuiButton;
+ import net.minecraft.client.renderer.OpenGlHelper;
+ import org.lwjgl.opengl.GL11;
+ import pixlepix.auracascade.lexicon.GuiLexicon;
+ import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
+
+ /**
  * Created by BluSunrize, used with permission
  */
 public class GuiButtonManualNavigation extends GuiButton {
