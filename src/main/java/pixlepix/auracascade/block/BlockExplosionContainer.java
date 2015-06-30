@@ -106,7 +106,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public boolean renderAsNormalBlock() {
-        return true;
+        return isOpaqueCube();
     }
 
     public double getChanceToResist() {
