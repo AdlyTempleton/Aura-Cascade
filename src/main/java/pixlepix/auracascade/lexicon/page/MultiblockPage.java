@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import pixlepix.auracascade.lexicon.GuiButtonManualNavigation;
 import pixlepix.auracascade.lexicon.GuiLexiconEntry;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 
