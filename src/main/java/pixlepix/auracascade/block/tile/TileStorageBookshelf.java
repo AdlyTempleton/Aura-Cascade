@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -92,21 +93,9 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
     @Override
     public ItemStack decrStackSize(int slot, int amt) {
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null) {
-            if (stack.stackSize <= amt) {
-                setInventorySlotContents(slot, null);
-            } else {
-                stack = stack.splitStack(amt);
-                if (stack.stackSize == 0) {
-                    setInventorySlotContents(slot, null);
-                }
-            }
-        }
 
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         markDirty();
-        return stack;
+        return AuraUtil.decrStackSize(this, slot, amt);
     }
 
     @Override
@@ -201,16 +190,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
         for (ItemStack itemStack : testInv) {
             if (itemStack != null) {
-                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
-                for (StorageItemStack storageItemStack : inv) {
-                    remainingStorage = storageItemStack.merge(remainingStorage, itemStorageBook.getMaxStackSize());
-                }
-                while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage != null && remainingStorage.stackSize > 0) {
-                    int delta = Math.min(itemStorageBook.getMaxStackSize(), remainingStorage.stackSize);
-                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
-                    inv.add(storageItemStack);
-                    remainingStorage.stackSize -= delta;
-                }
+                StorageItemStack remainingStorage = mergeStack(itemStorageBook, inv, itemStack);
                 if (remainingStorage != null && remainingStorage.stackSize > 0) {
                     validCache.put(new ItemStackMapEntry(item), false);
                     return false;
@@ -240,16 +220,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
         for (ItemStack itemStack : testInv) {
             if (itemStack != null) {
-                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
-                for (StorageItemStack storageItemStack : inv) {
-                    remainingStorage = storageItemStack.merge(remainingStorage, itemStorageBook.getMaxStackSize());
-                }
-                while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage != null && remainingStorage.stackSize > 0) {
-                    int delta = Math.min(itemStorageBook.getMaxStackSize(), remainingStorage.stackSize);
-                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
-                    inv.add(storageItemStack);
-                    remainingStorage.stackSize -= delta;
-                }
+                StorageItemStack remainingStorage = mergeStack(itemStorageBook, inv, itemStack);
                 if (remainingStorage != null && remainingStorage.stackSize > 0) {
                     return false;
                 }
@@ -259,23 +230,22 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
     }
 
+    public StorageItemStack mergeStack(ItemStorageBook itemStorageBook, ArrayList<StorageItemStack> inv, ItemStack itemStack) {
+        StorageItemStack remainingStorage = new StorageItemStack(itemStack);
+        for (StorageItemStack storageItemStack : inv) {
+            remainingStorage = storageItemStack.merge(remainingStorage, itemStorageBook.getMaxStackSize());
+        }
+        while (inv.size() < itemStorageBook.getHeldStacks() && remainingStorage != null && remainingStorage.stackSize > 0) {
+            int delta = Math.min(itemStorageBook.getMaxStackSize(), remainingStorage.stackSize);
+            StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
+            inv.add(storageItemStack);
+            remainingStorage.stackSize -= delta;
+        }
+        return remainingStorage;
+    }
+
     public ArrayList<StorageItemStack> getAbstractInventory() {
         ArrayList<ItemStack> startInv = inv;
-        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
-        for (ItemStack itemStack : startInv) {
-            if (itemStack != null) {
-                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
-                for (StorageItemStack storageItemStack : inv) {
-                    remainingStorage = storageItemStack.merge(remainingStorage, Integer.MAX_VALUE);
-                }
-                while (remainingStorage != null && remainingStorage.stackSize > 0) {
-                    int delta = remainingStorage.stackSize;
-                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
-                    inv.add(storageItemStack);
-                    remainingStorage.stackSize -= delta;
-                }
-            }
-        }
-        return inv;
+        return TileBookshelfCoordinator.getAbstractInventoryFromInv(startInv);
     }
 }

@@ -16,6 +16,7 @@ import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
@@ -130,10 +131,9 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
         TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(x, y, z);
         if (bookshelf != null && bookshelf.storedBook != null) {
-            float f = 0.7F;
-            double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-            double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-            double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+            double d0 = AuraUtil.getDropOffset(world);
+            double d1 = AuraUtil.getDropOffset(world);
+            double d2 = AuraUtil.getDropOffset(world);
             EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, bookshelf.storedBook);
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);

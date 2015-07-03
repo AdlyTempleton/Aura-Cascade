@@ -100,7 +100,7 @@ public class EventHandler {
     public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         player.getEntityData().setBoolean(BOOK_TAG, true);
-        AuraCascade.proxy.networkWrapper.sendTo(new PacketSyncQuestData((EntityPlayer) event.player), (EntityPlayerMP) event.player);
+        AuraCascade.proxy.networkWrapper.sendTo(new PacketSyncQuestData(event.player), (EntityPlayerMP) event.player);
 
 
     }

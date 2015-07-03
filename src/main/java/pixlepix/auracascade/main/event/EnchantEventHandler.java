@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -366,10 +367,9 @@ public class EnchantEventHandler {
 
     protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {
         if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) { // do not drop items while restoring blockstates, prevents item dupe
-            float f = 0.7F;
-            double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-            double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-            double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+            double d0 = AuraUtil.getDropOffset(world);
+            double d1 = AuraUtil.getDropOffset(world);
+            double d2 = AuraUtil.getDropOffset(world);
             EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, stack);
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);

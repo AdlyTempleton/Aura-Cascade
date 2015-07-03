@@ -34,15 +34,9 @@ public class MineralStorageBook extends ItemStorageBook {
 
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
-        Item item = stack.getItem();
-        if (Block.getBlockFromItem(item) != null) {
-            Block block = Block.getBlockFromItem(item);
-            if (Arrays.asList(blocks).contains(block)) {
-                return true;
-            }
-        }
-        if (Arrays.asList(items).contains(item)) {
+        if (isValid(stack, blocks, items, ores)) {
             return true;
+
         }
         int[] ids = OreDictionary.getOreIDs(stack);
         for (int i : ids) {

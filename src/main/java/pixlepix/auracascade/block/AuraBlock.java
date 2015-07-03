@@ -27,6 +27,7 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.network.PacketBurst;
@@ -246,7 +247,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     @Override
     public void onPostBlockPlaced(World world, int x, int y, int z, int p_149714_5_) {
         super.onPostBlockPlaced(world, x, y, z, p_149714_5_);
-        updateMonitor(world, x, y, z);
+        AuraUtil.updateMonitor(world, x, y, z);
     }
 
     @Override
@@ -268,10 +269,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             IInventory inv = (IInventory) te;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 if (inv.getStackInSlot(i) != null) {
-                    float f = 0.7F;
-                    double d0 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-                    double d1 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
-                    double d2 = (double) (world.rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+                    double d0 = AuraUtil.getDropOffset(world);
+                    double d1 = AuraUtil.getDropOffset(world);
+                    double d2 = AuraUtil.getDropOffset(world);
                     EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, inv.getStackInSlot(i));
                     entityitem.delayBeforeCanPickup = 10;
                     world.spawnEntityInWorld(entityitem);
@@ -279,7 +279,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             }
         }
         super.breakBlock(world, x, y, z, block, p_149749_6_);
-        updateMonitor(world, x, y, z);
+        AuraUtil.updateMonitor(world, x, y, z);
     }
 
     @Override
@@ -346,20 +346,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
         }
         return new CraftingBenchRecipe(new ItemStack(this, 4), "PPP", "PRP", "PPP", 'P', new ItemStack(Items.gold_nugget), 'R', new ItemStack(Items.redstone));
-    }
-
-    public void updateMonitor(World w, int x, int y, int z) {
-        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
-            if (b instanceof BlockMonitor) {
-
-                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
-                    Block b2 = tuple.getBlock(w);
-                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
-                }
-            }
-        }
     }
 
     @Override

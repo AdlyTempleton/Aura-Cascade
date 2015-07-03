@@ -10,6 +10,7 @@ import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.IAngelsteelTool;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -49,13 +50,8 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
-        if (AngelsteelToolHelper.hasValidBuffs(stack)) {
-            int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
-            list.add("Angel's Efficiency: " + buffs[0]);
-            list.add("Angel's Fortune: " + buffs[1]);
-            list.add("Angel's Shatter: " + buffs[2]);
-            list.add("Angel's Disintegrate: " + buffs[3]);
-        }
+
+        AuraUtil.addAngelsteelDesc(list, stack);
     }
 
     @Override

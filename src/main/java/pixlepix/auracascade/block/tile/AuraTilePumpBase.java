@@ -1,14 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import pixlepix.auracascade.block.BlockMonitor;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.main.AuraUtil;
 
 /**
  * Created by pixlepix on 12/24/14.
@@ -54,22 +51,10 @@ public class AuraTilePumpBase extends AuraTile {
 
             }
         }
-        updateMonitor(worldObj, xCoord, yCoord, zCoord);
+        AuraUtil.updateMonitor(worldObj, xCoord, yCoord, zCoord);
     }
 
-    public void updateMonitor(World w, int x, int y, int z) {
-        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
-            if (b instanceof BlockMonitor) {
 
-                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
-                    Block b2 = tuple.getBlock(w);
-                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
-                }
-            }
-        }
-    }
 
     @Override
     public void updateEntity() {
@@ -88,7 +73,7 @@ public class AuraTilePumpBase extends AuraTile {
 
                     pumpPower--;
                     if (pumpPower == 0) {
-                        updateMonitor(worldObj, xCoord, yCoord, zCoord);
+                        AuraUtil.updateMonitor(worldObj, xCoord, yCoord, zCoord);
 
                     }
                     for (EnumAura aura : EnumAura.values()) {

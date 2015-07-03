@@ -6,14 +6,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.Arrays;
 
 /**
  * Created by localmacaccount on 1/27/15.
@@ -36,23 +33,7 @@ public class FarmingStorageBook extends ItemStorageBook {
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         Item item = stack.getItem();
-        if (Block.getBlockFromItem(item) != null) {
-            Block block = Block.getBlockFromItem(item);
-            if (Arrays.asList(blocks).contains(block)) {
-                return true;
-            }
-        }
-        if (Arrays.asList(items).contains(item)) {
-            return true;
-        }
-        int[] ids = OreDictionary.getOreIDs(stack);
-        for (int i : ids) {
-            String s = OreDictionary.getOreName(i);
-            if (Arrays.asList(ores).contains(s.toLowerCase())) {
-                return true;
-            }
-        }
-        return GameRegistry.findUniqueIdentifierFor(item).modId != null && GameRegistry.findUniqueIdentifierFor(item).modId.equals("HarvestCraft");
+        return isValid(stack, blocks, items, ores) || GameRegistry.findUniqueIdentifierFor(item).modId != null && GameRegistry.findUniqueIdentifierFor(item).modId.equals("HarvestCraft");
     }
 
     @Override

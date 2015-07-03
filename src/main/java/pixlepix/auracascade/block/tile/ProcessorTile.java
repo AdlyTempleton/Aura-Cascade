@@ -1,15 +1,13 @@
 package pixlepix.auracascade.block.tile;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.recipe.ProcessorRecipe;
 import pixlepix.auracascade.data.recipe.ProcessorRecipeRegistry;
-import pixlepix.auracascade.network.PacketBurst;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -109,17 +107,7 @@ public class ProcessorTile extends ConsumerTile {
 
     public boolean spawnInWorld(ItemStack resultStack, EntityItem entityItem) {
         if (resultStack != null) {
-            EntityItem newEntity = new EntityItem(worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, resultStack);
-
-            newEntity.delayBeforeCanPickup = entityItem.delayBeforeCanPickup;
-            newEntity.motionX = entityItem.motionX;
-            newEntity.motionY = entityItem.motionY;
-            newEntity.motionZ = entityItem.motionZ;
-
-            worldObj.spawnEntityInWorld(newEntity);
-
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
-
+            AuraUtil.respawnItemWithParticles(worldObj, entityItem, resultStack);
             return true;
         }
         return false;

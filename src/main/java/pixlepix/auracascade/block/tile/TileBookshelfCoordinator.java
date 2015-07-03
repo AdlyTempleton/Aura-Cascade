@@ -16,6 +16,7 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.StorageItemStack;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
@@ -31,6 +32,25 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public boolean hasCheckedShelves;
     public int neededPower = 0;
     public int lastPower = 0;
+
+    public static ArrayList<StorageItemStack> getAbstractInventoryFromInv(ArrayList<ItemStack> startInv) {
+        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
+        for (ItemStack itemStack : startInv) {
+            if (itemStack != null) {
+                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
+                for (StorageItemStack storageItemStack : inv) {
+                    remainingStorage = storageItemStack.merge(remainingStorage, Integer.MAX_VALUE);
+                }
+                while (remainingStorage != null && remainingStorage.stackSize > 0) {
+                    int delta = remainingStorage.stackSize;
+                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
+                    inv.add(storageItemStack);
+                    remainingStorage.stackSize -= delta;
+                }
+            }
+        }
+        return inv;
+    }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -200,20 +220,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     @Override
     public ItemStack decrStackSize(int slot, int amt) {
-        ItemStack stack = getStackInSlot(slot);
-        if (stack != null) {
-            if (stack.stackSize <= amt) {
-                setInventorySlotContents(slot, null);
-            } else {
-                stack = stack.splitStack(amt);
-                if (stack.stackSize == 0) {
-                    setInventorySlotContents(slot, null);
-                }
-            }
-        }
 
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-        return stack;
+        return AuraUtil.decrStackSize(this, slot, amt);
     }
 
     @Override
@@ -268,22 +276,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     public ArrayList<StorageItemStack> getAbstractInventory() {
         ArrayList<ItemStack> startInv = getInv();
-        ArrayList<StorageItemStack> inv = new ArrayList<StorageItemStack>();
-        for (ItemStack itemStack : startInv) {
-            if (itemStack != null) {
-                StorageItemStack remainingStorage = new StorageItemStack(itemStack);
-                for (StorageItemStack storageItemStack : inv) {
-                    remainingStorage = storageItemStack.merge(remainingStorage, Integer.MAX_VALUE);
-                }
-                while (remainingStorage != null && remainingStorage.stackSize > 0) {
-                    int delta = remainingStorage.stackSize;
-                    StorageItemStack storageItemStack = new StorageItemStack(remainingStorage.item, delta, remainingStorage.damage, remainingStorage.compound);
-                    inv.add(storageItemStack);
-                    remainingStorage.stackSize -= delta;
-                }
-            }
-        }
-        return inv;
+        return getAbstractInventoryFromInv(startInv);
     }
 
     public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {

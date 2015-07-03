@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -9,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockStorageBookshelf;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
@@ -17,6 +19,7 @@ import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by localmacaccount on 1/23/15.
@@ -40,6 +43,29 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
             list.appendTag(nbt);
         }
         stack.stackTagCompound.setTag("items", list);
+    }
+
+    public boolean isValid(ItemStack stack, Block[] blocks, Item[] items, String[] ores) {
+        Item item = stack.getItem();
+        if (blocks != null && Block.getBlockFromItem(item) != null) {
+            Block block = Block.getBlockFromItem(item);
+            if (Arrays.asList(blocks).contains(block)) {
+                return true;
+            }
+        }
+        if (items != null && Arrays.asList(items).contains(item)) {
+            return true;
+        }
+        int[] ids = OreDictionary.getOreIDs(stack);
+        if (ores != null) {
+            for (int i : ids) {
+                String s = OreDictionary.getOreName(i);
+                if (Arrays.asList(ores).contains(s.toLowerCase())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public ArrayList<ItemStack> getInventory(ItemStack stack) {

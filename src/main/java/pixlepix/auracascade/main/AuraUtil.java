@@ -1,15 +1,20 @@
 package pixlepix.auracascade.main;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.BlockMonitor;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.Comparator;
@@ -72,6 +77,66 @@ public class AuraUtil {
         }
     }
 
+    public static void updateMonitor(World w, int x, int y, int z) {
+        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
+            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
+            if (b instanceof BlockMonitor) {
+
+                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
+                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
+                    Block b2 = tuple.getBlock(w);
+                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                }
+            }
+        }
+    }
+
+    public static void respawnItemWithParticles(World worldObj, EntityItem oldItem, ItemStack stack) {
+        EntityItem newEntity = new EntityItem(worldObj, oldItem.posX, oldItem.posY, oldItem.posZ, stack);
+
+        newEntity.delayBeforeCanPickup = oldItem.delayBeforeCanPickup;
+        newEntity.motionX = oldItem.motionX;
+        newEntity.motionY = oldItem.motionY;
+        newEntity.motionZ = oldItem.motionZ;
+
+        worldObj.spawnEntityInWorld(newEntity);
+
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
+
+
+    }
+
+    public static ItemStack decrStackSize(IInventory tile, int slot, int amt) {
+        ItemStack stack = tile.getStackInSlot(slot);
+        if (stack != null) {
+            if (stack.stackSize <= amt) {
+                tile.setInventorySlotContents(slot, null);
+            } else {
+                stack = stack.splitStack(amt);
+                if (stack.stackSize == 0) {
+                    tile.setInventorySlotContents(slot, null);
+                }
+            }
+        }
+
+        ((TileEntity) tile).getWorldObj().markBlockForUpdate(((TileEntity) tile).xCoord, ((TileEntity) tile).yCoord, ((TileEntity) tile).zCoord);
+        return stack;
+    }
+
+    public static void addAngelsteelDesc(List infoList, ItemStack stack) {
+        if (AngelsteelToolHelper.hasValidBuffs(stack)) {
+            int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
+            infoList.add("Angel's Efficiency: " + buffs[0]);
+            infoList.add("Angel's Fortune: " + buffs[1]);
+            infoList.add("Angel's Shatter: " + buffs[2]);
+            infoList.add("Angel's Disintegrate: " + buffs[3]);
+        }
+
+    }
+
+    public static double getDropOffset(World w) {
+        return (w.rand.nextFloat() * .7) + (double) (1.0F - .7) * 0.5D;
+    }
 
     public static void diamondBurst(Entity entity, String particle) {
         CoordTuple centerTuple = new CoordTuple((int) entity.posX, (int) entity.posY + 1, (int) entity.posZ);

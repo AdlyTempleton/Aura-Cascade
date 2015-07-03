@@ -1,13 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.network.PacketBurst;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
 
@@ -69,16 +67,7 @@ public class FurnaceTile extends ConsumerTile {
                     stack.stackSize--;
                 }
 
-                EntityItem newEntity = new EntityItem(worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, FurnaceRecipes.smelting().getSmeltingResult(stack).copy());
-
-                newEntity.delayBeforeCanPickup = entityItem.delayBeforeCanPickup;
-                newEntity.motionX = entityItem.motionX;
-                newEntity.motionY = entityItem.motionY;
-                newEntity.motionZ = entityItem.motionZ;
-
-                worldObj.spawnEntityInWorld(newEntity);
-
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                AuraUtil.respawnItemWithParticles(worldObj, entityItem, FurnaceRecipes.smelting().getSmeltingResult(stack).copy());
 
                 break;
             }

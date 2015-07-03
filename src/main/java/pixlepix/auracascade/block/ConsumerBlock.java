@@ -14,10 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
@@ -25,6 +23,7 @@ import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.item.ItemRedHole;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
@@ -84,27 +83,12 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             w.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
 
-        updateMonitor(w, x, y, z);
+        AuraUtil.updateMonitor(w, x, y, z);
     }
-
-    public void updateMonitor(World w, int x, int y, int z) {
-        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
-            if (b instanceof BlockMonitor) {
-
-                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
-                    Block b2 = tuple.getBlock(w);
-                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
-                }
-            }
-        }
-    }
-
     @Override
     public void breakBlock(World w, int x, int y, int z, Block b, int p_149749_6_) {
         super.breakBlock(w, x, y, z, b, p_149749_6_);
-        updateMonitor(w, x, y, z);
+        AuraUtil.updateMonitor(w, x, y, z);
     }
 
     @Override
