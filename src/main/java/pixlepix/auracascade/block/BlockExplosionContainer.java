@@ -45,8 +45,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         this();
         type = s;
         if (type.equals("Glass")) {
-            setLightLevel(15);
-            setLightOpacity(0);
+            //setLightLevel(15);
+            setLightOpacity(1);
         }
     }
 
