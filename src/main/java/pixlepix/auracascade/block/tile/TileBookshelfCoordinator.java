@@ -152,7 +152,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                         toSearch.add(newTuple);
                         if (hasClearLineOfSight(newTuple)) {
                             bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
-                            burst(newTuple, "enchantmenttable", EnumAura.WHITE_AURA, 1);
+                            if (!worldObj.isRemote) {
+                                burst(newTuple, "enchantmenttable", EnumAura.WHITE_AURA, 1);
+                            }
                         }
                         checkedLocations.add(newTuple);
                     }
