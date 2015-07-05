@@ -110,6 +110,15 @@ public class EnchantEventHandler {
         return (int) Math.ceil(Math.sqrt(getEffectStrength(stack, aura) * getEffectStrength(stack, aura2)));
     }
 
+    public boolean canMultiplyDrops(BlockEvent.HarvestDropsEvent event) {
+        for (ItemStack drop : event.drops) {
+            if (getDoubleResult(drop) != drop) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     //Start event handling
     @SubscribeEvent(priority = EventPriority.LOW)
@@ -120,7 +129,7 @@ public class EnchantEventHandler {
             ItemStack stack = event.harvester.inventory.getCurrentItem();
             //Silk touch
             int multiply = getEffectStrength(stack, EnumAura.RED_AURA, EnumAura.YELLOW_AURA);
-            if (new Random().nextInt(4) < multiply) {
+            if (new Random().nextInt(4) < multiply && canMultiplyDrops(event)) {
                 ArrayList newDrops = new ArrayList(event.drops.size());
                 for (ItemStack dropStack : event.drops) {
                     newDrops.add(getDoubleResult(dropStack));
