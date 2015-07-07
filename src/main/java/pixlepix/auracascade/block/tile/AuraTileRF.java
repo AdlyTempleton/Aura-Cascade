@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.transport.IEnderEnergyHandler;
@@ -107,7 +108,7 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
-                if (te instanceof IEnergyProvider) {
+                if (te instanceof IEnergyProvider && !((IEnergyConnection) (te)).canConnectEnergy(ForgeDirection.UNKNOWN)) {
                     boolean isWhitelisted = false;
                     for (String clazz : whitelist) {
                         if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())) {
