@@ -131,7 +131,7 @@ public class CoordTuple {
     }
 
     public AxisAlignedBB getBoundingBox(int range) {
-        return AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range, y + range, z + range);
+        return AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range + 1, y + range + 1, z + range + 1);
     }
 
     public List<CoordTuple> inRange(int range) {
