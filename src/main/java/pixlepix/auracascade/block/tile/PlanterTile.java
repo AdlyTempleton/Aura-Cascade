@@ -29,6 +29,8 @@ public class PlanterTile extends ConsumerTile {
     @Override
     public void onUsePower() {
         Block block = worldObj.getBlock(xCoord, yCoord + 2, zCoord);
-        block.updateTick(worldObj, xCoord, yCoord + 2, zCoord, new Random());
+        for (int i = 0; i < 50; i++) {
+            block.updateTick(worldObj, xCoord, yCoord + 2, zCoord, new Random());
+        }
     }
 }
