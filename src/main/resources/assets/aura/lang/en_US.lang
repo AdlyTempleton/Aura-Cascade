@@ -124,6 +124,8 @@ auramisc.shapeless=Shapeless Recipe
 auramisc.oredict=Ore Dictionary Recipe
 
 
+tile.consumerBlocknether.name=Ritual of the Nether
+tile.consumerBlockfish.name=Cascading Fisher
 tile.consumerBlockoreAdv.name=Prismatic Processor
 
 
@@ -364,6 +366,9 @@ aura.entry.furnace=Cascading Smelter
 aura.page.furnace1=Cascading Smelter
 aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
 
+aura.entry.fish=Cascading Fisher
+aura.page.fish0=The &1Cascading Fisher&0 will fish for you for a small amount of power. Just place the Cascading Fisher over a 3x3 pool of water, power it, and watch the fish pour in!
+
 aura.entry.loot=Cascading Looter
 aura.page.loot1=Cascading Looter
 aura.page.loot0=The Cascading Looter will summon the loot from dungeon chests. The looter has a minimum power requirement of 5000 power/second.
@@ -406,7 +411,6 @@ aura.page.miner2=However, the singularity is incredible dangerous and must be co
 aura.page.miner3=Fortified blocks come in six varieties - Dirt, Cobblestone, Wood, Obsidian, Glass, and Stone. Each type has two properties - resistance and repair speed.
 aura.page.miner4=For instance, &1Fortified Wood&0 has relatively low resistance, meaning it quickly racks up damage, but extremely high repair speed. &1Fortified Obsidian&0 is the other end of the spectrum, with incredibly high resistance but incredibly slow repair speed. <br> To make fortified blocks, mix &1End Stone&0 and the corresponding block in a Cascading Processor.
 
-tile.consumerBlocknether.name=Ritual of the Nether
 aura.entry.nether=Ritual of the Nether
 aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
 aura.page.nether1=Better than fire

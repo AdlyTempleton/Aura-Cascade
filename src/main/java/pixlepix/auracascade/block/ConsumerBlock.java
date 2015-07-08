@@ -110,6 +110,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:auraGrow");
             top = iconRegister.registerIcon("aura:auraGrowTop");
         }
+        if (name.equals("fish")) {
+            blockIcon = iconRegister.registerIcon("aura:auraFish");
+        }
         if (name.equals("angel")) {
             blockIcon = iconRegister.registerIcon("aura:auraAngel");
             top = iconRegister.registerIcon("aura:auraAngelTop");
@@ -202,6 +205,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("miner")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "PAP", "IRI", "IRI", 'P', ItemMaterial.getPrism(), 'A', new ItemStack(Items.diamond_pickaxe), 'I', new ItemStack(Items.iron_ingot), 'R', BlockRegistry.getFirstItemFromClass(ItemRedHole.class));
             }
+            if (name.equals("fish")) {
+                return new CraftingBenchRecipe(new ItemStack(this), "RRR", "III", 'R', new ItemStack(Items.fishing_rod), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA));
+
+            }
         }
         return new CraftingBenchRecipe(new ItemStack(this), "FFF", "FIF", "FFF", 'F', new ItemStack(Blocks.furnace), 'I', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
     }
@@ -225,6 +232,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("dye");
         result.add("oreAdv");
         result.add("miner");
+        result.add("fish");
         return result;
     }
 
@@ -288,6 +296,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             }
             if (name.equals("miner")) {
                 return MinerTile.class;
+            }
+            if (name.equals("fish")) {
+                return FisherTile.class;
+                
             }
         }
         return FurnaceTile.class;
