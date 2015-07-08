@@ -120,7 +120,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 5) {
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 200 == 5) {
             int numShelves = getBookshelves().size();
             neededPower = (int) (5 * numShelves * Math.pow(1.05, numShelves));
             //Drain power from aura nodes
@@ -138,7 +138,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
             }
             worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
         }
-        if (worldObj.getTotalWorldTime() % 20 == 0 || !hasCheckedShelves) {
+        if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
             ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
