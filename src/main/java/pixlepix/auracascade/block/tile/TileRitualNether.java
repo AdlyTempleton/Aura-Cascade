@@ -3,7 +3,6 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeGenHell;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
@@ -34,6 +33,12 @@ public class TileRitualNether extends ConsumerTile {
         return true;
     }
 
+    public byte getBiomeId() {
+
+        //8 is hardcoded value for hell biome
+        return 8;
+    }
+
     @Override
     public void updateEntity() {
         super.updateEntity();
@@ -41,7 +46,7 @@ public class TileRitualNether extends ConsumerTile {
         if (!worldObj.isRemote && toSearch.size() == 0 && started) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
         }
-        while (!worldObj.isRemote && toSearch.size() > 0) {
+        while (toSearch.size() > 0) {
             CoordTuple tuple = toSearch.getFirst();
             toSearch.removeFirst();
             int x = tuple.getX();
@@ -51,8 +56,7 @@ public class TileRitualNether extends ConsumerTile {
             }
             Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
             byte[] biomeData = chunk.getBiomeArray();
-            //8 is hardcoded value for hell biome
-            biomeData[(z & 15) << 4 | (x & 15)] = 8;
+            biomeData[(z & 15) << 4 | (x & 15)] = getBiomeId();
             boolean particle = true;
             for (int y = 0; y < 255; y++) {
                 Block b = getMappedBlock(worldObj.getBlock(x, y, z));
@@ -91,7 +95,7 @@ public class TileRitualNether extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        if (!worldObj.isRemote && !(worldObj.getBiomeGenForCoords(xCoord, zCoord) instanceof BiomeGenHell)) {
+        if (!(worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID == getBiomeId())) {
             //Coordtuples are used for convenience, but y-values are irrelavent
             toSearch.addFirst(new CoordTuple(this));
             targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);

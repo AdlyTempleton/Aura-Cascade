@@ -125,6 +125,7 @@ auramisc.oredict=Ore Dictionary Recipe
 
 
 tile.consumerBlocknether.name=Ritual of the Nether
+tile.consumerBlockend.name=Ritual of the End
 tile.consumerBlockfish.name=Cascading Fisher
 tile.consumerBlockoreAdv.name=Prismatic Processor
 
@@ -414,6 +415,9 @@ aura.page.miner4=For instance, &1Fortified Wood&0 has relatively low resistance,
 aura.entry.nether=Ritual of the Nether
 aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
 aura.page.nether1=Better than fire
+
+aura.entry.end=Ritual of the End
+aura.page.end0=The &1Ritual of the End&0, much like the &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the end, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
 
 
 aura.entry.brewer=Cascading brewer

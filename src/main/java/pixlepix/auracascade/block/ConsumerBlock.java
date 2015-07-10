@@ -125,6 +125,10 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             blockIcon = iconRegister.registerIcon("aura:ritualNether");
 
         }
+        if (name.equals("end")) {
+            blockIcon = iconRegister.registerIcon("aura:ritualEnd");
+
+        }
         if (name.equals("potion")) {
             blockIcon = iconRegister.registerIcon("aura:brewer");
 
@@ -205,6 +209,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             if (name.equals("miner")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "PAP", "IRI", "IRI", 'P', ItemMaterial.getPrism(), 'A', new ItemStack(Items.diamond_pickaxe), 'I', new ItemStack(Items.iron_ingot), 'R', BlockRegistry.getFirstItemFromClass(ItemRedHole.class));
             }
+            if (name.equals("end")) {
+                return new CraftingBenchRecipe(new ItemStack(this), "EPE", "ENE", "EEE", 'P', ItemMaterial.getPrism(), 'E', new ItemStack(Blocks.end_stone), 'N', new ItemStack(getBlockFromName("nether")));
+            }
             if (name.equals("fish")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "RRR", "III", 'R', new ItemStack(Items.fishing_rod), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA));
 
@@ -233,6 +240,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         result.add("oreAdv");
         result.add("miner");
         result.add("fish");
+        result.add("end");
         return result;
     }
 
@@ -296,6 +304,9 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             }
             if (name.equals("miner")) {
                 return MinerTile.class;
+            }
+            if (name.equals("end")) {
+                return TileRitualEnd.class;
             }
             if (name.equals("fish")) {
                 return FisherTile.class;
