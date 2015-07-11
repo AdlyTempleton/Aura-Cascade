@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.Config;
@@ -33,7 +34,8 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
         }
 
         if (pumpPower == 0 && (!hasSearched || worldObj.getTotalWorldTime() % 1200 == 0)) {
-            for (CoordTuple tuple : new CoordTuple(this).inRange(5)) {
+            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+                CoordTuple tuple = new CoordTuple(this).add(direction);
                 if (consumeLightSource(tuple, Blocks.glowstone)) {
                     break;
                 }
