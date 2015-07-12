@@ -29,7 +29,7 @@ public class AuraTileRF extends AuraTile {
     public String[] blacklist = new String[]{"InductionPort", "EnergyCube", "ChargePad", "EnergyStorage", "TileEntityMagnetic", "TileTransceiver", "TileEntityRift", "TileTransvectorInterface", "TileRemoteInterface", "TileEntityEnergyDistributor", "TileEntityEnderEnergyDistributor", "TileCharger", "TileCell", "TileEntityTransferNodeEnergy", "TileEnergyInfuser"};
     public String[] whitelist = new String[]{"tileentityenderthermiclavapump", "tileentityenderquarry"};
     public String[] blacklistModId = new String[]{"quantumflux"};
-    public String[] whitelistModId = new String[]{"buildcraft", "GalacticraftCore", "progressiveautomation"};
+    public String[] whitelistModId = new String[]{"buildcraft", "GalacticraftCore", "progressiveautomation", "Mekanism"};
 
     @Override
     protected void readCustomNBT(NBTTagCompound nbt) {
