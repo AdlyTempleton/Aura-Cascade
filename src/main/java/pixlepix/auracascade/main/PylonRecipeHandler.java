@@ -14,7 +14,6 @@ import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,9 +48,11 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
         if ("item".equals(inputId)) {
             for (PylonRecipe r : PylonRecipeRegistry.recipes) {
                 for (PylonRecipeComponent component : r.componentList) {
-                    if (Arrays.asList(ingredients).contains(component.itemStack)) {
-                        arecipes.add(new NEIPylonRecipe(r));
-                        break;
+                    for (Object obj : ingredients) {
+                        if (obj instanceof ItemStack && ((ItemStack) obj).isItemEqual(component.itemStack)) {
+                            arecipes.add(new NEIPylonRecipe(r));
+                            break;
+                        }
                     }
                 }
             }
