@@ -64,7 +64,7 @@ public class AuraTilePumpBase extends AuraTile {
                 AuraTile upNode = null;
                 for (int i = 1; i < 16; i++) {
                     TileEntity te = worldObj.getTileEntity(xCoord, yCoord + i, zCoord);
-                    if (te instanceof AuraTile) {
+                    if (te instanceof AuraTile && isOpenPath(new CoordTuple(xCoord, yCoord + i, zCoord))) {
                         upNode = (AuraTile) te;
                         break;
                     }
