@@ -271,7 +271,7 @@ public final class LexiconData {
                 {{node, node}}
 
         }
-        ), new PageText("2"));
+        ));
         new BLexiconEntry("autoOff", categoryWalkthrough).setLexiconPages(new MultiblockPage("0", new ItemStack[][][]{
                 {{pumpnode, node}, {monitor, furnacenode}},
                 {}, {},
