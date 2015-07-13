@@ -22,6 +22,7 @@ public interface IEnergyReceiver extends IEnergyConnection {
 	 */
 	int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate);
 
+	
 	/**
 	 * Returns the amount of energy currently stored.
 	 */

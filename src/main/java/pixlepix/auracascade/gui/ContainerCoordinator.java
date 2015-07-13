@@ -116,6 +116,7 @@ public class ContainerCoordinator extends Container {
         while (iter.hasNext()) {
             StorageItemStack storageItemStack = (StorageItemStack) iter.next();
             String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
+
             if (!name.contains(filter)) {
                 iter.remove();
             }

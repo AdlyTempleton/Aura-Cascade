@@ -116,7 +116,7 @@ public class AuraTileRF extends AuraTile {
                         }
                     }
                     for (String whitelistMod : whitelistModId) {
-                        if (modid.toLowerCase().contains(whitelistMod)) {
+                        if (modid.toLowerCase().contains(whitelistMod.toLowerCase())) {
                             isWhitelisted = true;
                         }
                     }
