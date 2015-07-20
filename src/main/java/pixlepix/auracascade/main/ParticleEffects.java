@@ -64,6 +64,9 @@ public class ParticleEffects {
                 if (particleName.equals("square")) {
                     entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) r, (float) g, (float) b);
                 }
+                if (particleName.equals("squareLong")) {
+                    entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) r, (float) g, (float) b, true);
+                }
                 if (particleName.equals("witchMagic")) {
                     entityfx = new EntitySpellParticleFX(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
                     ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);

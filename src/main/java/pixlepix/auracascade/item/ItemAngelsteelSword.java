@@ -3,7 +3,9 @@ package pixlepix.auracascade.item;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -11,20 +13,26 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IAngelsteelTool;
+import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.*;
+import scala.actors.threadpool.Arrays;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/19/15.
  */
 public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IAngelsteelTool {
     public static final String name = "angelsteelSword";
+    public static String[] patrons = new String[]{"Pixlepix"};
     public int degree = 0;
     public EnumAura[] auraSwords = new EnumAura[]{EnumAura.BLUE_AURA, EnumAura.GREEN_AURA, EnumAura.ORANGE_AURA, EnumAura.RED_AURA, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA};
     public HashMap<EnumAura, IIcon> iconHashMap = new HashMap<EnumAura, IIcon>();
@@ -144,7 +152,21 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
+        EntityPlayer player = AuraCascade.proxy.getPlayer();
+        if (player != null && Arrays.asList(patrons).contains(player.getDisplayName())) {
+            return "Sword of the Patron";
+        }
         return getAura(stack).name + " " + super.getItemStackDisplayName(stack);
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World w, Entity e, int p_77663_4_, boolean p_77663_5_) {
+        if (w.isRemote && e instanceof EntityPlayer && Arrays.asList(patrons).contains(((EntityPlayer) e).getDisplayName())) {
+            float hue = (w.getTotalWorldTime() % 1200) / 1200F;
+            Color color = Color.getHSBColor(hue, 1F, .5F);
+            Random r = new Random();
+            ParticleEffects.spawnParticle("squareLong", e.posX, e.posY + .5, e.posZ, r.nextFloat() / 5, .5, r.nextFloat() / 5, color.getRed(), color.getGreen(), color.getBlue());
+        }
     }
 
     @Override
