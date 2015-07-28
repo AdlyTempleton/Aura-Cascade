@@ -44,10 +44,12 @@ public class PotionGreenCurse extends Potion {
 
 
         List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(entity.posX - 5, entity.posY - 5, entity.posZ - 5, entity.posX + 5, entity.posY + 5, entity.posZ + 5));
-        EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
-        if (entityLiving != entity) {
-            if (!entityLiving.isPotionActive(this)) {
-                entityLiving.addPotionEffect(new PotionEffect(this.getId(), entity.getActivePotionEffect(this).getDuration()));
+        if (entities.size() > 0) {
+            EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
+            if (entityLiving != entity) {
+                if (!entityLiving.isPotionActive(this)) {
+                    entityLiving.addPotionEffect(new PotionEffect(this.getId(), entity.getActivePotionEffect(this).getDuration()));
+                }
             }
         }
     }
