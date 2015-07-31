@@ -19,13 +19,10 @@ import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.*;
-import scala.actors.threadpool.Arrays;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/19/15.
