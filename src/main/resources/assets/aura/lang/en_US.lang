@@ -272,7 +272,7 @@ aura.page.pumps1=Each pump has two properties for each type of fuel it consumes:
 aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
 aura.page.pumps3=The Burning Aura Pump
 aura.entry.comparator=Comparator Interactions
-aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. This signal is logarithmic: 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2. Cascading blocks output signal based on their progress divided by their required progress.
+aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2, and so on. Cascading blocks output signal based on their progress divided by their required progress.
 
 aura.entry.black=Black Aura
 aura.page.black0=Black aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
@@ -295,10 +295,10 @@ aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it ta
 aura.page.blue1=Blue Aura Crystal
 
 aura.entry.violet=Violet Aura
-aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic, and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate. More than 2600 violet aura in a node will also cause all the aura to dissipate.
+aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic (It goes quicker when less Violet aura is in a single node), and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate. More than 2600 violet aura in a node will also cause all the aura to dissipate.
 aura.page.violet1=Violet Aura Crystal
 aura.entry.alternating=Alternating Pumps
-aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally over an eight minute period.
+aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally (Like a wave) over an eight minute period.
 
 
 aura.entry.flux=Fluxing Node
