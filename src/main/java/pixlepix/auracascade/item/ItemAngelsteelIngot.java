@@ -40,7 +40,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
 
     @Override
     public boolean onEntityItemUpdate(EntityItem entityItem) {
-        if (!entityItem.worldObj.isRemote && entityItem.getEntityItem().getItemDamage() < AngelsteelToolHelper.MAX_DEGREE - 1) {
+        if (entityItem.worldObj.getTotalWorldTime() % 4 == 0 && entityItem.onGround && !entityItem.worldObj.isRemote && entityItem.getEntityItem().getItemDamage() < AngelsteelToolHelper.MAX_DEGREE - 1) {
             EntityItem[] targetStacks = new EntityItem[3];
             targetStacks[0] = entityItem;
             int i = 1;
@@ -57,18 +57,23 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
             int degree = entityItem.getEntityItem().getItemDamage();
 
             if (i != 3) {
-                AxisAlignedBB range = AxisAlignedBB.getBoundingBox(entityItem.posX - 1, entityItem.posY - 1, entityItem.posZ - 1, entityItem.posX + 1, entityItem.posY + 1, entityItem.posZ + 1);
+                AxisAlignedBB range = AxisAlignedBB.getBoundingBox(entityItem.posX - 3, entityItem.posY - 3, entityItem.posZ - 3, entityItem.posX + 3, entityItem.posY + 3, entityItem.posZ + 3);
                 List<EntityItem> entityItems = entityItem.worldObj.getEntitiesWithinAABB(EntityItem.class, range);
                 for (EntityItem nearbyItem : entityItems) {
                     ItemStack nearbyStack = nearbyItem.getEntityItem();
                     if (nearbyItem != entityItem && nearbyStack.getItem() == this && nearbyStack.getItemDamage() == degree) {
-                        if (nearbyStack.stackSize == 2) {
-                            targetStacks[1] = entityItem;
-                            i = 2;
-                        } else if (nearbyStack.stackSize >= 3) {
-                            targetStacks[1] = entityItem;
-                            targetStacks[2] = entityItem;
-                            i = 3;
+
+                        targetStacks[i] = nearbyItem;
+                        i += 1;
+
+                        if (nearbyStack.stackSize >= 2 && i < 3) {
+                            targetStacks[i] = nearbyItem;
+                            i += 1;
+                        }
+
+                        if (i == 3) {
+                            break;
+
                         }
 
                     }
