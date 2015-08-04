@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IAngelsteelTool {
     public static final String name = "angelsteelSword";
-    public static String[] patrons = new String[]{"Pixlepix"};
+    public static String[] patrons = new String[]{"Pixlepix", "JGPhoenix"};
     public int degree = 0;
     public EnumAura[] auraSwords = new EnumAura[]{EnumAura.BLUE_AURA, EnumAura.GREEN_AURA, EnumAura.ORANGE_AURA, EnumAura.RED_AURA, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA};
     public HashMap<EnumAura, IIcon> iconHashMap = new HashMap<EnumAura, IIcon>();
