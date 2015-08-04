@@ -84,7 +84,7 @@ public abstract class ConsumerTile extends TileEntity {
         super.updateEntity();
         if (!worldObj.isRemote) {
             if (worldObj.getTotalWorldTime() % 20 == 18) {
-                storedPower *= .5;
+                storedPower *= .25;
             }
 
             if (worldObj.getTotalWorldTime() % 20 == 0) {
