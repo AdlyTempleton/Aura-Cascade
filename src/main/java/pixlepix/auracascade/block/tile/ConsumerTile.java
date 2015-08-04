@@ -126,21 +126,24 @@ public abstract class ConsumerTile extends TileEntity {
                 AuraUtil.keepAlive(this, 3);
             }
 
-            int nextBoostCost = getPowerPerProgress();
-            while (true) {
-                if (progress > getMaxProgress()) {
-                    progress = 0;
-                    onUsePower();
+            if (worldObj.getTotalWorldTime() % 20 == 1 || worldObj.getTotalWorldTime() % 20 == 2) {
+
+                int nextBoostCost = getPowerPerProgress();
+                while (true) {
+                    if (progress > getMaxProgress()) {
+                        progress = 0;
+                        onUsePower();
+                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    }
+                    if (storedPower < nextBoostCost) {
+                        break;
+                    }
+                    progress += 1;
+                    storedPower -= nextBoostCost;
+                    nextBoostCost *= 2;
                     worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
                 }
-                if (storedPower < nextBoostCost) {
-                    break;
-                }
-                progress += 1;
-                storedPower -= nextBoostCost;
-                nextBoostCost *= 2;
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
             }
         }
     }
