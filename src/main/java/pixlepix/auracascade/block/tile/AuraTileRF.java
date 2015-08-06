@@ -5,9 +5,11 @@ import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.transport.IEnderEnergyHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import de.npe.gameanalytics.events.GAErrorEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.Config;
@@ -109,6 +111,7 @@ public class AuraTileRF extends AuraTile {
                     }
                 }
                 if (te instanceof IEnergyProvider && !((IEnergyConnection) (te)).canConnectEnergy(ForgeDirection.UNKNOWN)) {
+                    AuraCascade.analytics.eventError(GAErrorEvent.Severity.info, "Blacklisted IEnergyProvider authmatically: " + te.getClass().getName());
                     boolean isWhitelisted = false;
                     for (String clazz : whitelist) {
                         if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())) {

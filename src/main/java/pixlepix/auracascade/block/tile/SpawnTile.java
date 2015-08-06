@@ -5,6 +5,8 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -32,6 +34,7 @@ public class SpawnTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerSpawner", AuraUtil.formatLocation(this));
         BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer) worldObj).spawnRandomCreature(EnumCreatureType.monster, xCoord, yCoord, zCoord);
         try {
             EntityLiving entity = (EntityLiving) spawnListEntry.entityClass.getConstructor(new Class[]{World.class}).newInstance(worldObj);

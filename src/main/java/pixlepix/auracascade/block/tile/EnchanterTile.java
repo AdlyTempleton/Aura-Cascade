@@ -11,6 +11,7 @@ import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class EnchanterTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
         ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();

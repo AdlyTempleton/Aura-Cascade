@@ -1,7 +1,9 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.passive.EntitySheep;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
 import java.util.Random;
@@ -28,6 +30,8 @@ public class DyeTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+
+        AuraCascade.analytics.eventDesign("consumerDye", AuraUtil.formatLocation(this));
         List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, new CoordTuple(this).getBoundingBox(2));
         if (nearbySheep.size() > 0) {
             EntitySheep sheep = nearbySheep.get(new Random().nextInt(nearbySheep.size()));

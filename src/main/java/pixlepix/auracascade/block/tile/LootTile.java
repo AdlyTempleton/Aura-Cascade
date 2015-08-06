@@ -4,7 +4,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ChestGenHooks;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.compat.IMCManager;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 
@@ -44,6 +46,7 @@ public class LootTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("cascaderLoot", AuraUtil.formatLocation(this));
         ItemStack lootStack;
         do {
             lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());

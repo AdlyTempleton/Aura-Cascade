@@ -6,6 +6,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -95,6 +96,7 @@ public class TileRitualNether extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
         if (!(worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID == getBiomeId())) {
             //Coordtuples are used for convenience, but y-values are irrelavent
             toSearch.addFirst(new CoordTuple(this));

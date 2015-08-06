@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.EnumColor;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public enum EnumAura {
     GREEN_AURA("Green", .1, 1, .1, EnumColor.DARK_GREEN, new int[]{5, 13}) {
         @Override
         public double getRelativeMass(World world) {
+
+            AuraCascade.analytics.eventDesign("greenAura");
             if (world.isDaytime()) {
                 return 2D;
             }
@@ -30,7 +33,10 @@ public enum EnumAura {
     BLACK_AURA("Black", .1, .1, .1, EnumColor.BLACK, new int[]{12, 15, 7, 8}) {
         @Override
         public double getRelativeMass(World world) {
+
+            AuraCascade.analytics.eventDesign("blackAura");
             return 0D;
+
         }
     },
     RED_AURA("Red", 1, .1, .1, EnumColor.RED, new int[]{14}) {
@@ -53,6 +59,8 @@ public enum EnumAura {
                     explosionPushUp(world, tuple, 50000);
                 }
             }
+
+            AuraCascade.analytics.eventDesign("redAura", AuraUtil.formatLocation(tuple));
         }
     },
     ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE, new int[]{1}) {
@@ -70,6 +78,7 @@ public enum EnumAura {
 
                 }
             }
+            AuraCascade.analytics.eventDesign("orangeAura", AuraUtil.formatLocation(tuple));
         }
 
         @Override
@@ -88,12 +97,15 @@ public enum EnumAura {
             if (world.getTotalWorldTime() % 1200 == 5) {
                 AuraTile tile = (AuraTile) tuple.getTile(world);
                 tile.storage.set(this, (int) (.8D * (double) tile.storage.get(this)));
+                AuraCascade.analytics.eventDesign("yellowAura", AuraUtil.formatLocation(tuple), 0);
             }
         }
     },
     BLUE_AURA("Blue", .1, .1, 1, EnumColor.DARK_BLUE, new int[]{3, 9, 11}) {
         @Override
         public double getAscentBoost(World world) {
+
+            AuraCascade.analytics.eventDesign("blueAura");
             return world.isRaining() ? 4 : .5;
         }
     },
@@ -112,6 +124,8 @@ public enum EnumAura {
                 //Achieve growth along logarithmic curve
                 int num = quantity.getNum();
                 int delta = num <= 25 ? -num : 5 * (Math.min(100, (int) Math.floor(((double) 2500 / num))));
+
+                AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
 
                 if (tile == null) {
                     AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());

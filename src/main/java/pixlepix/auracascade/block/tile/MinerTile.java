@@ -3,8 +3,10 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityMinerExplosion;
 import pixlepix.auracascade.data.OreDropManager;
+import pixlepix.auracascade.main.AuraUtil;
 
 /**
  * Created by localmacaccount on 6/4/15.
@@ -57,6 +59,7 @@ public class MinerTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerMiner", AuraUtil.formatLocation(this));
 
         if (!hasBeenPulsed) {
             if (explosion != null && !explosion.isDead) {
@@ -85,6 +88,7 @@ public class MinerTile extends ConsumerTile {
                         EntityItem item = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, stack);
                         worldObj.spawnEntityInWorld(item);
                     }
+                    AuraCascade.analytics.eventDesign("consumerMinerLoot", AuraUtil.formatLocation(this), explosion.charge);
                 }
             }
             hasBeenPulsed = false;

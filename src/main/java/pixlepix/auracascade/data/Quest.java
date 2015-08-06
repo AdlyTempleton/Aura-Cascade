@@ -2,6 +2,7 @@ package pixlepix.auracascade.data;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.AuraCascade;
 
 /**
  * Created by localmacaccount on 5/31/15.
@@ -30,5 +31,7 @@ public class Quest {
     public void complete(EntityPlayer player) {
         QuestData questData = (QuestData) player.getExtendedProperties(QuestData.EXT_PROP_NAME);
         questData.completedQuests.add(this);
+
+        AuraCascade.analytics.eventDesign("questComplete", id);
     }
 }

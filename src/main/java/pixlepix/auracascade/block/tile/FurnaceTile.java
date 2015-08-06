@@ -5,6 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
@@ -54,6 +55,7 @@ public class FurnaceTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerSmelt", AuraUtil.formatLocation(this));
         int range = 3;
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
         for (EntityItem entityItem : nearbyItems) {

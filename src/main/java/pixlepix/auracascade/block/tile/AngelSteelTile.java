@@ -2,7 +2,9 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.item.ItemAngelsteelIngot;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 /**
@@ -30,6 +32,7 @@ public class AngelSteelTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("cascaderAngel", AuraUtil.formatLocation(this));
         ItemStack lootStack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class));
         EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
         entityItem.motionX = 0;

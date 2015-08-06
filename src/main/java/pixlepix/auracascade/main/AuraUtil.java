@@ -77,6 +77,20 @@ public class AuraUtil {
         }
     }
 
+    public static String formatLocation(TileEntity te) {
+        return te.xCoord + "|" + te.yCoord + "|" + te.zCoord;
+    }
+
+    public static String formatLocation(CoordTuple te) {
+        return te.getX() + "|" + te.getY() + "|" + te.getZ();
+    }
+
+    public static String formatLocation(Entity entity) {
+        return entity.posX + "|" + entity.posY + "|" + entity.posZ;
+
+    }
+    
+
     public static void updateMonitor(World w, int x, int y, int z) {
         for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
             Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);

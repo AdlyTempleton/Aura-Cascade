@@ -122,6 +122,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     public void updateEntity() {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 200 == 5) {
             int numShelves = getBookshelves().size();
+
+            AuraCascade.analytics.eventDesign("booshelfUsage", AuraUtil.formatLocation(this), numShelves);
             neededPower = (int) (5 * numShelves * Math.pow(1.05, numShelves));
             //Drain power from aura nodes
             lastPower = 0;

@@ -3,6 +3,8 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.FishingHooks;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 
@@ -40,6 +42,7 @@ public class FisherTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerLoot", AuraUtil.formatLocation(this));
         if (hasWater()) {
 
             EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, FishingHooks.getRandomFishable(new Random(), new Random().nextFloat()));

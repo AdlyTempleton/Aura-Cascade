@@ -1,6 +1,8 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
+import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 
@@ -28,6 +30,7 @@ public class PlanterTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
+        AuraCascade.analytics.eventDesign("consumerPlant", AuraUtil.formatLocation(this));
         Block block = worldObj.getBlock(xCoord, yCoord + 2, zCoord);
         for (int i = 0; i < 50; i++) {
             block.updateTick(worldObj, xCoord, yCoord + 2, zCoord, new Random());

@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.event.EventHandler;
@@ -116,6 +117,8 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
 
                     consumeInventoryItem(player.inventory, this, stack.getItemDamage());
+
+                    AuraCascade.analytics.eventDesign("fairyAdded", fairyClasses[stack.getItemDamage()].getName());
                 }
             }
         }
