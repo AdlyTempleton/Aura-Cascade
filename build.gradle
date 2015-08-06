@@ -20,12 +20,6 @@ buildscript {
     }
 }
 
-minecraft {
-    replaceIn "src/main/java/pixlepix/auracascade/ConstantMod.java"
-    replace "PLACEHOLDER", someProperty
-    replace "OTHER_PLACEHOLDER", otherProperty
-}
-
 repositories {
     ivy {
 
