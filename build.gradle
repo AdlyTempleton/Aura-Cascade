@@ -64,7 +64,7 @@ minecraft {
     version = "1.7.10-10.13.2.1277"
     runDir = "eclipse"
     replace '@version@', project.version
-    replace '@keySecret', System.env.SECRET != null ? "$System.env.SECRET" : ''
+    replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
 
 }
 version = "-${minecraft.version}"
