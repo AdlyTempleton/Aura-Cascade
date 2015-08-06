@@ -19,6 +19,13 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+
+minecraft {
+    replaceIn "src/main/java/pixlepix/auracascade/ConstantMod.java"
+    replace "PLACEHOLDER", someProperty
+    replace "OTHER_PLACEHOLDER", otherProperty
+}
+
 repositories {
     ivy {
 
@@ -58,8 +65,8 @@ archivesBaseName = "AuraCascade"
 minecraft {
     version = "1.7.10-10.13.2.1277"
     runDir = "eclipse"
-    replace '${version}', project.version
-
+    replace '@version@', project.version
+    replace '@keySecret', System.env.SECRET != null ? "$System.env.SECRET" : ''
 
 }
 version = "-${minecraft.version}"
@@ -94,4 +101,16 @@ processResources
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'dev'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            srcDir 'src/gameanalytics'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
 }

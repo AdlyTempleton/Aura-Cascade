@@ -3,6 +3,7 @@ dist
 download
 push.sh
 remotebuild.py
+secret.properties
 
 ## gradle
 /.gradle

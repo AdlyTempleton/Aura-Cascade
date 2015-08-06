@@ -12,6 +12,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import de.npe.gameanalytics.minecraft.MCSimpleAnalytics;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
@@ -58,7 +59,9 @@ public class CommonProxy {
     public SimpleNetworkWrapper networkWrapper;
     public Block chiselBookshelf;
 
+
     public void preInit(FMLPreInitializationEvent event) {
+        AuraCascade.analytics = new MCSimpleAnalytics(ConstantMod.version, ConstantMod.analyticsKey, ConstantMod.analyticsKeySecret);
         Config.init(event);
         ModCreativeTab.INSTANCE = new ModCreativeTab();
         AngelsteelToolHelper.initMaterials();

@@ -9,6 +9,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import de.npe.gameanalytics.SimpleAnalytics;
 import org.apache.logging.log4j.Logger;
 import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.CommonProxy;
@@ -18,6 +19,8 @@ import pixlepix.auracascade.main.ConstantMod;
 @Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles")
 public class AuraCascade {
 
+    public static SimpleAnalytics analytics;
+    
     @Instance(ConstantMod.modId)
     public static AuraCascade instance;
 
