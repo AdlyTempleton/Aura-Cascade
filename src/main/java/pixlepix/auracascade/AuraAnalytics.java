@@ -21,6 +21,6 @@ public class AuraAnalytics extends MCSimpleAnalytics {
 
     @Override
     public boolean isActive() {
-        return Config.analytics;
+        return Config.analytics && super.isActive();
     }
 }
