@@ -157,7 +157,7 @@ aura.angelJumpDown=Descend
 aura.keyBindCategory=Aura Cascade
 
 item.angelJumpAmulet.name=Amulet of the Angel's Wing
-item.angelStepBelt.name=Sash of the Angel's heels
+item.angelStepBelt.name=Sash of the Angel's Heels
 
 //Consumers
 
@@ -217,19 +217,18 @@ tile.consumerBlockpotion.name=Cascading Brewer
 
 aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
 
-aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with aura, and place coal near the pump.
-aura.page.basicSetup1=A pump and three nodes in a vertical rectangle. Substitute the pump or consumer of your choice
+aura.page.basicSetup0=The most basic power generating setup is referred to as a 4-node setup. A pump sends Aura upwards, which travels across the two upper nodes, falling back down and releasing power. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with Aura, and place coal near the pump.
+aura.page.basicSetup1=A pump and three nodes in a vertical rectangle. Substitute the pump or consumer of your choice.
 aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0.
 
 aura.entry.accumulate=Energy Storage
-aura.page.accumulate0=By moving the cobblestone in or out with a sticky piston, you can store energy simply. Storage is limited by the amount of spare aura.
+aura.page.accumulate0=By moving the cobblestone in or out with a sticky piston, you can store energy simply. Storage is limited by the amount of spare Aura.
 
 aura.entry.autoOff=Power Saver
-aura.page.autoOff0=A monitor will output a signal when next to a consumer that has finished all it's work. By placing it next to the pump, it will turn off when the job is done.
+aura.page.autoOff0=A Monitor will output a signal when next to a consumer that has finished all it's work. By placing it next to the pump, it will turn off when the job is done.
 
 aura.entry.multiplePumps=More power
 aura.page.multiplePumps0=Some consumers require power faster than a single pump can provide. You can easily stack multiple pumps to gain more power per second.
-tile.consumerBlockenchanter.name=Kaleidoscopic Enchanter
 
 tile.consumerBlockenchant.name=Kaleidoscopic Enchanter
 enchantment.Red=Kaleidoscopic Red
@@ -242,29 +241,29 @@ enchantment.Violet=Kaleidoscopic Violet
 #Start Lexicon
 
 aura.entry.basics=Basic Concepts
-aura.page.basics0=Aura is a magical fluid, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura nodes will connect to nearby nodes in a straight line, and transfer energy.
+aura.page.basics0=Aura is a magical fluid, which comes from craftable Aura Crystals. You can craft different Aura Nodes, and place them in the world. Aura Nodes will connect to nearby nodes in a straight line, and transfer energy.
 aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura is used to transport and store &1Power&0, in mechanics which will be discussed later.
 aura.entry.power=Power
 aura.page.power0=Storing Power with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. Power is equal to (Quantity of Aura)x(Height).
 aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. Note that pumps will push less aura if they have to push it farther - you will get the same power at any height. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
 aura.entry.auraFlow=Aura Flow Mechanics
 aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
-aura.page.auraFlow1=When two nodes are connected, both send aura to each other. This means that the quantity of aura in connected nodes tends toward equilibrium, under normal circumstances.
-aura.page.auraFlow2=Aura Crystals can place Aura in a node
-aura.page.auraFlow3=Aura Nodes store and transport Aura
+aura.page.auraFlow1=When two nodes are connected, both send Aura to each other. This means that the quantity of Aura in connected nodes tends toward equilibrium, under normal circumstances.
+aura.page.auraFlow2=Aura Crystals can place Aura in a node.
+aura.page.auraFlow3=Aura Nodes store and transport Aura.
 aura.entry.interactions=Controls
-aura.page.interactions0=Right click on an Aura Node with a Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
+aura.page.interactions0=Right click on an Aura Node with an Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
 aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
 aura.entry.materials=Materials
 aura.page.materials0=The &1Cascading Processor&0 is the basis of material processing. It's a consumer block (See the consumer tab) that requires a minimum of 150 power/second. It will 'process' nearby items in various ways.
-aura.page.materials2=First off, it will turn ores dropped nearby into two dust, if appropriate dusts exist. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Colorer&0
+aura.page.materials2=First off, it will turn ores dropped nearby into two dust, if appropriate dusts exist. It can also make &1Arcane Ingots&0 of various colors by dropping a iron ingot and wool of a particular color nearby. To obtain plentiful wool use the &1Cascading Colorer&0.
 aura.page.materials3=&1Arcane Gems&0 are the next tier of materials, and they come in all eight colors. They are made in &1Vortex Infusion&0 by using a diamond and 3 &1Arcane Ingots&0 of the same color.
-aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0
-aura.page.materials6=By upgrading the &1Cascading Processor&0 with &1Arcane Prisms&0, you can make a more advanced version, the &1Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
+aura.page.materials5=The final tier of materials is the &1Arcane Prism&0. It can be made by dropping &1Arcane Gems&0 of all eight colors near a &1Cascading Processor&0.
+aura.page.materials6=By upgrading the &1Cascading Processor&0 with an &1Arcane Prism&0, you can make a more advanced version, the &1Prismatic Processor&0. First of all, though it uses the same power per operation as a normal &1Cascading Processor&0, it requires a minmimum of 1000 power per second. This means that it runs much faster, given adequate power.
 aura.page.materials7=It has two additional operations. First, it will create three dusts per ore instead of two. It will also destroy colored wool, leaving behind the precious dye. Note that this can be a good source of materials such as ink or Lapis Lazuli.
 
 aura.entry.monitor=Monitor
-aura.page.monitor0=The monitor is a block that can read additional state from pumps and consumer blocks. When placed next to a pump, it will output a redstone signal when the pump runs out of fuel. <br> When placed next to a consumer, it will output a redstone signal when the consumer has no work to do (ie. when the Cascading Smelter has no nearby smeltable items).
+aura.page.monitor0=The Monitor is a block that can read additional state from pumps and consumer blocks. When placed next to a pump, it will output a redstone signal when the pump runs out of fuel. <br> When placed next to a consumer, it will output a redstone signal when the consumer has no work to do (ie. when the Cascading Smelter has no nearby smeltable items).
 
 aura.entry.pumps=Pumps
 aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently. Note that pumps can't send energy horizontally to each other, so using multiple pumps horizontally requires supplying aura to each one individually.
