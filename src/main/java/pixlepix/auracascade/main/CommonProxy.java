@@ -12,7 +12,6 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
-import de.npe.gameanalytics.minecraft.MCSimpleAnalytics;
 import net.minecraft.block.Block;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
@@ -22,6 +21,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
+import pixlepix.auracascade.AuraAnalytics;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;
@@ -63,7 +63,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         Config.init(event);
 
-        AuraCascade.analytics = new MCSimpleAnalytics(ConstantMod.version, ConstantMod.analyticsKey, ConstantMod.analyticsKeySecret);
+        AuraCascade.analytics = new AuraAnalytics(ConstantMod.version, ConstantMod.analyticsKey, ConstantMod.analyticsKeySecret);
        
         ModCreativeTab.INSTANCE = new ModCreativeTab();
         AngelsteelToolHelper.initMaterials();
