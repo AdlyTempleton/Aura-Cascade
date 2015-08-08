@@ -249,8 +249,8 @@ aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura 
 aura.entry.auraFlow=Aura Flow Mechanics
 aura.page.auraFlow0=Every second, Aura Nodes will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
 aura.page.auraFlow1=When two nodes are connected, both send Aura to each other. This means that the quantity of Aura in connected nodes tends toward equilibrium, under normal circumstances.
-aura.page.auraFlow2=Aura Crystals can place Aura in a node.
-aura.page.auraFlow3=Aura Nodes store and transport Aura.
+aura.page.auraFlow2=Aura Crystals can place Aura in a node
+aura.page.auraFlow3=Aura Nodes store and transport Aura
 aura.entry.interactions=Controls
 aura.page.interactions0=Right click on an Aura Node with an Aura Crystal, or toss the Aura Crystal onto the node, to give Aura and consume the crystal. <br> Right click an Aura Node with an empty hand to see the stored Aura.
 aura.page.interactions1=Applying a redstone signal to a node will stop the node from sending Aura, but will allow it to receive power. This will create a one-way flow, disrupting the natural tendency to equilibrium.
@@ -266,35 +266,35 @@ aura.entry.monitor=Monitor
 aura.page.monitor0=The Monitor is a block that can read additional state from pumps and consumer blocks. When placed next to a pump, it will output a redstone signal when the pump runs out of fuel. <br> When placed next to a consumer, it will output a redstone signal when the consumer has no work to do (ie. when the Cascading Smelter has no nearby smeltable items).
 
 aura.entry.pumps=Pumps
-aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of Pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently. Note that pumps can't send energy horizontally to each other, so using multiple pumps horizontally requires supplying aura to each one individually.
-aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and Speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
+aura.page.pumps0=Pumps are devices that push aura uphill, generating &1Power&0. There are many different types of pumps, which all consume some sort of fuel in different manners, though each pump is fed fuel differently. Note that pumps can't send energy horizontally to each other, so using multiple pumps horizontally requires supplying aura to each one individually.
+aura.page.pumps1=Each pump has two properties for each type of fuel it consumes: Duration and speed. Duration is the number of seconds a pump can run off a single piece of fuel. Speed is the amount of &1Power&0 it generates each second.
 aura.page.pumps2=The most basic and boring pump, the Burning Aura Pump, uses any type of fuel that can be placed in a furnace. Items will not be returned; for instance, putting in a lava bucket will not return an empty bucket. Duration: The burn duration in a furnace. Speed: 200.
 aura.page.pumps3=The Burning Aura Pump
 aura.entry.comparator=Comparator Interactions
-aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored aura. 10 stored aura produces a signal of 1, 100 stored aura produces a signal of 2, and so on. Cascading blocks output signal based on their progress divided by their required progress.
+aura.page.comparator0=Almost all blocks interact with the comparator. Blocks which can store &1Aura&0, primarily &1Aura Nodes&0, will output a signal based off of their stored Aura. 10 stored Aura produces a signal of 1, 100 stored Aura produces a signal of 2, and so on. Cascading blocks output signal based on their progress divided by their required progress.
 
 aura.entry.black=Black Aura
-aura.page.black0=Black aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
+aura.page.black0=Black Aura has a few special properties. First, it has a weight of zero: It can't be pumped uphill, and generates no power when flowing downhill. It can't flow horizontally, only vertically. Most importantly, it can be created or destroyed by an &1Aura Manipulator&0
 aura.page.black1=Black Aura Crystal
 aura.entry.red=Red Aura
-aura.page.red0=When TNT is detonated near an &1Aura Node&0 containing Red Aura, it will absorb the explosion and it will push Red Aura uphill, acting like a pump. Each TNT block generated 200,000 power.
+aura.page.red0=When TNT is detonated near an &1Aura Node&0 containing Red Aura, it will absorb the explosion and it will push Red Aura uphill, acting like a pump. Each TNT block generates 200,000 power.
 aura.page.red1=Red Aura Crystal
 
 aura.entry.orange=Orange Aura
-aura.page.orange0=Orange Aura shares the properties of &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby aura nodes, causing aura to flow in the same direction.
+aura.page.orange0=Orange Aura shares the properties of &1Black Aura&0, except that it can only move horizontally and can't move vertically. When Orange Aura moves, it induces a current in nearby &1Aura Nodes&0, causing Aura to flow in the same direction.
 aura.page.orange1=Orange Aura Crystal
 aura.entry.yellow=Yellow Aura
 aura.page.yellow0=Yellow Aura provides a x2 ascent boost, meaning that it takes half of the energy to pump up, while producing the normal amount of power falling down. However, Yellow Aura rapidly breaks down in &1Aura Nodes&0.
 aura.page.yellow1=Yellow Aura Crystal
 aura.entry.green=Green Aura
-aura.page.green0=Green Aura's weight changes during the day. During the day, it weights 2x as much as normal, meaning it takes more energy to pump up and releases more energy going down. At night, however, it weighs only half as much as normal.
+aura.page.green0=Green Aura's weight changes throughout the day. During daytime, it weights 2x as much as normal, meaning it takes more energy to pump up and releases more energy going down. At night, however, it weights only half as much as normal.
 aura.page.green1=Green Aura Crystal
 aura.entry.blue=Blue Aura
 aura.page.blue0=Blue Aura provides a massive x4 ascent boost, meaning that it takes a fourth of the energy to pump up, while producing the normal amount of power falling down, but only when it's raining. At other times, it has a detrimental x0.5 ascent boost.
 aura.page.blue1=Blue Aura Crystal
 
 aura.entry.violet=Violet Aura
-aura.page.violet0=Violet Aura will continuously grow when placed in an aura node. This growth is logarithmic (It goes quicker when less Violet aura is in a single node), and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate. More than 2600 violet aura in a node will also cause all the aura to dissipate.
+aura.page.violet0=Violet Aura will continuously grow when placed in an &1Aura Node&0. This growth is logarithmic (It goes quicker when less Violet aura is in a single node), and caps out at 2,500 Violet Aura per node. Spreading Violet Aura among many nodes will increase growth. However, if less than 25 violet aura remains in a node, it will dissipate. More than 2600 violet aura in a node will also cause all the aura to dissipate.
 aura.page.violet1=Violet Aura Crystal
 aura.entry.alternating=Alternating Pumps
 aura.page.alternating0=A new technique will make your pumps much more efficient, at a price. &1Alternating Pumps&0 produce much more power than their mundane counterparts. However, their output is not constant. It varies sinusoidally (Like a wave) over an eight minute period.
@@ -302,32 +302,32 @@ aura.page.alternating0=A new technique will make your pumps much more efficient,
 
 aura.entry.flux=Fluxing Node
 tile.auraNodeflux.name=Fluxing Node
-aura.page.flux0=The fluxing node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and and blocks adjacent to those ones, and so on, providing power to all of them.
-aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain 4 power-consuming blocks, including pipes. This means that the &1Fluxing Node&0 won't provide power to a large network. It won't connect to blocks such as pipes or energy cubes or tesseracts
+aura.page.flux0=The Fluxing Node will convert power from aura falling into it into Redstone Flux. It does this by creating an &1Aura Bubble&0. This bubble will surround and power adjacent power-consuming blocks, and blocks adjacent to those ones, and so on, providing power to all of them.
+aura.page.flux1=This &1Aura Bubble&0 has a limit, however. It will only contain a total of 4 power-consuming blocks. This means that the &1Fluxing Node&0 won't provide power to a large network. It also won't connect to blocks such as pipes or wireless energy transport mechanisms, such as tesseracts.
 aura.page.flux2=The bullet, guys. I bit it. Copied some stuff, too.
 
 
 aura.entry.capacitor=Aura Capacitor
-aura.page.capacitor0=The Aura Capacitor, unlike other aura nodes, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive Aura for a few seconds.
+aura.page.capacitor0=The Aura Capacitor, unlike other &1Aura Nodes&0, will not normally send energy. Instead, the capacitor has a threshold, which can be toggled with a shift-right click. The capacitor will build up aura until it exceeds it's threshold, at which point it will totally discharge itself, remaining unable to receive aura for a few seconds.
 aura.page.capacitor1=Aura Capacitor
 aura.entry.conserve=Conserving Aura Node
 aura.page.conserve0=The Conserving Aura Node functions much like a regular &1Aura Node&0, with one caveat: it will not send aura downhill. This can be used in conjunction with &1Red Aura&0, or to achieve compact builds.
 aura.page.conserve1=Conserving Aura Node
 aura.entry.manipulator=Aura Manipulator
-aura.page.manipulator0=The Aura Manipulator comes in two colors: Orange and Black. When not given a redstone signal, it will accept only aura of it's chosen color, and destroy it. When powered by redstone, it will rapidly generate extremely large amounts of it's chosen color of Aura.
+aura.page.manipulator0=The Aura Manipulator comes in two colors: Orange and Black. When not given a redstone signal, it will accept only aura of it's chosen color, and destroy it. When powered by redstone, it will rapidly generate extremely large amounts of it's chosen color of aura.
 aura.page.manipulator1=Black Aura Manipulator
 aura.page.manipulator2=Orange Aura Manipulator
 aura.entry.pumpFall=Momentum Pump
-aura.page.pumpFall0=The Momentum Pump is a pump that derives energy from the falling of mobs. When mobs fall near the pump, they will provide a duration of 2 seconds for every block the mob fell, and a speed of 500
+aura.page.pumpFall0=The Momentum Pump is a pump that derives energy from the falling of mobs. When mobs fall near the pump, they will provide a duration of 2 seconds for every block the mob fell, and a speed of 500.
 aura.page.pumpFall1=Momentum Pump
 aura.entry.pumpLight=Illumination Pump
-aura.page.pumpLight0=The Illumination Pump is a pump that derives energy from nearby light sources. It will consume adjacent Glowstone and Torches, producing a speed of 750 power/s and a duration of 3 minutes for glowstone and 30 seconds for a torch.
+aura.page.pumpLight0=The Illumination Pump is a pump that derives energy from nearby light sources. It will consume adjacent glowstone and torches, producing a speed of 750 power/s. The duration is 3 minutes for glowstone and 30 seconds for a torch.
 aura.page.pumpLight1=Illumination Pump
 aura.entry.pumpRedstone=Redstone Pump
-aura.page.pumpRedstone0=The Redstone Pump is a pump that derives energy from nearby Redstone. When a redstone wire is connected and powered, the pump will consume the redstone wire, generating a power of 1500 and a duration of 10 seconds for the first wire. It will eat a line of redstone up to 15 blocks long, generating a 40% greater duration for subsequent redstone.
+aura.page.pumpRedstone0=The Redstone Pump is a pump that derives energy from nearby redstone. When a redstone wire is connected and powered, the pump will consume the redstone wire, generating a power of 1500 and a duration of 10 seconds for the first wire. It will eat a line of redstone up to 15 blocks long, generating a 40% greater duration for subsequent redstone.
 aura.page.pumpRedstone1=Redstone Pump
 aura.entry.pumpProjectile=Projectile Pump
-aura.page.pumpProjectile0=The projectile pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
+aura.page.pumpProjectile0=The Projectile Pump will absorb certain projectiles thrown into it, generating power. Snowballs produce a duration of 10s and a speed of 500. Eggs produce a duration of 90s and a speed of 500. Arrows produce a duration of 20 and a speed of 1000.
 aura.page.pumpProjectile1=Projectile Pump
 #Consumers
 
@@ -336,7 +336,7 @@ aura.page.consumers0=Consumers are blocks which use power to accomplish some tas
 
 aura.entry.crafting=Vortex Infusion
 aura.page.crafting0=Vortex Infusion is a process for creating many higher-level items. First, place a &1Vortex Controller&0 down, and place four &1Vortex Pedestals&0 adjacent to it. Following a recipe, right-click to place the correct items on all four pedestals.
-aura.page.crafting1=Now, you need to supply the pedestals with power. Each pedestal acts like an Aura Node, unlike most consumer blocks. Each recipe needs different amounts of power per pedestal. Some recipies require a specific color of Aura to be used; These requirements can vary based on the item in the pedestal.
+aura.page.crafting1=Now, you need to supply the pedestals with power. Each pedestal acts like an &1Aura Node&0, unlike most consumer blocks. Each recipe needs different amounts of power per pedestal. Some recipies require a specific color of Aura to be used; These requirements can vary based on the item in the pedestal.
 aura.page.crafting2=Vortex Controller
 aura.page.crafting3=Vortex Pedestal
 aura.page.crafting4=Leather
@@ -358,13 +358,13 @@ aura.page.dye0=The Cascading Colorer is designed to ensure an easy supply of woo
 
 
 aura.entry.angel=Cascading Synthesizer
-aura.page.angel0=This block will consume power to synthesize &1Angel's steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s
+aura.page.angel0=This block will consume power to synthesize &1Angel's Steel&0, an extremely powerful material. It runs at a minimum speed of 10000 power/s.
 aura.page.angel1=Cascading Synthesizer
 
 
 aura.entry.furnace=Cascading Smelter
 aura.page.furnace1=Cascading Smelter
-aura.page.furnace0=The Cascading smelter will smelt nearby items when powered. It will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
+aura.page.furnace0=The Cascading Smelter will smelt nearby items when powered. Like most consumers, it will also keep nearby items from despawning. The smelter has a minimum power requirement of 190 power/second.
 
 aura.entry.fish=Cascading Fisher
 aura.page.fish0=The &1Cascading Fisher&0 will fish for you for a small amount of power. Just place the Cascading Fisher over a 3x3 pool of water, power it, and watch the fish pour in!
@@ -382,23 +382,23 @@ aura.page.plant1=Cascading Grower
 aura.page.plant0=The Cascading Grower will rapidly grow plants directly on top of it. The plant should be placed two blocks above the Cascading Grower, with a block of dirt in the middle. The grower has a minimum power requirement of 150 power/second.
 
 aura.entry.books=Book Storage
-aura.page.books0=Book's are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
+aura.page.books0=Books are an end-game method of storing and accessing items. Items are stored in different &1Storage Books&0. To access the Storage Books, place them in a vanilla bookshelf by right-clicking. Storage books hold items, and different types can hold different quantities or amounts of items, or can accept only certain types of items.
 aura.page.books1=A &1Bookshelf Coordinator&0 will allow you to access any connected bookshelves. To connect a storage-book-containing bookshelf, two requirements must be met: There must be a connection made of bookshelves, either empty or full. There must also be a clear line-of-sight between the coordinator and the bookshelf storing items.
 aura.page.books2=The coordinator requires power from an adjacent node. It will consume 5 power per bookshelf for small systems. Larger quantities of bookshelves make it less efficient: The cost will increase by 5% for each added bookshelf.
 aura.page.books3=The brain of the storage system
 aura.page.books4=Stores 27 stacks
-aura.page.books5=Dense storage books can store tons of items, but only a few types of items. &1Dense Storage Book&0 stores 8 stacks of 1,000 items. &1Very Dense Storage Book&0 stores 4 stacks of 5,000 items. &1Dense Storage Book&0 stores 2 stacks of 25,000 items. &1Extremely Dense Storage Book&0 stores 1 stack of 1,000,000 items.
+aura.page.books5=&1Dense Storage Books&0 can store tons of items, but only a few types of items. &1Dense Storage Books&0 store 8 stacks of 1,000 items, &1Very Dense Storage Books&0 store 4 stacks of 5,000 items, &1Super Dense Storage Books&0 store 2 stacks of 25,000 items, and finally, &1Extremely Dense Storage Books&0 store 1 stack of 1,000,000 items.
 aura.page.books6=Dense Storage Book
 aura.page.books7=Very Dense Storage Book
 aura.page.books8=Super Dense Storage Book
-aura.page.books9=Extremely Dense Storage book
-aura.page.books10=Light Storage books can store many types of items, but only a few items per stack. &1Light Storage Book&0 stores 100 stacks of 32 items. &1Very Light Storage Book&0 stores 150 stacks of 16 items. &1Light Storage Book&0 stores 1,000 stacks of 4 items. &1Extremely Light Storage Book&0 stores 10,000 stacks of 1 item.
+aura.page.books9=Extremely Dense Storage Book
+aura.page.books10=&1Light Storage Books&0 can store many types of items, but only a few items per stack. The &1Light Storage Books&0 store 100 stacks of 32 items, &1Very Light Storage Books&0 store 150 stacks of 16 items, &1Super Light Storage Books&0 store 1,000 stacks of 4 items, and &1Extremely Light Storage Books&0 store 10,000 stacks of 1 item.
 aura.page.books11=Light Storage Book
 aura.page.books12=Very Light Storage Book
 aura.page.books13=Super Light Storage Book
-aura.page.books14=Extremely Light Storage book
-aura.page.books15=Specialized Storage books are very efficient, but they can only store certain types of materials. <br> &1Mineral Storage Book&0 will store ores and ingots. <br> &1Mob Storage Book&0 will store mob drops.<br> &1Farming Storage Book&0 will store crops and seeds.
-aura.page.books16=&1Mod Storage Book&0 will only store items that come from the same mod.
+aura.page.books14=Extremely Light Storage Book
+aura.page.books15=Specialized Storage Books are very efficient, but they can only store certain types of materials. <br> &1Mineral Storage Books&0 will store ores and ingots. <br> &1Mob Storage Books&0 will store mob drops.
+aura.page.books16=&1Farming Storage Books&0 will store crops and seeds.<br> &1Mod Storage Book&0 will only store items that come from the same mod.
 aura.page.books17=8 stacks of 10,000
 aura.page.books18=32 stacks of 100,000
 aura.page.books19=32 stacks of 100,000
@@ -406,20 +406,20 @@ aura.page.books20=64 stacks of 100
 
 aura.entry.miner=Cascading Miner
 aura.page.miner0=The &1Cascading Miner&0 is an end-game system that provides a steady supply of ores. When powered, the Cascading Miner will create a &1Prismatic Singularity&0 1.5 blocks below itself.
-aura.page.miner1=When a redstone signal is applied, the Prismatic Singularity will implode, generating a number ores corresponding quadratically to the time the Singularity has existed. The singularity must have existed for 20 seconds before any ores are generated.
-aura.page.miner2=However, the singularity is incredible dangerous and must be contained with a chamber of &1Fortified Blocks&0. If the singularity touches any non-fortified blocks, it will create a massive explosion. When it hits any fortified blocks, it will bounce, dealing damage to the fortified blocks. The longer the singularity has existed, the faster it moves and the more frequently it does damage to fortified blocks
-aura.page.miner3=Fortified blocks come in six varieties - Dirt, Cobblestone, Wood, Obsidian, Glass, and Stone. Each type has two properties - resistance and repair speed.
-aura.page.miner4=For instance, &1Fortified Wood&0 has relatively low resistance, meaning it quickly racks up damage, but extremely high repair speed. &1Fortified Obsidian&0 is the other end of the spectrum, with incredibly high resistance but incredibly slow repair speed. <br> To make fortified blocks, mix &1End Stone&0 and the corresponding block in a Cascading Processor.
+aura.page.miner1=When a redstone signal is applied, the Prismatic Singularity will implode, generating a number ores corresponding quadratically to the time the singularity has existed. The singularity must have existed for 20 seconds before any ores are generated.
+aura.page.miner2=However, the singularity is incredible dangerous and must be contained with a chamber of &1Fortified Blocks&0. If the singularity touches any non-fortified blocks, it will create a massive explosion. When it hits any fortified blocks, it will bounce, dealing damage to them. The longer the singularity has existed, the faster it moves and the more frequently it does damage to fortified blocks.
+aura.page.miner3=&1Fortified Blocks&0 come in six varieties - Dirt, Cobblestone, Wood, Obsidian, Glass, and Stone. Each type has two properties - resistance and repair speed.
+aura.page.miner4=For instance, &1Fortified Wood&0 has relatively low resistance, meaning it quickly racks up damage, but has extremely high repair speed. &1Fortified Obsidian&0 is the other end of the spectrum, with incredibly high resistance but incredibly slow repair speed. <br> To make Fortified Blocks, mix End Stone and the corresponding block in a Cascading Processor.
 
 aura.entry.nether=Ritual of the Nether
 aura.page.nether0=The &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the nether, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
 aura.page.nether1=Better than fire
 
 aura.entry.end=Ritual of the End
-aura.page.end0=The &1Ritual of the End&0, much like the &1Ritual of the Nether&0 is an extremely powerful and dangerous device that will turn the surrounding biome into the end, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
+aura.page.end0=The &1Ritual of the End&0, much like the Ritual of the Nether is an extremely powerful and dangerous device that will turn the surrounding biome into the end, transmuting blocks inside the biome. It requires a minimum of 5000 power/second to run.
 
 
-aura.entry.brewer=Cascading brewer
+aura.entry.brewer=Cascading Brewer
 aura.page.brewer0=The &1Cascading Brewer&0 is an extremely useful device. Dropping water bottles nearby will randomly add brewing ingredients, creating potions for just the cost of the water bottle. It requires a minimum of 500 power/second to run.
 aura.page.brewer1=Don't drink potions from strangers
 
