@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * try-with-resource instead of having to keep an eye on proper unlock manually.<br>
  * <br>
  * <b>Usage:</b>
- * <p/>
+ *
  * <pre>
  * private ACLock myLock = new ACLock();
  *
@@ -24,25 +24,26 @@ import java.util.concurrent.locks.ReentrantLock;
  * </pre>
  *
  * @author NPException
+ *
  */
 public class ACLock extends ReentrantLock implements AutoCloseable {
-    private static final long serialVersionUID = -2604054164317029860L;
+	private static final long serialVersionUID = -2604054164317029860L;
 
-    public ACLock() {
-        super(false);
-    }
+	public ACLock() {
+		super(false);
+	}
 
-    public ACLock(boolean fair) {
-        super(fair);
-    }
+	public ACLock(boolean fair) {
+		super(fair);
+	}
 
-    public ACLock lockAC() {
-        lock();
-        return this;
-    }
+	public ACLock lockAC() {
+		lock();
+		return this;
+	}
 
-    @Override
-    public void close() {
-        unlock();
-    }
+	@Override
+	public void close() {
+		unlock();
+	}
 }

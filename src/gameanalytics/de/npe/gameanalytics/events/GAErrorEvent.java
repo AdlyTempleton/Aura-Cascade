@@ -9,30 +9,31 @@ import de.npe.gameanalytics.Analytics;
 
 /**
  * @author NPException
+ *
  */
 public class GAErrorEvent extends GAEvent {
 
-    @SerializedName("message")
-    private final String message;
-    @SerializedName("severity")
-    private final String severity;
+	@SerializedName("message")
+	private final String message;
+	@SerializedName("severity")
+	private final String severity;
 
-    public GAErrorEvent(Analytics an, Severity severity, String message) {
-        super(an);
-        this.severity = severity.name();
-        this.message = message;
-    }
+	public GAErrorEvent(Analytics an, Severity severity, String message) {
+		super(an);
+		this.severity = severity.name();
+		this.message = message;
+	}
 
-    @Override
-    public String category() {
-        return "error";
-    }
+	@Override
+	public String category() {
+		return "error";
+	}
 
-    public enum Severity {
-        critical,
-        error,
-        warning,
-        info,
-        debug
-    }
+	public enum Severity {
+		critical,
+		error,
+		warning,
+		info,
+		debug
+	}
 }
