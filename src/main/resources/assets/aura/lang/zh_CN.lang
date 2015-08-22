@@ -1,54 +1,58 @@
 //Item
-item.ingotAngelSteel.name=%n 之天使钢
-item.fairyCharm.name=仙子护身符
 item.AuraCrystal.name=气场晶体:
+item.ingotAngelSteel.name=%n 之天使钢
+item.lexicon.name=气场百科
+
+item.prismaticWand.name=超炫光手杖
+item.mirror.name=天使之镜
+
+item.redHole.name=便携式红洞
+item.blackHole.name=便携式黑洞
+
+//Materials
+item.ingotWhite.name=白色秘法锭
+item.ingotBlack.name=黑色秘法锭
+item.ingotRed.name=红色秘法锭
+item.ingotOrange.name=橙色秘法锭
+item.ingotYellow.name=黄色秘法锭
+item.ingotGreen.name=绿色秘法锭
+item.ingotBlue.name=蓝色秘法锭
+item.ingotViolet.name=紫色秘法锭
+
+item.gemWhite.name=白色秘法宝石
+item.gemBlack.name=黑色秘法宝石
+item.gemOrange.name=橙色秘法宝石
+item.gemYellow.name=黄色秘法宝石
+item.gemRed.name=红色秘法宝石
+item.gemGreen.name=绿色秘法宝石
+item.gemBlue.name=蓝色秘法宝石
+item.gemViolet.name=紫色秘法宝石
+
+item.prismWhite.name=秘法棱镜
+
+//Fairies
 item.fairyRing.name=约束之戒
+item.fairyCharm.name=仙子护身符
 
-//Tile
-tile.auraNode.name=气场节点
-tile.auraNodeblack.name=气场操纵者: 黑色
-tile.auraNodecapacitor.name=气场电容
-tile.auraNodeconserve.name=保护性气场节点
-tile.auraNodecraftingCenter.name=涡流控制器
-tile.auraNodecraftingPedestal.name=涡流基座
-tile.auraNodeorange.name=气场操纵者: 橙色
-tile.auraNodepumpLight.name=照明气场泵
-tile.auraNodepumpFall.name=动量气场泵
-tile.auraNodepumpProjectile.name=抛射物气场泵
-tile.auraNodepumpRedstone.name=红石气场泵
-tile.auraNodepump.name=燃烧气场泵
+//TO DO: Localize all fairy names (Fighter Fairy, Buffer Fairy etc.)
 
+//Baubles
+item.purpleAmulet.name=紫色护符
+item.redAmulet.name=红色护符
+item.orangeAmulet.name=橙色护符
+item.yellowAmulet.name=黄色护符
+item.greenAmulet.name=绿色护符
+item.blueAmulet.name=蓝色护符
 
-tile.auraNodepumpLightAlt.name=交变照明气场泵
-tile.auraNodepumpFallAlt.name=交变动量气场泵
-tile.auraNodepumpProjectileAlt.name=交变抛射物气场泵
-tile.auraNodepumpRedstoneAlt.name=交变红石气场泵
-tile.auraNodepumpAlt.name=交变燃烧气场泵
-vortex.nei.name=涡流融合
+item.angelJumpAmulet.name=天使之翼护符
+item.amuletFood.name=禁果护符
+item.angelStepBelt.name=天使之膝绶带
+item.explosionRing.name=碎石戒指
 
-tile.consumerBlockmob.name=流注刷怪机
-tile.consumerBlockangel.name=流注合成机
-tile.consumerBlockloot.name=流注掠夺机
-tile.consumerBlockore.name=流注处理器
-tile.consumerBlockplant.name=流注种植机
-tile.consumerBlockfurnace.name=流注熔炉
-
-
-//Used for angelsteel ingots
-//Take careful note of the off-by-one in the naming
-0.aurasteel.name=子
-1.aurasteel.name=丑
-2.aurasteel.name=寅
-3.aurasteel.name=卯
-4.aurasteel.name=辰
-5.aurasteel.name=巳
-6.aurasteel.name=午
-7.aurasteel.name=未
-8.aurasteel.name=申
-9.aurasteel.name=酉
-10.aurasteel.name=戌
-11.aurasteel.name=亥
-
+//Tool
+item.transmutingSword.name=变形剑
+item.comboSword.name=蛮族之剑
+item.swordThief.name=强盗之剑
 
 //Angelsteel tool
 item.angelsteelPickaxe0.name=子之天使钢镐
@@ -103,98 +107,12 @@ item.angelsteelShovel9.name=酉之天使钢锹
 item.angelsteelShovel10.name=戌之天使钢锹
 item.angelsteelShovel11.name=亥之天使钢锹
 
-itemGroup.aura=气场流注
-
-auramisc.lexiconIndex=目录
-auramisc.clickToShare=分享
-auramisc.bookmark=书签 #%s
-auramisc.clickToSee=点击阅读
-auramisc.shiftToRemove=按住Shift点击移除
-auramisc.clickToAdd=添加书签
-item.lexicon.name=气场百科
-aura.gui.lexicon.header=气场百科
-
-tile.monitor.name=监视者
-
-auramisc.nextPage=下一页
-auramisc.prevPage=上一页
-auramisc.back=返回
-auramisc.craftingContainer=合成结果
-auramisc.shapeless=无序合成
-auramisc.oredict=矿典配方
-
-
-tile.consumerBlocknether.name=下界仪式
-tile.consumerBlockend.name=末地仪式
-tile.consumerBlockfish.name=流注钓鱼机
-tile.consumerBlockoreAdv.name=棱镜处理器
-
-
-item.gemWhite.name=白色秘法宝石
-item.gemBlack.name=黑色秘法宝石
-item.gemOrange.name=橙色秘法宝石
-item.gemYellow.name=黄色秘法宝石
-item.gemRed.name=红色秘法宝石
-item.gemGreen.name=绿色秘法宝石
-item.gemBlue.name=蓝色秘法宝石
-item.gemViolet.name=紫色秘法宝石
-
-item.ingotWhite.name=白色秘法锭
-item.ingotBlack.name=黑色秘法锭
-item.ingotRed.name=红色秘法锭
-item.ingotOrange.name=橙色秘法锭
-item.ingotYellow.name=黄色秘法锭
-item.ingotGreen.name=绿色秘法锭
-item.ingotBlue.name=蓝色秘法锭
-item.ingotViolet.name=紫色秘法锭
-
-item.prismWhite.name=秘法棱镜
-
-item.prismaticWand.name=超炫光手杖
-
-aura.angelJump=上行
-aura.angelJumpDown=下行
-aura.keyBindCategory=气场流注
-
-item.angelJumpAmulet.name=天使之翼护符
-item.angelStepBelt.name=天使之膝绶带
-
-//Consumers
-
-aura.tutorialStarted=教程开始
-
-
-item.comboSword.name=蛮族之剑
-
-tile.auraNodepumpCreative.name=创造泵(仅创造)
-tile.consumerBlockdye.name=流注染色机
-
-item.transmutingSword.name=变形剑
-item.explosionRing.name=碎石戒指
-
-tile.fortifiedCobblestone.name=强化圆石
-tile.fortifiedStone.name=强化石
-tile.fortifiedWood.name=强化木板
-tile.fortifiedGlass.name=强化玻璃
-tile.fortifiedObsidian.name=强化黑曜石
-tile.fortifiedDirt.name=强化泥土
-tile.consumerBlockminer.name=流注开采机
-
-aura.tutorialEnded=教程结束
-
-auramisc.shiftToRead=按住Shift右击阅读更多
-auramisc.clickToRecipe=按住Shift单击查看配方
-auramisc.clickToIndex=按住Shift单击打开目录
-
-tile.storageBookshelfCoordinator.name=书架协调器
-tile.storageBookshelf.name=存储书架
-
+//Books
 item.basicBook.name=存储书
 item.denseBook.name=致密存储书
 item.extremelyDenseBook.name=极密存储书
 item.veryDenseBook.name=甚密存储书
 item.superDenseBook.name=超密存储书
-tile.fake.name=粘性活塞
 item.lightBook.name=轻型存储书
 item.extremelyLightBook.name=极轻存储书
 item.veryLightBook.name=甚轻存储书
@@ -205,20 +123,128 @@ item.mobDropBook.name=怪物掉落书
 item.modBook.name=模组限定书
 item.farmingBook.name=农用存储书
 
-item.purpleAmulet.name=紫色护符
-item.redAmulet.name=红色护符
-item.orangeAmulet.name=橙色护符
-item.yellowAmulet.name=黄色护符
-item.greenAmulet.name=绿色护符
-item.blueAmulet.name=蓝色护符
+//Tile
+tile.magicRoad.name=旅人之砖
+tile.trampoline.name=弹力英格玛
+tile.monitor.name=监视者
+tile.fake.name=粘性活塞
+tile.storageBookshelf.name=存储书架
 
+tile.fortifiedCobblestone.name=强化圆石
+tile.fortifiedStone.name=强化石
+tile.fortifiedWood.name=强化木板
+tile.fortifiedGlass.name=强化玻璃
+tile.fortifiedObsidian.name=强化黑曜石
+tile.fortifiedDirt.name=强化泥土
 
+//Node
+tile.auraNode.name=气场节点
+tile.auraNodeblack.name=气场操纵者: 黑色
+tile.auraNodeorange.name=气场操纵者: 橙色
+tile.auraNodecapacitor.name=气场电容
+tile.auraNodeconserve.name=节能气场节点
+
+//Pump
+tile.auraNodepumpLight.name=照明气场泵
+tile.auraNodepumpFall.name=动量气场泵
+tile.auraNodepumpProjectile.name=抛射物气场泵
+tile.auraNodepumpRedstone.name=红石气场泵
+tile.auraNodepump.name=燃烧气场泵
+tile.auraNodepumpCreative.name=创造泵(仅创造)
+
+tile.auraNodepumpLightAlt.name=交变照明气场泵
+tile.auraNodepumpFallAlt.name=交变动量气场泵
+tile.auraNodepumpProjectileAlt.name=交变抛射物气场泵
+tile.auraNodepumpRedstoneAlt.name=交变红石气场泵
+tile.auraNodepumpAlt.name=交变燃烧气场泵
+
+//Consumers
+tile.auraNodecraftingCenter.name=涡流控制器
+tile.auraNodecraftingPedestal.name=涡流基座
+
+tile.consumerBlockmob.name=流注刷怪机
+tile.consumerBlockangel.name=流注合成机
+tile.consumerBlockloot.name=流注掠夺机
+tile.consumerBlockore.name=流注处理器
+tile.consumerBlockoreAdv.name=超炫光处理器
+tile.consumerBlockplant.name=流注种植机
+tile.consumerBlockfurnace.name=流注熔炉
+tile.consumerBlocknether.name=下界仪式
+tile.consumerBlockend.name=末地仪式
+tile.consumerBlockfish.name=流注钓鱼机
+tile.consumerBlockdye.name=流注染色机
 tile.consumerBlockpotion.name=流注酿造器
+tile.consumerBlockenchant.name=万花筒附魔器
+tile.consumerBlockminer.name=流注开采机
+tile.auraNodeflux.name=通量节点
+tile.storageBookshelfCoordinator.name=书架协调器
 
+//Enchant
+enchantment.Red=万花筒·红
+enchantment.Orange=万花筒·橙
+enchantment.Yellow=万花筒·黄
+enchantment.Green=万花筒·绿
+enchantment.Blue=万花筒·蓝
+enchantment.Violet=万花筒·紫
+
+//Chat
+aura.tutorialStarted=教程开始
+aura.tutorialEnded=教程结束
+
+//TO DO: Localize all chat messages (Such as the prismatic wand and bookshelf coordinator messages)
+
+//Misc
+vortex.nei.name=涡流融合
+itemGroup.aura=气场流注
+
+aura.keyBindCategory=气场流注
+aura.angelJump=上行
+aura.angelJumpDown=下行
+
+//Used for angelsteel ingots
+//Take careful note of the off-by-one in the naming
+0.aurasteel.name=子
+1.aurasteel.name=丑
+2.aurasteel.name=寅
+3.aurasteel.name=卯
+4.aurasteel.name=辰
+5.aurasteel.name=巳
+6.aurasteel.name=午
+7.aurasteel.name=未
+8.aurasteel.name=申
+9.aurasteel.name=酉
+10.aurasteel.name=戌
+11.aurasteel.name=亥
+
+//Lexicon
+auramisc.nextPage=下一页
+auramisc.prevPage=上一页
+auramisc.back=返回
+auramisc.craftingContainer=合成结果
+auramisc.shapeless=无序合成
+auramisc.oredict=矿典配方
+
+auramisc.lexiconIndex=目录
+auramisc.clickToShare=分享
+auramisc.bookmark=书签 #%s 
+auramisc.clickToSee=点击阅读
+auramisc.shiftToRemove=按住Shift点击移除
+auramisc.clickToAdd=添加书签
+aura.gui.lexicon.header=气场百科
+
+auramisc.shiftToRead=按住Shift右击阅读更多
+auramisc.clickToRecipe=按住Shift单击查看配方
+auramisc.clickToIndex=按住Shift单击打开目录
+
+//Entries
+aura.entry.introduction=攻略介绍
 aura.page.introduction0=此攻略提供了快速了解本模组的手段.它只展现了最基本的装置. 我们鼓励读者创造其他的装置, 可能会比本书所述更有效.
 
+aura.entry.basicSetup=基本设置
 aura.page.basicSetup0=最基本的产能装置被称为四节点装置. 一个泵将气场向上运输, 气场穿过上方的两个节点, 落下并释放能量.下一页有设计图. 切记你必须向装置中扔 &1气场晶体&0 已提供气场, 并在泵附近摆放煤炭.
 aura.page.basicSetup1=一个泵和在垂直面上构成直角三角形的三个节点. 你可以使用你想要的泵或耗能设备以替换。
+
+aura.entry.vortexInfusion=涡流融合
 aura.page.vortexInfusion0=&1涡流融合&0 是合成几十种强大物品的手段. 最基本的装置包含四个分离的四节点装置, 且将力量节点换为 &1涡流基座&0.
 
 aura.entry.accumulate=储能
@@ -229,107 +255,118 @@ aura.page.autoOff0=一个监视器会在旁边的耗能设备完成工作后输�
 
 aura.entry.multiplePumps=更多能量
 aura.page.multiplePumps0=某些耗能设备的耗能速度超过单独一台泵的产能速度. 你可以简单地堆积多个泵以获得单位时间内更高的能量供给.
-tile.consumerBlockenchanter.name=万花筒附魔器
-
-tile.consumerBlockenchant.name=万花筒附魔器
-enchantment.Red=万花筒·红
-enchantment.Orange=万花筒·橙
-enchantment.Yellow=万花筒·黄
-enchantment.Green=万花筒·绿
-enchantment.Blue=万花筒·蓝
-enchantment.Violet=万花筒·紫
 
 #Start Lexicon
 
 aura.entry.basics=基本概念
 aura.page.basics0=气场是一种魔法流体, 来自可合成的气场晶体. 你可以合成不同的气场节点, 并放置在世界中. 气场节点会与附近的节点以直线相连, 并传输能量.
 aura.page.basics1=大多数情况下气场既不会创生，也不会消亡. 取而代之, 气场表现为整台机器的一部分. 气场用于传送和储存 &1能量&0, 具体机制将在下文中提及.
-aura.entry.power=Power
+
+aura.entry.power=能量
 aura.page.power0=利用气场储存能量可类比为推大石头上山. 推上山这一过程需要外界提供能量, 但是, 当大石头从山上滚下时, 释放的能量可用于做功. 能量等于 (气场量)x(高度).
 aura.page.power1=气场正常只会上坡不会下坡. 要把气场推上坡, 必须使用各种 &1泵&0 . 切记如果把气场推得越远推走的会越少 - 不论高度如何能量大小相同. 当气场垂直向下流, 能量将从低处的节点散布到附近的&1耗能设备&0 .
+
 aura.entry.auraFlow=气场流动机制
 aura.page.auraFlow0=每一秒, 气场节点都会将一部分气场送至相连节点. 百分比由邻近两节点间距离决定.
 aura.page.auraFlow1=当两个节点相连, 相互之间都会送出气场. 这意味着通常情况下相邻两节点间气场的量趋向于达到平衡.
 aura.page.auraFlow2=气场晶体可向节点输入气场
 aura.page.auraFlow3=气场节点储存和传输气场
+
 aura.entry.interactions=控制
 aura.page.interactions0=用气场晶体右击气场节点, 或将气场晶体扔到节点上, 以注入气场并消耗水晶. <br> 空手右击气场节点以查看气场量.
 aura.page.interactions1=向节点输入红石信号会停止其输出气场, 但仍允许接受能量. 这样会产生单向的气场流动, 破坏形成平衡的自然倾向.
+
 aura.entry.materials=材料
 aura.page.materials0=&1流注处理器&0 是材料处理的基础. 它是耗能方块 (见耗能设备章节) 需要每秒至少 150 单位能量. 它会已不同方式'处理' 附近的物品.
+aura.page.materials1=处理中...
 aura.page.materials2=首先, 它会把附近掉落的矿石变成两个粉, 如果存在适当的粉. 它也可以制作不同颜色的 &1秘法锭&0 通过在附近扔一块铁锭和一块特定颜色的羊毛. 要获取大量羊毛，使用 &1流注染色机&0
 aura.page.materials3=&1秘法宝石&0 是下一级的材料, 包含全部八种颜色. 它们可以用 &1涡流融合&0 消耗一个钻石和三个同种颜色的 &1秘法锭&0 .
+aura.page.materials4=啊, 闪闪发光!
 aura.page.materials5=终极材料是 &1秘法棱镜&0. 他可以通过把全部八种颜色的 &1秘法宝石&0 扔在 &1流注处理器&0附近
 aura.page.materials6=通过在 &1流注处理器&0 上使用 &1秘法棱镜&0 升级, 你可以得到高级版本, &1超炫光处理器&0. 首先, 虽然单次操作耗能与普通 &1流注处理器&0相同, 它需要至少每秒1000单位能量. 这意味着它一旦得到足够能量, 运转速度会大大增加.
 aura.page.materials7=它还有两种附加操作. 首先, 它会产生三个矿粉而非两个. 它也会破坏染色羊毛, 留下宝贵的然料. 切记这可以作为墨囊和青金石这类宝贵材料的来源.
+aura.page.materials8=更努力, 更好, 更快, 更牛
 
 aura.entry.monitor=监视器
 aura.page.monitor0=监视器是一种可以读取泵和耗能方块附加信息的方块. 当摆在泵旁边时, 会在泵燃料枯竭时发出红石信号. <br> 当放在耗能设备旁边时, 会在耗能设备不工作时发出红石信号(例如， 当流注熔炉附近无可熔炼物品时).
+aura.page.monitor1=老式电视才时髦
 
 aura.entry.pumps=泵
 aura.page.pumps0=泵是将气场送上坡, 以产生 &1能量&0 的设备. 有很多不同类型的泵, 都通过不同方式消耗燃料, 虽然每种泵的燃料供给方式不一样. 切记泵不能水平传输能量, 所以在水平方向上使用多个泵需要分别提供气场.
 aura.page.pumps1=每种泵对每种燃料都有两种性质: 持续时间和速度. 持续时间是每个燃料驱动泵工作的时间长短. 速度是单位时间内产生的 &1能量&0 多少.
 aura.page.pumps2=最基本又无聊的泵, 燃烧气场泵, 使用任何熔炉使用的燃料. 物品不会被退还; 比如, 放下一个岩浆桶不会退还空桶. 持续时间: 熔炉中燃烧时间. 速度: 200.
-aura.page.pumps3=燃烧气场泵
+aura.page.pumps3=点火吧!
 aura.entry.comparator=与比较器的互动
 aura.page.comparator0=几乎所有都会与比较器有互动. 可以储存 &1气场&0 的方块, 主要是 &1气场节点&0, 会输出大小与气场量相关的信号. 信号大小是对数相关的: 10 单位储存气场会输出大小为 1 的信号,100 单位储存气场会输出大小为 2 的信号. 流注方块输出信号大小与已进行工作量和总工作量之比有关.
 
 aura.entry.black=黑色气场
 aura.page.black0=黑色气场有一些特性. 首先，它没有重量: 它不能被泵上坡, 而且流下坡时不产生能量. 它不会水平流动, 只会垂直流动. 最重要的是, 它可用 &1气场操纵器&0产生或破坏
-aura.page.black1=黑色气场晶体
+aura.page.black1=大家好, 它会触发 &1气场电容&0. 很有用的, 不是吗?
+
 aura.entry.red=红色气场
 aura.page.red0=一旦TNT被放在含有红色气场的 &气场节点&0附近, 爆炸会被吸收并将红色气场推上坡, 就像泵一样工作. 每个TNT产生 200,000 单位能量.
-aura.page.red1=红色气场晶体
+aura.page.red1=轰隆隆.
 
 aura.entry.orange=橙色气场
 aura.page.orange0=橙色气场类似于 &1黑色气场&0, 除了它只能水平流动不能垂直流动. 当橙色气场流动时,它会在附近气场节点中产生气流, 使气场向同一方向流动.
-aura.page.orange1=橙色气场晶体
+aura.page.orange1=气场流佳人
+
 aura.entry.yellow=黄色气场
 aura.page.yellow0=黄色气场提供两倍上坡加成, 意味着将其泵上坡只需要一半的能量,但流下坡时产能仍为原来的量. 然而, 黄色气场会在&1气场节点&0中迅速分解.
-aura.page.yellow1=黄色气场晶体
+aura.page.yellow1=以以以以以及, 这是乱世.
+
 aura.entry.green=绿色气场
 aura.page.green0=绿色气场的重量在一天中会变化. 白天, 它是正常的两倍重, 意味着需要更多能量泵上坡且流下坡时产生更多能量. 然而在夜间, 它只有正常的一半重.
-aura.page.green1=绿色气场晶体
+aura.page.green1=光合作用赛高
+
 aura.entry.blue=蓝色气场
 aura.page.blue0=蓝色气场提供强大的四倍上坡加成, 意味着将其泵上坡只需要四分之一的能量, 但流下坡时产能仍为原来的量, 不过仅仅在下雨天. 其他时间, 它提供半速上坡的有害效果.
-aura.page.blue1=蓝色气场晶体
+aura.page.blue1=雨: 很有用,但还是很烦人
 
 aura.entry.violet=紫色气场
 aura.page.violet0=加入气场节点后紫色气场会随时间增长. 增长规律是指数增长, 最多每个节点2500单位. 将紫色气场散布到很多节点中可以促进增长. 但是, 如果每个节点中紫色气场量少于25单位, 它会分解.单一节点中多余2600单位紫色气场也会导致其全部分解.
-aura.page.violet1=紫色气场泵
+aura.page.violet1=它在扩散
+
 aura.entry.alternating=交变泵
 aura.page.alternating0=一门新技术可以是你的泵更有效, 但有一定代价. &1交变泵&0 比对应的普通泵产生的能量更多. 但是, 它们的输出不恒定. 以八秒为周期按正弦规律变化.
-
+aura.page.alternating2=以下同上
+aura.page.alternating3=包含所有种类
 
 aura.entry.flux=通量节点
-tile.auraNodeflux.name=通量节点
 aura.page.flux0=通量节点会将气场下落产生的能量转化为RF. 它通过产生一个 &1气场泡泡&0 完成这项任务. 这个泡泡会环绕着附近的耗能方块并向其供能, 以及那些方块四周的方块四周的方块, 等等, 向所有方块充能.
 aura.page.flux1=然而这个 &1气场泡泡&0 有一个极限. 它只会包含四个耗能方块, 包括管道. 这意味着 &1通量节点&0 不会向一个大网络供能. 它不会向管道，能量方块，超立方体等供能。
 aura.page.flux2=这是子弹, 老兄. 我做出来了. 不过也复制了一些东西.
 
-
 aura.entry.capacitor=气场电容
 aura.page.capacitor0=气场电容, 与其他气场节点不一样, 正常情况下不会输出能源. 取而代之, 电容有一个临界值, 可以通过按住shift右击调节. 电容会积累气场直到超过临界值, 其后会完全释放气场, 并在一段时间内无法接受气场.
 aura.page.capacitor1=气场电容
+aura.page.capacitor1=天哪,多方块存储!
+
 aura.entry.conserve=节能气场节点
 aura.page.conserve0=节能气场节点运作很像普通 &1气场节点&0, 但有一点需要预先声明: 它不会自动把气场送下坡. 它可以与 &1红色气场&0 相连, 或者构造紧凑的装置.
-aura.page.conserve1=节能气场节点
+aura.page.conserve1=永远不会回来了
+
 aura.entry.manipulator=气场操纵器
 aura.page.manipulator0=气场操纵器有两种颜色: 橙色和黑色. 如果不输入红石信号, 它只会接受选定颜色的气场, 并将其摧毁. 输入红石信号后, 它会很快产生极大量选定颜色的气场.
 aura.page.manipulator1=黑色气场操纵器
 aura.page.manipulator2=橙色气场操纵器
+
 aura.entry.pumpFall=动量泵
 aura.page.pumpFall0=动量泵是一种从附近坠落的生物接收能量的泵. 当有生物在泵附近坠落时,每落下一个方块高度会提供2秒的持续时间, 和500单位的速度
-aura.page.pumpFall1=动量泵
+aura.page.pumpFall1=&o*骨折声*&r
+
 aura.entry.pumpLight=照明泵
 aura.page.pumpLight0=照明泵是一种从附近的光源接收能量的泵. 它会消耗附近的荧石和火把, 荧石以每秒750单位的速度持续3分钟供能而火把持续30秒.
-aura.page.pumpLight1=照明泵
+aura.page.pumpLight1=多么启蒙
+
 aura.entry.pumpRedstone=红石泵
 aura.page.pumpRedstone0=红石泵是一种从附近的红石接收能量的泵.当红石线与其相连并充能时, 泵会消耗附近的红石线, 第一根线产生1500单位能量持续10秒. 它会吃掉至多15个方块长的红石线, 后面的红石线产能多百分之四十.
-aura.page.pumpRedstone1=红石泵
+aura.page.pumpRedstone1=红色力量
+
 aura.entry.pumpProjectile=抛射物泵
 aura.page.pumpProjectile0=抛射物泵会吸收向其投掷的某些抛射物, 产生能量. 雪球提供10秒的持续时间, 和500单位的速度. 鸡蛋提供90秒的持续时间, 和500单位的速度. 箭提供20秒的持续时间, 和1000单位的速度
-aura.page.pumpProjectile1=抛射物泵
+aura.page.pumpProjectile1=咻咻咻
+
 #Consumers
 
 aura.entry.consumers=耗能设备
@@ -356,31 +393,31 @@ aura.page.crafting15=钻石
 
 aura.entry.dye=流注染色器
 aura.page.dye0=流注染色器的设计目的是用于简化羊毛的获取. 一旦提供充足的能源, 它会使附近的羊重新长毛且将其染成随机颜色.
-
+aura.page.dye1=&c五&4光&6十&e色&a眼&2花&1缭&5乱&d!&0
 
 aura.entry.angel=流注合成机
 aura.page.angel0=此方块会消耗能量合成 &1天使钢&0, 一种相当强大的材料. 它至少需要每秒10000单位能量
-aura.page.angel1=流注合成机
-
+aura.page.angel1=无中生有!
 
 aura.entry.furnace=流注熔炉
-aura.page.furnace1=流注熔炉
 aura.page.furnace0=流注熔炉会熔炼附近所有可熔炼的物品. 它也可以防止附近的物品消失. 熔炉至少需要每秒190单位能量.
+aura.page.furnace1=太热了!
 
 aura.entry.fish=流注钓鱼机
 aura.page.fish0=&1流注钓鱼机&0 会花费少量能量为你捕鱼. 把流注钓鱼机放在3x3的水面上, 通入能量, 接下来就看着鱼涌进去吧!
+aura.page.fish1=没人喜欢钓鱼
 
 aura.entry.loot=流注掠夺机
-aura.page.loot1=流注掠夺机
 aura.page.loot0=流注掠夺机会召唤地牢的战利品. 掠夺机至少需要每秒5000单位能量.
+aura.page.loot1=还是一个卢比也没有
 
 aura.entry.mob=流注刷怪机
-aura.page.mob1=流注刷怪机
 aura.page.mob0=流注刷怪机会在正上方刷出怪物. 刷出来的怪物会是当地可能出现的所有怪物. 刷怪机至少需要每秒190单位能量.
+aura.page.mob1=多少怪物?全部.
 
 aura.entry.plant=流注种植机
-aura.page.plant1=流注种植机
 aura.page.plant0=流注种植机会迅速催生正上方生长的植物. 植物应放在流注种植机上方两个方块高处, 中间有一个泥土方块. 种植机至少需要每秒150单位能量.
+aura.page.plant1=谁还需要施肥?
 
 aura.entry.books=书籍存储
 aura.page.books0=书籍是一种后期储存和处理物品的手段. 物品被存储在不同的 &1存储书&0 中. 要访问存储书, 右击将其放入原版书架中. 存储书保存物品, 不同种类的书保存不同量的物品, 或者只能接受某种物品.
@@ -411,14 +448,15 @@ aura.page.miner1=通入红石信号后, 超炫光奇点会爆聚, 产生于奇�
 aura.page.miner2=但是, 奇点异常危险且必须放在一个由 &1强化方块&0 砌成的室中. 一旦奇点接触非强化方块, 就会产生强烈的爆炸. 接触强化方块后, 它会反弹, 对强化方块产生损伤. 奇点存在越久, 就会移动越快且越频繁损坏强化方块
 aura.page.miner3=强化方块分六种 - 泥土, 圆石, 木板, 黑曜石, 玻璃, 石头. 每种都有两个属性 - 抗性和修复速度.
 aura.page.miner4=比如, &1强化木板&0 拥有相对较低的抗性, 意味着很快积累损伤, 但有极高的修复速度. &1强化黑曜石&0 是另一个极端, 拥有极高的抗性却有极低的修复速度. <br> 要制造强化方块, 在流注处理器中混合 &1末地石&0 和对应的普通方块.
+aura.page.miner5=也产生其他矿物!
 
 aura.entry.nether=下界仪式
-aura.page.nether0=The &1下界仪式&0 是极端强大而危险的将生物群系变成下界的装置, 会转变生物群系内的方块. 运行至少需要每秒5000单位能量.
+aura.page.nether0=&1下界仪式&0 是极端强大而危险的将生物群系变成下界的装置, 会转变生物群系内的方块. 运行至少需要每秒5000单位能量.
 aura.page.nether1=比火焰好
 
 aura.entry.end=末地仪式
 aura.page.end0=&1末地仪式&0, 是相当类似于 &1下界仪式&0 的极端强大而危险的将生物群系变成末地的装置, 会转变生物群系内的方块. 运行至少需要每秒5000单位能量.
-
+aura.page.end1=末地, 末影(更末地), 最末地
 
 aura.entry.brewer=流注酿造器
 aura.page.brewer0=&1流注酿造器&0 是极有用的装置. 在附近扔水瓶会随机加入药材, 制造出药水仅消耗水瓶. 运行至少需要每秒500单位能量.
@@ -428,25 +466,27 @@ aura.page.brewer1=不要喝陌生人的药
 
 aura.entry.amuletAngel=天使之翼护符
 aura.page.amuletAngel0=&1天使之翼护符&0 允许玩家快速穿透地层. 按 '上' 会向上跳过地层到可站立的开阔处. 按 '下' 则反之.
+aura.page.amuletAngel1=传送我吧史考提
 
 aura.entry.beltAngel=天使之膝绶带
 aura.page.beltAngel0=&1天使之膝绶带&0 允许玩家轻松穿越群山. 它被动地允许玩家无关紧要地穿越那些三个方块高或者更矮的山丘. 然而一旦玩家跑到墙边,  绶带会充能并且, 一小段时间后, 玩家可以爬任何高度的墙.
+aura.page.beltAngel1=我在世界之巅, '嘿!
 
 aura.entry.prismaticWand=超炫光手杖
 aura.page.prismaticWand0=&1超炫光手杖&0 是用于复制建筑的工具. 它有三种模式, 可通过按住Shift右击切换. 首先, 将其调至选择模式, 右击两个焦点创造一个长方体. 然后, 调至复制模式, 右击以复制. 最后, 调至粘贴模式, 右击以粘贴. 它会消耗使用者物品栏里的物品.
+aura.page.prismaticWand1=建筑大师
 
-item.mirror.name=天使之镜
 aura.entry.mirror=天使之镜
-aura.page.mirror0=&1Mirror of the Angel天使之镜&0 是反射恶魂火球的工具. 单击火球, 就像拿着剑一样, 或右击火球附近会使其转向. 转向后的火球会直接飞向最近的恶魂, 速率远快于其他的火球.
-
+aura.page.mirror0=&1天使之镜&0 是反射恶魂火球的工具. 单击火球, 就像拿着剑一样, 或右击火球附近会使其转向. 转向后的火球会直接飞向最近的恶魂, 速率远快于其他的火球.
+aura.page.mirror1="最好的成就" - DW20
 
 aura.entry.angelsteel=天使钢
 aura.page.angelsteel0=天使钢是相当稀缺而宝贵的材料, 只能在 &1流注合成机&0 中制造. &1流注合成机&0 会制造出子之钢锭. 丑之钢锭通过在世界中相邻地丢三块子之钢锭得到, 更高级的钢锭获取方式也一样
 aura.page.angelsteel1=高级天使钢锭可以制作更好的工具. 高级钢锭会提升开采速度. 它也会对工具赋予两点加成点数. 点数被随机加在以下四个方面:
 aura.page.angelsteel2=&2效率&0 I提升开采速度 <br> &2时运&0 与原版附魔相似地提升掉落. <br> &2碎裂&0 提升硬度大于2的方块的挖掘速度 <br> &2崩裂&0 提升硬度小于1的方块的挖掘速度
-aura.page.angelsteel4=天使钢斧
-aura.page.angelsteel5=天使钢镐
-aura.page.angelsteel6=天使钢锹
+aura.page.angelsteel4=能让我 &o斧&r (讲) 几句俏皮话吗?
+aura.page.angelsteel5=时运4就是开挂!
+aura.page.angelsteel6=挖大挖大坑
 
 aura.entry.angelsteelSword=天使钢剑
 aura.page.angelsteelSword0=天使钢也可用于制造致命的武器. 通过将其制成剑刃, 你可以对击中的敌人施加形形色色的诅咒.
@@ -457,7 +497,6 @@ aura.page.angelsteelSword4=黄色晶体会使闪电频繁击中对方
 aura.page.angelsteelSword5=绿色晶体会使对方生病, 导致其迅速受到伤害. 这种病会传染到四周的实体-包括你自己!
 aura.page.angelsteelSword6=蓝色晶体会施加削弱对方防御的诅咒. 对方会迅速受伤如果血量小于满血的一半
 aura.page.angelsteelSword7=紫色晶体会使对方失去自我. 它们会周期性与周围其他实体交换位置.
-
 
 aura.entry.protection=护符
 aura.page.protection0=护符是保护玩家免受某些伤害的小饰物, 并且能引导能量治疗玩家. 它们包括彩虹的所有颜色! &1红色护符&0 提供火焰岩浆免疫. &1橙色护符&0 提供爆炸物免疫. &1黄色护符&0 提供部分抛射物免疫.
@@ -472,6 +511,7 @@ aura.page.protection7=日久不凋零 (商标)
 aura.entry.swordTransmute=变形剑
 aura.page.swordTransmute0=&1变形剑&0 会将一种实体转换为另一种. 受影响实体的完全列表见下页.
 aura.page.swordTransmute1=牛 <-> 哞菇 <br> 爬行者 <-> 末影人 <br> 羊 <-> 猪 <br> 恶魂 <-> 烈焰人 <br> 史莱姆 <-> 岩浆怪 <br> 豹猫 <-> 狼
+aura.page.swordTransmute2=&o爱-爱德华...&r
 
 aura.entry.swordCombo=蛮族之剑
 aura.page.swordCombo0=&1蛮族之剑&0 会在每次攻击成功后变得更强大. 连击计算以5秒钟内攻击数目为准. 每次攻击成功伤害提升百分之七, 100次封顶.
@@ -479,35 +519,28 @@ aura.page.swordCombo1=连击破纪录者!
 
 aura.entry.explosionRing=碎石戒指
 aura.page.explosionRing0=&1碎石戒指&0 会引导爆炸的破坏力较小范围内的爆炸力. 距戒指佩戴者四个方块以内的爆炸只会影响泥土, 石头, 沙子或砂砾, 留下更宝贵的资源.
+aura.page.explosionRing1=&oSSSsss&r
 
 aura.entry.redHole=便携式红洞
-item.redHole.name=便携式红洞
 aura.page.redHole0=&1便携式红洞&0 是一种设备, 每五秒钟, 会在四周产生剧烈的爆炸. 落到地上时需五倍时间消失. 强烈推荐使用 &1橙色护符&0 .
 aura.page.redHole1=请勿乱扔
 
 aura.entry.blackHole=便携式黑洞
-item.blackHole.name=便携式黑洞
 aura.page.blackHole0=&1便携式黑洞&0 是一个会消耗物品栏中所有圆石的物品. 落到地上时需五倍时间消失.
 aura.page.blackHole1=等价交换模组快回来
 
-
-
-tile.magicRoad.name=旅人之砖
 aura.entry.magicRoad=旅人之砖
 aura.page.magicRoad0=&1旅人之砖&0 是一种铺路相当有效的方块. 在这些方块上疾跑会几乎立刻在移动方向上加速.
 aura.page.magicRoad1=公路成为新时髦
 
-tile.trampoline.name=弹力英格玛
 aura.entry.trampoline=弹力英格玛
 aura.page.trampoline0=&弹力英格玛&0 会把任何走上的实体送上高空几百个方块高. 小心坠落过程可能致命, 推荐使用 &1绿色护符&0 或类似的物品.
 aura.page.trampoline1=光荣的蹦床
 
-item.swordThief.name=强盗之剑
 aura.entry.swordThief=强盗之剑
 aura.page.swordThief0=&1强盗之剑&0 是一把可以用来从村里偷东西的剑. 用此剑杀村民, 有百分之二十五几率掉落交易的物品.
 aura.page.swordThief1=侠盗猎车风格
 
-item.amuletFood.name=禁果护符
 aura.entry.amuletFood=禁果护符
 aura.page.amuletFood0=&1禁果护符&0 会在食用食物时对你作用药水效果, 正面负面都有可能. 相同的食物提供同一种药水效果-例如, 胡萝卜永远提供夜视.
 aura.page.amuletFood1=苹果是硬编码的
@@ -564,67 +597,67 @@ aura.page.fairies3=仙子护身符.
 
 aura.entry.fairyCombat=斗士仙子
 aura.page.fairyCombat0=普通的伤害附近生物的仙子.
-aura.page.fairyCombat1=右击 &1约束之戒&0 召唤
+aura.page.fairyCombat1=&o为你而战!
 
 aura.entry.fairyDebuff=削弱仙子
 aura.page.fairyDebuff0=对生物施加多种不同负面效果的仙子.
-aura.page.fairyDebuff1=右击 &1约束之戒&0 召唤
+aura.page.fairyDebuff1=&o你最近是不是有点问题?
 
 aura.entry.fairyBuff=增强仙子
 aura.page.fairyBuff0=对玩家施加随机正面效果的仙子.
-aura.page.fairyBuff1=右击 &1约束之戒&0 召唤
+aura.page.fairyBuff1=医生! 医生! 医生!
 
 aura.entry.fairySteal=盗贼仙子
 aura.page.fairySteal0=极罕见情况下偷走其他玩家的物品并扔在地上.
-aura.page.fairySteal1=右击 &1约束之戒&0 召唤
+aura.page.fairySteal1=&o啊, 你用这个?
 
 aura.entry.fairyPush=推手仙子
 aura.page.fairyPush0=对生物产生击退, 但无伤害, 的仙子.
-aura.page.fairyPush1=右击 &1约束之戒&0 召唤
+aura.page.fairyPush1=敲!
 
 aura.entry.fairyShoot=射手仙子
 aura.page.fairyShoot0=提高玩家射出箭伤害的仙子
-aura.page.fairyShoot1=右击 &1约束之戒&0 召唤
+aura.page.fairyShoot1=&o砰, 爆头
 
 aura.entry.fairySavior=救世主仙子
 aura.page.fairySavior0=在玩家生命值低时行为类似强力格斗仙子的仙子.
-aura.page.fairySavior1=右击 &1约束之戒&0 召唤
+aura.page.fairySavior1=&o我很懒. 生死存亡关头再找我.
 
 aura.entry.fairyFetch=取物仙子
 aura.page.fairyFetch0=捡起附近物品并带给玩家的仙子.
-aura.page.fairyFetch1=右击 &1约束之戒&0 召唤
+aura.page.fairyFetch1=&o让我把这个拿过来
 
 aura.entry.fairyBait=诱饵仙子
 aura.page.fairyBait0=召唤被动生物的仙子. 会召唤出当地自然生成的生物.
-aura.page.fairyBait1=右击 &1约束之戒&0 召唤
+aura.page.fairyBait1=&o一个人太危险了. 收下这头牛.
 
 aura.entry.fairyBreed=饲育仙子
 aura.page.fairyBreed0=是被动生物繁殖, 就像正确的喂食一样的仙子.
-aura.page.fairyBreed1=右击 &1约束之戒&0 召唤
+aura.page.fairyBreed1=&o食物是合适的, 但笑话不是.
 
 aura.entry.fairyScare=恐惧仙子
 aura.page.fairyScare0=在大范围内减少敌对生物生成的仙子
-aura.page.fairyScare1=右击 &1约束之戒&0 召唤
+aura.page.fairyScare1=&o吼!
 
 aura.entry.fairyExtinguisher=灭火仙子
 aura.page.fairyExtinguisher0=移除附近岩浆和玩家身上的火的仙子.
-aura.page.fairyExtinguisher1=右击 &1约束之戒&0 召唤
+aura.page.fairyExtinguisher1=&o有聚会,很开心
 
 aura.entry.fairyDigger=挖掘仙子
 aura.page.fairyDigger0=提升挖矿速度的仙子. 每一个仙子提升百分之八的挖矿速度.
-aura.page.fairyDigger1=右击 &1约束之戒&0 召唤
+aura.page.fairyDigger1=&o越来越快!
 
 aura.entry.fairyLight=照明仙子
 aura.page.fairyLight0=黑暗时设置隐形临时光源的仙子.
-aura.page.fairyLight1=右击 &1约束之戒&0 召唤
+aura.page.fairyLight1=&o谁还要火把?
 
 aura.entry.fairyFall=滑翔仙子
 aura.page.fairyFall0=减少坠落伤害的仙子. 每个仙子减少百分之五十的伤害
-aura.page.fairyFall1=右击 &1约束之戒&0 召唤
+aura.page.fairyFall1=&o可恶, 太沉了
 
 aura.entry.fairyTrain=训练仙子
 aura.page.fairyTrain0=有时会掉落经验的仙子. 一个仙子大约每分钟掉落一个经验球.
-aura.page.fairyTrain1=右击 &1约束之戒&0 召唤
+aura.page.fairyTrain1=&o你还需要学很多, 孩子.
 
 
 #END-WEB#
@@ -634,20 +667,20 @@ aura.page.video0=This video, by SilverContrails, provides a good solid walkthrou
 
 aura.page.video1=This video, by nicolbw, provides an incredibly concise (15 minutes) guide to all blocks and items.
 auramisc.playVideo=Play Video
-aura.entry.00quest=Crystals
-aura.entry.01quest=Nodes
-aura.entry.02quest=Pumps
-aura.entry.03quest=Furnace
-aura.entry.04quest=Red Crystals
-aura.entry.05quest=Processor
-aura.entry.06quest=Dye
-aura.entry.07quest=Arcane Ingot
-aura.entry.08quest=Vortex Infusion
-aura.entry.09quest=Arcane Gem
-aura.entry.10quest=Arcane Prism
-aura.entry.11quest=Synthesizer
-aura.entry.12quest=Angel's Steel
-aura.entry.13quest=Fairies
+aura.entry.00quest=晶体
+aura.entry.01quest=节点
+aura.entry.02quest=泵
+aura.entry.03quest=熔炉
+aura.entry.04quest=红色晶体
+aura.entry.05quest=处理器
+aura.entry.06quest=燃料
+aura.entry.07quest=秘法锭
+aura.entry.08quest=涡流融合
+aura.entry.09quest=秘法宝石
+aura.entry.10quest=秘法棱镜
+aura.entry.11quest=合成机
+aura.entry.12quest=天使钢
+aura.entry.13quest=仙子
 
 aura.entry.patreon=Support the Author
 aura.page.patreon0=I make this mod in my free time, and it is a huge commitment. Aura Cascade will always be free, but I will appreciate any money you have to give.
@@ -674,6 +707,6 @@ aura.startTutorial=开始
 
 
 
-aura.entry.basicSetup=基本设置
-aura.entry.introduction=攻略介绍
-aura.entry.vortexInfusion=涡流融合
+
+
+
