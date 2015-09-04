@@ -167,10 +167,10 @@ tile.consumerBlockangel.name=Synthétiseur en cascade
 tile.consumerBlockloot.name=Trésorier en cascade
 tile.consumerBlockore.name=Processeur en cascade
 tile.consumerBlockoreAdv.name=Processeur prismatique
-tile.consumerBlockplant.name=Eleveur en cascade
+tile.consumerBlockplant.name=Éleveur en cascade
 tile.consumerBlockfurnace.name=Four en cascade
 tile.consumerBlocknether.name=Rituel du Nether
-tile.consumerBlockend.name=Rituel due l'End
+tile.consumerBlockend.name=Rituel de l'End
 tile.consumerBlockfish.name=Pècheur en cascade
 tile.consumerBlockdye.name=Colorieur en cascade
 tile.consumerBlockpotion.name=Préparateur en cascade
@@ -226,35 +226,35 @@ auramisc.oredict=Recette du dictionnaire de minerai
 
 auramisc.lexiconIndex=Index
 auramisc.clickToShare=Partager
-auramisc.bookmark=Bookmark #%s
-auramisc.clickToSee=Click to read
-auramisc.shiftToRemove=Shift-click to remove
-auramisc.clickToAdd=Add Bookmark
-aura.gui.lexicon.header=Encyclopedia Aura
+auramisc.bookmark=Marque-page #%s
+auramisc.clickToSee=Cliquez pour lire
+auramisc.shiftToRemove=Maj-Cliquez pour effacer
+auramisc.clickToAdd=Ajouter un marque-page
+aura.gui.lexicon.header=Encyclopédie de l'Aura
 
-auramisc.shiftToRead=Shift-right click to read more
-auramisc.clickToRecipe=Shift click to see recipe
-auramisc.clickToIndex=Shift click for index
+auramisc.shiftToRead=Maj-Cliquez droit pour lire plus
+auramisc.clickToRecipe=Maj-Cliquez pour voir la recette
+auramisc.clickToIndex=Maj-Cliquez pour voir l'index
 
 //Entries
-aura.entry.introduction=Introduction to this Walkthrough
-aura.page.introduction0=This walkthrough is intended to provide a jump start to the mechanics of this mod. It showcases only the most basic setups which can be created. The reader is encouraged to design their own setups, which will be more efficient than those contained here.
+aura.entry.introduction=Introduction à cette présentation
+aura.page.introduction0=Cette présentation est destinée à fournir un rapide début à la mécanique de ce mod. Elle présente seulement les configurations les plus simples qui peuvent être créées. Le lecteur est encouragé à concevoir ses propres configurations, qui seront plus efficaces que celles contenus ici.
 
-aura.entry.basicSetup=Basic Setup
-aura.page.basicSetup0=The most basic power generating setup is referred to as a &14-node setup&0. A pump sends Aura upwards, which travels across the two upper nodes, falling back down and releasing &1power&0. This setup is diagrammed on the next page. Note than you must drop &1Aura Crystals&0 into this setup in order to provide the system with Aura, and place coal near the pump.
-aura.page.basicSetup1=A pump and three nodes in a vertical rectangle. Substitute the pump or consumer of your choice.
+aura.entry.basicSetup=Configuration de base
+aura.page.basicSetup0=La plus simple configuration de génération de puissance est référencé comme une &14-configuration de noeud&0. Une pompe envoie d'Aura en hauteur, à travers les deux noeuds supérieur, retombant et relachant ainsi la &1puissance&0. Voir le diagramme de cette configuration page suivante. Notez que vous devez jeter des &1Cristals d'Aura&0 dans cette configuration afin de fournir de l'Aura au système, et placer du charbon près de la pompe.
+aura.page.basicSetup1=Une pompe et trois noeuds dans un rectangle vertical. Substituez la pompe ou le consommateur de votre choix.
 
-aura.entry.vortexInfusion=Vortex Infusion
-aura.page.vortexInfusion0=&1Vortex Infusion&0 is a method for crafting dozens of powerful items. The most basic setup involved four separate 4-node setups, replacing the Power Node with a &1Vortex Pedestal&0.
+aura.entry.vortexInfusion=Infusion de vortex
+aura.page.vortexInfusion0=L'&1Infusion de vortex&0 est une méthode pour fabriquer des douzaines d'éléments puissants. La configuration la plus simple nécessite quatres configurations de 4-noeuds séparées, en remplaçant le Noeud de puissance par un &1Piédestal de vortex&0.
 
-aura.entry.accumulate=Energy Storage
-aura.page.accumulate0=By moving the cobblestone in or out with a sticky piston, you can store energy simply. Storage is limited by the amount of spare Aura.
+aura.entry.accumulate=Stockage d'énergie
+aura.page.accumulate0=En déplacant de la pierre dedans ou dehors avec un piston collant, vous pouvez stocker de l'énergie simplement. Le stockage est limité par la quantité d'Aura partagé.
 
-aura.entry.autoOff=Power Saver
-aura.page.autoOff0=A &1Monitor&0 will output a signal when next to a consumer that has finished all it's work. By placing it next to the pump, it will turn off when the job is done.
+aura.entry.autoOff=Économie de puissance
+aura.page.autoOff0=Un &1Moniteur&0 produira un signal lorsqu'un consommateur proche aura fini tout sont travail. En le placant près d'une pompe, il l'arrêtera quand le travail sera fini.
 
-aura.entry.multiplePumps=More power
-aura.page.multiplePumps0=Some &1consumers&0 require &1power&0 faster than a single pump can provide. You can easily stack multiple pumps to gain more power per second.
+aura.entry.multiplePumps=Plus de puissance
+aura.page.multiplePumps0=Certain &1consommateurs&0 demande de la &1puissance&0 plus vite qu'une simple pompe puisse produire. Vous pouvez facilement empiler de multiples pompes pour gagner plus de puissance par seconde.
 
 #Start Lexicon
 
