@@ -82,7 +82,9 @@ public class CommonProxy {
         networkWrapper.registerMessage(PacketSyncQuestData.PacketSyncQuestDataHandler.class, PacketSyncQuestData.class, 5, Side.CLIENT);
 
 
-        VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
+        if (Config.villageGeneration) {
+            VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
+        }
 
         MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
     }

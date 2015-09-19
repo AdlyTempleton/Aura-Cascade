@@ -14,18 +14,19 @@ import java.security.InvalidParameterException;
  * events)
  *
  * @author NPException
+ *
  */
 abstract class GAEventWithID extends GAEvent {
 
-    @SerializedName("event_id")
-    private final String eventID;
+	@SerializedName("event_id")
+	private final String eventID;
 
-    GAEventWithID(Analytics an, String eventID) {
-        super(an);
+	GAEventWithID(Analytics an, String eventID) {
+		super(an);
 
-        if (eventID == null || eventID.isEmpty())
-            throw new InvalidParameterException("eventID must not be null or empty");
+		if (eventID == null || eventID.isEmpty())
+			throw new InvalidParameterException("eventID must not be null or empty");
 
-        this.eventID = eventID;
-    }
+		this.eventID = eventID;
+	}
 }

@@ -29,6 +29,7 @@ public class Config {
 
     public static boolean giveBook = true;
     public static boolean questline = true;
+    public static boolean villageGeneration = true;
 
     public static int potionRed = 93;
     public static int potionOrange = 94;
@@ -79,6 +80,8 @@ public class Config {
 
         pumpArrowSpeed = config.getInt("pumpArrowSpeed", Configuration.CATEGORY_GENERAL, pumpArrowSpeed, 1, Integer.MAX_VALUE, "");
         pumpArrowDuration = config.getInt("pumpArrowDuration", Configuration.CATEGORY_GENERAL, pumpArrowDuration, 1, Integer.MAX_VALUE, "");
+
+        villageGeneration = config.getBoolean("generateVillage", Configuration.CATEGORY_GENERAL, villageGeneration, "");
 
         overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
 

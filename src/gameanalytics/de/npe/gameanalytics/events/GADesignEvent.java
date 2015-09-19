@@ -9,23 +9,24 @@ import de.npe.gameanalytics.Analytics;
 
 /**
  * @author NPException
+ *
  */
 public class GADesignEvent extends GAEventWithID {
 
-    @SerializedName("area")
-    private final String area;
+	@SerializedName("area")
+	private final String area;
 
-    @SerializedName("value")
-    private final Float value;
+	@SerializedName("value")
+	private final Float value;
 
-    public GADesignEvent(Analytics an, String eventID, String area, Number value) {
-        super(an, eventID);
-        this.area = area;
-        this.value = value == null ? null : Float.valueOf(value.floatValue());
-    }
+	public GADesignEvent(Analytics an, String eventID, String area, Number value) {
+		super(an, eventID);
+		this.area = area;
+		this.value = value == null ? null : Float.valueOf(value.floatValue());
+	}
 
-    @Override
-    public String category() {
-        return "design";
-    }
+	@Override
+	public String category() {
+		return "design";
+	}
 }
