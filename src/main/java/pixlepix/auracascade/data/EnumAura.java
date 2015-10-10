@@ -120,19 +120,21 @@ public enum EnumAura {
                 }
             } else if (world.getTotalWorldTime() % 300 == 5) {
                 AuraTile tile = (AuraTile) tuple.getTile(world);
+                if (tile != null) {
 
-                //Achieve growth along logarithmic curve
-                int num = quantity.getNum();
-                int delta = num <= 25 ? -num : 5 * (Math.min(100, (int) Math.floor(((double) 2500 / num))));
+                    //Achieve growth along logarithmic curve
+                    int num = quantity.getNum();
+                    int delta = num <= 25 ? -num : 5 * (Math.min(100, (int) Math.floor(((double) 2500 / num))));
 
-                AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
+                    AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
 
-                if (tile == null) {
-                    AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());
-                } else if (tile.storage == null) {
-                    AuraCascade.log.error("Storage data is null in updateTick of EnumAura");
-                } else {
-                    tile.storage.set(this, num + delta);
+                    if (tile == null) {
+                        AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + tuple.getX() + "Y: " + tuple.getY() + "Z: " + tuple.getZ());
+                    } else if (tile.storage == null) {
+                        AuraCascade.log.error("Storage data is null in updateTick of EnumAura");
+                    } else {
+                        tile.storage.set(this, num + delta);
+                    }
                 }
             }
 
