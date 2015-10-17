@@ -6,6 +6,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import org.apache.commons.lang3.math.NumberUtils;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
@@ -95,9 +96,17 @@ public class EnchanterTile extends ConsumerTile {
                 + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack);
     }
 
+    public int getMaxLevel(ItemStack stack) {
+        return NumberUtils.max(new int[]{EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack)});
+    }
     public double getSuccessRate(ItemStack stack) {
         int totalLevel = getTotalLevel(stack);
-        return Math.pow(.75, totalLevel);
+        return Math.pow(.75, totalLevel) * Math.pow(.5, getMaxLevel(stack));
     }
 
     public boolean isSuccessful(ItemStack stack) {
