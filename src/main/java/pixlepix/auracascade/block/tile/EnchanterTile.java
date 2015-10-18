@@ -106,7 +106,7 @@ public class EnchanterTile extends ConsumerTile {
     }
     public double getSuccessRate(ItemStack stack) {
         int totalLevel = getTotalLevel(stack);
-        return Math.pow(.75, totalLevel) * Math.pow(.25, Math.max(0, getMaxLevel(stack) - 5));
+        return Math.pow(.75, totalLevel) * Math.pow(.25, Math.max(0, getMaxLevel(stack) - 4));
     }
 
     public boolean isSuccessful(ItemStack stack) {
