@@ -11,7 +11,7 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
-import pixlepix.auracascade.item.ItemAuraCrystal;
+import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -41,8 +41,8 @@ public class EnchanterTile extends ConsumerTile {
             if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
 
                 ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
-                for (EntityItem crystal : nextItems) {
-                    if (crystal.getEntityItem().getItem() instanceof ItemAuraCrystal) {
+                for (EntityItem ingot : nextItems) {
+                    if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         return true;
                     }
                 }
@@ -60,10 +60,10 @@ public class EnchanterTile extends ConsumerTile {
             if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
 
                 ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
-                for (EntityItem crystal : nextItems) {
-                    if (crystal.getEntityItem().getItem() instanceof ItemAuraCrystal) {
-                        ItemStack crystalStack = crystal.getEntityItem();
-                        EnumAura aura = EnumAura.values()[crystalStack.getItemDamage()];
+                for (EntityItem ingot : nextItems) {
+                    if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
+                        ItemStack ingotStack = ingot.getEntityItem();
+                        EnumAura aura = ((ItemMaterial) ingotStack.getItem()).aura;
                         Enchantment enchant = getEnchantFromAura(aura);
                         if (enchant != null) {
                             int level = EnchantmentHelper.getEnchantmentLevel(enchant.effectId, toolStack);
@@ -72,11 +72,11 @@ public class EnchanterTile extends ConsumerTile {
                                 enchantMap.put(enchant.effectId, level + 1);
                                 EnchantmentHelper.setEnchantments(enchantMap, toolStack);
                             }
-                            crystalStack.stackSize--;
+                            ingotStack.stackSize--;
                             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
 
-                            if (crystalStack.stackSize <= 0) {
-                                crystal.setDead();
+                            if (ingotStack.stackSize <= 0) {
+                                ingot.setDead();
                             }
                             return;
                         }
