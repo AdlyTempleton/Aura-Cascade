@@ -37,12 +37,12 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 CoordTuple tuple = new CoordTuple(this).add(direction);
                 if (consumeLightSource(tuple, Blocks.glowstone)) {
+
+                    addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
                     break;
                 }
                 if (consumeLightSource(tuple, Blocks.torch)) {
                     addFuel(Config.pumpTorchDuration, Config.pumpTorchSpeed);
-
-                    tuple.setBlockToAir(worldObj);
                     break;
                 }
             }
@@ -52,7 +52,6 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
 
     public boolean consumeLightSource(CoordTuple tuple, Block block) {
         if (tuple.getBlock(worldObj) == block) {
-            addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
             if (!worldObj.isRemote) {
                 for (int j = 0; j < 5; j++) {
                     AuraCascade.proxy.addBlockDestroyEffects(tuple);
