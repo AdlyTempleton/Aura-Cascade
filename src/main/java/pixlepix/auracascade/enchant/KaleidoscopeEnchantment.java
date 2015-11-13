@@ -10,7 +10,7 @@ import pixlepix.auracascade.data.EnumAura;
  */
 public class KaleidoscopeEnchantment extends Enchantment {
     public KaleidoscopeEnchantment(int id, EnumAura aura) {
-        super(id, 0, EnumEnchantmentType.digger);
+        super(id, 0, EnumEnchantmentType.all);
         setName(aura.name);
     }
 
