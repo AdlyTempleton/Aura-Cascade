@@ -186,7 +186,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
                                     if (world.isAirBlock(newX, newY, newZ)) {
                                         Block block = world.getBlock(oldX, oldY, oldZ);
-                                        Item item = block.getItem(world, oldX, oldY, oldZ);
+                                        Item item = Item.getItemFromBlock(block);
                                         int worldDmg = world.getBlockMetadata(oldX, oldY, oldZ);
                                         int dmg = block.getDamageValue(world, oldX, oldY, oldZ);
 

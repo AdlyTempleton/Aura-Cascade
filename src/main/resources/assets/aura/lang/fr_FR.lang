@@ -258,19 +258,19 @@ aura.page.multiplePumps0=Certain &1consommateurs&0 demande de la &1puissance&0 p
 
 #Start Lexicon
 
-aura.entry.basics=Basic Concepts
-aura.page.basics0=Aura is a magical fluid, which comes from craftable &1Aura Crystals&0. You can craft different &1Aura Nodes&0, and place them in the world. Aura Nodes will connect to nearby nodes in a straight line, and transfer energy.
-aura.page.basics1=Aura is not created or destroyed under most circumstances. Instead, Aura represents one part of the overall machine. Aura is used to transport and store &1Power&0, in mechanics which will be discussed later.
+aura.entry.basics=Concepts de base
+aura.page.basics0=L'Aura un fluide magique, qui provient de la fabrication de &1Cristaux d'Aura&0. Vous pouvez fabriquer différent &1Noeuds d'Aura&0, et les placer dans le monde. Les noeuds d'Aura se connectent au noeud le plus proche en ligne directe, et transfèrent del'énergie.
+aura.page.basics1=L'Aura n'est pas créée ou détruite dans la plupart des circonstances. Au lieu de cela, l'Aura représente une partie de la machine globale. L'aura est utilisée pour transporter et stocker la &1Puissance&0, dans les mécaniques qui seront discutée plus tard.
 
-aura.entry.power=Power
-aura.page.power0=Storing &1Power&0 with Aura is analogous to pushing a boulder up a hill. Lifting up the boulder takes a lot of power, but, as the boulder rolls back down the hill, it can be harnessed to do work. The generated Power is equal to the quantity of Aura, times the height the Aura is falling from.
-aura.page.power1=Aura will naturally flow downhill but not uphill. To push Aura uphill, various &1Pumps&0 must be used. Note that pumps will push less aura if they have to push it farther - you will get the same power at any height. When Aura flows vertically downward, power will be distributed to nearby &1Consumers&0 from the lower node.
+aura.entry.power=Puissance
+aura.page.power0=Stocker de la &1Puissance&0 avec l'Aura est analogue à pousser d'un rocher en haut une colline. Monter le rocher demandes beaucoup de puissance, mais, lorsque le rocher redescend la colline, il peut être exploité pour faire du travail. La puissance générée est équale à la quantité d'Aura, fois la hauteur de laquelle l'Aura tombe.
+aura.page.power1=L'Aura coulera naturellement en descente mais pas en montée. Pour propulser l'aura vers le haut, Différentes &1Pompes&0 doivent être utilisées. Notez que les pompes pousseront moins d'Aura si elles doivent la pousser plus loin - Vous obtiendrez la même puissance à n'importe quelle hauteur. Quand l'Aura coule verticalement en bas, la puissance sera distribué aux &1Consommateurs&0 proches du noeud inférieur.
 
-aura.entry.auraFlow=Aura Flow Mechanics
-aura.page.auraFlow0=Every second, &1Aura Nodes&0 will send a percentage of their Aura to connected nodes. This percentage depends on the distance between the nodes and other connected nodes.
-aura.page.auraFlow1=When two nodes are connected, both send Aura to each other. This means that the quantity of Aura in connected nodes tends toward equilibrium, under normal circumstances.
-aura.page.auraFlow2=&1Aura Crystals&0 can place Aura in a node
-aura.page.auraFlow3=&1Aura Nodes&0 store and transport Aura
+aura.entry.auraFlow=Mécaniques d'écoulement d'Aura
+aura.page.auraFlow0=Toutes les secondes, Les &1Noeuds d'Aura&0 envoient un pourcentage de leur Aura aux noeuds connectés. Ce pourcentage dépend de la distence entre les noeuds et les autres noeuds connectés.
+aura.page.auraFlow1=Quand deux noeuds sont connectés, tous les deux envoient l'Aura l'un à l'autre. ceci signifie que la quantité d'Aura dans les noeuds connectés a tendance à s'équilibrer, en temps normal.
+aura.page.auraFlow2=les &1Cristaux d'Aura&0 peuvent mettre de l'Aura dasn un noeud.
+aura.page.auraFlow3=Les &1Noeuds d'Aura&0 stockent et transportent l'Aura.
 
 aura.entry.interactions=Controls
 aura.page.interactions0=Right click on an &1Aura Node&0 with an &1Aura Crystal&0, or toss the Aura Crystal onto the node, to give Aura and consume the crystal.<br>Right click an Aura Node with an empty hand to see the stored Aura.
