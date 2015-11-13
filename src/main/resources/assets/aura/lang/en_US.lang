@@ -549,7 +549,7 @@ aura.page.amuletFood1=Apples are hardcoded
 aura.entry.enchanter=Kaleidoscopic Enchantments
 aura.page.enchanter0=&1Kaleidoscopic Enchantments&0 are a series of 6 enchantments, each with a different color, that can be applied to swords or tools. Each enchantment gives a different effect by themselves. However, when two or more different enchantments are combined, each one interacts with every other enchantment, creating dozens of unique effects - some negative.
 aura.page.enchanter1=Mana still unobtainable
-aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying kaleidoscopic enchantments. It functions as a cascading consumer, and requires 500 power/second minimum. Drop the item to be enchanted, as well as an appropriately colored &1Aura Crystal&0 near the enchanter.
+aura.page.enchanter2=The &1Kaleidoscopic Enchanter&0 is the method of applying kaleidoscopic enchantments. It functions as a cascading consumer, and requires 500 power/second minimum. Drop the item to be enchanted, as well as an appropriately colored &1Arcane Ingot&0 near the enchanter.
 aura.page.enchanter3=The enchanter struggles to put more and more kaleidoscopic enchantments on an item. When adding a second level, it has a 75% chance of success. Each additional level has three-quarters success rate of the previous one.
 
 aura.entry.basicEffects=Basic Effects
