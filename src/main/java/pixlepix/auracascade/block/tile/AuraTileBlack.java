@@ -15,11 +15,11 @@ public class AuraTileBlack extends AuraTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (worldObj.getTotalWorldTime() % 20 == 2) {
             this.storage = new AuraQuantityList();
-            if (worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+            if (worldObj.isBlockIndirectlyGettingPowered(pos) > 0) {
                 storage.add(new AuraQuantity(getAuraType(), 100000));
             }
         }

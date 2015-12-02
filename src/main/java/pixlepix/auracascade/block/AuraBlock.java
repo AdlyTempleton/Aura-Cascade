@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
@@ -508,7 +509,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
-    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+    public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         List<String> result = new ArrayList<String>();
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof AuraTile) {

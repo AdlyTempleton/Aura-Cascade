@@ -37,7 +37,7 @@ public class PacketCoordinatorScroll implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(player.worldObj.provider.dimensionId);
+        buf.writeInt(player.worldObj.provider.getDimensionId());
         buf.writeInt(player.getEntityId());
         buf.writeFloat(scroll);
         ByteBufUtils.writeUTF8String(buf, filter);

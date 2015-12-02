@@ -19,8 +19,8 @@ public class AuraTilePump extends AuraTilePumpBase {
 
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (worldObj.getTotalWorldTime() % 2400 == 0) {
             AuraUtil.keepAlive(this, 3);
         }
@@ -41,7 +41,7 @@ public class AuraTilePump extends AuraTilePumpBase {
                         } else {
                             stack.stackSize--;
                         }
-                        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entityItem.posX, entityItem.posY, entityItem.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entityItem.posX, entityItem.posY, entityItem.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
                         break;
                     }
                 }

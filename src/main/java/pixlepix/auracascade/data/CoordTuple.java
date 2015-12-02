@@ -3,9 +3,10 @@ package pixlepix.auracascade.data;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,25 +26,35 @@ public class CoordTuple {
 
 
     public CoordTuple(TileEntity tileEntity) {
-        this.x = tileEntity.xCoord;
-        this.y = tileEntity.yCoord;
-        this.z = tileEntity.zCoord;
+        this.x = tileEntity.getPos().getX();
+        this.y = tileEntity.getPos().getY();
+        this.z = tileEntity.getPos().getZ();
+    }
+
+    public CoordTuple(BlockPos pos) {
+        this.x = pos.getX();
+        this.y = pos.getY();
+        this.z = pos.getZ();
+    }
+
+    public static BlockPos pos(CoordTuple tuple) {
+        return new BlockPos(tuple.getX(), tuple.getY(), tuple.getZ());
     }
 
     public static Vec3 vec(CoordTuple tuple) {
-        return Vec3.createVectorHelper(tuple.getX(), tuple.getY(), tuple.getZ());
+        return new Vec3(tuple.getX(), tuple.getY(), tuple.getZ());
     }
 
     public void setBlockToAir(World world) {
-        world.setBlockToAir(x, y, z);
+        world.setBlockToAir(new BlockPos(x, y, z));
     }
 
-    public CoordTuple add(ForgeDirection dir) {
-        return new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+    public CoordTuple add(EnumFacing dir) {
+        return new CoordTuple(x + dir.getFrontOffsetX(), y + dir.getFrontOffsetY(), z + dir.getFrontOffsetZ());
     }
 
-    public CoordTuple add(ForgeDirection dir, int mult) {
-        return new CoordTuple(x + dir.offsetX * mult, y + dir.offsetY * mult, z + dir.offsetZ * mult);
+    public CoordTuple add(EnumFacing dir, int mult) {
+        return new CoordTuple(x + dir.getFrontOffsetX() * mult, y + dir.getFrontOffsetY() * mult, z + dir.getFrontOffsetZ() * mult);
     }
 
     public double dist(CoordTuple other) {
@@ -63,11 +74,11 @@ public class CoordTuple {
     }
 
     public TileEntity getTile(World w) {
-        return w.getTileEntity(x, y, z);
+        return w.getTileEntity(new BlockPos(x, y, z));
     }
 
     public Block getBlock(World w) {
-        return w.getBlock(x, y, z);
+        return w.getBlockState(new BlockPos(x, y, z)).getBlock();
     }
 
     public int getX() {
@@ -94,7 +105,7 @@ public class CoordTuple {
         this.z = z;
     }
 
-    public ForgeDirection getDirectionTo(CoordTuple other) {
+    public EnumFacing getDirectionTo(CoordTuple other) {
         int xDiff = other.x - x;
         int yDiff = other.y - y;
         int zDiff = other.z - z;
@@ -111,13 +122,13 @@ public class CoordTuple {
             count++;
         }
         if (count == 1) {
-            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                if (direction.offsetX == (int) Math.signum(xDiff) && direction.offsetY == (int) Math.signum(yDiff) && direction.offsetZ == (int) Math.signum(zDiff)) {
+            for (EnumFacing direction : EnumFacing.VALUES) {
+                if (direction.getFrontOffsetX() == (int) Math.signum(xDiff) && direction.getFrontOffsetY() == (int) Math.signum(yDiff) && direction.getFrontOffsetZ() == (int) Math.signum(zDiff)) {
                     return direction;
                 }
             }
         }
-        return ForgeDirection.UNKNOWN;
+        return null;
     }
 
     @Override
@@ -131,7 +142,7 @@ public class CoordTuple {
     }
 
     public AxisAlignedBB getBoundingBox(int range) {
-        return AxisAlignedBB.getBoundingBox(x - range, y - range, z - range, x + range + 1, y + range + 1, z + range + 1);
+        return new AxisAlignedBB(x - range, y - range, z - range, x + range + 1, y + range + 1, z + range + 1);
     }
 
     public List<CoordTuple> inRange(int range) {

@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -55,11 +54,6 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.cobblestone), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:blackHole");
     }
 
     @Override

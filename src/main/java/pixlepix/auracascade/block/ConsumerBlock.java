@@ -11,6 +11,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -347,7 +348,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
 
 
     @Override
-    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+    public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         List<String> result = new ArrayList<String>();
         if (world.getTileEntity(x, y, z) instanceof ConsumerTile) {
             ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(x, y, z);

@@ -1,5 +1,6 @@
 package pixlepix.auracascade.village;
 
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 
@@ -21,7 +22,7 @@ public class AuraHutHandler implements VillagerRegistry.IVillageCreationHandler 
     }
 
     @Override
-    public Object buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, List pieces, Random random, int p1, int p2, int p3, int p4, int p5) {
+    public Object buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, List pieces, Random random, int p1, int p2, int p3, EnumFacing p4, int p5) {
         return ComponentAuraHut.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
     }
 }

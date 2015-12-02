@@ -36,7 +36,7 @@ public class SlotCoordinator extends Slot {
 
     @Override
     public void putStack(ItemStack stack) {
-        if (te.getWorldObj().isRemote) {
+        if (te.getWorld().isRemote) {
             storage = stack == null ? null : new StorageItemStack(stack);
         } else {
             StorageItemStack lost = null;

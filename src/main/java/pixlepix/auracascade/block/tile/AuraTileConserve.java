@@ -9,6 +9,6 @@ import pixlepix.auracascade.data.EnumAura;
 public class AuraTileConserve extends AuraTile {
     @Override
     public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
-        return super.canTransfer(tuple, aura) && tuple.getY() == yCoord;
+        return super.canTransfer(tuple, aura) && tuple.getY() == pos.getY();
     }
 }

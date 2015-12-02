@@ -54,11 +54,6 @@ public class ItemOrangeAmulet extends Item implements IBauble, ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:amuletOrange");
-    }
-
-    @Override
     public String getItemName() {
         return "orangeAmulet";
     }

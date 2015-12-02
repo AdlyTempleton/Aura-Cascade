@@ -14,8 +14,8 @@ public class AuraTilePumpRedstone extends AuraTilePumpBase {
 
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (pumpPower == 0) {
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                 for (int i = 1; i < 16; i++) {

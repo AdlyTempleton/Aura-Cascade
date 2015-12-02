@@ -6,8 +6,8 @@ package pixlepix.auracascade.block.tile;
 public class AuraTilePumpCreative extends AuraTilePumpBase {
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         addFuel(2, 10000000);
     }
 }

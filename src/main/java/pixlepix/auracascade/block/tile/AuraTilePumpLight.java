@@ -27,8 +27,8 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (pumpPower > 0) {
             hasSearched = false;
         }

@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -31,11 +30,11 @@ public class ItemComboSword extends ItemSword implements ITTinkererItem {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
         super.addInformation(stack, player, list, bool);
-        if (stack.stackTagCompound != null) {
-            double timeLeft = (double) (stack.stackTagCompound.getLong(NBT_TAG_LAST_TIME) + 200 - player.worldObj.getTotalWorldTime());
+        if (stack.getTagCompound() != null) {
+            double timeLeft = (double) (stack.getTagCompound().getLong(NBT_TAG_LAST_TIME) + 200 - player.worldObj.getTotalWorldTime());
             timeLeft /= 20;
             if (timeLeft > 0) {
-                list.add(String.format("Combo: %.3f", getComboMultiplier(stack.stackTagCompound.getInteger(NBT_TAG_COMBO_COUNT))));
+                list.add(String.format("Combo: %.3f", getComboMultiplier(stack.getTagCompound().getInteger(NBT_TAG_COMBO_COUNT))));
 
                 list.add("Time left in combo: " + timeLeft);
             }
@@ -50,11 +49,6 @@ public class ItemComboSword extends ItemSword implements ITTinkererItem {
     @Override
     public String getItemName() {
         return "comboSword";
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("aura:comboSword");
     }
 
     @Override

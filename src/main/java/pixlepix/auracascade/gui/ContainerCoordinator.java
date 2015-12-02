@@ -106,8 +106,8 @@ public class ContainerCoordinator extends Container {
     }
 
     public void scrollTo(float scroll, String filter) {
-        if (!tileEntity.getWorldObj().isRemote) {
-            tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+        if (!tileEntity.getWorld().isRemote) {
+            tileEntity.getWorld().markBlockForUpdate(tileEntity.getPos());
         }
         lastFilter = filter;
 

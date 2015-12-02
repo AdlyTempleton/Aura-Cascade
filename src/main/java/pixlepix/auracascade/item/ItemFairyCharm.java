@@ -100,17 +100,17 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         if (!world.isRemote) {
             ItemStack ringStack = EventHandler.getBaubleFromInv(ItemFairyRing.class, player);
             if (ringStack != null) {
-                if (ringStack.stackTagCompound == null) {
-                    ringStack.stackTagCompound = new NBTTagCompound();
+                if (ringStack.getTagCompound() == null) {
+                    ringStack.setTagCompound(new NBTTagCompound());
                 }
-                int[] fairies = ringStack.stackTagCompound.getIntArray("fairyList");
+                int[] fairies = ringStack.getTagCompound().getIntArray("fairyList");
                 if (fairies.length < 15) {
                     int[] newFairies = Arrays.copyOf(fairies, fairies.length + 1);
 
                     newFairies[newFairies.length - 1] = stack.getItemDamage();
 
 
-                    ringStack.stackTagCompound.setIntArray("fairyList", newFairies);
+                    ringStack.getTagCompound().setIntArray("fairyList", newFairies);
                     //Trigger the re-spawn of fairies
                     ItemFairyRing.killNearby(player);
                     ItemFairyRing.makeFaries(ringStack, player);

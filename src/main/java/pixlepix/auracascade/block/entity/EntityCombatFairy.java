@@ -20,7 +20,7 @@ public class EntityCombatFairy extends EntityFairy {
     public void onEntityUpdate() {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
-            List<Entity> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
+            List<EntityMob> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
             if (nearbyEntities.size() > 0) {
                 nearbyEntities.get(0).attackEntityFrom(DamageSource.causePlayerDamage(player), 1.5F);
             }

@@ -1,5 +1,8 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,7 +24,7 @@ import pixlepix.auracascade.network.PacketBurst;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class AuraTile extends TileEntity {
+public class AuraTile extends TileEntity implements ITickable {
 
     public AuraQuantityList storage = new AuraQuantityList();
     public HashMap<CoordTuple, AuraQuantityList> burstMap = null;
@@ -66,7 +69,7 @@ public class AuraTile extends TileEntity {
 
     public boolean connectionBlockedByBlock(CoordTuple tuple) {
         Block block = tuple.getBlock(worldObj);
-        return !block.isAir(worldObj, tuple.getX(), tuple.getY(), tuple.getZ()) && (block instanceof AuraBlock || block.isOpaqueCube());
+        return !block.isAir(worldObj, CoordTuple.pos(tuple)) && (block instanceof AuraBlock || block.isOpaqueCube());
     }
 
     @Override
@@ -98,8 +101,8 @@ public class AuraTile extends TileEntity {
     public boolean isOpenPath(CoordTuple target) {
         int dist = (int) new CoordTuple(this).dist(target);
 
-        ForgeDirection direction = new CoordTuple(this).getDirectionTo(target);
-        if (direction == ForgeDirection.UNKNOWN) {
+        EnumFacing direction = new CoordTuple(this).getDirectionTo(target);
+        if (direction == null) {
             return false;
         }
         for (int i = 1; i < dist; i++) {
@@ -127,15 +130,15 @@ public class AuraTile extends TileEntity {
         connected = result;
     }
 
-    public void connect(int x2, int y2, int z2) {
-        if (worldObj.getTileEntity(x2, y2, z2) instanceof AuraTile && worldObj.getTileEntity(x2, y2, z2) != this && isOpenPath(new CoordTuple(x2, y2, z2))) {
-            AuraTile otherNode = (AuraTile) worldObj.getTileEntity(x2, y2, z2);
+    public void connect(BlockPos pos) {
+        if (worldObj.getTileEntity(pos) instanceof AuraTile && worldObj.getTileEntity(pos) != this && isOpenPath(new CoordTuple(pos))) {
+            AuraTile otherNode = (AuraTile) worldObj.getTileEntity(pos);
             otherNode.connected.add(new CoordTuple(this));
             this.connected.add(new CoordTuple(otherNode));
             //This should only happen on initial placement
             //Not on 'follow ups'
             if (!hasConnected) {
-                burst(new CoordTuple(x2, y2, z2), "spell", EnumAura.WHITE_AURA, 1D);
+                burst(new CoordTuple(pos), "spell", EnumAura.WHITE_AURA, 1D);
             }
 
         }
@@ -143,13 +146,12 @@ public class AuraTile extends TileEntity {
 
     public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
 
         if ((!hasConnected || worldObj.getTotalWorldTime() % 200 == 0) && !worldObj.isRemote) {
             for (int i = 1; i < 16; i++) {
@@ -162,14 +164,14 @@ public class AuraTile extends TileEntity {
             hasConnected = true;
         }
 
-        if (initialYValue != yCoord) {
+        if (initialYValue != pos.getY()) {
             if (initialYValue == -1 || initialYValue == 0) {
-                initialYValue = yCoord;
+                initialYValue = pos.getY();
             } else {
-                Explosion explosion = new Explosion(worldObj, null, xCoord, yCoord, zCoord, 2F);
+                Explosion explosion = new Explosion(worldObj, null, pos.getX(), pos.getY(), pos.getZ(), 2F);
                 explosion.doExplosionA();
                 explosion.doExplosionB(false);
-                worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+                worldObj.setBlockToAir(pos);
             }
         }
 
@@ -260,8 +262,8 @@ public class AuraTile extends TileEntity {
                 }
                 inducedBurstMap = new HashMap<CoordTuple, Integer>();
             }
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-            worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
+            worldObj.markBlockForUpdate(pos);
+            worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
         }
 
         for (AuraQuantity quantity : storage.quantityList) {
@@ -278,7 +280,7 @@ public class AuraTile extends TileEntity {
             for (EnumAura aura : EnumAura.values()) {
                 if (list.get(aura) > 0) {
                     burst(tuple, "square", aura, list.getComposition(aura));
-                    int power = (int) ((yCoord - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
+                    int power = (int) ((pos.getY() - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
                     if (power > 0) {
                         ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
                     }
@@ -296,16 +298,16 @@ public class AuraTile extends TileEntity {
 
     @SuppressWarnings("SimplifiableIfStatement")
     public boolean canTransfer(CoordTuple tuple) {
-        boolean isLower = tuple.getY() < yCoord;
+        boolean isLower = tuple.getY() < pos.getY();
 
-        boolean isSame = tuple.getY() == yCoord;
+        boolean isSame = tuple.getY() == pos.getY();
         if (!(tuple.getTile(worldObj) instanceof AuraTile)) {
             return false;
         }
         if (!(isSame || isLower)) {
             return false;
         }
-        return !(worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord) && !(this instanceof AuraTileBlack));
+        return !(worldObj.isBlockIndirectlyGettingPowered(pos) > 0 && !(this instanceof AuraTileBlack));
 
     }
 
@@ -314,10 +316,10 @@ public class AuraTile extends TileEntity {
         if (!canTransfer(tuple)) {
             return false;
         }
-        if (tuple.getY() != yCoord && aura == EnumAura.ORANGE_AURA) {
+        if (tuple.getY() != pos.getY() && aura == EnumAura.ORANGE_AURA) {
             return false;
         }
-        if (tuple.getY() == yCoord && aura == EnumAura.BLACK_AURA) {
+        if (tuple.getY() == pos.getY() && aura == EnumAura.BLACK_AURA) {
             return false;
         }
         return ((AuraTile) tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
@@ -335,11 +337,11 @@ public class AuraTile extends TileEntity {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
+        return new S35PacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
     public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        readCustomNBT(pkt.func_148857_g());
+        readCustomNBT(pkt.getNbtCompound());
     }
 }

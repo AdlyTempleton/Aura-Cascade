@@ -19,8 +19,7 @@ public class EntityBuffFairy extends EntityFairy {
                 new PotionEffect(Potion.regeneration.getId(), 2400),
                 new PotionEffect(Potion.resistance.getId(), 2400),
                 new PotionEffect(Potion.damageBoost.getId(), 2400),
-                //absorbtion
-                new PotionEffect(Potion.field_76444_x.getId(), 2400),
+                new PotionEffect(Potion.absorption.getId(), 2400),
                 new PotionEffect(Potion.jump.getId(), 2400),
                 new PotionEffect(Potion.moveSpeed.getId(), 2400)};
     }

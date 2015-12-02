@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.BlockExplosionContainer;
 
@@ -59,7 +60,7 @@ public class EntityMinerExplosion extends Entity {
         }
         moveEntity(motionX, motionY, motionZ);
         if (worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
-            this.worldObj.spawnParticle("largeexplode", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+            this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
         }
     }
 

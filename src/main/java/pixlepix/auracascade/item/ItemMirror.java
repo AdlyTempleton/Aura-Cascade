@@ -41,11 +41,6 @@ public class ItemMirror extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:mirror");
-    }
-
-    @Override
     public boolean shouldRegister() {
         return true;
     }
@@ -64,7 +59,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
      */
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        AxisAlignedBB axisAlignedBB = AxisAlignedBB.getBoundingBox(player.posX - 6, player.posY - 6, player.posZ - 6, player.posX + 6, player.posY + 6, player.posZ + 6);
+        AxisAlignedBB axisAlignedBB = new AxisAlignedBB(player.posX - 6, player.posY - 6, player.posZ - 6, player.posX + 6, player.posY + 6, player.posZ + 6);
         ArrayList<EntityFireball> fireballs = (ArrayList<EntityFireball>) world.getEntitiesWithinAABB(EntityFireball.class, axisAlignedBB);
         for (EntityFireball fireball : fireballs) {
             if (fireball.getDistanceSqToEntity(player) <= 25) {
@@ -79,7 +74,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
     public void redirect(EntityFireball entity) {
 
         if (!entity.worldObj.isRemote && !(entity instanceof EntityWitherSkull)) {
-            AxisAlignedBB axisAlignedBB = AxisAlignedBB.getBoundingBox(entity.posX - 100, entity.posY - 100, entity.posZ - 100, entity.posX + 100, entity.posY + 100, entity.posZ + 100);
+            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(entity.posX - 100, entity.posY - 100, entity.posZ - 100, entity.posX + 100, entity.posY + 100, entity.posZ + 100);
             ArrayList<EntityFireball> targets = (ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityBlaze.class, axisAlignedBB);
             targets.addAll((ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityGhast.class, axisAlignedBB));
             if (targets.size() > 0) {

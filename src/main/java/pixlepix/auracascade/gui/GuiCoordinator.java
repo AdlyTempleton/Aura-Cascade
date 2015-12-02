@@ -24,6 +24,8 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.network.PacketCoordinatorScroll;
 
+import java.io.IOException;
+
 /**
  * Created by localmacaccount on 1/24/15.
  */
@@ -72,7 +74,7 @@ public class GuiCoordinator extends GuiContainer {
     }
 
     @Override
-    protected void keyTyped(char p_73869_1_, int p_73869_2_) {
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) throws IOException {
         if (this.unfocused) {
             this.unfocused = false;
             this.searchField.setText("");
@@ -94,7 +96,7 @@ public class GuiCoordinator extends GuiContainer {
         AuraCascade.proxy.networkWrapper.sendToServer(new PacketCoordinatorScroll(Minecraft.getMinecraft().thePlayer, filter, containerCoordinator.lastScroll));
     }
 
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
         int i = Mouse.getEventDWheel();
 

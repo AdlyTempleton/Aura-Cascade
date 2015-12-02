@@ -10,6 +10,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
@@ -86,7 +87,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     }
 
     @Override
-    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+    public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         TileEntity te = world.getTileEntity(x, y, z);
         if (!(te instanceof TileStorageBookshelf)) {
             return null;

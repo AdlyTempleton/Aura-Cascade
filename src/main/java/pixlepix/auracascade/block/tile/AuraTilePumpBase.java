@@ -57,8 +57,8 @@ public class AuraTilePumpBase extends AuraTile {
 
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
             if (pumpPower > 0) {
                 AuraTile upNode = null;

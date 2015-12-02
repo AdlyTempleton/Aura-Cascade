@@ -1,16 +1,13 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
@@ -71,17 +68,12 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:book");
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, BlockPos pos, EnumFacing side, float par8, float par9, float par10) {
         if (par2EntityPlayer.isSneaking()) {
-            Block block = par3World.getBlock(par4, par5, par6);
+            Block block = par3World.getBlockState(pos).getBlock();
             if (block != null) {
                 if (block instanceof ILexiconable) {
-                    LexiconEntry entry = ((ILexiconable) block).getEntry(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
+                    LexiconEntry entry = ((ILexiconable) block).getEntry(par3World, pos, par2EntityPlayer, par1ItemStack);
                     if (entry != null) {
                         AuraCascade.proxy.setEntryToOpen(entry);
                         AuraCascade.proxy.setLexiconStack(par1ItemStack);
@@ -138,7 +130,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
     @Override
     public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return EnumRarity.uncommon;
+        return EnumRarity.UNCOMMON;
     }
 
     @Override

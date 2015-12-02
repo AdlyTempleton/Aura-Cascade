@@ -3,9 +3,9 @@ package pixlepix.auracascade.data;
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.main.AuraUtil;
@@ -65,7 +65,7 @@ public enum EnumAura {
     },
     ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE, new int[]{1}) {
         @Override
-        public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
+        public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, EnumFacing direction) {
             for (CoordTuple nearbyNode : tuple.inRange(2)) {
                 if (nearbyNode.getTile(world) instanceof AuraTile && !tuple.equals(nearbyNode) && tuple.getDirectionTo(nearbyNode) != direction && tuple.getDirectionTo(nearbyNode) != direction.getOpposite()) {
                     AuraTile auraTile = (AuraTile) nearbyNode.getTile(world);
@@ -179,14 +179,12 @@ public enum EnumAura {
         return 1D;
     }
 
-    public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, ForgeDirection direction) {
+    public void onTransfer(World world, CoordTuple tuple, AuraQuantity quantity, EnumFacing direction) {
     }
 
     public void explosionPushUp(World world, CoordTuple tuple, int power) {
         //Make graphical explosion
-        Explosion explosion = new Explosion(world, null, tuple.getX(), tuple.getY(), tuple.getZ(), 4F);
-        explosion.isFlaming = false;
-        explosion.isSmoking = true;
+        Explosion explosion = new Explosion(world, null, tuple.getX(), tuple.getY(), tuple.getZ(), 4F, false, true);
         explosion.doExplosionB(false);
 
         //Move up mana
@@ -195,10 +193,10 @@ public enum EnumAura {
             AuraTile tile = (AuraTile) tuple.getTile(world);
             tile.verifyConnections();
             for (CoordTuple connectedNode : tile.connected) {
-                if (connectedNode.getY() > tile.yCoord) {
+                if (connectedNode.getY() > tile.getPos().getY()) {
                     AuraTile transferTile = (AuraTile) connectedNode.getTile(world);
 
-                    int auraPower = power / (connectedNode.getY() - tile.yCoord);
+                    int auraPower = power / (connectedNode.getY() - tile.getPos().getY());
                     auraPower = Math.min(auraPower, tile.storage.get(this));
 
                     tile.burst(connectedNode, "magicCrit", this, 1D);

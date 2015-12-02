@@ -46,8 +46,8 @@ public class AuraTileRF extends AuraTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();
             LinkedList<CoordTuple> nextTiles = new LinkedList<CoordTuple>();

@@ -1,5 +1,6 @@
 package pixlepix.auracascade.network;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -39,7 +40,7 @@ public class PacketAngelJump implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(entityPlayer.worldObj.provider.dimensionId);
+        buf.writeInt(entityPlayer.worldObj.provider.getDimensionId());
         buf.writeInt(entityPlayer.getEntityId());
         buf.writeBoolean(up);
     }
@@ -56,16 +57,17 @@ public class PacketAngelJump implements IMessage {
                         int z = (int) Math.floor(player.posZ);
                         int x = (int) Math.floor(player.posX);
 
+                        BlockPos pos = new BlockPos(x, y, z);
                         //If the player is going down, we want them to be able to land on bedrock
                         //But not the other way around
-                        if (player.worldObj.getBlock(x, msg.up ? y : y + 1, z).getBlockHardness(player.worldObj, x, y, z) < 0) {
+                        if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj, pos) < 0) {
                             break;
                         }
-                        if (!player.worldObj.isAirBlock(x, y, z) &&
-                                player.worldObj.isAirBlock(x, y + 1, z) &&
-                                player.worldObj.isAirBlock(x, y + 2, z)) {
+                        if (!player.worldObj.isAirBlock(pos) &&
+                                player.worldObj.isAirBlock(pos.up()) &&
+                                player.worldObj.isAirBlock(pos.up(2))) {
                             player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
+                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
                             break;
                         }
                     }

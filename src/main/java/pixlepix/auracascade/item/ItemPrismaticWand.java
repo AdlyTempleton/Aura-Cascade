@@ -9,7 +9,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.main.EnumColor;
@@ -36,14 +38,14 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
         //More specific selections
         if (!player.isSneaking() && !world.isRemote) {
-            if (stack.stackTagCompound == null) {
-                stack.stackTagCompound = new NBTTagCompound();
+            if (stack.getTagCompound() == null) {
+                stack.setTagCompound(new NBTTagCompound());
             }
 
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             if (stack.getItemDamage() == 0) {
                 if (nbt.hasKey("x1")) {
                     nbt.setInteger("x2", nbt.getInteger("x1"));
@@ -71,19 +73,19 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         int mode = stack.getItemDamage();
         if (player.isSneaking()) {
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             mode++;
             mode = mode % modes.length;
             stack.setItemDamage(mode);
-            stack.stackTagCompound = nbt;
+            stack.setTagCompound(nbt);
             if (!world.isRemote) {
                 player.addChatComponentMessage(new ChatComponentText("Switched to: " + modes[mode]));
             }
         } else {
-            if (stack.stackTagCompound == null) {
-                stack.stackTagCompound = new NBTTagCompound();
+            if (stack.getTagCompound() == null) {
+                stack.setTagCompound(new NBTTagCompound());
             }
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             switch (mode) {
                 case 1:
                     if (nbt.hasKey("x1") && nbt.hasKey("x2")) {
@@ -249,7 +251,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     private void particles(int bx, int by, int bz) {
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+        for (EnumFacing direction : EnumFacing.VALUES) {
             for (int i = 0; i < 3; i++) {
                 Random random = new Random();
                 double x = bx + random.nextDouble();
@@ -297,11 +299,6 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.blaze_rod));
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:prismaticWand");
     }
 
     @Override

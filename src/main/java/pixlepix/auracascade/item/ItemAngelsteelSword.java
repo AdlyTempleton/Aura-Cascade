@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
@@ -77,8 +75,8 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     }
 
     public EnumAura getAura(ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("aura")) {
-            return EnumAura.values()[stack.stackTagCompound.getInteger("aura")];
+        if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("aura")) {
+            return EnumAura.values()[stack.getTagCompound().getInteger("aura")];
 
         }
         return EnumAura.RED_AURA;
@@ -86,8 +84,8 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
 
     public ItemStack getStack(EnumAura aura) {
         ItemStack stack = new ItemStack(this);
-        stack.stackTagCompound = new NBTTagCompound();
-        stack.stackTagCompound.setInteger("aura", aura.ordinal());
+        stack.setTagCompound(new NBTTagCompound());
+        stack.getTagCompound().setInteger("aura", aura.ordinal());
         return stack;
     }
 

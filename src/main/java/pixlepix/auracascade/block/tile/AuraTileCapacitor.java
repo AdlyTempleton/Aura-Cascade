@@ -35,8 +35,8 @@ public class AuraTileCapacitor extends AuraTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         if (!worldObj.isRemote) {
             if (ticksDisabled > 0) {
                 ticksDisabled--;
@@ -53,7 +53,7 @@ public class AuraTileCapacitor extends AuraTile {
                 ticksDisabled = 110;
 
                 worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
-                worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
+                worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
             }
         }
     }

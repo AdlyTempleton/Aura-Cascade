@@ -31,8 +31,8 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
+        super.update();
         List<Entity> entityList = worldObj.getEntitiesWithinAABB(EntityThrowable.class, AxisAlignedBB.getBoundingBox(xCoord - .5, yCoord - .5, zCoord - .5, xCoord + 1.5, yCoord + 1.5, zCoord + 1.5));
         for (Entity entity : entityList) {
             if (entity instanceof EntitySnowball || entity instanceof EntityEgg) {

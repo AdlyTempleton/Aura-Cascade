@@ -49,7 +49,7 @@ public class AngelsteelToolHelper {
     }
 
     public static boolean hasValidBuffs(ItemStack stack) {
-        return stack.stackTagCompound != null && stack.stackTagCompound.hasKey(NBT_BUFF_ARRAY_NAME);
+        return stack.getTagCompound() != null && stack.getTagCompound().hasKey(NBT_BUFF_ARRAY_NAME);
     }
 
     public static NBTTagCompound getRandomBuffCompound(int lvl) {

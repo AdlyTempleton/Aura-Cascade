@@ -113,7 +113,7 @@ public class BlockRegistry {
             try {
                 Block newBlock = (Block) clazz.newInstance();
                 if (((ITTinkererBlock) newBlock).shouldRegister()) {
-                    newBlock.setBlockName(((ITTinkererBlock) newBlock).getBlockName());
+                    newBlock.setUnlocalizedName(((ITTinkererBlock) newBlock).getBlockName());
                     ArrayList<Block> blockList = new ArrayList<Block>();
                     blockList.add(newBlock);
 
@@ -123,7 +123,7 @@ public class BlockRegistry {
                             for (Constructor constructor : clazz.getConstructors()) {
                                 if (constructor.getParameterTypes().length > 0 && constructor.getParameterTypes()[0].isAssignableFrom(param.getClass())) {
                                     Block nextBlock = (Block) clazz.getConstructor(param.getClass()).newInstance(param);
-                                    nextBlock.setBlockName(((ITTinkererBlock) nextBlock).getBlockName());
+                                    nextBlock.setUnlocalizedName(((ITTinkererBlock) nextBlock).getBlockName());
                                     blockList.add(nextBlock);
                                     break;
                                 }

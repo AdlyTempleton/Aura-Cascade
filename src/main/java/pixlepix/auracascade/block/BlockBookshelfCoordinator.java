@@ -9,6 +9,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
@@ -85,7 +86,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
     }
 
     @Override
-    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+    public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         ArrayList<String> result = new ArrayList<String>();
         TileBookshelfCoordinator coordinator = (TileBookshelfCoordinator) world.getTileEntity(x, y, z);
         result.add("Power used last second: " + coordinator.lastPower);
