@@ -1,7 +1,7 @@
 package pixlepix.auracascade.block;
 
-import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.ModAPIManager;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

@@ -1,6 +1,6 @@
 package pixlepix.auracascade.block.entity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;

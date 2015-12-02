@@ -2,9 +2,9 @@ package pixlepix.auracascade.main.event;
 
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
@@ -68,7 +68,7 @@ public class EventHandler {
 
     //Lexicon auto give
     @SubscribeEvent
-    public void onWorldLoad(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+    public void onWorldLoad(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
         if (!player.worldObj.isRemote && Config.giveBook) {
             if (!player.getEntityData().hasKey(BOOK_TAG) || !player.getEntityData().getBoolean(BOOK_TAG)) {
@@ -97,7 +97,7 @@ public class EventHandler {
 
     //Lexicon auto give
     @SubscribeEvent
-    public void onPlayerRespawn(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
+    public void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
         EntityPlayer player = event.player;
         player.getEntityData().setBoolean(BOOK_TAG, true);
         AuraCascade.proxy.networkWrapper.sendTo(new PacketSyncQuestData(event.player), (EntityPlayerMP) event.player);
@@ -352,7 +352,7 @@ public class EventHandler {
 
     //Kill fairies on logout
     @SubscribeEvent
-    public void onPlayerLogout(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
+    public void onPlayerLogout(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent event) {
         ItemStack item = getBaubleFromInv(ItemFairyRing.class, event.player);
         if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
             ItemFairyRing.killNearby(event.player);
@@ -362,7 +362,7 @@ public class EventHandler {
 
     //Respawn fairies on login
     @SubscribeEvent
-    public void onPlayerLogin(cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+    public void onPlayerLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
         ItemStack item = getBaubleFromInv(ItemFairyRing.class, event.player);
         if (item != null && item.getItem() instanceof ItemFairyRing && !event.player.worldObj.isRemote) {
             ItemFairyRing.makeFaries(item, event.player);

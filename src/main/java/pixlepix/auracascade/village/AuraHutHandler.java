@@ -1,6 +1,6 @@
 package pixlepix.auracascade.village;
 
-import cpw.mods.fml.common.registry.VillagerRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 
 import java.util.List;

@@ -16,7 +16,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
     }
 }
 
@@ -51,7 +51,7 @@ repositories {
     }
 }
 
-apply plugin: 'forge'
+apply plugin: 'net.minecraftforge.gradle.forge'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -61,7 +61,8 @@ group = "pixlepix.auracascade" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "AuraCascade"
 
 minecraft {
-    version = "1.7.10-10.13.2.1277"
+    version = "1.8.8-11.15.0.1595-1.8.8"
+    mappings = "snapshot_20151128"
     runDir = "eclipse"
     replace '@version@', project.version
     replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
@@ -83,7 +84,7 @@ jar {
 
 dependencies {
     compile files("/libs/Baubles-deobf-1.7.10-1.0.1.10.jar")
-    compile files("/libs/NotEnoughItems-1.7.10-1.0.3.74-dev.jar")
+    //compile files("/libs/NotEnoughItems-1.7.10-1.0.3.74-dev.jar")
 }
 
 processResources

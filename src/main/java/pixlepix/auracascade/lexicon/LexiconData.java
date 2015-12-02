@@ -12,7 +12,7 @@
 package pixlepix.auracascade.lexicon;
 
 
-import cpw.mods.fml.common.ModAPIManager;
+import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

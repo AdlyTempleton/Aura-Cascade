@@ -3,4 +3,4 @@
  */
 @API(apiVersion = APIProps.VERSION, owner = "dimensionalPockets", provides = "GameAnalyticsAPI") package de.npe.gameanalytics;
 
-import cpw.mods.fml.common.API;
+import net.minecraftforge.fml.common.API;
