@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.main.Config;
 
 /**
@@ -35,7 +35,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
 
         if (pumpPower == 0 && (!hasSearched || worldObj.getTotalWorldTime() % 1200 == 0)) {
             for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                CoordTuple tuple = new CoordTuple(this).add(direction);
+                BlockPos tuple = new BlockPos(this).add(direction);
                 if (consumeLightSource(tuple, Blocks.glowstone)) {
 
                     addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
@@ -50,7 +50,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
         }
     }
 
-    public boolean consumeLightSource(CoordTuple tuple, Block block) {
+    public boolean consumeLightSource(BlockPos tuple, Block block) {
         if (tuple.getBlock(worldObj) == block) {
             if (!worldObj.isRemote) {
                 for (int j = 0; j < 5; j++) {

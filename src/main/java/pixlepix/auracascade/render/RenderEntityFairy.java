@@ -1,6 +1,7 @@
 package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -18,44 +19,33 @@ import pixlepix.auracascade.registry.BlockRegistry;
  */
 public class RenderEntityFairy extends Render {
 
-    RenderItem renderItem = new RenderItem() {
-        @Override
-        public boolean shouldBob() {
-            return false;
-        }
-    };
+    protected RenderEntityFairy(RenderManager renderManager) {
+        super(renderManager);
+    }
 
     @Override
     public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
 
+        ItemStack stack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100);
 
-        renderItem.setRenderManager(RenderManager.instance);
-
-        EntityItem entityItem = ((EntityFairy) entity).entityItemRender;
-        entityItem.age = 0;
-        entityItem.velocityChanged = true;
-        entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
-
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_BLEND);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableLighting();
+        GlStateManager.enableBlend();
         //This parameter is never used ._.
 
-        Minecraft.getMinecraft().entityRenderer.disableLightmap(0D);
+        Minecraft.getMinecraft().entityRenderer.disableLightmap();
 
 
         //Prevent 'jump' in the bobbing
         //Bobbing is calculated as the age plus the yaw
-        entityItem.age = 0;
         renderItem.doRender(entityItem, x, y, z, 0, 0);
 
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
+        GlStateManager.disableBlend();
+        GlStateManager.disableLighting();
+        GlStateManager.popMatrix();
 
 
-        Minecraft.getMinecraft().entityRenderer.enableLightmap(0D);
+        Minecraft.getMinecraft().entityRenderer.enableLightmap();
 
             /*
             GL11.glPushMatrix();

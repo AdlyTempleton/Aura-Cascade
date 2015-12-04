@@ -51,7 +51,7 @@ public class LootTile extends ConsumerTile {
         do {
             lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
         } while (IMCManager.isStackBlacklistedFromLoot(lootStack));
-        EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, lootStack);
+        EntityItem entityItem = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, lootStack);
         entityItem.motionX = 0;
         entityItem.motionY = 0;
         entityItem.motionZ = 0;

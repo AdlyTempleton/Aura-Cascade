@@ -30,8 +30,6 @@ import java.util.List;
  */
 public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
-    public IIcon top;
-
     public BlockStorageBookshelf() {
         super(Material.wood);
         setHardness(2F);

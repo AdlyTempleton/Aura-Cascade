@@ -15,12 +15,17 @@ public class CoordinatorScrollHandler implements IMessageHandler<PacketCoordinat
     }
 
     @Override
-    public IMessage onMessage(PacketCoordinatorScroll message, MessageContext ctx) {
-        Container container = message.player.openContainer;
-        if (container instanceof ContainerCoordinator) {
-            ContainerCoordinator coordinator = (ContainerCoordinator) container;
-            coordinator.scrollTo(message.scroll, message.filter);
-        }
+    public IMessage onMessage(final PacketCoordinatorScroll message, MessageContext ctx) {
+        ctx.getServerHandler().playerEntity.mcServer.addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                Container container = message.player.openContainer;
+                if (container instanceof ContainerCoordinator) {
+                    ContainerCoordinator coordinator = (ContainerCoordinator) container;
+                    coordinator.scrollTo(message.scroll, message.filter);
+                }
+            }
+        });
         return null;
     }
 }

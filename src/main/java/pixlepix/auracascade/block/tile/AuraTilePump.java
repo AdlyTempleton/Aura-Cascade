@@ -24,10 +24,10 @@ public class AuraTilePump extends AuraTilePumpBase {
         if (worldObj.getTotalWorldTime() % 2400 == 0) {
             AuraUtil.keepAlive(this, 3);
         }
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && worldObj.isBlockIndirectlyGettingPowered(getPos()) == 0) {
             if (pumpPower <= 0) {
                 int range = 3;
-                List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+                List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
                 for (EntityItem entityItem : nearbyItems) {
                     ItemStack stack = entityItem.getEntityItem();
                     if (!entityItem.isDead && TileEntityFurnace.getItemBurnTime(stack) != 0) {

@@ -12,13 +12,12 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.Explosion;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.HashMap;
@@ -27,14 +26,14 @@ import java.util.LinkedList;
 public class AuraTile extends TileEntity implements ITickable {
 
     public AuraQuantityList storage = new AuraQuantityList();
-    public HashMap<CoordTuple, AuraQuantityList> burstMap = null;
-    public LinkedList<CoordTuple> connected = new LinkedList<CoordTuple>();
+    public HashMap<BlockPos, AuraQuantityList> burstMap = null;
+    public LinkedList<BlockPos> connected = new LinkedList<BlockPos>();
     public boolean hasConnected = false;
     public int energy = 0;
     public int initialYValue = -1;
 
     //Used by Orange Aura
-    public HashMap<CoordTuple, Integer> inducedBurstMap = new HashMap<CoordTuple, Integer>();
+    public HashMap<BlockPos, Integer> inducedBurstMap = new HashMap<BlockPos, Integer>();
 
     public AuraTile() {
     }
@@ -51,13 +50,13 @@ public class AuraTile extends TileEntity implements ITickable {
         storage.readFromNBT(storageNBT);
 
         NBTTagList connectionsNBT = nbt.getTagList("connected", 10);
-        connected = new LinkedList<CoordTuple>();
+        connected = new LinkedList<BlockPos>();
         for (int i = 0; i < connectionsNBT.tagCount(); i++) {
             NBTTagCompound coordNBT = connectionsNBT.getCompoundTagAt(i);
             int x = coordNBT.getInteger("x");
             int y = coordNBT.getInteger("y");
             int z = coordNBT.getInteger("z");
-            CoordTuple coord = new CoordTuple(x, y, z);
+            BlockPos coord = new BlockPos(x, y, z);
             connected.add(coord);
         }
 
@@ -67,9 +66,9 @@ public class AuraTile extends TileEntity implements ITickable {
 
     }
 
-    public boolean connectionBlockedByBlock(CoordTuple tuple) {
-        Block block = tuple.getBlock(worldObj);
-        return !block.isAir(worldObj, CoordTuple.pos(tuple)) && (block instanceof AuraBlock || block.isOpaqueCube());
+    public boolean connectionBlockedByBlock(BlockPos pos) {
+        Block block = worldObj.getBlockState(pos).getBlock();
+        return !block.isAir(worldObj, pos) && (block instanceof AuraBlock || block.isOpaqueCube());
     }
 
     @Override
@@ -84,7 +83,7 @@ public class AuraTile extends TileEntity implements ITickable {
         nbt.setTag("storage", storageNBT);
 
         NBTTagList connectionsNBT = new NBTTagList();
-        for (CoordTuple tuple : connected) {
+        for (BlockPos tuple : connected) {
             NBTTagCompound coordNBT = new NBTTagCompound();
             coordNBT.setInteger("x", tuple.getX());
             coordNBT.setInteger("y", tuple.getY());
@@ -98,15 +97,15 @@ public class AuraTile extends TileEntity implements ITickable {
         nbt.setInteger("initialYValue", initialYValue);
     }
 
-    public boolean isOpenPath(CoordTuple target) {
-        int dist = (int) new CoordTuple(this).dist(target);
+    public boolean isOpenPath(BlockPos target) {
+        int dist = (int) Math.sqrt(getPos().distanceSq(target));
 
-        EnumFacing direction = new CoordTuple(this).getDirectionTo(target);
+        EnumFacing direction = PosUtil.directionTo(getPos(), target);
         if (direction == null) {
             return false;
         }
         for (int i = 1; i < dist; i++) {
-            CoordTuple between = new CoordTuple(this).add(direction, i);
+            BlockPos between = getPos().offset(direction, i);
             if (connectionBlockedByBlock(between)) {
                 return false;
             }
@@ -115,12 +114,12 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     public void verifyConnections() {
-        LinkedList<CoordTuple> result = new LinkedList<CoordTuple>();
-        for (CoordTuple next : connected) {
-            TileEntity tile = next.getTile(worldObj);
+        LinkedList<BlockPos> result = new LinkedList<BlockPos>();
+        for (BlockPos next : connected) {
+            TileEntity tile = worldObj.getTileEntity(next);
             if (tile instanceof AuraTile && isOpenPath(next)) {
-                if (!((AuraTile) tile).connected.contains(new CoordTuple(this))) {
-                    ((AuraTile) tile).connected.add(new CoordTuple(this));
+                if (!((AuraTile) tile).connected.contains(getPos())) {
+                    ((AuraTile) tile).connected.add(getPos());
                 }
                 if (!result.contains(next)) {
                     result.add(next);
@@ -131,22 +130,22 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     public void connect(BlockPos pos) {
-        if (worldObj.getTileEntity(pos) instanceof AuraTile && worldObj.getTileEntity(pos) != this && isOpenPath(new CoordTuple(pos))) {
+        if (worldObj.getTileEntity(pos) instanceof AuraTile && worldObj.getTileEntity(pos) != this && isOpenPath(pos)) {
             AuraTile otherNode = (AuraTile) worldObj.getTileEntity(pos);
-            otherNode.connected.add(new CoordTuple(this));
-            this.connected.add(new CoordTuple(otherNode));
+            otherNode.connected.add(getPos());
+            this.connected.add(otherNode.getPos());
             //This should only happen on initial placement
             //Not on 'follow ups'
             if (!hasConnected) {
-                burst(new CoordTuple(pos), "spell", EnumAura.WHITE_AURA, 1D);
+                burst(pos, "spell", EnumAura.WHITE_AURA, 1D);
             }
 
         }
     }
 
-    public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
+    public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
     }
 
@@ -155,8 +154,8 @@ public class AuraTile extends TileEntity implements ITickable {
 
         if ((!hasConnected || worldObj.getTotalWorldTime() % 200 == 0) && !worldObj.isRemote) {
             for (int i = 1; i < 16; i++) {
-                for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-                    connect(xCoord + dir.offsetX * i, yCoord + dir.offsetY * i, zCoord + dir.offsetZ * i);
+                for (EnumFacing dir : EnumFacing.VALUES) {
+                    connect(getPos().offset(dir, i));
                 }
             }
             //This initial check does *not* see if connections are blocked
@@ -168,7 +167,7 @@ public class AuraTile extends TileEntity implements ITickable {
             if (initialYValue == -1 || initialYValue == 0) {
                 initialYValue = pos.getY();
             } else {
-                Explosion explosion = new Explosion(worldObj, null, pos.getX(), pos.getY(), pos.getZ(), 2F);
+                Explosion explosion = new Explosion(worldObj, null, pos.getX(), pos.getY(), pos.getZ(), 2F, true, true); // todo 1.8 isSmoking/isFlaming
                 explosion.doExplosionA();
                 explosion.doExplosionB(false);
                 worldObj.setBlockToAir(pos);
@@ -181,9 +180,9 @@ public class AuraTile extends TileEntity implements ITickable {
 
                 verifyConnections();
                 energy = 0;
-                burstMap = new HashMap<CoordTuple, AuraQuantityList>();
+                burstMap = new HashMap<BlockPos, AuraQuantityList>();
                 double totalWeight = 0;
-                for (CoordTuple tuple : connected) {
+                for (BlockPos tuple : connected) {
                     if (canTransfer(tuple)) {
                         totalWeight += getWeight(tuple);
                     }
@@ -192,13 +191,13 @@ public class AuraTile extends TileEntity implements ITickable {
                 //Based off 'sending aura to yourself'
                 totalWeight += this instanceof AuraTileCapacitor ? 0 : 20 * 20;
 
-                for (CoordTuple tuple : connected) {
-                    double factor = getWeight(tuple) / totalWeight;
-                    AuraTile other = (AuraTile) tuple.getTile(worldObj);
+                for (BlockPos pos : connected) {
+                    double factor = getWeight(pos) / totalWeight;
+                    AuraTile other = (AuraTile) worldObj.getTileEntity(pos);
                     AuraQuantityList quantityList = new AuraQuantityList();
                     for (EnumAura enumAura : EnumAura.values()) {
 
-                        if (canTransfer(tuple, enumAura)) {
+                        if (canTransfer(pos, enumAura)) {
                             int auraHere = storage.get(enumAura);
                             int auraThere = other.storage.get(enumAura);
                             int diff = Math.abs(auraHere - auraThere);
@@ -210,7 +209,7 @@ public class AuraTile extends TileEntity implements ITickable {
                         }
                     }
                     if (!quantityList.empty()) {
-                        burstMap.put(tuple, quantityList);
+                        burstMap.put(pos, quantityList);
                     }
                 }
             }
@@ -220,7 +219,7 @@ public class AuraTile extends TileEntity implements ITickable {
         if (worldObj.getTotalWorldTime() % 20 == 1) {
             verifyConnections();
             if (burstMap != null) {
-                for (CoordTuple tuple : connected) {
+                for (BlockPos tuple : connected) {
                     if (burstMap.containsKey(tuple)) {
                         transferAura(tuple, burstMap.get(tuple), true);
 
@@ -232,35 +231,35 @@ public class AuraTile extends TileEntity implements ITickable {
         if (worldObj.getTotalWorldTime() % 20 == 2) {
             verifyConnections();
             if (inducedBurstMap != null) {
-                for (CoordTuple tuple : connected) {
-                    if (inducedBurstMap.containsKey(tuple)) {
-                        int num = inducedBurstMap.get(tuple);
-                        AuraTile otherTile = (AuraTile) tuple.getTile(worldObj);
+                for (BlockPos pos : connected) {
+                    if (inducedBurstMap.containsKey(pos)) {
+                        int num = inducedBurstMap.get(pos);
+                        AuraTile otherTile = (AuraTile) worldObj.getTileEntity(pos);
                         int deltaFlow;
                         int altNum = 0;
                         if (otherTile.inducedBurstMap != null) {
-                            altNum = otherTile.inducedBurstMap.containsKey(new CoordTuple(this)) ? otherTile.inducedBurstMap.get(new CoordTuple(this)) : 0;
+                            altNum = otherTile.inducedBurstMap.containsKey(getPos()) ? otherTile.inducedBurstMap.get(getPos()) : 0;
                             deltaFlow = num - altNum;
                         } else {
                             deltaFlow = num;
                         }
                         if (deltaFlow > 0) {
                             AuraQuantityList auraToSend = (AuraQuantityList) storage.clone();
-                            otherTile.inducedBurstMap.put(new CoordTuple(this), 0);
+                            otherTile.inducedBurstMap.put(getPos(), 0);
                             auraToSend.set(EnumAura.ORANGE_AURA, 0);
                             if (auraToSend.getTotalAura() > 0) {
                                 auraToSend = auraToSend.percent(Math.min(1F, (float) deltaFlow / (float) storage.getTotalAura()) - storage.get(EnumAura.ORANGE_AURA));
-                                transferAura(tuple, auraToSend, false);
+                                transferAura(pos, auraToSend, false);
                             }
                         } else {
-                            inducedBurstMap.put(tuple, 0);
+                            inducedBurstMap.put(pos, 0);
                             if (otherTile.inducedBurstMap != null) {
-                                otherTile.inducedBurstMap.put(new CoordTuple(this), altNum - num);
+                                otherTile.inducedBurstMap.put(getPos(), altNum - num);
                             }
                         }
                     }
                 }
-                inducedBurstMap = new HashMap<CoordTuple, Integer>();
+                inducedBurstMap = new HashMap<BlockPos, Integer>();
             }
             worldObj.markBlockForUpdate(pos);
             worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
@@ -268,24 +267,24 @@ public class AuraTile extends TileEntity implements ITickable {
 
         for (AuraQuantity quantity : storage.quantityList) {
             if (quantity.getNum() > 0) {
-                quantity.getType().updateTick(worldObj, new CoordTuple(this), quantity);
+                quantity.getType().updateTick(worldObj, getPos(), quantity);
             }
         }
     }
 
-    public void transferAura(CoordTuple tuple, AuraQuantityList list, boolean triggerOrange) {
+    public void transferAura(BlockPos pos, AuraQuantityList list, boolean triggerOrange) {
         if (storage.greaterThan(list)) {
-            ((AuraTile) tuple.getTile(worldObj)).storage.add(list);
+            ((AuraTile) worldObj.getTileEntity(pos)).storage.add(list);
             storage.subtract(list);
             for (EnumAura aura : EnumAura.values()) {
                 if (list.get(aura) > 0) {
-                    burst(tuple, "square", aura, list.getComposition(aura));
-                    int power = (int) ((pos.getY() - tuple.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
+                    burst(pos, "square", aura, list.getComposition(aura));
+                    int power = (int) ((this.pos.getY() - pos.getY()) * list.get(aura) * aura.getRelativeMass(worldObj));
                     if (power > 0) {
-                        ((AuraTile) tuple.getTile(worldObj)).receivePower(power, aura);
+                        ((AuraTile) worldObj.getTileEntity(pos)).receivePower(power, aura);
                     }
                     if (!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0) {
-                        aura.onTransfer(worldObj, new CoordTuple(this), new AuraQuantity(aura, list.get(aura)), new CoordTuple(this).getDirectionTo(tuple));
+                        aura.onTransfer(worldObj, getPos(), new AuraQuantity(aura, list.get(aura)), PosUtil.directionTo(getPos(), pos));
                     }
                 }
             }
@@ -297,40 +296,40 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
-    public boolean canTransfer(CoordTuple tuple) {
-        boolean isLower = tuple.getY() < pos.getY();
+    public boolean canTransfer(BlockPos pos) {
+        boolean isLower = pos.getY() < this.pos.getY();
 
-        boolean isSame = tuple.getY() == pos.getY();
-        if (!(tuple.getTile(worldObj) instanceof AuraTile)) {
+        boolean isSame = pos.getY() == this.pos.getY();
+        if (!(worldObj.getTileEntity(pos) instanceof AuraTile)) {
             return false;
         }
         if (!(isSame || isLower)) {
             return false;
         }
-        return !(worldObj.isBlockIndirectlyGettingPowered(pos) > 0 && !(this instanceof AuraTileBlack));
+        return !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0 && !(this instanceof AuraTileBlack));
 
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
-        if (!canTransfer(tuple)) {
+    public boolean canTransfer(BlockPos pos, EnumAura aura) {
+        if (!canTransfer(pos)) {
             return false;
         }
-        if (tuple.getY() != pos.getY() && aura == EnumAura.ORANGE_AURA) {
+        if (pos.getY() != this.pos.getY() && aura == EnumAura.ORANGE_AURA) {
             return false;
         }
-        if (tuple.getY() == pos.getY() && aura == EnumAura.BLACK_AURA) {
+        if (pos.getY() == this.pos.getY() && aura == EnumAura.BLACK_AURA) {
             return false;
         }
-        return ((AuraTile) tuple.getTile(worldObj)).canReceive(new CoordTuple(this), aura);
+        return ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos(), aura);
     }
 
-    public boolean canReceive(CoordTuple source, EnumAura aura) {
+    public boolean canReceive(BlockPos source, EnumAura aura) {
         return true;
     }
 
-    public double getWeight(CoordTuple tuple) {
-        return Math.pow(20 - tuple.dist(this), 2);
+    public double getWeight(BlockPos pos) {
+        return Math.pow(20 - Math.sqrt(pos.distanceSq(getPos())), 2);
     }
 
     @Override

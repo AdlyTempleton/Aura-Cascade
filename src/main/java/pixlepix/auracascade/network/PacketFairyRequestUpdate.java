@@ -1,5 +1,6 @@
 package pixlepix.auracascade.network;
 
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -37,7 +38,7 @@ public class PacketFairyRequestUpdate implements IMessage, IMessageHandler<Packe
     }
 
     @Override
-    public PacketFairyUpdate onMessage(PacketFairyRequestUpdate message, MessageContext ctx) {
+    public PacketFairyUpdate onMessage(final PacketFairyRequestUpdate message, MessageContext ctx) {
         if (message.entityFairy != null) {
             return new PacketFairyUpdate(message.entityFairy);
         }

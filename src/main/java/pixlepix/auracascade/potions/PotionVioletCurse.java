@@ -1,5 +1,6 @@
 package pixlepix.auracascade.potions;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -9,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
+import pixlepix.auracascade.main.ConstantMod;
 
 import java.util.List;
 import java.util.Random;
@@ -19,7 +21,7 @@ import java.util.Random;
 public class PotionVioletCurse extends Potion {
 
     public PotionVioletCurse(int id) {
-        super(id, true, EnumAura.VIOLET_AURA.color.getHex());
+        super(id, new ResourceLocation(ConstantMod.modId, "violet_curse"), true, EnumAura.VIOLET_AURA.color.getHex());
         setPotionName("Violet Curse");
     }
 

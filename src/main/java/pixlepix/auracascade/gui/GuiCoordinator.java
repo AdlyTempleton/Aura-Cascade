@@ -64,7 +64,7 @@ public class GuiCoordinator extends GuiContainer {
     @Override
     public void initGui() {
         super.initGui();
-        this.searchField = new GuiTextField(this.fontRendererObj, this.guiLeft + 82, this.guiTop + 6, 89, this.fontRendererObj.FONT_HEIGHT);
+        this.searchField = new GuiTextField(0, this.fontRendererObj, this.guiLeft + 82, this.guiTop + 6, 89, this.fontRendererObj.FONT_HEIGHT);
         this.searchField.setMaxStringLength(15);
         this.searchField.setEnableBackgroundDrawing(true);
         this.searchField.setVisible(true);
@@ -215,10 +215,10 @@ public class GuiCoordinator extends GuiContainer {
             if (slot instanceof SlotCoordinator) {
                 this.drawSlot(slot);
             } else {
-                this.func_146977_a(slot);
+                this.drawSlot(slot);
             }
 
-            if (this.isMouseOverSlot(slot, x, y) && slot.func_111238_b()) {
+            if (this.isMouseOverSlot(slot, x, y) && slot.canBeHovered()) {
                 this.theSlot = slot;
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -248,9 +248,9 @@ public class GuiCoordinator extends GuiContainer {
             if (this.draggedStack != null && this.isRightMouseClick) {
                 itemstack = itemstack.copy();
                 itemstack.stackSize = MathHelper.ceiling_float_int((float) itemstack.stackSize / 2.0F);
-            } else if (this.field_147007_t && this.field_147008_s.size() > 1) {
+            } else if (this.dragSplitting && this.dragSplittingSlots.size() > 1) {
                 itemstack = itemstack.copy();
-                itemstack.stackSize = this.field_146996_I;
+                itemstack.stackSize = this.dragSplittingRemnant;
 
                 if (itemstack.stackSize == 0) {
                     s = "" + EnumChatFormatting.YELLOW + "0";
@@ -386,7 +386,7 @@ public class GuiCoordinator extends GuiContainer {
             if (iicon != null) {
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL11.GL_BLEND); // Forge: Blending needs to be enabled for this.
-                this.mc.getTextureManager().bindTexture(TextureMap.locationItemsTexture);
+                this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
                 this.drawTexturedModelRectFromIcon(i, j, iicon, 16, 16);
                 GL11.glDisable(GL11.GL_BLEND); // Forge: And clean that up
                 GL11.glEnable(GL11.GL_LIGHTING);

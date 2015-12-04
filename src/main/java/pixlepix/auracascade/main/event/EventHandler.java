@@ -38,6 +38,7 @@ import pixlepix.auracascade.block.entity.EntityFallFairy;
 import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.IAngelsteelTool;
+import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.data.QuestData;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.Config;
@@ -310,7 +311,7 @@ public class EventHandler {
             EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
             ItemStack item = BaublesApi.getBaubles(entityPlayer).getStackInSlot(1);
             if (item != null && item.getItem() instanceof ItemFairyRing && !entityPlayer.worldObj.isRemote) {
-                List<EntityFallFairy> fairyList = entityPlayer.worldObj.getEntitiesWithinAABB(EntityFallFairy.class, entityPlayer.boundingBox.expand(20, 20, 20));
+                List<EntityFallFairy> fairyList = entityPlayer.worldObj.getEntitiesWithinAABB(EntityFallFairy.class, entityPlayer.getEntityBoundingBox().expand(20, 20, 20));
                 int count = 0;
                 for (EntityFallFairy fairy : fairyList) {
                     if (fairy.player == entityPlayer) {
@@ -324,9 +325,9 @@ public class EventHandler {
         //Momentum pump
         BlockPos pos = new BlockPos(event.entity);
 
-        for (CoordTuple searchPump : tuple.inRange(3)) {
-            if (searchPump.getTile(event.entity.worldObj) instanceof AuraTilePumpFall) {
-                ((AuraTilePumpFall) searchPump.getTile(event.entity.worldObj)).onFall(event);
+        for (BlockPos searchPump : PosUtil.inRange(pos, 3)) {
+            if (event.entity.worldObj.getTileEntity(searchPump) instanceof AuraTilePumpFall) {
+                ((AuraTilePumpFall) event.entity.worldObj.getTileEntity(searchPump)).onFall(event);
                 break;
             }
         }
@@ -373,7 +374,7 @@ public class EventHandler {
         ItemStack heldStack = player.inventory.getCurrentItem();
         if (getBaubleFromInv(ItemFoodAmulet.class, player) != null) {
             //Check if item is food
-            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.eat || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.drink)) {
+            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.EAT || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.DRINK)) {
                 if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
                     player.addPotionEffect(new PotionEffect(Potion.wither.id, 6 * 60 * 20, 1));
                 } else {

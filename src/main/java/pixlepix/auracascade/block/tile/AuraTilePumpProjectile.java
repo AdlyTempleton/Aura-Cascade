@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumParticleTypes;
 import pixlepix.auracascade.main.Config;
 
 import java.util.List;
@@ -33,12 +34,12 @@ public class AuraTilePumpProjectile extends AuraTilePumpBase {
     @Override
     public void update() {
         super.update();
-        List<Entity> entityList = worldObj.getEntitiesWithinAABB(EntityThrowable.class, AxisAlignedBB.getBoundingBox(xCoord - .5, yCoord - .5, zCoord - .5, xCoord + 1.5, yCoord + 1.5, zCoord + 1.5));
+        List<EntityThrowable> entityList = worldObj.getEntitiesWithinAABB(EntityThrowable.class, new AxisAlignedBB(pos.getX() - .5, pos.getY() - .5, pos.getZ() - .5, pos.getX() + 1.5, pos.getY() + 1.5, pos.getZ() + 1.5));
         for (Entity entity : entityList) {
             if (entity instanceof EntitySnowball || entity instanceof EntityEgg) {
                 //Fun fact: Eggs and snowballs use the same particle code
                 for (int i = 0; i < 8; ++i) {
-                    this.worldObj.spawnParticle("snowballpoof", entity.posX, entity.posY, entity.posZ, 0.0D, 0.0D, 0.0D);
+                    this.worldObj.spawnParticle(EnumParticleTypes.SNOWBALL, entity.posX, entity.posY, entity.posZ, 0.0D, 0.0D, 0.0D);
                 }
                 entity.setDead();
                 if (!worldObj.isRemote) {

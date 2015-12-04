@@ -19,7 +19,6 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,7 +28,6 @@ import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.entity.EntityMinerExplosion;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.OreDropManager;
 import pixlepix.auracascade.data.recipe.ProcessorRecipeRegistry;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
@@ -88,7 +86,7 @@ public class CommonProxy {
             VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
         }
 
-        MapGenStructureIO.func_143031_a(ComponentAuraHut.class, "aura:auraHut");
+        MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "aura:auraHut");
     }
 
     public void addToTutorial(LexiconEntry entry) {

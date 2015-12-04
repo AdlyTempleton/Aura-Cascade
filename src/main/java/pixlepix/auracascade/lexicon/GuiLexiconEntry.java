@@ -24,6 +24,7 @@ import org.lwjgl.input.Mouse;
 import pixlepix.auracascade.lexicon.button.GuiButtonBackWithShift;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -237,7 +238,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
+    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
         super.mouseClicked(par1, par2, par3);
 
         fx = par1;
@@ -246,7 +247,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
 
         if (Mouse.getEventButton() == 0)
@@ -260,7 +261,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         LexiconPage page = entry.pages.get(this.page);
         page.onKeyPressed(par1, par2);
 
@@ -281,21 +282,21 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     void back() {
         if (backButton.enabled) {
             actionPerformed(backButton);
-            backButton.func_146113_a(mc.getSoundHandler());
+            backButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void nextPage() {
         if (rightButton.enabled) {
             actionPerformed(rightButton);
-            rightButton.func_146113_a(mc.getSoundHandler());
+            rightButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void prevPage() {
         if (leftButton.enabled) {
             actionPerformed(leftButton);
-            leftButton.func_146113_a(mc.getSoundHandler());
+            leftButton.playPressSound(mc.getSoundHandler());
         }
     }
 

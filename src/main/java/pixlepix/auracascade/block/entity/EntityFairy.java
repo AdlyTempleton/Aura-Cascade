@@ -84,7 +84,7 @@ public class EntityFairy extends Entity {
             phi %= 360;
             theta %= 360;
             if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 1000 == 0) {
-                ((WorldServer) worldObj).getEntityTracker().func_151247_a(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
+                ((WorldServer) worldObj).getEntityTracker().sendToAllTrackingEntity(this, AuraCascade.proxy.networkWrapper.getPacketFrom(new PacketFairyUpdate(this)));
             }
 
             double oldX = posX;
@@ -113,7 +113,7 @@ public class EntityFairy extends Entity {
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox() {
+    public AxisAlignedBB getEntityBoundingBox() {
         return null;
     }
 

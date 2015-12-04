@@ -48,14 +48,14 @@ public class TileRitualNether extends ConsumerTile {
             worldObj.setBlockToAir(getPos());
         }
         while (toSearch.size() > 0) {
-            BlockPos tuple = toSearch.getFirst();
+            BlockPos pos = toSearch.getFirst();
             toSearch.removeFirst();
-            int x = tuple.getX();
-            int z = tuple.getZ();
-            if (getPos().distanceSq(tuple) > 150 * 150) {
+            int x = pos.getX();
+            int z = pos.getZ();
+            if (getPos().distanceSq(pos) > 150 * 150) {
                 continue;
             }
-            Chunk chunk = worldObj.getChunkFromBlockCoords(tuple);
+            Chunk chunk = worldObj.getChunkFromBlockCoords(pos);
             byte[] biomeData = chunk.getBiomeArray();
             biomeData[(z & 15) << 4 | (x & 15)] = getBiomeId();
             boolean particle = true;
@@ -69,21 +69,21 @@ public class TileRitualNether extends ConsumerTile {
                     }
                 }
             }
-            if (worldObj.getBiomeGenForCoords(x + 1, z) == targetBiome
-                    && !toSearch.contains(new BlockPos(x + 1, tuple.getY(), z))) {
-                toSearch.addLast(new BlockPos(x + 1, tuple.getY(), z));
+            if (worldObj.getBiomeGenForCoords(getPos().east()) == targetBiome
+                    && !toSearch.contains(getPos().east())) {
+                toSearch.addLast(getPos().east());
             }
-            if (worldObj.getBiomeGenForCoords(x - 1, z) == targetBiome
-                    && !toSearch.contains(new BlockPos(x - 1, tuple.getY(), z))) {
-                toSearch.addLast(new BlockPos(x - 1, tuple.getY(), z));
+            if (worldObj.getBiomeGenForCoords(getPos().west()) == targetBiome
+                    && !toSearch.contains(getPos().west())) {
+                toSearch.addLast(getPos().west());
             }
-            if (worldObj.getBiomeGenForCoords(x, z + 1) == targetBiome
-                    && !toSearch.contains(new BlockPos(x, tuple.getY(), z + 1))) {
-                toSearch.addLast(new BlockPos(x, tuple.getY(), z + 1));
+            if (worldObj.getBiomeGenForCoords(getPos().south()) == targetBiome
+                    && !toSearch.contains(getPos().south())) {
+                toSearch.addLast(getPos().south());
             }
-            if (worldObj.getBiomeGenForCoords(x, z - 1) == targetBiome
-                    && !toSearch.contains(new BlockPos(x + 1, tuple.getY(), z - 1))) {
-                toSearch.addLast(new BlockPos(x, tuple.getY(), z - 1));
+            if (worldObj.getBiomeGenForCoords(getPos().north()) == targetBiome
+                    && !toSearch.contains(getPos().north())) {
+                toSearch.addLast(getPos().north());
             }
             count++;
             if (count > 30) {
@@ -97,10 +97,10 @@ public class TileRitualNether extends ConsumerTile {
     @Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
-        if (!(worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID == getBiomeId())) {
+        if (!(worldObj.getBiomeGenForCoords(getPos()).biomeID == getBiomeId())) {
             //BlockPoss are used for convenience, but y-values are irrelavent
-            toSearch.addFirst(new BlockPos(this));
-            targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+            toSearch.addFirst(getPos());
+            targetBiome = worldObj.getBiomeGenForCoords(getPos());
             started = true;
         }
     }

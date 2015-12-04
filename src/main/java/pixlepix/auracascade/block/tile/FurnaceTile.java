@@ -36,10 +36,10 @@ public class FurnaceTile extends ConsumerTile {
     @Override
     public boolean validItemsNearby() {
         int range = 3;
-        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
-            if (FurnaceRecipes.smelting().getSmeltingResult(stack) != null) {
+            if (FurnaceRecipes.instance().getSmeltingResult(stack) != null) {
                 return true;
             }
         }
@@ -57,10 +57,10 @@ public class FurnaceTile extends ConsumerTile {
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerSmelt", AuraUtil.formatLocation(this));
         int range = 3;
-        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
-            if (FurnaceRecipes.smelting().getSmeltingResult(stack) != null) {
+            if (FurnaceRecipes.instance().getSmeltingResult(stack) != null) {
 
                 //Kill the stack
                 if (stack.stackSize == 0) {
@@ -69,7 +69,7 @@ public class FurnaceTile extends ConsumerTile {
                     stack.stackSize--;
                 }
 
-                AuraUtil.respawnItemWithParticles(worldObj, entityItem, FurnaceRecipes.smelting().getSmeltingResult(stack).copy());
+                AuraUtil.respawnItemWithParticles(worldObj, entityItem, FurnaceRecipes.instance().getSmeltingResult(stack).copy());
 
                 break;
             }

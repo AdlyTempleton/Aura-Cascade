@@ -86,12 +86,12 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
             w.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
 
-        AuraUtil.updateMonitor(w, x, y, z);
+        AuraUtil.updateMonitor(w, pos);
     }
     @Override
     public void breakBlock(World w, BlockPos pos, IBlockState state) {
         super.breakBlock(w, pos, state);
-        AuraUtil.updateMonitor(w, x, y, z);
+        AuraUtil.updateMonitor(w, pos);
     }
 
     @Override
@@ -151,26 +151,6 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         if (name.equals("miner")) {
             blockIcon = iconRegister.registerIcon("aura:miner");
         }
-    }
-
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        if (top != null && this.side != null && front != null) {
-            if (side == 1 || side == 0) {
-                return top;
-            }
-            if (side == meta) {
-                return front;
-            }
-            return this.side;
-        }
-        if (top != null) {
-            if (side == 1 || side == 0) {
-                return top;
-            }
-            return blockIcon;
-        }
-        return blockIcon;
     }
 
     @Override

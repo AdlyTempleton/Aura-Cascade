@@ -1,6 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
-import pixlepix.auracascade.data.CoordTuple;
+import net.minecraft.util.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 
 /**
@@ -8,7 +8,7 @@ import pixlepix.auracascade.data.EnumAura;
  */
 public class AuraTileConserve extends AuraTile {
     @Override
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+    public boolean canTransfer(BlockPos tuple, EnumAura aura) {
         return super.canTransfer(tuple, aura) && tuple.getY() == pos.getY();
     }
 }

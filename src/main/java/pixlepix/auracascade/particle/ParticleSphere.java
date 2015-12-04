@@ -1,5 +1,7 @@
 package pixlepix.auracascade.particle;
 
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -32,7 +34,7 @@ public class ParticleSphere extends EntityFX {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void renderParticle(Tessellator par1Tessellator, float par2, float par3, float par4, float par5, float par6, float par7) {
+    public void renderParticle(WorldRenderer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
 
         par1Tessellator.draw();
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));

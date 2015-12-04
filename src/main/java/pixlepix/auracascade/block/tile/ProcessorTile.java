@@ -48,7 +48,7 @@ public class ProcessorTile extends ConsumerTile {
     @Override
     public boolean validItemsNearby() {
         int range = 3;
-        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
             if (getDoubleResult(stack) != null) {
@@ -72,7 +72,7 @@ public class ProcessorTile extends ConsumerTile {
         AuraCascade.analytics.eventDesign(isPrismatic() ? "consumerProcessorPrism" : "consumerProcessor", AuraUtil.formatLocation(this));
         int range = 3;
         ItemStack resultStack = null;
-        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(xCoord - range, yCoord - range, zCoord - range, xCoord + range, yCoord + range, zCoord + range));
+        List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             ItemStack stack = entityItem.getEntityItem();
             if (getDoubleResult(stack) != null) {

@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.main.ParticleEffects;
@@ -22,9 +22,9 @@ import java.util.*;
  */
 public class AuraTileRF extends AuraTile {
 
-    public ArrayList<CoordTuple> foundTiles = new ArrayList<CoordTuple>();
+    public ArrayList<BlockPos> foundTiles = new ArrayList<BlockPos>();
 
-    public HashSet<CoordTuple> particleTiles = new HashSet<CoordTuple>();
+    public HashSet<BlockPos> particleTiles = new HashSet<BlockPos>();
 
     public int lastPower = 0;
     public boolean disabled = false;
@@ -50,12 +50,12 @@ public class AuraTileRF extends AuraTile {
         super.update();
         if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();
-            LinkedList<CoordTuple> nextTiles = new LinkedList<CoordTuple>();
-            nextTiles.add(new CoordTuple(this));
+            LinkedList<BlockPos> nextTiles = new LinkedList<BlockPos>();
+            nextTiles.add(new BlockPos(this));
             while (nextTiles.size() > 0) {
-                CoordTuple target = nextTiles.removeFirst();
+                BlockPos target = nextTiles.removeFirst();
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple adjacent = target.add(direction);
+                    BlockPos adjacent = target.add(direction);
                     TileEntity entity = adjacent.getTile(worldObj);
                     if (entity instanceof IEnergyReceiver) {
                         if (!nextTiles.contains(adjacent) && !foundTiles.contains(adjacent)) {
@@ -67,7 +67,7 @@ public class AuraTileRF extends AuraTile {
             }
             particleTiles.clear();
             //First, find all things near tiles
-            for (CoordTuple tuple : foundTiles) {
+            for (BlockPos tuple : foundTiles) {
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
                     particleTiles.add(tuple.add(direction));
                 }
@@ -76,7 +76,7 @@ public class AuraTileRF extends AuraTile {
             //Remove things that are 'inside' the bubble
             Iterator iterator = particleTiles.iterator();
             while (iterator.hasNext()) {
-                CoordTuple tuple = (CoordTuple) iterator.next();
+                BlockPos tuple = (BlockPos) iterator.next();
                 if (foundTiles.contains(tuple)) {
                     iterator.remove();
                 }
@@ -85,7 +85,7 @@ public class AuraTileRF extends AuraTile {
 
             disabled = foundTiles.size() > 4;
 
-            for (CoordTuple tuple : foundTiles) {
+            for (BlockPos tuple : foundTiles) {
 
                 String modid = GameRegistry.findUniqueIdentifierFor(tuple.getBlock(worldObj)).modId;
                 TileEntity te = tuple.getTile(worldObj);
@@ -131,7 +131,7 @@ public class AuraTileRF extends AuraTile {
         }
 
         if (worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
-            for (CoordTuple tuple : particleTiles) {
+            for (BlockPos tuple : particleTiles) {
                 Random random = new Random();
                 double x = tuple.getX() + random.nextDouble();
                 double y = tuple.getY() + random.nextDouble();
@@ -143,7 +143,7 @@ public class AuraTileRF extends AuraTile {
 
         if (!disabled) {
             int divisions = foundTiles.size();
-            for (CoordTuple tuple : foundTiles) {
+            for (BlockPos tuple : foundTiles) {
 
                 TileEntity entity = tuple.getTile(worldObj);
                 if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
@@ -151,7 +151,7 @@ public class AuraTileRF extends AuraTile {
                 }
             }
             if (divisions > 0) {
-                for (CoordTuple tuple : foundTiles) {
+                for (BlockPos tuple : foundTiles) {
                     TileEntity entity = tuple.getTile(worldObj);
                     if (entity instanceof IEnergyReceiver) {
                         ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);

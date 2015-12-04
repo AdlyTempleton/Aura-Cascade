@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 
@@ -55,7 +55,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
         if (direction == ForgeDirection.UNKNOWN) {
             return null;
         }
-        TileEntity te = new CoordTuple(this).add(direction).getTile(worldObj);
+        TileEntity te = new BlockPos(this).add(direction).getTile(worldObj);
         return te instanceof CraftingCenterTile ? (CraftingCenterTile) te : null;
     }
 

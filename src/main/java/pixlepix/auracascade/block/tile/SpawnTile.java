@@ -35,10 +35,10 @@ public class SpawnTile extends ConsumerTile {
     @Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerSpawner", AuraUtil.formatLocation(this));
-        BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer) worldObj).spawnRandomCreature(EnumCreatureType.monster, xCoord, yCoord, zCoord);
+        BiomeGenBase.SpawnListEntry spawnListEntry = ((WorldServer) worldObj).getSpawnListEntryForTypeAt(EnumCreatureType.MONSTER, getPos());
         try {
             EntityLiving entity = (EntityLiving) spawnListEntry.entityClass.getConstructor(new Class[]{World.class}).newInstance(worldObj);
-            entity.setPosition(xCoord + .5, yCoord + 2, zCoord + .5);
+            entity.setPosition(pos.getX() + .5, pos.getY() + 2, pos.getZ() + .5);
             worldObj.spawnEntityInWorld(entity);
             entity.onSpawnWithEgg(null);
         } catch (InstantiationException e) {

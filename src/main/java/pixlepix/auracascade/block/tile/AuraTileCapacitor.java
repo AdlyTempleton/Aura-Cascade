@@ -1,9 +1,9 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -59,12 +59,12 @@ public class AuraTileCapacitor extends AuraTile {
     }
 
     @Override
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+    public boolean canTransfer(BlockPos tuple, EnumAura aura) {
         return storage.getTotalAura() >= storageValues[storageValueIndex] && super.canTransfer(tuple, aura);
     }
 
     @Override
-    public boolean canReceive(CoordTuple source, EnumAura aura) {
+    public boolean canReceive(BlockPos source, EnumAura aura) {
         return ticksDisabled == 0 && super.canReceive(source, aura);
     }
 }

@@ -21,7 +21,7 @@ public class EntityStealFairy extends EntityFairy {
     public void onEntityUpdate() {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 200 == 0) {
-            List<EntityPlayer> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
+            List<EntityPlayer> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
             for (EntityPlayer entity : nearbyEntities) {
                 ItemStack stack = entity.getCurrentEquippedItem();
 

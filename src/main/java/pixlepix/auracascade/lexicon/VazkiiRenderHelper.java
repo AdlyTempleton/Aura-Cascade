@@ -52,7 +52,7 @@ public final class VazkiiRenderHelper {
             int var5 = 0;
             int var6;
             int var7;
-            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
             for (var6 = 0; var6 < tooltipData.size(); ++var6) {
                 var7 = fontRenderer.getStringWidth(tooltipData.get(var6));
                 if (var7 > var5)

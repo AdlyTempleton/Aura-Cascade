@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.main.AuraUtil;
@@ -87,7 +87,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         readCustomNBT(pkt.func_148857_g());
     }
 
-    public boolean hasClearLineOfSight(CoordTuple tuple) {
+    public boolean hasClearLineOfSight(BlockPos tuple) {
         int x = (xCoord);
         int y = (yCoord);
         int z = (zCoord);
@@ -101,13 +101,13 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
             y = (int) (yCoord + f * vec3.yCoord);
             z = (int) (zCoord + f * vec3.zCoord);
 
-            if (new CoordTuple(x, y, z).equals(tuple)) {
+            if (new BlockPos(x, y, z).equals(tuple)) {
                 return true;
             }
-            if (new CoordTuple(x, y, z).equals(new CoordTuple(xCoord, yCoord, zCoord))) {
+            if (new BlockPos(x, y, z).equals(new BlockPos(xCoord, yCoord, zCoord))) {
                 continue;
             }
-            if (!worldObj.isAirBlock(x, y, z) && new CoordTuple(x, y, z).dist(this) >= 1.5 && new CoordTuple(x, y, z).dist(tuple) >= 1.5) {
+            if (!worldObj.isAirBlock(x, y, z) && new BlockPos(x, y, z).dist(this) >= 1.5 && new BlockPos(x, y, z).dist(tuple) >= 1.5) {
                 return false;
             }
             if (f > originalVector.lengthVector()) {
@@ -132,7 +132,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(new BlockPos(this), "magicCrit", EnumAura.WHITE_AURA, 1);
                         lastPower += auraTile.energy;
                         auraTile.energy = 0;
                     }
@@ -142,13 +142,13 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         }
         if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
-            ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
-            ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
-            toSearch.add(new CoordTuple(this));
+            ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
+            ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
+            toSearch.add(new BlockPos(this));
             while (toSearch.size() > 0) {
-                CoordTuple nextTuple = toSearch.remove(0);
+                BlockPos nextTuple = toSearch.remove(0);
                 for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple newTuple = nextTuple.add(direction);
+                    BlockPos newTuple = nextTuple.add(direction);
                     TileEntity storageBookshelf = newTuple.getTile(worldObj);
                     if (storageBookshelf instanceof TileStorageBookshelf && !checkedLocations.contains(newTuple)) {
                         toSearch.add(newTuple);
@@ -283,8 +283,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         return getAbstractInventoryFromInv(startInv);
     }
 
-    public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+    public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new BlockPos(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
     }
 
     @Override

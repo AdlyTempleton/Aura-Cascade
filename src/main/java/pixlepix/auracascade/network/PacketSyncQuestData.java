@@ -1,5 +1,6 @@
 package pixlepix.auracascade.network;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
@@ -76,11 +77,16 @@ public class PacketSyncQuestData implements IMessage {
          * @return an optional return message
          */
         @Override
-        public IMessage onMessage(PacketSyncQuestData message, MessageContext ctx) {
-            if (message.entityPlayer != null) {
-                QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
-                data.completedQuests = message.completed;
-            }
+        public IMessage onMessage(final PacketSyncQuestData message, MessageContext ctx) {
+            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (message.entityPlayer != null) {
+                        QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
+                        data.completedQuests = message.completed;
+                    }
+                }
+            });
             return null;
         }
     }

@@ -8,7 +8,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.BlockMonitor;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
 
@@ -67,11 +67,11 @@ public abstract class ConsumerTile extends TileEntity {
 
     public void updateMonitor() {
         for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(this).add(d1).getBlock(worldObj);
+            Block b = new BlockPos(this).add(d1).getBlock(worldObj);
             if (b instanceof BlockMonitor) {
 
                 for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(this).add(d2).add(d1);
+                    BlockPos tuple = new BlockPos(this).add(d2).add(d1);
                     Block b2 = tuple.getBlock(worldObj);
                     b2.onNeighborBlockChange(worldObj, tuple.getX(), tuple.getY(), tuple.getZ(), b);
                 }
@@ -101,7 +101,7 @@ public abstract class ConsumerTile extends TileEntity {
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(new BlockPos(this), "magicCrit", EnumAura.WHITE_AURA, 1);
                         storedPower += auraTile.energy;
                         auraTile.energy = 0;
                         changeLastPower = true;

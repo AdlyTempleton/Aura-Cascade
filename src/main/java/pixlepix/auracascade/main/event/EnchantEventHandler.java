@@ -137,9 +137,9 @@ public class EnchantEventHandler {
                 if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.pos, event.state, event.harvester)) {
                     event.dropChance = 0;
                     event.drops.clear();
-                    ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
+                    ItemStack itemstack = createStackedBlock(event.state);
                     if (itemstack != null) {
-                        dropBlockAsItem(world, event.x, event.y, event.z, itemstack);
+                        dropBlockAsItem(world, event.pos, itemstack);
                     }
                 } else {
 
@@ -178,7 +178,7 @@ public class EnchantEventHandler {
         }
 
         int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
-        if (knockback > 0 && !event.target.isEntityInvulnerable()) {
+        if (knockback > 0 && !event.target.isEntityInvulnerable(DamageSource.causePlayerDamage(player))) { // todo 1.8.8 check damagesource
             event.target.addVelocity((double) (-MathHelper.sin(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.entity.rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
         }
 
@@ -361,21 +361,25 @@ public class EnchantEventHandler {
     }
 
     //Copied from Block
-    public ItemStack createStackedBlock(Block block, int meta) {
-        int j = 0;
-        Item item = Item.getItemFromBlock(block);
-        if (item != null && item.getHasSubtypes()) {
-            j = meta;
+    public ItemStack createStackedBlock(IBlockState state)
+    {
+        int i = 0;
+        Item item = Item.getItemFromBlock(state.getBlock());
+
+        if (item != null && item.getHasSubtypes())
+        {
+            i = state.getBlock().getMetaFromState(state);
         }
-        return new ItemStack(item, 1, j);
+
+        return new ItemStack(item, 1, i);
     }
 
-    protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {
+    protected void dropBlockAsItem(World world, BlockPos pos, ItemStack stack) {
         if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && !world.restoringBlockSnapshots) { // do not drop items while restoring blockstates, prevents item dupe
             double d0 = AuraUtil.getDropOffset(world);
             double d1 = AuraUtil.getDropOffset(world);
             double d2 = AuraUtil.getDropOffset(world);
-            EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, stack);
+            EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);
         }

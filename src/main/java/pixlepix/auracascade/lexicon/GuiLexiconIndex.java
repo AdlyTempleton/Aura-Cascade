@@ -22,6 +22,7 @@ import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
 import pixlepix.auracascade.main.EnumColor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -76,7 +77,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
         buttonList.add(leftButton = new GuiButtonPage(13, left, top + guiHeight - 10, false));
         buttonList.add(rightButton = new GuiButtonPage(14, left + guiWidth - 18, top + guiHeight - 10, true));
 
-        searchField = new GuiTextField(fontRendererObj, left + guiWidth / 2 + 28, top + guiHeight + 6, 200, 10);
+        searchField = new GuiTextField(15, fontRendererObj, left + guiWidth / 2 + 28, top + guiHeight + 6, 200, 10);
         searchField.setCanLoseFocus(false);
         searchField.setFocused(true);
         searchField.setEnableBackgroundDrawing(false);
@@ -220,7 +221,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
+    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
         super.mouseClicked(par1, par2, par3);
 
         searchField.mouseClicked(par1, par2, par3);
@@ -230,7 +231,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
 
         if (Mouse.getEventButton() == 0)
@@ -249,7 +250,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         if (par2 == 203 || par2 == 200 || par2 == 201) // Left, Up, Page Up
             prevPage();
         else if (par2 == 205 || par2 == 208 || par2 == 209) // Right, Down Page Down
@@ -273,21 +274,21 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     void back() {
         if (backButton.enabled) {
             actionPerformed(backButton);
-            backButton.func_146113_a(mc.getSoundHandler());
+            backButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void nextPage() {
         if (rightButton.enabled) {
             actionPerformed(rightButton);
-            rightButton.func_146113_a(mc.getSoundHandler());
+            rightButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void prevPage() {
         if (leftButton.enabled) {
             actionPerformed(leftButton);
-            leftButton.func_146113_a(mc.getSoundHandler());
+            leftButton.playPressSound(mc.getSoundHandler());
         }
     }
 }

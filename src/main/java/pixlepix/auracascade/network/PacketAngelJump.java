@@ -48,32 +48,38 @@ public class PacketAngelJump implements IMessage {
     public static class PacketAngelJumpHandler implements IMessageHandler<PacketAngelJump, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketAngelJump msg, MessageContext ctx) {
-            if (msg.entityPlayer != null) {
-                EntityPlayer player = msg.entityPlayer;
-                if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
-                    for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
+        public IMessage onMessage(final PacketAngelJump msg, MessageContext ctx) {
+            ctx.getServerHandler().playerEntity.mcServer.addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (msg.entityPlayer != null) {
+                        EntityPlayer player = msg.entityPlayer;
+                        if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
+                            for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
 
-                        int z = (int) Math.floor(player.posZ);
-                        int x = (int) Math.floor(player.posX);
+                                int z = (int) Math.floor(player.posZ);
+                                int x = (int) Math.floor(player.posX);
 
-                        BlockPos pos = new BlockPos(x, y, z);
-                        //If the player is going down, we want them to be able to land on bedrock
-                        //But not the other way around
-                        if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj, pos) < 0) {
-                            break;
+                                BlockPos pos = new BlockPos(x, y, z);
+                                //If the player is going down, we want them to be able to land on bedrock
+                                //But not the other way around
+                                if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj, pos) < 0) {
+                                    break;
+                                }
+                                if (!player.worldObj.isAirBlock(pos) &&
+                                        player.worldObj.isAirBlock(pos.up()) &&
+                                        player.worldObj.isAirBlock(pos.up(2))) {
+                                    player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
+                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
+                                    break;
+                                }
+                            }
                         }
-                        if (!player.worldObj.isAirBlock(pos) &&
-                                player.worldObj.isAirBlock(pos.up()) &&
-                                player.worldObj.isAirBlock(pos.up(2))) {
-                            player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
-                            break;
-                        }
+
                     }
-                }
 
-            }
+                }
+            });
             return null;
         }
     }

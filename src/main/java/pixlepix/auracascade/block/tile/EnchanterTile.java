@@ -8,7 +8,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.math.NumberUtils;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
+import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
@@ -35,12 +35,12 @@ public class EnchanterTile extends ConsumerTile {
 
     @Override
     public boolean validItemsNearby() {
-        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();
             if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
 
-                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
                 for (EntityItem ingot : nextItems) {
                     if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         return true;
@@ -54,12 +54,12 @@ public class EnchanterTile extends ConsumerTile {
     @Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
-        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();
             if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
 
-                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new CoordTuple(this).getBoundingBox(3));
+                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
                 for (EntityItem ingot : nextItems) {
                     if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         ItemStack ingotStack = ingot.getEntityItem();

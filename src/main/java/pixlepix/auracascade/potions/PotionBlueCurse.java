@@ -1,5 +1,6 @@
 package pixlepix.auracascade.potions;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -9,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
+import pixlepix.auracascade.main.ConstantMod;
 
 import java.util.Random;
 
@@ -17,7 +19,7 @@ import java.util.Random;
  */
 public class PotionBlueCurse extends Potion {
     public PotionBlueCurse(int id) {
-        super(id, true, EnumAura.BLUE_AURA.color.getHex());
+        super(id, new ResourceLocation(ConstantMod.modId, "blue_curse"), true, EnumAura.BLUE_AURA.color.getHex());
         setPotionName("Blue Curse");
 
     }

@@ -23,6 +23,7 @@ import pixlepix.auracascade.lexicon.button.GuiButtonBookmark;
 import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -140,7 +141,7 @@ public class GuiLexicon extends GuiScreen {
 
     public void drawBookmark(int x, int y, String s, boolean drawLeft) {
         // This function is called from the buttons so I can't use fontRendererObj
-        FontRenderer font = Minecraft.getMinecraft().fontRenderer;
+        FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
         boolean unicode = font.getUnicodeFlag();
         font.setUnicodeFlag(true);
         int l = font.getStringWidth(s);
@@ -281,7 +282,7 @@ public class GuiLexicon extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         if (closeScreenOnInvKey() && mc.gameSettings.keyBindInventory.getKeyCode() == par2) {
             mc.displayGuiScreen(null);
             mc.setIngameFocus();

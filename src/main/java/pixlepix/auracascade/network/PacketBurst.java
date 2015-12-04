@@ -1,5 +1,6 @@
 package pixlepix.auracascade.network;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -63,100 +64,106 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
     }
 
     @Override
-    public IMessage onMessage(PacketBurst msg, MessageContext ctx) {
+    public IMessage onMessage(final PacketBurst msg, MessageContext ctx) {
         //Particle
-        if (msg.world.isRemote) {
-            if (msg.type == 0) {
-                if (msg.comp != 0D) {
-                    Vec3 velocity = new Vec3(msg.to.subtract(msg.from));
-                    velocity = velocity.normalize();
-                    double dist = Math.sqrt(msg.to.distanceSq(msg.from));
+        Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                if (msg.world.isRemote) {
+                    if (msg.type == 0) {
+                        if (msg.comp != 0D) {
+                            Vec3 velocity = new Vec3(msg.to.subtract(msg.from));
+                            velocity = velocity.normalize();
+                            double dist = Math.sqrt(msg.to.distanceSq(msg.from));
 
-                    int density = (int) (5D * msg.comp);
-                    for (int count = 0; count < dist * density; count++) {
-                        double i = ((double) count) / density;
-                        if (msg.comp < 1D) {
-                            i += new Random().nextDouble() * (1 / density);
+                            int density = (int) (5D * msg.comp);
+                            for (int count = 0; count < dist * density; count++) {
+                                double i = ((double) count) / density;
+                                if (msg.comp < 1D) {
+                                    i += new Random().nextDouble() * (1 / density);
+                                }
+                                double xp = msg.from.getX() + (velocity.xCoord * i) + .5;
+                                double yp = msg.from.getY() + (velocity.yCoord * i) + .5;
+                                double zp = msg.from.getZ() + (velocity.zCoord * i) + .5;
+                                ParticleEffects.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
+
+                            }
                         }
-                        double xp = msg.from.getX() + (velocity.xCoord * i) + .5;
-                        double yp = msg.from.getY() + (velocity.yCoord * i) + .5;
-                        double zp = msg.from.getZ() + (velocity.zCoord * i) + .5;
-                        ParticleEffects.spawnParticle(msg.particle, xp, yp, zp, velocity.xCoord * .1, .15, velocity.zCoord * .1, msg.r, msg.g, msg.b);
 
+                    }
+                    if (msg.type == 1) {
+                        for (int i = 0; i < 50; i++) {
+                            Random rand = new Random();
+                            msg.world.spawnParticle(EnumParticleTypes.FLAME, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 16, rand.nextDouble() / 16, (rand.nextDouble() - .5) / 16);
+                        }
+                    }
+                    if (msg.type == 6) {
+                        for (int i = 0; i < 50; i++) {
+                            Random rand = new Random();
+                            msg.world.spawnParticle(EnumParticleTypes.SPELL, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 16, rand.nextDouble() / 16, (rand.nextDouble() - .5) / 16);
+                        }
+                    }
+                    if (msg.type == 2) {
+                        for (int i = 0; i < 50; i++) {
+                            Random rand = new Random();
+                            msg.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 4, rand.nextDouble() / 4, (rand.nextDouble() - .5) / 4);
+                        }
+                    }
+                    if (msg.type == 3) {
+                        for (int i = 0; i < 200; i++) {
+                            Random rand = new Random();
+                            double posX = msg.x + rand.nextDouble() * 8 - 4D;
+                            double posY = msg.y + rand.nextDouble() * 8 - 4D;
+                            double posZ = msg.z + rand.nextDouble() * 8 - 4D;
+                            ParticleEffects.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                        }
+                    }
+                    if (msg.type == 4) {
+                        for (int i = 0; i < 200; i++) {
+                            Random rand = new Random();
+                            double rho = 3;
+                            double phi = rand.nextDouble() * 2 * Math.PI;
+                            double theta = rand.nextDouble() * 2 * Math.PI;
+                            double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
+                            double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
+                            double posZ = msg.z + rho * Math.cos(phi);
+                            msg.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                        }
+                    }
+                    if (msg.type == 5) {
+                        for (int i = 0; i < 200; i++) {
+                            Random rand = new Random();
+                            double rho = 3;
+                            double phi = rand.nextDouble() * 2 * Math.PI;
+                            double theta = rand.nextDouble() * 2 * Math.PI;
+                            double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
+                            double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
+                            double posZ = msg.z + rho * Math.cos(phi);
+                            msg.world.spawnParticle(EnumParticleTypes.HEART, posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
+                        }
+                    }
+                    if (msg.type == 7) {
+                        for (int i = 0; i < 400; i++) {
+                            Random rand = new Random();
+                            double rho = 5;
+                            double phi = rand.nextDouble() * 2 * Math.PI;
+                            double theta = rand.nextDouble() * 2 * Math.PI;
+                            double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
+                            double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
+                            double posZ = msg.z + rho * Math.cos(phi);
+                            msg.world.spawnParticle(EnumParticleTypes.WATER_WAKE, posX, posY, posZ, 0, 0, 0);
+                        }
+                    }
+                    if (msg.type == 8) {
+                        for (int i = 0; i < 50; i++) {
+                            Random rand = new Random();
+                            msg.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) * 4, rand.nextDouble() / 64, (rand.nextDouble() - .5) * 4);
+                        }
                     }
                 }
 
             }
-            if (msg.type == 1) {
-                for (int i = 0; i < 50; i++) {
-                    Random rand = new Random();
-                    msg.world.spawnParticle(EnumParticleTypes.FLAME, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 16, rand.nextDouble() / 16, (rand.nextDouble() - .5) / 16);
-                }
-            }
-            if (msg.type == 6) {
-                for (int i = 0; i < 50; i++) {
-                    Random rand = new Random();
-                    msg.world.spawnParticle(EnumParticleTypes.SPELL, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 16, rand.nextDouble() / 16, (rand.nextDouble() - .5) / 16);
-                }
-            }
-            if (msg.type == 2) {
-                for (int i = 0; i < 50; i++) {
-                    Random rand = new Random();
-                    msg.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) / 4, rand.nextDouble() / 4, (rand.nextDouble() - .5) / 4);
-                }
-            }
-            if (msg.type == 3) {
-                for (int i = 0; i < 200; i++) {
-                    Random rand = new Random();
-                    double posX = msg.x + rand.nextDouble() * 8 - 4D;
-                    double posY = msg.y + rand.nextDouble() * 8 - 4D;
-                    double posZ = msg.z + rand.nextDouble() * 8 - 4D;
-                    ParticleEffects.spawnParticle("fireworksSpark", posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
-                }
-            }
-            if (msg.type == 4) {
-                for (int i = 0; i < 200; i++) {
-                    Random rand = new Random();
-                    double rho = 3;
-                    double phi = rand.nextDouble() * 2 * Math.PI;
-                    double theta = rand.nextDouble() * 2 * Math.PI;
-                    double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
-                    double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
-                    double posZ = msg.z + rho * Math.cos(phi);
-                    msg.world.spawnParticle(EnumParticleTypes.SPELL_WITCH, posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
-                }
-            }
-            if (msg.type == 5) {
-                for (int i = 0; i < 200; i++) {
-                    Random rand = new Random();
-                    double rho = 3;
-                    double phi = rand.nextDouble() * 2 * Math.PI;
-                    double theta = rand.nextDouble() * 2 * Math.PI;
-                    double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
-                    double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
-                    double posZ = msg.z + rho * Math.cos(phi);
-                    msg.world.spawnParticle(EnumParticleTypes.HEART, posX, posY, posZ, .1D * (msg.x - posX), .1D * (msg.y - posY), .1D * (msg.z - posZ));
-                }
-            }
-            if (msg.type == 7) {
-                for (int i = 0; i < 400; i++) {
-                    Random rand = new Random();
-                    double rho = 5;
-                    double phi = rand.nextDouble() * 2 * Math.PI;
-                    double theta = rand.nextDouble() * 2 * Math.PI;
-                    double posX = msg.x + rho * Math.cos(theta) * Math.sin(phi);
-                    double posY = msg.y + rho * Math.sin(theta) * Math.sin(phi);
-                    double posZ = msg.z + rho * Math.cos(phi);
-                    msg.world.spawnParticle(EnumParticleTypes.WATER_WAKE, posX, posY, posZ, 0, 0, 0);
-                }
-            }
-            if (msg.type == 8) {
-                for (int i = 0; i < 50; i++) {
-                    Random rand = new Random();
-                    msg.world.spawnParticle(EnumParticleTypes.ENCHANTMENT_TABLE, msg.x, msg.y, msg.z, (rand.nextDouble() - .5D) * 4, rand.nextDouble() / 64, (rand.nextDouble() - .5) * 4);
-                }
-            }
-        }
+        });
         return null;
     }
 
