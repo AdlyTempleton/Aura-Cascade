@@ -1,5 +1,6 @@
 package pixlepix.auracascade.main;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -15,7 +16,6 @@ import net.minecraftforge.common.MinecraftForge;
 import pixlepix.auracascade.KeyBindings;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.lexicon.*;
 import pixlepix.auracascade.main.event.ClientEventHandler;
 import pixlepix.auracascade.render.OverlayRender;
@@ -74,9 +74,9 @@ public class ClientProxy extends CommonProxy {
     }
 
 
-    public void addBlockDestroyEffects(CoordTuple tuple) {
+    public void addBlockDestroyEffects(BlockPos pos) {
 
-        Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(tuple.getX(), tuple.getY(), tuple.getZ(), tuple.getBlock(Minecraft.getMinecraft().theWorld), tuple.getMeta(Minecraft.getMinecraft().theWorld));
+        Minecraft.getMinecraft().effectRenderer.addBlockDestroyEffects(pos, Minecraft.getMinecraft().theWorld.getBlockState(pos));
 
 
     }

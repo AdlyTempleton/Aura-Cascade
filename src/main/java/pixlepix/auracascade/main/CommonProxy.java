@@ -1,5 +1,7 @@
 package pixlepix.auracascade.main;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -50,8 +52,8 @@ public class CommonProxy {
     public static EventHandler eventHandler;
 
     public static EnchantEventHandler eventHandlerEnch;
-    public IIcon[] breakingIcons = new IIcon[10];
-    public IIcon blankIcon;
+    public TextureAtlasSprite[] breakingIcons = new TextureAtlasSprite[10];
+    public TextureAtlasSprite blankIcon;
 
 
     public int renderPass;
@@ -134,14 +136,14 @@ public class CommonProxy {
 
         //RiM IMC for blacklisting aura nodes
         for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
-            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block));
+            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block).toString());
         }
         OreDropManager.init();
     }
     public void setLexiconStack(ItemStack stack) {
     }
 
-    public void addBlockDestroyEffects(CoordTuple tuple) {
+    public void addBlockDestroyEffects(BlockPos tuple) {
     }
 
     public EffectRenderer getEffectRenderer() {

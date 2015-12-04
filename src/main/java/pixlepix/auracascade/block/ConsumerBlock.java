@@ -3,6 +3,7 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,7 +66,8 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         return null;
     }
 
-    public void onBlockPlacedBy(World w, int x, int y, int z, EntityLivingBase livingBase, ItemStack stack) {
+    @Override
+    public void onBlockPlacedBy(World w, BlockPos pos, IBlockState state, EntityLivingBase livingBase, ItemStack stack) {
         int l = MathHelper.floor_double((double) (livingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (l == 0) {
@@ -87,8 +89,8 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         AuraUtil.updateMonitor(w, x, y, z);
     }
     @Override
-    public void breakBlock(World w, int x, int y, int z, Block b, int p_149749_6_) {
-        super.breakBlock(w, x, y, z, b, p_149749_6_);
+    public void breakBlock(World w, BlockPos pos, IBlockState state) {
+        super.breakBlock(w, pos, state);
         AuraUtil.updateMonitor(w, x, y, z);
     }
 
@@ -323,12 +325,12 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
     }
 
     @Override
-    public int getComparatorInputOverride(World world, int x, int y, int z, int meta) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+    public int getComparatorInputOverride(World world, BlockPos pos) {
+        TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity instanceof ConsumerTile) {
             return (int) (15D * (((double) ((ConsumerTile) tileEntity).progress) / ((double) ((ConsumerTile) tileEntity).getMaxProgress())));
         } else {
-            return super.getComparatorInputOverride(world, x, y, z, meta);
+            return super.getComparatorInputOverride(world, pos);
         }
     }
 
@@ -350,8 +352,8 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
     @Override
     public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         List<String> result = new ArrayList<String>();
-        if (world.getTileEntity(x, y, z) instanceof ConsumerTile) {
-            ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(pos) instanceof ConsumerTile) {
+            ConsumerTile consumerTile = (ConsumerTile) world.getTileEntity(pos);
             result.add("Progress: " + consumerTile.progress + " / " + consumerTile.getMaxProgress());
             result.add("Power per progress: " + consumerTile.getPowerPerProgress());
             result.add("Last Power: " + consumerTile.lastPower);

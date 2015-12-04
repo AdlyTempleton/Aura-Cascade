@@ -2,15 +2,18 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -29,7 +32,7 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public boolean isReplaceable(IBlockAccess world, int x, int y, int z) {
+    public boolean isReplaceable(World world, BlockPos pos) {
         return true;
     }
 
@@ -39,7 +42,7 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public boolean isAir(IBlockAccess world, int x, int y, int z) {
+    public boolean isAir(IBlockAccess world, BlockPos pos) {
         return true;
     }
 
@@ -49,15 +52,15 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         return new ArrayList<ItemStack>();
     }
 
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(world, pos, state, rand);
         if (!world.isRemote) {
-            world.setBlockToAir(x, y, z);
+            world.setBlockToAir(pos);
         }
     }
 

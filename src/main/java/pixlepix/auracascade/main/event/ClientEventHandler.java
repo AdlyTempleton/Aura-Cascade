@@ -1,5 +1,6 @@
 package pixlepix.auracascade.main.event;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -24,12 +25,10 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public void registerEvent(TextureStitchEvent.Pre event) {
-        if (event.map.getTextureType() == 0) {
-            ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
-            for (int i = 0; i < 10; i++) {
-                clientProxy.breakingIcons[i] = event.map.registerIcon("destroy_stage_" + i);
-            }
-            clientProxy.blankIcon = event.map.registerIcon("aura:blank");
+        ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
+        for (int i = 0; i < 10; i++) {
+            clientProxy.breakingIcons[i] = event.map.registerSprite(new ResourceLocation("destroy_stage_" + i));
         }
+        clientProxy.blankIcon = event.map.registerSprite(new ResourceLocation("aura:blank")); // todo 1.8 recheck resourcelocations
     }
 }

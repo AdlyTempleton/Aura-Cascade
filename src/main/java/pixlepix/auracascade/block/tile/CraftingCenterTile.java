@@ -1,5 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,7 @@ import java.util.List;
  */
 public class CraftingCenterTile extends TileEntity {
 
-    public static List<ForgeDirection> pedestalRelativeLocations = Arrays.asList(ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST);
+    public static List<EnumFacing> pedestalRelativeLocations = Arrays.asList(EnumFacing.HORIZONTALS);
 
     public boolean pedestalsConnected() {
         for (ForgeDirection direction : pedestalRelativeLocations) {

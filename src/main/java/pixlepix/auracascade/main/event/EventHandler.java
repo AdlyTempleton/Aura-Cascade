@@ -2,6 +2,7 @@ package pixlepix.auracascade.main.event;
 
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -22,7 +23,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.village.MerchantRecipe;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -37,7 +37,6 @@ import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.entity.EntityFallFairy;
 import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.data.QuestData;
 import pixlepix.auracascade.item.*;
@@ -119,14 +118,14 @@ public class EventHandler {
         List<Block> affectedBlocks = Arrays.asList(Blocks.grass, Blocks.sandstone, Blocks.stone, Blocks.sand, Blocks.dirt, Blocks.cobblestone, Blocks.gravel);
         if (!event.world.isRemote) {
             Explosion explosion = event.explosion;
-            AxisAlignedBB axisAlignedBB = AxisAlignedBB.getBoundingBox(explosion.explosionX - 3, explosion.explosionY - 3, explosion.explosionZ - 3, explosion.explosionX + 3, explosion.explosionY + 3, explosion.explosionZ + 3);
+            AxisAlignedBB axisAlignedBB = new AxisAlignedBB(explosion.getPosition().xCoord - 3, explosion.getPosition().yCoord - 3, explosion.getPosition().zCoord - 3, explosion.getPosition().xCoord + 3, explosion.getPosition().yCoord + 3, explosion.getPosition().zCoord + 3);
             List<EntityPlayer> players = event.world.getEntitiesWithinAABB(EntityPlayer.class, axisAlignedBB);
             for (EntityPlayer player : players) {
                 if (getBaubleFromInv(ItemExplosionRing.class, player) != null) {
-                    Iterator iterator = explosion.affectedBlockPositions.iterator();
+                    Iterator<BlockPos> iterator = explosion.getAffectedBlockPositions().iterator();
                     while (iterator.hasNext()) {
-                        ChunkPosition position = (ChunkPosition) iterator.next();
-                        Block block = event.world.getBlock(position.chunkPosX, position.chunkPosY, position.chunkPosZ);
+                        BlockPos position = iterator.next();
+                        Block block = event.world.getBlockState(position).getBlock();
                         if (!affectedBlocks.contains(block) && block != Blocks.air) {
                             iterator.remove();
                         }
@@ -170,23 +169,23 @@ public class EventHandler {
         if (event.source != null && event.source.getEntity() instanceof EntityPlayer) {
             ItemStack stack = ((EntityPlayer) event.source.getEntity()).getHeldItem();
             if (stack != null && stack.getItem() instanceof ItemComboSword) {
-                if (stack.stackTagCompound == null) {
-                    stack.stackTagCompound = new NBTTagCompound();
+                if (stack.getTagCompound() == null) {
+                    stack.setTagCompound(new NBTTagCompound());
                 }
-                int timeDiff = (int) Math.abs(event.entity.worldObj.getTotalWorldTime() - stack.stackTagCompound.getLong(ItemComboSword.NBT_TAG_LAST_TIME));
+                int timeDiff = (int) Math.abs(event.entity.worldObj.getTotalWorldTime() - stack.getTagCompound().getLong(ItemComboSword.NBT_TAG_LAST_TIME));
 
                 if (timeDiff < 100 && timeDiff > 4) {
-                    int combo = stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT);
+                    int combo = stack.getTagCompound().getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT);
 
                     double comboMultiplier = ItemComboSword.getComboMultiplier(combo);
                     event.ammount *= comboMultiplier;
                     if (combo < 100) {
-                        stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, stack.stackTagCompound.getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT) + 1);
+                        stack.getTagCompound().setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, stack.getTagCompound().getInteger(ItemComboSword.NBT_TAG_COMBO_COUNT) + 1);
                     }
                 } else {
-                    stack.stackTagCompound.setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, 0);
+                    stack.getTagCompound().setInteger(ItemComboSword.NBT_TAG_COMBO_COUNT, 0);
                 }
-                stack.stackTagCompound.setLong(ItemComboSword.NBT_TAG_LAST_TIME, event.entity.worldObj.getTotalWorldTime());
+                stack.getTagCompound().setLong(ItemComboSword.NBT_TAG_LAST_TIME, event.entity.worldObj.getTotalWorldTime());
             }
         }
         if (event.entity instanceof EntityPlayer && event.source.isExplosion()) {
@@ -247,7 +246,7 @@ public class EventHandler {
     public void onGetBreakSpeed(PlayerEvent.BreakSpeed event) {
         ItemStack item = BaublesApi.getBaubles(event.entityPlayer).getStackInSlot(1);
         if (item != null && item.getItem() instanceof ItemFairyRing && !event.entityPlayer.worldObj.isRemote) {
-            List<EntityDigFairy> fairyList = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityDigFairy.class, event.entityPlayer.boundingBox.expand(20, 20, 20));
+            List<EntityDigFairy> fairyList = event.entityPlayer.worldObj.getEntitiesWithinAABB(EntityDigFairy.class, event.entityPlayer.getEntityBoundingBox().expand(20, 20, 20));
             int count = -1;
             for (EntityDigFairy digFairy : fairyList) {
                 if (digFairy.player == event.entityPlayer) {
@@ -258,12 +257,12 @@ public class EventHandler {
             event.newSpeed *= Math.pow(1.08, count);
         }
         if (event.entityPlayer.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.entityPlayer.inventory.getCurrentItem().getItem())) {
-            if (event.entityPlayer.inventory.getCurrentItem().stackTagCompound == null) {
-                event.entityPlayer.inventory.getCurrentItem().stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool) event.entityPlayer.inventory.getCurrentItem().getItem()).getDegree());
+            if (event.entityPlayer.inventory.getCurrentItem().getTagCompound() == null) {
+                event.entityPlayer.inventory.getCurrentItem().setTagCompound(AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool) event.entityPlayer.inventory.getCurrentItem().getItem()).getDegree()));
             }
             ItemStack tool = event.entityPlayer.inventory.getCurrentItem();
-            if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
-                int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().stackTagCompound);
+            if (ForgeHooks.canToolHarvestBlock(event.entityPlayer.worldObj, event.pos, tool)) {
+                int[] buffs = AngelsteelToolHelper.readFromNBT(event.entityPlayer.inventory.getCurrentItem().getTagCompound());
                 if (buffs.length > 0) {
                     int efficiency = buffs[0];
                     event.newSpeed *= Math.pow(1.3, efficiency);
@@ -271,10 +270,10 @@ public class EventHandler {
                     int disintegrate = buffs[3];
                     //1.5F, the hardness of stone, is used as a dividing point
                     //Stone is not affected by either enchant
-                    if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) <= 1F) {
+                    if (event.state.getBlock().getBlockHardness(event.entity.worldObj, event.pos) <= 1F) {
                         event.newSpeed *= Math.pow(3, disintegrate);
                     }
-                    if (event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 2F) {
+                    if (event.state.getBlock().getBlockHardness(event.entity.worldObj, event.pos) >= 2F) {
 
                         event.newSpeed *= Math.pow(3, shatter);
                     }
@@ -288,16 +287,16 @@ public class EventHandler {
     public void onHarvestEvent(BlockEvent.HarvestDropsEvent event) {
 
         if (event.harvester != null && event.harvester.inventory.getCurrentItem() != null && AngelsteelToolHelper.isAngelsteelTool(event.harvester.inventory.getCurrentItem().getItem())) {
-            if (event.harvester.inventory.getCurrentItem().stackTagCompound == null) {
-                event.harvester.inventory.getCurrentItem().stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool) event.harvester.inventory.getCurrentItem().getItem()).getDegree());
+            if (event.harvester.inventory.getCurrentItem().getTagCompound() == null) {
+                event.harvester.inventory.getCurrentItem().setTagCompound(AngelsteelToolHelper.getRandomBuffCompound(((IAngelsteelTool) event.harvester.inventory.getCurrentItem().getItem()).getDegree()));
             }
-            int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().stackTagCompound)[1];
+            int fortune = AngelsteelToolHelper.readFromNBT(event.harvester.inventory.getCurrentItem().getTagCompound())[1];
             if (event.fortuneLevel < fortune) {
                 //Cancels the event and breaks the block again
-                if (event.dropChance <= 0 && event.drops.size() > 0 && !(event.block instanceof BlockCrops)) {
+                if (event.dropChance <= 0 && event.drops.size() > 0 && !(event.state.getBlock() instanceof BlockCrops)) {
                     event.dropChance = 0;
                     event.drops.clear();
-                    event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                    event.state.getBlock().dropBlockAsItemWithChance(event.world, event.pos, event.state, 1F, fortune);
                 }
             }
         }
@@ -323,10 +322,8 @@ public class EventHandler {
         }
 
         //Momentum pump
-        int x = (int) event.entity.posX;
-        int y = (int) event.entity.posY;
-        int z = (int) event.entity.posZ;
-        CoordTuple tuple = new CoordTuple(x, y, z);
+        BlockPos pos = new BlockPos(event.entity);
+
         for (CoordTuple searchPump : tuple.inRange(3)) {
             if (searchPump.getTile(event.entity.worldObj) instanceof AuraTilePumpFall) {
                 ((AuraTilePumpFall) searchPump.getTile(event.entity.worldObj)).onFall(event);
@@ -339,7 +336,7 @@ public class EventHandler {
     @SubscribeEvent
     public void onPlayerDeath(LivingDeathEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
-            if (!((EntityPlayer) event.entityLiving).worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
+            if (!((EntityPlayer) event.entityLiving).worldObj.getGameRules().getBoolean("keepInventory")) {
 
                 EntityPlayer entityPlayer = (EntityPlayer) event.entityLiving;
                 ItemStack item = getBaubleFromInv(ItemFairyRing.class, entityPlayer);

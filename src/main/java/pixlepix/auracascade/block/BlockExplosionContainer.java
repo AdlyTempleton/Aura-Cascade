@@ -1,15 +1,17 @@
 package pixlepix.auracascade.block;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
@@ -65,10 +67,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-        super.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, meta);
-        world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
-        return meta;
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+        world.scheduleUpdate(pos, this, tickRate(world));
+        return getStateFromMeta(meta);
     }
 
     @Override
@@ -77,8 +79,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(world, pos, state, rand);
         if (rand.nextDouble() < getChanceToRepair()) {
             int meta = world.getBlockMetadata(x, y, z);
             if (meta > 0) {
@@ -86,7 +88,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
             }
         }
-        world.scheduleBlockUpdate(x, y, z, this, tickRate(world) + rand.nextInt(5));
+        world.scheduleUpdate(pos, this, tickRate(world) + rand.nextInt(5));
     }
 
     /**
@@ -181,11 +183,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
         if (!type.equals("Glass")) {
             return true;
         }
-        Block block = world.getBlock(x, y, z);
+        Block block = world.getBlockState(pos).getBlock();
         return block != this;
     }
 

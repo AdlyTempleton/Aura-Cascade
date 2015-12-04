@@ -2,10 +2,10 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.LinkedList;
@@ -15,7 +15,7 @@ import java.util.Random;
  * Created by localmacaccount on 2/8/15.
  */
 public class TileRitualNether extends ConsumerTile {
-    LinkedList<CoordTuple> toSearch = new LinkedList<CoordTuple>();
+    LinkedList<BlockPos> toSearch = new LinkedList<BlockPos>();
     BiomeGenBase targetBiome;
     boolean started = false;
 
@@ -45,45 +45,45 @@ public class TileRitualNether extends ConsumerTile {
         super.updateEntity();
         int count = 0;
         if (!worldObj.isRemote && toSearch.size() == 0 && started) {
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            worldObj.setBlockToAir(getPos());
         }
         while (toSearch.size() > 0) {
-            CoordTuple tuple = toSearch.getFirst();
+            BlockPos tuple = toSearch.getFirst();
             toSearch.removeFirst();
             int x = tuple.getX();
             int z = tuple.getZ();
-            if (new CoordTuple(this).dist(tuple) > 150) {
+            if (getPos().distanceSq(tuple) > 150 * 150) {
                 continue;
             }
-            Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
+            Chunk chunk = worldObj.getChunkFromBlockCoords(tuple);
             byte[] biomeData = chunk.getBiomeArray();
             biomeData[(z & 15) << 4 | (x & 15)] = getBiomeId();
             boolean particle = true;
             for (int y = 0; y < 255; y++) {
-                Block b = getMappedBlock(worldObj.getBlock(x, y, z));
+                Block b = getMappedBlock(worldObj.getBlockState(new BlockPos(x, y, z)).getBlock());
                 if (b != null) {
-                    worldObj.setBlock(x, y, z, b, 0, 2);
+                    worldObj.setBlockState(new BlockPos(x, y, z), b.getDefaultState(), 2);
                     if (particle) {
                         particle = false;
-                        AuraCascade.proxy.addBlockDestroyEffects(new CoordTuple(x, y, z));
+                        AuraCascade.proxy.addBlockDestroyEffects(new BlockPos(x, y, z));
                     }
                 }
             }
             if (worldObj.getBiomeGenForCoords(x + 1, z) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x + 1, tuple.getY(), z))) {
-                toSearch.addLast(new CoordTuple(x + 1, tuple.getY(), z));
+                    && !toSearch.contains(new BlockPos(x + 1, tuple.getY(), z))) {
+                toSearch.addLast(new BlockPos(x + 1, tuple.getY(), z));
             }
             if (worldObj.getBiomeGenForCoords(x - 1, z) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x - 1, tuple.getY(), z))) {
-                toSearch.addLast(new CoordTuple(x - 1, tuple.getY(), z));
+                    && !toSearch.contains(new BlockPos(x - 1, tuple.getY(), z))) {
+                toSearch.addLast(new BlockPos(x - 1, tuple.getY(), z));
             }
             if (worldObj.getBiomeGenForCoords(x, z + 1) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x, tuple.getY(), z + 1))) {
-                toSearch.addLast(new CoordTuple(x, tuple.getY(), z + 1));
+                    && !toSearch.contains(new BlockPos(x, tuple.getY(), z + 1))) {
+                toSearch.addLast(new BlockPos(x, tuple.getY(), z + 1));
             }
             if (worldObj.getBiomeGenForCoords(x, z - 1) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x + 1, tuple.getY(), z - 1))) {
-                toSearch.addLast(new CoordTuple(x, tuple.getY(), z - 1));
+                    && !toSearch.contains(new BlockPos(x + 1, tuple.getY(), z - 1))) {
+                toSearch.addLast(new BlockPos(x, tuple.getY(), z - 1));
             }
             count++;
             if (count > 30) {
@@ -98,8 +98,8 @@ public class TileRitualNether extends ConsumerTile {
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
         if (!(worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID == getBiomeId())) {
-            //Coordtuples are used for convenience, but y-values are irrelavent
-            toSearch.addFirst(new CoordTuple(this));
+            //BlockPoss are used for convenience, but y-values are irrelavent
+            toSearch.addFirst(new BlockPos(this));
             targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
             started = true;
         }

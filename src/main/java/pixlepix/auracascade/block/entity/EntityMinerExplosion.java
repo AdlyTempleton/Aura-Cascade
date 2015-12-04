@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.BlockExplosionContainer;
@@ -68,16 +69,15 @@ public class EntityMinerExplosion extends Entity {
         int delay = (int) Math.max(0, (100 - 20 * Math.log10(charge)));
         if (lastExplosion + delay < worldObj.getTotalWorldTime()) {
             lastExplosion = worldObj.getTotalWorldTime();
-            int xCoord = (int) posX;
-            int yCoord = (int) posY;
-            int zCoord = (int) posZ;
+            BlockPos pos = new BlockPos(this);
 
             boolean contained = false;
 
             for (int i = -2; i < 3; i++) {
                 for (int j = -2; j < 3; j++) {
                     for (int k = -2; k < 3; k++) {
-                        Block block = worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k);
+                        BlockPos pos_ = pos.add(i, j, k);
+                        Block block = worldObj.getBlockState(pos_).getBlock();
                         if (block instanceof BlockExplosionContainer) {
                             contained = true;
                             Random r = new Random();
@@ -86,7 +86,7 @@ public class EntityMinerExplosion extends Entity {
 
                                 if (meta > 15) {
 
-                                    worldObj.setBlockToAir(xCoord + i, yCoord + j, zCoord + k);
+                                    worldObj.setBlockToAir(pos_);
                                 } else {
 
                                     worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
@@ -123,7 +123,7 @@ public class EntityMinerExplosion extends Entity {
     }
 
     @Override
-    public ItemStack[] getLastActiveItems() {
+    public ItemStack[] getInventory() {
         return new ItemStack[0];
     }
 

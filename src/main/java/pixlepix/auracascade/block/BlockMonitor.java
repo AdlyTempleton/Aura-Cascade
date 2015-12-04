@@ -2,13 +2,14 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.AuraTilePumpBase;
 import pixlepix.auracascade.block.tile.ConsumerTile;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
@@ -28,20 +29,20 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
+    public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
 
 
     @Override
-    public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side) {
-        ForgeDirection powerDirection = ForgeDirection.getOrientation(side).getOpposite();
-        Block b = world.getBlock(x + powerDirection.offsetX, y + powerDirection.offsetY, z + powerDirection.offsetZ);
+    public int getWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
+        EnumFacing powerDirection = side.getOpposite();
+        Block b = world.getBlockState(pos.offset(powerDirection)).getBlock();
 
 
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+        for (EnumFacing direction : EnumFacing.VALUES) {
             if (direction != powerDirection) {
-                TileEntity auraTile = world.getTileEntity(x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ);
+                TileEntity auraTile = world.getTileEntity(pos.offset(direction));
 
                 if (auraTile instanceof AuraTilePumpBase) {
                     return ((AuraTilePumpBase) auraTile).pumpPower > 0 ? 0 : 15;
@@ -97,11 +98,6 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.redstone), 'A', AuraBlock.getAuraNodeItemstack());
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister icon) {
-        blockIcon = icon.registerIcon("aura:monitor");
     }
 
     @Override

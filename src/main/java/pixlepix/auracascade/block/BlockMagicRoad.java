@@ -2,12 +2,12 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.EnumAura;
@@ -40,8 +40,8 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        Vec3 dir = Vec3.createVectorHelper(entity.motionX, entity.motionY, entity.motionZ);
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
+        Vec3 dir = new Vec3(entity.motionX, entity.motionY, entity.motionZ);
         if (dir.lengthVector() > 0.25) {
             dir = dir.normalize();
             entity.addVelocity(dir.xCoord * 5, dir.yCoord * 5, dir.zCoord * 5);
@@ -51,11 +51,6 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
     @Override
     public boolean shouldRegister() {
         return true;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:bricks");
     }
 
     @Override

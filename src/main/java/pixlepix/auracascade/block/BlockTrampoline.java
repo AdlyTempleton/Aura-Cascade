@@ -2,12 +2,12 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemMaterial;
@@ -39,7 +39,7 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
         entity.motionY = 10;
 
     }
@@ -47,11 +47,6 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
     @Override
     public boolean shouldRegister() {
         return true;
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:trampoline");
     }
 
     @Override

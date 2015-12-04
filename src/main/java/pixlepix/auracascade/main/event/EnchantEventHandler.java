@@ -1,5 +1,7 @@
 package pixlepix.auracascade.main.event;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.*;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -14,12 +16,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -27,7 +25,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.main.AuraUtil;
@@ -123,7 +120,7 @@ public class EnchantEventHandler {
     //Start event handling
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onHarvestEvent(BlockEvent.HarvestDropsEvent event) {
-        Block block = event.block;
+        Block block = event.state.getBlock();
         World world = event.world;
         if (event.harvester != null && event.harvester.inventory.getCurrentItem() != null) {
             ItemStack stack = event.harvester.inventory.getCurrentItem();
@@ -137,7 +134,7 @@ public class EnchantEventHandler {
                 event.drops.clear();
                 event.drops.addAll(newDrops);
             } else {
-                if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.harvester, event.x, event.y, event.z, event.blockMetadata)) {
+                if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.pos, event.state, event.harvester)) {
                     event.dropChance = 0;
                     event.drops.clear();
                     ItemStack itemstack = createStackedBlock(block, event.blockMetadata);
@@ -148,11 +145,11 @@ public class EnchantEventHandler {
 
                     int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
                     //Crops nullifies the fortune level passed to dropBlockAsItemWithChance
-                    if (fortune != 0 && event.fortuneLevel < fortune && !(event.block instanceof BlockCrops)) {
+                    if (fortune != 0 && event.fortuneLevel < fortune && !(event.state.getBlock() instanceof BlockCrops)) {
                         //Cancels the event and breaks the block again
                         event.dropChance = 0;
                         event.drops.clear();
-                        event.block.dropBlockAsItemWithChance(event.world, event.x, event.y, event.z, event.blockMetadata, 1F, fortune);
+                        event.state.getBlock().dropBlockAsItemWithChance(event.world, event.pos, event.state, 1F, fortune);
                     }
                 }
             }
@@ -167,7 +164,7 @@ public class EnchantEventHandler {
         int areaOfEffect = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.BLUE_AURA);
         if (areaOfEffect != 0) {
             World world = event.target.worldObj;
-            List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(event.target.posX - 2, event.target.posY - 2, event.target.posZ - 2, event.target.posX + 2, event.target.posY + 2, event.target.posZ + 2));
+            List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(event.target.posX - 2, event.target.posY - 2, event.target.posZ - 2, event.target.posX + 2, event.target.posY + 2, event.target.posZ + 2));
             for (EntityLivingBase entityLivingBase : list) {
                 if (entityLivingBase != event.entityLiving && entityLivingBase != event.target) {
                     entityLivingBase.attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.entityPlayer, event.target), areaOfEffect);
@@ -236,18 +233,18 @@ public class EnchantEventHandler {
         ItemStack stack = event.getPlayer().getCurrentEquippedItem();
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.world.isRemote) {
-            Block block = event.world.getBlock(event.x, event.y, event.z);
+            Block block = event.world.getBlockState(event.pos).getBlock();
             if (block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
-                ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
-                ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
-                toSearch.add(new CoordTuple(event.x, event.y, event.z));
+                ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
+                ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
+                toSearch.add(event.pos);
                 while (toSearch.size() > 0 && treeFeller > 0) {
-                    CoordTuple nextTuple = toSearch.remove(0);
-                    event.world.func_147480_a(nextTuple.getX(), nextTuple.getY(), nextTuple.getZ(), true);
+                    BlockPos nextTuple = toSearch.remove(0);
+                    event.world.destroyBlock(nextTuple, true);
                     treeFeller--;
-                    for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                        CoordTuple newTuple = nextTuple.add(direction);
-                        if ((newTuple.getBlock(event.world) == block) && !checkedLocations.contains(newTuple)) {
+                    for (EnumFacing direction : EnumFacing.VALUES) {
+                        BlockPos newTuple = nextTuple.offset(direction);
+                        if ((event.world.getBlockState(newTuple).getBlock() == block) && !checkedLocations.contains(newTuple)) {
                             toSearch.add(newTuple);
                             checkedLocations.add(newTuple);
                         }
@@ -259,19 +256,18 @@ public class EnchantEventHandler {
         //Similar code to tree feller
         int harvester = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.YELLOW_AURA) * 25;
         if (harvester > 0 && !event.world.isRemote) {
-            Block block = event.world.getBlock(event.x, event.y, event.z);
-            int meta = event.world.getBlockMetadata(event.x, event.y, event.z);
-            if (block instanceof IGrowable && block != Blocks.grass) {
-                ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
-                ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
-                toSearch.add(new CoordTuple(event.x, event.y, event.z));
+            IBlockState state = event.world.getBlockState(event.pos);
+            if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.grass) {
+                ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
+                ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
+                toSearch.add(event.pos);
                 while (toSearch.size() > 0 && harvester > 0) {
-                    CoordTuple nextTuple = toSearch.remove(0);
-                    event.world.func_147480_a(nextTuple.getX(), nextTuple.getY(), nextTuple.getZ(), true);
+                    BlockPos nextTuple = toSearch.remove(0);
+                    event.world.destroyBlock(nextTuple, true);
                     harvester--;
-                    for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                        CoordTuple newTuple = nextTuple.add(direction);
-                        if ((newTuple.getBlock(event.world) == block) && !checkedLocations.contains(newTuple) && newTuple.getMeta(event.world) == meta) {
+                    for (EnumFacing direction : EnumFacing.VALUES) {
+                        BlockPos newTuple = nextTuple.offset(direction);
+                        if ((event.world.getBlockState(newTuple).getBlock() == state) && !checkedLocations.contains(newTuple)) {
                             toSearch.add(newTuple);
                             checkedLocations.add(newTuple);
                         }
@@ -321,18 +317,18 @@ public class EnchantEventHandler {
                 event.newSpeed /= Math.pow(3, miningDebuff);
             }
 
-            if (ForgeHooks.canToolHarvestBlock(event.block, event.metadata, tool)) {
-                Block block = event.block;
+            if (ForgeHooks.canToolHarvestBlock(event.entityPlayer.worldObj, event.pos, tool)) {
+                Block block = event.state.getBlock();
                 int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
                 event.newSpeed *= Math.pow(1.15, efficiency);
                 int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
-                if (shatter > 0 && event.block.getBlockHardness(event.entity.worldObj, event.x, event.y, event.z) >= 3F) {
+                if (shatter > 0 && event.state.getBlock().getBlockHardness(event.entity.worldObj, event.pos) >= 3F) {
                     event.newSpeed *= Math.pow(1.5, shatter);
                 }
 
                 int oreSpeed = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.ORANGE_AURA);
 
-                if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.block) || containsOredict(block, "ore"))) {
+                if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.state.getBlock()) || containsOredict(block, "ore"))) {
                     event.newSpeed *= Math.pow(1.25, oreSpeed);
                 }
 
@@ -375,7 +371,7 @@ public class EnchantEventHandler {
     }
 
     protected void dropBlockAsItem(World world, int x, int y, int z, ItemStack stack) {
-        if (!world.isRemote && world.getGameRules().getGameRuleBooleanValue("doTileDrops") && !world.restoringBlockSnapshots) { // do not drop items while restoring blockstates, prevents item dupe
+        if (!world.isRemote && world.getGameRules().getBoolean("doTileDrops") && !world.restoringBlockSnapshots) { // do not drop items while restoring blockstates, prevents item dupe
             double d0 = AuraUtil.getDropOffset(world);
             double d1 = AuraUtil.getDropOffset(world);
             double d2 = AuraUtil.getDropOffset(world);

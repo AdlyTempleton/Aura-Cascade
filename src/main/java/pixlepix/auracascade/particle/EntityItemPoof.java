@@ -1,13 +1,13 @@
 package pixlepix.auracascade.particle;
 
 import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntityFireworkSparkFX;
+import net.minecraft.client.particle.EntityFirework;
 import net.minecraft.world.World;
 
 /**
  * Created by pixlepix on 12/7/14.
  */
-public class EntityItemPoof extends EntityFireworkSparkFX {
+public class EntityItemPoof extends EntityFirework.SparkFX {
     public EntityItemPoof(World p_i1207_1_, double p_i1207_2_, double p_i1207_4_, double p_i1207_6_, double p_i1207_8_, double p_i1207_10_, double p_i1207_12_, EffectRenderer p_i1207_14_) {
         super(p_i1207_1_, p_i1207_2_, p_i1207_4_, p_i1207_6_, p_i1207_8_, p_i1207_10_, p_i1207_12_, p_i1207_14_);
     }

@@ -3,7 +3,7 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -11,7 +11,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.IToolTip;
@@ -47,7 +48,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     }
 
     @Override
-    public float getEnchantPowerBonus(World world, int x, int y, int z) {
+    public float getEnchantPowerBonus(World world, BlockPos pos) {
         return 1;
     }
 
@@ -88,7 +89,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
 
     @Override
     public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
-        TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getTileEntity(pos);
         if (!(te instanceof TileStorageBookshelf)) {
             return null;
         }
@@ -108,44 +109,30 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register) {
-        top = register.registerIcon("aura:magicBookshelf_Top");
-        blockIcon = register.registerIcon("aura:magicBookshelf");
-    }
-
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        if (side == 0 || side == 1) {
-            return top;
-        }
-        return blockIcon;
-    }
-
-    @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
         result.add(new ItemStack(Blocks.bookshelf));
         return result;
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
-        TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(pos);
         if (bookshelf != null && bookshelf.storedBook != null) {
             double d0 = AuraUtil.getDropOffset(world);
             double d1 = AuraUtil.getDropOffset(world);
             double d2 = AuraUtil.getDropOffset(world);
-            EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, bookshelf.storedBook);
+            EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, bookshelf.storedBook);
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);
         }
 
-        super.breakBlock(world, x, y, z, block, p_149749_6_);
+        super.breakBlock(world, pos, state);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
-        TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(x, y, z);
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+        TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(pos);
         if (player.isSneaking() && !world.isRemote) {
             if (bookshelf.storedBook != null) {
                 EntityItem entityItem = new EntityItem(world, player.posX, player.posY, player.posZ, bookshelf.storedBook);
