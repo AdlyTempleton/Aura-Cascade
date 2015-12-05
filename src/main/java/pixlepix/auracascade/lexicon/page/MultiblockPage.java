@@ -91,7 +91,6 @@ public class MultiblockPage extends PageText {
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             RenderHelper.enableGUIStandardItemLighting();
-            RenderItem.getInstance().renderWithColor = true;
             int i = 0;
             ItemStack highlighted = null;
             for (int h = 0; h < structure.length; h++)
@@ -105,7 +104,7 @@ public class MultiblockPage extends PageText {
                             GL11.glTranslated(0, 0, 1);
                             if (row[w] != null && i <= limiter) {
                                 i++;
-                                RenderItem.getInstance().renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, row[w], x + xx, y + yy);
+                                Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(row[w], x + xx, y + yy);
                                 if (mx >= x + xx && mx < x + xx + 16 && my >= y + yy && my < y + yy + 16)
                                     highlighted = row[w];
                             }
@@ -119,7 +118,7 @@ public class MultiblockPage extends PageText {
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-            Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(false);
+            Minecraft.getMinecraft().fontRendererObj.setUnicodeFlag(false);
             if (highlighted != null) {
                 ((GuiLexiconEntry) gui).renderToolTip(highlighted, mx, my);
             }

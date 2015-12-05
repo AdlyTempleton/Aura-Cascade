@@ -1,6 +1,6 @@
 package thaumcraft.api.crafting;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,27 +14,28 @@ public class CrucibleRecipe {
 	
 	public Object catalyst;
 	public AspectList aspects;
-	public String key;
+	public String research;
 	
 	public int hash;
 	
 	public CrucibleRecipe(String researchKey, ItemStack result, Object cat, AspectList tags) {
 		recipeOutput = result;
 		this.aspects = tags;
-		this.key = researchKey;
+		this.research = researchKey;
 		this.catalyst = cat;
 		if (cat instanceof String) {
 			this.catalyst = OreDictionary.getOres((String) cat);
 		}
-		String hc = researchKey + result.toString();
+		String hc = researchKey;
+		hc += result.toString();
 		for (Aspect tag:tags.getAspects()) {
 			hc += tag.getTag()+tags.getAmount(tag);
 		}
 		if (cat instanceof ItemStack) {
 			hc += ((ItemStack)cat).toString();
 		} else
-		if (cat instanceof ArrayList && ((ArrayList<ItemStack>)catalyst).size()>0) {
-			for (ItemStack is :(ArrayList<ItemStack>)catalyst) {
+		if (cat instanceof List && ((List<ItemStack>)catalyst).size()>0) {
+			for (ItemStack is :(List<ItemStack>)catalyst) {
 				hc += is.toString();
 			}
 		}
@@ -45,13 +46,12 @@ public class CrucibleRecipe {
 		
 
 	public boolean matches(AspectList itags, ItemStack cat) {
-		if (catalyst instanceof ItemStack &&
-				!ThaumcraftApiHelper.itemMatches((ItemStack) catalyst,cat,false)) {
+		if (catalyst instanceof ItemStack && !OreDictionary.itemMatches((ItemStack) catalyst,cat,false)) {
 			return false;
 		} else 
-		if (catalyst instanceof ArrayList && ((ArrayList<ItemStack>)catalyst).size()>0) {
-			ItemStack[] ores = ((ArrayList<ItemStack>)catalyst).toArray(new ItemStack[]{});
-			if (!ThaumcraftApiHelper.containsMatch(false, new ItemStack[]{cat},ores)) return false;
+		if (catalyst instanceof List && ((List<ItemStack>)catalyst).size()>0) {
+			if (!ThaumcraftApiHelper.containsMatch(false, new ItemStack[]{cat},
+					(List<ItemStack>)catalyst)) return false;
 		}
 		if (itags==null) return false;
 		for (Aspect tag:aspects.getAspects()) {
@@ -61,12 +61,11 @@ public class CrucibleRecipe {
 	}
 	
 	public boolean catalystMatches(ItemStack cat) {
-		if (catalyst instanceof ItemStack && ThaumcraftApiHelper.itemMatches((ItemStack) catalyst,cat,false)) {
+		if (catalyst instanceof ItemStack && OreDictionary.itemMatches((ItemStack) catalyst,cat,false)) {
 			return true;
 		} else 
-		if (catalyst instanceof ArrayList && ((ArrayList<ItemStack>)catalyst).size()>0) {
-			ItemStack[] ores = ((ArrayList<ItemStack>)catalyst).toArray(new ItemStack[]{});
-			if (ThaumcraftApiHelper.containsMatch(false, new ItemStack[]{cat},ores)) return true;
+		if (catalyst instanceof List && ((List<ItemStack>)catalyst).size()>0) {
+			if (ThaumcraftApiHelper.containsMatch(false, new ItemStack[]{cat}, (List<ItemStack>)catalyst)) return true;
 		}
 		return false;
 	}
@@ -77,7 +76,6 @@ public class CrucibleRecipe {
 		
 		for (Aspect tag:aspects.getAspects()) {
 			temptags.remove(tag, aspects.getAmount(tag));
-//			if (!temptags.remove(tag, aspects.getAmount(tag))) return null;
 		}
 		
 		itags = temptags;
@@ -88,24 +86,5 @@ public class CrucibleRecipe {
 		return recipeOutput;
 	}
 	
-	
-//	@Override
-//	public int hashCode() {
-//		String hash = "";
-//		if (catalyst instanceof ItemStack) {
-//			hash += ((ItemStack)catalyst).toString();
-//		} else if (catalyst instanceof ArrayList && ((ArrayList<ItemStack>)catalyst).size()>0) {
-//			for (ItemStack s:(ArrayList<ItemStack>)catalyst) {
-//				hash += s.toString();
-//			} 
-//		} else {
-//			hash += catalyst.hashCode();
-//		}
-//		hash += getRecipeOutput().toString();
-//		for (Aspect a:aspects.getAspectsSorted()) {
-//			hash += a.getTag() + aspects.getAmount(a);
-//		}
-//		return hash.hashCode();
-//	}
 
 }

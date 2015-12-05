@@ -35,8 +35,6 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             , EntityBaitFairy.class, EntityBreederFairy.class, EntityScareFairy.class, EntityExtinguisherFairy.class, EntityDigFairy.class,
             EntityFallFairy.class, EntityLightFairy.class, EntityXPFairy.class
     };
-    //Used in RenderEntityFairy
-    public IIcon fairyIcon;
 
     public static String getNameFromFairy(Class<? extends EntityFairy> clazz) {
         if (clazz == EntityFairy.class) {
@@ -139,12 +137,6 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
                 inventoryPlayer.mainInventory[i] = null;
             }
         }
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        fairyIcon = iconRegister.registerIcon("aura:fairy_plain");
-        itemIcon = iconRegister.registerIcon("aura:fairy_charm");
     }
 
     @Override

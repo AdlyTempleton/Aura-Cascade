@@ -11,6 +11,7 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
+import com.google.common.base.Strings;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -32,7 +33,7 @@ public class PageText extends LexiconPage {
 
     @SideOnly(Side.CLIENT)
     public static void renderText(int x, int y, int width, String unlocalizedText) {
-        FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+        FontRenderer renderer = Minecraft.getMinecraft().fontRendererObj;
         boolean unicode = renderer.getUnicodeFlag();
         renderer.setUnicodeFlag(true);
         String text = StatCollector.translateToLocal(unlocalizedText).replaceAll("&", "\u00a7");
@@ -61,7 +62,7 @@ public class PageText extends LexiconPage {
                     pendingFormat = "";
                 }
 
-                if (MathHelper.stringNullOrLengthZero(format))
+                if (Strings.isNullOrEmpty(format))
                     format = lastFormat;
 
                 if (renderer.getStringWidth(workingOn + " " + s1) >= width) {

@@ -2,6 +2,7 @@ package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -19,7 +20,7 @@ import pixlepix.auracascade.registry.BlockRegistry;
  */
 public class RenderEntityFairy extends Render {
 
-    protected RenderEntityFairy(RenderManager renderManager) {
+    public RenderEntityFairy(RenderManager renderManager) {
         super(renderManager);
     }
 
@@ -36,9 +37,9 @@ public class RenderEntityFairy extends Render {
         Minecraft.getMinecraft().entityRenderer.disableLightmap();
 
 
-        //Prevent 'jump' in the bobbing
-        //Bobbing is calculated as the age plus the yaw
-        renderItem.doRender(entityItem, x, y, z, 0, 0);
+
+        // todo 1.8.8
+        Minecraft.getMinecraft().getRenderItem().func_181564_a(stack, ItemCameraTransforms.TransformType.GROUND);
 
         GlStateManager.disableBlend();
         GlStateManager.disableLighting();

@@ -1,5 +1,6 @@
 package pixlepix.auracascade.potions;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,17 +39,11 @@ public class PotionRedCurse extends Potion {
 
     @Override
     public void performEffect(EntityLivingBase entity, int amplifier) {
-        int x = (int) entity.posX;
-        int y = (int) entity.posY;
-        int z = (int) entity.posZ;
+        BlockPos pos = new BlockPos(entity);
 
-        for (int i = x - 5; i < x + 6; i++) {
-            for (int j = y - 2; j < y + 3; j++) {
-                for (int k = z - 5; k < z + 6; k++) {
-                    if (entity.worldObj.isAirBlock(i, j, k) && Blocks.fire.canPlaceBlockAt(entity.worldObj, i, j, k)) {
-                        entity.worldObj.setBlock(i, j, k, Blocks.fire);
-                    }
-                }
+        for (BlockPos pos_ : BlockPos.getAllInBox(pos.add(-5, -2, -5), pos.add(6, 3, 6))) {
+            if (entity.worldObj.isAirBlock(pos_) && Blocks.fire.canPlaceBlockAt(entity.worldObj, pos_)) {
+                entity.worldObj.setBlockState(pos_, Blocks.fire.getDefaultState());
             }
         }
     }

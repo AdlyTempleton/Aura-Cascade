@@ -380,7 +380,7 @@ public class EnchantEventHandler {
             double d1 = AuraUtil.getDropOffset(world);
             double d2 = AuraUtil.getDropOffset(world);
             EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
-            entityitem.delayBeforeCanPickup = 10;
+            AuraUtil.setItemDelay(entityitem, 10);
             world.spawnEntityInWorld(entityitem);
         }
     }

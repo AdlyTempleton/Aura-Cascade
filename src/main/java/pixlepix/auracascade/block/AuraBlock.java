@@ -45,10 +45,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     //"pump" is AuraTilePump\
     //"black" is AuraTileBlack etc
     String type;
-    private IIcon topIcon;
-    private IIcon sideIcon;
-    private IIcon botIcon;
-
 
     @SuppressWarnings("SameParameterValue")
     public AuraBlock(String type) {
@@ -106,7 +102,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
-    public String getHarvestTool(int metadata) {
+    public String getHarvestTool(IBlockState state) {
         return "pickaxe";
     }
 
@@ -212,26 +208,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         if (!world.isRemote && te instanceof AuraTilePumpProjectile) {
             ((AuraTilePumpProjectile) te).onEntityCollidedWithBlock(entity);
         }
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-
-
-        if (type.contains("Alt")) {
-
-            topIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Top");
-            sideIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Side_Alt");
-
-            botIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Bottom");
-        } else {
-            sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
-
-            botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
-            topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
-        }
-
-
     }
 
     /**

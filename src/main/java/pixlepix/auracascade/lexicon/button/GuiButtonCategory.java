@@ -76,7 +76,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
             itemStack = category.getIcon();
         }
         GL11.glDisable(GL11.GL_LIGHTING);
-        RenderItem.getInstance().renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().getTextureManager(), itemStack, xPosition, yPosition);
+        Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(itemStack, xPosition, yPosition);
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();

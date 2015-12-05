@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -13,7 +12,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
@@ -52,9 +50,9 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                     nbt.setInteger("y2", nbt.getInteger("y1"));
                     nbt.setInteger("z2", nbt.getInteger("z1"));
                 }
-                nbt.setInteger("x1", x);
-                nbt.setInteger("y1", y);
-                nbt.setInteger("z1", z);
+                nbt.setInteger("x1", pos.getX());
+                nbt.setInteger("y1", pos.getY());
+                nbt.setInteger("z1", pos.getZ());
                 player.addChatComponentMessage(new ChatComponentText("Position set"));
                 return true;
             }

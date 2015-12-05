@@ -65,7 +65,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
                 redirect(fireball);
             }
         }
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(7, player.posX, player.posY, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(7, player.posX, player.posY, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
 
         return stack;
     }

@@ -11,6 +11,7 @@ import pixlepix.auracascade.block.ConsumerBlock;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.Quest;
 import pixlepix.auracascade.item.*;
+import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 
@@ -30,7 +31,7 @@ public class QuestManager {
                 if (player.inventory.hasItemStack(quest.target)) {
                     if (!player.worldObj.isRemote) {
                         EntityItem entityItem = new EntityItem(player.worldObj, player.posX, player.posY, player.posZ, quest.result.copy());
-                        entityItem.delayBeforeCanPickup = 0;
+                        AuraUtil.setItemDelay(entityItem, 0);
                         player.worldObj.spawnEntityInWorld(entityItem);
                         player.addChatComponentMessage(new ChatComponentText("Quest \'" + quest.string + "\' Completed"));
                     } else {

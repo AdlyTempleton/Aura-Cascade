@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
         ClientRegistry.bindTileEntitySpecialRenderer(AuraTilePedestal.class, new RenderPedestal());
-        RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderEntityFairy());
+        RenderingRegistry.registerEntityRenderingHandler(EntityFairy.class, new RenderEntityFairy(Minecraft.getMinecraft().getRenderManager()));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void addEffectBypassingLimit(EntityFX entityFX) {
         if (Config.overrideMaxParticleLimit) {
-            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()].add(entityFX);
+            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][0].add(entityFX); // todo 1.8.8 check second index (just guessed)
         } else {
             Minecraft.getMinecraft().theWorld.spawnEntityInWorld(entityFX);
         }

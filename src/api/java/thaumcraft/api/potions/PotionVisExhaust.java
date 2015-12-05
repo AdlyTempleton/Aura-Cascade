@@ -14,7 +14,7 @@ public class PotionVisExhaust extends Potion
     
     public PotionVisExhaust(int par1, boolean par2, int par3)
     {
-    	super(par1,par2,par3);
+    	super(par1,new ResourceLocation("vis_exhaust"),par2,par3);
     	setIconIndex(0, 0);
     }
     

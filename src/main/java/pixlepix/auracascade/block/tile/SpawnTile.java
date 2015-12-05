@@ -40,7 +40,7 @@ public class SpawnTile extends ConsumerTile {
             EntityLiving entity = (EntityLiving) spawnListEntry.entityClass.getConstructor(new Class[]{World.class}).newInstance(worldObj);
             entity.setPosition(pos.getX() + .5, pos.getY() + 2, pos.getZ() + .5);
             worldObj.spawnEntityInWorld(entity);
-            entity.onSpawnWithEgg(null);
+            // todo 1.8.8 entity.onSpawnWithEgg(null);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

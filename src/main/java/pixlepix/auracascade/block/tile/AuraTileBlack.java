@@ -1,8 +1,8 @@
 package pixlepix.auracascade.block.tile;
 
+import net.minecraft.util.BlockPos;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.AuraQuantityList;
-import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 
 /**

@@ -8,8 +8,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.math.NumberUtils;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.main.AuraUtil;
@@ -35,12 +35,12 @@ public class EnchanterTile extends ConsumerTile {
 
     @Override
     public boolean validItemsNearby() {
-        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();
-            if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
+            if (EnumEnchantmentType.DIGGER.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.WEAPON.canEnchantItem(toolStack.getItem())) {
 
-                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
+                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
                 for (EntityItem ingot : nextItems) {
                     if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         return true;
@@ -54,12 +54,12 @@ public class EnchanterTile extends ConsumerTile {
     @Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
-        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
+        ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();
-            if (EnumEnchantmentType.digger.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.weapon.canEnchantItem(toolStack.getItem())) {
+            if (EnumEnchantmentType.DIGGER.canEnchantItem(toolStack.getItem()) || EnumEnchantmentType.WEAPON.canEnchantItem(toolStack.getItem())) {
 
-                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, new BlockPos(this).getBoundingBox(3));
+                ArrayList<EntityItem> nextItems = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
                 for (EntityItem ingot : nextItems) {
                     if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         ItemStack ingotStack = ingot.getEntityItem();
@@ -73,7 +73,7 @@ public class EnchanterTile extends ConsumerTile {
                                 EnchantmentHelper.setEnchantments(enchantMap, toolStack);
                             }
                             ingotStack.stackSize--;
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
 
                             if (ingotStack.stackSize <= 0) {
                                 ingot.setDead();

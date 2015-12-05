@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -108,11 +107,6 @@ public class ItemMaterial extends Item implements ITTinkererItem {
     @Override
     public boolean shouldDisplayInTab() {
         return true;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:" + names[materialIndex] + aura.name);
     }
 
     @Override

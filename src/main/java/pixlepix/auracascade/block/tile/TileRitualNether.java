@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ITickable;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
@@ -14,7 +15,7 @@ import java.util.Random;
 /**
  * Created by localmacaccount on 2/8/15.
  */
-public class TileRitualNether extends ConsumerTile {
+public class TileRitualNether extends ConsumerTile implements ITickable {
     LinkedList<BlockPos> toSearch = new LinkedList<BlockPos>();
     BiomeGenBase targetBiome;
     boolean started = false;
@@ -41,8 +42,7 @@ public class TileRitualNether extends ConsumerTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         int count = 0;
         if (!worldObj.isRemote && toSearch.size() == 0 && started) {
             worldObj.setBlockToAir(getPos());

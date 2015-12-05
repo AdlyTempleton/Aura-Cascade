@@ -39,7 +39,7 @@ public class PotionVioletCurse extends Potion {
 
     @Override
     public void performEffect(EntityLivingBase entity, int amplifier) {
-        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(entity.posX - 15, entity.posY - 15, entity.posZ - 15, entity.posX + 15, entity.posY + 15, entity.posZ + 15));
+        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(entity.posX - 15, entity.posY - 15, entity.posZ - 15, entity.posX + 15, entity.posY + 15, entity.posZ + 15));
         EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
         if (entityLiving != entity) {
             //XOR, XOR, blah blah blah

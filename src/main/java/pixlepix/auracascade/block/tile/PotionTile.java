@@ -77,7 +77,7 @@ public class PotionTile extends ConsumerTile {
 
                 EntityItem newEntity = new EntityItem(worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, smeltingResult.copy());
 
-                newEntity.delayBeforeCanPickup = entityItem.delayBeforeCanPickup;
+                AuraUtil.setItemDelay(newEntity, AuraUtil.getItemDelay(entityItem));
                 newEntity.motionX = entityItem.motionX;
                 newEntity.motionY = entityItem.motionY;
                 newEntity.motionZ = entityItem.motionZ;

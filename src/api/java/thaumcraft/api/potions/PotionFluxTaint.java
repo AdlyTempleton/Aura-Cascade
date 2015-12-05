@@ -5,10 +5,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
-import thaumcraft.api.damagesource.DamageSourceThaumcraft;
-import thaumcraft.api.entities.ITaintedMob;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import thaumcraft.api.damagesource.DamageSourceThaumcraft;
+import thaumcraft.api.entities.ITaintedMob;
 
 public class PotionFluxTaint extends Potion
 {
@@ -17,7 +17,7 @@ public class PotionFluxTaint extends Potion
     
     public PotionFluxTaint(int par1, boolean par2, int par3)
     {
-    	super(par1,par2,par3);
+    	super(par1,new ResourceLocation("flux_taint"),par2,par3);
     	setIconIndex(0, 0);
     }
     
