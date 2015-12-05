@@ -115,10 +115,8 @@ public class CommonProxy {
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         EnchantmentManager.init();
-        FMLCommonHandler.instance().bus().register(eventHandler);
         eventHandlerEnch = new EnchantEventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandlerEnch);
-        FMLCommonHandler.instance().bus().register(eventHandlerEnch);
         EntityRegistry.registerModEntity(EntityFairy.class, "Fairy", 0, AuraCascade.instance, 50, 250, true);
         EntityRegistry.registerModEntity(EntityMinerExplosion.class, "ExplosionMiner", 1, AuraCascade.instance, 50, 40, true);
         QuestManager.init();

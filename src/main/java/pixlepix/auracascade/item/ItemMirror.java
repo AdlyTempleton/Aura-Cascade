@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
@@ -75,6 +74,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
 
         if (!entity.worldObj.isRemote && !(entity instanceof EntityWitherSkull)) {
             AxisAlignedBB axisAlignedBB = new AxisAlignedBB(entity.posX - 100, entity.posY - 100, entity.posZ - 100, entity.posX + 100, entity.posY + 100, entity.posZ + 100);
+            // todo 1.8.8 what the actual fuck
             ArrayList<EntityFireball> targets = (ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityBlaze.class, axisAlignedBB);
             targets.addAll((ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityGhast.class, axisAlignedBB));
             if (targets.size() > 0) {
@@ -87,7 +87,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
                 entity.accelerationX = entity.motionX * .3;
                 entity.accelerationY = entity.motionY * .3;
                 entity.accelerationZ = entity.motionZ * .3;
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
             }
         }
     }

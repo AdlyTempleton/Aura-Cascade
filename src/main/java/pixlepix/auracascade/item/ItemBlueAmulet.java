@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -61,11 +60,6 @@ public class ItemBlueAmulet extends Item implements IBauble, ITTinkererItem {
     @Override
     public int getItemStackLimit(ItemStack stack) {
         return 1;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:amuletBlue");
     }
 
     @Override

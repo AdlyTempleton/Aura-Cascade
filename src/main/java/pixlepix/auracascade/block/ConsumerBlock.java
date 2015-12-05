@@ -3,8 +3,8 @@ package pixlepix.auracascade.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -13,7 +13,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
@@ -39,21 +39,22 @@ import java.util.List;
  */
 public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, ITileEntityProvider {
 
+    public static final PropertyEnum<EnumFacing> FACING = PropertyEnum.create("facing", EnumFacing.class, EnumFacing.Plane.HORIZONTAL);
+
     public String name;
-    public IIcon front;
-    public IIcon side;
-    public IIcon top;
 
     public ConsumerBlock() {
         super(Material.iron);
         this.name = "furnace";
         setHardness(2F);
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
     }
 
     public ConsumerBlock(String name) {
         super(Material.iron);
         this.name = name;
         setHardness(2F);
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
     }
 
     public static ConsumerBlock getBlockFromName(String name) {
@@ -68,89 +69,13 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
 
     @Override
     public void onBlockPlacedBy(World w, BlockPos pos, IBlockState state, EntityLivingBase livingBase, ItemStack stack) {
-        int l = MathHelper.floor_double((double) (livingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-        if (l == 0) {
-            w.setBlockMetadataWithNotify(x, y, z, 2, 2);
-        }
-
-        if (l == 1) {
-            w.setBlockMetadataWithNotify(x, y, z, 5, 2);
-        }
-
-        if (l == 2) {
-            w.setBlockMetadataWithNotify(x, y, z, 3, 2);
-        }
-
-        if (l == 3) {
-            w.setBlockMetadataWithNotify(x, y, z, 4, 2);
-        }
-
+        w.setBlockState(pos, state.withProperty(FACING, livingBase.getHorizontalFacing()));
         AuraUtil.updateMonitor(w, pos);
     }
     @Override
     public void breakBlock(World w, BlockPos pos, IBlockState state) {
         super.breakBlock(w, pos, state);
         AuraUtil.updateMonitor(w, pos);
-    }
-
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        if (name.equals("furnace")) {
-            top = iconRegister.registerIcon("aura:auraFurnace_top");
-            side = iconRegister.registerIcon("aura:auraFurnace_side");
-            front = iconRegister.registerIcon("aura:auraFurnace_front");
-        }
-
-        if (name.equals("ore")) {
-            blockIcon = iconRegister.registerIcon("aura:auraOre");
-        }
-        if (name.equals("mob")) {
-            blockIcon = iconRegister.registerIcon("aura:auraMob");
-        }
-
-        if (name.equals("plant")) {
-            blockIcon = iconRegister.registerIcon("aura:auraGrow");
-            top = iconRegister.registerIcon("aura:auraGrowTop");
-        }
-        if (name.equals("fish")) {
-            blockIcon = iconRegister.registerIcon("aura:auraFish");
-        }
-        if (name.equals("angel")) {
-            blockIcon = iconRegister.registerIcon("aura:auraAngel");
-            top = iconRegister.registerIcon("aura:auraAngelTop");
-        }
-        if (name.equals("loot")) {
-            blockIcon = iconRegister.registerIcon("aura:auraLoot");
-            top = iconRegister.registerIcon("aura:auraLootTop");
-        }
-        if (name.equals("nether")) {
-            blockIcon = iconRegister.registerIcon("aura:ritualNether");
-
-        }
-        if (name.equals("end")) {
-            blockIcon = iconRegister.registerIcon("aura:ritualEnd");
-
-        }
-        if (name.equals("potion")) {
-            blockIcon = iconRegister.registerIcon("aura:brewer");
-
-        }
-        if (name.equals("enchant")) {
-            blockIcon = iconRegister.registerIcon("aura:enchanter");
-
-        }
-        if (name.equals("oreAdv")) {
-            blockIcon = iconRegister.registerIcon("aura:auraOreAdv");
-
-        }
-
-        if (name.equals("dye")) {
-            blockIcon = iconRegister.registerIcon("aura:dye");
-        }
-        if (name.equals("miner")) {
-            blockIcon = iconRegister.registerIcon("aura:miner");
-        }
     }
 
     @Override

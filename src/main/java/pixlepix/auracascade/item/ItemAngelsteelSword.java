@@ -1,6 +1,7 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
@@ -30,7 +32,6 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public static String[] patrons = new String[]{"Pixlepix", "JGPhoenix"};
     public int degree = 0;
     public EnumAura[] auraSwords = new EnumAura[]{EnumAura.BLUE_AURA, EnumAura.GREEN_AURA, EnumAura.ORANGE_AURA, EnumAura.RED_AURA, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA};
-    public HashMap<EnumAura, IIcon> iconHashMap = new HashMap<EnumAura, IIcon>();
 
     public ItemAngelsteelSword(Integer i) {
         super(AngelsteelToolHelper.materials[i]);
@@ -47,31 +48,13 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:angel_sword");
-        for (EnumAura aura : auraSwords) {
-            iconHashMap.put(aura, register.registerIcon("aura:angel_sword" + aura.name));
-        }
-    }
-
-    @Override
     public int getCreativeTabPriority() {
         return -5;
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block state, BlockPos pos, EntityLivingBase p_150894_7_) {
         return true;
-    }
-
-    @Override
-    public IIcon getIconIndex(ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("aura")) {
-            EnumAura aura = EnumAura.values()[stack.stackTagCompound.getInteger("aura")];
-            return iconHashMap.get(aura);
-
-        }
-        return super.getIconIndex(stack);
     }
 
     public EnumAura getAura(ItemStack stack) {

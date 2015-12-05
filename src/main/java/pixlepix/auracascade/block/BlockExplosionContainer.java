@@ -166,11 +166,6 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:fortified" + type);
-    }
-
-    @Override
     public ArrayList<Object> getSpecialParameters() {
         // TODO Auto-generated method stub
         ArrayList result = new ArrayList<Object>();

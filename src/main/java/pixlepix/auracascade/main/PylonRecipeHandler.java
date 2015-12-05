@@ -4,8 +4,8 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.block.tile.CraftingCenterTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
@@ -24,10 +24,10 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
     public void drawExtras(int recipe) {
         super.drawExtras(recipe);
         for (int i = 0; i < 4; i++) {
-            ForgeDirection d = CraftingCenterTile.pedestalRelativeLocations.get(i);
+            EnumFacing d = CraftingCenterTile.pedestalRelativeLocations.get(i);
             PylonRecipe recipeObj = ((NEIPylonRecipe) arecipes.get(recipe)).recipe;
             AuraQuantity quantity = recipeObj.componentList.get(i).auraQuantity;
-            Minecraft.getMinecraft().fontRenderer.drawString("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 50 + d.offsetX * 50, 85 + d.offsetZ * 35, quantity.getType().color.getHex());
+            Minecraft.getMinecraft().fontRendererObj.drawString("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 50 + d.getFrontOffsetX() * 50, 85 + d.getFrontOffsetZ() * 35, quantity.getType().color.getHex());
         }
     }
 
@@ -97,8 +97,8 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
         public List<PositionedStack> getIngredients() {
             ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
             for (int i = 0; i < 4; i++) {
-                ForgeDirection d = CraftingCenterTile.pedestalRelativeLocations.get(i);
-                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 80 + d.offsetX * 35, 70 + d.offsetZ * 35));
+                EnumFacing d = CraftingCenterTile.pedestalRelativeLocations.get(i);
+                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 80 + d.getFrontOffsetX() * 35, 70 + d.getFrontOffsetZ() * 35));
             }
             return stacks;
         }

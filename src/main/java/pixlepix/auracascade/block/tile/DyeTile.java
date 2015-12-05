@@ -1,8 +1,10 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.util.BlockPos;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.BlockPos;
+import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class DyeTile extends ConsumerTile {
 
     @Override
     public boolean validItemsNearby() {
-        List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, new BlockPos(this).getBoundingBox(2));
+        List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, PosUtil.getBoundingBox(getPos(), 2));
         return nearbySheep.size() > 0;
     }
 
@@ -32,11 +34,11 @@ public class DyeTile extends ConsumerTile {
     public void onUsePower() {
 
         AuraCascade.analytics.eventDesign("consumerDye", AuraUtil.formatLocation(this));
-        List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, new BlockPos(this).getBoundingBox(2));
+        List<EntitySheep> nearbySheep = worldObj.getEntitiesWithinAABB(EntitySheep.class, PosUtil.getBoundingBox(getPos(), 2));
         if (nearbySheep.size() > 0) {
             EntitySheep sheep = nearbySheep.get(new Random().nextInt(nearbySheep.size()));
             sheep.setSheared(false);
-            sheep.setFleeceColor(new Random().nextInt(16));
+            sheep.setFleeceColor(EnumDyeColor.byMetadata(new Random().nextInt(16)));
         }
     }
 }

@@ -3,6 +3,7 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ public class EntityFetchFairy extends EntityFairy {
     public void onEntityUpdate() {
         super.onEntityUpdate();
         if (!worldObj.isRemote) {
-            List<EntityItem> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(posX - 4, posY - 4, posZ - 4, posX + 4, posY + 4, posZ + 4));
+            List<EntityItem> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(posX - 4, posY - 4, posZ - 4, posX + 4, posY + 4, posZ + 4));
             for (EntityItem entity : nearbyEntities) {
-                if (entity.delayBeforeCanPickup <= 0) {
+                if (AuraUtil.getItemDelay(entity) <= 0) {
                     entity.setPositionAndRotation(player.posX, player.posY, player.posZ, 0, 0);
                 }
             }

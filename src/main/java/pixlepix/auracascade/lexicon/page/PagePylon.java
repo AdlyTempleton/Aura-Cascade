@@ -1,5 +1,6 @@
 package pixlepix.auracascade.lexicon.page;
 
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -8,7 +9,6 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.tile.CraftingCenterTile;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -76,10 +76,10 @@ public class PagePylon extends PageRecipe {
     @SideOnly(Side.CLIENT)
     public void renderPylonRecipe(IGuiLexiconEntry gui, PylonRecipe recipe, int mx, int my) {
         for (int i = 0; i < 4; i++) {
-            ForgeDirection direction = CraftingCenterTile.pedestalRelativeLocations.get(i);
+            EnumFacing direction = CraftingCenterTile.pedestalRelativeLocations.get(i);
 
-            int x = 2 + direction.offsetX;
-            int y = 2 + direction.offsetZ;
+            int x = 2 + direction.getFrontOffsetX();
+            int y = 2 + direction.getFrontOffsetZ();
 
             renderItemAtGridPos(gui, x, y, recipe.componentList.get(i).itemStack, true);
 

@@ -4,13 +4,13 @@ import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
 import cofh.api.transport.IEnderEnergyHandler;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import de.npe.gameanalytics.events.GAErrorEvent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.main.ParticleEffects;
@@ -51,12 +51,12 @@ public class AuraTileRF extends AuraTile {
         if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();
             LinkedList<BlockPos> nextTiles = new LinkedList<BlockPos>();
-            nextTiles.add(new BlockPos(this));
+            nextTiles.add(getPos());
             while (nextTiles.size() > 0) {
                 BlockPos target = nextTiles.removeFirst();
-                for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                    BlockPos adjacent = target.add(direction);
-                    TileEntity entity = adjacent.getTile(worldObj);
+                for (EnumFacing direction : EnumFacing.VALUES) {
+                    BlockPos adjacent = target.offset(direction);
+                    TileEntity entity = worldObj.getTileEntity(adjacent);
                     if (entity instanceof IEnergyReceiver) {
                         if (!nextTiles.contains(adjacent) && !foundTiles.contains(adjacent)) {
                             nextTiles.add(adjacent);
@@ -67,17 +67,17 @@ public class AuraTileRF extends AuraTile {
             }
             particleTiles.clear();
             //First, find all things near tiles
-            for (BlockPos tuple : foundTiles) {
-                for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                    particleTiles.add(tuple.add(direction));
+            for (BlockPos pos : foundTiles) {
+                for (EnumFacing direction : EnumFacing.VALUES) {
+                    particleTiles.add(pos.offset(direction));
                 }
             }
 
             //Remove things that are 'inside' the bubble
             Iterator iterator = particleTiles.iterator();
             while (iterator.hasNext()) {
-                BlockPos tuple = (BlockPos) iterator.next();
-                if (foundTiles.contains(tuple)) {
+                BlockPos pos = (BlockPos) iterator.next();
+                if (foundTiles.contains(pos)) {
                     iterator.remove();
                 }
 
@@ -85,10 +85,10 @@ public class AuraTileRF extends AuraTile {
 
             disabled = foundTiles.size() > 4;
 
-            for (BlockPos tuple : foundTiles) {
+            for (BlockPos pos : foundTiles) {
 
-                String modid = GameRegistry.findUniqueIdentifierFor(tuple.getBlock(worldObj)).modId;
-                TileEntity te = tuple.getTile(worldObj);
+                String modid = GameRegistry.findUniqueIdentifierFor(worldObj.getBlockState(pos).getBlock()).modId; // todo 1.8.8 deprecated
+                TileEntity te = worldObj.getTileEntity(pos);
                 if (te instanceof IEnderEnergyHandler) {
                     disabled = true;
                 }
@@ -143,16 +143,16 @@ public class AuraTileRF extends AuraTile {
 
         if (!disabled) {
             int divisions = foundTiles.size();
-            for (BlockPos tuple : foundTiles) {
+            for (BlockPos pos : foundTiles) {
 
-                TileEntity entity = tuple.getTile(worldObj);
+                TileEntity entity = worldObj.getTileEntity(pos);
                 if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
                     divisions--;
                 }
             }
             if (divisions > 0) {
-                for (BlockPos tuple : foundTiles) {
-                    TileEntity entity = tuple.getTile(worldObj);
+                for (BlockPos pos : foundTiles) {
+                    TileEntity entity = worldObj.getTileEntity(pos);
                     if (entity instanceof IEnergyReceiver) {
                         ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);
                     }
@@ -165,7 +165,7 @@ public class AuraTileRF extends AuraTile {
             lastPower = 0;
         }
         if (worldObj.getTotalWorldTime() % 20 == 1) {
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            worldObj.markBlockForUpdate(getPos());
         }
 
 

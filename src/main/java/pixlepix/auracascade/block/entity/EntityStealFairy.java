@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class EntityStealFairy extends EntityFairy {
                     item.motionX = 0;
                     item.motionY = 0;
                     item.motionZ = 0;
-                    item.delayBeforeCanPickup = 0;
+                    AuraUtil.setItemDelay(item, 0);
                     worldObj.spawnEntityInWorld(item);
 
                     entity.inventory.setInventorySlotContents(entity.inventory.currentItem, null);

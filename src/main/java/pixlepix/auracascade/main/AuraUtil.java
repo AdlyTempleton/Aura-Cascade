@@ -3,6 +3,7 @@ package pixlepix.auracascade.main;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -74,7 +75,7 @@ public class AuraUtil {
         List<EntityItem> nearbyItems = te.getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(te.getPos().add(-range, -range, -range), te.getPos().add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             entityItem.lifespan = Integer.MAX_VALUE;
-            entityItem.age = 0;
+            setItemAge(entityItem, 0);
         }
     }
 
@@ -108,7 +109,7 @@ public class AuraUtil {
     public static void respawnItemWithParticles(World worldObj, EntityItem oldItem, ItemStack stack) {
         EntityItem newEntity = new EntityItem(worldObj, oldItem.posX, oldItem.posY, oldItem.posZ, stack);
 
-        newEntity.delayBeforeCanPickup = oldItem.delayBeforeCanPickup;
+        setItemDelay(newEntity, getItemDelay(oldItem));
         newEntity.motionX = oldItem.motionX;
         newEntity.motionY = oldItem.motionY;
         newEntity.motionZ = oldItem.motionZ;
@@ -167,4 +168,19 @@ public class AuraUtil {
         }
     }
 
+    public static int getItemAge(EntityItem item) {
+        return ((Integer) ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, item, "age", "field_70292_b", "c"));
+    }
+
+    public static void setItemAge(EntityItem item, int age) {
+        ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, item, age, "age", "field_70292_b", "c");
+    }
+
+    public static int getItemDelay(EntityItem item) {
+        return ((Integer) ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, item, "delayBeforeCanPickup", "field_145804_b", "d"));
+    }
+
+    public static void setItemDelay(EntityItem item, int age) {
+        ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, item, age, "delayBeforeCanPickup", "field_145804_b", "d");
+    }
 }

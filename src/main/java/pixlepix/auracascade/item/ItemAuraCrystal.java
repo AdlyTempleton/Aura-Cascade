@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -8,7 +7,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -24,7 +24,6 @@ import java.util.List;
 public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
     public static final String name = "AuraCrystal";
-    private IIcon[] icons;
 
     public static ItemStack getCrystalFromAura(EnumAura aura) {
         return new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, aura.ordinal());
@@ -35,26 +34,13 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int meta, float hitX, float hitY, float hitZ) {
-        TileEntity te = world.getTileEntity(x, y, z);
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntity te = world.getTileEntity(pos);
         if (te instanceof AuraTile) {
             stack.stackSize--;
             ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
         }
         return false;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-        icons = new IIcon[EnumAura.values().length];
-        for (int i = 0; i < EnumAura.values().length; i++) {
-            icons[i] = iconRegister.registerIcon("aura:" + EnumAura.values()[i].name.toLowerCase() + "Crystal");
-        }
-    }
-
-    @Override
-    public IIcon getIconFromDamage(int i) {
-        return icons[i];
     }
 
     @Override

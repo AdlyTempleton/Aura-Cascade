@@ -14,7 +14,6 @@ import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
@@ -268,10 +267,10 @@ public class GuiCoordinator extends GuiContainer {
                 this.returningStack = null;
             }
 
-            k1 = this.returningStackDestSlot.xDisplayPosition - this.field_147011_y;
-            int j2 = this.returningStackDestSlot.yDisplayPosition - this.field_147010_z;
-            l1 = this.field_147011_y + (int) ((float) k1 * f1);
-            int i2 = this.field_147010_z + (int) ((float) j2 * f1);
+            k1 = this.returningStackDestSlot.xDisplayPosition - this.touchUpX;
+            int j2 = this.returningStackDestSlot.yDisplayPosition - this.touchUpY;
+            l1 = this.touchUpX + (int) ((float) k1 * f1);
+            int i2 = this.touchUpY + (int) ((float) j2 * f1);
             this.drawItemStack(this.returningStack, l1, i2, null);
         }
 
@@ -294,8 +293,8 @@ public class GuiCoordinator extends GuiContainer {
         FontRenderer font = null;
         if (p_146982_1_ != null) font = p_146982_1_.getItem().getFontRenderer(p_146982_1_);
         if (font == null) font = fontRendererObj;
-        itemRender.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), p_146982_1_, p_146982_2_, p_146982_3_);
-        itemRender.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), p_146982_1_, p_146982_2_, p_146982_3_ - (this.draggedStack == null ? 0 : 8), p_146982_4_);
+        itemRender.renderItemAndEffectIntoGUI(p_146982_1_, p_146982_2_, p_146982_3_);
+        itemRender.renderItemOverlayIntoGUI(font, p_146982_1_, p_146982_2_, p_146982_3_ - (this.draggedStack == null ? 0 : 8), p_146982_4_);
         this.zLevel = 0.0F;
         itemRender.zLevel = 0.0F;
     }
@@ -332,14 +331,15 @@ public class GuiCoordinator extends GuiContainer {
             }
         }
 
-        itemRender.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), stack, x, y);
-        itemRender.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), stack, x, y - (this.draggedStack == null ? 0 : 8), number);
+        itemRender.renderItemAndEffectIntoGUI(stack, x, y);
+        itemRender.renderItemOverlayIntoGUI(font, stack, x, y - (this.draggedStack == null ? 0 : 8), number);
 
         this.zLevel = 0.0F;
         itemRender.zLevel = 0.0F;
 
     }
 
+    // todo 1.8.8 wtf is this vanilla copy
     public void drawSlot(Slot p_146977_1_) {
         int i = p_146977_1_.xDisplayPosition;
         int j = p_146977_1_.yDisplayPosition;
@@ -352,15 +352,15 @@ public class GuiCoordinator extends GuiContainer {
         if (p_146977_1_ == this.clickedSlot && this.draggedStack != null && this.isRightMouseClick && itemstack != null) {
             itemstack = itemstack.copy();
             itemstack.stackSize /= 2;
-        } else if (this.field_147007_t && this.field_147008_s.contains(p_146977_1_) && itemstack1 != null) {
-            if (this.field_147008_s.size() == 1) {
+        } else if (this.dragSplitting && this.dragSplittingSlots.contains(p_146977_1_) && itemstack1 != null) {
+            if (this.dragSplittingSlots.size() == 1) {
                 return;
             }
 
-            if (Container.func_94527_a(p_146977_1_, itemstack1, true) && this.inventorySlots.canDragIntoSlot(p_146977_1_)) {
+            if (Container.canAddItemToSlot(p_146977_1_, itemstack1, true) && this.inventorySlots.canDragIntoSlot(p_146977_1_)) {
                 itemstack = itemstack1.copy();
                 flag = true;
-                Container.func_94525_a(this.field_147008_s, this.field_146987_F, itemstack, p_146977_1_.getStack() == null ? 0 : p_146977_1_.getStack().stackSize);
+                Container.computeStackSize(this.dragSplittingSlots, this.dragSplittingLimit, itemstack, p_146977_1_.getStack() == null ? 0 : p_146977_1_.getStack().stackSize);
 
                 if (itemstack.stackSize > itemstack.getMaxStackSize()) {
                     s = EnumChatFormatting.YELLOW + "" + itemstack.getMaxStackSize();
@@ -372,8 +372,8 @@ public class GuiCoordinator extends GuiContainer {
                     itemstack.stackSize = p_146977_1_.getSlotStackLimit();
                 }
             } else {
-                this.field_147008_s.remove(p_146977_1_);
-                this.func_146980_g();
+                this.dragSplittingSlots.remove(p_146977_1_);
+                this.updateDragSplitting();
             }
         }
 
