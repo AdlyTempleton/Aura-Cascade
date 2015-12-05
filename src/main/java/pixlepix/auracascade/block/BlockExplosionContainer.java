@@ -209,30 +209,18 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         return true;
     }
 
-    /**
-     * Gets the block's texture. Args: side, meta
-     *
-     * @param side
-     * @param meta
-     */
-    @Override
-    public IIcon getIcon(int side, int meta) {
-
-        return blockIcon;
-    }
-
-    @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        int meta = world.getBlockMetadata(x, y, z);
-        if (AuraCascade.proxy.renderPass == 1) {
-            if (meta != 0) {
-                return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
-            } else {
-                return AuraCascade.proxy.blankIcon;
-            }
-        }
-        return blockIcon;
-    }
+//    @Override todo 1.8.8
+//    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+//        int meta = world.getBlockMetadata(x, y, z);
+//        if (AuraCascade.proxy.renderPass == 1) {
+//            if (meta != 0) {
+//                return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
+//            } else {
+//                return AuraCascade.proxy.blankIcon;
+//            }
+//        }
+//        return blockIcon;
+//    }
 
     public int getCrackedStage(int meta) {
         if (meta <= 5) {
