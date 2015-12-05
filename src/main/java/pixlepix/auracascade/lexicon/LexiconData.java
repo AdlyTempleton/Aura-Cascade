@@ -208,7 +208,7 @@ public final class LexiconData {
                 , new PageText("2"), new PageText("3"), new PageText("4"), new PageText("5"), new PageText("6"), new PageText("7"));
 
 
-        new BLexiconEntry("enchanter", categoryEnchants).setPriority().setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("enchant"))), new PageText("2"), new PageText("3"));
+        new BLexiconEntry("enchanter", categoryEnchants).setPriority().setLexiconPages(new PageText("0"), new PagePylon("1", (PylonRecipe) BlockRegistry.getRecipe(ConsumerBlock.getBlockFromName("enchant"))), new PageText("2"), new PageText("3"), new PageText(("4")));
 
         new BLexiconEntry("basicEffects", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageText("3"), new PageText("4"), new PageText("5"));
         new BLexiconEntry("speedBoosts", categoryEnchants).setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageText("3"), new PageText("4"));
