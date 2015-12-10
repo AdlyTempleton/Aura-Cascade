@@ -36,14 +36,14 @@ public class ParticleSphere extends EntityFX {
     @SideOnly(Side.CLIENT)
     public void renderParticle(WorldRenderer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
 
-        par1Tessellator.draw();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
-        par1Tessellator.startDrawingQuads();
-        par1Tessellator.setBrightness(200);//make sure you have this!!
-        super.renderParticle(par1Tessellator, par2, par3, par4, par5, par6, par7);
-        par1Tessellator.draw();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/particle/particles.png"));
-        par1Tessellator.startDrawingQuads();
+//        par1Tessellator.draw(); todo 1.8.8
+//        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
+//        par1Tessellator.startDrawingQuads();
+//        par1Tessellator.setBrightness(200);//make sure you have this!!
+        super.renderParticle(wr, e, par2, par3, par4, par5, par6, par7);
+//        par1Tessellator.draw();
+//        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/particle/particles.png"));
+//        par1Tessellator.startDrawingQuads();
     }
 
 

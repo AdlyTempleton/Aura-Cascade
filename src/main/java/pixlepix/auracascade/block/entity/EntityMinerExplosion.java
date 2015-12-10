@@ -81,15 +81,15 @@ public class EntityMinerExplosion extends Entity {
                         if (block instanceof BlockExplosionContainer) {
                             contained = true;
                             Random r = new Random();
-                            int meta = worldObj.getBlockMetadata(xCoord + i, yCoord + j, zCoord + k) + 1;
+                            int nextDamage = worldObj.getBlockState(pos_).getValue(BlockExplosionContainer.DAMAGE) + 1;
                             if (r.nextDouble() > ((BlockExplosionContainer) block).getChanceToResist()) {
 
-                                if (meta > 15) {
+                                if (nextDamage > 15) {
 
                                     worldObj.setBlockToAir(pos_);
                                 } else {
 
-                                    worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
+                                    worldObj.setBlockState(pos_, worldObj.getBlockState(pos_).withProperty(BlockExplosionContainer.DAMAGE, nextDamage), 3);
                                 }
                             }
                         }

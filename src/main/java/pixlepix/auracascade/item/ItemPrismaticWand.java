@@ -176,22 +176,17 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                     int dy = yi - cy1;
                                     int dz = zi - cz1;
 
-                                    int oldX = cx1 + dx;
-                                    int oldY = cy1 + dy;
-                                    int oldZ = cz1 + dz;
+                                    BlockPos oldPos = new BlockPos(cx1 + dx, cy1 + dy, cz1 + dz);
+                                    BlockPos newPos = new BlockPos(x + dx + xo, y + dy + yo, z + dz + zo);
 
-                                    int newX = x + dx + xo;
-                                    int newY = y + dy + yo;
-                                    int newZ = z + dz + zo;
-
-                                    if (world.isAirBlock(newX, newY, newZ)) {
-                                        Block block = world.getBlock(oldX, oldY, oldZ);
+                                    if (world.isAirBlock(newPos)) {
+                                        Block block = world.getBlockState(oldPos).getBlock();
                                         Item item = Item.getItemFromBlock(block);
-                                        int worldDmg = world.getBlockMetadata(oldX, oldY, oldZ);
-                                        int dmg = block.getDamageValue(world, oldX, oldY, oldZ);
+                                        int worldDmg = block.getMetaFromState(world.getBlockState(oldPos));
+                                        int dmg = block.getDamageValue(world, oldPos);
 
                                         boolean usesMetadataForPlacing = false;
-                                        ArrayList<ItemStack> drops = block.getDrops(world, oldX, oldY, oldZ, dmg, 0);
+                                        List<ItemStack> drops = block.getDrops(world, oldPos, block.getStateFromMeta(dmg), 0);
                                         if (drops.size() == 1) {
                                             ItemStack dropStack = drops.get(0);
                                             usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
@@ -199,20 +194,20 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
                                         if (player.capabilities.isCreativeMode) {
                                             if (!world.isRemote) {
-                                                world.setBlock(newX, newY, newZ, block, worldDmg, 3);
-                                                particles(newX, newY, newZ);
+                                                world.setBlockState(newPos, block.getStateFromMeta(worldDmg), 3);
+                                                particles(newPos);
                                             }
 
                                         } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
                                             int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                             if (item instanceof ItemBlock) {
                                                 if (!world.isRemote) {
-                                                    ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
+                                                    ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, newPos, EnumFacing.DOWN, 0, 0, 0, ((ItemBlock) item).block.getStateFromMeta(dmg));
                                                     if (usesMetadataForPlacing) {
-                                                        world.setBlockMetadataWithNotify(newX, newY, newZ, worldDmg, 3);
+                                                        world.setBlockState(newPos, world.getBlockState(newPos).getBlock().getStateFromMeta(worldDmg), 3);
                                                     }
                                                 }
-                                                particles(newX, newY, newZ);
+                                                particles(newPos);
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
@@ -248,13 +243,13 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
     }
 
-    private void particles(int bx, int by, int bz) {
+    private void particles(BlockPos pos) {
         for (EnumFacing direction : EnumFacing.VALUES) {
             for (int i = 0; i < 3; i++) {
                 Random random = new Random();
-                double x = bx + random.nextDouble();
-                double y = by + random.nextDouble();
-                double z = bz + random.nextDouble();
+                double x = pos.getX() + random.nextDouble();
+                double y = pos.getY() + random.nextDouble();
+                double z = pos.getZ() + random.nextDouble();
                 ParticleEffects.spawnParticle("witchMagic", x, y, z, 0, 0, 0, 0, 34, 264);
             }
         }

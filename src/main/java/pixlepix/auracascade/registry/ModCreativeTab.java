@@ -51,7 +51,7 @@ public class ModCreativeTab extends CreativeTabs {
     }
 
     public void addAllItemsAndBlocks() {
-        Collections.sort(creativeTabQueue, new ItemStackCompatator());
+        // todo 1.8.8 your comparator is broken Collections.sort(creativeTabQueue, new ItemStackCompatator());
         list.addAll(creativeTabQueue);
     }
 }

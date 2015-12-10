@@ -13,7 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import pixlepix.auracascade.KeyBindings;
+import pixlepix.auracascade.ModelHandler;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.lexicon.*;
@@ -31,16 +33,21 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
+    public void preInit(FMLPreInitializationEvent evt) {
+        super.preInit(evt);
+        ModelHandler.registerModels();
+    }
+
+    @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+        MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(new OverlayRender());
 
         KeyBindings.init();
 
         ClientEventHandler clientEventHandler = new ClientEventHandler();
         MinecraftForge.EVENT_BUS.register(clientEventHandler);
-        FMLCommonHandler.instance().bus().register(clientEventHandler);
 
 
     }
@@ -89,7 +96,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void addEffectBypassingLimit(EntityFX entityFX) {
         if (Config.overrideMaxParticleLimit) {
-            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][0].add(entityFX); // todo 1.8.8 check second index (just guessed)
+            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][entityFX.getAlpha() != 1 ? 0 : 1].add(entityFX);
         } else {
             Minecraft.getMinecraft().theWorld.spawnEntityInWorld(entityFX);
         }

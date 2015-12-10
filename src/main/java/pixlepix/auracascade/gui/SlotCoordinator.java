@@ -126,7 +126,7 @@ public class SlotCoordinator extends Slot {
     }
 
     @Override
-    public boolean isSlotInInventory(IInventory inv, int slot) {
+    public boolean isHere(IInventory inv, int slot) {
         return inv == te && new StorageItemStack(te.getStackInSlot(slot)).equalsType(storage);
     }
 

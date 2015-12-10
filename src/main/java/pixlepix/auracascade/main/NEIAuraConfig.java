@@ -1,11 +1,14 @@
+/* todo 1.8.8 await NEI update
 package pixlepix.auracascade.main;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
 
+*/
 /**
  * Created by pixlepix on 12/26/14.
- */
+ *//*
+
 public class NEIAuraConfig implements IConfigureNEI {
 
 
@@ -24,3 +27,4 @@ public class NEIAuraConfig implements IConfigureNEI {
         return ConstantMod.version;
     }
 }
+*/

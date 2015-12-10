@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityBlaze;
@@ -20,6 +21,8 @@ import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by localmacaccount on 5/30/15.
@@ -74,9 +77,19 @@ public class ItemMirror extends Item implements ITTinkererItem {
 
         if (!entity.worldObj.isRemote && !(entity instanceof EntityWitherSkull)) {
             AxisAlignedBB axisAlignedBB = new AxisAlignedBB(entity.posX - 100, entity.posY - 100, entity.posZ - 100, entity.posX + 100, entity.posY + 100, entity.posZ + 100);
-            // todo 1.8.8 what the actual fuck
-            ArrayList<EntityFireball> targets = (ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityBlaze.class, axisAlignedBB);
-            targets.addAll((ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityGhast.class, axisAlignedBB));
+
+
+            List<EntityFireball> targets = entity.worldObj.getEntitiesWithinAABB(EntityFireball.class, axisAlignedBB);
+            Iterator<EntityFireball> iter = targets.iterator();
+            while (iter.hasNext()) {
+                EntityLivingBase shooter = iter.next().shootingEntity;
+                if (!(shooter instanceof EntityBlaze || shooter instanceof EntityGhast)) {
+                    iter.remove();
+                }
+            }
+            // todo 1.8.8 what the actual fuck (possible fix above?)
+//            ArrayList<EntityFireball> targets = (ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityBlaze.class, axisAlignedBB);
+//            targets.addAll((ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityGhast.class, axisAlignedBB));
             if (targets.size() > 0) {
 
                 //Check to make sure the fireball is traveling towards the player

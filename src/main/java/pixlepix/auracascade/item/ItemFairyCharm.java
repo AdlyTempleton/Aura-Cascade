@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,7 +8,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.*;
@@ -139,10 +137,10 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         }
     }
 
-    @Override
-    public IIcon getIconFromDamage(int damage) {
-        return damage == 100 ? fairyIcon : itemIcon;
-    }
+//    @Override
+//    public IIcon getIconFromDamage(int damage) {
+//        return damage == 100 ? fairyIcon : itemIcon;
+//    }
 
     @Override
     public int getItemStackLimit(ItemStack stack) {

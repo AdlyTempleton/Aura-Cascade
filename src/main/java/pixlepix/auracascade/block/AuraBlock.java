@@ -1,6 +1,7 @@
 package pixlepix.auracascade.block;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.ModAPIManager;
@@ -65,6 +66,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     public static AuraBlock getBlockFromName(String name) {
         List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
+        if ("capacitor".equals(name)) {
+            blockList = BlockRegistry.getBlockFromClass(AuraBlockCapacitor.class);
+        }
         for (Block b : blockList) {
             if (((AuraBlock) b).type.equals(name)) {
                 return (AuraBlock) b;
@@ -210,19 +214,10 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
     }
 
-    /**
-     * Called after a block is placed
-     *
-     * @param world
-     * @param x
-     * @param z
-     * @param z
-     * @param p_149714_5_
-     */
     @Override
-    public void onPostBlockPlaced(World world, BlockPos pos, IBlockState state) {
-        super.onPostBlockPlaced(world, x, y, z, p_149714_5_);
-        AuraUtil.updateMonitor(world, x, y, z);
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(world, pos, state, placer, stack);
+        AuraUtil.updateMonitor(world, pos);
     }
 
     @Override
@@ -235,8 +230,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                     double d0 = AuraUtil.getDropOffset(world);
                     double d1 = AuraUtil.getDropOffset(world);
                     double d2 = AuraUtil.getDropOffset(world);
-                    EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, inv.getStackInSlot(i));
-                    entityitem.delayBeforeCanPickup = 10;
+                    EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, inv.getStackInSlot(i));
+                    AuraUtil.setItemDelay(entityitem, 10);
                     world.spawnEntityInWorld(entityitem);
                 }
             }
@@ -333,7 +328,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         result.add("pump");
         result.add("black");
         result.add("conserve");
-        result.add("capacitor");
 
         result.add("craftingCenter");
 

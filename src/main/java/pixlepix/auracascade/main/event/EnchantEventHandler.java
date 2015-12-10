@@ -47,7 +47,7 @@ public class EnchantEventHandler {
 
     public static void init() {
         dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, boolean.class, int.class);
-        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70600_l", "dropRareDrop"}, int.class);
+        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_82164_bB", "addRandomDrop"});
     }
 
     public static ItemStack getDoubleResult(ItemStack stack) {

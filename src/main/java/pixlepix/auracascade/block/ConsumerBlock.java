@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,6 +56,24 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
         this.name = name;
         setHardness(2F);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.SOUTH));
+    }
+
+    @Override
+    public BlockState createBlockState() {
+        return new BlockState(this, FACING);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        if (meta < 2 || meta > 5) {
+            meta = 2;
+        }
+        return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
     }
 
     public static ConsumerBlock getBlockFromName(String name) {

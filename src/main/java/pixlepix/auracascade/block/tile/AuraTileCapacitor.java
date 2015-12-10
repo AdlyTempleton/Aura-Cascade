@@ -4,6 +4,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.auracascade.AuraCascade;
+import pixlepix.auracascade.block.AuraBlock;
+import pixlepix.auracascade.block.AuraBlockCapacitor;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -44,15 +46,15 @@ public class AuraTileCapacitor extends AuraTile {
 
             if (worldObj.getTotalWorldTime() % 19 == 0 && storage.getTotalAura() >= storageValues[storageValueIndex]) {
                 aboutToBurst = true;
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(2, xCoord + .5, yCoord + .5, zCoord + .5), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+                worldObj.setBlockState(getPos(), worldObj.getBlockState(getPos()).withProperty(AuraBlockCapacitor.BURSTING, true), 3);
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(2, getPos().getX() + .5, getPos().getY() + .5, getPos().getZ() + .5), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
             }
 
             if (worldObj.getTotalWorldTime() % 5 == 0 && aboutToBurst) {
                 aboutToBurst = false;
                 ticksDisabled = 110;
 
-                worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 0, 3);
+                worldObj.setBlockState(getPos(), worldObj.getBlockState(getPos()).withProperty(AuraBlockCapacitor.BURSTING, false), 3);
                 worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
             }
         }

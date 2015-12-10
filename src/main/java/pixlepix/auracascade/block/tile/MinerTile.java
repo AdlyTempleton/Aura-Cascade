@@ -51,11 +51,11 @@ public class MinerTile extends ConsumerTile {
     }
 
     @Override
-    public void updateEntity() {
+    public void update() {
         if (worldObj.isBlockIndirectlyGettingPowered(getPos()) > 0) {
             hasBeenPulsed = true;
         }
-        super.updateEntity();
+        super.update();
     }
 
     @Override

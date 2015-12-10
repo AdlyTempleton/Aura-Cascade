@@ -207,6 +207,17 @@ public class BlockRegistry {
 
         for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
             for (Item item : itemArrayList) {
+                if (!(item instanceof ItemBlock)) {
+                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
+
+                    if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+                        ModCreativeTab.INSTANCE.addItem(item);
+                    }
+                }
+            }
+        }
+        for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
+            for (Item item : itemArrayList) {
                 registerRecipe((ITTinkererRegisterable) item);
             }
         }
@@ -217,17 +228,7 @@ public class BlockRegistry {
 
             }
         }
-        for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
-            for (Item item : itemArrayList) {
-                if (!(item instanceof ItemBlock)) {
-                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
 
-                    if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-                        ModCreativeTab.INSTANCE.addItem(item);
-                    }
-                }
-            }
-        }
 
     }
 

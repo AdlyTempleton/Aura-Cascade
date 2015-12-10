@@ -1,5 +1,7 @@
 package pixlepix.auracascade.gui;
 
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -150,7 +152,8 @@ public class GuiCoordinator extends GuiContainer {
         this.drawTexturedModalRect(i1, k + (int) ((float) (l - k - 17) * this.currentScroll), 232, 0, 12, 15);
     }
 
-    public void drawScreen(int x, int y, float p_73863_3_) {
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
         //Code handling scrolling
         //Comes from creative inventory gui
@@ -158,12 +161,12 @@ public class GuiCoordinator extends GuiContainer {
         boolean flag = Mouse.isButtonDown(0);
         int k = this.guiLeft;
         int l = this.guiTop;
-        int i1 = k + 161;
+        int i1 = k + 175;
         int j1 = l + 18;
         int k1 = i1 + 14;
-        int l1 = j1 + 52;
+        int l1 = j1 + 112;
 
-        if (!this.wasClicking && flag && x >= i1 && y >= j1 && x < k1 && y < l1) {
+        if (!this.wasClicking && flag && mouseX >= i1 && mouseY >= j1 && mouseX < k1 && mouseY < l1) {
             this.isScrolling = true;
         }
 
@@ -174,7 +177,7 @@ public class GuiCoordinator extends GuiContainer {
         this.wasClicking = flag;
 
         if (this.isScrolling) {
-            this.currentScroll = ((float) (y - j1) - 7.5F) / ((float) (l1 - j1) - 15.0F);
+            this.currentScroll = ((float) (mouseY - j1) - 7.5F) / ((float) (l1 - j1) - 15.0F);
 
             if (this.currentScroll < 0.0F) {
                 this.currentScroll = 0.0F;
@@ -191,98 +194,103 @@ public class GuiCoordinator extends GuiContainer {
         }
         //Override super drawScreen to make use of custom item rendering
         this.drawDefaultBackground();
-        k = this.guiLeft;
-        l = this.guiTop;
-        this.drawGuiContainerBackgroundLayer(p_73863_3_, x, y);
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        int i = this.guiLeft;
+        int j = this.guiTop;
+        this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+        GlStateManager.disableRescaleNormal();
         RenderHelper.disableStandardItemLighting();
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        // super.drawScreen(mouseX, mouseY, partialTicks);
         RenderHelper.enableGUIStandardItemLighting();
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float) k, (float) l, 0.0F);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float)i, (float)j, 0.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.enableRescaleNormal();
         this.theSlot = null;
-        short short1 = 240;
-        short short2 = 240;
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) short1 / 1.0F, (float) short2 / 1.0F);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        int k3 = 240;
+        int l3 = 240;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)k3 / 1.0F, (float)l3 / 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        for (i1 = 0; i1 < this.inventorySlots.inventorySlots.size(); ++i1) {
-            Slot slot = (Slot) this.inventorySlots.inventorySlots.get(i1);
-            if (slot instanceof SlotCoordinator) {
-                this.drawSlot(slot);
-            } else {
-                this.drawSlot(slot);
-            }
+        for (int i2 = 0; i2 < this.inventorySlots.inventorySlots.size(); ++i2)
+        {
+            Slot slot = (Slot)this.inventorySlots.inventorySlots.get(i2);
+            this.drawSlot(slot);
 
-            if (this.isMouseOverSlot(slot, x, y) && slot.canBeHovered()) {
+            if (this.isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered())
+            {
                 this.theSlot = slot;
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
-                j1 = slot.xDisplayPosition;
-                k1 = slot.yDisplayPosition;
-                GL11.glColorMask(true, true, true, false);
-                this.drawGradientRect(j1, k1, j1 + 16, k1 + 16, -2130706433, -2130706433);
-                GL11.glColorMask(true, true, true, true);
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                GlStateManager.disableLighting();
+                GlStateManager.disableDepth();
+                int j2 = slot.xDisplayPosition;
+                int k2 = slot.yDisplayPosition;
+                GlStateManager.colorMask(true, true, true, false);
+                this.drawGradientRect(j2, k2, j2 + 16, k2 + 16, -2130706433, -2130706433);
+                GlStateManager.colorMask(true, true, true, true);
+                GlStateManager.enableLighting();
+                GlStateManager.enableDepth();
             }
         }
 
-        //Forge: Force lighting to be disabled as there are some issue where lighting would
-        //incorrectly be applied based on items that are in the inventory.
-        GL11.glDisable(GL11.GL_LIGHTING);
-        this.drawGuiContainerForegroundLayer(x, y);
-        GL11.glEnable(GL11.GL_LIGHTING);
+        RenderHelper.disableStandardItemLighting();
+        this.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        RenderHelper.enableGUIStandardItemLighting();
         InventoryPlayer inventoryplayer = this.mc.thePlayer.inventory;
         ItemStack itemstack = this.draggedStack == null ? inventoryplayer.getItemStack() : this.draggedStack;
 
-        if (itemstack != null) {
-            byte b0 = 8;
-            k1 = this.draggedStack == null ? 8 : 16;
+        if (itemstack != null)
+        {
+            int j2 = 8;
+            int k2 = this.draggedStack == null ? 8 : 16;
             String s = null;
 
-            if (this.draggedStack != null && this.isRightMouseClick) {
+            if (this.draggedStack != null && this.isRightMouseClick)
+            {
                 itemstack = itemstack.copy();
-                itemstack.stackSize = MathHelper.ceiling_float_int((float) itemstack.stackSize / 2.0F);
-            } else if (this.dragSplitting && this.dragSplittingSlots.size() > 1) {
+                itemstack.stackSize = MathHelper.ceiling_float_int((float)itemstack.stackSize / 2.0F);
+            }
+            else if (this.dragSplitting && this.dragSplittingSlots.size() > 1)
+            {
                 itemstack = itemstack.copy();
                 itemstack.stackSize = this.dragSplittingRemnant;
 
-                if (itemstack.stackSize == 0) {
+                if (itemstack.stackSize == 0)
+                {
                     s = "" + EnumChatFormatting.YELLOW + "0";
                 }
             }
 
-            this.drawItemStack(itemstack, x - k - b0, y - l - k1, s);
+            this.drawItemStack(itemstack, mouseX - i - j2, mouseY - j - k2, s);
         }
 
-        if (this.returningStack != null) {
-            float f1 = (float) (Minecraft.getSystemTime() - this.returningStackTime) / 100.0F;
+        if (this.returningStack != null)
+        {
+            float f = (float)(Minecraft.getSystemTime() - this.returningStackTime) / 100.0F;
 
-            if (f1 >= 1.0F) {
-                f1 = 1.0F;
+            if (f >= 1.0F)
+            {
+                f = 1.0F;
                 this.returningStack = null;
             }
 
-            k1 = this.returningStackDestSlot.xDisplayPosition - this.touchUpX;
-            int j2 = this.returningStackDestSlot.yDisplayPosition - this.touchUpY;
-            l1 = this.touchUpX + (int) ((float) k1 * f1);
-            int i2 = this.touchUpY + (int) ((float) j2 * f1);
-            this.drawItemStack(this.returningStack, l1, i2, null);
+            int l2 = this.returningStackDestSlot.xDisplayPosition - this.touchUpX;
+            int i3 = this.returningStackDestSlot.yDisplayPosition - this.touchUpY;
+            int l4 = this.touchUpX + (int)((float)l2 * f);
+            int i2 = this.touchUpY + (int)((float)i3 * f);
+            this.drawItemStack(this.returningStack, l4, i2, (String)null);
         }
 
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
-        if (inventoryplayer.getItemStack() == null && this.theSlot != null && this.theSlot.getHasStack()) {
+        if (inventoryplayer.getItemStack() == null && this.theSlot != null && this.theSlot.getHasStack())
+        {
             ItemStack itemstack1 = this.theSlot.getStack();
-            this.renderToolTip(itemstack1, x, y);
+            this.renderToolTip(itemstack1, mouseX, mouseY);
         }
 
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GlStateManager.enableLighting();
+        GlStateManager.enableDepth();
         RenderHelper.enableStandardItemLighting();
     }
 
@@ -339,7 +347,7 @@ public class GuiCoordinator extends GuiContainer {
 
     }
 
-    // todo 1.8.8 wtf is this vanilla copy
+    @Override
     public void drawSlot(Slot p_146977_1_) {
         int i = p_146977_1_.xDisplayPosition;
         int j = p_146977_1_.yDisplayPosition;
@@ -381,15 +389,13 @@ public class GuiCoordinator extends GuiContainer {
         itemRender.zLevel = 100.0F;
 
         if (itemstack == null) {
-            IIcon iicon = p_146977_1_.getBackgroundIconIndex();
+            TextureAtlasSprite iicon = p_146977_1_.getBackgroundSprite();
 
             if (iicon != null) {
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_BLEND); // Forge: Blending needs to be enabled for this.
-                this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-                this.drawTexturedModelRectFromIcon(i, j, iicon, 16, 16);
-                GL11.glDisable(GL11.GL_BLEND); // Forge: And clean that up
-                GL11.glEnable(GL11.GL_LIGHTING);
+                GlStateManager.disableLighting();
+                this.mc.getTextureManager().bindTexture(p_146977_1_.getBackgroundLocation());
+                this.drawTexturedModalRect(i, j, iicon, 16, 16);
+                GlStateManager.enableLighting();
                 flag1 = true;
             }
         }

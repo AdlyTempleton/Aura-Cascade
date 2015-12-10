@@ -1,5 +1,6 @@
 package pixlepix.auracascade.potions;
 
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,8 +31,8 @@ public class PotionGreenCurse extends Potion {
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(Minecraft.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.GREEN_AURA).getIconIndex(), 16, 16);
+        mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.GREEN_AURA), x + 8, y + 8);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class PotionGreenCurse extends Potion {
         entity.attackEntityFrom(DamageSource.magic, 2.0F);
 
 
-        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(entity.posX - 5, entity.posY - 5, entity.posZ - 5, entity.posX + 5, entity.posY + 5, entity.posZ + 5));
+        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(entity.posX - 5, entity.posY - 5, entity.posZ - 5, entity.posX + 5, entity.posY + 5, entity.posZ + 5));
         if (entities.size() > 0) {
             EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
             if (entityLiving != entity) {

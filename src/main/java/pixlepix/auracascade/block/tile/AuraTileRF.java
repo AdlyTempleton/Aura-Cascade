@@ -3,7 +3,7 @@ package pixlepix.auracascade.block.tile;
 import cofh.api.energy.IEnergyConnection;
 import cofh.api.energy.IEnergyProvider;
 import cofh.api.energy.IEnergyReceiver;
-import cofh.api.transport.IEnderEnergyHandler;
+// todo 1.8.8 await duct update import cofh.api.transport.IEnderEnergyHandler;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -89,9 +89,10 @@ public class AuraTileRF extends AuraTile {
 
                 String modid = GameRegistry.findUniqueIdentifierFor(worldObj.getBlockState(pos).getBlock()).modId; // todo 1.8.8 deprecated
                 TileEntity te = worldObj.getTileEntity(pos);
-                if (te instanceof IEnderEnergyHandler) {
-                    disabled = true;
-                }
+                // todo 1.8.8 await duct update
+                // if (te instanceof IEnderEnergyHandler) {
+                //    disabled = true;
+                // }
                 for (String clazz : blacklist) {
                     if (te.getClass().getName().toLowerCase().contains(clazz.toLowerCase())) {
                         boolean whitelistedByMod = false;
@@ -110,7 +111,7 @@ public class AuraTileRF extends AuraTile {
                         disabled = true;
                     }
                 }
-                if (te instanceof IEnergyProvider && !((IEnergyConnection) (te)).canConnectEnergy(ForgeDirection.UNKNOWN)) {
+                if (te instanceof IEnergyProvider && !((IEnergyConnection) (te)).canConnectEnergy(null)) {
                     AuraCascade.analytics.eventError(GAErrorEvent.Severity.info, "Blacklisted IEnergyProvider authmatically: " + te.getClass().getName());
                     boolean isWhitelisted = false;
                     for (String clazz : whitelist) {
@@ -146,7 +147,7 @@ public class AuraTileRF extends AuraTile {
             for (BlockPos pos : foundTiles) {
 
                 TileEntity entity = worldObj.getTileEntity(pos);
-                if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, 1, true) <= 0) {
+                if (!(entity instanceof IEnergyReceiver) || ((IEnergyReceiver) entity).receiveEnergy(null, 1, true) <= 0) {
                     divisions--;
                 }
             }
@@ -154,7 +155,7 @@ public class AuraTileRF extends AuraTile {
                 for (BlockPos pos : foundTiles) {
                     TileEntity entity = worldObj.getTileEntity(pos);
                     if (entity instanceof IEnergyReceiver) {
-                        ((IEnergyReceiver) entity).receiveEnergy(ForgeDirection.UNKNOWN, (int) (lastPower * Config.powerFactor / divisions), false);
+                        ((IEnergyReceiver) entity).receiveEnergy(null, (int) (lastPower * Config.powerFactor / divisions), false);
                     }
                 }
             }

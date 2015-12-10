@@ -1,9 +1,12 @@
 package pixlepix.auracascade.block;
 
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -32,7 +35,7 @@ import java.util.Random;
 public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     public String type;
-
+    public static final PropertyInteger DAMAGE = PropertyInteger.create("damage", 0, 15);
 
     public BlockExplosionContainer() {
         super(Material.rock);
@@ -41,6 +44,22 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         type = "Dirt";
         setTickRandomly(true);
         setHardness(2F);
+        setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
+    }
+
+    @Override
+    public BlockState createBlockState() {
+        return new BlockState(this, DAMAGE);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(DAMAGE);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(DAMAGE, meta);
     }
 
     public BlockExplosionContainer(String s) {
@@ -82,9 +101,9 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(world, pos, state, rand);
         if (rand.nextDouble() < getChanceToRepair()) {
-            int meta = world.getBlockMetadata(x, y, z);
-            if (meta > 0) {
-                world.setBlockMetadataWithNotify(x, y, z, meta - 1, 3);
+            int damage = state.getValue(DAMAGE);
+            if (damage > 0) {
+                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
 
             }
         }
@@ -92,22 +111,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     /**
-     * Determines if this block should render in this pass.
-     *
-     * @param pass The pass in question
-     * @return True to render
-     */
-    @Override
-    public boolean canRenderInPass(int pass) {
-        AuraCascade.proxy.renderPass = pass;
-        return true;
-    }
-
-    /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean isFullCube() {
         return isOpaqueCube();
     }
 
@@ -190,8 +197,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
      */
     @Override
-    public int getRenderBlockPass() {
-        return 1;
+    public EnumWorldBlockLayer getBlockLayer() {
+        return EnumWorldBlockLayer.CUTOUT_MIPPED; // todo 1.8.8
     }
 
     @Override

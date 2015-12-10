@@ -10,6 +10,6 @@ import thaumcraft.api.ThaumcraftApi;
 public class TCCompat {
 
     public static void postInit() {
-        ThaumcraftApi.portableHoleBlackList.addAll(BlockRegistry.getBlockFromClass(AuraBlock.class));
+        // todo 1.8.8 ThaumcraftApi.portableHoleBlackList.addAll(BlockRegistry.getBlockFromClass(AuraBlock.class));
     }
 }

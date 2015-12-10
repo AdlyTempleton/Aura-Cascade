@@ -88,7 +88,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     protected void readCustomNBT(NBTTagCompound nbt) {
         super.readCustomNBT(nbt);
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
-        direction = EnumFacing.getFront(nbt.getInteger("direction"));
+        direction = nbt.getInteger("direction") == -1 ? null : EnumFacing.getFront(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
         typeReceiving = nbt.getInteger("typeReceiving") == -1 ? null : EnumAura.values()[nbt.getInteger("typeReceiving")];
     }
@@ -101,7 +101,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
             itemStack.writeToNBT(compound);
             nbt.setTag("itemStack", compound);
         }
-        nbt.setInteger("direction", direction.getIndex());
+        nbt.setInteger("direction", direction == null ? -1 : direction.getIndex());
         nbt.setInteger("powerReceived", powerReceived);
         nbt.setInteger("typeReceiving", typeReceiving == null ? -1 : typeReceiving.ordinal());
     }

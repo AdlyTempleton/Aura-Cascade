@@ -1,3 +1,4 @@
+/* todo 1.8.8 await NEI update
 package pixlepix.auracascade.main;
 
 import codechicken.nei.PositionedStack;
@@ -16,9 +17,11 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by pixlepix on 12/26/14.
- */
+ *//*
+
 public class PylonRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void drawExtras(int recipe) {
@@ -105,4 +108,4 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
     }
 
 
-}
+}*/
