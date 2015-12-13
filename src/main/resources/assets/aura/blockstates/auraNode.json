@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal":  {
-      "model": "aura:auranode"
+      "model": "aura:auraNode"
     }
   }
 }

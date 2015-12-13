@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal":  {
-      "model": "aura:auranodepumpcreative"
+      "model": "aura:auraNodepumpCreative"
     }
   }
 }
