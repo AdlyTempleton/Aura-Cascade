@@ -30,7 +30,7 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
             EnumFacing d = CraftingCenterTile.pedestalRelativeLocations.get(i);
             PylonRecipe recipeObj = ((NEIPylonRecipe) arecipes.get(recipe)).recipe;
             AuraQuantity quantity = recipeObj.componentList.get(i).auraQuantity;
-            Minecraft.getMinecraft().fontRendererObj.drawString("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 50 + d.getFrontOffsetX() * 50, 85 + d.getFrontOffsetZ() * 35, quantity.getType().color.getHex());
+            Minecraft.getMinecraft().fontRendererObj.drawString("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")", 52 + d.offsetX * 50, 76 + d.offsetZ * 35, quantity.getType().color.getHex());
         }
     }
 
@@ -93,7 +93,7 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
 
         @Override
         public PositionedStack getResult() {
-            return new PositionedStack(recipe.result, 80, 70);
+            return new PositionedStack(recipe.result, 75, 60);
         }
 
         @Override
@@ -101,7 +101,7 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
             ArrayList<PositionedStack> stacks = new ArrayList<PositionedStack>();
             for (int i = 0; i < 4; i++) {
                 EnumFacing d = CraftingCenterTile.pedestalRelativeLocations.get(i);
-                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 80 + d.getFrontOffsetX() * 35, 70 + d.getFrontOffsetZ() * 35));
+                stacks.add(new PositionedStack(recipe.componentList.get(i).itemStack, 75 + d.getFrontOffsetX() * 35, 60 + d.getFrontOffsetZ() * 35));
             }
             return stacks;
         }

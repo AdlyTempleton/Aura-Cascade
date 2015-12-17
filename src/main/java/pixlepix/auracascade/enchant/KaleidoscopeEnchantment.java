@@ -12,7 +12,7 @@ import pixlepix.auracascade.main.ConstantMod;
  */
 public class KaleidoscopeEnchantment extends Enchantment {
     public KaleidoscopeEnchantment(int id, EnumAura aura) {
-        super(id, new ResourceLocation(ConstantMod.prefixMod, "kaleidoscope"), 0, EnumEnchantmentType.DIGGER);
+        super(id, new ResourceLocation(ConstantMod.prefixMod, "kaleidoscope"), 0, EnumEnchantmentType.ALL);
         setName(aura.name);
     }
 
