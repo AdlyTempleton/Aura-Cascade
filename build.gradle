@@ -68,7 +68,7 @@ minecraft {
     replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
 
 }
-version = "-${minecraft.version}"
+version = "${minecraft.version}"
 if (System.getenv("BUILD_NUMBER")!=null)
     version = "${System.getenv().BUILD_NUMBER}"
 if (project.hasProperty("releaseType"))
