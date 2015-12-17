@@ -33,10 +33,10 @@ repositories {
         name 'ForgeFS'
         url 'http://files.minecraftforge.net/maven'
     }
-    maven {
-        name 'MinecraftS3'
-        url 'http://s3.amazonaws.com/Minecraft.Download/libraries'
-    }
+    //maven {
+    //    name 'MinecraftS3'
+    //    url 'http://s3.amazonaws.com/Minecraft.Download/libraries'
+    //}
     maven {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
