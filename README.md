@@ -2,7 +2,7 @@ Notes from williewillus (1.8.8 porter):
 * Please report 1.8.8 issues in THIS repository, NOT at pixlepix's!!
 * Do not ask for design changes, I will strictly match the design of upstream.
 * This fork, like the mod itself, is licensed under the [MIT license](https://tldrlegal.com/license/mit-license) and the parts drawn from Botania under the [Botania license](http://botaniamod.net/license.php).
-* This fork should be almost fully functional. See the issue tracker for any known issues.
+* This fork should be almost fully functional. See the [issue tracker](https://github.com/williewillus/Aura-Cascade/issues) for any known issues.
 * Have fun!
 
 
