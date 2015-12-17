@@ -2,22 +2,107 @@
   "forge_marker": 1,
   "defaults": {
     "model": "forge:multi-layer",
-    "custom": {
-      "base": "aura:fortifiedWood#base",
-      "Solid": "aura:fortifiedWood#base",
-      "Translucent": "minecraft:pink_stained_glass_pane#east=true,north=false,south=false,west=true"
-    },
     "transform": "forge:default-block"
   },
   "variants": {
-    "normal": [{}],
-    "inventory": [{}],
+    "damage": {
+      "0": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#base" }
+      },
+      "1": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_0" }
+      },
+      "2": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_1" }
+      },
+      "3": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_2" }
+      },
+      "4": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_3" }
+      },
+      "5": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_4" }
+      },
+      "6": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_4" }
+      },
+      "7": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_5" }
+      },
+      "8": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_5" }
+      },
+      "9": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_6" }
+      },
+      "10": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_6" }
+      },
+      "11": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_7" }
+      },
+      "12": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_7" }
+      },
+      "13": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_8" }
+      },
+      "14": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_8" }
+      },
+      "15": {
+        "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#breaking_9" }
+      }
+    },
+    "inventory": [{
+      "custom": { "base": "aura:fortifiedWood#base", "Solid": "aura:fortifiedWood#base", "Translucent": "aura:fortifiedWood#base" }
+    }],
+
+
     "base": [{
-      "model": "minecraft:block/cube_all",
+      "model": "minecraft:cube_all",
       "textures": { "all": "aura:blocks/fortifiedWood" }
     }],
-    "breaking": [{
-      "model": "minecraft:block/cube_all",
+
+    "breaking_0": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_0" }
+    }],
+    "breaking_1": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_1" }
+    }],
+    "breaking_2": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_2" }
+    }],
+    "breaking_3": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_3" }
+    }],
+    "breaking_4": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_4" }
+    }],
+    "breaking_5": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_5" }
+    }],
+    "breaking_6": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_6" }
+    }],
+    "breaking_7": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_7" }
+    }],
+    "breaking_8": [{
+      "model": "minecraft:cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_8" }
+    }],
+    "breaking_9": [{
+      "model": "minecraft:cube_all",
       "textures": { "all": "minecraft:blocks/destroy_stage_9" }
     }]
   }

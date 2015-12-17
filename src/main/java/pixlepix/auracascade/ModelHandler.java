@@ -55,6 +55,7 @@ public final class ModelHandler {
         registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedCobblestone")));
         registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedStone")));
         registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedObsidian")));
+        registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedDirt")));
 
         registerItem(Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(BlockMonitor.class)));
 
@@ -76,9 +77,7 @@ public final class ModelHandler {
     }
 
     private static void registerItem(Item item) {
-        System.out.println(item);
         ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
-        System.out.println(item.delegate.getResourceName());
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(l, "inventory"));
     }
 

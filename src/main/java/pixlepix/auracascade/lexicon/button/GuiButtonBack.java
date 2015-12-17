@@ -12,6 +12,7 @@
 package pixlepix.auracascade.lexicon.button;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.GuiLexicon;
@@ -33,7 +34,7 @@ public class GuiButtonBack extends GuiButtonLexicon {
         int k = getHoverState(hovered);
 
         par1Minecraft.renderEngine.bindTexture(GuiLexicon.texture);
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1F, 1F, 1F, 1F);
         drawTexturedModalRect(xPosition, yPosition, 36, k == 2 ? 180 : 189, 18, 9);
 
         List<String> tooltip = getTooltip();

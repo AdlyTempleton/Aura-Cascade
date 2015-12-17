@@ -1,5 +1,6 @@
 package pixlepix.auracascade.lexicon.page;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -48,11 +49,11 @@ public class PageQuest extends PageRecipe {
         renderer.setUnicodeFlag(true);
 
         if (quest.hasCompleted(AuraCascade.proxy.getPlayer())) {
-            GL11.glPushMatrix();
+            GlStateManager.pushMatrix();
             double scale = 2;
-            GL11.glScaled(scale, scale, scale);
+            GlStateManager.scale(scale, scale, scale);
             renderer.drawString("§2COMPLETED", (int) (xPos / scale) - 10, (int) ((yPosTop - 25) / scale), 0);
-            GL11.glPopMatrix();
+            GlStateManager.popMatrix();
         }
 
 

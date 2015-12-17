@@ -12,6 +12,7 @@
 package pixlepix.auracascade.lexicon.button;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -63,10 +64,10 @@ public class GuiButtonCategory extends GuiButtonLexicon {
         float defAlpha = 0.3F;
         float alpha = ticksHovered / time * (1F - defAlpha) + defAlpha;
 
-        GL11.glPushMatrix();
-        GL11.glColor4f(2F, 2F, 2F, alpha);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.pushMatrix();
+        GlStateManager.color(2F, 2F, 2F, alpha);
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         //GL11.glScalef(.5F, 3F, 3F);
 
         ItemStack itemStack;
@@ -75,11 +76,11 @@ public class GuiButtonCategory extends GuiButtonLexicon {
         } else {
             itemStack = category.getIcon();
         }
-        GL11.glDisable(GL11.GL_LIGHTING);
+        GlStateManager.disableLighting();
         Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(itemStack, xPosition, yPosition);
 
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
+        GlStateManager.enableLighting();
+        GlStateManager.popMatrix();
 
         if (inside)
             VazkiiRenderHelper.renderTooltipGreen(mx, my, Arrays.asList(StatCollector.translateToLocal(getTooltipText())));

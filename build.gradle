@@ -61,7 +61,7 @@ group = "pixlepix.auracascade" // http://maven.apache.org/guides/mini/guide-nami
 archivesBaseName = "AuraCascade"
 
 minecraft {
-    version = "1.8.8-11.15.0.1634-1.8.8"
+    version = "1.8.8-11.15.0.1635-1.8.8"
     mappings = "snapshot_20151128"
     runDir = "eclipse"
     replace '@version@', project.version
@@ -83,7 +83,7 @@ jar {
 }
 
 dependencies {
-    compile files("/libs/Baubles-deobf-1.7.10-1.0.1.10.jar")
+    compile files("/libs/Baubles-1.8-1.1.1.1-deobf.jar")
     //compile files("/libs/NotEnoughItems-1.7.10-1.0.3.74-dev.jar")
 }
 

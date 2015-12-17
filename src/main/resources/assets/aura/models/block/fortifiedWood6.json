@@ -1,7 +1,0 @@
-{
-  "parent": "aura:block/cube_all_damaged",
-  "textures": {
-    "destroy": "minecraft:blocks/destroy_stage_4",
-    "all": "aura:blocks/fortifiedWood"
-  }
-}

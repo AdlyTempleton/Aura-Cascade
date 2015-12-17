@@ -134,7 +134,7 @@ public class GuiCoordinator extends GuiContainer {
         ResourceLocation tex = new ResourceLocation("aura", "textures/gui/coordinator.png");
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(tex);
 
-        GL11.glColor4f(1, 1, 1, 1);
+        GlStateManager.color(1, 1, 1, 1);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
@@ -295,7 +295,7 @@ public class GuiCoordinator extends GuiContainer {
     }
 
     private void drawItemStack(ItemStack p_146982_1_, int p_146982_2_, int p_146982_3_, String p_146982_4_) {
-        GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+        GlStateManager.translate(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRender.zLevel = 200.0F;
         FontRenderer font = null;
@@ -310,7 +310,7 @@ public class GuiCoordinator extends GuiContainer {
     private void drawItemStackLarge(ItemStack stack, int x, int y) {
 
 
-        GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+        GlStateManager.translate(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRender.zLevel = 200.0F;
         FontRenderer font = null;
@@ -405,7 +405,7 @@ public class GuiCoordinator extends GuiContainer {
                 drawRect(i, j, i + 16, j + 16, -2130706433);
             }
 
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GlStateManager.enableDepth();
             if (itemstack != null && itemstack.stackSize > 999) {
                 drawItemStackLarge(itemstack, i, j);
             } else {

@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
@@ -108,16 +109,16 @@ public class GuiLexicon extends GuiScreen {
         lastTime = time;
         partialTicks = par3;
 
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1F, 1F, 1F, 1F);
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
 
         drawBookmark(left + guiWidth / 2, top - getTitleHeight(), getTitle(), true);
         String subtitle = getSubtitle();
         if (subtitle != null) {
-            GL11.glScalef(0.5F, 0.5F, 1F);
+            GlStateManager.scale(0.5F, 0.5F, 1F);
             drawCenteredString(fontRendererObj, subtitle, left * 2 + guiWidth, (top - getTitleHeight() + 11) * 2, 0x00FF00);
-            GL11.glScalef(2F, 2F, 1F);
+            GlStateManager.scale(2F, 2F, 1F);
         }
 
         drawHeader();
@@ -131,11 +132,11 @@ public class GuiLexicon extends GuiScreen {
 
         if (hasTutorialArrow) {
             mc.renderEngine.bindTexture(texture);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glColor4f(1F, 1F, 1F, 0.7F + (float) (Math.sin((ClientTickHandler.ticksInGame + par3) * 0.3F) + 1) * 0.15F);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GlStateManager.color(1F, 1F, 1F, 0.7F + (float) (Math.sin((ClientTickHandler.ticksInGame + par3) * 0.3F) + 1) * 0.15F);
             drawTexturedModalRect(tutorialArrowX, tutorialArrowY, 20, 200, TUTORIAL_ARROW_WIDTH, TUTORIAL_ARROW_HEIGHT);
-            GL11.glDisable(GL11.GL_BLEND);
+            GlStateManager.disableBlend();
         }
     }
 
@@ -154,7 +155,7 @@ public class GuiLexicon extends GuiScreen {
 
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1F, 1F, 1F, 1F);
         drawTexturedModalRect(x + l / 2 + 3, y - 1, 54, 180, 6, 11);
         if (drawLeft)
             drawTexturedModalRect(x - l / 2 - 9, y - 1, 61, 180, 6, 11);

@@ -44,23 +44,23 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         type = "Dirt";
         setTickRandomly(true);
         setHardness(2F);
-        //setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
+        setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
     }
 
-//    @Override
-//    public BlockState createBlockState() {
-//        return new BlockState(this, DAMAGE);
-//    }
-//
-//    @Override
-//    public int getMetaFromState(IBlockState state) {
-//        return state.getValue(DAMAGE);
-//    }
-//
-//    @Override
-//    public IBlockState getStateFromMeta(int meta) {
-//        return getDefaultState().withProperty(DAMAGE, meta);
-//    }
+    @Override
+    public BlockState createBlockState() {
+        return new BlockState(this, DAMAGE);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(DAMAGE);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(DAMAGE, meta);
+    }
 
     public BlockExplosionContainer(String s) {
         this();
@@ -101,10 +101,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(world, pos, state, rand);
         if (rand.nextDouble() < getChanceToRepair()) {
-//            int damage = state.getValue(DAMAGE);
-//            if (damage > 0) {
-//                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
-//            }
+            int damage = state.getValue(DAMAGE);
+            if (damage > 0) {
+                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
+            }
         }
         world.scheduleUpdate(pos, this, tickRate(world) + rand.nextInt(5));
     }
@@ -194,7 +194,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
-        return layer == EnumWorldBlockLayer.SOLID || layer == EnumWorldBlockLayer.TRANSLUCENT;
+        if ("Glass".equals(type)) {
+            return layer == EnumWorldBlockLayer.CUTOUT_MIPPED || layer == EnumWorldBlockLayer.TRANSLUCENT;
+        } else {
+            return layer == EnumWorldBlockLayer.SOLID || layer == EnumWorldBlockLayer.TRANSLUCENT;
+        }
     }
 
     @Override

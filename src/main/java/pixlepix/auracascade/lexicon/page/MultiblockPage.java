@@ -2,6 +2,7 @@ package pixlepix.auracascade.lexicon.page;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -88,8 +89,8 @@ public class MultiblockPage extends PageText {
             yOffPartial = (structureHeight - 1) * 12 + structureWidth * 5 + structureLength * 5 + 16;
             int yOffTotal = Math.max(48, yOffPartial + 16);
 
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            GlStateManager.disableDepth();
+            GlStateManager.enableRescaleNormal();
             RenderHelper.enableGUIStandardItemLighting();
             int i = 0;
             ItemStack highlighted = null;
@@ -101,7 +102,7 @@ public class MultiblockPage extends PageText {
                         for (int w = row.length - 1; w >= 0; w--) {
                             int xx = 60 + xHalf - 10 * w + 10 * l - 7;
                             int yy = yOffPartial - 5 * w - 5 * l - 12 * h;
-                            GL11.glTranslated(0, 0, 1);
+                            GlStateManager.translate(0, 0, 1);
                             if (row[w] != null && i <= limiter) {
                                 i++;
                                 Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(row[w], x + xx, y + yy);
@@ -112,11 +113,11 @@ public class MultiblockPage extends PageText {
                     }
                 }
 
-            GL11.glTranslated(0, 0, -i);
+            GlStateManager.translate(0, 0, -i);
             RenderHelper.disableStandardItemLighting();
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GlStateManager.disableRescaleNormal();
+            GlStateManager.enableBlend();
+            GlStateManager.enableDepth();
 
             Minecraft.getMinecraft().fontRendererObj.setUnicodeFlag(false);
             if (highlighted != null) {

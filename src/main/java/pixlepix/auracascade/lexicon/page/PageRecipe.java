@@ -11,6 +11,7 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -89,7 +90,7 @@ public class PageRecipe extends LexiconPage {
 
         tooltipStack = tooltipContainerStack = null;
         tooltipEntry = false;
-        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.disableBlend();
         mouseDownLastTick = Mouse.isButtonDown(0);
     }
 
@@ -139,16 +140,16 @@ public class PageRecipe extends LexiconPage {
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
         boolean mouseDown = Mouse.isButtonDown(0);
 
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         RenderHelper.enableGUIStandardItemLighting();
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.enableDepth();
         render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
         render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRendererObj, stack, xPos, yPos, "");
         RenderHelper.disableStandardItemLighting();
-        GL11.glPopMatrix();
+        GlStateManager.popMatrix();
 
         if (relativeMouseX >= xPos && relativeMouseY >= yPos && relativeMouseX <= xPos + 16 && relativeMouseY <= yPos + 16) {
             tooltipStack = stack;
@@ -171,7 +172,7 @@ public class PageRecipe extends LexiconPage {
             }
         }
 
-        GL11.glDisable(GL11.GL_LIGHTING);
+        GlStateManager.disableLighting();
     }
 
 }

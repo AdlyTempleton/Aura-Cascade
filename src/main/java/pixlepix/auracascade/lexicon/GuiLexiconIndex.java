@@ -13,6 +13,7 @@ package pixlepix.auracascade.lexicon;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.input.Mouse;
@@ -152,7 +153,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
         if (!searchField.getText().isEmpty()) {
             drawBookmark(left + 138, top + guiHeight - 24, "  " + searchField.getText(), false);
             mc.renderEngine.bindTexture(texture);
-            GL11.glColor4f(1F, 1F, 1F, 1F);
+            GlStateManager.color(1F, 1F, 1F, 1F);
             drawTexturedModalRect(left + 134, top + guiHeight - 26, 86, 180, 12, 12);
         }
     }

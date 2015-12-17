@@ -11,6 +11,7 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -37,13 +38,13 @@ public class PageImage extends LexiconPage {
         TextureManager render = Minecraft.getMinecraft().renderEngine;
         render.bindTexture(resource);
 
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1F, 1F, 1F, 1F);
-        GL11.glTranslated(gui.getLeft() + gui.getWidth() / 8, gui.getTop() + gui.getHeight() / 8, 0);
-        GL11.glScaled(.5, .5, .5);
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.color(1F, 1F, 1F, 1F);
+        GlStateManager.translate(gui.getLeft() + gui.getWidth() / 8, gui.getTop() + gui.getHeight() / 8, 0);
+        GlStateManager.scale(.5, .5, .5);
         ((GuiScreen) gui).drawTexturedModalRect(0, 0, 0, 0, (int) (gui.getWidth() * 1.5) + 5, (int) (gui.getHeight() * 1.5) - 15);
-        GL11.glDisable(GL11.GL_BLEND);
+        GlStateManager.disableBlend();
 
         int width = gui.getWidth() - 30;
         int height = gui.getHeight();
