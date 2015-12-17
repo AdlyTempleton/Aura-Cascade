@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "top": "aura:blocks/magicBookshelf_Top",
+    "side": "aura:blocks/magicBookshelf"
+  }
+}

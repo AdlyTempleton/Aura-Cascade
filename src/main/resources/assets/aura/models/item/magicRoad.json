@@ -1,5 +1,5 @@
 {
-  "parent": "aura:block/auraNode",
+  "parent": "aura:block/magicRoad",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

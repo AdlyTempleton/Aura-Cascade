@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "aura:blocks/craftingCenterNode_Bottom",
+    "top": "aura:blocks/craftingCenterNode_Top",
+    "side": "aura:blocks/craftingCenterNode_Side"
+  }
+}

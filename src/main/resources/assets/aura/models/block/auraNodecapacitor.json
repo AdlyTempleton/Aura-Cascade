@@ -1,0 +1,8 @@
+{
+  "parent": "aura:block/miniblock_top_bottom",
+  "textures": {
+    "top": "aura:blocks/capacitorNode_Top",
+    "bottom": "aura:blocks/capacitorNode_Bottom",
+    "side": "aura:blocks/capacitorNode_Side"
+  }
+}

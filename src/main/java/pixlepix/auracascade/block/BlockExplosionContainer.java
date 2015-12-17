@@ -198,7 +198,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      */
     @Override
     public EnumWorldBlockLayer getBlockLayer() {
-        return EnumWorldBlockLayer.CUTOUT_MIPPED; // todo 1.8.8
+        return EnumWorldBlockLayer.TRANSLUCENT; // todo 1.8.8
     }
 
     @Override

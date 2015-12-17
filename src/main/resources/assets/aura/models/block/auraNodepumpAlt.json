@@ -1,0 +1,6 @@
+{
+  "parent": "aura:block/auraNodepump",
+  "textures": {
+    "side": "aura:blocks/pumpNode_Side_Alt"
+  }
+}

@@ -141,6 +141,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
             worldObj.markBlockForUpdate(getPos());
         }
         if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
+/* todo 1.8.8 this causes an infinite loop wtf
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
             ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
@@ -168,6 +169,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
                 }
             }
             hasCheckedShelves = true;
+*/
         }
     }
 

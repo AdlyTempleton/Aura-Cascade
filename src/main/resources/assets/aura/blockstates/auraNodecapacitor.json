@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "bursting=false": {
+      "model": "aura:auraNodecapacitor"
+    },
+    "bursting=true": {
+      "model": "aura:auraNodecapacitor"
+    }
+  }
+}

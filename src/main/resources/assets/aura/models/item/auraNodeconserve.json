@@ -1,5 +1,5 @@
 {
-  "parent": "aura:block/auraNode",
+  "parent": "aura:block/auraNodeconserve",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],
