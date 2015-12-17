@@ -6,6 +6,7 @@ import cofh.api.energy.IEnergyReceiver;
 // todo 1.8.8 await duct update import cofh.api.transport.IEnderEnergyHandler;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import de.npe.gameanalytics.events.GAErrorEvent;
 import net.minecraft.nbt.NBTTagCompound;
@@ -87,7 +88,7 @@ public class AuraTileRF extends AuraTile {
 
             for (BlockPos pos : foundTiles) {
 
-                String modid = GameRegistry.findUniqueIdentifierFor(worldObj.getBlockState(pos).getBlock()).modId; // todo 1.8.8 deprecated
+                String modid = GameData.getBlockRegistry().getNameForObject(worldObj.getBlockState(pos).getBlock()).getResourceDomain();
                 TileEntity te = worldObj.getTileEntity(pos);
                 // todo 1.8.8 await duct update
                 // if (te instanceof IEnderEnergyHandler) {

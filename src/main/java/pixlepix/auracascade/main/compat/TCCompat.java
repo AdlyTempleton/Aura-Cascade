@@ -1,6 +1,10 @@
 package pixlepix.auracascade.main.compat;
 
+import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.registry.GameData;
 import pixlepix.auracascade.block.AuraBlock;
+import pixlepix.auracascade.block.AuraBlockCapacitor;
 import pixlepix.auracascade.registry.BlockRegistry;
 import thaumcraft.api.ThaumcraftApi;
 
@@ -10,6 +14,12 @@ import thaumcraft.api.ThaumcraftApi;
 public class TCCompat {
 
     public static void postInit() {
-        // todo 1.8.8 ThaumcraftApi.portableHoleBlackList.addAll(BlockRegistry.getBlockFromClass(AuraBlock.class));
+        for (Block b : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
+            FMLInterModComms.sendMessage("thaumcraft", "portableHoleBlacklist", GameData.getBlockRegistry().getNameForObject(b).toString());
+        }
+
+        for (Block b : BlockRegistry.getBlockFromClass(AuraBlockCapacitor.class)) {
+            FMLInterModComms.sendMessage("thaumcraft", "portableHoleBlacklist", GameData.getBlockRegistry().getNameForObject(b).toString());
+        }
     }
 }

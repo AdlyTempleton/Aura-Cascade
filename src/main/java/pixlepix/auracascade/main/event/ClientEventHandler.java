@@ -26,9 +26,6 @@ public class ClientEventHandler {
     @SubscribeEvent
     public void registerEvent(TextureStitchEvent.Pre event) {
         ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
-        for (int i = 0; i < 10; i++) {
-            clientProxy.breakingIcons[i] = event.map.registerSprite(new ResourceLocation("destroy_stage_" + i));
-        }
-        clientProxy.blankIcon = event.map.registerSprite(new ResourceLocation("aura:blank")); // todo 1.8 recheck resourcelocations
+        clientProxy.blankIcon = event.map.registerSprite(new ResourceLocation("aura:blocks/blank"));
     }
 }

@@ -1,6 +1,7 @@
 package pixlepix.auracascade.particle;
 
 import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -9,6 +10,7 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
 
 /**
  * Created by pixlepix on 11/30/14.
@@ -35,15 +37,15 @@ public class ParticleSphere extends EntityFX {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderParticle(WorldRenderer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
-
-//        par1Tessellator.draw(); todo 1.8.8
-//        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
-//        par1Tessellator.startDrawingQuads();
-//        par1Tessellator.setBrightness(200);//make sure you have this!!
+        // todo 1.8.8 verify
+        Tessellator.getInstance().draw();
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
+        wr.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
+        wr.putBrightness4(200, 200, 200, 200);
         super.renderParticle(wr, e, par2, par3, par4, par5, par6, par7);
-//        par1Tessellator.draw();
-//        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/particle/particles.png"));
-//        par1Tessellator.startDrawingQuads();
+        Tessellator.getInstance().draw();
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("textures/particle/particles.png"));
+        wr.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
     }
 
 

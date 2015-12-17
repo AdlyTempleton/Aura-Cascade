@@ -19,8 +19,8 @@ import java.util.Random;
  * Created by localmacaccount on 1/19/15.
  */
 public class PotionBlueCurse extends Potion {
-    public PotionBlueCurse(int id) {
-        super(id, new ResourceLocation(ConstantMod.modId, "blue_curse"), true, EnumAura.BLUE_AURA.color.getHex());
+    public PotionBlueCurse() {
+        super(new ResourceLocation(ConstantMod.modId, "blue_curse"), true, EnumAura.BLUE_AURA.color.getHex());
         setPotionName("Blue Curse");
 
     }

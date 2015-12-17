@@ -168,10 +168,6 @@ public class AuraUtil {
         }
     }
 
-    public static int getItemAge(EntityItem item) {
-        return ((Integer) ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, item, "age", "field_70292_b", "c"));
-    }
-
     public static void setItemAge(EntityItem item, int age) {
         ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, item, age, "age", "field_70292_b", "c");
     }

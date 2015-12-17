@@ -18,9 +18,6 @@ public class RenderPedestal extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f, int digProgress) {
-//        RenderBlocks.getInstance().blockAccess = tileEntity.getWorldObj(); todo 1.8.8 why the hell is the tesr rendering a static model
-//        RenderBlocks.getInstance().renderBlockAllFaces(tileEntity.getBlockType(), (int) x, (int) y, (int) z);
-
         AuraTilePedestal pedestal = (AuraTilePedestal) tileEntity;
         if (pedestal.itemStack != null) {
             if (pedestal.entityItem == null || !ItemStack.areItemStacksEqual(pedestal.entityItem.getEntityItem(), pedestal.itemStack)) {

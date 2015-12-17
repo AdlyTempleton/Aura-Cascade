@@ -75,7 +75,7 @@ public class ComponentAuraHut extends StructureVillagePieces.WoodHut {
 
         this.setBlockState(p_74875_1_, Blocks.air.getDefaultState(), 1, 1, 0, p_74875_3_);
         this.setBlockState(p_74875_1_, Blocks.air.getDefaultState(), 1, 2, 0, p_74875_3_);
-        this.placeDoorCurrentPosition(p_74875_1_, p_74875_3_, p_74875_2_, 1, 1, 0, EnumFacing.SOUTH); // todo 1.8.8 check facing
+        this.placeDoorCurrentPosition(p_74875_1_, p_74875_3_, p_74875_2_, 1, 1, 0, EnumFacing.SOUTH);
 
         if (this.getBlockStateFromPos(p_74875_1_, 1, 0, -1, p_74875_3_).getBlock().getMaterial() == Material.air && this.getBlockStateFromPos(p_74875_1_, 1, -1, -1, p_74875_3_).getBlock().getMaterial() != Material.air) {
             this.setBlockState(p_74875_1_, Blocks.stone_stairs.getStateFromMeta(this.getMetadataWithOffset(Blocks.stone_stairs, 3)), 1, 0, -1, p_74875_3_);

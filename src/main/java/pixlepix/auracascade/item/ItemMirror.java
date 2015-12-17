@@ -1,5 +1,8 @@
 package pixlepix.auracascade.item;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.Entity;
@@ -20,6 +23,7 @@ import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -79,17 +83,13 @@ public class ItemMirror extends Item implements ITTinkererItem {
             AxisAlignedBB axisAlignedBB = new AxisAlignedBB(entity.posX - 100, entity.posY - 100, entity.posZ - 100, entity.posX + 100, entity.posY + 100, entity.posZ + 100);
 
 
-            List<EntityFireball> targets = entity.worldObj.getEntitiesWithinAABB(EntityFireball.class, axisAlignedBB);
-            Iterator<EntityFireball> iter = targets.iterator();
-            while (iter.hasNext()) {
-                EntityLivingBase shooter = iter.next().shootingEntity;
-                if (!(shooter instanceof EntityBlaze || shooter instanceof EntityGhast)) {
-                    iter.remove();
+            List<EntityFireball> targets = ImmutableList.copyOf(Iterables.filter(entity.worldObj.getEntitiesWithinAABB(EntityFireball.class, axisAlignedBB), new Predicate<EntityFireball>() {
+                @Override
+                public boolean apply(EntityFireball input) {
+                    return input.shootingEntity instanceof EntityBlaze || input.shootingEntity instanceof EntityGhast;
                 }
-            }
-            // todo 1.8.8 what the actual fuck (possible fix above?)
-//            ArrayList<EntityFireball> targets = (ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityBlaze.class, axisAlignedBB);
-//            targets.addAll((ArrayList<EntityFireball>) entity.worldObj.getEntitiesWithinAABB(EntityGhast.class, axisAlignedBB));
+            }));
+
             if (targets.size() > 0) {
 
                 //Check to make sure the fireball is traveling towards the player

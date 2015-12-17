@@ -31,13 +31,6 @@ public class Config {
     public static boolean questline = true;
     public static boolean villageGeneration = true;
 
-    public static int potionRed = 93;
-    public static int potionOrange = 94;
-    public static int potionYellow = 95;
-    public static int potionGreen = 96;
-    public static int potionBlue = 97;
-    public static int potionViolet = 98;
-
     public static int enchantRed = 110;
     public static int enchantOrange = 111;
     public static int enchantYellow = 112;
@@ -84,13 +77,6 @@ public class Config {
         villageGeneration = config.getBoolean("generateVillage", Configuration.CATEGORY_GENERAL, villageGeneration, "");
 
         overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
-
-        potionRed = config.getInt("potionRed", Configuration.CATEGORY_GENERAL, potionRed, 1, 128, "Red Potion ID");
-        potionOrange = config.getInt("potionOrange", Configuration.CATEGORY_GENERAL, potionOrange, 1, 128, "Orange Potion ID");
-        potionYellow = config.getInt("potionYellow", Configuration.CATEGORY_GENERAL, potionYellow, 1, 128, "Yellow Potion ID");
-        potionBlue = config.getInt("potionBlue", Configuration.CATEGORY_GENERAL, potionBlue, 1, 128, "Blue Potion ID");
-        potionGreen = config.getInt("potionGreen", Configuration.CATEGORY_GENERAL, potionGreen, 1, 128, "Green Potion ID");
-        potionViolet = config.getInt("potionViolet", Configuration.CATEGORY_GENERAL, potionViolet, 1, 128, "Violet Potion ID");
 
         enchantRed = config.getInt("enchantRed", Configuration.CATEGORY_GENERAL, enchantRed, 1, 256, "Red Enchant ID");
         enchantOrange = config.getInt("enchantOrange", Configuration.CATEGORY_GENERAL, enchantOrange, 1, 256, "Orange Enchant ID");
