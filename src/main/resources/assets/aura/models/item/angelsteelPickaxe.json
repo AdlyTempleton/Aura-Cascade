@@ -1,0 +1,6 @@
+{
+  "parent": "aura:item/standard_tool",
+  "textures": {
+    "layer0": "aura:items/angel_pickaxe"
+  }
+}

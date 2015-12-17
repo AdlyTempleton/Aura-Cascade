@@ -18,14 +18,14 @@ import pixlepix.auracascade.registry.BlockRegistry;
 /**
  * Created by pixlepix on 12/8/14.
  */
-public class RenderEntityFairy extends Render {
+public class RenderEntityFairy extends Render<EntityFairy> {
 
     public RenderEntityFairy(RenderManager renderManager) {
         super(renderManager);
     }
 
     @Override
-    public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
+    public void doRender(EntityFairy entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
 
         ItemStack stack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100);
 
@@ -39,7 +39,7 @@ public class RenderEntityFairy extends Render {
 
 
         // todo 1.8.8
-        Minecraft.getMinecraft().getRenderItem().func_181564_a(stack, ItemCameraTransforms.TransformType.GROUND);
+        Minecraft.getMinecraft().getRenderItem().renderItemModelForEntity(stack, entity.player, ItemCameraTransforms.TransformType.GROUND);
 
         GlStateManager.disableBlend();
         GlStateManager.disableLighting();
@@ -63,7 +63,7 @@ public class RenderEntityFairy extends Render {
 
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    protected ResourceLocation getEntityTexture(EntityFairy p_110775_1_) {
         return new ResourceLocation("minecraft", "/blocks/cobblestone.png");
     }
 }

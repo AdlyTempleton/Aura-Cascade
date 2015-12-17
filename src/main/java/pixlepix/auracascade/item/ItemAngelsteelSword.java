@@ -57,7 +57,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         return true;
     }
 
-    public EnumAura getAura(ItemStack stack) {
+    public static EnumAura getAura(ItemStack stack) {
         if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("aura")) {
             return EnumAura.values()[stack.getTagCompound().getInteger("aura")];
 

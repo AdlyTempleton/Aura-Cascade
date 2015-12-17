@@ -212,10 +212,6 @@ public class BlockRegistry {
             }
         }
 
-    }
-
-    public void init() {
-
         for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
             for (Item item : itemArrayList) {
                 if (!(item instanceof ItemBlock)) {
@@ -227,6 +223,10 @@ public class BlockRegistry {
                 }
             }
         }
+    }
+
+    public void init() {
+
         for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
             for (Item item : itemArrayList) {
                 registerRecipe((ITTinkererRegisterable) item);
@@ -236,10 +236,8 @@ public class BlockRegistry {
         for (ArrayList<Block> blockArrayList : blockRegistry.values()) {
             for (Block block : blockArrayList) {
                 registerRecipe((ITTinkererRegisterable) block);
-
             }
         }
-
 
     }
 

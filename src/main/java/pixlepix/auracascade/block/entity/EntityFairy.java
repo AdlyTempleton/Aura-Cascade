@@ -114,7 +114,7 @@ public class EntityFairy extends Entity {
 
     @Override
     public AxisAlignedBB getEntityBoundingBox() {
-        return null;
+        return new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     }
 
     @Override

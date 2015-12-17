@@ -32,6 +32,11 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     }
 
     @Override
+    public int getRenderType() {
+        return -1;
+    }
+
+    @Override
     public boolean isReplaceable(World world, BlockPos pos) {
         return true;
     }

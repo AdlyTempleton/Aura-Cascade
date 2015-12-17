@@ -57,7 +57,7 @@
     },
 
     "inventory": [{
-      "custom": { "base": "aura:fortifiedObsidian#base", "Solid": "aura:fortifiedObsidian#base", "Translucent": "aura:fortifiedObsidian#base" }
+      "custom": { "base": "aura:fortifiedDirt#base", "Solid": "aura:fortifiedDirt#base", "Translucent": "aura:fortifiedDirt#base" }
     }],
 
 

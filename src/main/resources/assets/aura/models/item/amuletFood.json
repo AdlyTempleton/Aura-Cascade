@@ -1,0 +1,6 @@
+{
+  "parent": "aura:item/standard_item",
+  "textures": {
+    "layer0": "aura:items/amuletFood"
+  }
+}
