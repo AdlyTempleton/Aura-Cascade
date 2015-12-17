@@ -1,5 +1,7 @@
 package pixlepix.auracascade.item.books;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
@@ -29,16 +31,16 @@ public class ModStorageBook extends ItemStorageBook {
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         ArrayList<ItemStack> inv = tileStorageBookshelf.inv;
-        GameRegistry.UniqueIdentifier uid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
-        if (uid == null || uid.modId == null) {
+        ResourceLocation uid = GameData.getItemRegistry().getNameForObject(stack.getItem());
+        if (uid == null || uid.getResourceDomain() == null) {
             return false;
         }
         for (ItemStack stackInInv : inv) {
-            if (stackInInv != null && !uid.modId.equals(GameRegistry.findUniqueIdentifierFor(stackInInv.getItem()).modId)) {
+            if (stackInInv != null && !uid.getResourceDomain().equals(GameData.getItemRegistry().getNameForObject(stackInInv.getItem()).getResourceDomain())) {
                 return false;
             }
         }
-        return !uid.modId.equals("minecraft");
+        return !uid.getResourceDomain().equals("minecraft");
     }
 
     @Override
