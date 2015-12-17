@@ -44,23 +44,23 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         type = "Dirt";
         setTickRandomly(true);
         setHardness(2F);
-        setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
+        //setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
     }
 
-    @Override
-    public BlockState createBlockState() {
-        return new BlockState(this, DAMAGE);
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(DAMAGE);
-    }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(DAMAGE, meta);
-    }
+//    @Override
+//    public BlockState createBlockState() {
+//        return new BlockState(this, DAMAGE);
+//    }
+//
+//    @Override
+//    public int getMetaFromState(IBlockState state) {
+//        return state.getValue(DAMAGE);
+//    }
+//
+//    @Override
+//    public IBlockState getStateFromMeta(int meta) {
+//        return getDefaultState().withProperty(DAMAGE, meta);
+//    }
 
     public BlockExplosionContainer(String s) {
         this();
@@ -101,11 +101,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(world, pos, state, rand);
         if (rand.nextDouble() < getChanceToRepair()) {
-            int damage = state.getValue(DAMAGE);
-            if (damage > 0) {
-                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
-
-            }
+//            int damage = state.getValue(DAMAGE);
+//            if (damage > 0) {
+//                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
+//            }
         }
         world.scheduleUpdate(pos, this, tickRate(world) + rand.nextInt(5));
     }
@@ -193,12 +192,9 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         return block != this;
     }
 
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
     @Override
-    public EnumWorldBlockLayer getBlockLayer() {
-        return EnumWorldBlockLayer.TRANSLUCENT; // todo 1.8.8
+    public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
+        return layer == EnumWorldBlockLayer.SOLID || layer == EnumWorldBlockLayer.TRANSLUCENT;
     }
 
     @Override
@@ -214,28 +210,6 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     @Override
     public boolean shouldDisplayInTab() {
         return true;
-    }
-
-//    @Override todo 1.8.8
-//    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-//        int meta = world.getBlockMetadata(x, y, z);
-//        if (AuraCascade.proxy.renderPass == 1) {
-//            if (meta != 0) {
-//                return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
-//            } else {
-//                return AuraCascade.proxy.blankIcon;
-//            }
-//        }
-//        return blockIcon;
-//    }
-
-    public int getCrackedStage(int meta) {
-        if (meta <= 5) {
-            return meta - 1;
-        } else {
-            return (int) (4 + Math.ceil((meta - 5) / 2));
-        }
-
     }
 
     @Override

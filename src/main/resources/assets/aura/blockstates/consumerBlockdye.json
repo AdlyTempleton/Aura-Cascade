@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockdye"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockdye"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockdye"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockdye"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockore"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockore"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockore"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockore"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockangel"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockangel"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockangel"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockangel"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockfurnace"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockfurnace",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockfurnace",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockfurnace",
+      "y": 90
+    }
+  }
+}

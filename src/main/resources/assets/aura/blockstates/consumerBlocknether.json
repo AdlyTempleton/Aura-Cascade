@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlocknether"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlocknether"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlocknether"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlocknether"
+    }
+  }
+}

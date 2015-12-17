@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockminer"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockminer"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockminer"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockminer"
+    }
+  }
+}

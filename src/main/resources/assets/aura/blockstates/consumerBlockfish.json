@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockfish"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockfish"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockfish"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockfish"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockplant"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockplant"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockplant"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockplant"
+    }
+  }
+}

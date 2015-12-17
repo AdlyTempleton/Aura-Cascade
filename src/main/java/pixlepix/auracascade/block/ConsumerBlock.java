@@ -88,7 +88,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
 
     @Override
     public void onBlockPlacedBy(World w, BlockPos pos, IBlockState state, EntityLivingBase livingBase, ItemStack stack) {
-        w.setBlockState(pos, state.withProperty(FACING, livingBase.getHorizontalFacing()));
+        w.setBlockState(pos, state.withProperty(FACING, livingBase.getHorizontalFacing().getOpposite()));
         AuraUtil.updateMonitor(w, pos);
     }
     @Override

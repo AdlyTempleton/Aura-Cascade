@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockmob"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockmob"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockmob"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockmob"
+    }
+  }
+}

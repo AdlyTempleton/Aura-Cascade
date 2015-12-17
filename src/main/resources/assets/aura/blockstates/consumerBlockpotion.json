@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockpotion"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockpotion"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockpotion"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockpotion"
+    }
+  }
+}

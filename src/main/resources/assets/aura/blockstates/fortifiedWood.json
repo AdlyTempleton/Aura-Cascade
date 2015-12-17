@@ -1,52 +1,25 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:multi-layer",
+    "custom": {
+      "base": "aura:fortifiedWood#base",
+      "Solid": "aura:fortifiedWood#base",
+      "Translucent": "minecraft:pink_stained_glass_pane#east=true,north=false,south=false,west=true"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "damage=0": {
-      "model": "aura:fortifiedWood"
-    },
-    "damage=1": {
-      "model": "aura:fortifiedWood1"
-    },
-    "damage=2": {
-      "model": "aura:fortifiedWood2"
-    },
-    "damage=3": {
-      "model": "aura:fortifiedWood3"
-    },
-    "damage=4": {
-      "model": "aura:fortifiedWood4"
-    },
-    "damage=5": {
-      "model": "aura:fortifiedWood5"
-    },
-    "damage=6": {
-      "model": "aura:fortifiedWood6"
-    },
-    "damage=7": {
-      "model": "aura:fortifiedWood7"
-    },
-    "damage=8": {
-      "model": "aura:fortifiedWood8"
-    },
-    "damage=9": {
-      "model": "aura:fortifiedWood9"
-    },
-    "damage=10": {
-      "model": "aura:fortifiedWood10"
-    },
-    "damage=11": {
-      "model": "aura:fortifiedWood11"
-    },
-    "damage=12": {
-      "model": "aura:fortifiedWood12"
-    },
-    "damage=13": {
-      "model": "aura:fortifiedWood13"
-    },
-    "damage=14": {
-      "model": "aura:fortifiedWood14"
-    },
-    "damage=15": {
-      "model": "aura:fortifiedWood15"
-    }
+    "normal": [{}],
+    "inventory": [{}],
+    "base": [{
+      "model": "minecraft:block/cube_all",
+      "textures": { "all": "aura:blocks/fortifiedWood" }
+    }],
+    "breaking": [{
+      "model": "minecraft:block/cube_all",
+      "textures": { "all": "minecraft:blocks/destroy_stage_9" }
+    }]
   }
 }
+

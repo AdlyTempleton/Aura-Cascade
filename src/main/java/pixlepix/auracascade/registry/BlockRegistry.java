@@ -1,5 +1,6 @@
 package pixlepix.auracascade.registry;
 
+import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -16,7 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class BlockRegistry {
 
@@ -25,6 +28,14 @@ public class BlockRegistry {
     private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
     private ArrayList<Class> itemClasses = new ArrayList<Class>();
     private ArrayList<Class> blockClasses = new ArrayList<Class>();
+
+    public static Set<Item> getAllItems() {
+        Set<Item> ret = Sets.newHashSet();
+        for (List<Item> list : itemRegistry.values()) {
+            ret.addAll(list);
+        }
+        return ret;
+    }
 
     public static ThaumicTinkererRecipe getRecipe(ITTinkererRegisterable item) {
         return recipeMap.get(item);

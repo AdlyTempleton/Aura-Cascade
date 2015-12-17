@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockenchant"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockenchant"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockenchant"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockenchant"
+    }
+  }
+}

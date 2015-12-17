@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "aura:consumerBlockloot"
+    },
+    "facing=south": {
+      "model": "aura:consumerBlockloot"
+    },
+    "facing=west": {
+      "model": "aura:consumerBlockloot"
+    },
+    "facing=east": {
+      "model": "aura:consumerBlockloot"
+    }
+  }
+}
