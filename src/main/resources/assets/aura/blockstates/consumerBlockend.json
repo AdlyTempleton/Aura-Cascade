@@ -1,16 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/ritualEnd"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockend"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockend"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockend"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockend"
-    }
+    "inventory": [{}]
   }
 }

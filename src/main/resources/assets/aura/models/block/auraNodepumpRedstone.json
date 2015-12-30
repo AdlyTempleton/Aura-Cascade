@@ -1,8 +1,0 @@
-{
-  "parent": "aura:block/miniblock_top_bottom",
-  "textures": {
-    "top": "aura:blocks/pumpRedstoneNode_Top",
-    "bottom": "aura:blocks/pumpRedstoneNode_Bottom",
-    "side": "aura:blocks/pumpRedstoneNode_Side"
-  }
-}

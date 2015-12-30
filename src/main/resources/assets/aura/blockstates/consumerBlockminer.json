@@ -1,16 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/miner"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockminer"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockminer"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockminer"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockminer"
-    }
+    "inventory": [{}]
   }
 }

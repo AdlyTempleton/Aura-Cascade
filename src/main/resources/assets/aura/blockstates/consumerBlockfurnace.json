@@ -1,19 +1,21 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:orientable",
+    "textures": {
+      "top": "aura:blocks/auraFurnace_top",
+      "front": "aura:blocks/auraFurnace_front",
+      "side": "aura:blocks/auraFurnace_side"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockfurnace"
+    "facing": {
+      "north": {},
+      "south": { "y": 180 },
+      "west": { "y": 270 },
+      "east": { "y": 90 }
     },
-    "facing=south": {
-      "model": "aura:consumerBlockfurnace",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockfurnace",
-      "y": 270
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockfurnace",
-      "y": 90
-    }
+    "inventory": [{}]
   }
 }

@@ -193,9 +193,11 @@ public final class ModelHandler {
     private static void registerFairyCharms() {
         Item item = BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class);
         ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
+        ModelLoader.addVariantName(item, l.toString(), "aura:fairy_plain");
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
+        ModelLoader.setCustomModelResourceLocation(item, 100, new ModelResourceLocation("aura:fairy_plain", "inventory"));
     }
 
     private static void registerMulticolors() {

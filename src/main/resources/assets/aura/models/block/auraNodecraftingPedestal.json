@@ -1,8 +1,0 @@
-{
-  "parent": "aura:block/miniblock_top_bottom",
-  "textures": {
-    "top": "aura:blocks/craftingPedestalNode_Top",
-    "bottom": "aura:blocks/craftingPedestalNode_Bottom",
-    "side": "aura:blocks/craftingPedestalNode_Side"
-  }
-}

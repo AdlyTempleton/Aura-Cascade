@@ -22,10 +22,4 @@ public class ClientEventHandler {
             AuraCascade.proxy.networkWrapper.sendToServer(new PacketAngelJump(AuraCascade.proxy.getPlayer(), false));
         }
     }
-
-    @SubscribeEvent
-    public void registerEvent(TextureStitchEvent.Pre event) {
-        ClientProxy clientProxy = (ClientProxy) AuraCascade.proxy;
-        clientProxy.blankIcon = event.map.registerSprite(new ResourceLocation("aura:blocks/blank"));
-    }
 }

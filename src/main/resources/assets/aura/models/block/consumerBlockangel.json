@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_top",
-  "textures": {
-    "top": "aura:blocks/auraAngelTop",
-    "side": "aura:blocks/auraAngel"
-  }
-}

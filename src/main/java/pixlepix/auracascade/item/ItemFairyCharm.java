@@ -137,11 +137,6 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         }
     }
 
-//    @Override
-//    public IIcon getIconFromDamage(int damage) {
-//        return damage == 100 ? fairyIcon : itemIcon;
-//    }
-
     @Override
     public int getItemStackLimit(ItemStack stack) {
         return 16;
@@ -149,6 +144,9 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
+        if (stack.getItemDamage() >= fairyClasses.length) {
+            return "invalid";
+        }
         return super.getItemStackDisplayName(stack) + ": " + getNameFromFairy(fairyClasses[stack.getItemDamage()]);
     }
 

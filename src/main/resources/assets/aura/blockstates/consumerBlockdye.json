@@ -1,16 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/dye"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockdye"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockdye"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockdye"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockdye"
-    }
+    "inventory": [{}]
   }
 }

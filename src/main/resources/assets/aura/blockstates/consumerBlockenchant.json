@@ -1,16 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/enchanter"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockenchant"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockenchant"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockenchant"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockenchant"
-    }
+    "inventory": [{}]
   }
 }

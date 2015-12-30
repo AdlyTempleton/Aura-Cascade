@@ -4,10 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -20,6 +23,8 @@ import pixlepix.auracascade.registry.BlockRegistry;
  */
 public class RenderEntityFairy extends Render<EntityFairy> {
 
+    private final ItemStack stack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100);
+
     public RenderEntityFairy(RenderManager renderManager) {
         super(renderManager);
     }
@@ -27,43 +32,24 @@ public class RenderEntityFairy extends Render<EntityFairy> {
     @Override
     public void doRender(EntityFairy entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
 
-        ItemStack stack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100);
-
         GlStateManager.pushMatrix();
-        GlStateManager.enableLighting();
-        GlStateManager.enableBlend();
-        //This parameter is never used ._.
-
-        Minecraft.getMinecraft().entityRenderer.disableLightmap();
-
-
-
-        // todo 1.8.8
-        Minecraft.getMinecraft().getRenderItem().renderItemModelForEntity(stack, entity.player, ItemCameraTransforms.TransformType.GROUND);
-
-        GlStateManager.disableBlend();
-        GlStateManager.disableLighting();
+        GlStateManager.translate(x, y, z);
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.scale(0.5F, 0.5F, 0.5F);
+        // Billboard towards the player
+        GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+        this.bindTexture(TextureMap.locationBlocksTexture);
+        Minecraft.getMinecraft().getRenderItem().func_181564_a(stack, ItemCameraTransforms.TransformType.GROUND);
+        GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();
+        super.doRender(entity, x, y, z, p_76986_8_, p_76986_9_);
 
-
-        Minecraft.getMinecraft().entityRenderer.enableLightmap();
-
-            /*
-            GlStateManager.pushMatrix();
-            this.entityItem.hoverStart = 0.0F;
-            RenderItem.renderInFrame = true;
-            GlStateManager.translate((float) x + 0.5F, (float) y + 2.02F, (float) z + 0.3F);
-            //GL11.glRotatef(180, 0, 1, 1);
-
-            RenderManager.instance.renderEntityWithPosYaw(this.entityItem, 0.0D, 0.0D, 0.0D, (float) Math.PI, 0);
-            RenderItem.renderInFrame = false;
-            GlStateManager.popMatrix();
-            */
     }
 
 
     @Override
     protected ResourceLocation getEntityTexture(EntityFairy p_110775_1_) {
-        return new ResourceLocation("minecraft", "/blocks/cobblestone.png");
+        return TextureMap.locationBlocksTexture;
     }
 }

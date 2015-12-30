@@ -1,16 +1,20 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_top",
+    "textures": {
+      "top": "aura:blocks/auraLootTop",
+      "side": "aura:blocks/auraLoot"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockloot"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockloot"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockloot"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockloot"
-    }
+    "inventory": [{}]
   }
 }

@@ -1,16 +1,20 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_top",
+    "textures": {
+      "top": "aura:blocks/auraGrowTop",
+      "side": "aura:blocks/auraGrow"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockplant"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockplant"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockplant"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockplant"
-    }
+    "inventory": [{}]
   }
 }

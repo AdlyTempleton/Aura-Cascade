@@ -1,7 +1,14 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/coordinator"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "normal":  {
-      "model": "aura:storageBookshelfCoordinator"
-    }
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

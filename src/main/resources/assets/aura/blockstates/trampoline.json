@@ -1,7 +1,16 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aura:biggerThanSlab",
+    "textures": {
+      "bottom": "aura:blocks/trampoline",
+      "top": "aura:blocks/trampoline",
+      "side": "aura:blocks/trampoline"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "normal": {
-      "model": "aura:trampoline"
-    }
+    "normal": [{}],
+    "inventory": [{}]
   }
 }

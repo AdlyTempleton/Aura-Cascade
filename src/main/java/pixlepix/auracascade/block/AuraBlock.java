@@ -116,6 +116,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
+    public boolean isBlockNormalCube() {
+        return false;
+    }
+
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }

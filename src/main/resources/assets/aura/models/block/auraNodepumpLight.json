@@ -1,8 +1,0 @@
-{
-  "parent": "aura:block/miniblock_top_bottom",
-  "textures": {
-    "top": "aura:blocks/pumpLightNode_Top",
-    "bottom": "aura:blocks/pumpLightNode_Bottom",
-    "side": "aura:blocks/pumpLightNode_Side"
-  }
-}

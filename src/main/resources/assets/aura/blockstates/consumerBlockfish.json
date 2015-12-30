@@ -1,16 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "aura:blocks/auraFish"
+    },
+    "transform": "forge:default-block"
+  },
   "variants": {
-    "facing=north": {
-      "model": "aura:consumerBlockfish"
+    "facing": {
+      "north": {},
+      "south": {},
+      "west": {},
+      "east": {}
     },
-    "facing=south": {
-      "model": "aura:consumerBlockfish"
-    },
-    "facing=west": {
-      "model": "aura:consumerBlockfish"
-    },
-    "facing=east": {
-      "model": "aura:consumerBlockfish"
-    }
+    "inventory": [{}]
   }
 }

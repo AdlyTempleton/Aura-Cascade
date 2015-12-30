@@ -1,5 +1,6 @@
 package pixlepix.auracascade.item.books;
 
+import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -33,7 +34,7 @@ public class FarmingStorageBook extends ItemStorageBook {
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         Item item = stack.getItem();
-        return isValid(stack, blocks, items, ores) || GameRegistry.findUniqueIdentifierFor(item).modId != null && GameRegistry.findUniqueIdentifierFor(item).modId.equals("HarvestCraft");
+        return isValid(stack, blocks, items, ores) || GameData.getItemRegistry().getNameForObject(item).getResourceDomain() != null && GameData.getItemRegistry().getNameForObject(item).getResourceDomain().equals("HarvestCraft");
     }
 
     @Override

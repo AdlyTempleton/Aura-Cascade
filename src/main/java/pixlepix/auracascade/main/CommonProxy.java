@@ -50,8 +50,6 @@ public class CommonProxy {
     public static EventHandler eventHandler;
 
     public static EnchantEventHandler eventHandlerEnch;
-    public TextureAtlasSprite[] breakingIcons = new TextureAtlasSprite[10];
-    public TextureAtlasSprite blankIcon;
 
 
     public int renderPass;
