@@ -4,11 +4,11 @@
   "name": "AuraCascade",
   "description": "A magic mod focused on emergent complexity and enabling unique designs",
   "version": "@version@",
-  "mcversion": "1.7.10",
+  "mcversion": "1.8.8",
   "logoFile": "/",
   "updateUrl": "",
   "author": "pixlepix",
-  "credits": "",
+  "credits": "williewillus: 1.8.x port",
   "parent": "",
   "screenshots": []
 }

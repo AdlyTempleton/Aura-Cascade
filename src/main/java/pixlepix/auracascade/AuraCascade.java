@@ -16,7 +16,7 @@ import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.main.ConstantMod;
 
 @SuppressWarnings("UnusedDeclaration")
-@Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles")
+@Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles", acceptedMinecraftVersions = "[1.8.8,1.8.9]")
 public class AuraCascade {
 
     public static SimpleAnalytics analytics;
