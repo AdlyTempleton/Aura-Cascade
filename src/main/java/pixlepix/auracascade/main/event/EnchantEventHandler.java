@@ -355,7 +355,9 @@ public class EnchantEventHandler {
     }
 
     public boolean containsOredict(Block block, String name) {
-
+        if (block == null || Item.getItemFromBlock(block) == null) {
+            return false;
+        }
         String oreName = OreDictionary.getOreIDs(new ItemStack(block)).length != 0 ? OreDictionary.getOreName(OreDictionary.getOreIDs(new ItemStack(block))[0]) : null;
         return oreName != null && oreName.contains(name);
     }
