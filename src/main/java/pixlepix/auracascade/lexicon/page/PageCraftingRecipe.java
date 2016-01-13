@@ -36,6 +36,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PageCraftingRecipe extends PageRecipe {
@@ -62,16 +63,16 @@ public class PageCraftingRecipe extends PageRecipe {
     }
 
     public PageCraftingRecipe(String unlocalizedName, IRecipe recipe) {
-        this(unlocalizedName, Arrays.asList(recipe));
+        this(unlocalizedName, Collections.singletonList(recipe));
     }
 
     public PageCraftingRecipe(String unlocalizedName, Class clazz) {
         super(unlocalizedName);
         if (Item.class.isAssignableFrom(clazz)) {
-            this.recipes = Arrays.asList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(clazz)).iRecipe);
+            this.recipes = Collections.singletonList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(clazz)).iRecipe);
         }
         if (Block.class.isAssignableFrom(clazz)) {
-            this.recipes = Arrays.asList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromBlock(clazz)).iRecipe);
+            this.recipes = Collections.singletonList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromBlock(clazz)).iRecipe);
         }
     }
 
@@ -155,7 +156,7 @@ public class PageCraftingRecipe extends PageRecipe {
                 for (int x = 0; x < width; x++) {
                     Object input = shaped.getInput()[y * width + x];
                     if (input != null)
-                        renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true);
+                        renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((List<ItemStack>) input).get(0), true);
                 }
 
             oreDictRecipe = true;
@@ -171,7 +172,7 @@ public class PageCraftingRecipe extends PageRecipe {
                         if (index >= shapeless.recipeItems.size())
                             break drawGrid;
 
-                        renderItemAtGridPos(gui, 1 + x, 1 + y, (ItemStack) shapeless.recipeItems.get(index), true);
+                        renderItemAtGridPos(gui, 1 + x, 1 + y, shapeless.recipeItems.get(index), true);
                     }
             }
 
@@ -190,7 +191,7 @@ public class PageCraftingRecipe extends PageRecipe {
 
                         Object input = shapeless.getInput().get(index);
                         if (input != null)
-                            renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true);
+                            renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((List<ItemStack>) input).get(0), true);
                     }
             }
 

@@ -94,7 +94,7 @@ public class OreDropManager {
 
     //Also Botania's code
     public static ItemStack getOreToPut() {
-        Collection<WeightedRandom.Item> values = new ArrayList();
+        Collection<WeightedRandom.Item> values = new ArrayList<>();
         for (String s : oreNames.keySet())
             values.add(new StringRandomItem(oreNames.get(s), s));
 

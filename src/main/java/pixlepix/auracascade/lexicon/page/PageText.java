@@ -42,7 +42,7 @@ public class PageText extends LexiconPage {
         String lastFormat = "";
         String pendingFormat = "";
         for (String s : textEntries) {
-            List<String> wrappedLines = new ArrayList();
+            List<String> wrappedLines = new ArrayList<>();
             String workingOn = "";
 
             int i = 0;

@@ -128,7 +128,7 @@ public class ResearchPage {
 		this.type = PageType.INFUSION_CRAFTING;
 		this.recipe = recipe;
 		if (recipe.getRecipeOutput() instanceof ItemStack) {
-			this.recipeOutput = (ItemStack) recipe.getRecipeOutput();
+			this.recipeOutput = recipe.getRecipeOutput();
 		} else {
 			this.recipeOutput = recipe.getRecipeInput();
 		}

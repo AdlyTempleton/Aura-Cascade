@@ -42,9 +42,7 @@ public final class ActivityReportTickEventHandler {
 					String mod;
 					try {
 						ModContainer activeMod = Loader.instance().activeModContainer();
-						StringBuilder sb = new StringBuilder(activeMod.getModId());
-						sb.append(" -> ").append(activeMod.getName());
-						mod = sb.toString();
+						mod = activeMod.getModId() + " -> " + activeMod.getName();
 					} catch (Exception e) {
 						mod = "Some mod";
 					}

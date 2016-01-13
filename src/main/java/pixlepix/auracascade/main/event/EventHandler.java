@@ -233,7 +233,7 @@ public class EventHandler {
             if (swordStack != null && swordStack.getItem() instanceof ItemThiefSword) {
                 if (event.entity instanceof EntityVillager && new Random().nextInt(4) == 0) {
                     EntityVillager villager = (EntityVillager) event.entity;
-                    ItemStack dropStack = ((MerchantRecipe) villager.getRecipes(player).get(0)).getItemToSell();
+                    ItemStack dropStack = villager.getRecipes(player).get(0).getItemToSell();
                     EntityItem entityItem = new EntityItem(player.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, dropStack);
                     event.drops.add(entityItem);
                 }

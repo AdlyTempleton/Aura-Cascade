@@ -139,7 +139,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
 
     @Override
     public void onUpdate(ItemStack stack, World w, Entity e, int p_77663_4_, boolean p_77663_5_) {
-        if (w.isRemote && e instanceof EntityPlayer && Arrays.asList(patrons).contains(((EntityPlayer) e).getDisplayName())) {
+        if (w.isRemote && e instanceof EntityPlayer && Arrays.asList(patrons).contains(e.getDisplayName().getUnformattedText())) {
             float hue = (w.getTotalWorldTime() % 1200) / 1200F;
             Color color = Color.getHSBColor(hue, 1F, .5F);
             Random r = new Random();

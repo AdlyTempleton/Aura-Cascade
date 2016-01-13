@@ -61,7 +61,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
         list.add(modes[stack.getItemDamage()]);
 

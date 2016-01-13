@@ -1,5 +1,6 @@
 package pixlepix.auracascade.data;
 
+import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
@@ -124,7 +125,7 @@ public class AuraQuantityList implements Cloneable {
         AuraQuantityList result = null;
         try {
             result = (AuraQuantityList) super.clone();
-            result.quantityList = (ArrayList<AuraQuantity>) quantityList.clone();
+            result.quantityList = Lists.newArrayList(quantityList);
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

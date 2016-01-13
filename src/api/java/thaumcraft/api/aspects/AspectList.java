@@ -223,7 +223,7 @@ public class AspectList implements Serializable {
         aspects.clear();
         NBTTagList tlist = nbttagcompound.getTagList("Aspects",(byte)10);
 		for (int j = 0; j < tlist.tagCount(); j++) {
-			NBTTagCompound rs = (NBTTagCompound) tlist.getCompoundTagAt(j);
+			NBTTagCompound rs = tlist.getCompoundTagAt(j);
 			if (rs.hasKey("key")) {
 				add(	Aspect.getAspect(rs.getString("key")),
 						rs.getInteger("amount"));
@@ -236,7 +236,7 @@ public class AspectList implements Serializable {
         aspects.clear();
         NBTTagList tlist = nbttagcompound.getTagList(label,(byte)10);
 		for (int j = 0; j < tlist.tagCount(); j++) {
-			NBTTagCompound rs = (NBTTagCompound) tlist.getCompoundTagAt(j);
+			NBTTagCompound rs = tlist.getCompoundTagAt(j);
 			if (rs.hasKey("key")) {
 				add(	Aspect.getAspect(rs.getString("key")),
 						rs.getInteger("amount"));

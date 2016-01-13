@@ -30,7 +30,7 @@ public class ItemGenericEssentiaContainer extends Item implements IEssentiaConta
 	
 	@SideOnly(Side.CLIENT)
     @Override
-	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,List par3List) {
+	public void getSubItems(Item par1, CreativeTabs par2CreativeTabs,List<ItemStack> par3List) {
     	for (Aspect tag:Aspect.aspects.values()) {
     		ItemStack i = new ItemStack(this);
     		this.setAspects(i, new AspectList().add(tag, base));

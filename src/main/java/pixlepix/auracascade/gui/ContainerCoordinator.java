@@ -57,7 +57,7 @@ public class ContainerCoordinator extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) inventorySlots.get(slot);
+        Slot slotObject = inventorySlots.get(slot);
 
         //null checks and checks if the item can be stacked (maxStackSize > 1)
         if (slotObject != null && slotObject.getHasStack()) {
@@ -241,7 +241,7 @@ public class ContainerCoordinator extends Container {
                     target.stackSize = clickedButton == 0 ? maxStackSize : maxStackSize / 2;
                     ItemStack result = takeFromInventory(target);
                     player.inventory.setItemStack(result);
-                    ((SlotCoordinator) inventorySlots.get(slot)).onPickupFromSlot(player, result);
+                    inventorySlots.get(slot).onPickupFromSlot(player, result);
                     update();
                 } else if (player.inventory.getItemStack() != null) {
                     ItemStack placedStack = player.inventory.getItemStack().copy();
@@ -268,7 +268,7 @@ public class ContainerCoordinator extends Container {
                 return null;
             }
 
-            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+            Slot slot2 = this.inventorySlots.get(slot);
 
             if (slot2 != null && slot2.canTakeStack(player)) {
                 ItemStack itemstack3 = this.transferStackInSlot(player, slot);
@@ -288,7 +288,7 @@ public class ContainerCoordinator extends Container {
                 return null;
             }
 
-            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+            Slot slot2 = this.inventorySlots.get(slot);
 
             if (slot2 != null) {
                 ItemStack stackInSlot = slot2.getStack();

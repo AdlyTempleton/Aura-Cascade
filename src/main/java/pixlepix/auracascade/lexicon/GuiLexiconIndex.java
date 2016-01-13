@@ -41,7 +41,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     GuiLexicon parent;
     GuiTextField searchField;
 
-    List<LexiconEntry> entriesToDisplay = new ArrayList();
+    List<LexiconEntry> entriesToDisplay = new ArrayList<>();
     int fx = 0;
     boolean swiped = false;
 

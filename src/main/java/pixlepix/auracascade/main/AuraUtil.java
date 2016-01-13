@@ -138,7 +138,7 @@ public class AuraUtil {
         return stack;
     }
 
-    public static void addAngelsteelDesc(List infoList, ItemStack stack) {
+    public static void addAngelsteelDesc(List<String> infoList, ItemStack stack) {
         if (AngelsteelToolHelper.hasValidBuffs(stack)) {
             int[] buffs = AngelsteelToolHelper.readFromNBT(stack.getTagCompound());
             infoList.add("Angel's Efficiency: " + buffs[0]);
@@ -150,7 +150,7 @@ public class AuraUtil {
     }
 
     public static double getDropOffset(World w) {
-        return (w.rand.nextFloat() * .7) + (double) (1.0F - .7) * 0.5D;
+        return (w.rand.nextFloat() * .7) + (1.0F - .7) * 0.5D;
     }
 
     public static void diamondBurst(Entity entity, String particle) {

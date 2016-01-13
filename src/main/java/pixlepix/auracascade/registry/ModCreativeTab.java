@@ -18,7 +18,7 @@ public class ModCreativeTab extends CreativeTabs {
     //Holds the registered items and blocks before they are sorted
     public ArrayList<ItemStack> creativeTabQueue = new ArrayList<ItemStack>();
     ItemStack displayItem;
-    List list = new ArrayList();
+    List<ItemStack> list = new ArrayList<>();
 
     public ModCreativeTab() {
         super(ConstantMod.modId);
@@ -35,7 +35,7 @@ public class ModCreativeTab extends CreativeTabs {
     }
 
     @Override
-    public void displayAllReleventItems(List list) {
+    public void displayAllReleventItems(List<ItemStack> list) {
         list.addAll(this.list);
     }
 

@@ -97,7 +97,7 @@ public class ItemFocusBasic extends Item {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack,EntityPlayer player, List list, boolean par4) {
+	public void addInformation(ItemStack stack,EntityPlayer player, List<String> list, boolean par4) {
 		AspectList al = this.getVisCost(stack);
 		if (al!=null && al.size()>0) {
 			list.add(StatCollector.translateToLocal(isVisCostPerTick(stack)?"item.Focus.cost2":"item.Focus.cost1"));

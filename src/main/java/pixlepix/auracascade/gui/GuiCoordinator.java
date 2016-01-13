@@ -215,7 +215,7 @@ public class GuiCoordinator extends GuiContainer {
 
         for (int i2 = 0; i2 < this.inventorySlots.inventorySlots.size(); ++i2)
         {
-            Slot slot = (Slot)this.inventorySlots.inventorySlots.get(i2);
+            Slot slot = this.inventorySlots.inventorySlots.get(i2);
             this.drawSlot(slot);
 
             if (this.isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered())
@@ -278,7 +278,7 @@ public class GuiCoordinator extends GuiContainer {
             int i3 = this.returningStackDestSlot.yDisplayPosition - this.touchUpY;
             int l4 = this.touchUpX + (int)((float)l2 * f);
             int i2 = this.touchUpY + (int)((float)i3 * f);
-            this.drawItemStack(this.returningStack, l4, i2, (String)null);
+            this.drawItemStack(this.returningStack, l4, i2, null);
         }
 
         GlStateManager.popMatrix();

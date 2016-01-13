@@ -195,7 +195,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tabs, List list) {
+    public void getSubItems(Item item, CreativeTabs tabs, List<ItemStack> list) {
         for (int i = 0; i < fairyClasses.length; i++) {
             list.add(new ItemStack(item, 1, i));
         }

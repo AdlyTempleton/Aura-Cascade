@@ -121,7 +121,7 @@ public class MultiblockPage extends PageText {
 
             Minecraft.getMinecraft().fontRendererObj.setUnicodeFlag(false);
             if (highlighted != null) {
-                ((GuiLexiconEntry) gui).renderToolTip(highlighted, mx, my);
+                gui.renderToolTip(highlighted, mx, my);
             }
             RenderHelper.disableStandardItemLighting();
             /*
