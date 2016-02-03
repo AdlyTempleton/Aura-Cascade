@@ -4,6 +4,7 @@ Notes from williewillus (1.8.8 porter):
 * This fork, like the mod itself, is licensed under the [MIT license](https://tldrlegal.com/license/mit-license) and the parts drawn from Botania under the [Botania license](http://botaniamod.net/license.php).
 * This fork should be almost fully functional. See the [issue tracker](https://github.com/williewillus/Aura-Cascade/issues) for any known issues.
 * Have fun!
+* These non-CurseForge builds can be openly used in modpacks of any kind, in accordance with the requirements of the license of this mod.
 
 
 
