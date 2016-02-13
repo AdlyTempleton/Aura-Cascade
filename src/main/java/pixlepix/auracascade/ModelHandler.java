@@ -157,15 +157,12 @@ public final class ModelHandler {
 
     private static void registerAngelSteelTools() {
         for (Item i : BlockRegistry.getItemFromClass(ItemAngelsteelAxe.class)) {
-            ModelLoader.addVariantName(i, "aura:angelsteelAxe");
             ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation("aura:angelsteelAxe", "inventory"));
         }
         for (Item i : BlockRegistry.getItemFromClass(ItemAngelsteelShovel.class)) {
-            ModelLoader.addVariantName(i, "aura:angelsteelShovel");
             ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation("aura:angelsteelShovel", "inventory"));
         }
         for (Item i : BlockRegistry.getItemFromClass(ItemAngelsteelPickaxe.class)) {
-            ModelLoader.addVariantName(i, "aura:angelsteelPickaxe");
             ModelLoader.setCustomModelResourceLocation(i, 0, new ModelResourceLocation("aura:angelsteelPickaxe", "inventory"));
         }
 
@@ -193,7 +190,6 @@ public final class ModelHandler {
     private static void registerFairyCharms() {
         Item item = BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class);
         ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
-        ModelLoader.addVariantName(item, l.toString(), "aura:fairy_plain");
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
@@ -204,7 +200,6 @@ public final class ModelHandler {
         Item crystal = BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
         for (int i = 0; i < EnumAura.values().length; i++) {
             String name = "aura:" + EnumAura.values()[i].name.toLowerCase(Locale.ROOT) + "Crystal";
-            ModelLoader.addVariantName(crystal, name);
             ModelLoader.setCustomModelResourceLocation(crystal, i, new ModelResourceLocation(name, "inventory"));
         }
 
@@ -220,7 +215,6 @@ public final class ModelHandler {
 
         for (Class<? extends ItemStorageBook> clazz : classes) {
             Item item = BlockRegistry.getFirstItemFromClass(clazz);
-            ModelLoader.addVariantName(item, "aura:storageBook");
             ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation("aura:storageBook", "inventory"));
         }
     }
