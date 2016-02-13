@@ -60,7 +60,7 @@ minecraft {
     version = "1.8.9-11.15.1.1722"
     mappings = "snapshot_20151229"
     runDir = "eclipse"
-    replace '@version@', project.version
+    replace '@version@', "589"
     replace '@keySecret@', System.env.SECRET != null ? "$System.env.SECRET" : ''
 
 }
