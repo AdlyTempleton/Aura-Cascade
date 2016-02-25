@@ -3,10 +3,11 @@
  */
 package de.npe.gameanalytics.events;
 
-import com.google.gson.annotations.SerializedName;
-import de.npe.gameanalytics.Analytics;
-
 import java.security.InvalidParameterException;
+
+import com.google.gson.annotations.SerializedName;
+
+import de.npe.gameanalytics.Analytics;
 
 
 /**

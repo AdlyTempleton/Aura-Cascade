@@ -1,5 +1,9 @@
 package de.npe.gameanalytics.minecraft;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -11,21 +15,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import de.npe.gameanalytics.events.GAUserEvent;
 import de.npe.gameanalytics.util.ACLock;
-import net.minecraft.client.Minecraft;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public final class ActivityReportTickEventHandler {
+	private ActivityReportTickEventHandler() {} // singleton
+
 	private static ACLock lock = new ACLock();
 	private static boolean initialized;
-	private static List<MCSimpleAnalytics> analyticsList = new ArrayList<>();
-	private static long nextActivityReport = 0;
-	private static GAUserEvent activityGAEvent;
 
-	private ActivityReportTickEventHandler() {
-	} // singleton
+	private static List<MCSimpleAnalytics> analyticsList = new ArrayList<>();
 
 	static void addToReportList(MCSimpleAnalytics mcSimpleAnalytics) {
 		try (ACLock acl = lock.lockAC()) {
@@ -42,7 +40,9 @@ public final class ActivityReportTickEventHandler {
 					String mod;
 					try {
 						ModContainer activeMod = Loader.instance().activeModContainer();
-						mod = activeMod.getModId() + " -> " + activeMod.getName();
+						StringBuilder sb = new StringBuilder(activeMod.getModId());
+						sb.append(" -> ").append(activeMod.getName());
+						mod = sb.toString();
 					} catch (Exception e) {
 						mod = "Some mod";
 					}
@@ -56,6 +56,9 @@ public final class ActivityReportTickEventHandler {
 			analyticsList.add(mcSimpleAnalytics);
 		}
 	}
+
+	private static long nextActivityReport = 0;
+	private static GAUserEvent activityGAEvent;
 
 	private static void sendAnalyticsActivityEvent() {
 		long now = System.currentTimeMillis();

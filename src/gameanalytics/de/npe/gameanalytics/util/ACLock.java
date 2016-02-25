@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 	try (ACLock acl = myLock.lockAC()) {
  * 		// this block can only be entered by one thread at a time
  * 		doStuffThatNeedsThreadSafety();
- *    }
+ * 	}
  * }
  * </pre>
  *

@@ -3,18 +3,18 @@
  */
 package de.npe.gameanalytics;
 
-import de.npe.gameanalytics.events.GABusinessEvent;
-import de.npe.gameanalytics.events.GADesignEvent;
-import de.npe.gameanalytics.events.GAErrorEvent;
-import de.npe.gameanalytics.events.GAErrorEvent.Severity;
-import de.npe.gameanalytics.events.GAEvent;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
+
+import de.npe.gameanalytics.events.GABusinessEvent;
+import de.npe.gameanalytics.events.GADesignEvent;
+import de.npe.gameanalytics.events.GAErrorEvent;
+import de.npe.gameanalytics.events.GAErrorEvent.Severity;
+import de.npe.gameanalytics.events.GAEvent;
 
 
 /**
@@ -29,24 +29,23 @@ import java.util.UUID;
  *
  */
 public abstract class Analytics {
-	private String sessionID;
-	private String userID;
-	private KeyPair keyPair;
-
 	public abstract boolean isActive();
 
 	public abstract String gameKey();
-
-	/////////////////////////////////////////////////////
-	// Methods you don't need to override necessarily, //
-	// but can if you want to do something specific    //
-	/////////////////////////////////////////////////////
 
 	public abstract String secretKey();
 
 	public abstract String build();
 
 	public abstract String userPrefix();
+
+	/////////////////////////////////////////////////////
+	// Methods you don't need to override necessarily, //
+	// but can if you want to do something specific    //
+	/////////////////////////////////////////////////////
+
+	private String sessionID;
+	private String userID;
 
 	public synchronized String getUserID() {
 		if (userID == null) {
@@ -114,13 +113,13 @@ public abstract class Analytics {
 		return getClass().getCanonicalName();
 	}
 
-	////////////////////////////
-	// Methods to send events //
-	////////////////////////////
-
 	private File getConfigFile() {
 		return new File(getAnaylitcsConfigRootPath(), getConfigFileName() + ".properties");
 	}
+
+	////////////////////////////
+	// Methods to send events //
+	////////////////////////////
 
 	public final void event(GAEvent event, boolean immediate) {
 		if (isActive()) {
@@ -201,10 +200,6 @@ public abstract class Analytics {
 		}
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// internal stuff. you should not need to bother about this :) //
-	/////////////////////////////////////////////////////////////////
-
 	/**
 	 * Similar to {@link #eventDesign(String, String, Number)}.<br>
 	 * <br>
@@ -226,12 +221,18 @@ public abstract class Analytics {
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// internal stuff. you should not need to bother about this :) //
+	/////////////////////////////////////////////////////////////////
+
 	public final KeyPair keyPair() {
 		if (keyPair == null) {
 			keyPair = new KeyPair();
 		}
 		return keyPair;
 	}
+
+	private KeyPair keyPair;
 
 	public final class KeyPair {
 		public final String gameKey = gameKey();

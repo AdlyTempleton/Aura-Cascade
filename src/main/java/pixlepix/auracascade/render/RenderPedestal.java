@@ -14,14 +14,13 @@ import pixlepix.auracascade.main.AuraUtil;
 /**
  * Created by pixlepix on 12/6/14.
  */
-public class RenderPedestal extends TileEntitySpecialRenderer {
+public class RenderPedestal extends TileEntitySpecialRenderer<AuraTilePedestal> {
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float f, int digProgress) {
-        AuraTilePedestal pedestal = (AuraTilePedestal) tileEntity;
+    public void renderTileEntityAt(AuraTilePedestal pedestal, double x, double y, double z, float f, int digProgress) {
         if (pedestal.itemStack != null) {
             if (pedestal.entityItem == null || !ItemStack.areItemStacksEqual(pedestal.entityItem.getEntityItem(), pedestal.itemStack)) {
-                pedestal.entityItem = new EntityItem(tileEntity.getWorld(), x, y, z, ((AuraTilePedestal) tileEntity).itemStack);
+                pedestal.entityItem = new EntityItem(pedestal.getWorld(), x, y, z, pedestal.itemStack);
             }
             EntityItem entityItem = pedestal.entityItem;
             x = x + .5;

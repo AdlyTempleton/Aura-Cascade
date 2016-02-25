@@ -4,6 +4,7 @@
 package de.npe.gameanalytics.events;
 
 import com.google.gson.annotations.SerializedName;
+
 import de.npe.gameanalytics.Analytics;
 
 
@@ -13,8 +14,17 @@ import de.npe.gameanalytics.Analytics;
  */
 public class GAErrorEvent extends GAEvent {
 
+	public enum Severity {
+		critical,
+		error,
+		warning,
+		info,
+		debug
+	}
+
 	@SerializedName("message")
 	private final String message;
+
 	@SerializedName("severity")
 	private final String severity;
 
@@ -27,13 +37,5 @@ public class GAErrorEvent extends GAEvent {
 	@Override
 	public String category() {
 		return "error";
-	}
-
-	public enum Severity {
-		critical,
-		error,
-		warning,
-		info,
-		debug
 	}
 }
