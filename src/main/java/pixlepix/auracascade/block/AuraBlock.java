@@ -18,7 +18,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -64,16 +68,18 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     //"pump" is AuraTilePump\
     //"black" is AuraTileBlack etc
     String type;
-
+    private static final AxisAlignedBB AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
     @SuppressWarnings("SameParameterValue")
     public AuraBlock(String type) {
         super(Material.glass);
         this.type = type;
-
+        
+        /*//TODO This may be broken.
         if (!type.equals("craftingCenter")) {
-        	this.(.25F, .25F, .25F, .75F, .75F, .75F);
+        	func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
         	
         }
+        */
         setLightOpacity(0);
         setHardness(2F);
     }
@@ -82,7 +88,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         this("");
         setHardness(2F);
     }
-
+    
     public static AuraBlock getBlockFromName(String name) {
         List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
         if ("capacitor".equals(name)) {
@@ -162,7 +168,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             if (world.getTileEntity(pos) instanceof AuraTileCapacitor && player.isSneaking()) {
                 AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(pos);
                 capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
-                player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
+                player.addChatComponentMessage(new TextComponentString("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
                 world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                 return true;
             } else if (world.getTileEntity(pos) instanceof AuraTilePedestal && !player.isSneaking()) {
@@ -180,33 +186,33 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 return true;
 
             } else if (world.getTileEntity(pos) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
-                player.addChatComponentMessage(new ChatComponentText("Aura:"));
+                player.addChatComponentMessage(new TextComponentString("Aura:"));
                 for (EnumAura aura : EnumAura.values()) {
                     if (((AuraTile) world.getTileEntity(pos)).storage.get(aura) != 0) {
-                        player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(pos)).storage.get(aura)));
+                        player.addChatComponentMessage(new TextComponentString(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(pos)).storage.get(aura)));
                     }
                 }
 
                 if (world.getTileEntity(pos) instanceof AuraTilePumpBase) {
 
-                    player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(pos)).pumpPower));
+                    player.addChatComponentMessage(new TextComponentString("Power: " + ((AuraTilePumpBase) world.getTileEntity(pos)).pumpPower));
                 }
                 return true;
             }
         } else if (!world.isRemote && world.getTileEntity(pos) instanceof CraftingCenterTile && player.inventory.getCurrentItem() == null) {
             CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(pos);
             if (tile.getRecipe() != null) {
-                player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
+                player.addChatComponentMessage(new TextComponentString(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
                 for (EnumFacing direction : CraftingCenterTile.pedestalRelativeLocations) {
                     AuraTilePedestal pedestal = ((AuraTilePedestal) world.getTileEntity(pos.offset(direction)));
                     if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
-                        player.addChatComponentMessage(new ChatComponentText("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
+                        player.addChatComponentMessage(new TextComponentString("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
                     } else {
                         AuraCascade.log.warn("Invalid recipe when checking crafting center");
                     }
                 }
             } else {
-                player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
+            	player.addChatComponentMessage(new TextComponentString("No Recipe Selected"));
             }
             return true;
         }
@@ -226,7 +232,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                     ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000 * stack.stackSize));
                     world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                     world.notifyNeighborsOfStateChange(pos, this);
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.func_177502_q(), pos.getX(), pos.getY(), pos.getZ(), 32));
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
                     entity.setDead();
                 }
@@ -551,5 +557,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
         return result;
     }
+    @Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABB;
+	}
 }
 
