@@ -33,7 +33,7 @@ public class RenderEntityFairy extends Render<EntityFairy> {
         // Billboard towards the player
         GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
-        this.bindTexture(TextureMap.locationBlocksTexture);
+        this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
         GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();
@@ -44,6 +44,6 @@ public class RenderEntityFairy extends Render<EntityFairy> {
 
     @Override
     protected ResourceLocation getEntityTexture(EntityFairy p_110775_1_) {
-        return TextureMap.locationBlocksTexture;
+        return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 }

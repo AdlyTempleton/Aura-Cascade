@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -58,7 +59,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block state, BlockPos pos, EntityLivingBase p_150894_7_) {
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         return true;
     }
 
@@ -113,22 +114,22 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase attacker) {
         EnumAura aura = getAura(stack);
         if (aura == EnumAura.RED_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.ORANGE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.YELLOW_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.GREEN_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.BLUE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.VIOLET_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.field_76415_H, degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple, degree * degree * 100 + 100));
         }
         return true;
     }

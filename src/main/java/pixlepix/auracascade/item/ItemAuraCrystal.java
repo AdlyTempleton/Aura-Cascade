@@ -10,7 +10,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
@@ -38,13 +40,14 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand){
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof AuraTile) {
             stack.stackSize--;
             ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
         }
-        return false;
+        //Chanigng this to fail may cancelt the animation.
+        return EnumActionResult.FAIL;
     }
 
     @Override
@@ -88,7 +91,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new OreCraftingBenchRecipe(new ItemStack(this, 2, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.iron_ingot), 'G', new ItemStack(Items.gold_nugget)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 2, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.IRON_INGOT), 'G', new ItemStack(Items.GOLD_NUGGET)),
                 //Green
                 new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', "dyeGreen", 'C', new ItemStack(this, 1, 0)),
                 //Black
@@ -104,19 +107,19 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
                 //Violet
                 new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0)),
                 //Green
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 13), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 13), 'C', new ItemStack(this, 1, 0)),
                 //Black
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 15), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 15), 'C', new ItemStack(this, 1, 0)),
                 //Red
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 14), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 14), 'C', new ItemStack(this, 1, 0)),
                 //Orange
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 1), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 1), 'C', new ItemStack(this, 1, 0)),
                 //Yellow
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 4), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 4), 'C', new ItemStack(this, 1, 0)),
                 //Blue
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 11), 'C', new ItemStack(this, 1, 0)),
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 11), 'C', new ItemStack(this, 1, 0)),
                 //Violet
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.wool, 1, 10), 'C', new ItemStack(this, 1, 0))
+                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 10), 'C', new ItemStack(this, 1, 0))
 
         );
     }

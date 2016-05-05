@@ -8,10 +8,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
@@ -77,11 +80,11 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(getPos(), -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         readCustomNBT(pkt.getNbtCompound());
     }
 
@@ -89,9 +92,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
         int x = getPos().getX();
         int y = getPos().getY();
         int z = getPos().getZ();
-
-        Vec3 originalVector = new Vec3(pos.subtract(getPos()));
-        Vec3 vec3 = originalVector.normalize();
+        //TODO TEST. CHANGED VEC3 to VEC3d
+        Vec3d originalVector = new Vec3d(pos.subtract(getPos()));
+        Vec3d vec3 = originalVector.normalize();
         double f = 0;
         while (true) {
             f += .1;
@@ -261,8 +264,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentText(getName());
+    public TextComponentString getDisplayName() {
+        return new TextComponentString(getName());
     }
 
     @Override
@@ -291,7 +294,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
     }
 
     public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
     }
 
     @Override

@@ -9,7 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextComponentString;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
@@ -63,11 +65,11 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(getPos(), -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         readCustomNBT(pkt.getNbtCompound());
     }
 
@@ -152,8 +154,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentText(getName());
+    public TextComponentString getDisplayName() {
+        return new TextComponentString(getName());
     }
 
     @Override

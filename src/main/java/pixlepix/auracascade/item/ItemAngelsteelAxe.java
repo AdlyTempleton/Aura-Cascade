@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,7 +72,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, BlockPos pos, EntityLivingBase p_150894_7_) {
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         return true;
     }
 
@@ -90,7 +91,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
 
-        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AA ", "AS ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AA ", "AS ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.STICK));
     }
 
     @Override

@@ -13,6 +13,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.EntityFairy;
@@ -126,13 +129,13 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new PylonRecipe(new ItemStack(this),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.BLUE_AURA, 50000), new ItemStack(Blocks.diamond_block)),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.BLUE_AURA, 50000), new ItemStack(Blocks.DIAMOND_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.iron_block)),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.IRON_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 50000), new ItemStack(Blocks.gold_block)),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 50000), new ItemStack(Blocks.GOLD_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 50000), new ItemStack(Blocks.redstone_block)));
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 50000), new ItemStack(Blocks.REDSTONE_BLOCK)));
     }
 
     @Override
@@ -150,7 +153,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
         if (stack.getTagCompound() == null) {
             stack.setTagCompound(new NBTTagCompound());
         }
@@ -164,7 +167,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
             stack.getTagCompound().setIntArray("fairyList", new int[0]);
 
         }
-        return stack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
     }
 
     @Override

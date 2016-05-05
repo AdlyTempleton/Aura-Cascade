@@ -13,7 +13,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
@@ -31,7 +33,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
     public BlockBookshelfCoordinator() {
-        super(Material.wood);
+        super(Material.WOOD);
         setHardness(2F);
     }
 
@@ -67,7 +69,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "IPI", "IBI", "III", 'P', ItemMaterial.getPrism(), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'B', new ItemStack(Blocks.bookshelf));
+        return new CraftingBenchRecipe(new ItemStack(this), "IPI", "IBI", "III", 'P', ItemMaterial.getPrism(), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'B', new ItemStack(Blocks.BOOKSHELF));
     }
 
     @Override
@@ -90,12 +92,12 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileBookshelfCoordinator coordinator = (TileBookshelfCoordinator) world.getTileEntity(pos);
         if (coordinator.lastPower >= coordinator.neededPower) {
             player.openGui(AuraCascade.instance, 1, world, pos.getX(), pos.getY(), pos.getZ());
         } else if (!world.isRemote) {
-            player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_RED + "Not enough power to activate the Coordinator"));
+            player.addChatComponentMessage(new TextComponentString(EnumColor.DARK_RED + "Not enough power to activate the Coordinator"));
         }
         return true;
     }

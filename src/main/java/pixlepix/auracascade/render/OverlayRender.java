@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,12 +18,12 @@ import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 public class OverlayRender {
     @SubscribeEvent
     public void onScreenRenderEvent(RenderGameOverlayEvent event) {
-        if (event.type == RenderGameOverlayEvent.ElementType.TEXT) {
+        if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT) {
             World world = AuraCascade.proxy.getWorld();
             EntityPlayer player = AuraCascade.proxy.getPlayer();
-            Vec3 vec3 = player.getPositionEyes(1.0F);
-            Vec3 vec3a = player.getLook(1.0F);
-            Vec3 vec3b = vec3.addVector(vec3a.xCoord * 3, vec3a.yCoord * 3, vec3a.zCoord * 3);
+            Vec3d vec3 = player.getPositionEyes(1.0F);
+            Vec3d vec3a = player.getLook(1.0F);
+            Vec3d vec3b = vec3.addVector(vec3a.xCoord * 3, vec3a.yCoord * 3, vec3a.zCoord * 3);
             MovingObjectPosition movingobjectposition = world.rayTraceBlocks(vec3, vec3b);
             if (movingobjectposition != null && movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                 Block block = world.getBlockState(movingobjectposition.getBlockPos()).getBlock();

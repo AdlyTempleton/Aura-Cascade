@@ -14,6 +14,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -31,7 +32,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
     public BlockStorageBookshelf() {
-        super(Material.wood);
+        super(Material.WOOD);
         setHardness(2F);
     }
 
@@ -109,7 +110,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-        result.add(new ItemStack(Blocks.bookshelf));
+        result.add(new ItemStack(Blocks.BOOKSHELF));
         return result;
     }
 
@@ -129,7 +130,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileStorageBookshelf bookshelf = (TileStorageBookshelf) world.getTileEntity(pos);
         if (player.isSneaking() && !world.isRemote) {
             if (bookshelf.storedBook != null) {

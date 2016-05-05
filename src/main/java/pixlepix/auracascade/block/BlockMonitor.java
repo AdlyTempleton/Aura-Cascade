@@ -23,19 +23,19 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
  */
 public class BlockMonitor extends Block implements ITTinkererBlock {
     public BlockMonitor() {
-        super(Material.redstoneLight);
+        super(Material.REDSTONE_LIGHT);
         setHardness(3);
         setHarvestLevel("pickaxe", 2);
     }
 
     @Override
-    public boolean canConnectRedstone(IBlockAccess world, BlockPos pos, EnumFacing side) {
+    public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
 
 
     @Override
-    public int getWeakPower(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
+    public int getWeakPower(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         EnumFacing powerDirection = side.getOpposite();
         Block b = world.getBlockState(pos.offset(powerDirection)).getBlock();
 
@@ -61,7 +61,7 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
 
 
     @Override
-    public boolean canProvidePower() {
+    public boolean canProvidePower(IBlockState state) {
         return true;
     }
 
@@ -97,7 +97,7 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.redstone), 'A', AuraBlock.getAuraNodeItemstack());
+        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'A', AuraBlock.getAuraNodeItemstack());
     }
 
     @Override

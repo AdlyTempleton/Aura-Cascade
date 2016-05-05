@@ -67,14 +67,14 @@ public class EnchanterTile extends ConsumerTile {
                         EnumAura aura = ((ItemMaterial) ingotStack.getItem()).aura;
                         Enchantment enchant = getEnchantFromAura(aura);
                         if (enchant != null) {
-                            int level = EnchantmentHelper.getEnchantmentLevel(enchant.field_77352_x, toolStack);
+                            int level = EnchantmentHelper.getEnchantmentLevel(enchant, toolStack);
                             if (isSuccessful(toolStack)) {
                                 Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
-                                enchantMap.put(enchant.field_77352_x, level + 1);
+                                enchantMap.put(Enchantment.getEnchantmentID(enchant), level + 1);
                                 EnchantmentHelper.setEnchantments(enchantMap, toolStack);
                             }
                             ingotStack.stackSize--;
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
+                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
 
                             if (ingotStack.stackSize <= 0) {
                                 ingot.setDead();
@@ -89,21 +89,22 @@ public class EnchanterTile extends ConsumerTile {
     }
 
     public int getTotalLevel(ItemStack stack) {
-        return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.field_77352_x, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.field_77352_x, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.field_77352_x, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.field_77352_x, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.field_77352_x, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.field_77352_x, stack);
+    	//TODO This may all be broken.
+        return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple, stack);
     }
 
     public int getMaxLevel(ItemStack stack) {
-        return NumberUtils.max(new int[]{EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.field_77352_x, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.field_77352_x, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.field_77352_x, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.field_77352_x, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.field_77352_x, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.field_77352_x, stack)});
+        return NumberUtils.max(new int[]{EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple, stack)});
     }
     public double getSuccessRate(ItemStack stack) {
         int totalLevel = getTotalLevel(stack);

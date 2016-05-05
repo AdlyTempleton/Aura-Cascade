@@ -7,12 +7,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -35,7 +37,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public static final PropertyInteger DAMAGE = PropertyInteger.create("damage", 0, 15);
 
     public BlockExplosionContainer() {
-        super(Material.rock);
+        super(Material.ROCK);
         //Same as obby
         setResistance(2000F);
         type = "Dirt";
@@ -45,8 +47,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public BlockState createBlockState() {
-        return new BlockState(this, DAMAGE);
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, DAMAGE);
     }
 
     @Override
@@ -110,8 +112,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean isFullCube() {
-        return isOpaqueCube();
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return isOpaqueCube(state);
     }
 
     public double getChanceToResist() {
@@ -190,11 +192,11 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         if ("Glass".equals(type)) {
-            return layer == EnumWorldBlockLayer.CUTOUT_MIPPED || layer == EnumWorldBlockLayer.TRANSLUCENT;
+            return layer == BlockRenderLayer.CUTOUT_MIPPED || layer == BlockRenderLayer.TRANSLUCENT;
         } else {
-            return layer == EnumWorldBlockLayer.SOLID || layer == EnumWorldBlockLayer.TRANSLUCENT;
+            return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
         }
     }
 
@@ -228,7 +230,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isFullyOpaque(IBlockState state) {
         return type == null || !type.equals("Glass");
     }
 
@@ -236,27 +238,27 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         if (type.equals("Dirt")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.dirt));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.DIRT));
         }
         if (type.equals("Wood")) {
-            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 1)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 2)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 3)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 4)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 5)));
+            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 1)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 2)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 3)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 4)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 5)));
         }
         if (type.equals("Glass")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.glass));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.GLASS));
         }
         if (type.equals("Cobblestone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.cobblestone));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.COBBLESTONE));
         }
         if (type.equals("Stone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.stone));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.STONE));
         }
         if (type.equals("Obsidian")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.obsidian));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.OBSIDIAN));
         }
         return null;
     }

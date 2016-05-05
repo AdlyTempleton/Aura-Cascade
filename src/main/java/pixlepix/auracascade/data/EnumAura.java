@@ -47,12 +47,12 @@ public enum EnumAura {
             AxisAlignedBB search = PosUtil.getBoundingBox(pos, 3);
             List<EntityTNTPrimed> tntList = world.getEntitiesWithinAABB(EntityTNTPrimed.class, search);
             for (EntityTNTPrimed tntPrimed : tntList) {
-                if (tntPrimed.fuse <= 2 && !tntPrimed.isDead) {
+                if (tntPrimed.getFuse() <= 2 && !tntPrimed.isDead) {
                     tntPrimed.setDead();
                     explosionPushUp(world, pos, 200000);
                 }
             }
-
+            /* TODO: Reimplement ASM?
             List<EntityCreeper> creeperList = world.getEntitiesWithinAABB(EntityCreeper.class, search);
             for (EntityCreeper creeper : creeperList) {
                 if (creeper.timeSinceIgnited + 2 >= creeper.fuseTime && !creeper.isDead) {
@@ -60,7 +60,7 @@ public enum EnumAura {
                     explosionPushUp(world, pos, 50000);
                 }
             }
-
+			*/
             AuraCascade.analytics.eventDesign("redAura", AuraUtil.formatLocation(pos));
         }
     },

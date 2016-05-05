@@ -109,26 +109,26 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
     }
 
     public Block getMappedBlock(Block b) {
-        if (b == Blocks.stone) {
-            return Blocks.netherrack;
+        if (b == Blocks.STONE) {
+            return Blocks.NETHERRACK;
         }
-        if (b == Blocks.grass || b == Blocks.dirt) {
-            return new Random().nextInt(3) == 0 ? Blocks.soul_sand : Blocks.netherrack;
+        if (b == Blocks.GRASS || b == Blocks.DIRT) {
+            return new Random().nextInt(3) == 0 ? Blocks.SOUL_SAND : Blocks.NETHERRACK;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.leaves || b == Blocks.leaves2) {
-            return Blocks.glowstone;
+        if (b == Blocks.LOG || b == Blocks.LOG2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+            return Blocks.GLOWSTONE;
         }
-        if (b == Blocks.tallgrass) {
-            return Blocks.nether_wart;
+        if (b == Blocks.TALLGRASS) {
+            return Blocks.NETHER_WART;
         }
-        if (b == Blocks.gravel || b == Blocks.sand) {
-            return Blocks.soul_sand;
+        if (b == Blocks.GRAVEL || b == Blocks.SAND) {
+            return Blocks.SOUL_SAND;
         }
-        if (b == Blocks.water || b == Blocks.flowing_water) {
-            return Blocks.lava;
+        if (b == Blocks.WATER || b == Blocks.FLOWING_WATER) {
+            return Blocks.LAVA;
         }
-        if (b == Blocks.snow || b == Blocks.snow_layer) {
-            return Blocks.air;
+        if (b == Blocks.SNOW || b == Blocks.SNOW_LAYER) {
+            return Blocks.AIR;
 
         }
         return null;

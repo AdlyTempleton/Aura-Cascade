@@ -10,6 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -22,33 +24,31 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 public class FairyTorch extends Block implements ITTinkererBlock {
 
     public final String name = "fairyTorch";
-
+    private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     public FairyTorch() {
-        super(Material.glass);
+        super(Material.GLASS);
         setTickRandomly(true);
-
         setLightLevel(1F);
-        //Block Bounds
-        func_149676_a(0, 0, 0, 0, 0, 0);
     }
 
     @Override
-    public int getRenderType() {
-        return -1;
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+    	//TODO test that this rendering works.
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
-    public boolean isReplaceable(World world, BlockPos pos) {
+    public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos) {
         return true;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
     @Override
-    public boolean isAir(IBlockAccess world, BlockPos pos) {
+    public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos) {
         return true;
     }
 
@@ -109,4 +109,8 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     public int getCreativeTabPriority() {
         return 0;
     }
+    @Override
+   	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+   		return AABB;
+   	}
 }

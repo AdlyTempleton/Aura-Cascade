@@ -5,6 +5,9 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.AuraUtil;
@@ -47,8 +50,11 @@ public class LootTile extends ConsumerTile {
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("cascaderLoot", AuraUtil.formatLocation(this));
         ItemStack lootStack;
+        Random rand = this.getWorld().rand;
         do {
-            lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
+        	//TODO TEST THAT THIS WORKS. USES BOTANIA LOONIUM CODE.
+        	lootStack = this.getWorld().getLootTableManager().getLootTableFromLocation(new ResourceLocation("minecraft", "chests/simple_dungeon")).generateLootForPools(rand, new LootContext.Builder(((WorldServer) this.getWorld())).build()).get(0);
+            //OLD CODE: lootStack = ChestGenHooks.getOneItem(ChestGenHooks.DUNGEON_CHEST, new Random());
         } while (IMCManager.isStackBlacklistedFromLoot(lootStack));
         EntityItem entityItem = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, lootStack);
         entityItem.motionX = 0;
