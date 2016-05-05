@@ -10,7 +10,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
@@ -69,7 +72,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, BlockPos pos, EnumFacing side, float par8, float par9, float par10) {
+    public EnumActionResult onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (par2EntityPlayer.isSneaking()) {
             Block block = par3World.getBlockState(pos).getBlock();
             if (block != null) {
@@ -84,12 +87,12 @@ public class ItemLexicon extends Item implements ITTinkererItem {
                         	//This needs fixed. TODO
                             //par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
                         }
-                        return true;
+                        return EnumActionResult.PASS;
                     }
                 }
             }
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     private void addStringToTooltip(String s, List<String> tooltip) {
@@ -97,7 +100,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+    public  ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand){
         String force = getForcedPage(par1ItemStack);
         if (force != null && !force.isEmpty()) {
             LexiconEntry entry = getEntryFromForce(par1ItemStack);
@@ -118,7 +121,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         	//TODO
             //par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
         skipSound = false;
-        return par1ItemStack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, par1ItemStack);
     }
 
     @Override
@@ -127,7 +130,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         if (ticks > 0 && entity instanceof EntityPlayer) {
             skipSound = ticks < 5;
             if (ticks == 1)
-                onItemRightClick(stack, world, (EntityPlayer) entity);
+                onItemRightClick(stack, world, (EntityPlayer) entity, EnumHand.MAIN_HAND);
             setQueueTicks(stack, ticks - 1);
         }
     }
@@ -159,7 +162,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.book));
+        return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.BOOK));
     }
 
     @Override

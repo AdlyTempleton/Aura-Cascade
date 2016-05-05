@@ -79,7 +79,8 @@ public class ParticleEffects {
                     ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);
                     float f = Minecraft.getMinecraft().theWorld.rand.nextFloat() * 0.5F + 0.35F;
                     entityfx.setRBGColorF((float) r, (float) g, (float) b);
-                    entityfx.motionY = -.07;
+                    //Changed this TODO Check
+                    EntityFX.interpPosY = -.07;
                 }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);

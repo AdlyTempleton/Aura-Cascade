@@ -12,8 +12,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.main.ParticleEffects;
@@ -35,7 +39,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         //More specific selections
         if (!player.isSneaking() && !world.isRemote) {
             if (stack.getTagCompound() == null) {
@@ -52,11 +56,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                 nbt.setInteger("x1", pos.getX());
                 nbt.setInteger("y1", pos.getY());
                 nbt.setInteger("z1", pos.getZ());
-                player.addChatComponentMessage(new ChatComponentText("Position set"));
-                return true;
+                player.addChatComponentMessage(new TextComponentString("Position set"));
+                return EnumActionResult.PASS;
             }
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     @Override
@@ -67,7 +71,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
         int mode = stack.getItemDamage();
         if (player.isSneaking()) {
             NBTTagCompound nbt = stack.getTagCompound();
@@ -76,7 +80,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
             stack.setItemDamage(mode);
             stack.setTagCompound(nbt);
             if (!world.isRemote) {
-                player.addChatComponentMessage(new ChatComponentText("Switched to: " + modes[mode]));
+                player.addChatComponentMessage(new TextComponentString("Switched to: " + modes[mode]));
             }
         } else {
             if (stack.getTagCompound() == null) {
@@ -99,12 +103,12 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         nbt.setInteger("czo", nbt.getInteger("z1") - roundToZero(player.posZ));
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Copied to clipboard"));
+                            player.addChatComponentMessage(new TextComponentString("Copied to clipboard"));
                         }
                     } else {
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Invalid selection"));
+                            player.addChatComponentMessage(new TextComponentString("Invalid selection"));
                         }
                     }
                     break;
@@ -183,7 +187,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         Item item = Item.getItemFromBlock(block);
                                         int worldDmg = block.getMetaFromState(world.getBlockState(oldPos));
                                         //TODO Test that this properly gets damage dropped
-                                        int dmg = block.func_176222_j(world, oldPos);
+                                        int dmg = block.damageDropped(world.getBlockState(oldPos));
 
                                         boolean usesMetadataForPlacing = false;
                                         List<ItemStack> drops = block.getDrops(world, oldPos, block.getStateFromMeta(dmg), 0);
@@ -222,11 +226,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         } while (xi <= cx2);
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Successfully pasted building"));
+                            player.addChatComponentMessage(new TextComponentString("Successfully pasted building"));
                         }
                     } else {
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Nothing copied"));
+                            player.addChatComponentMessage(new TextComponentString("Nothing copied"));
                         }
 
                     }
@@ -235,7 +239,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
             }
         }
-        return stack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
     }
 
     public int roundToZero(double d) {
@@ -291,7 +295,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.blaze_rod));
+        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.BLAZE_ROD));
     }
 
     @Override

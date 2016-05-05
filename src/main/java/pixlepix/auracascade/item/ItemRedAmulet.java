@@ -75,7 +75,7 @@ public class ItemRedAmulet extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.RED_AURA), 'S', new ItemStack(Items.string));
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.RED_AURA), 'S', new ItemStack(Items.STRING));
     }
 
     @Override

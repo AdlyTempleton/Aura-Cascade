@@ -16,6 +16,9 @@ import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -62,7 +65,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
      * @param player
      */
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
         AxisAlignedBB axisAlignedBB = new AxisAlignedBB(player.posX - 6, player.posY - 6, player.posZ - 6, player.posX + 6, player.posY + 6, player.posZ + 6);
         ArrayList<EntityFireball> fireballs = (ArrayList<EntityFireball>) world.getEntitiesWithinAABB(EntityFireball.class, axisAlignedBB);
         for (EntityFireball fireball : fireballs) {
@@ -70,9 +73,9 @@ public class ItemMirror extends Item implements ITTinkererItem {
                 redirect(fireball);
             }
         }
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(7, player.posX, player.posY, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.func_177502_q(), player.posX, player.posY, player.posZ, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(7, player.posX, player.posY, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimension(), player.posX, player.posY, player.posZ, 32));
 
-        return stack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
     }
 
     public void redirect(EntityFireball entity) {
@@ -98,7 +101,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
                 entity.accelerationX = entity.motionX * .3;
                 entity.accelerationY = entity.motionY * .3;
                 entity.accelerationZ = entity.motionZ * .3;
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
             }
         }
     }
@@ -117,7 +120,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " G ", "GIG", " G ", 'G', new ItemStack(Blocks.glass), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), " G ", "GIG", " G ", 'G', new ItemStack(Blocks.GLASS), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
     }
 
     @Override

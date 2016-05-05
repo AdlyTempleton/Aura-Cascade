@@ -10,7 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
@@ -93,17 +95,17 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && ((world.getBlockState(pos).getBlock() != null && world.getBlockState(pos).getBlock() == AuraCascade.proxy.chiselBookshelf) || world.getBlockState(pos).getBlock() == Blocks.bookshelf)) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && ((world.getBlockState(pos).getBlock() != null && world.getBlockState(pos).getBlock() == AuraCascade.proxy.chiselBookshelf) || world.getBlockState(pos).getBlock() == Blocks.BOOKSHELF)) {
             world.setBlockState(pos, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class).getDefaultState());
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(pos);
             te.storedBook = stack.copy();
             te.markDirty();
             world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            return true;
+            return EnumActionResult.PASS;
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     public abstract int getMaxStackSize();

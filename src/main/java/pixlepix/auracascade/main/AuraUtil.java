@@ -115,7 +115,7 @@ public class AuraUtil {
 
         worldObj.spawnEntityInWorld(newEntity);
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
 
 
     }
@@ -161,9 +161,9 @@ public class AuraUtil {
             EnumFacing connectingDirection = e.rotateYCCW();
             BlockPos corner = centerPos.offset(primaryDirection, 5);
             BlockPos connectingCorner = centerPos.offset(connectingDirection, 5);
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
 
         }
     }
