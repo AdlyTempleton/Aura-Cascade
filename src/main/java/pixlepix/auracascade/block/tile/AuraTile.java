@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
@@ -144,7 +145,7 @@ public class AuraTile extends TileEntity implements ITickable {
 
     public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
     	//TODO test for broken dim ID
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), pos.getX(), pos.getY(), pos.getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
     }
 
@@ -335,11 +336,11 @@ public class AuraTile extends TileEntity implements ITickable {
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(getPos(), -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
         readCustomNBT(pkt.getNbtCompound());
     }
 }

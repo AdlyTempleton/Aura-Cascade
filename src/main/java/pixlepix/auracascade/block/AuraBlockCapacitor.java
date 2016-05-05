@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.google.common.collect.Lists;
 
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 
 // Extend so we can use blockstates without forcing them on all the other blocks >.>
@@ -18,8 +19,8 @@ public class AuraBlockCapacitor extends AuraBlock {
     }
 
     @Override
-    public BlockState createBlockState() {
-        return new BlockState(this, BURSTING);
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, BURSTING);
     }
 
     @Override

@@ -2,6 +2,8 @@ package pixlepix.auracascade.item;
 
 import java.util.ArrayList;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
