@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.entity;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/14/14.

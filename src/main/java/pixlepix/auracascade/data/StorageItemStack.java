@@ -1,11 +1,11 @@
 package pixlepix.auracascade.data;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 1/23/15.

@@ -1,10 +1,11 @@
 package pixlepix.auracascade.lexicon;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.page.MultiblockPage;
 
 /**

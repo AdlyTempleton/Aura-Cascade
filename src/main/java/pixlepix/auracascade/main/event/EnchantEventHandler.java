@@ -1,13 +1,18 @@
 package pixlepix.auracascade.main.event;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import org.apache.commons.lang3.StringUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +21,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -23,18 +33,13 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.oredict.OreDictionary;
-import org.apache.commons.lang3.StringUtils;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 2/14/15.
@@ -68,12 +73,12 @@ public class EnchantEventHandler {
 
     public int[] getEffectData(ItemStack stack) {
         return new int[]{
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack),
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack),
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack),
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack),
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack),
-                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack)
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.field_77352_x, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.field_77352_x, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.field_77352_x, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.field_77352_x, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.field_77352_x, stack),
+                EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.field_77352_x, stack)
         };
     }
 
@@ -159,7 +164,7 @@ public class EnchantEventHandler {
     @SubscribeEvent
     public void onAttack(AttackEntityEvent event) {
         EntityPlayer player = event.entityPlayer;
-        ItemStack tool = player.getHeldItem();
+        ItemStack tool = player.inventory.getCurrentItem();
 
         int areaOfEffect = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.BLUE_AURA);
         if (areaOfEffect != 0) {
@@ -202,7 +207,7 @@ public class EnchantEventHandler {
     @SubscribeEvent
     public void getDamage(LivingHurtEvent attackEvent) {
         if (attackEvent.source != null && attackEvent.source.getEntity() instanceof EntityPlayer) {
-            ItemStack tool = ((EntityPlayer) attackEvent.source.getEntity()).getHeldItem();
+            ItemStack tool = ((EntityPlayer) attackEvent.source.getEntity()).inventory.getCurrentItem();
             int sharpness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
             if (sharpness > 0) {
                 attackEvent.ammount += .5 * sharpness;
@@ -218,7 +223,7 @@ public class EnchantEventHandler {
             }
         }
         if (attackEvent.entity instanceof EntityPlayer) {
-            ItemStack heldStack = ((EntityPlayer) attackEvent.entity).getHeldItem();
+            ItemStack heldStack = ((EntityPlayer) attackEvent.entity).inventory.getCurrentItem();
             if (heldStack != null) {
                 int protection = getEffectStrength(heldStack, EnumAura.RED_AURA, EnumAura.VIOLET_AURA);
                 if (protection > 0) {
@@ -230,7 +235,7 @@ public class EnchantEventHandler {
 
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
-        ItemStack stack = event.getPlayer().getCurrentEquippedItem();
+        ItemStack stack = event.getPlayer().inventory.getCurrentItem();
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.world.isRemote) {
             Block block = event.world.getBlockState(event.pos).getBlock();
@@ -288,7 +293,7 @@ public class EnchantEventHandler {
     public void onDrops(LivingDropsEvent event) {
         Entity entity = event.source.getSourceOfDamage();
         if (entity instanceof EntityPlayer && !entity.worldObj.isRemote) {
-            ItemStack stack = ((EntityPlayer) entity).getHeldItem();
+            ItemStack stack = ((EntityPlayer) entity).inventory.getCurrentItem();
             int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
             if (looting > 0) {
                 try {

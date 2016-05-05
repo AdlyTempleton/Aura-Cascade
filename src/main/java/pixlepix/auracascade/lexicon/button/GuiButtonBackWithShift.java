@@ -11,9 +11,6 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-
 import java.util.Arrays;
 import java.util.List;
 

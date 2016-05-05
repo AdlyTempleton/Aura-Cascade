@@ -1,16 +1,16 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/16/14.
@@ -48,7 +48,7 @@ public class EntityBaitFairy extends EntityFairy {
                 entity.setPosition(posX, posY, posZ);
                 worldObj.spawnEntityInWorld(entity);
                 //TODO Test this fetches the ID properly
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
 
             }
         }

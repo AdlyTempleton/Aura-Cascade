@@ -1,7 +1,7 @@
 package pixlepix.auracascade.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -10,8 +10,6 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 2/6/15.

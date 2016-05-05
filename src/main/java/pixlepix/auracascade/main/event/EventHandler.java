@@ -1,11 +1,11 @@
 package pixlepix.auracascade.main.event;
 
-import baubles.api.BaublesApi;
-import baubles.api.IBauble;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.entity.Entity;
@@ -20,18 +20,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.village.MerchantRecipe;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityDigFairy;
 import pixlepix.auracascade.block.entity.EntityFallFairy;
@@ -40,12 +46,22 @@ import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.data.QuestData;
-import pixlepix.auracascade.item.*;
+import pixlepix.auracascade.item.AngelsteelToolHelper;
+import pixlepix.auracascade.item.ItemBlueAmulet;
+import pixlepix.auracascade.item.ItemComboSword;
+import pixlepix.auracascade.item.ItemExplosionRing;
+import pixlepix.auracascade.item.ItemFairyRing;
+import pixlepix.auracascade.item.ItemFoodAmulet;
+import pixlepix.auracascade.item.ItemGreenAmulet;
+import pixlepix.auracascade.item.ItemLexicon;
+import pixlepix.auracascade.item.ItemOrangeAmulet;
+import pixlepix.auracascade.item.ItemPurpleAmulet;
+import pixlepix.auracascade.item.ItemRedAmulet;
+import pixlepix.auracascade.item.ItemThiefSword;
+import pixlepix.auracascade.item.ItemYellowAmulet;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.network.PacketSyncQuestData;
 import pixlepix.auracascade.registry.BlockRegistry;
-
-import java.util.*;
 
 /**
  * Created by pixlepix on 12/16/14.
@@ -168,7 +184,7 @@ public class EventHandler {
             }
         }
         if (event.source != null && event.source.getEntity() instanceof EntityPlayer) {
-            ItemStack stack = ((EntityPlayer) event.source.getEntity()).getHeldItem();
+            ItemStack stack = ((EntityPlayer) event.source.getEntity()).inventory.getCurrentItem();
             if (stack != null && stack.getItem() instanceof ItemComboSword) {
                 if (stack.getTagCompound() == null) {
                     stack.setTagCompound(new NBTTagCompound());
@@ -229,7 +245,7 @@ public class EventHandler {
     public void onLivingDrops(LivingDropsEvent event) {
         if (!event.entity.worldObj.isRemote && event.source.getSourceOfDamage() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
-            ItemStack swordStack = player.getCurrentEquippedItem();
+            ItemStack swordStack = player.inventory.getCurrentItem();
             if (swordStack != null && swordStack.getItem() instanceof ItemThiefSword) {
                 if (event.entity instanceof EntityVillager && new Random().nextInt(4) == 0) {
                     EntityVillager villager = (EntityVillager) event.entity;
@@ -376,7 +392,7 @@ public class EventHandler {
             //Check if item is food
             if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.EAT || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.DRINK)) {
                 if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
-                    player.addPotionEffect(new PotionEffect(Potion.wither.id, 6 * 60 * 20, 1));
+                    player.addPotionEffect(new PotionEffect(Potion.wither.field_76415_H, 6 * 60 * 20, 1));
                 } else {
                     String name = heldStack.getUnlocalizedName();
                     Random random = new Random(name.hashCode());
@@ -384,11 +400,11 @@ public class EventHandler {
                     //Note that there is no potion with id 0
                     Potion potion;
                     do {
-                        potion = Potion.potionTypes[random.nextInt(23) + 1];
+                        potion = Potion.field_76425_a[random.nextInt(23) + 1];
                     } while (potion.isInstant());
                     int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
                     int amplified = random.nextInt(6);
-                    PotionEffect potionEffect = new PotionEffect(potion.id, duration, amplified);
+                    PotionEffect potionEffect = new PotionEffect(potion.field_76415_H, duration, amplified);
                     player.addPotionEffect(potionEffect);
                 }
             }

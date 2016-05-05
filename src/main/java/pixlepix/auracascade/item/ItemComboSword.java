@@ -1,5 +1,8 @@
 package pixlepix.auracascade.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -8,9 +11,6 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by localmacaccount on 5/15/15.

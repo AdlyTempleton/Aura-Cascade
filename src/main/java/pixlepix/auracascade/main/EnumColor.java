@@ -1,7 +1,5 @@
 package pixlepix.auracascade.main;
 
-import net.minecraft.util.StatCollector;
-
 /**
  * Simple color enum for adding colors to in-game GUI strings of text.
  *

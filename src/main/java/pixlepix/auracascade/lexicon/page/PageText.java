@@ -11,19 +11,18 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.base.Strings;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.lexicon.FontHelper;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconPage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PageText extends LexiconPage {
 

@@ -1,19 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
-// todo 1.8.8 await duct update import cofh.api.transport.IEnderEnergyHandler;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.common.registry.GameData;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import de.npe.gameanalytics.events.GAErrorEvent;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.main.Config;
-import pixlepix.auracascade.main.ParticleEffects;
+import java.util.ArrayList;
+import java.util.HashSet;
 
-import java.util.*;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import pixlepix.auracascade.data.EnumAura;
 
 /**
  * Created by localmacaccount on 2/24/15.

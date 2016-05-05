@@ -1,9 +1,9 @@
 package pixlepix.auracascade.network;
 
+import net.minecraft.inventory.Container;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraft.inventory.Container;
 import pixlepix.auracascade.gui.ContainerCoordinator;
 
 /**

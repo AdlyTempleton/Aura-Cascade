@@ -1,14 +1,14 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityEgg;
 import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import pixlepix.auracascade.main.Config;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/24/14.

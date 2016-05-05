@@ -1,5 +1,8 @@
 package pixlepix.auracascade.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -7,16 +10,17 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.registry.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.OreCraftingBenchRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 /**
  * Created by pixlepix on 11/29/14.

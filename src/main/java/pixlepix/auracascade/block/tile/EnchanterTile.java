@@ -1,12 +1,17 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import org.apache.commons.lang3.math.NumberUtils;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.PosUtil;
@@ -14,10 +19,6 @@ import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 2/14/15.
@@ -66,14 +67,14 @@ public class EnchanterTile extends ConsumerTile {
                         EnumAura aura = ((ItemMaterial) ingotStack.getItem()).aura;
                         Enchantment enchant = getEnchantFromAura(aura);
                         if (enchant != null) {
-                            int level = EnchantmentHelper.getEnchantmentLevel(enchant.effectId, toolStack);
+                            int level = EnchantmentHelper.getEnchantmentLevel(enchant.field_77352_x, toolStack);
                             if (isSuccessful(toolStack)) {
                                 Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
-                                enchantMap.put(enchant.effectId, level + 1);
+                                enchantMap.put(enchant.field_77352_x, level + 1);
                                 EnchantmentHelper.setEnchantments(enchantMap, toolStack);
                             }
                             ingotStack.stackSize--;
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
+                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
 
                             if (ingotStack.stackSize <= 0) {
                                 ingot.setDead();
@@ -88,21 +89,21 @@ public class EnchanterTile extends ConsumerTile {
     }
 
     public int getTotalLevel(ItemStack stack) {
-        return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack)
-                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack);
+        return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.field_77352_x, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.field_77352_x, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.field_77352_x, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.field_77352_x, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.field_77352_x, stack)
+                + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.field_77352_x, stack);
     }
 
     public int getMaxLevel(ItemStack stack) {
-        return NumberUtils.max(new int[]{EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.effectId, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.effectId, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.effectId, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.effectId, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.effectId, stack)
-                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.effectId, stack)});
+        return NumberUtils.max(new int[]{EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red.field_77352_x, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange.field_77352_x, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow.field_77352_x, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.green.field_77352_x, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.blue.field_77352_x, stack)
+                , EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.purple.field_77352_x, stack)});
     }
     public double getSuccessRate(ItemStack stack) {
         int totalLevel = getTotalLevel(stack);

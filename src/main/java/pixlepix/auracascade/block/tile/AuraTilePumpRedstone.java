@@ -2,8 +2,8 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.Config;
 

@@ -1,12 +1,11 @@
 package pixlepix.auracascade.lexicon.page;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.Quest;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;

@@ -1,17 +1,19 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.data.AuraQuantity;
@@ -19,9 +21,6 @@ import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.HashMap;
-import java.util.LinkedList;
 
 public class AuraTile extends TileEntity implements ITickable {
 
@@ -68,7 +67,7 @@ public class AuraTile extends TileEntity implements ITickable {
 
     public boolean connectionBlockedByBlock(BlockPos pos) {
         Block block = worldObj.getBlockState(pos).getBlock();
-        return !block.isAir(worldObj, pos) && (block instanceof AuraBlock || block.isOpaqueCube());
+        return !block.isAir(block.getDefaultState(), worldObj, pos) && (block instanceof AuraBlock || block.isOpaqueCube(block.getDefaultState()));
     }
 
     @Override

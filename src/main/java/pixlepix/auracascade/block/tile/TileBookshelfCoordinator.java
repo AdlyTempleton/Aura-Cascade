@@ -1,23 +1,23 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.util.*;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraft.block.BlockBookshelf;
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 1/24/15.

@@ -1,19 +1,17 @@
 package pixlepix.auracascade.item;
 
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.ArrayList;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 5/30/15.

@@ -1,16 +1,16 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.LinkedList;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.LinkedList;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 2/8/15.
@@ -97,12 +97,15 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
     @Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
-        if (!(worldObj.getBiomeGenForCoords(getPos()).biomeID == getBiomeId())) {
+        worldObj.getBiomeGenForCoords(getPos());
+        //TODO Test that this works
+        if (!(BiomeGenBase.getIdForBiome(worldObj.getChunkFromBlockCoords(pos).getBiome(pos, worldObj.getBiomeProvider())) == getBiomeId())) {
             //BlockPoss are used for convenience, but y-values are irrelavent
             toSearch.addFirst(getPos());
             targetBiome = worldObj.getBiomeGenForCoords(getPos());
             started = true;
         }
+ 
     }
 
     public Block getMappedBlock(Block b) {

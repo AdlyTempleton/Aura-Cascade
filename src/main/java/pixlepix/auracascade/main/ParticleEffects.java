@@ -1,7 +1,12 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.*;
+import net.minecraft.client.particle.EntityAuraFX;
+import net.minecraft.client.particle.EntityCrit2FX;
+import net.minecraft.client.particle.EntityCritFX;
+import net.minecraft.client.particle.EntityEnchantmentTableParticleFX;
+import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.EntitySpellParticleFX;
 import net.minecraft.client.renderer.texture.TextureManager;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.particle.EntityItemPoof;

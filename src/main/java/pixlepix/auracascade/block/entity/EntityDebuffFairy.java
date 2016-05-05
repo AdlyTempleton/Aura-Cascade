@@ -1,15 +1,14 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.List;
+
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/13/14.
@@ -41,7 +40,7 @@ public class EntityDebuffFairy extends EntityFairy {
                 for (PotionEffect potionEffect : potionEffects) {
                     entity.addPotionEffect(potionEffect);
                 }
-               // AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
+               AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
             }
         }
     }

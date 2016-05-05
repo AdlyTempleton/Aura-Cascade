@@ -1,14 +1,14 @@
 package pixlepix.auracascade.network;
 
-import net.minecraft.util.BlockPos;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.item.ItemAngelJump;
 import pixlepix.auracascade.main.event.EventHandler;
@@ -40,7 +40,7 @@ public class PacketAngelJump implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(entityPlayer.worldObj.provider.getDimensionId());
+        buf.writeInt(entityPlayer.worldObj.provider.func_177502_q());
         buf.writeInt(entityPlayer.getEntityId());
         buf.writeBoolean(up);
     }
@@ -70,7 +70,7 @@ public class PacketAngelJump implements IMessage {
                                         player.worldObj.isAirBlock(pos.up()) &&
                                         player.worldObj.isAirBlock(pos.up(2))) {
                                     player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
-                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
+                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.func_177502_q(), player.posX, player.posY, player.posZ, 32));
                                     break;
                                 }
                             }

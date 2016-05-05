@@ -1,13 +1,12 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.common.FishingHooks;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 7/7/15.

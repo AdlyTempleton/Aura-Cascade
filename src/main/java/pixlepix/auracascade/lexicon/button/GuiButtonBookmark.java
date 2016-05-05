@@ -1,13 +1,11 @@
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import pixlepix.auracascade.lexicon.GuiLexicon;
-import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import pixlepix.auracascade.lexicon.GuiLexicon;
+import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
 public class GuiButtonBookmark extends GuiButtonLexicon {
 

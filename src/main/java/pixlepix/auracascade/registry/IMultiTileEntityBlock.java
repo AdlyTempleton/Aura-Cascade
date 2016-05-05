@@ -1,8 +1,8 @@
 package pixlepix.auracascade.registry;
 
-import net.minecraft.tileentity.TileEntity;
-
 import java.util.HashMap;
+
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * Created by pixlepix on 8/2/14.

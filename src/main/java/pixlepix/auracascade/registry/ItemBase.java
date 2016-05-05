@@ -14,11 +14,9 @@
  */
 package pixlepix.auracascade.registry;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.item.Item;
-
 import java.util.ArrayList;
+
+import net.minecraft.item.Item;
 
 public abstract class ItemBase extends Item implements ITTinkererItem {
 

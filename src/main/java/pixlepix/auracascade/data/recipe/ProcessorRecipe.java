@@ -1,12 +1,12 @@
 package pixlepix.auracascade.data.recipe;
 
-import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import net.minecraft.item.ItemStack;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 /**
  * Created by localmacaccount on 6/20/15.

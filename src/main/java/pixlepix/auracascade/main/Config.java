@@ -1,7 +1,7 @@
 package pixlepix.auracascade.main;
 
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * Created by localmacaccount on 1/12/15.

@@ -1,5 +1,8 @@
 package pixlepix.auracascade.village;
 
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -9,9 +12,6 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.ConsumerBlock;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 3/27/15.

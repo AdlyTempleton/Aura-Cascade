@@ -1,9 +1,9 @@
 package pixlepix.auracascade.block.entity;
 
+import java.util.Random;
+
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/20/14.

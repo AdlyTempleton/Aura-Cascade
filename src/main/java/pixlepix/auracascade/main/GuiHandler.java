@@ -1,9 +1,9 @@
 package pixlepix.auracascade.main;
 
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.gui.ContainerCoordinator;
 import pixlepix.auracascade.gui.GuiCoordinator;

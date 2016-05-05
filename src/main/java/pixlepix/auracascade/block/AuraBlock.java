@@ -1,15 +1,14 @@
 package pixlepix.auracascade.block;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.common.ModAPIManager;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -18,10 +17,32 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ModAPIManager;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.tile.*;
+import pixlepix.auracascade.block.tile.AuraTile;
+import pixlepix.auracascade.block.tile.AuraTileBlack;
+import pixlepix.auracascade.block.tile.AuraTileCapacitor;
+import pixlepix.auracascade.block.tile.AuraTileConserve;
+import pixlepix.auracascade.block.tile.AuraTileOrange;
+import pixlepix.auracascade.block.tile.AuraTilePedestal;
+import pixlepix.auracascade.block.tile.AuraTilePump;
+import pixlepix.auracascade.block.tile.AuraTilePumpAlt;
+import pixlepix.auracascade.block.tile.AuraTilePumpBase;
+import pixlepix.auracascade.block.tile.AuraTilePumpCreative;
+import pixlepix.auracascade.block.tile.AuraTilePumpFall;
+import pixlepix.auracascade.block.tile.AuraTilePumpFallAlt;
+import pixlepix.auracascade.block.tile.AuraTilePumpLight;
+import pixlepix.auracascade.block.tile.AuraTilePumpLightAlt;
+import pixlepix.auracascade.block.tile.AuraTilePumpProjectile;
+import pixlepix.auracascade.block.tile.AuraTilePumpProjectileAlt;
+import pixlepix.auracascade.block.tile.AuraTilePumpRedstone;
+import pixlepix.auracascade.block.tile.AuraTilePumpRedstoneAlt;
+import pixlepix.auracascade.block.tile.AuraTileRF;
+import pixlepix.auracascade.block.tile.CraftingCenterTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
@@ -35,9 +56,6 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITileEntityProvider {
 
@@ -53,7 +71,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         this.type = type;
 
         if (!type.equals("craftingCenter")) {
-        	func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
+        	this.(.25F, .25F, .25F, .75F, .75F, .75F);
+        	
         }
         setLightOpacity(0);
         setHardness(2F);

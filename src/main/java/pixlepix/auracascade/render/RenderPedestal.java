@@ -2,12 +2,9 @@ package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.tile.AuraTilePedestal;
 import pixlepix.auracascade.main.AuraUtil;
 
@@ -39,8 +36,8 @@ public class RenderPedestal extends TileEntitySpecialRenderer<AuraTilePedestal> 
             //Prevent 'jump' in the bobbing
             //Bobbing is calculated as the age plus the yaw
             AuraUtil.setItemAge(entityItem, (int) (400F - pedestal.frames));
-
-            Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, x, y, z, 0, entityItem.rotationYaw);
+            //TODO Fix pedestals
+           // Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, x, y, z, 0, entityItem.rotationYaw);
             GlStateManager.disableLighting();
             GlStateManager.popMatrix();
 

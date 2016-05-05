@@ -1,12 +1,9 @@
 package pixlepix.auracascade.main.event;
 
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.KeyBindings;
-import pixlepix.auracascade.main.ClientProxy;
 import pixlepix.auracascade.network.PacketAngelJump;
 
 /**

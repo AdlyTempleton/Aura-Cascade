@@ -1,14 +1,13 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.util.BlockPos;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by localmacaccount on 4/5/15.

@@ -11,6 +11,15 @@
  */
 package pixlepix.auracascade.lexicon;
 
+import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Queue;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -18,14 +27,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.button.GuiButtonBookmark;
 import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
-
-import java.io.IOException;
-import java.util.*;
 
 
 public class GuiLexicon extends GuiScreen {

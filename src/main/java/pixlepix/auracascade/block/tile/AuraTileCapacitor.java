@@ -1,10 +1,9 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.AuraBlockCapacitor;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.network.PacketBurst;

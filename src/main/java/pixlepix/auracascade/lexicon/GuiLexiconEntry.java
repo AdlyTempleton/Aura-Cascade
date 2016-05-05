@@ -11,21 +11,18 @@
  */
 package pixlepix.auracascade.lexicon;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.lwjgl.input.Mouse;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
 import pixlepix.auracascade.lexicon.button.GuiButtonBackWithShift;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
-
-import java.io.IOException;
-import java.util.List;
 
 
 public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IParented {

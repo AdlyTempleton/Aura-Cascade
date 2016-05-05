@@ -11,15 +11,13 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
-import pixlepix.auracascade.lexicon.GuiLexicon;
-import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
-
 import java.util.Arrays;
 import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import pixlepix.auracascade.lexicon.GuiLexicon;
+import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
 
 public class GuiButtonBack extends GuiButtonLexicon {

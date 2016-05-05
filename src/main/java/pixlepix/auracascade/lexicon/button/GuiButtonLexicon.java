@@ -11,10 +11,8 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonLexicon extends GuiButton {
 

@@ -1,6 +1,9 @@
 package pixlepix.auracascade;
 
 
+import org.apache.logging.log4j.Logger;
+
+import de.npe.gameanalytics.SimpleAnalytics;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -9,8 +12,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import de.npe.gameanalytics.SimpleAnalytics;
-import org.apache.logging.log4j.Logger;
 import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.CommonProxy;
 import pixlepix.auracascade.main.ConstantMod;

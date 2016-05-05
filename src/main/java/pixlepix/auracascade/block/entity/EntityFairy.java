@@ -1,17 +1,17 @@
 package pixlepix.auracascade.block.entity;
 
+import java.util.Random;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketFairyRequestUpdate;
 import pixlepix.auracascade.network.PacketFairyUpdate;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/8/14.

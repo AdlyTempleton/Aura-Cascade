@@ -1,7 +1,12 @@
 package pixlepix.auracascade.item;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,18 +16,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.potions.PotionManager;
-import pixlepix.auracascade.registry.*;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
+import pixlepix.auracascade.registry.BlockRegistry;
+import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.ITTinkererItem;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 
 /**
  * Created by localmacaccount on 1/19/15.
@@ -108,22 +113,22 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase attacker) {
         EnumAura aura = getAura(stack);
         if (aura == EnumAura.RED_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.field_76415_H, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.ORANGE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.field_76415_H, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.YELLOW_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.field_76415_H, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.GREEN_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.field_76415_H, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.BLUE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.field_76415_H, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.VIOLET_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.field_76415_H, degree * degree * 100 + 100));
         }
         return true;
     }

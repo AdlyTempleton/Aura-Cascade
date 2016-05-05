@@ -1,10 +1,8 @@
 package pixlepix.auracascade.main;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.Comparator;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -12,15 +10,16 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockMonitor;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.
@@ -116,7 +115,7 @@ public class AuraUtil {
 
         worldObj.spawnEntityInWorld(newEntity);
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
 
 
     }
@@ -133,8 +132,9 @@ public class AuraUtil {
                 }
             }
         }
-
-        ((TileEntity) tile).getWorld().markBlockForUpdate(((TileEntity) tile).getPos());
+        BlockPos pos = ((TileEntity) tile).getPos();
+       // ((TileEntity) tile).getWorld().markBlockForUpdate(((TileEntity) tile).getPos());
+        ((TileEntity) tile).getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         return stack;
     }
 
@@ -161,9 +161,9 @@ public class AuraUtil {
             EnumFacing connectingDirection = e.rotateYCCW();
             BlockPos corner = centerPos.offset(primaryDirection, 5);
             BlockPos connectingCorner = centerPos.offset(connectingDirection, 5);
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
 
         }
     }

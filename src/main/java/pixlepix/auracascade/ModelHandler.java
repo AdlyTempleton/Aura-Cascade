@@ -1,9 +1,12 @@
 package pixlepix.auracascade;
 
-import com.google.common.collect.ImmutableList;
+import java.util.Locale;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableSet;
+
 import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -63,10 +66,6 @@ import pixlepix.auracascade.item.books.SuperLightStorageBook;
 import pixlepix.auracascade.item.books.VeryDenseStorageBook;
 import pixlepix.auracascade.item.books.VeryLightStorageBook;
 import pixlepix.auracascade.registry.BlockRegistry;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 public final class ModelHandler {
 

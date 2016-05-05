@@ -1,16 +1,16 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.List;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.

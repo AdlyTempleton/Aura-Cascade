@@ -1,6 +1,6 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
 
 /**

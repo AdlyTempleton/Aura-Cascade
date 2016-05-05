@@ -1,16 +1,12 @@
 package pixlepix.auracascade.lexicon.page;
 
+import static net.minecraft.client.Minecraft.getMinecraft;
+
+import net.minecraft.client.gui.GuiButton;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
-
-import static net.minecraft.client.Minecraft.getMinecraft;
 
 /**
  * Created by localmacaccount on 6/2/15.

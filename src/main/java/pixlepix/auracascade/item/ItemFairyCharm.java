@@ -1,5 +1,9 @@
 package pixlepix.auracascade.item;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,17 +14,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.entity.*;
+import pixlepix.auracascade.block.entity.EntityBaitFairy;
+import pixlepix.auracascade.block.entity.EntityBreederFairy;
+import pixlepix.auracascade.block.entity.EntityBuffFairy;
+import pixlepix.auracascade.block.entity.EntityCombatFairy;
+import pixlepix.auracascade.block.entity.EntityDebuffFairy;
+import pixlepix.auracascade.block.entity.EntityDigFairy;
+import pixlepix.auracascade.block.entity.EntityExtinguisherFairy;
+import pixlepix.auracascade.block.entity.EntityFairy;
+import pixlepix.auracascade.block.entity.EntityFallFairy;
+import pixlepix.auracascade.block.entity.EntityFetchFairy;
+import pixlepix.auracascade.block.entity.EntityLightFairy;
+import pixlepix.auracascade.block.entity.EntityPushFairy;
+import pixlepix.auracascade.block.entity.EntitySaviorFairy;
+import pixlepix.auracascade.block.entity.EntityScareFairy;
+import pixlepix.auracascade.block.entity.EntityShooterFairy;
+import pixlepix.auracascade.block.entity.EntityStealFairy;
+import pixlepix.auracascade.block.entity.EntityXPFairy;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.event.EventHandler;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/9/14.

@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraft.potion.Potion;
+import java.util.Random;
+
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/14/14.
@@ -17,15 +17,14 @@ public class EntityBuffFairy extends EntityFairy {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
         		//TODO TEST THIS
-        		new PotionEffect(Potion.absorption.func_76396_c(), 2400),
-        		/*
-                new PotionEffect(Potion.regeneration, 2400, 4),
-                new PotionEffect(Potion.resistance.getId(), 2400),
-                new PotionEffect(Potion.damageBoost.getId(), 2400),
-                new PotionEffect(Potion.absorption.getId(), 2400),
-                new PotionEffect(Potion.jump.getId(), 2400),
-                new PotionEffect(Potion.moveSpeed.getId(), 2400)
-                */
+        		new PotionEffect(MobEffects.absorption, 2400),
+                new PotionEffect(MobEffects.regeneration, 2400),
+                new PotionEffect(MobEffects.resistance, 2400),
+                new PotionEffect(MobEffects.damageBoost, 2400),
+                new PotionEffect(MobEffects.absorption, 2400),
+                new PotionEffect(MobEffects.jump, 2400),
+                new PotionEffect(MobEffects.moveSpeed, 2400)
+                
                 };
     }
 

@@ -1,12 +1,11 @@
 package pixlepix.auracascade.network;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.block.entity.EntityFairy;
 
 /**
@@ -33,7 +32,7 @@ public class PacketFairyRequestUpdate implements IMessage, IMessageHandler<Packe
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(entityFairy.worldObj.provider.getDimensionId());
+        buf.writeInt(entityFairy.worldObj.provider.func_177502_q());
         buf.writeInt(entityFairy.getEntityId());
     }
 

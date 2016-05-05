@@ -1,14 +1,13 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ChestGenHooks;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.compat.IMCManager;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/21/14.

@@ -1,13 +1,12 @@
 package pixlepix.auracascade.data;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 import pixlepix.auracascade.QuestManager;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 5/31/15.

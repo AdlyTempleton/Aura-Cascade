@@ -1,6 +1,6 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.FairyTorch;
 import pixlepix.auracascade.registry.BlockRegistry;

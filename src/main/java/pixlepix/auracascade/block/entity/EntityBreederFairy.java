@@ -1,13 +1,13 @@
 package pixlepix.auracascade.block.entity;
 
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import java.util.List;
+
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
-
-import java.util.List;
 
 /**
  * Created by pixlepix on 12/16/14.
@@ -28,7 +28,7 @@ public class EntityBreederFairy extends EntityFairy {
                     //Need to get the ID
                     //Pretty sure that field entity.worldObj.provider.func_177502_q obtains the dimension ID properly
                    //TODO test this got the ID correctly
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.func_177502_q(), entity.posX, entity.posY, entity.posZ, 32));
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
                     break;
 
                 }

@@ -11,9 +11,9 @@
  */
 package pixlepix.auracascade.lexicon;
 
+import net.minecraft.client.gui.GuiButton;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.GuiButton;
 
 public abstract class LexiconPage {
 

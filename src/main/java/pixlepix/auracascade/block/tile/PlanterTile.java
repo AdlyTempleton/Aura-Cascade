@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.Random;
 
 /**
  * Created by pixlepix on 12/21/14.

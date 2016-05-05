@@ -1,16 +1,19 @@
 package pixlepix.auracascade.lexicon.page;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import java.util.Arrays;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.block.tile.CraftingCenterTile;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
@@ -20,8 +23,6 @@ import pixlepix.auracascade.lexicon.LexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconRecipeMappings;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 import pixlepix.auracascade.registry.BlockRegistry;
-
-import java.util.Arrays;
 
 /**
  * Created by pixlepix on 12/28/14.

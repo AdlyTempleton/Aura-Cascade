@@ -1,9 +1,9 @@
 package pixlepix.auracascade.compat;
 
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
+
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 
 /**
  * Created by localmacaccount on 5/8/15.

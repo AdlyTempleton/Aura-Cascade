@@ -1,10 +1,12 @@
 package pixlepix.auracascade.block;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,11 +15,24 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import pixlepix.auracascade.block.tile.*;
+import pixlepix.auracascade.block.tile.AngelSteelTile;
+import pixlepix.auracascade.block.tile.ConsumerTile;
+import pixlepix.auracascade.block.tile.DyeTile;
+import pixlepix.auracascade.block.tile.EnchanterTile;
+import pixlepix.auracascade.block.tile.FisherTile;
+import pixlepix.auracascade.block.tile.FurnaceTile;
+import pixlepix.auracascade.block.tile.LootTile;
+import pixlepix.auracascade.block.tile.MinerTile;
+import pixlepix.auracascade.block.tile.PlanterTile;
+import pixlepix.auracascade.block.tile.PotionTile;
+import pixlepix.auracascade.block.tile.ProcessorTile;
+import pixlepix.auracascade.block.tile.ProcessorTileAdv;
+import pixlepix.auracascade.block.tile.SpawnTile;
+import pixlepix.auracascade.block.tile.TileRitualEnd;
+import pixlepix.auracascade.block.tile.TileRitualNether;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
@@ -31,9 +46,6 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.

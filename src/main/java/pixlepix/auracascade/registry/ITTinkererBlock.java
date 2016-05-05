@@ -1,9 +1,9 @@
 package pixlepix.auracascade.registry;
 
+import java.util.ArrayList;
+
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
-
-import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 6/11/14.

@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.registry.GameData;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.AuraBlockCapacitor;
 import pixlepix.auracascade.registry.BlockRegistry;
-import thaumcraft.api.ThaumcraftApi;
 
 /**
  * Created by localmacaccount on 2/27/15.

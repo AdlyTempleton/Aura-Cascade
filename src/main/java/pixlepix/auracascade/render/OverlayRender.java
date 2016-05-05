@@ -1,14 +1,12 @@
 package pixlepix.auracascade.render;
 
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;

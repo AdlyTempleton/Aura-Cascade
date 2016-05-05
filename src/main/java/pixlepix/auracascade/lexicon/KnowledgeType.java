@@ -1,7 +1,5 @@
 package pixlepix.auracascade.lexicon;
 
-import net.minecraft.util.EnumChatFormatting;
-
 public class KnowledgeType {
 
     public final String id;

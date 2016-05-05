@@ -11,22 +11,20 @@
  */
 package pixlepix.auracascade.lexicon;
 
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import pixlepix.auracascade.lexicon.button.GuiButtonBack;
-import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
-import pixlepix.auracascade.lexicon.button.GuiButtonPage;
-import pixlepix.auracascade.main.EnumColor;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.lwjgl.input.Mouse;
+
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.renderer.GlStateManager;
+import pixlepix.auracascade.lexicon.button.GuiButtonBack;
+import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
+import pixlepix.auracascade.lexicon.button.GuiButtonPage;
+import pixlepix.auracascade.main.EnumColor;
 
 public class GuiLexiconIndex extends GuiLexicon implements IParented {
 

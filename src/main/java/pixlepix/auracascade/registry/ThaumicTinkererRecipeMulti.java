@@ -1,10 +1,10 @@
 package pixlepix.auracascade.registry;
 
-import net.minecraft.item.crafting.IRecipe;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import net.minecraft.item.crafting.IRecipe;
 
 public class ThaumicTinkererRecipeMulti extends ThaumicTinkererRecipe {
 

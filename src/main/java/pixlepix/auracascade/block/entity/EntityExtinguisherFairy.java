@@ -1,7 +1,8 @@
 package pixlepix.auracascade.block.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 /**
@@ -20,7 +21,8 @@ public class EntityExtinguisherFairy extends EntityFairy {
                 player.extinguish();
             }
             BlockPos pos = new BlockPos(this);
-            if (worldObj.getBlockState(pos).getBlock().getMaterial() == Material.lava) {
+            Block block = worldObj.getBlockState(pos).getBlock();
+            if (block.getMaterial(block.getDefaultState()) == Material.lava) {
                 worldObj.setBlockToAir(pos);
             }
         }
