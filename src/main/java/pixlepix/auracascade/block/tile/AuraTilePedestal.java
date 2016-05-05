@@ -81,7 +81,8 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
                 }
             }
         }
-        worldObj.markBlockForUpdate(getPos());
+        getPos();
+        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
     }
 
     @Override

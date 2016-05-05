@@ -381,7 +381,7 @@ public class GuiCoordinator extends GuiContainer {
                 }
             } else {
                 this.dragSplittingSlots.remove(p_146977_1_);
-                this.updateDragSplitting();
+                this.func_146980_g();
             }
         }
 

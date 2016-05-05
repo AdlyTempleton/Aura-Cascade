@@ -43,11 +43,15 @@ public class MCSimpleAnalytics extends SimpleAnalytics {
 	 * @return
 	 */
 	private static boolean isServerSnooper() {
+		//TODO
+		/*
 		try {
 			return MinecraftServer.getServer().isSnooperEnabled();
 		} catch (NullPointerException npe) {
 			return true;
 		}
+		*/
+		return false;
 	}
 
 	@Override

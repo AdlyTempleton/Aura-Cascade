@@ -111,21 +111,6 @@ public class EntityMinerExplosion extends Entity {
 
     }
 
-    /**
-     * Sets the held item, or an armor slot. Slot 0 is held item. Slot 1-4 is armor. Params: Item, slot
-     *
-     * @param p_70062_1_
-     * @param p_70062_2_
-     */
-    @Override
-    public void setCurrentItemOrArmor(int p_70062_1_, ItemStack p_70062_2_) {
-
-    }
-
-    @Override
-    public ItemStack[] getInventory() {
-        return new ItemStack[0];
-    }
 
     @Override
     public boolean shouldRenderInPass(int pass) {

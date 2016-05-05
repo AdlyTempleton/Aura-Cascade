@@ -28,7 +28,8 @@ public class FairyTorch extends Block implements ITTinkererBlock {
         setTickRandomly(true);
 
         setLightLevel(1F);
-        setBlockBounds(0, 0, 0, 0, 0, 0);
+        //Block Bounds
+        func_149676_a(0, 0, 0, 0, 0, 0);
     }
 
     @Override

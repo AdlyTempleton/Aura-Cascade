@@ -40,7 +40,8 @@ public class PageTutorial extends PageText {
         if (button == this.button) {
             GuiLexicon.startTutorial();
             getMinecraft().displayGuiScreen(new GuiLexicon());
-            getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialStarted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+            //TODO Reimplement
+            //getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialStarted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
         }
     }
 

@@ -114,11 +114,11 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
             if (changeLastPower) {
                 lastPower = storedPower;
 
-                worldObj.markBlockForUpdate(getPos());
+                worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
 
             } else if (worldObj.getTotalWorldTime() % 20 == 2) {
 
-                worldObj.markBlockForUpdate(getPos());
+            	worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
 
             }
 
@@ -133,7 +133,7 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
                     if (progress > getMaxProgress()) {
                         progress = 0;
                         onUsePower();
-                        worldObj.markBlockForUpdate(getPos());
+                        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                     }
                     if (storedPower < nextBoostCost) {
                         break;
@@ -141,7 +141,7 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
                     progress += 1;
                     storedPower -= nextBoostCost;
                     nextBoostCost *= 2;
-                    worldObj.markBlockForUpdate(getPos());
+                    worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                     worldObj.notifyBlockOfStateChange(getPos(), worldObj.getBlockState(pos).getBlock());
                 }
             }

@@ -126,7 +126,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             inv = new ArrayList<ItemStack>();
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlockForUpdate(getPos());
+        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
     }
 
     @Override
@@ -141,7 +141,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlockForUpdate(pos);
+        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
     }
 
     @Override

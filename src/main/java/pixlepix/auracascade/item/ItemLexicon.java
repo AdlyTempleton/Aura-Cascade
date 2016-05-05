@@ -80,7 +80,8 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
                         par2EntityPlayer.openGui(AuraCascade.instance, 0, par3World, 0, 0, 0);
                         if (!par3World.isRemote) {
-                            par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
+                        	//This needs fixed. TODO
+                            //par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
                         }
                         return true;
                     }
@@ -102,7 +103,8 @@ public class ItemLexicon extends Item implements ITTinkererItem {
             if (entry != null) {
                 AuraCascade.proxy.setEntryToOpen(entry);
             } else {
-                par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+            	//TODO
+               // par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
             setForcedPage(par1ItemStack, "");
         }
@@ -112,7 +114,8 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         AuraCascade.proxy.setLexiconStack(par1ItemStack);
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound)
-            par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
+        	//TODO
+            //par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
         skipSound = false;
         return par1ItemStack;
     }

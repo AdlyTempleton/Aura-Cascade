@@ -33,7 +33,7 @@ public class ItemAngelStep extends Item implements IBauble, ITTinkererItem {
     public void onWornTick(ItemStack itemStack, EntityLivingBase player) {
         if (player.isCollidedHorizontally) {
             player.stepHeight += .3;
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 1.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 1.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.func_177502_q(), player.posX, player.posY, player.posZ, 32));
         } else if (player.stepHeight > 2) {
             player.stepHeight = 2;
         }

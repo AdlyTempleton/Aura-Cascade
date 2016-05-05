@@ -144,8 +144,8 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
-
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
+    	//TODO test for broken dim ID
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
     }
 
@@ -261,7 +261,7 @@ public class AuraTile extends TileEntity implements ITickable {
                 }
                 inducedBurstMap = new HashMap<BlockPos, Integer>();
             }
-            worldObj.markBlockForUpdate(pos);
+            worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
             worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
         }
 

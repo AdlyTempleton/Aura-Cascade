@@ -138,7 +138,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
                     }
                 }
             }
-            worldObj.markBlockForUpdate(getPos());
+            worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         }
         if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
 /* todo 1.8.8 this causes an infinite loop wtf
@@ -291,7 +291,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
     }
 
     public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimensionId(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.func_177502_q(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
     }
 
     @Override

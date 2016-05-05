@@ -19,13 +19,16 @@ public class EntityDebuffFairy extends EntityFairy {
 
     public EntityDebuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
-        potionEffects = new PotionEffect[]{
+        //TODO
+      //  potionEffects = new PotionEffect[]{
+        		/*
                 new PotionEffect(Potion.poison.getId(), 200),
                 new PotionEffect(Potion.confusion.getId(), 200),
                 new PotionEffect(Potion.weakness.getId(), 200),
                 new PotionEffect(Potion.wither.getId(), 200),
                 new PotionEffect(Potion.moveSlowdown.getId(), 200),
                 new PotionEffect(Potion.hunger.getId(), 200)};
+                */
     }
 
     @Override
@@ -38,7 +41,7 @@ public class EntityDebuffFairy extends EntityFairy {
                 for (PotionEffect potionEffect : potionEffects) {
                     entity.addPotionEffect(potionEffect);
                 }
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
+               // AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimensionId(), entity.posX, entity.posY, entity.posZ, 32));
             }
         }
     }

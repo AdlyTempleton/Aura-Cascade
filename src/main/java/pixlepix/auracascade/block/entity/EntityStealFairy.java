@@ -24,8 +24,8 @@ public class EntityStealFairy extends EntityFairy {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 200 == 0) {
             List<EntityPlayer> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
             for (EntityPlayer entity : nearbyEntities) {
-                ItemStack stack = entity.getCurrentEquippedItem();
-
+                ItemStack stack = entity.inventory.getCurrentItem();
+                //TODO Test this works.
                 if (stack != null && entity != player) {
                     EntityItem item = new EntityItem(worldObj, player.posX, player.posY, player.posZ, stack);
                     item.motionX = 0;

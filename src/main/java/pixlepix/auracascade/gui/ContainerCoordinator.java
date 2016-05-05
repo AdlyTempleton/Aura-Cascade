@@ -6,6 +6,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.StatCollector;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
@@ -107,7 +108,8 @@ public class ContainerCoordinator extends Container {
 
     public void scrollTo(float scroll, String filter) {
         if (!tileEntity.getWorld().isRemote) {
-            tileEntity.getWorld().markBlockForUpdate(tileEntity.getPos());
+        	BlockPos pos = tileEntity.getPos();
+            tileEntity.getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         }
         lastFilter = filter;
 
@@ -216,7 +218,7 @@ public class ContainerCoordinator extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int slot, int clickedButton, int mode, EntityPlayer player) {
+    public ItemStack func_75144_a(int slot, int clickedButton, int mode, EntityPlayer player) {
         ItemStack itemstack = null;
 
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {

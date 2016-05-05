@@ -1,8 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import cofh.api.energy.IEnergyConnection;
-import cofh.api.energy.IEnergyProvider;
-import cofh.api.energy.IEnergyReceiver;
 // todo 1.8.8 await duct update import cofh.api.transport.IEnderEnergyHandler;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -49,6 +46,7 @@ public class AuraTileRF extends AuraTile {
     @Override
     public void update() {
         super.update();
+        /*
         if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();
             LinkedList<BlockPos> nextTiles = new LinkedList<BlockPos>();
@@ -167,9 +165,9 @@ public class AuraTileRF extends AuraTile {
             lastPower = 0;
         }
         if (worldObj.getTotalWorldTime() % 20 == 1) {
-            worldObj.markBlockForUpdate(getPos());
+            worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         }
-
+	*/
 
     }
 

@@ -3,7 +3,6 @@ package pixlepix.auracascade.block.entity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import net.minecraft.init.MobEffects;
 import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
@@ -17,12 +16,17 @@ public class EntityBuffFairy extends EntityFairy {
     public EntityBuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
-                new PotionEffect(MobEffects),
-              //  new PotionEffect(Potion.resistance.getId(), 2400),
-            //    new PotionEffect(Potion.damageBoost.getId(), 2400),
-            //    new PotionEffect(Potion.absorption.getId(), 2400),
-            //    new PotionEffect(Potion.jump.getId(), 2400),
-            //    new PotionEffect(Potion.moveSpeed.getId(), 2400)};
+        		//TODO TEST THIS
+        		new PotionEffect(Potion.absorption.func_76396_c(), 2400),
+        		/*
+                new PotionEffect(Potion.regeneration, 2400, 4),
+                new PotionEffect(Potion.resistance.getId(), 2400),
+                new PotionEffect(Potion.damageBoost.getId(), 2400),
+                new PotionEffect(Potion.absorption.getId(), 2400),
+                new PotionEffect(Potion.jump.getId(), 2400),
+                new PotionEffect(Potion.moveSpeed.getId(), 2400)
+                */
+                };
     }
 
     @Override

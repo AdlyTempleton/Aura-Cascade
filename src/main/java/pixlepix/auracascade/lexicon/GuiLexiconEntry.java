@@ -173,7 +173,8 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
                 tutorial.poll();
                 positionTutorialArrow();
                 if (tutorial.isEmpty()) {
-                    mc.thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialEnded").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                	//TODO Chat reimplementation
+                  //  mc.thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialEnded").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                     hasTutorialArrow = false;
                 }
             }

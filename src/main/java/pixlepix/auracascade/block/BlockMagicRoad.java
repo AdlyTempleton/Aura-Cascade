@@ -24,7 +24,9 @@ import java.util.ArrayList;
 public class BlockMagicRoad extends Block implements ITTinkererBlock {
     public BlockMagicRoad() {
         super(Material.rock);
-        setBlockBounds(0F, 0F, 0F, 1F, .8F, 1F);
+        //I think this fixes setBoundBox.
+        //TODO test I didn't fuck it up.
+        func_149676_a(0F, 0F, 0F, 1F, .8F, 1F);
         setHardness(2F);
         setLightLevel(1F);
     }

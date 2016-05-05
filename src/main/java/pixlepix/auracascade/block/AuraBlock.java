@@ -53,7 +53,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         this.type = type;
 
         if (!type.equals("craftingCenter")) {
-            setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
+        	func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
         }
         setLightOpacity(0);
         setHardness(2F);
@@ -144,7 +144,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(pos);
                 capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
                 player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
-                world.markBlockForUpdate(pos);
+                world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                 return true;
             } else if (world.getTileEntity(pos) instanceof AuraTilePedestal && !player.isSneaking()) {
                 AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(pos);
@@ -156,7 +156,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
 
                 pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
-                world.markBlockForUpdate(pos);
+                world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                 world.notifyBlockOfStateChange(pos, this);
                 return true;
 
@@ -205,9 +205,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             if (stack.getItem() instanceof ItemAuraCrystal) {
                 if (te instanceof AuraTile) {
                     ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000 * stack.stackSize));
-                    world.markBlockForUpdate(pos);
+                    world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                     world.notifyNeighborsOfStateChange(pos, this);
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.getDimensionId(), pos.getX(), pos.getY(), pos.getZ(), 32));
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.func_177502_q(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
                     entity.setDead();
                 }
