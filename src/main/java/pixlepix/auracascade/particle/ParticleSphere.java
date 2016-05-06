@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -27,16 +28,16 @@ public class ParticleSphere extends EntityFX {
         this.particleRed = this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D + 0.6000000238418579D);
         this.particleScale *= 0.75F;
         this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.6D));
-        this.noClip = false;
+        this.isCollided = false;
 
         this.particleMaxAge = 20;
-        this.noClip = false;
+        this.isCollided = false;
     }
 
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void renderParticle(WorldRenderer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
+    public void renderParticle(VertexBuffer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
         // todo 1.8.8 verify
         Tessellator.getInstance().draw();
         Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));

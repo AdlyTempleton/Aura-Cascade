@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -71,7 +72,7 @@ public class PacketBurst implements IMessage, IMessageHandler<PacketBurst, IMess
                 if (msg.world.isRemote) {
                     if (msg.type == 0) {
                         if (msg.comp != 0D) {
-                            Vec3 velocity = new Vec3(msg.to.subtract(msg.from));
+                            Vec3d velocity = new Vec3d(msg.to.subtract(msg.from));
                             velocity = velocity.normalize();
                             double dist = Math.sqrt(msg.to.distanceSq(msg.from));
 

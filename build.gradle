@@ -19,6 +19,11 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
+jar {
+        manifest {
+        attributes 'FMLAT': 'aura_at.cfg'
+    }
+}
 */
 version = "1.0"
 group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html

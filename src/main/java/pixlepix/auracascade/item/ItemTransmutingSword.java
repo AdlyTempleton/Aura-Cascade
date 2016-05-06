@@ -7,6 +7,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraft.entity.monster.EntitySlime;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -67,7 +68,7 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
                 target.worldObj.spawnEntityInWorld(newEntity);
                 if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {
-                    ((EntitySlime) newEntity).setSlimeSize(((EntitySlime) target).getSlimeSize());
+                    ((EntitySlime) newEntity).setSlimeSize((((EntitySlime) target).getSlimeSize()));
                 }
                 if (newEntity instanceof EntityLivingBase) {
                     ((EntityLivingBase) newEntity).setHealth(Math.min(((EntityLivingBase) newEntity).getMaxHealth(), target.getHealth()));

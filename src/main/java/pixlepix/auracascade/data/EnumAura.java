@@ -52,7 +52,6 @@ public enum EnumAura {
                     explosionPushUp(world, pos, 200000);
                 }
             }
-            /* TODO: Reimplement ASM?
             List<EntityCreeper> creeperList = world.getEntitiesWithinAABB(EntityCreeper.class, search);
             for (EntityCreeper creeper : creeperList) {
                 if (creeper.timeSinceIgnited + 2 >= creeper.fuseTime && !creeper.isDead) {
@@ -60,7 +59,6 @@ public enum EnumAura {
                     explosionPushUp(world, pos, 50000);
                 }
             }
-			*/
             AuraCascade.analytics.eventDesign("redAura", AuraUtil.formatLocation(pos));
         }
     },

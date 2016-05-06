@@ -40,7 +40,7 @@ public class PacketAngelJump implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(entityPlayer.worldObj.provider.func_177502_q());
+        buf.writeInt(entityPlayer.worldObj.provider.getDimension());
         buf.writeInt(entityPlayer.getEntityId());
         buf.writeBoolean(up);
     }
@@ -63,14 +63,14 @@ public class PacketAngelJump implements IMessage {
                                 BlockPos pos = new BlockPos(x, y, z);
                                 //If the player is going down, we want them to be able to land on bedrock
                                 //But not the other way around
-                                if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj, pos) < 0) {
+                                if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj.getBlockState(pos), player.worldObj, pos) < 0) {
                                     break;
                                 }
                                 if (!player.worldObj.isAirBlock(pos) &&
                                         player.worldObj.isAirBlock(pos.up()) &&
                                         player.worldObj.isAirBlock(pos.up(2))) {
                                     player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
-                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.func_177502_q(), player.posX, player.posY, player.posZ, 32));
+                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimension(), player.posX, player.posY, player.posZ, 32));
                                     break;
                                 }
                             }

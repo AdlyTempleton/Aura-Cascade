@@ -54,7 +54,7 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void toBytes(ByteBuf data) {
-        data.writeInt(entityPlayer.worldObj.provider.func_177502_q());
+        data.writeInt(entityPlayer.worldObj.provider.getDimension());
         data.writeInt(entityPlayer.getEntityId());
 
         data.writeByte(completed.size());

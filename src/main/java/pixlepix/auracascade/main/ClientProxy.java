@@ -100,7 +100,7 @@ public class ClientProxy extends CommonProxy {
     public void addEffectBypassingLimit(EntityFX entityFX) {
         if (Config.overrideMaxParticleLimit) {
         	//TODO Changed getAlpha to func_174838_j.
-            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][entityFX.func_174838_j() != 1 ? 0 : 1].add(entityFX);
+            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][entityFX.getAlpha() != 1 ? 0 : 1].add(entityFX);
         } else {
             Minecraft.getMinecraft().theWorld.spawnEntityInWorld(entityFX);
         }

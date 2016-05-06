@@ -70,7 +70,7 @@ import pixlepix.auracascade.registry.BlockRegistry;
 public final class ModelHandler {
 
     // I know this is very hardcoded right now, but it's the fastest to get up and running
-    public static void registerModels() {
+    public static void registerModels(){
         registerAngelSteelIngots();
         registerAngelSteelTools();
         registerFairyCharms();
@@ -79,7 +79,8 @@ public final class ModelHandler {
         registerAmulets();
 
         Item fairyTorchItem = Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
-        ModelLoader.addVariantName(fairyTorchItem, "minecraft:barrier");
+        //ModelLoader.setCustomMeshDefinition(fairyTorchItem, new ItemMeshDefinition("minecraft:barrier"));
+        ModelLoader.setCustomMeshDefinition(fairyTorchItem, "minecraft:barrier");
         ModelLoader.setCustomModelResourceLocation(fairyTorchItem, 0, new ModelResourceLocation("minecraft:barrier", "inventory"));
 
         registerItem(BlockRegistry.getFirstItemFromClass(ItemMirror.class));
@@ -208,7 +209,8 @@ public final class ModelHandler {
     }
 
     private static void registerBooks() {
-        Set<Class<? extends ItemStorageBook>> classes = ImmutableSet.of(BasicStorageBook.class, DenseStorageBook.class, ExtremelyDenseStorageBook.class,
+        @SuppressWarnings("unchecked")
+		Set<Class<? extends ItemStorageBook>> classes = ImmutableSet.of(BasicStorageBook.class, DenseStorageBook.class, ExtremelyDenseStorageBook.class,
                 ExtremelyLightStorageBook.class, FarmingStorageBook.class, LightStorageBook.class, MineralStorageBook.class, MobStorageBook.class,
                 ModStorageBook.class, SuperDenseStorageBook.class, SuperLightStorageBook.class, VeryDenseStorageBook.class, VeryLightStorageBook.class);
 

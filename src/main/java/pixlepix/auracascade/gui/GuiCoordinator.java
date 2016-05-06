@@ -345,39 +345,39 @@ public class GuiCoordinator extends GuiContainer {
     }
 
     @Override
-    public void drawSlot(Slot p_146977_1_) {
-        int i = p_146977_1_.xDisplayPosition;
-        int j = p_146977_1_.yDisplayPosition;
-        ItemStack itemstack = p_146977_1_.getStack();
+    public void drawSlot(Slot slotIn) {
+        int i = slotIn.xDisplayPosition;
+        int j = slotIn.yDisplayPosition;
+        ItemStack itemstack = slotIn.getStack();
         boolean flag = false;
-        boolean flag1 = p_146977_1_ == this.clickedSlot && this.draggedStack != null && !this.isRightMouseClick;
+        boolean flag1 = slotIn == this.clickedSlot && this.draggedStack != null && !this.isRightMouseClick;
         ItemStack itemstack1 = this.mc.thePlayer.inventory.getItemStack();
         String s = null;
 
-        if (p_146977_1_ == this.clickedSlot && this.draggedStack != null && this.isRightMouseClick && itemstack != null) {
+        if (slotIn == this.clickedSlot && this.draggedStack != null && this.isRightMouseClick && itemstack != null) {
             itemstack = itemstack.copy();
             itemstack.stackSize /= 2;
-        } else if (this.dragSplitting && this.dragSplittingSlots.contains(p_146977_1_) && itemstack1 != null) {
+        } else if (this.dragSplitting && this.dragSplittingSlots.contains(slotIn) && itemstack1 != null) {
             if (this.dragSplittingSlots.size() == 1) {
                 return;
             }
 
-            if (Container.canAddItemToSlot(p_146977_1_, itemstack1, true) && this.inventorySlots.canDragIntoSlot(p_146977_1_)) {
+            if (Container.canAddItemToSlot(slotIn, itemstack1, true) && this.inventorySlots.canDragIntoSlot(slotIn)) {
                 itemstack = itemstack1.copy();
                 flag = true;
-                Container.computeStackSize(this.dragSplittingSlots, this.dragSplittingLimit, itemstack, p_146977_1_.getStack() == null ? 0 : p_146977_1_.getStack().stackSize);
+                Container.computeStackSize(this.dragSplittingSlots, this.dragSplittingLimit, itemstack, slotIn.getStack() == null ? 0 : slotIn.getStack().stackSize);
 
                 if (itemstack.stackSize > itemstack.getMaxStackSize()) {
                     s = EnumChatFormatting.YELLOW + "" + itemstack.getMaxStackSize();
                     itemstack.stackSize = itemstack.getMaxStackSize();
                 }
 
-                if (itemstack.stackSize > p_146977_1_.getSlotStackLimit()) {
-                    s = EnumChatFormatting.YELLOW + "" + p_146977_1_.getSlotStackLimit();
-                    itemstack.stackSize = p_146977_1_.getSlotStackLimit();
+                if (itemstack.stackSize > slotIn.getSlotStackLimit()) {
+                    s = EnumChatFormatting.YELLOW + "" + slotIn.getSlotStackLimit();
+                    itemstack.stackSize = slotIn.getSlotStackLimit();
                 }
             } else {
-                this.dragSplittingSlots.remove(p_146977_1_);
+                this.dragSplittingSlots.remove(slotIn);
                 this.func_146980_g();
             }
         }
@@ -386,11 +386,11 @@ public class GuiCoordinator extends GuiContainer {
         itemRender.zLevel = 100.0F;
 
         if (itemstack == null) {
-            TextureAtlasSprite iicon = p_146977_1_.getBackgroundSprite();
+            TextureAtlasSprite iicon = slotIn.getBackgroundSprite();
 
             if (iicon != null) {
                 GlStateManager.disableLighting();
-                this.mc.getTextureManager().bindTexture(p_146977_1_.getBackgroundLocation());
+                this.mc.getTextureManager().bindTexture(slotIn.getBackgroundLocation());
                 this.drawTexturedModalRect(i, j, iicon, 16, 16);
                 GlStateManager.enableLighting();
                 flag1 = true;

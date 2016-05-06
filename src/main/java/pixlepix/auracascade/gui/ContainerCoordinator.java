@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -217,7 +218,7 @@ public class ContainerCoordinator extends Container {
     }
 
     @Override
-    public ItemStack func_75144_a(int slot, int clickedButton, int mode, EntityPlayer player) {
+    public ItemStack slotClick(int slot, int clickedButton, ClickType clickTypeIn, EntityPlayer player) {
         ItemStack itemstack = null;
 
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {

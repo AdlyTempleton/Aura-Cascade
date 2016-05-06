@@ -19,7 +19,7 @@ public class EntityItemPoof extends EntityFirework.SparkFX {
         this.prevPosZ = this.posZ;
 
         if (this.particleAge++ >= this.particleMaxAge) {
-            this.setDead();
+            this.setExpired();
         }
 
         if (this.particleAge > this.particleMaxAge / 2) {
@@ -30,7 +30,7 @@ public class EntityItemPoof extends EntityFirework.SparkFX {
         this.motionY -= 0.004D;
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
 
-        if (this.onGround) {
+        if (this.isCollided) {
             this.motionX *= 0.699999988079071D;
             this.motionZ *= 0.699999988079071D;
         }
