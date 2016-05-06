@@ -21,7 +21,7 @@ import pixlepix.auracascade.main.ConstantMod;
 public class PotionVioletCurse extends Potion {
 
     public PotionVioletCurse() {
-        super(new ResourceLocation(ConstantMod.modId, "violet_curse"), true, EnumAura.VIOLET_AURA.color.getHex());
+        super(true, EnumAura.VIOLET_AURA.color.getHex());
         setPotionName("Violet Curse");
     }
 

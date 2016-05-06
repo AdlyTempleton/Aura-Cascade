@@ -7,19 +7,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
-import pixlepix.auracascade.main.ConstantMod;
 
 /**
  * Created by localmacaccount on 1/19/15.
  */
 public class PotionBlueCurse extends Potion {
     public PotionBlueCurse() {
-        super(new ResourceLocation(ConstantMod.modId, "blue_curse"), true, EnumAura.BLUE_AURA.color.getHex());
+        super(true, EnumAura.BLUE_AURA.color.getHex());
         setPotionName("Blue Curse");
 
     }

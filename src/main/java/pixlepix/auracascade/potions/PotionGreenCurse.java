@@ -8,20 +8,18 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
-import pixlepix.auracascade.main.ConstantMod;
 
 /**
  * Created by localmacaccount on 1/19/15.
  */
 public class PotionGreenCurse extends Potion {
     public PotionGreenCurse() {
-        super(new ResourceLocation(ConstantMod.modId, "green_curse"), true, EnumAura.GREEN_AURA.color.getHex());
+        super(true, EnumAura.GREEN_AURA.color.getHex());
         setPotionName("Green Curse");
 
     }
@@ -50,7 +48,7 @@ public class PotionGreenCurse extends Potion {
             EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
             if (entityLiving != entity) {
                 if (!entityLiving.isPotionActive(this)) {
-                    entityLiving.addPotionEffect(new PotionEffect(this.field_76415_H, entity.getActivePotionEffect(this).getDuration()));
+                    entityLiving.addPotionEffect(new PotionEffect(this, entity.getActivePotionEffect(this).getDuration()));
                 }
             }
         }
