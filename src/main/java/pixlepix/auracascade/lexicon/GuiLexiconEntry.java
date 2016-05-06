@@ -21,6 +21,9 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.button.GuiButtonBackWithShift;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
 
@@ -41,7 +44,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         this.entry = entry;
         this.parent = parent;
 
-        title = StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
+        title = I18n.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
     }
 
     public void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_) {
@@ -51,7 +54,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
             if (k == 0) {
                 list.set(k, p_146285_1_.getRarity().rarityColor + (String) list.get(k));
             } else {
-                list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
+                list.set(k, TextFormatting.GRAY + (String) list.get(k));
             }
         }
 
@@ -90,7 +93,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
 
     @Override
     String getTitle() {
-        return String.format("%s " + EnumChatFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
+        return String.format("%s " + TextFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
     }
 
     @Override
@@ -170,8 +173,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
                 tutorial.poll();
                 positionTutorialArrow();
                 if (tutorial.isEmpty()) {
-                	//TODO Chat reimplementation
-                  //  mc.thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialEnded").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    mc.thePlayer.addChatMessage(new TextComponentString("aura.tutorialEnded"));
                     hasTutorialArrow = false;
                 }
             }

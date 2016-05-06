@@ -14,6 +14,9 @@ package pixlepix.auracascade.lexicon.button;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+
 public class GuiButtonBackWithShift extends GuiButtonBack {
 
     public GuiButtonBackWithShift(int par1, int par2, int par3) {
@@ -22,7 +25,7 @@ public class GuiButtonBackWithShift extends GuiButtonBack {
 
     @Override
     public List<String> getTooltip() {
-        return Arrays.asList(StatCollector.translateToLocal("auramisc.back"), EnumChatFormatting.GRAY + StatCollector.translateToLocal("auramisc.clickToIndex"));
+        return Arrays.asList(I18n.translateToLocal("auramisc.back"), TextFormatting.GRAY + I18n.translateToLocal("auramisc.clickToIndex"));
     }
 
 }

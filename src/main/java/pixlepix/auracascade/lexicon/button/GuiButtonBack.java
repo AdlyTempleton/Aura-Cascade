@@ -16,6 +16,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
@@ -42,7 +43,7 @@ public class GuiButtonBack extends GuiButtonLexicon {
     }
 
     public List<String> getTooltip() {
-        return Arrays.asList(StatCollector.translateToLocal("auramisc.back"));
+        return Arrays.asList(I18n.translateToLocal("auramisc.back"));
     }
 
 }

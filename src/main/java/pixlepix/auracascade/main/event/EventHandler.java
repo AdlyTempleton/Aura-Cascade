@@ -403,11 +403,11 @@ public class EventHandler {
                     //Note that there is no potion with id 0
                     Potion potion;
                     do {
-                        potion = Potion.field_76425_a[random.nextInt(23) + 1];
+                        potion = Potion.getPotionById(random.nextInt(23) + 1);
                     } while (potion.isInstant());
                     int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
                     int amplified = random.nextInt(6);
-                    PotionEffect potionEffect = new PotionEffect(potion.field_76415_H, duration, amplified);
+                    PotionEffect potionEffect = new PotionEffect(potion.setBeneficial(), duration, amplified);
                     player.addPotionEffect(potionEffect);
                 }
             }

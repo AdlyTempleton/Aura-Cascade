@@ -19,6 +19,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
@@ -254,7 +255,7 @@ public class GuiCoordinator extends GuiContainer {
 
                 if (itemstack.stackSize == 0)
                 {
-                    s = "" + EnumChatFormatting.YELLOW + "0";
+                    s = "" + TextFormatting.YELLOW + "0";
                 }
             }
 
@@ -368,17 +369,17 @@ public class GuiCoordinator extends GuiContainer {
                 Container.computeStackSize(this.dragSplittingSlots, this.dragSplittingLimit, itemstack, slotIn.getStack() == null ? 0 : slotIn.getStack().stackSize);
 
                 if (itemstack.stackSize > itemstack.getMaxStackSize()) {
-                    s = EnumChatFormatting.YELLOW + "" + itemstack.getMaxStackSize();
+                    s = TextFormatting.YELLOW + "" + itemstack.getMaxStackSize();
                     itemstack.stackSize = itemstack.getMaxStackSize();
                 }
 
                 if (itemstack.stackSize > slotIn.getSlotStackLimit()) {
-                    s = EnumChatFormatting.YELLOW + "" + slotIn.getSlotStackLimit();
+                    s = TextFormatting.YELLOW + "" + slotIn.getSlotStackLimit();
                     itemstack.stackSize = slotIn.getSlotStackLimit();
                 }
             } else {
                 this.dragSplittingSlots.remove(slotIn);
-                this.func_146980_g();
+                this.updateActivePotionEffects();
             }
         }
 

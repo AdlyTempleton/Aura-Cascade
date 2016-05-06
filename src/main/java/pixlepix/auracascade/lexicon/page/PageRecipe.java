@@ -24,6 +24,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.lexicon.GuiLexiconEntry;
@@ -60,7 +62,7 @@ public class PageRecipe extends LexiconPage {
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + getTextOffset(gui);
-        if (!StatCollector.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
+        if (!I18n.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {
             PageText.renderText(x, y, width, getUnlocalizedName());
         }
 
@@ -72,7 +74,7 @@ public class PageRecipe extends LexiconPage {
             for (String s : tooltipData) {
                 String s_ = s;
                 if (!first)
-                    s_ = EnumChatFormatting.GRAY + s;
+                    s_ = TextFormatting.GRAY + s;
                 parsedTooltip.add(s_);
                 first = false;
             }
@@ -82,12 +84,12 @@ public class PageRecipe extends LexiconPage {
             int tooltipY = 8 + tooltipData.size() * 11;
 
             if (tooltipEntry) {
-                VazkiiRenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.GRAY + StatCollector.translateToLocal("auramisc.clickToRecipe")));
+                VazkiiRenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(TextFormatting.GRAY + I18n.translateToLocal("auramisc.clickToRecipe")));
                 tooltipY += 18;
             }
 
             if (tooltipContainerStack != null)
-                VazkiiRenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("auramisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
+                VazkiiRenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(TextFormatting.AQUA + I18n.translateToLocal("auramisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
         }
 
         tooltipStack = tooltipContainerStack = null;

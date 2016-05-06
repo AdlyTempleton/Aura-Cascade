@@ -15,6 +15,7 @@ import java.awt.Desktop;
 import java.net.URI;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 
 public class PageGuide extends PageText {
@@ -31,7 +32,7 @@ public class PageGuide extends PageText {
 
     @Override
     public void onOpened(IGuiLexiconEntry gui) {
-        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, StatCollector.translateToLocal(desc));
+        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, I18n.translateToLocal(desc));
         gui.getButtonList().add(button);
     }
 

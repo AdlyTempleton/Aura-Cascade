@@ -8,6 +8,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
@@ -28,7 +29,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack).replace("%n", StatCollector.translateToLocal(stack.getItemDamage() + ".aurasteel.name"));
+        return super.getItemStackDisplayName(stack).replace("%n", I18n.translateToLocal(stack.getItemDamage() + ".aurasteel.name"));
     }
 
     @Override

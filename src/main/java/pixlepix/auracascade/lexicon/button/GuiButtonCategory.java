@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.LexiconCategory;
 import pixlepix.auracascade.lexicon.LibResources;
@@ -71,7 +72,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
 
         ItemStack itemStack;
         if (category == null) {
-            itemStack = new ItemStack(Items.book);
+            itemStack = new ItemStack(Items.BOOK);
         } else {
             itemStack = category.getIcon();
         }
@@ -82,7 +83,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
         GlStateManager.popMatrix();
 
         if (inside)
-            VazkiiRenderHelper.renderTooltipGreen(mx, my, Arrays.asList(StatCollector.translateToLocal(getTooltipText())));
+            VazkiiRenderHelper.renderTooltipGreen(mx, my, Arrays.asList(I18n.translateToLocal(getTooltipText())));
     }
 
     String getTooltipText() {

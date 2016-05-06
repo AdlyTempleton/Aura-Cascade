@@ -11,6 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.StorageItemStack;
@@ -117,7 +118,7 @@ public class ContainerCoordinator extends Container {
         Iterator iter = stacks.iterator();
         while (iter.hasNext()) {
             StorageItemStack storageItemStack = (StorageItemStack) iter.next();
-            String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
+            String name = I18n.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
 
             if (!name.contains(filter)) {
                 iter.remove();
@@ -220,7 +221,7 @@ public class ContainerCoordinator extends Container {
     @Override
     public ItemStack slotClick(int slot, int clickedButton, ClickType clickTypeIn, EntityPlayer player) {
         ItemStack itemstack = null;
-
+        int mode = this.dragMode;
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
                 player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);

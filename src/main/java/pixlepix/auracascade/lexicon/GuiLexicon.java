@@ -27,6 +27,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.button.GuiButtonBookmark;
 import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
@@ -173,7 +174,7 @@ public class GuiLexicon extends GuiScreen {
     void drawHeader() {
         boolean unicode = fontRendererObj.getUnicodeFlag();
         fontRendererObj.setUnicodeFlag(true);
-        fontRendererObj.drawSplitString(String.format(StatCollector.translateToLocal("aura.gui.lexicon.header")), left + 18, top + 12, 110, 0);
+        fontRendererObj.drawSplitString(String.format(I18n.translateToLocal("aura.gui.lexicon.header")), left + 18, top + 12, 110, 0);
         fontRendererObj.setUnicodeFlag(unicode);
     }
 
@@ -252,9 +253,9 @@ public class GuiLexicon extends GuiScreen {
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i);
             LexiconCategory category = i_ >= categoryList.size() ? null : categoryList.get(i_);
             if (category != null)
-                button.displayString = StatCollector.translateToLocal(category.getUnlocalizedName());
+                button.displayString = I18n.translateToLocal(category.getUnlocalizedName());
             else {
-                button.displayString = StatCollector.translateToLocal("auramisc.lexiconIndex");
+                button.displayString = I18n.translateToLocal("auramisc.lexiconIndex");
                 break;
             }
         }

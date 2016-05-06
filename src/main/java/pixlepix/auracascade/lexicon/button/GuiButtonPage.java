@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
@@ -38,7 +39,7 @@ public class GuiButtonPage extends GuiButtonLexicon {
             drawTexturedModalRect(xPosition, yPosition, k == 2 ? 18 : 0, right ? 180 : 190, 18, 10);
 
             if (k == 2)
-                VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(StatCollector.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
+                VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(I18n.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
         }
     }
 

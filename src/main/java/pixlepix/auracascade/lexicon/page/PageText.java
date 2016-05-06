@@ -18,6 +18,7 @@ import com.google.common.base.Strings;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.lexicon.FontHelper;
@@ -35,7 +36,7 @@ public class PageText extends LexiconPage {
         FontRenderer renderer = Minecraft.getMinecraft().fontRendererObj;
         boolean unicode = renderer.getUnicodeFlag();
         renderer.setUnicodeFlag(true);
-        String text = StatCollector.translateToLocal(unlocalizedText).replaceAll("&", "\u00a7");
+        String text = I18n.translateToLocal(unlocalizedText).replaceAll("&", "\u00a7");
         String[] textEntries = text.split("<br>");
 
         String lastFormat = "";

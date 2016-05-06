@@ -1,5 +1,7 @@
 package pixlepix.auracascade.main;
 
+import net.minecraft.util.text.translation.I18n;
+
 /**
  * Simple color enum for adding colors to in-game GUI strings of text.
  *
@@ -57,11 +59,11 @@ public enum EnumColor {
      * @return localized name
      */
     public String getLocalizedName() {
-        return StatCollector.translateToLocal("color." + unlocalizedName);
+        return I18n.translateToLocal("color." + unlocalizedName);
     }
 
     public String getDyeName() {
-        return StatCollector.translateToLocal("dye." + unlocalizedName);
+        return I18n.translateToLocal("dye." + unlocalizedName);
     }
 
     public String getOreDictName() {

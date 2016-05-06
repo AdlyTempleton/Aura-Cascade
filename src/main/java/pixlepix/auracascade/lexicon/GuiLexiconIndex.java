@@ -21,6 +21,8 @@ import org.lwjgl.input.Mouse;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.button.GuiButtonBack;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
@@ -45,7 +47,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
 
     public GuiLexiconIndex(LexiconCategory category) {
         this.category = category;
-        title = StatCollector.translateToLocal(category == null ? "auramisc.lexiconIndex" : category.getUnlocalizedName());
+        title = I18n.translateToLocal(category == null ? "auramisc.lexiconIndex" : category.getUnlocalizedName());
         parent = new GuiLexicon();
     }
 
@@ -93,7 +95,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     void buildEntries() {
         entriesToDisplay.clear();
         for (LexiconEntry entry : category == null ? CategoryManager.getAllEntries() : category.entries) {
-            if (StatCollector.translateToLocal(entry.getUnlocalizedName()).toLowerCase().contains(searchField.getText().toLowerCase().trim()))
+            if (I18n.translateToLocal(entry.getUnlocalizedName()).toLowerCase().contains(searchField.getText().toLowerCase().trim()))
                 entriesToDisplay.add(entry);
         }
         Collections.sort(entriesToDisplay);
@@ -107,7 +109,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i - page * 12);
             LexiconEntry entry = i >= entriesToDisplay.size() ? null : entriesToDisplay.get(i);
             if (entry != null) {
-                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
+                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? TextFormatting.ITALIC : "") + I18n.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
                 if (entry == tutEntry) {
                     tutPage = page;
                 }
