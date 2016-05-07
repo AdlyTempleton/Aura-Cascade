@@ -76,12 +76,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     public AuraBlock(String type) {
         super(Material.glass);
         this.type = type;
-        
-        //TODO Test the reimplemented bounding box/
-        if (!type.equals("craftingCenter")) {
-        	AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
-        	
-        }
         setLightOpacity(0);
         setHardness(2F);
     }
@@ -140,16 +134,13 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     {
         return false;
     }
-    public boolean isVisuallyOpaque()
+    @Override
+    public boolean isBlockNormalCube(IBlockState state)
     {
         return false;
     }
     @Override
-    public boolean isFullBlock(IBlockState state){
-        return false;
-    }
-    @Override
-    public boolean isBlockNormalCube(IBlockState state)
+    public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
