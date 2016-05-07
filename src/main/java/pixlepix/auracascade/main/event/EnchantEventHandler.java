@@ -51,8 +51,10 @@ public class EnchantEventHandler {
     Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
 
     public static void init() {
-        dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, boolean.class, int.class);
-        dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_82164_bB", "addRandomDrop"});
+    	//TODO FIX THESE. FUCK REFLECTION
+     //   dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, boolean.class, int.class);
+        //dropRare = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_82164_bB", "addRandomDrop"});
+        
     }
 
     public static ItemStack getDoubleResult(ItemStack stack) {

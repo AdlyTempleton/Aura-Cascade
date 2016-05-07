@@ -28,7 +28,9 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     public int degree = 0;
 
     public ItemAngelsteelAxe(Integer i) {
-        super(AngelsteelToolHelper.materials[i]);
+        //super(AngelsteelToolHelper.materials[i]);
+    	super(ToolMaterial.IRON);
+        System.out.println("I made it here");
         this.degree = i;
         setCreativeTab(null);
     }

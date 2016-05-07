@@ -79,9 +79,9 @@ public final class ModelHandler {
         registerAmulets();
 
         Item fairyTorchItem = Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
-        //ModelLoader.setCustomMeshDefinition(fairyTorchItem, new ItemMeshDefinition("minecraft:barrier"));
+      //  ModelLoader.setCustomMeshDefinition(fairyTorchItem, ("minecraft:barrier"));
         //TODO this probably doesn't work
-        ModelLoader.setCustomMeshDefinition(fairyTorchItem, (ItemMeshDefinition) new ResourceLocation("minecraft:barrier"));
+       // ModelLoader.setCustomMeshDefinition(fairyTorchItem, (ItemMeshDefinition) new ResourceLocation("minecraft:barrier"));
        // ModelLoader.setCustomMeshDefinition(fairyTorchItem, );
         ModelLoader.setCustomModelResourceLocation(fairyTorchItem, 0, new ModelResourceLocation("minecraft:barrier", "inventory"));
 
