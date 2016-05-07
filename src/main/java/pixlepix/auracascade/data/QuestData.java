@@ -16,7 +16,7 @@ import pixlepix.auracascade.QuestManager;
  * Created by localmacaccount on 5/31/15.
  */
 public class QuestData implements Capability.IStorage<QuestData>{
-	//TODO Fix all of this.
+	//TODO Fix QuestData
 
     public final static String EXT_PROP_NAME = "ACQuest";
     public ArrayList<Quest> completedQuests = new ArrayList<Quest>();
@@ -86,13 +86,11 @@ public class QuestData implements Capability.IStorage<QuestData>{
 
 	@Override
 	public NBTBase writeNBT(Capability<QuestData> capability, QuestData instance, EnumFacing side) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void readNBT(Capability<QuestData> capability, QuestData instance, EnumFacing side, NBTBase nbt) {
-		// TODO Auto-generated method stub
 		
 	}
 }

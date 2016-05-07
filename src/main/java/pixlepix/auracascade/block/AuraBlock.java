@@ -74,12 +74,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         super(Material.glass);
         this.type = type;
         
-        /*//TODO This may be broken.
+        //TODO Reimplement bounding box special case.
         if (!type.equals("craftingCenter")) {
-        	func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
+        	//func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
         	
         }
-        */
         setLightOpacity(0);
         setHardness(2F);
     }
@@ -272,7 +271,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        // TODO Auto-generated method stub
         if (type.equals("pump")) {
             return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
         }
@@ -353,8 +351,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        // TODO Auto-generated method stub
-        ArrayList result = new ArrayList<Object>();
+    	//This was typed to Object from no-type.
+        ArrayList<Object> result = new ArrayList<Object>();
         result.add("pump");
         result.add("black");
         result.add("conserve");
@@ -385,25 +383,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public String getBlockName() {
-        // TODO Auto-generated method stub
         return name + type;
     }
 
     @Override
     public boolean shouldRegister() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean shouldDisplayInTab() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
-        // TODO Auto-generated method stub
         return null;
     }
 

@@ -144,7 +144,6 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
-    	//TODO test for broken dim ID
         AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
     }
@@ -262,6 +261,8 @@ public class AuraTile extends TileEntity implements ITickable {
                 inducedBurstMap = new HashMap<BlockPos, Integer>();
             }
             worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+            markDirty();
+            worldObj.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getX(), pos.getX(), pos.getY(), pos.getZ());
             worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
         }
 
@@ -295,7 +296,6 @@ public class AuraTile extends TileEntity implements ITickable {
         energy += power;
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
     public boolean canTransfer(BlockPos pos) {
         boolean isLower = pos.getY() < this.pos.getY();
 
@@ -310,7 +310,6 @@ public class AuraTile extends TileEntity implements ITickable {
 
     }
 
-    @SuppressWarnings("SimplifiableIfStatement")
     public boolean canTransfer(BlockPos pos, EnumAura aura) {
         if (!canTransfer(pos)) {
             return false;
@@ -332,7 +331,8 @@ public class AuraTile extends TileEntity implements ITickable {
         return Math.pow(20 - Math.sqrt(pos.distanceSq(getPos())), 2);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);

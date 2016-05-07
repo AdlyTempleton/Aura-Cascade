@@ -172,8 +172,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        // TODO Auto-generated method stub
-        ArrayList result = new ArrayList<Object>();
+        ArrayList<Object> result = new ArrayList<Object>();
         result.add("Wood");
         result.add("Glass");
         result.add("Cobblestone");

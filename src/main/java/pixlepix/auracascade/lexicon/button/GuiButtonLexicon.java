@@ -22,7 +22,7 @@ public class GuiButtonLexicon extends GuiButton {
 
     @Override
     public void playPressSound(SoundHandler p_146113_1_) {
-    	//TODO Reimplement
+    	//TODO reimplement sounds
         //p_146113_1_.playSound(PositionedSoundRecord.create(new ResourceLocation("aura:lexiconPage"), 1.0F));
     }
 

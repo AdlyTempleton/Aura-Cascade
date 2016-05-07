@@ -33,7 +33,6 @@ public class FairyTorch extends Block implements ITTinkererBlock {
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
-    	//TODO test that this rendering works.
         return EnumBlockRenderType.MODEL;
     }
 

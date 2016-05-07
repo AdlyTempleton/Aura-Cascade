@@ -80,7 +80,7 @@ public final class ModelHandler {
 
         Item fairyTorchItem = Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
       //  ModelLoader.setCustomMeshDefinition(fairyTorchItem, ("minecraft:barrier"));
-        //TODO this probably doesn't work
+        //TODO CustomMeshDefinitions
        // ModelLoader.setCustomMeshDefinition(fairyTorchItem, (ItemMeshDefinition) new ResourceLocation("minecraft:barrier"));
        // ModelLoader.setCustomMeshDefinition(fairyTorchItem, );
         ModelLoader.setCustomModelResourceLocation(fairyTorchItem, 0, new ModelResourceLocation("minecraft:barrier", "inventory"));

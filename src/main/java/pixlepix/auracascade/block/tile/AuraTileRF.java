@@ -38,6 +38,7 @@ public class AuraTileRF extends AuraTile {
     @Override
     public void update() {
         super.update();
+        //TODO Reimplement RF tile
         /*
         if (worldObj.getTotalWorldTime() % 40 == 0) {
             foundTiles.clear();

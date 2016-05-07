@@ -43,7 +43,7 @@ public class MCSimpleAnalytics extends SimpleAnalytics {
 	 * @return
 	 */
 	private static boolean isServerSnooper() {
-		//TODO
+		//TODO reimplement snooper? maybe?
 		/*
 		try {
 			return MinecraftServer.getServer().isSnooperEnabled();

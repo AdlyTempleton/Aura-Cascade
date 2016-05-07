@@ -46,8 +46,8 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
             stack.stackSize--;
             ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
         }
-        //Chanigng this to fail may cancelt the animation.
-        return EnumActionResult.FAIL;
+        //Changing anything to fail literally breaks all of it.
+        return EnumActionResult.PASS;
     }
 
     @Override

@@ -8,6 +8,7 @@ import pixlepix.auracascade.AuraCascade;
  * Created by localmacaccount on 5/31/15.
  */
 public class Quest {
+	//TODO QUEST
     public static int nextId;
     public final ItemStack target;
     public final ItemStack result;
@@ -22,7 +23,6 @@ public class Quest {
         nextId++;
 
     }
-    //TODO fix this
     public boolean hasCompleted(EntityPlayer player) {
       //  QuestData questData = (QuestData) player.getExtendedProperties(QuestData.EXT_PROP_NAME);
        // return questData.completedQuests.contains(this);

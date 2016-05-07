@@ -96,7 +96,7 @@ public class EventHandler {
     }
 
     //QuestData management
-    //TODO reimplement
+    //TODO Quest data mangement
     @SubscribeEvent
     public void constructEntity(EntityEvent.EntityConstructing event) {
       //  if (event.getEntity() instanceof EntityPlayer && event.getEntity().getExtendedProperties(QuestData.EXT_PROP_NAME) == null) {

@@ -224,7 +224,7 @@ public class ContainerCoordinator extends Container {
         int mode = this.dragMode;
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
-            	//TODO these may be broken
+            	//TODO Something graphics and dropping shit
                 player.dropItem(player.inventory.getItemStack(), true, true);
                 player.inventory.setItemStack(null);
             }

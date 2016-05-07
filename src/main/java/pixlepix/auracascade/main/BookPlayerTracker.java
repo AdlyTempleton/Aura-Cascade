@@ -8,7 +8,7 @@ import net.minecraft.world.World;
  * Created by localmacaccount on 1/16/15.
  */
 public class BookPlayerTracker {
-	//TODO fix all of this shit
+	//TODO Fuck the quest system
     public boolean hasReceived;
     /*
     @Override

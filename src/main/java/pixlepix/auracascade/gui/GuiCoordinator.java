@@ -380,8 +380,8 @@ public class GuiCoordinator extends GuiContainer {
                 }
             } else {
                 this.dragSplittingSlots.remove(slotIn);
-                //TODO
-                //this.updateActivePotionEffects();
+                //TODO Reimplement this. requires ASM probably
+               // this.updateActivePotionEffects();
             }
         }
 

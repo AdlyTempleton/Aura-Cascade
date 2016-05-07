@@ -186,7 +186,6 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         Block block = world.getBlockState(oldPos).getBlock();
                                         Item item = Item.getItemFromBlock(block);
                                         int worldDmg = block.getMetaFromState(world.getBlockState(oldPos));
-                                        //TODO Test that this properly gets damage dropped
                                         int dmg = block.damageDropped(world.getBlockState(oldPos));
 
                                         boolean usesMetadataForPlacing = false;

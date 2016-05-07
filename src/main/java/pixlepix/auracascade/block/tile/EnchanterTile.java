@@ -89,7 +89,7 @@ public class EnchanterTile extends ConsumerTile {
     }
 
     public int getTotalLevel(ItemStack stack) {
-    	//TODO This may all be broken.
+    	//TODO Enchant System, fix.
         return EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.red, stack)
                 + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.orange, stack)
                 + EnchantmentHelper.getEnchantmentLevel(EnchantmentManager.yellow, stack)

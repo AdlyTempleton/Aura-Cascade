@@ -15,6 +15,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
@@ -84,7 +85,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
                         par2EntityPlayer.openGui(AuraCascade.instance, 0, par3World, 0, 0, 0);
                         if (!par3World.isRemote) {
-                        	//This needs fixed. TODO
+                        	//TODO fix sounds
                             //par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
                         }
                         return EnumActionResult.PASS;
@@ -107,8 +108,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
             if (entry != null) {
                 AuraCascade.proxy.setEntryToOpen(entry);
             } else {
-            	//TODO
-               // par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                par3EntityPlayer.addChatMessage(new TextComponentString("aura.misc.cantOpen"));
             }
             setForcedPage(par1ItemStack, "");
         }
@@ -118,8 +118,8 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         AuraCascade.proxy.setLexiconStack(par1ItemStack);
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound)
-        	//TODO
-            //par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
+        	//TODO Fix soundat
+        //par2World.playSoundAt(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
         skipSound = false;
         return new ActionResult<ItemStack>(EnumActionResult.PASS, par1ItemStack);
     }

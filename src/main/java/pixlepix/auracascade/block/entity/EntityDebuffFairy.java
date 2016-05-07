@@ -3,6 +3,8 @@ package pixlepix.auracascade.block.entity;
 import java.util.List;
 
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.MobEffects;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -18,16 +20,15 @@ public class EntityDebuffFairy extends EntityFairy {
 
     public EntityDebuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
-        //TODO
-      //  potionEffects = new PotionEffect[]{
-        		/*
-                new PotionEffect(Potion.poison.getId(), 200),
-                new PotionEffect(Potion.confusion.getId(), 200),
-                new PotionEffect(Potion.weakness.getId(), 200),
-                new PotionEffect(Potion.wither.getId(), 200),
-                new PotionEffect(Potion.moveSlowdown.getId(), 200),
-                new PotionEffect(Potion.hunger.getId(), 200)};
-                */
+        potionEffects = new PotionEffect[]{
+        		
+                new PotionEffect(MobEffects.poison, 200),
+                new PotionEffect(MobEffects.confusion, 200),
+                new PotionEffect(MobEffects.weakness, 200),
+                new PotionEffect(MobEffects.wither, 200),
+                new PotionEffect(MobEffects.moveSlowdown, 200),
+                new PotionEffect(MobEffects.hunger, 200)};
+                
     }
 
     @Override

@@ -39,7 +39,7 @@ public class QuestManager {
                         player.worldObj.spawnEntityInWorld(entityItem);
                         player.addChatComponentMessage(new TextComponentString("Quest \'" + quest.string + "\' Completed"));
                     } else {
-                    	//TODO
+                    	//TODO Fix sounds
                        // player.worldObj.playSoundAtEntity(player, "fireworks.launch", 0.5F, 1F);
                     }
                     quest.complete(player);
