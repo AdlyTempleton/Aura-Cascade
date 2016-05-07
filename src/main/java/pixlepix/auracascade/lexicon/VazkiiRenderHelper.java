@@ -20,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
 
@@ -108,7 +109,7 @@ public final class VazkiiRenderHelper {
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
         Tessellator var15 = Tessellator.getInstance();
-        WorldRenderer wr = var15.getBuffer();
+        VertexBuffer wr = var15.getBuffer();
         wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         wr.pos(par3, par2, z).color(var8, var9, var10, var7).endVertex();
         wr.pos(par1, par2, z).color(var8, var9, var10, var7).endVertex();
@@ -127,14 +128,12 @@ public final class VazkiiRenderHelper {
 
     public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6, float f, float f1) {
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer wr = tessellator.getBuffer();
+        VertexBuffer wr = tessellator.getBuffer();
         wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        //If I broke rendering, this is why. I changed TEX to func_181673_a.
-        //TODO CHECK TO MAKE SURE I AM NOT A DUMBASS
-        wr.pos(par1, par2 + par6, z).func_181673_a((par3) * f, (par4 + par6) * f1).endVertex();
-        wr.pos(par1 + par5, par2 + par6, z).func_181673_a((par3 + par5) * f, (par4 + par6) * f1).endVertex();
-        wr.pos(par1 + par5, par2, z).func_181673_a((par3 + par5) * f, (par4) * f1).endVertex();
-        wr.pos(par1, par2, z).func_181673_a((par3) * f, (par4) * f1).endVertex();
+        wr.pos(par1, par2 + par6, z).tex((par3) * f, (par4 + par6) * f1).endVertex();
+        wr.pos(par1 + par5, par2 + par6, z).tex((par3 + par5) * f, (par4 + par6) * f1).endVertex();
+        wr.pos(par1 + par5, par2, z).tex((par3 + par5) * f, (par4) * f1).endVertex();
+        wr.pos(par1, par2, z).tex((par3) * f, (par4) * f1).endVertex();
         tessellator.draw();
     }
 

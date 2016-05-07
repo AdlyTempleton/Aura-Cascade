@@ -68,7 +68,8 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
                 target.worldObj.spawnEntityInWorld(newEntity);
                 if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {
-                    ((EntitySlime) newEntity).setSlimeSize((((EntitySlime) target).getSlimeSize()));
+                   // ((EntitySlime) newEntity).setSlimeSize((((EntitySlime) target).getSlimeSize()));
+                	//TODO: This requires ASM, and seems fairly pointless.
                 }
                 if (newEntity instanceof EntityLivingBase) {
                     ((EntityLivingBase) newEntity).setHealth(Math.min(((EntityLivingBase) newEntity).getMaxHealth(), target.getHealth()));

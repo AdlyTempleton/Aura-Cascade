@@ -7,10 +7,10 @@ import net.minecraft.world.World;
 /**
  * Created by localmacaccount on 1/16/15.
  */
-public class BookPlayerTracker implements IExtendedEntityProperties {
-
+public class BookPlayerTracker {
+	//TODO fix all of this shit
     public boolean hasReceived;
-
+    /*
     @Override
     public void saveNBTData(NBTTagCompound compound) {
         compound.setBoolean("HAS_REVEICED_AURA_BOOK", hasReceived);
@@ -25,4 +25,5 @@ public class BookPlayerTracker implements IExtendedEntityProperties {
     public void init(Entity entity, World world) {
 
     }
+    */
 }

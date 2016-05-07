@@ -30,11 +30,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -100,18 +96,19 @@ public class EventHandler {
     }
 
     //QuestData management
+    //TODO reimplement
     @SubscribeEvent
     public void constructEntity(EntityEvent.EntityConstructing event) {
-        if (event.getEntity() instanceof EntityPlayer && event.getEntity().getExtendedProperties(QuestData.EXT_PROP_NAME) == null) {
-            QuestData.register((EntityPlayer) event.getEntity());
-        }
+      //  if (event.getEntity() instanceof EntityPlayer && event.getEntity().getExtendedProperties(QuestData.EXT_PROP_NAME) == null) {
+     //       QuestData.register((EntityPlayer) event.getEntity());
+     //   }
     }
 
     @SubscribeEvent
     public void onPlayerClone(PlayerEvent.Clone event) {
-        NBTTagCompound compound = new NBTTagCompound();
-        event.getOriginal().getExtendedProperties(QuestData.EXT_PROP_NAME).saveNBTData(compound);
-        event.getEntityPlayer().getExtendedProperties(QuestData.EXT_PROP_NAME).loadNBTData(compound);
+       // NBTTagCompound compound = new NBTTagCompound();
+       // event.getOriginal().getExtendedProperties(QuestData.EXT_PROP_NAME).saveNBTData(compound);
+       // event.getEntityPlayer().getExtendedProperties(QuestData.EXT_PROP_NAME).loadNBTData(compound);
     }
 
     //Lexicon auto give
@@ -388,30 +385,34 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onEatEvent(PlayerUseItemEvent.Finish finishEvent) {
-        EntityPlayer player = finishEvent.entityPlayer;
-        ItemStack heldStack = player.inventory.getCurrentItem();
-        if (getBaubleFromInv(ItemFoodAmulet.class, player) != null) {
-            //Check if item is food
-            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.EAT || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.DRINK)) {
-                if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
-                    player.addPotionEffect(new PotionEffect(MobEffects.WITHER, 6 * 60 * 20, 1));
-                } else {
-                    String name = heldStack.getUnlocalizedName();
-                    Random random = new Random(name.hashCode());
-                    //Limit within vanilla potions, which go up to 24
-                    //Note that there is no potion with id 0
-                    Potion potion;
-                    do {
-                        potion = Potion.getPotionById(random.nextInt(23) + 1);
-                    } while (potion.isInstant());
-                    int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
-                    int amplified = random.nextInt(6);
-                    PotionEffect potionEffect = new PotionEffect(potion.setBeneficial(), duration, amplified);
-                    player.addPotionEffect(potionEffect);
-                }
-            }
-        }
+    public void onEatEvent(LivingEntityUseItemEvent.Finish finishEvent) {
+    	try{
+	        EntityPlayer player = (EntityPlayer) finishEvent.getEntityLiving();
+	        ItemStack heldStack = player.inventory.getCurrentItem();
+	        if (getBaubleFromInv(ItemFoodAmulet.class, player) != null) {
+	            //Check if item is food
+	            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.EAT || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.DRINK)) {
+	                if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
+	                    player.addPotionEffect(new PotionEffect(MobEffects.WITHER, 6 * 60 * 20, 1));
+	                } else {
+	                    String name = heldStack.getUnlocalizedName();
+	                    Random random = new Random(name.hashCode());
+	                    //Limit within vanilla potions, which go up to 24
+	                    //Note that there is no potion with id 0
+	                    Potion potion;
+	                    do {
+	                        potion = Potion.getPotionById(random.nextInt(23) + 1);
+	                    } while (potion.isInstant());
+	                    int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
+	                    int amplified = random.nextInt(6);
+	                    PotionEffect potionEffect = new PotionEffect(potion.setBeneficial(), duration, amplified);
+	                    player.addPotionEffect(potionEffect);
+	                }
+	            }
+	        }
+    	}catch(Exception e){
+    		System.out.println("This failed and drastic has failed you. Please report this to the 1.9 repository for Aura Cascade by DrasticDemise.");
+    	}
     }
 
 }

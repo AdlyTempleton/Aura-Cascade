@@ -224,13 +224,12 @@ public class ContainerCoordinator extends Container {
         int mode = this.dragMode;
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
-                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);
+                player.dropItem(player.inventory.getItemStack(), true);
                 player.inventory.setItemStack(null);
             }
 
             if (clickedButton == 1) {
-                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack().splitStack(1), true);
-
+            	player.dropItem(player.inventory.getItemStack().splitStack(1), true);
                 if (player.inventory.getItemStack().stackSize == 0) {
                     player.inventory.setItemStack(null);
                 }

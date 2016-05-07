@@ -216,7 +216,8 @@ public class GuiCoordinator extends GuiContainer {
             Slot slot = this.inventorySlots.inventorySlots.get(i2);
             this.drawSlot(slot);
 
-            if (this.isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered())
+          //  if (this.isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered())
+            if(false)
             {
                 this.theSlot = slot;
                 GlStateManager.disableLighting();
@@ -345,7 +346,7 @@ public class GuiCoordinator extends GuiContainer {
 
     }
 
-    @Override
+   // @Override
     public void drawSlot(Slot slotIn) {
         int i = slotIn.xDisplayPosition;
         int j = slotIn.yDisplayPosition;
@@ -379,7 +380,8 @@ public class GuiCoordinator extends GuiContainer {
                 }
             } else {
                 this.dragSplittingSlots.remove(slotIn);
-                this.updateActivePotionEffects();
+                //TODO
+                //this.updateActivePotionEffects();
             }
         }
 

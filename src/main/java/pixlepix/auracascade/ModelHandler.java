@@ -80,7 +80,9 @@ public final class ModelHandler {
 
         Item fairyTorchItem = Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
         //ModelLoader.setCustomMeshDefinition(fairyTorchItem, new ItemMeshDefinition("minecraft:barrier"));
-        ModelLoader.setCustomMeshDefinition(fairyTorchItem, "minecraft:barrier");
+        //TODO this probably doesn't work
+        ModelLoader.setCustomMeshDefinition(fairyTorchItem, (ItemMeshDefinition) new ResourceLocation("minecraft:barrier"));
+       // ModelLoader.setCustomMeshDefinition(fairyTorchItem, );
         ModelLoader.setCustomModelResourceLocation(fairyTorchItem, 0, new ModelResourceLocation("minecraft:barrier", "inventory"));
 
         registerItem(BlockRegistry.getFirstItemFromClass(ItemMirror.class));
@@ -167,8 +169,9 @@ public final class ModelHandler {
         }
 
         for (Item i : BlockRegistry.getItemFromClass(ItemAngelsteelSword.class)) {
-            ModelLoader.addVariantName(i, "aura:angel_sword", "aura:angel_swordBlue", "aura:angel_swordGreen",
-                    "aura:angel_swordOrange", "aura:angel_swordRed", "aura:angel_swordViolet", "aura:angel_swordYellow");
+           // ModelLoader.addVariantName(i, "aura:angel_sword", "aura:angel_swordBlue", "aura:angel_swordGreen",
+           //         "aura:angel_swordOrange", "aura:angel_swordRed", "aura:angel_swordViolet", "aura:angel_swordYellow");
+            ModelLoader.registerItemVariants(i, new ResourceLocation("Aura Swords Filler name"));
             ModelLoader.setCustomMeshDefinition(i, new ItemMeshDefinition() {
                 @Override
                 public ModelResourceLocation getModelLocation(ItemStack stack) {

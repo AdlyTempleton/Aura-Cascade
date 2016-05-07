@@ -23,7 +23,7 @@ public class PacketSyncQuestData implements IMessage {
 
     public PacketSyncQuestData(EntityPlayer entityPlayer) {
         this.entityPlayer = entityPlayer;
-        this.completed = ((QuestData) entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME)).completedQuests;
+       // this.completed = ((QuestData) entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME)).completedQuests;
     }
 
     public PacketSyncQuestData() {
@@ -36,6 +36,7 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void fromBytes(ByteBuf data) {
+    	/*
         World world = DimensionManager.getWorld(data.readInt());
         if (world != null) {
             entityPlayer = (EntityPlayer) world.getEntityByID(data.readInt());
@@ -45,6 +46,7 @@ public class PacketSyncQuestData implements IMessage {
                 completed.add(QuestManager.quests.get(data.readByte()));
             }
         }
+       */
     }
 
     /**
@@ -54,13 +56,13 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void toBytes(ByteBuf data) {
-        data.writeInt(entityPlayer.worldObj.provider.getDimension());
-        data.writeInt(entityPlayer.getEntityId());
+       // data.writeInt(entityPlayer.worldObj.provider.getDimension());
+       // data.writeInt(entityPlayer.getEntityId());
 
-        data.writeByte(completed.size());
-        for (Quest Quest : completed) {
-            data.writeByte(Quest.id);
-        }
+      //  data.writeByte(completed.size());
+       // for (Quest Quest : completed) {
+      //      data.writeByte(Quest.id);
+      //  }
     }
 
     public static class PacketSyncQuestDataHandler implements IMessageHandler<PacketSyncQuestData, IMessage> {
@@ -82,8 +84,8 @@ public class PacketSyncQuestData implements IMessage {
                 @Override
                 public void run() {
                     if (message.entityPlayer != null) {
-                        QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
-                        data.completedQuests = message.completed;
+                   //     QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
+                    //    data.completedQuests = message.completed;
                     }
                 }
             });
