@@ -33,7 +33,7 @@ public class PotionVioletCurse extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
-        mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
         mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.VIOLET_AURA), x + 8, y + 8);
     }
 

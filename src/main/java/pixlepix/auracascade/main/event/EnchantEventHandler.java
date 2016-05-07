@@ -48,7 +48,7 @@ public class EnchantEventHandler {
 
     static Method dropCommon;
     static Method dropRare;
-    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.LAPIS_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, Blocks.COAL_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.LIT_REDSTONE_ORE, Blocks.QUARTZ_ORE};
+    Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
 
     public static void init() {
         dropCommon = ReflectionHelper.findMethod(EntityLivingBase.class, null, new String[]{"func_70628_a", "dropFewItems"}, boolean.class, int.class);
@@ -239,7 +239,7 @@ public class EnchantEventHandler {
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.getWorld().isRemote) {
             Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-            if (block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
+            if (block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
                 ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
                 ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
                 toSearch.add(event.getPos());
@@ -262,7 +262,7 @@ public class EnchantEventHandler {
         int harvester = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.YELLOW_AURA) * 25;
         if (harvester > 0 && !event.getWorld().isRemote) {
             IBlockState state = event.getWorld().getBlockState(event.getPos());
-            if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.GRASS) {
+            if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.grass) {
                 ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
                 ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
                 toSearch.add(event.getPos());
@@ -340,17 +340,17 @@ public class EnchantEventHandler {
 
                 int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
 
-                if (stone > 0 && Blocks.STONE == block) {
+                if (stone > 0 && Blocks.stone == block) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, stone)));
                 }
 
                 int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
-                if (logSpeed > 0 && block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
+                if (logSpeed > 0 && block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, logSpeed)));
                 }
 
                 int digSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
-                if (block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.GRAVEL || block == Blocks.SAND) {
+                if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.gravel || block == Blocks.sand) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, digSpeed)));
 
                 }

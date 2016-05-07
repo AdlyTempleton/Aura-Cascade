@@ -15,28 +15,28 @@ public class TileRitualEnd extends TileRitualNether {
 
     @Override
     public Block getMappedBlock(Block b) {
-        if (b == Blocks.STONE) {
-            return Blocks.END_STONE;
+        if (b == Blocks.stone) {
+            return Blocks.end_stone;
         }
-        if (b == Blocks.GRASS || b == Blocks.DIRT) {
-            return Blocks.END_STONE;
+        if (b == Blocks.grass || b == Blocks.dirt) {
+            return Blocks.end_stone;
         }
-        if (b == Blocks.LOG || b == Blocks.LOG2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
-            return Blocks.OBSIDIAN;
+        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.leaves || b == Blocks.leaves2) {
+            return Blocks.obsidian;
         }
-        if (b == Blocks.TALLGRASS) {
-            return Blocks.AIR;
+        if (b == Blocks.tallgrass) {
+            return Blocks.air;
         }
-        if (b == Blocks.GRAVEL || b == Blocks.SAND) {
-            return Blocks.END_STONE;
+        if (b == Blocks.gravel || b == Blocks.sand) {
+            return Blocks.end_stone;
         }
-        if ((b == Blocks.WATER || b == Blocks.FLOWING_WATER)) {
+        if ((b == Blocks.water || b == Blocks.flowing_water)) {
             if (FluidRegistry.isFluidRegistered("ender")) {
                 return FluidRegistry.getFluid("ender").getBlock();
             }
         }
-        if (b == Blocks.SNOW || b == Blocks.SNOW_LAYER) {
-            return Blocks.AIR;
+        if (b == Blocks.snow || b == Blocks.snow_layer) {
+            return Blocks.air;
         }
         return null;
     }

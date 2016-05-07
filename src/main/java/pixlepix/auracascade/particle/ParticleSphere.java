@@ -19,12 +19,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ParticleSphere extends EntityFX {
     public ParticleSphere(World par1World, double x, double y, double z, float motionX, float motionY, float motionZ) {
         super(par1World, x, y, z, 0.0D, 0.0D, 0.0D);
-        this.motionX *= 0.10000000149011612D;
-        this.motionY *= 0.10000000149011612D;
-        this.motionZ *= 0.10000000149011612D;
-        this.motionX += motionX * 0.4D;
-        this.motionY += motionY * 0.4D;
-        this.motionZ += motionZ * 0.4D;
+        this.xSpeed *= 0.10000000149011612D;
+        this.ySpeed *= 0.10000000149011612D;
+        this.zSpeed *= 0.10000000149011612D;
+        this.xSpeed += motionX * 0.4D;
+        this.ySpeed += motionY * 0.4D;
+        this.zSpeed += motionZ * 0.4D;
         this.particleRed = this.particleGreen = this.particleBlue = (float) (Math.random() * 0.30000001192092896D + 0.6000000238418579D);
         this.particleScale *= 0.75F;
         this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.6D));

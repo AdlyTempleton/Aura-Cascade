@@ -51,11 +51,11 @@ public class QuestManager {
     public static void init() {
         quests.add(new Quest("Crystals", ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), ItemAuraCrystal.getCrystalFromAuraMax(EnumAura.WHITE_AURA)));
         quests.add(new Quest("Nodes", AuraBlock.getAuraNodeItemstack(), new ItemStack(AuraBlock.getBlockFromName(""), 16)));
-        quests.add(new Quest("Pumps", AuraBlock.getAuraNodePumpItemstack(), new ItemStack(Items.COAL, 64)));
+        quests.add(new Quest("Pumps", AuraBlock.getAuraNodePumpItemstack(), new ItemStack(Items.coal, 64)));
         quests.add(new Quest("Furance", new ItemStack(ConsumerBlock.getBlockFromName("furnace")), ItemAuraCrystal.getCrystalFromAuraMax(EnumAura.WHITE_AURA)));
-        quests.add(new Quest("Red Crystals", ItemAuraCrystal.getCrystalFromAura(EnumAura.RED_AURA), new ItemStack(Blocks.TNT, 4)));
-        quests.add(new Quest("Processor", new ItemStack(ConsumerBlock.getBlockFromName("ore")), new ItemStack(Blocks.IRON_ORE, 8)));
-        quests.add(new Quest("Dye", new ItemStack(ConsumerBlock.getBlockFromName("dye")), new ItemStack(Blocks.WOOL, 32)));
+        quests.add(new Quest("Red Crystals", ItemAuraCrystal.getCrystalFromAura(EnumAura.RED_AURA), new ItemStack(Blocks.tnt, 4)));
+        quests.add(new Quest("Processor", new ItemStack(ConsumerBlock.getBlockFromName("ore")), new ItemStack(Blocks.iron_ore, 8)));
+        quests.add(new Quest("Dye", new ItemStack(ConsumerBlock.getBlockFromName("dye")), new ItemStack(Blocks.wool, 32)));
         quests.add(new Quest("Arcane Ingot", ItemMaterial.getIngot(EnumAura.WHITE_AURA), ItemMaterial.getIngot(EnumAura.WHITE_AURA, 15)));
         quests.add(new Quest("Vortex Infusion", new ItemStack(AuraBlock.getBlockFromName("craftingCenter")), new ItemStack(AuraBlock.getBlockFromName("craftingPedestal"), 4)));
         quests.add(new Quest("Arcane Gem", ItemMaterial.getGem(EnumAura.WHITE_AURA), ItemMaterial.getGem(EnumAura.WHITE_AURA, 8)));

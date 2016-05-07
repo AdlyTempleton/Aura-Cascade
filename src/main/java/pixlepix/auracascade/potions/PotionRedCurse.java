@@ -28,7 +28,7 @@ public class PotionRedCurse extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
-        mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
         mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.RED_AURA), x + 8, y + 8);
     }
 
@@ -42,8 +42,8 @@ public class PotionRedCurse extends Potion {
         BlockPos pos = new BlockPos(entity);
 
         for (BlockPos pos_ : BlockPos.getAllInBox(pos.add(-5, -2, -5), pos.add(6, 3, 6))) {
-            if (entity.worldObj.isAirBlock(pos_) && Blocks.FIRE.canPlaceBlockAt(entity.worldObj, pos_)) {
-                entity.worldObj.setBlockState(pos_, Blocks.FIRE.getDefaultState());
+            if (entity.worldObj.isAirBlock(pos_) && Blocks.fire.canPlaceBlockAt(entity.worldObj, pos_)) {
+                entity.worldObj.setBlockState(pos_, Blocks.fire.getDefaultState());
             }
         }
     }

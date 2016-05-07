@@ -70,7 +70,7 @@ public class ItemAngelJump extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Blocks.PISTON), 'P', ItemMaterial.getPrism());
+        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Blocks.piston), 'P', ItemMaterial.getPrism());
     }
 
     @Override

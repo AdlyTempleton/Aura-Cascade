@@ -32,7 +32,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
     public BlockStorageBookshelf() {
-        super(Material.WOOD);
+        super(Material.wood);
         setHardness(2F);
     }
 
@@ -110,7 +110,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-        result.add(new ItemStack(Blocks.BOOKSHELF));
+        result.add(new ItemStack(Blocks.bookshelf));
         return result;
     }
 

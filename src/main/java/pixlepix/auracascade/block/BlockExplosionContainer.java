@@ -37,7 +37,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public static final PropertyInteger DAMAGE = PropertyInteger.create("damage", 0, 15);
 
     public BlockExplosionContainer() {
-        super(Material.ROCK);
+        super(Material.rock);
         //Same as obby
         setResistance(2000F);
         type = "Dirt";
@@ -238,27 +238,27 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         if (type.equals("Dirt")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.DIRT));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.dirt));
         }
         if (type.equals("Wood")) {
-            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 1)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 2)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 3)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 4)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 5)));
+            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 1)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 2)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 3)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 4)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 5)));
         }
         if (type.equals("Glass")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.GLASS));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.glass));
         }
         if (type.equals("Cobblestone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.COBBLESTONE));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.cobblestone));
         }
         if (type.equals("Stone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.STONE));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.stone));
         }
         if (type.equals("Obsidian")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.OBSIDIAN));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.obsidian));
         }
         return null;
     }

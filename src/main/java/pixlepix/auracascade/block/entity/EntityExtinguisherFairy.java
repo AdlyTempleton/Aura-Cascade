@@ -22,7 +22,7 @@ public class EntityExtinguisherFairy extends EntityFairy {
             }
             BlockPos pos = new BlockPos(this);
             Block block = worldObj.getBlockState(pos).getBlock();
-            if (block.getMaterial(block.getDefaultState()) == Material.LAVA) {
+            if (block.getMaterial(block.getDefaultState()) == Material.lava) {
                 worldObj.setBlockToAir(pos);
             }
         }

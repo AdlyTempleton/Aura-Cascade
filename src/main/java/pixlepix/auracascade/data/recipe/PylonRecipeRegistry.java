@@ -27,30 +27,30 @@ public class PylonRecipeRegistry {
     }
 
     public static void init() {
-        recipes.add(new PylonRecipe(new ItemStack(Items.LEATHER),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.ROTTEN_FLESH))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.BLAZE_POWDER, 20),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.BLAZE_ROD))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.SADDLE, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.LEATHER))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.ENDER_EYE, 2),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.ENDER_PEARL))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.ARROW, 8),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.FEATHER))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.RAIL, 32),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.IRON_INGOT))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.LAPIS_BLOCK, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.REDSTONE_BLOCK))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.REPEATER, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.REDSTONE))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.COMPARATOR, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.REPEATER))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.SOUL_SAND, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.SAND))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.DIAMOND_BLOCK, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.GOLD_BLOCK))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.GOLD_BLOCK, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.IRON_BLOCK))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.leather),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.rotten_flesh))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.blaze_powder, 20),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.blaze_rod))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.saddle, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.leather))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.ender_eye, 2),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.ender_pearl))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.arrow, 8),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.feather))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.rail, 32),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.iron_ingot))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.lapis_block, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.redstone_block))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.repeater, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.redstone))));
+        recipes.add(new PylonRecipe(new ItemStack(Items.comparator, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.repeater))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.soul_sand, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.sand))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.diamond_block, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.gold_block))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.gold_block, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.iron_block))));
 
 
     }

@@ -23,7 +23,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
  */
 public class BlockMonitor extends Block implements ITTinkererBlock {
     public BlockMonitor() {
-        super(Material.REDSTONE_LIGHT);
+        super(Material.redstoneLight);
         setHardness(3);
         setHarvestLevel("pickaxe", 2);
     }
@@ -97,7 +97,7 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'A', AuraBlock.getAuraNodeItemstack());
+        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.redstone), 'A', AuraBlock.getAuraNodeItemstack());
     }
 
     @Override

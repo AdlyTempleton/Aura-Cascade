@@ -26,7 +26,7 @@ public class FairyTorch extends Block implements ITTinkererBlock {
     public final String name = "fairyTorch";
     private static final AxisAlignedBB AABB = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     public FairyTorch() {
-        super(Material.GLASS);
+        super(Material.glass);
         setTickRandomly(true);
         setLightLevel(1F);
     }

@@ -45,7 +45,7 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'T', new ItemStack(Blocks.TNT), 'G', new ItemStack(Items.GUNPOWDER));
+        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'T', new ItemStack(Blocks.tnt), 'G', new ItemStack(Items.gunpowder));
     }
 
     @Override

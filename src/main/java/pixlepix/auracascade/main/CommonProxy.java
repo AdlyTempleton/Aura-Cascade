@@ -134,7 +134,7 @@ public class CommonProxy {
 
         //RiM IMC for blacklisting aura nodes
         for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
-            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.REGISTRY.getNameForObject(block).toString());
+            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block).toString());
         }
         OreDropManager.init();
     }

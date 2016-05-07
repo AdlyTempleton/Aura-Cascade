@@ -15,12 +15,12 @@ public class ParticleBeam extends EntityFX {
     
     public ParticleBeam(World par1World, double x, double y, double z, float red, float blue, float green) {
         super(par1World, x, y, z, 0.0D, 0.0D, 0.0D);
-        this.motionX *= 0.10000000149011612D;
-        this.motionY *= 0.10000000149011612D;
-        this.motionZ *= 0.10000000149011612D;
-        this.motionX += motionX * 0.4D;
-        this.motionY += motionY * 0.4D;
-        this.motionZ += motionZ * 0.4D;
+        this.xSpeed *= 0.10000000149011612D;
+        this.ySpeed *= 0.10000000149011612D;
+        this.zSpeed *= 0.10000000149011612D;
+        this.xSpeed += xSpeed * 0.4D;
+        this.ySpeed += ySpeed * 0.4D;
+        this.zSpeed += zSpeed * 0.4D;
         float offset = (float) (Math.random() * 0.30000001192092896D);
 
         red -= offset;

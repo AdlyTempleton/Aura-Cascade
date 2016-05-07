@@ -35,7 +35,7 @@ public class ProcessorRecipeRegistry {
 
     public static void init() {
         for (int i = 0; i < 16; i++) {
-            registerRecipe(new ProcessorRecipe(new ItemStack(Items.DYE, 1, i), true, new ItemStack(Blocks.WOOL, 1, 15 - i)));
+            registerRecipe(new ProcessorRecipe(new ItemStack(Items.dye, 1, i), true, new ItemStack(Blocks.wool, 1, 15 - i)));
         }
     }
 

@@ -19,8 +19,8 @@ public class ItemStackCompatator implements Comparator<ItemStack> {
         Object itemObj2 = o2.getItem();
 
         //Convert to block if it is a block
-        itemObj1 = Block.getBlockFromItem((Item) itemObj1) != Blocks.AIR ? Block.getBlockFromItem((Item) itemObj1) : itemObj1;
-        itemObj2 = Block.getBlockFromItem((Item) itemObj2) != Blocks.AIR ? Block.getBlockFromItem((Item) itemObj2) : itemObj2;
+        itemObj1 = Block.getBlockFromItem((Item) itemObj1) != Blocks.air ? Block.getBlockFromItem((Item) itemObj1) : itemObj1;
+        itemObj2 = Block.getBlockFromItem((Item) itemObj2) != Blocks.air ? Block.getBlockFromItem((Item) itemObj2) : itemObj2;
 
         if (itemObj1 instanceof ITTinkererRegisterable && itemObj2 instanceof ITTinkererRegisterable) {
             int p1 = ((ITTinkererRegisterable) itemObj1).getCreativeTabPriority();

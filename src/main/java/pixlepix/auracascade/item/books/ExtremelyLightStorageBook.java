@@ -35,6 +35,6 @@ public class ExtremelyLightStorageBook extends ItemStorageBook {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
-                new ItemStack(BlockRegistry.getFirstItemFromClass(SuperLightStorageBook.class)), 'S', new ItemStack(Blocks.GLASS));
+                new ItemStack(BlockRegistry.getFirstItemFromClass(SuperLightStorageBook.class)), 'S', new ItemStack(Blocks.glass));
     }
 }

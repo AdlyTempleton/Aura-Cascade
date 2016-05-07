@@ -30,7 +30,7 @@ public class ModCreativeTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return Items.STICK;
+        return Items.stick;
     }
 
     @Override
