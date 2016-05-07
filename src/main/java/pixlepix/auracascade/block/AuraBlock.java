@@ -17,6 +17,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -26,6 +28,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.block.tile.AuraTileBlack;
@@ -68,15 +72,14 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     //"pump" is AuraTilePump\
     //"black" is AuraTileBlack etc
     String type;
-    private static final AxisAlignedBB AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
-    @SuppressWarnings("SameParameterValue")
+    private static AxisAlignedBB AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
     public AuraBlock(String type) {
         super(Material.glass);
         this.type = type;
         
-        //TODO Reimplement bounding box special case.
+        //TODO Test the reimplemented bounding box/
         if (!type.equals("craftingCenter")) {
-        	//func_149676_a(.25F, .25F, .25F, .75F, .75F, .75F);
+        	AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
         	
         }
         setLightOpacity(0);
@@ -87,7 +90,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         this("");
         setHardness(2F);
     }
-    
     public static AuraBlock getBlockFromName(String name) {
         List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
         if ("capacitor".equals(name)) {
@@ -133,22 +135,28 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     public String getHarvestTool(IBlockState state) {
         return "pickaxe";
     }
-
+    @Override
     public boolean isFullyOpaque(IBlockState state)
     {
         return false;
     }
-
+    public boolean isVisuallyOpaque()
+    {
+        return false;
+    }
     @Override
     public boolean isFullBlock(IBlockState state){
         return false;
     }
-
+    @Override
+    public boolean isBlockNormalCube(IBlockState state)
+    {
+        return false;
+    }
     @Override
     public boolean hasComparatorInputOverride(IBlockState state) {
         return true;
     }
-
     @Override
     public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
         TileEntity tileEntity = worldIn.getTileEntity(pos);
@@ -218,7 +226,10 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         return true;
     }
 
-
+    public boolean isCollidable()
+    {
+        return true;
+    }
     @Override
     public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState blockState, Entity entity) {
         super.onEntityCollidedWithBlock(world, pos, this.getDefaultState(), entity);
