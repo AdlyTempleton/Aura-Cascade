@@ -1,11 +1,9 @@
-Notes from williewillus (1.8.8 porter):
-* Please report 1.8.8 issues in THIS repository, NOT at pixlepix's!!
+Notes from DrasticDemise (1.9.0 porter):
+* Please report 1.9.0 issues in THIS repository, NOT at pixlepix's or the 1.8.9 repository by Williewillus
 * Do not ask for design changes, I will strictly match the design of upstream.
 * This fork, like the mod itself, is licensed under the [MIT license](https://tldrlegal.com/license/mit-license) and the parts drawn from Botania under the [Botania license](http://botaniamod.net/license.php).
-* This fork should be almost fully functional. See the [issue tracker](https://github.com/williewillus/Aura-Cascade/issues) for any known issues.
-* Have fun!
-* These non-CurseForge builds can be openly used in modpacks of any kind, in accordance with the requirements of the license of this mod.
-
+* This fork is currently non-functional and should not be used in any world you value.
+* Do not ask for an ETA, it is always "ASAP."
 
 
 Welcome to Aura Cascade!
