@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.init.MobEffects;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;

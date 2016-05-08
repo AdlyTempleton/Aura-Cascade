@@ -345,7 +345,7 @@ public class GuiCoordinator extends GuiContainer {
         itemRender.zLevel = 0.0F;
 
     }
-
+    //TODO reimplement drawslot
    // @Override
     public void drawSlot(Slot slotIn) {
         int i = slotIn.xDisplayPosition;

@@ -37,7 +37,7 @@ public class AuraTile extends TileEntity implements ITickable {
 
     public AuraTile() {
     }
-
+    
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 
@@ -260,7 +260,6 @@ public class AuraTile extends TileEntity implements ITickable {
                 }
                 inducedBurstMap = new HashMap<BlockPos, Integer>();
             }
-            worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
             markDirty();
             worldObj.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getX(), pos.getX(), pos.getY(), pos.getZ());
             worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
@@ -286,6 +285,7 @@ public class AuraTile extends TileEntity implements ITickable {
                     }
                     if (!(!triggerOrange && aura == EnumAura.ORANGE_AURA) && list.get(aura) != 0) {
                         aura.onTransfer(worldObj, getPos(), new AuraQuantity(aura, list.get(aura)), PosUtil.directionTo(getPos(), pos));
+       
                     }
                 }
             }
@@ -331,9 +331,8 @@ public class AuraTile extends TileEntity implements ITickable {
         return Math.pow(20 - Math.sqrt(pos.distanceSq(getPos())), 2);
     }
 
-    @SuppressWarnings("unchecked")
 	@Override
-    public Packet getDescriptionPacket() {
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

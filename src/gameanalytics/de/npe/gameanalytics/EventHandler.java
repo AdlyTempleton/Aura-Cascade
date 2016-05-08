@@ -36,7 +36,7 @@ import de.npe.gameanalytics.util.ACLock;
 final class EventHandler {
 	private static boolean init = true;
 
-	private static final Queue<GAEvent> immediateEvents = new ArrayDeque(32);
+	private static final Queue<GAEvent> immediateEvents = new ArrayDeque<GAEvent>(32);
 	private static Thread sendImmediateThread;
 	private static ACLock immediateEvents_lock = new ACLock(true);
 	private static Semaphore sendSemaphore = new Semaphore(0);

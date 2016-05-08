@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 /**
  * Created by pixlepix on 12/29/14.
  */
-@SuppressWarnings("UnusedParameters")
 public interface IToolTip {
     public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos);
 }

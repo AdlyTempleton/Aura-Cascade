@@ -125,10 +125,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             inv = new ArrayList<ItemStack>();
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
-    }
-
-    @Override
+        markDirty();
+    }   @Override
     public void markDirty() {
         super.markDirty();
         if (storedBook != null) {
@@ -140,7 +138,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+        //TODO BS storage, verify an extra mark dirty is needed?
     }
 
     @Override

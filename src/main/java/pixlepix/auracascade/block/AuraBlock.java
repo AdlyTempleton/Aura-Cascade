@@ -17,8 +17,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,8 +26,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.block.tile.AuraTileBlack;
@@ -130,7 +126,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         return "pickaxe";
     }
     @Override
-    public boolean isFullyOpaque(IBlockState state)
+    public boolean isVisuallyOpaque()
     {
         return false;
     }
@@ -143,6 +139,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
+    }
+    @Override
+    public boolean isCollidable()
+    {
+        return true;
     }
     @Override
     public boolean hasComparatorInputOverride(IBlockState state) {
@@ -158,7 +159,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return super.getComparatorInputOverride(blockState, worldIn, pos);
         }
     }
-
+    
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote && world.getTileEntity(pos) instanceof AuraTile) {
@@ -214,11 +215,6 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             }
             return true;
         }
-        return true;
-    }
-
-    public boolean isCollidable()
-    {
         return true;
     }
     @Override

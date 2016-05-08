@@ -1,9 +1,5 @@
 package pixlepix.auracascade.main;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-
 /**
  * Created by localmacaccount on 1/16/15.
  */

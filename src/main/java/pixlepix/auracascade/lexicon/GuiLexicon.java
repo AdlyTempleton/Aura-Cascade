@@ -41,8 +41,8 @@ public class GuiLexicon extends GuiScreen {
     private static final int TUTORIAL_ARROW_HEIGHT = 12;
     public static GuiLexicon currentOpenLexicon = new GuiLexicon();
     public static ItemStack stackUsed;
-    public static List<GuiLexicon> bookmarks = new ArrayList();
-    public static Queue<LexiconEntry> tutorial = new ArrayDeque();
+    public static List<GuiLexicon> bookmarks = new ArrayList<GuiLexicon>();
+    public static Queue<LexiconEntry> tutorial = new ArrayDeque<LexiconEntry>();
     public static ArrayList<LexiconEntry> tutorialMaster = new ArrayList<LexiconEntry>();
     public float lastTime = 0F;
     public float partialTicks = 0F;

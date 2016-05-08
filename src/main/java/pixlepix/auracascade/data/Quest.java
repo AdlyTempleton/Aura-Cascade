@@ -2,7 +2,6 @@ package pixlepix.auracascade.data;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.AuraCascade;
 
 /**
  * Created by localmacaccount on 5/31/15.

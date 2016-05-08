@@ -1,21 +1,30 @@
 package pixlepix.auracascade.item;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.entity.monster.EntitySlime;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by localmacaccount on 4/3/15.

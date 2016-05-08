@@ -30,7 +30,12 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -44,7 +49,6 @@ import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.data.PosUtil;
-import pixlepix.auracascade.data.QuestData;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.item.ItemBlueAmulet;
 import pixlepix.auracascade.item.ItemComboSword;
@@ -171,7 +175,6 @@ public class EventHandler {
     }
 
     //Amulets of protection
-    @SuppressWarnings("ConstantConditions")
     @SubscribeEvent
     public void onEntityAttacked(LivingHurtEvent event) {
         if (event.getEntity() instanceof EntityPlayer && (event.getSource() == DamageSource.lava || event.getSource() == DamageSource.onFire || event.getSource() == DamageSource.inFire)) {

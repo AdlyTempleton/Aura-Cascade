@@ -5,14 +5,10 @@ import java.util.ArrayList;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.data.Quest;
-import pixlepix.auracascade.data.QuestData;
 
 /**
  * Created by localmacaccount on 5/31/15.

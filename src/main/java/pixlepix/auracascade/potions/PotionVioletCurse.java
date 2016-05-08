@@ -7,13 +7,11 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
-import pixlepix.auracascade.main.ConstantMod;
 
 /**
  * Created by localmacaccount on 1/19/15.
