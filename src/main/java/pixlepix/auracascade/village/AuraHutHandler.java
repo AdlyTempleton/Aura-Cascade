@@ -21,7 +21,8 @@ public class AuraHutHandler implements VillagerRegistry.IVillageCreationHandler 
         return ComponentAuraHut.class;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public StructureVillagePieces.Village buildComponent(StructureVillagePieces.PieceWeight villagePiece, StructureVillagePieces.Start startPiece, @SuppressWarnings("rawtypes") List pieces, Random random, int p1, int p2, int p3, EnumFacing p4, int p5) {
         return ComponentAuraHut.buildComponent(startPiece, pieces, random, p1, p2, p3, p4, p5);
     }

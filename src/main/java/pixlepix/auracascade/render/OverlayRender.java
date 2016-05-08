@@ -37,7 +37,6 @@ public class OverlayRender {
                     IToolTip toolTip = (IToolTip) block;
                     VazkiiRenderHelper.renderTooltip(centerX, centerY, toolTip.getTooltipData(world, player, movingobjectposition.getBlockPos()), 0x5577ff, 0x505000ff);
                 }
-
             }
         }
     }

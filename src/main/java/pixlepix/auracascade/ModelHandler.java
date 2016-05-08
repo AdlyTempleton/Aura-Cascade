@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.AuraBlockCapacitor;
 import pixlepix.auracascade.block.BlockBookshelfCoordinator;
@@ -151,7 +151,7 @@ public final class ModelHandler {
 
     private static void registerAngelSteelIngots() {
         Item item = BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class);
-        ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
+        ResourceLocation l = ForgeRegistries.ITEMS.getKey(item);
         for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
@@ -192,7 +192,7 @@ public final class ModelHandler {
 
     private static void registerFairyCharms() {
         Item item = BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class);
-        ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
+        ResourceLocation l = ForgeRegistries.ITEMS.getKey(item);
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
@@ -240,7 +240,7 @@ public final class ModelHandler {
             return;
         }
 
-        ResourceLocation l = GameData.getItemRegistry().getNameForObject(item);
+        ResourceLocation l = ForgeRegistries.ITEMS.getKey(item);
 
         if (l == null) {
             return;

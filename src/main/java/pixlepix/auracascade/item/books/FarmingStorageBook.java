@@ -5,7 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -33,7 +33,7 @@ public class FarmingStorageBook extends ItemStorageBook {
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         Item item = stack.getItem();
-        return isValid(stack, blocks, items, ores) || GameData.getItemRegistry().getNameForObject(item).getResourceDomain() != null && GameData.getItemRegistry().getNameForObject(item).getResourceDomain().equals("HarvestCraft");
+        return isValid(stack, blocks, items, ores) || ForgeRegistries.ITEMS.getKey(item).getResourceDomain() != null && ForgeRegistries.ITEMS.getKey(item).getResourceDomain().equals("HarvestCraft");
     }
 
     @Override

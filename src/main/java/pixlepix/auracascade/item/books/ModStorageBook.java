@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAuraCrystal;
@@ -30,12 +30,12 @@ public class ModStorageBook extends ItemStorageBook {
     @Override
     public boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf) {
         ArrayList<ItemStack> inv = tileStorageBookshelf.inv;
-        ResourceLocation uid = GameData.getItemRegistry().getNameForObject(stack.getItem());
+        ResourceLocation uid = ForgeRegistries.ITEMS.getKey(stack.getItem());
         if (uid == null || uid.getResourceDomain() == null) {
             return false;
         }
         for (ItemStack stackInInv : inv) {
-            if (stackInInv != null && !uid.getResourceDomain().equals(GameData.getItemRegistry().getNameForObject(stackInInv.getItem()).getResourceDomain())) {
+            if (stackInInv != null && !uid.getResourceDomain().equals(ForgeRegistries.ITEMS.getKey(stackInInv.getItem()).getResourceDomain())) {
                 return false;
             }
         }

@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import pixlepix.auracascade.AuraAnalytics;
@@ -128,7 +127,8 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {
         registry.postInit();
         LexiconData.init();
-        chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
+        //chiselBookshelf = GameRegistry.findBlock("chisel", "chisel.blockBookshelf");
+       // chiselBookshelf = ForgeRegistries.BLOCKS.getValue(key)
         if (Loader.isModLoaded("Thaumcraft")) {
             TCCompat.postInit();
         }

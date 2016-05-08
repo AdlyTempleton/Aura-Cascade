@@ -18,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import pixlepix.auracascade.main.ConstantMod;
@@ -198,9 +199,12 @@ public class BlockRegistry {
         for (ArrayList<Block> blockArrayList : blockRegistry.values()) {
             for (Block block : blockArrayList) {
                 if (((ITTinkererBlock) block).getItemBlock() != null) {
-                    GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getItemBlock(), ((ITTinkererBlock) block).getBlockName());
+                	//TODO these may break
+                    //GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getItemBlock(), ((ITTinkererBlock) block).getBlockName());
+                    ForgeRegistries.BLOCKS.register(block);
                 } else {
-                    GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getBlockName());
+                    //GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getBlockName());
+                    ForgeRegistries.BLOCKS.register(block);
                 }
                 if (((ITTinkererBlock) block).getTileEntity() != null) {
                     GameRegistry.registerTileEntity(((ITTinkererBlock) block).getTileEntity(), ConstantMod.prefixMod + ((ITTinkererBlock) block).getBlockName());
@@ -219,8 +223,9 @@ public class BlockRegistry {
         for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
             for (Item item : itemArrayList) {
                 if (!(item instanceof ItemBlock)) {
-                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
-
+                	//TODO this may have broken.
+                  //  GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
+                    ForgeRegistries.ITEMS.register(item);
                     if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
                         ModCreativeTab.INSTANCE.addItem(item);
                     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -29,7 +29,7 @@ public final class ActivityReportTickEventHandler {
 		try (ACLock acl = lock.lockAC()) {
 			if (!initialized) {
 				initialized = true;
-				FMLCommonHandler.instance().bus().register(new ActivityReportTickEventHandler());
+				MinecraftForge.EVENT_BUS.register(new ActivityReportTickEventHandler());
 			}
 
 			// check if an analytics object with the same keys and client status is already in the list
