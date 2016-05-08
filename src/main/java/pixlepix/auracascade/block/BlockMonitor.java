@@ -37,9 +37,6 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
     @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess world, BlockPos pos, EnumFacing side) {
         EnumFacing powerDirection = side.getOpposite();
-        Block b = world.getBlockState(pos.offset(powerDirection)).getBlock();
-
-
         for (EnumFacing direction : EnumFacing.VALUES) {
             if (direction != powerDirection) {
                 TileEntity auraTile = world.getTileEntity(pos.offset(direction));

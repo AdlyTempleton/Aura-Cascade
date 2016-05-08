@@ -43,7 +43,7 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
 
         AuraUtil.addAngelsteelDesc(list, stack);

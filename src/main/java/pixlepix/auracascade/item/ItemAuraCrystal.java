@@ -76,7 +76,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs p_150895_2_, List list) {
+    public void getSubItems(Item item, CreativeTabs p_150895_2_, List<ItemStack> list) {
         for (int i = 0; i < EnumAura.values().length; i++) {
             list.add(new ItemStack(item, 1, i));
         }

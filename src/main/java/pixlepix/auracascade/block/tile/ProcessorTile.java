@@ -92,7 +92,7 @@ public class ProcessorTile extends ConsumerTile {
 
                 ItemStack entityStack = entityItem.getEntityItem();
 
-                Iterator recipeItemIter = ingredients.iterator();
+                Iterator<ItemStack> recipeItemIter = ingredients.iterator();
                 while (recipeItemIter.hasNext()) {
                     ItemStack curStack = (ItemStack) recipeItemIter.next();
                     if (curStack.stackSize <= entityStack.stackSize && curStack.getItemDamage() == entityStack.getItemDamage() && curStack.getItem() == entityStack.getItem()) {

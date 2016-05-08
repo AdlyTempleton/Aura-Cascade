@@ -100,7 +100,7 @@ public final class LexiconData {
     public static CraftingBenchRecipe getRecipeFromFairy(Class<? extends EntityFairy> clazz) {
         int num = 0;
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
-            Class clazzCompare = ItemFairyCharm.fairyClasses[i];
+            Class<?> clazzCompare = ItemFairyCharm.fairyClasses[i];
             if (clazzCompare.equals(clazz)) {
                 num = i;
                 break;

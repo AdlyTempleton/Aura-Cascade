@@ -76,8 +76,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
         nbt.setInteger("neededPower", neededPower);
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
+	@Override
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

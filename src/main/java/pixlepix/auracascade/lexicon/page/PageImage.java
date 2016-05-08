@@ -23,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconPage;
 
-@SuppressWarnings("UnusedAssignment")
 public class PageImage extends LexiconPage {
 
     ResourceLocation resource;
@@ -51,6 +50,7 @@ public class PageImage extends LexiconPage {
         int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + height - 40;
+        //TODO reimplement renderText
         //PageText.renderText(x, y, width, height, getUnlocalizedName());
     }
 }

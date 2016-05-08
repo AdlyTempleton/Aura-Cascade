@@ -37,7 +37,7 @@ public class ProcessorRecipe extends ThaumicTinkererRecipe {
 
         search:
         for (ItemStack curOutsideStack : outsideStacks) {
-            Iterator recipeStacksIter = recipeStacks.iterator();
+            Iterator<ItemStack> recipeStacksIter = recipeStacks.iterator();
 
             while (recipeStacksIter.hasNext()) {
                 ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();

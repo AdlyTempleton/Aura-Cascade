@@ -97,7 +97,7 @@ public class OreDropManager {
 
     //Also Botania's code
     public static ItemStack getOreToPut() {
-        List<WeightedRandom.Item> values = new ArrayList();
+        List<WeightedRandom.Item> values = new ArrayList<net.minecraft.util.WeightedRandom.Item>();
         for (String s : oreNames.keySet())
             values.add(new StringRandomItem(oreNames.get(s), s));
 

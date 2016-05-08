@@ -112,7 +112,6 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
 
     public abstract int getHeldStacks();
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public abstract boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf);
 
     public int getActualCount() {

@@ -24,7 +24,7 @@ public class GuiButtonBookmark extends GuiButtonLexicon {
         hovered = par2 >= xPosition && par3 >= yPosition && par2 < xPosition + width && par3 < yPosition + height;
         int k = getHoverState(hovered);
 
-        List<String> tooltip = new ArrayList();
+        List<String> tooltip = new ArrayList<String>();
         if (displayString.equals("+"))
             tooltip.add(I18n.translateToLocal("auramisc.clickToAdd"));
         else {

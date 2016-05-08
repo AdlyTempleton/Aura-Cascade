@@ -107,7 +107,8 @@ public class ContainerCoordinator extends Container {
 
     }
 
-    public void scrollTo(float scroll, String filter) {
+    @SuppressWarnings("unchecked")
+	public void scrollTo(float scroll, String filter) {
         if (!tileEntity.getWorld().isRemote) {
         	BlockPos pos = tileEntity.getPos();
             tileEntity.getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
@@ -115,7 +116,7 @@ public class ContainerCoordinator extends Container {
         lastFilter = filter;
 
         ArrayList<StorageItemStack> stacks = (ArrayList<StorageItemStack>) tileEntity.getAbstractInventory().clone();
-        Iterator iter = stacks.iterator();
+        Iterator<StorageItemStack> iter = stacks.iterator();
         while (iter.hasNext()) {
             StorageItemStack storageItemStack = (StorageItemStack) iter.next();
             String name = I18n.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();

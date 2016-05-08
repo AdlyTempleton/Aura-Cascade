@@ -59,7 +59,6 @@ public class PageRecipe extends LexiconPage {
         renderRecipe(gui, mx, my);
 
         int width = gui.getWidth() - 30;
-        int height = gui.getHeight();
         int x = gui.getLeft() + 16;
         int y = gui.getTop() + getTextOffset(gui);
         if (!I18n.translateToLocal(getUnlocalizedName()).equals(getUnlocalizedName())) {

@@ -28,7 +28,7 @@ public class ItemComboSword extends ItemSword implements ITTinkererItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
         super.addInformation(stack, player, list, bool);
         if (stack.getTagCompound() != null) {
             double timeLeft = (double) (stack.getTagCompound().getLong(NBT_TAG_LAST_TIME) + 200 - player.worldObj.getTotalWorldTime());

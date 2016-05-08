@@ -96,4 +96,8 @@ public class GuiButtonCategory extends GuiButtonLexicon {
         return category;
     }
 
+	public static ResourceLocation getFallbackresource() {
+		return fallbackResource;
+	}
+
 }

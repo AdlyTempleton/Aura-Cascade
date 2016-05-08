@@ -52,7 +52,8 @@ public class EnchanterTile extends ConsumerTile {
         return false;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void onUsePower() {
         AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
         ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
@@ -69,7 +70,8 @@ public class EnchanterTile extends ConsumerTile {
                         if (enchant != null) {
                             int level = EnchantmentHelper.getEnchantmentLevel(enchant, toolStack);
                             if (isSuccessful(toolStack)) {
-                                Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
+                                @SuppressWarnings("rawtypes")
+								Map enchantMap = EnchantmentHelper.getEnchantments(toolStack);
                                 enchantMap.put(Enchantment.getEnchantmentID(enchant), level + 1);
                                 EnchantmentHelper.setEnchantments(enchantMap, toolStack);
                             }
@@ -116,7 +118,8 @@ public class EnchanterTile extends ConsumerTile {
 
     }
 
-    public Enchantment getEnchantFromAura(EnumAura aura) {
+    @SuppressWarnings("incomplete-switch")
+	public Enchantment getEnchantFromAura(EnumAura aura) {
         switch (aura) {
             case RED_AURA:
                 return EnchantmentManager.red;

@@ -28,7 +28,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
 
     public ItemAngelsteelAxe(Integer i) {
         //super(AngelsteelToolHelper.materials[i]);
-    	//TODO Why the fuck did this break?!?!
+    	//TODO Fix AngelSteel axe, and all of them registering too.
     	super(ToolMaterial.IRON);
         System.out.println("I made it here");
         this.degree = i;
@@ -84,7 +84,7 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
 
         AuraUtil.addAngelsteelDesc(list, stack);

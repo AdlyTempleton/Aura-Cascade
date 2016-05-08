@@ -47,7 +47,8 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
 public class ItemFairyCharm extends Item implements ITTinkererItem {
 
     public static final String name = "fairyCharm";
-    public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class, EntityBuffFairy.class,
+    @SuppressWarnings("rawtypes")
+	public static Class[] fairyClasses = new Class[]{EntityFairy.class, EntityCombatFairy.class, EntityDebuffFairy.class, EntityBuffFairy.class,
             EntityStealFairy.class, EntityPushFairy.class, EntityShooterFairy.class, EntitySaviorFairy.class, EntityFetchFairy.class
             , EntityBaitFairy.class, EntityBreederFairy.class, EntityScareFairy.class, EntityExtinguisherFairy.class, EntityDigFairy.class,
             EntityFallFairy.class, EntityLightFairy.class, EntityXPFairy.class
@@ -161,7 +162,8 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
         return 16;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public String getItemStackDisplayName(ItemStack stack) {
         if (stack.getItemDamage() >= fairyClasses.length) {
             return "invalid";

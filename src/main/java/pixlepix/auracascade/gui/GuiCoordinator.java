@@ -216,7 +216,9 @@ public class GuiCoordinator extends GuiContainer {
             Slot slot = this.inventorySlots.inventorySlots.get(i2);
             this.drawSlot(slot);
 
+            //TODO Reimplement mouseoverslot
           //  if (this.isMouseOverSlot(slot, mouseX, mouseY) && slot.canBeHovered())
+            /*
             if(false)
             {
                 this.theSlot = slot;
@@ -230,6 +232,7 @@ public class GuiCoordinator extends GuiContainer {
                 GlStateManager.enableLighting();
                 GlStateManager.enableDepth();
             }
+            */
         }
 
         RenderHelper.disableStandardItemLighting();

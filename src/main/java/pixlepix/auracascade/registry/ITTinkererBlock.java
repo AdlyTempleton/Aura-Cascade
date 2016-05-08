@@ -8,7 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 /**
  * Created by localmacaccount on 6/11/14.
  */
-@SuppressWarnings("SameReturnValue")
 public interface ITTinkererBlock extends ITTinkererRegisterable {
 
     public ArrayList<Object> getSpecialParameters();

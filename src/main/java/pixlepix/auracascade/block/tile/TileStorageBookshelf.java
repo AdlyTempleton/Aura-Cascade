@@ -61,8 +61,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         nbt.setTag("book", compound);
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
+	@Override
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

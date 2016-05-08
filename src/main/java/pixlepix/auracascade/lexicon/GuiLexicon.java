@@ -69,7 +69,7 @@ public class GuiLexicon extends GuiScreen {
     public void initGui() {
         super.initGui();
 
-        allCategories = new ArrayList(CategoryManager.getAllCategories());
+        allCategories = new ArrayList<LexiconCategory>(CategoryManager.getAllCategories());
         Collections.sort(allCategories);
 
         lastTime = ClientTickHandler.ticksInGame;
@@ -262,7 +262,7 @@ public class GuiLexicon extends GuiScreen {
     }
 
     void populateBookmarks() {
-        List remove = new ArrayList();
+        List<GuiButton> remove = new ArrayList<GuiButton>();
         List<GuiButton> buttons = buttonList;
         for (GuiButton button : buttons)
             if (button.id >= BOOKMARK_START)

@@ -133,7 +133,7 @@ public class EnchantEventHandler {
             //Silk touch
             int multiply = getEffectStrength(stack, EnumAura.RED_AURA, EnumAura.YELLOW_AURA);
             if (new Random().nextInt(4) < multiply && canMultiplyDrops(event)) {
-                ArrayList newDrops = new ArrayList(event.getDrops().size());
+                ArrayList<ItemStack> newDrops = new ArrayList<ItemStack>(event.getDrops().size());
                 for (ItemStack dropStack : event.getDrops()) {
                     newDrops.add(getDoubleResult(dropStack));
                 }

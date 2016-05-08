@@ -117,7 +117,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
             list.add(new ItemStack(item, 1, i));
         }

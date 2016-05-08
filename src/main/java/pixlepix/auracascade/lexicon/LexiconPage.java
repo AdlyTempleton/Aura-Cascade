@@ -78,7 +78,6 @@ public abstract class LexiconPage {
     /**
      * Called when a key is pressed.
      */
-    @SuppressWarnings("EmptyMethod")
     @SideOnly(Side.CLIENT)
     public void onKeyPressed(char c, int key) {
         // NO-OP

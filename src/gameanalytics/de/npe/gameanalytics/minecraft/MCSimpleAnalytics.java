@@ -4,7 +4,6 @@
 package de.npe.gameanalytics.minecraft;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import de.npe.gameanalytics.SimpleAnalytics;

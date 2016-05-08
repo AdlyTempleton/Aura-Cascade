@@ -70,7 +70,8 @@ public class PageCraftingRecipe extends PageRecipe {
         this(unlocalizedName, Collections.singletonList(recipe));
     }
 
-    public PageCraftingRecipe(String unlocalizedName, Class clazz) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public PageCraftingRecipe(String unlocalizedName, Class clazz) {
         super(unlocalizedName);
         if (Item.class.isAssignableFrom(clazz)) {
             this.recipes = Collections.singletonList(((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(clazz)).iRecipe);

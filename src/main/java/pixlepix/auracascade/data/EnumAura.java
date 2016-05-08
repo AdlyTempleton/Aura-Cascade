@@ -127,9 +127,7 @@ public enum EnumAura {
 
                     AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
 
-                    if (tile == null) {
-                        AuraCascade.log.error("Tile entity is null in updateTick of EnumAura X: " + pos.getX() + "Y: " + pos.getY() + "Z: " + pos.getZ());
-                    } else if (tile.storage == null) {
+                    if (tile.storage == null) {
                         AuraCascade.log.error("Storage data is null in updateTick of EnumAura");
                     } else {
                         tile.storage.set(this, num + delta);

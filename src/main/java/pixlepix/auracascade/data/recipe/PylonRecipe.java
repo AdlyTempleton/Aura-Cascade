@@ -55,7 +55,7 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
         }
         search:
         for (ItemStack curStack : stacks) {
-            Iterator recipeStacksIter = recipeStacks.iterator();
+            Iterator<ItemStack> recipeStacksIter = recipeStacks.iterator();
 
             while (recipeStacksIter.hasNext()) {
                 ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();

@@ -25,10 +25,14 @@ import pixlepix.auracascade.main.ConstantMod;
 public class BlockRegistry {
 
     public static HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe> recipeMap = new HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe>();
-    private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
-    private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
-    private ArrayList<Class> itemClasses = new ArrayList<Class>();
-    private ArrayList<Class> blockClasses = new ArrayList<Class>();
+    @SuppressWarnings("rawtypes")
+	private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
+    @SuppressWarnings("rawtypes")
+	private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
+    @SuppressWarnings("rawtypes")
+	private ArrayList<Class> itemClasses = new ArrayList<Class>();
+    @SuppressWarnings("rawtypes")
+	private ArrayList<Class> blockClasses = new ArrayList<Class>();
 
     public static Set<Item> getAllItems() {
         Set<Item> ret = Sets.newHashSet();
@@ -42,25 +46,23 @@ public class BlockRegistry {
         return recipeMap.get(item);
     }
 
-    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromItem(Class<? extends Item> item) {
         return recipeMap.get(getFirstItemFromClass(item));
     }
 
-    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromBlock(Class<? extends Block> item) {
         return recipeMap.get(getFirstBlockFromClass(item));
     }
 
-    public static ArrayList<Item> getItemFromClass(Class clazz) {
+    public static ArrayList<Item> getItemFromClass(Class<?> clazz) {
         return itemRegistry.get(clazz);
     }
 
-    public static Item getFirstItemFromClass(Class clazz) {
+    public static Item getFirstItemFromClass(Class<? extends Item> clazz) {
         return itemRegistry.get(clazz) != null ? itemRegistry.get(clazz).get(0) : null;
     }
 
-    public static Item getItemFromClassAndName(Class clazz, String s) {
+    public static Item getItemFromClassAndName(Class<?> clazz, String s) {
         if (itemRegistry.get(clazz) == null) {
             return null;
         }
@@ -72,7 +74,7 @@ public class BlockRegistry {
         return null;
     }
 
-    public static Block getBlockFromClassAndName(Class clazz, String s) {
+    public static Block getBlockFromClassAndName(Class<?> clazz, String s) {
         if (blockRegistry.get(clazz) == null) {
             return null;
         }
@@ -84,11 +86,11 @@ public class BlockRegistry {
         return null;
     }
 
-    public static ArrayList<Block> getBlockFromClass(Class clazz) {
+    public static ArrayList<Block> getBlockFromClass(Class<?> clazz) {
         return blockRegistry.get(clazz);
     }
 
-    public static Block getFirstBlockFromClass(Class clazz) {
+    public static Block getFirstBlockFromClass(Class<? extends Block> clazz) {
         return blockRegistry.get(clazz) != null ? blockRegistry.get(clazz).get(0) : null;
     }
 
@@ -121,7 +123,7 @@ public class BlockRegistry {
 
     public void preInit() {
         registerClasses();
-        for (Class clazz : blockClasses) {
+        for (Class<?> clazz : blockClasses) {
             try {
                 Block newBlock = (Block) clazz.newInstance();
                 if (((ITTinkererBlock) newBlock).shouldRegister()) {
@@ -132,7 +134,7 @@ public class BlockRegistry {
                     if (((ITTinkererBlock) newBlock).getSpecialParameters() != null) {
                         for (Object param : ((ITTinkererBlock) newBlock).getSpecialParameters()) {
 
-                            for (Constructor constructor : clazz.getConstructors()) {
+                            for (Constructor<?> constructor : clazz.getConstructors()) {
                                 if (constructor.getParameterTypes().length > 0 && constructor.getParameterTypes()[0].isAssignableFrom(param.getClass())) {
                                     Block nextBlock = (Block) clazz.getConstructor(param.getClass()).newInstance(param);
                                     nextBlock.setUnlocalizedName(((ITTinkererBlock) nextBlock).getBlockName());
@@ -163,7 +165,7 @@ public class BlockRegistry {
                 e.printStackTrace();
             }
         }
-        for (Class clazz : itemClasses) {
+        for (Class<?> clazz : itemClasses) {
             try {
                 Item newItem = (Item) clazz.newInstance();
                 if (((ITTinkererItem) newItem).shouldRegister()) {
@@ -172,7 +174,7 @@ public class BlockRegistry {
                     itemList.add(newItem);
                     if (((ITTinkererItem) newItem).getSpecialParameters() != null) {
                         for (Object param : ((ITTinkererItem) newItem).getSpecialParameters()) {
-                            for (Constructor constructor : clazz.getConstructors()) {
+                            for (Constructor<?> constructor : clazz.getConstructors()) {
                                 if (constructor.getParameterTypes().length > 0 && constructor.getParameterTypes()[0].isAssignableFrom(param.getClass())) {
                                     Item nextItem = (Item) constructor.newInstance(param);
                                     nextItem.setUnlocalizedName(((ITTinkererItem) nextItem).getItemName());

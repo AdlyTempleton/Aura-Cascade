@@ -3,7 +3,6 @@ package pixlepix.auracascade.lexicon.page;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.AuraCascade;
@@ -30,8 +29,6 @@ public class PageQuest extends PageRecipe {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderRecipe(IGuiLexiconEntry gui, int mx, int my) {
-
-        TextureManager render = Minecraft.getMinecraft().renderEngine;
         renderItemAtGridPos(gui, 2, 1, quest.target, true);
         renderItemAtGridPos(gui, 2, 3, quest.result, true);
 
