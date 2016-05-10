@@ -23,62 +23,62 @@ import java.util.List;
  */
 public interface IGuiLexiconEntry {
 
-    public void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_);
+    void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_);
     
     /**
      * Gets the entry currently portrayed in this gui.
      */
-    public LexiconEntry getEntry();
+    LexiconEntry getEntry();
 
     /**
      * Gets the current page the lexicon GUI is browsing.
      */
-    public int getPageOn();
+    int getPageOn();
 
     /**
      * Gets the leftmost part of the GUI.
      */
-    public int getLeft();
+    int getLeft();
 
     /**
      * Gets the topmost part of the GUI.
      */
-    public int getTop();
+    int getTop();
 
     /**
      * Gets the GUI's width.
      */
-    public int getWidth();
+    int getWidth();
 
     /**
      * Gets the GUI's height
      */
-    public int getHeight();
+    int getHeight();
 
     /**
      * Gets the GUI's Z level for rendering.
      */
-    public float getZLevel();
+    float getZLevel();
 
     /**
      * Gets the list of buttons in this gui.
      */
-    public List<GuiButton> getButtonList();
+    List<GuiButton> getButtonList();
 
     /**
      * Gets the total amount of ticks (+ partial ticks) the player
      * has been in this gui.
      */
-    public float getElapsedTicks();
+    float getElapsedTicks();
 
     /**
      * Gets the current partial ticks.
      */
-    public float getPartialTicks();
+    float getPartialTicks();
 
     /**
      * Gets the delta (1F = 1 tick) between this render call
      * and the last one.
      */
-    public float getTickDelta();
+    float getTickDelta();
 }

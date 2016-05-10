@@ -260,9 +260,7 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
 
         try {
             return getTileEntity().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

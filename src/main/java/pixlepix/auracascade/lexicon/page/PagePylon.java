@@ -22,6 +22,7 @@ import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by pixlepix on 12/28/14.
@@ -93,7 +94,7 @@ public class PagePylon extends PageRecipe {
             LexiconRecipeMappings.EntryData data = LexiconRecipeMappings.getDataForStack(recipe.componentList.get(i).itemStack);
             int yOffset = (data != null && (data.entry != gui.getEntry() || data.page != gui.getPageOn())) ? 32 : 16;
             if (mx >= xPos && my >= yPos && mx < xPos + 16 && my < yPos + 16) {
-                VazkiiRenderHelper.renderTooltip(mx, my + yOffset, Arrays.asList("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")"));
+                VazkiiRenderHelper.renderTooltip(mx, my + yOffset, Collections.singletonList("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")"));
             }
         }
         renderItemAtGridPos(gui, 2, 0, recipe.result, false);

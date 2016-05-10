@@ -4,7 +4,7 @@ package pixlepix.auracascade.registry;
 public interface ITTinkererRegisterable {
 
 
-    public ThaumicTinkererRecipe getRecipeItem();
+    ThaumicTinkererRecipe getRecipeItem();
 
-    public int getCreativeTabPriority();
+    int getCreativeTabPriority();
 }

@@ -18,6 +18,7 @@ import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class GuiButtonPage extends GuiButtonLexicon {
 
@@ -39,7 +40,7 @@ public class GuiButtonPage extends GuiButtonLexicon {
             drawTexturedModalRect(xPosition, yPosition, k == 2 ? 18 : 0, right ? 180 : 190, 18, 10);
 
             if (k == 2)
-                VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(I18n.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
+                VazkiiRenderHelper.renderTooltip(par2, par3, Collections.singletonList(I18n.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
         }
     }
 

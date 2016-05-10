@@ -48,7 +48,7 @@ public class LootTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("cascaderLoot", AuraUtil.formatLocation(this));
+     //   AuraCascade.analytics.eventDesign("cascaderLoot", AuraUtil.formatLocation(this));
         ItemStack lootStack;
         Random rand = this.getWorld().rand;
         do {

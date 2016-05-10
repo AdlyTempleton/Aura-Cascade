@@ -40,7 +40,7 @@ public enum EnumColor {
     public String unlocalizedName;
     public String dyeName;
 
-    private EnumColor(String s, String n, String dye, int[] rgb, int meta) {
+    EnumColor(String s, String n, String dye, int[] rgb, int meta) {
         code = s;
         unlocalizedName = n;
         dyeName = dye;

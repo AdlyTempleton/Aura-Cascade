@@ -60,7 +60,7 @@ public class MinerTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerMiner", AuraUtil.formatLocation(this));
+       // AuraCascade.analytics.eventDesign("consumerMiner", AuraUtil.formatLocation(this));
 
         if (!hasBeenPulsed) {
             if (explosion != null && !explosion.isDead) {
@@ -89,7 +89,7 @@ public class MinerTile extends ConsumerTile {
                         EntityItem item = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, stack);
                         worldObj.spawnEntityInWorld(item);
                     }
-                    AuraCascade.analytics.eventDesign("consumerMinerLoot", AuraUtil.formatLocation(this), explosion.charge);
+                //    AuraCascade.analytics.eventDesign("consumerMinerLoot", AuraUtil.formatLocation(this), explosion.charge);
                 }
             }
             hasBeenPulsed = false;

@@ -54,7 +54,7 @@ public class EnchanterTile extends ConsumerTile {
     @SuppressWarnings("unchecked")
 	@Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
+       // AuraCascade.analytics.eventDesign("consumerEnchant", AuraUtil.formatLocation(this));
         ArrayList<EntityItem> items = (ArrayList<EntityItem>) worldObj.getEntitiesWithinAABB(EntityItem.class, PosUtil.getBoundingBox(getPos(), 3));
         for (EntityItem item : items) {
             ItemStack toolStack = item.getEntityItem();

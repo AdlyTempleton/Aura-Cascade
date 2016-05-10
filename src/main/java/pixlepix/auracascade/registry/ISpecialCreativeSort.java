@@ -10,5 +10,5 @@ public interface ISpecialCreativeSort {
     //otherStack is NOT
     //If you don't want any special comparison in certain circumstance, you must re-implement compare
     //return stack.getDisplayName().compareToIgnoreCase(otherStack.getDisplayName());
-    public int compare(ItemStack stack, ItemStack otherStack);
+    int compare(ItemStack stack, ItemStack otherStack);
 }

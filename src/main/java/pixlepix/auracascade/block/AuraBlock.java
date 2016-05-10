@@ -48,7 +48,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     //"" is default
     //"pump" is AuraTilePump\
     //"black" is AuraTileBlack etc
-    String type;
+    private String type;
     private static AxisAlignedBB AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
     public AuraBlock(String type) {
         super(Material.glass);
@@ -454,9 +454,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
         try {
             return getTileEntity().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;

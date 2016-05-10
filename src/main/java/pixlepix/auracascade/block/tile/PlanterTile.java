@@ -31,7 +31,7 @@ public class PlanterTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerPlant", AuraUtil.formatLocation(this));
+     //   AuraCascade.analytics.eventDesign("consumerPlant", AuraUtil.formatLocation(this));
         BlockPos updatePos = pos.up(2);
         Block block = worldObj.getBlockState(updatePos).getBlock();
         for (int i = 0; i < 50; i++) {

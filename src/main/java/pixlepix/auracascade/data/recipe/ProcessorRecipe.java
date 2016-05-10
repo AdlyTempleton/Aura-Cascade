@@ -40,7 +40,7 @@ public class ProcessorRecipe extends ThaumicTinkererRecipe {
             Iterator<ItemStack> recipeStacksIter = recipeStacks.iterator();
 
             while (recipeStacksIter.hasNext()) {
-                ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();
+                ItemStack curRecipeStack = recipeStacksIter.next();
                 if (curOutsideStack != null && curRecipeStack.getItem() == curOutsideStack.getItem() && curOutsideStack.getItemDamage() == curRecipeStack.getItemDamage()
                         && curOutsideStack.stackSize >= curRecipeStack.stackSize) {
                     recipeStacksIter.remove();

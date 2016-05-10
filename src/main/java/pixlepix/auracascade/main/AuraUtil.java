@@ -157,9 +157,8 @@ public class AuraUtil {
         BlockPos centerPos = new BlockPos(entity).up();
         BlockPos topPos = centerPos.up(5);
         for (EnumFacing e : EnumFacing.HORIZONTALS) {
-            EnumFacing primaryDirection = e;
             EnumFacing connectingDirection = e.rotateYCCW();
-            BlockPos corner = centerPos.offset(primaryDirection, 5);
+            BlockPos corner = centerPos.offset(e, 5);
             BlockPos connectingCorner = centerPos.offset(connectingDirection, 5);
             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));

@@ -169,7 +169,7 @@ public class GuiLexicon extends GuiScreen {
     void drawHeader() {
         boolean unicode = fontRendererObj.getUnicodeFlag();
         fontRendererObj.setUnicodeFlag(true);
-        fontRendererObj.drawSplitString(String.format(I18n.translateToLocal("aura.gui.lexicon.header")), left + 18, top + 12, 110, 0);
+        fontRendererObj.drawSplitString(I18n.translateToLocal("aura.gui.lexicon.header"), left + 18, top + 12, 110, 0);
         fontRendererObj.setUnicodeFlag(unicode);
     }
 

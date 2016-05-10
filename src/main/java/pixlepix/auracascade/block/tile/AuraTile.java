@@ -263,6 +263,7 @@ public class AuraTile extends TileEntity implements ITickable {
             markDirty();
             worldObj.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getX(), pos.getX(), pos.getY(), pos.getZ());
             worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
+            worldObj.markAndNotifyBlock(this.pos, this.worldObj.getChunkFromBlockCoords(this.pos),this.blockType.getDefaultState(), this.blockType.getDefaultState(), 2);
         }
 
         for (AuraQuantity quantity : storage.quantityList) {
@@ -303,10 +304,7 @@ public class AuraTile extends TileEntity implements ITickable {
         if (!(worldObj.getTileEntity(pos) instanceof AuraTile)) {
             return false;
         }
-        if (!(isSame || isLower)) {
-            return false;
-        }
-        return !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0 && !(this instanceof AuraTileBlack));
+        return (isSame || isLower) && !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0 && !(this instanceof AuraTileBlack));
 
     }
 
@@ -317,10 +315,7 @@ public class AuraTile extends TileEntity implements ITickable {
         if (pos.getY() != this.pos.getY() && aura == EnumAura.ORANGE_AURA) {
             return false;
         }
-        if (pos.getY() == this.pos.getY() && aura == EnumAura.BLACK_AURA) {
-            return false;
-        }
-        return ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos(), aura);
+        return !(pos.getY() == this.pos.getY() && aura == EnumAura.BLACK_AURA) && ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos(), aura);
     }
 
     public boolean canReceive(BlockPos source, EnumAura aura) {

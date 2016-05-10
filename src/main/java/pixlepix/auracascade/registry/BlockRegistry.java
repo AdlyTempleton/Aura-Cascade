@@ -195,11 +195,12 @@ public class BlockRegistry {
             for (Block block : blockArrayList) {
                 if (((ITTinkererBlock) block).getItemBlock() != null) {
                 	//TODO these may break
-                    //GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getItemBlock(), ((ITTinkererBlock) block).getBlockName());
-                    ForgeRegistries.BLOCKS.register(block);
+                    GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getItemBlock(), ((ITTinkererBlock) block).getBlockName());
+                    //ForgeRegistries.BLOCKS.register(block);
                 } else {
-                    //GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getBlockName());
-                    ForgeRegistries.BLOCKS.register(block);
+                    GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getBlockName());
+                   // ForgeRegistries.BLOCKS.register(block);
+                    //ForgeRegistries.BLOCKS.re
                 }
                 if (((ITTinkererBlock) block).getTileEntity() != null) {
                     GameRegistry.registerTileEntity(((ITTinkererBlock) block).getTileEntity(), ConstantMod.prefixMod + ((ITTinkererBlock) block).getBlockName());
@@ -219,8 +220,8 @@ public class BlockRegistry {
             for (Item item : itemArrayList) {
                 if (!(item instanceof ItemBlock)) {
                 	//TODO this may have broken.
-                  //  GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
-                    ForgeRegistries.ITEMS.register(item);
+                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
+                    //ForgeRegistries.ITEMS.register(item);
                     if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
                         ModCreativeTab.INSTANCE.addItem(item);
                     }

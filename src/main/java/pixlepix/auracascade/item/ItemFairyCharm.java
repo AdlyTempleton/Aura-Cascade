@@ -38,7 +38,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
             EntityFallFairy.class, EntityLightFairy.class, EntityXPFairy.class
     };
 
-    public static String getNameFromFairy(Class<? extends EntityFairy> clazz) {
+    protected static String getNameFromFairy(Class<? extends EntityFairy> clazz) {
         if (clazz == EntityFairy.class) {
             return "Fairy";
         }
@@ -118,7 +118,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
 
                     consumeInventoryItem(player.inventory, this, stack.getItemDamage());
 
-                    AuraCascade.analytics.eventDesign("fairyAdded", fairyClasses[stack.getItemDamage()].getName());
+                  //  AuraCascade.analytics.eventDesign("fairyAdded", fairyClasses[stack.getItemDamage()].getName());
                 }
             }
         }

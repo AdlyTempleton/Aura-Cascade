@@ -69,7 +69,7 @@ public class ProcessorTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign(isPrismatic() ? "consumerProcessorPrism" : "consumerProcessor", AuraUtil.formatLocation(this));
+    //    AuraCascade.analytics.eventDesign(isPrismatic() ? "consumerProcessorPrism" : "consumerProcessor", AuraUtil.formatLocation(this));
         int range = 3;
         ItemStack resultStack = null;
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
@@ -93,7 +93,7 @@ public class ProcessorTile extends ConsumerTile {
 
                 Iterator<ItemStack> recipeItemIter = ingredients.iterator();
                 while (recipeItemIter.hasNext()) {
-                    ItemStack curStack = (ItemStack) recipeItemIter.next();
+                    ItemStack curStack = recipeItemIter.next();
                     if (curStack.stackSize <= entityStack.stackSize && curStack.getItemDamage() == entityStack.getItemDamage() && curStack.getItem() == entityStack.getItem()) {
                         spawnNear = entityItem;
                         entityStack.stackSize -= curStack.stackSize;

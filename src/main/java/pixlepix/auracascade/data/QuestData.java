@@ -26,7 +26,7 @@ public class QuestData implements Capability.IStorage<QuestData>{
         this(new ArrayList<Quest>());
     }
 
-    public static final void register(EntityPlayer player) {
+    public static void register(EntityPlayer player) {
        // player.registerExtendedProperties(QuestData.EXT_PROP_NAME, new QuestData());
      //   player.capabilities.writeCapabilitiesToNBT(tagCompound);
     }

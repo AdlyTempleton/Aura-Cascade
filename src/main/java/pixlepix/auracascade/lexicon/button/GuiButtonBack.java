@@ -18,6 +18,7 @@ import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -43,7 +44,7 @@ public class GuiButtonBack extends GuiButtonLexicon {
     }
 
     public List<String> getTooltip() {
-        return Arrays.asList(I18n.translateToLocal("auramisc.back"));
+        return Collections.singletonList(I18n.translateToLocal("auramisc.back"));
     }
 
 }

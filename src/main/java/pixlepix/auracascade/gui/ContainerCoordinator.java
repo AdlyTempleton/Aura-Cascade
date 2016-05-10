@@ -118,7 +118,7 @@ public class ContainerCoordinator extends Container {
         ArrayList<StorageItemStack> stacks = (ArrayList<StorageItemStack>) tileEntity.getAbstractInventory().clone();
         Iterator<StorageItemStack> iter = stacks.iterator();
         while (iter.hasNext()) {
-            StorageItemStack storageItemStack = (StorageItemStack) iter.next();
+            StorageItemStack storageItemStack = iter.next();
             String name = I18n.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
 
             if (!name.contains(filter)) {

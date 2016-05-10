@@ -10,6 +10,7 @@ import pixlepix.auracascade.registry.BlockRegistry;
 /**
  * Created by pixlepix on 12/21/14.
  */
+@SuppressWarnings("ALL")
 public class AngelSteelTile extends ConsumerTile {
 
     public static int MAX_PROGRESS = 50;
@@ -32,7 +33,7 @@ public class AngelSteelTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("cascaderAngel", AuraUtil.formatLocation(this));
+      //  AuraCascade.analytics.eventDesign("cascaderAngel", AuraUtil.formatLocation(this));
         ItemStack lootStack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class));
         EntityItem entityItem = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, lootStack);
         entityItem.motionX = 0;

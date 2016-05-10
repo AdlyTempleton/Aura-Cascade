@@ -85,7 +85,7 @@ public class CraftingCenterTile extends TileEntity {
             }
             ItemStack loot = recipe.result.copy();
 
-            AuraCascade.analytics.eventDesign("vortexCraft", loot.getUnlocalizedName());
+            //AuraCascade.analytics.eventDesign("vortexCraft", loot.getUnlocalizedName());
             EntityItem entityDrop = new EntityItem(worldObj, getPos().getX() + .5, getPos().getY() + 2, getPos().getZ() + .5, loot);
             worldObj.spawnEntityInWorld(entityDrop);
             AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(3, getPos().getX() + .5, getPos().getY() + 2, getPos().getZ() + .5), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(),getPos().getY(), getPos().getZ(), 32));

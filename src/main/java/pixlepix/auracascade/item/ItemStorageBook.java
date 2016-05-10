@@ -101,7 +101,6 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(pos);
             te.storedBook = stack.copy();
             te.markDirty();
-            world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
             return EnumActionResult.PASS;
         }

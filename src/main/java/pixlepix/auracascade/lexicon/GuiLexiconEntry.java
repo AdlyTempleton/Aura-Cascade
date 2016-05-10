@@ -51,9 +51,9 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
 
         for (int k = 0; k < list.size(); ++k) {
             if (k == 0) {
-                list.set(k, p_146285_1_.getRarity().rarityColor + (String) list.get(k));
+                list.set(k, p_146285_1_.getRarity().rarityColor + list.get(k));
             } else {
-                list.set(k, TextFormatting.GRAY + (String) list.get(k));
+                list.set(k, TextFormatting.GRAY + list.get(k));
             }
         }
 

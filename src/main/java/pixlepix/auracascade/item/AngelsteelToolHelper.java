@@ -14,10 +14,10 @@ import java.util.Random;
 public class AngelsteelToolHelper {
 
     public static final int MAX_DEGREE = 11;
-    public static final String NBT_BUFF_ARRAY_NAME = "angelbuffs";
-    public static final Item.ToolMaterial[] materials = new Item.ToolMaterial[MAX_DEGREE];
+    protected static final String NBT_BUFF_ARRAY_NAME = "angelbuffs";
+    protected static final Item.ToolMaterial[] materials = new Item.ToolMaterial[MAX_DEGREE];
 
-    public static ArrayList<Object> getDegreeList() {
+    protected static ArrayList<Object> getDegreeList() {
         ArrayList<Object> integers = new ArrayList<Object>();
         for (int i = 1; i < MAX_DEGREE; i++) {
             integers.add(i);
@@ -31,7 +31,7 @@ public class AngelsteelToolHelper {
     // [1]: Fortune
     // [2]: Shatter
     // [3]: Disintegrate
-    public static int[] getRandomBuffSet(int lvl) {
+    protected static int[] getRandomBuffSet(int lvl) {
         int[] result = new int[4];
         Random rand = new Random();
         for (int i = 0; i < lvl * 2; i++) {
@@ -40,7 +40,7 @@ public class AngelsteelToolHelper {
         return result;
     }
 
-    public static void writeToNBT(NBTTagCompound nbtTagCompound, int[] buffs) {
+    private static void writeToNBT(NBTTagCompound nbtTagCompound, int[] buffs) {
         nbtTagCompound.setIntArray(NBT_BUFF_ARRAY_NAME, buffs);
     }
 

@@ -96,7 +96,7 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
+       // AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
         worldObj.getBiomeGenForCoords(getPos());
         if (!(BiomeGenBase.getIdForBiome(worldObj.getChunkFromBlockCoords(pos).getBiome(pos, worldObj.getBiomeProvider())) == getBiomeId())) {
             //BlockPoss are used for convenience, but y-values are irrelavent

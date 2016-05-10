@@ -110,7 +110,7 @@ public class PageCraftingRecipe extends PageRecipe {
             ((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 0, 16, 16);
 
             if (mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-                VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(I18n.translateToLocal("auramisc.shapeless")));
+                VazkiiRenderHelper.renderTooltip(mx, my, Collections.singletonList(I18n.translateToLocal("auramisc.shapeless")));
 
             iconY += 20;
         }
@@ -122,7 +122,7 @@ public class PageCraftingRecipe extends PageRecipe {
             ((GuiScreen) gui).drawTexturedModalRect(iconX, iconY, 240, 16, 16, 16);
 
             if (mx >= iconX && my >= iconY && mx < iconX + 16 && my < iconY + 16)
-                VazkiiRenderHelper.renderTooltip(mx, my, Arrays.asList(I18n.translateToLocal("auramisc.oredict")));
+                VazkiiRenderHelper.renderTooltip(mx, my, Collections.singletonList(I18n.translateToLocal("auramisc.oredict")));
         }
         GlStateManager.disableBlend();
     }
@@ -140,63 +140,66 @@ public class PageCraftingRecipe extends PageRecipe {
     }
 
     @SideOnly(Side.CLIENT)
-    public void renderCraftingRecipe(IGuiLexiconEntry gui, IRecipe recipe) {
+    private void renderCraftingRecipe(IGuiLexiconEntry gui, IRecipe recipe) {
         if (recipe instanceof ShapedRecipes) {
             ShapedRecipes shaped = (ShapedRecipes) recipe;
 
             for (int y = 0; y < shaped.recipeHeight; y++)
                 for (int x = 0; x < shaped.recipeWidth; x++)
                     renderItemAtGridPos(gui, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true);
-        } else if (recipe instanceof ShapedOreRecipe) {
-            ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
-            int width = ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 4);
-            int height = ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 5);
+        } else {
+            if (recipe instanceof ShapedOreRecipe) {
+                ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+                int width = ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 4);
+                int height = ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 5);
 
-            for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++) {
-                    Object input = shaped.getInput()[y * width + x];
-                    if (input != null)
-                        renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((List<ItemStack>) input).get(0), true);
-                }
-
-            oreDictRecipe = true;
-        } else if (recipe instanceof ShapelessRecipes) {
-            ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
-
-            drawGrid:
-            {
-                for (int y = 0; y < 3; y++)
-                    for (int x = 0; x < 3; x++) {
-                        int index = y * 3 + x;
-
-                        if (index >= shapeless.recipeItems.size())
-                            break drawGrid;
-
-                        renderItemAtGridPos(gui, 1 + x, 1 + y, shapeless.recipeItems.get(index), true);
-                    }
-            }
-
-            shapelessRecipe = true;
-        } else if (recipe instanceof ShapelessOreRecipe) {
-            ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
-
-            drawGrid:
-            {
-                for (int y = 0; y < 3; y++)
-                    for (int x = 0; x < 3; x++) {
-                        int index = y * 3 + x;
-
-                        if (index >= shapeless.getRecipeSize())
-                            break drawGrid;
-
-                        Object input = shapeless.getInput().get(index);
+                for (int y = 0; y < height; y++) {
+                    for (int x = 0; x < width; x++) {
+                        Object input = shaped.getInput()[y * width + x];
                         if (input != null)
                             renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((List<ItemStack>) input).get(0), true);
                     }
-            }
+                }
 
-            shapelessRecipe = true;
-            oreDictRecipe = true;
+                oreDictRecipe = true;
+            } else if (recipe instanceof ShapelessRecipes) {
+                ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
+
+                drawGrid:
+                {
+                    for (int y = 0; y < 3; y++)
+                        for (int x = 0; x < 3; x++) {
+                            int index = y * 3 + x;
+
+                            if (index >= shapeless.recipeItems.size())
+                                break drawGrid;
+
+                            renderItemAtGridPos(gui, 1 + x, 1 + y, shapeless.recipeItems.get(index), true);
+                        }
+                }
+
+                shapelessRecipe = true;
+            } else if (recipe instanceof ShapelessOreRecipe) {
+                ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
+
+                drawGrid:
+                {
+                    for (int y = 0; y < 3; y++)
+                        for (int x = 0; x < 3; x++) {
+                            int index = y * 3 + x;
+
+                            if (index >= shapeless.getRecipeSize())
+                                break drawGrid;
+
+                            Object input = shapeless.getInput().get(index);
+                            if (input != null)
+                                renderItemAtGridPos(gui, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((List<ItemStack>) input).get(0), true);
+                        }
+                }
+
+                shapelessRecipe = true;
+                oreDictRecipe = true;
+            }
         }
 
         renderItemAtGridPos(gui, 2, 0, recipe.getRecipeOutput(), false);

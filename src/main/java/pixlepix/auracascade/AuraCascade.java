@@ -1,7 +1,6 @@
 package pixlepix.auracascade;
 
 
-import de.npe.gameanalytics.SimpleAnalytics;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -18,8 +17,8 @@ import pixlepix.auracascade.main.ConstantMod;
 @Mod(modid = ConstantMod.modId, name = ConstantMod.modName, version = ConstantMod.version, dependencies = "required-after:Baubles", acceptedMinecraftVersions = "[1.9.0]")
 public class AuraCascade {
 
-    public static SimpleAnalytics analytics;
-    
+  //  public static SimpleAnalytics analytics;
+
     @Instance(ConstantMod.modId)
     public static AuraCascade instance;
 

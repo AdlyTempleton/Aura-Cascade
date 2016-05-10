@@ -13,6 +13,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.KeyBindings;
 import pixlepix.auracascade.ModelHandler;
 import pixlepix.auracascade.block.entity.EntityFairy;

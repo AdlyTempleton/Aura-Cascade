@@ -27,6 +27,7 @@ import pixlepix.auracascade.lexicon.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PageRecipe extends LexiconPage {
@@ -78,7 +79,7 @@ public class PageRecipe extends LexiconPage {
             int tooltipY = 8 + tooltipData.size() * 11;
 
             if (tooltipEntry) {
-                VazkiiRenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(TextFormatting.GRAY + I18n.translateToLocal("auramisc.clickToRecipe")));
+                VazkiiRenderHelper.renderTooltipOrange(mx, my + tooltipY, Collections.singletonList(TextFormatting.GRAY + I18n.translateToLocal("auramisc.clickToRecipe")));
                 tooltipY += 18;
             }
 

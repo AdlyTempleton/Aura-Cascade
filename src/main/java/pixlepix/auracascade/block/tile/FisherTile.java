@@ -34,7 +34,7 @@ public class FisherTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerLoot", AuraUtil.formatLocation(this));
+     //   AuraCascade.analytics.eventDesign("consumerLoot", AuraUtil.formatLocation(this));
         if (hasWater()) {
         	//TODO FIX fishing tile
            // EntityItem entityItem = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, worldObj.getLootTableManager().getLootTableFromLocation(new ResourceLocation("minecraft",))

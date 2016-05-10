@@ -55,7 +55,7 @@ public class FurnaceTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerSmelt", AuraUtil.formatLocation(this));
+   //     AuraCascade.analytics.eventDesign("consumerSmelt", AuraUtil.formatLocation(this));
         int range = 3;
         List<EntityItem> nearbyItems = worldObj.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(pos.add(-range, -range, -range), pos.add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {

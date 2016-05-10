@@ -58,7 +58,7 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
             Iterator<ItemStack> recipeStacksIter = recipeStacks.iterator();
 
             while (recipeStacksIter.hasNext()) {
-                ItemStack curRecipeStack = (ItemStack) recipeStacksIter.next();
+                ItemStack curRecipeStack = recipeStacksIter.next();
                 if (ItemStack.areItemStacksEqual(curRecipeStack, curStack)) {
                     recipeStacksIter.remove();
                     continue search;

@@ -24,6 +24,7 @@ import pixlepix.auracascade.lexicon.LibResources;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public class GuiButtonCategory extends GuiButtonLexicon {
 
@@ -82,7 +83,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
         GlStateManager.popMatrix();
 
         if (inside)
-            VazkiiRenderHelper.renderTooltipGreen(mx, my, Arrays.asList(I18n.translateToLocal(getTooltipText())));
+            VazkiiRenderHelper.renderTooltipGreen(mx, my, Collections.singletonList(I18n.translateToLocal(getTooltipText())));
     }
 
     String getTooltipText() {

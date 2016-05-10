@@ -303,9 +303,7 @@ public class EnchantEventHandler {
                     if (j < 5) {
                         dropRare.invoke(event.getEntity(), j <= 0 ? 1 : 0);
                     }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }

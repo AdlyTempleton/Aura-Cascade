@@ -23,7 +23,7 @@ public enum EnumAura {
         @Override
         public double getRelativeMass(World world) {
 
-            AuraCascade.analytics.eventDesign("greenAura");
+        //    AuraCascade.analytics.eventDesign("greenAura");
             if (world.isDaytime()) {
                 return 2D;
             }
@@ -35,7 +35,7 @@ public enum EnumAura {
         @Override
         public double getRelativeMass(World world) {
 
-            AuraCascade.analytics.eventDesign("blackAura");
+          //  AuraCascade.analytics.eventDesign("blackAura");
             return 0D;
 
         }
@@ -59,7 +59,7 @@ public enum EnumAura {
                     explosionPushUp(world, pos, 50000);
                 }
             }
-            AuraCascade.analytics.eventDesign("redAura", AuraUtil.formatLocation(pos));
+         //   AuraCascade.analytics.eventDesign("redAura", AuraUtil.formatLocation(pos));
         }
     },
     ORANGE_AURA("Orange", 1, .5, 0, EnumColor.ORANGE, new int[]{1}) {
@@ -77,7 +77,7 @@ public enum EnumAura {
 
                 }
             }
-            AuraCascade.analytics.eventDesign("orangeAura", AuraUtil.formatLocation(pos));
+         //   AuraCascade.analytics.eventDesign("orangeAura", AuraUtil.formatLocation(pos));
         }
 
         @Override
@@ -96,7 +96,7 @@ public enum EnumAura {
             if (world.getTotalWorldTime() % 1200 == 5) {
                 AuraTile tile = (AuraTile) world.getTileEntity(pos);
                 tile.storage.set(this, (int) (.8D * (double) tile.storage.get(this)));
-                AuraCascade.analytics.eventDesign("yellowAura", AuraUtil.formatLocation(pos), 0);
+            //    AuraCascade.analytics.eventDesign("yellowAura", AuraUtil.formatLocation(pos), 0);
             }
         }
     },
@@ -104,7 +104,7 @@ public enum EnumAura {
         @Override
         public double getAscentBoost(World world) {
 
-            AuraCascade.analytics.eventDesign("blueAura");
+           // AuraCascade.analytics.eventDesign("blueAura");
             return world.isRaining() ? 4 : .5;
         }
     },
@@ -125,7 +125,7 @@ public enum EnumAura {
                     int num = quantity.getNum();
                     int delta = num <= 25 ? -num : 5 * (Math.min(100, (int) Math.floor(((double) 2500 / num))));
 
-                    AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
+                 //   AuraCascade.analytics.eventDesign("violetAura", AuraUtil.formatLocation(tile), num);
 
                     if (tile.storage == null) {
                         AuraCascade.log.error("Storage data is null in updateTick of EnumAura");
