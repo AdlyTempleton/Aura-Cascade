@@ -36,8 +36,8 @@ public class RenderPedestal extends TileEntitySpecialRenderer<AuraTilePedestal> 
             //Prevent 'jump' in the bobbing
             //Bobbing is calculated as the age plus the yaw
             AuraUtil.setItemAge(entityItem, (int) (400F - pedestal.frames));
-            //TODO Fix pedestals
-            //Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, x, y, z, 0, entityItem.rotationYaw);
+            //TODO Fix pedestals rendering items
+          //  Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(entityItem, x, y, z, 0, entityItem.rotationYaw);
             GlStateManager.disableLighting();
             GlStateManager.popMatrix();
 

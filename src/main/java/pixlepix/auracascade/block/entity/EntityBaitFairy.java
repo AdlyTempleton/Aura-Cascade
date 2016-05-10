@@ -47,7 +47,6 @@ public class EntityBaitFairy extends EntityFairy {
 
                 entity.setPosition(posX, posY, posZ);
                 worldObj.spawnEntityInWorld(entity);
-                //TODO Test this fetches the ID properly
                 AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
 
             }

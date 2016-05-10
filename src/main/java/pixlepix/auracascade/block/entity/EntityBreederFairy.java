@@ -25,9 +25,6 @@ public class EntityBreederFairy extends EntityFairy {
             for (EntityAnimal entity : nearbyEntities) {
                 if (!entity.isInLove() && entity.getGrowingAge() == 0) {
                     entity.setInLove(player);
-                    //Need to get the ID
-                    //Pretty sure that field entity.worldObj.provider.func_177502_q obtains the dimension ID properly
-                   //TODO test this got the ID correctly
                     AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
                     break;
 

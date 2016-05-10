@@ -32,7 +32,6 @@ public class ParticleBeam extends EntityFX {
 
         this.particleScale *= 2F;
         this.particleMaxAge = (int) (6.0D / (Math.random() * 0.8D + 0.6D));
-        //TODO From noCLIP to isCollided and isExpired
         this.isCollided = false;
         this.isExpired = false;
     }

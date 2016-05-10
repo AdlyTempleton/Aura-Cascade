@@ -92,7 +92,6 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
         int x = getPos().getX();
         int y = getPos().getY();
         int z = getPos().getZ();
-        //TODO TEST. CHANGED VEC3 to VEC3d
         Vec3d originalVector = new Vec3d(pos.subtract(getPos()));
         Vec3d vec3 = originalVector.normalize();
         double f = 0;
@@ -141,10 +140,10 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
                     }
                 }
             }
-            worldObj.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+            markDirty();
         }
         if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
-/* todo 1.8.8 this causes an infinite loop wtf
+/* TODO 1.8.8 this causes an infinite loop wtf
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
             ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
             ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();

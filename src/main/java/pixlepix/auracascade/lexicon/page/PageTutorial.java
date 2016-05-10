@@ -3,6 +3,7 @@ package pixlepix.auracascade.lexicon.page;
 import static net.minecraft.client.Minecraft.getMinecraft;
 
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,8 +38,7 @@ public class PageTutorial extends PageText {
         if (button == this.button) {
             GuiLexicon.startTutorial();
             getMinecraft().displayGuiScreen(new GuiLexicon());
-            //TODO Reimplement
-            //getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialStarted").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
+            getMinecraft().thePlayer.addChatMessage(new TextComponentString("aura.tutorialStarted"));
         }
     }
 
