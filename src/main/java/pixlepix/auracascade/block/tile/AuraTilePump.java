@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.List;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -11,6 +9,8 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.

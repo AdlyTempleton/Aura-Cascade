@@ -11,7 +11,6 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
 

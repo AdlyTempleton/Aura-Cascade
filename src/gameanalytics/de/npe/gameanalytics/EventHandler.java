@@ -3,30 +3,21 @@
  */
 package de.npe.gameanalytics;
 
+import com.google.gson.Gson;
+import de.npe.gameanalytics.Analytics.KeyPair;
+import de.npe.gameanalytics.events.GAErrorEvent;
+import de.npe.gameanalytics.events.GAEvent;
+import de.npe.gameanalytics.util.ACLock;
+
+import javax.xml.bind.DatatypeConverter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Semaphore;
-
-import javax.xml.bind.DatatypeConverter;
-
-import com.google.gson.Gson;
-
-import de.npe.gameanalytics.Analytics.KeyPair;
-import de.npe.gameanalytics.events.GAErrorEvent;
-import de.npe.gameanalytics.events.GAEvent;
-import de.npe.gameanalytics.util.ACLock;
 
 
 /**

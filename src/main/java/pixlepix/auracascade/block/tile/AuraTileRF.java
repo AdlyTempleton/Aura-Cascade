@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.data.EnumAura;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by localmacaccount on 2/24/15.

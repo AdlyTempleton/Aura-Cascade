@@ -1,8 +1,5 @@
 package pixlepix.auracascade.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +15,9 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/22/14.

@@ -1,8 +1,5 @@
 package pixlepix.auracascade.gui;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -15,6 +12,9 @@ import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.StorageItemStack;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by localmacaccount on 1/24/15.

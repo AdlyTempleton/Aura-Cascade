@@ -3,10 +3,10 @@
  */
 package de.npe.gameanalytics.minecraft;
 
+import de.npe.gameanalytics.SimpleAnalytics;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import de.npe.gameanalytics.SimpleAnalytics;
 
 /**
  * @author NPException

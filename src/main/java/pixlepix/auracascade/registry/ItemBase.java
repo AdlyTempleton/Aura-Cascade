@@ -14,9 +14,9 @@
  */
 package pixlepix.auracascade.registry;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.Item;
+
+import java.util.ArrayList;
 
 public abstract class ItemBase extends Item implements ITTinkererItem {
 

@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.entity;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +7,8 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.BlockExplosionContainer;
+
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 6/4/15.

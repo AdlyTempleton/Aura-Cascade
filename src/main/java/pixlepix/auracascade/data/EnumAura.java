@@ -1,7 +1,5 @@
 package pixlepix.auracascade.data;
 
-import java.util.List;
-
 import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.util.EnumFacing;
@@ -13,6 +11,8 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.EnumColor;
+
+import java.util.List;
 
 public enum EnumAura {
 

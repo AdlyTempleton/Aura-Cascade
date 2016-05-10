@@ -1,9 +1,5 @@
 package pixlepix.auracascade.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -27,6 +23,10 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 6/5/15.

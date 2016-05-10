@@ -1,8 +1,5 @@
 package pixlepix.auracascade.main;
 
-import java.util.Comparator;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -20,6 +17,9 @@ import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockMonitor;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.

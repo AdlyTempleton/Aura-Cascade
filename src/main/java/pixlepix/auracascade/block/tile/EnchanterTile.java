@@ -1,17 +1,12 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Random;
-
-import org.apache.commons.lang3.math.NumberUtils;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.apache.commons.lang3.math.NumberUtils;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.PosUtil;
@@ -19,6 +14,10 @@ import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 2/14/15.

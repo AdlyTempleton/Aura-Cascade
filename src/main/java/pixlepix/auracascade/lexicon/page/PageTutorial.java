@@ -1,7 +1,5 @@
 package pixlepix.auracascade.lexicon.page;
 
-import static net.minecraft.client.Minecraft.getMinecraft;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
@@ -9,6 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
+
+import static net.minecraft.client.Minecraft.getMinecraft;
 
 /**
  * Created by localmacaccount on 6/2/15.

@@ -1,7 +1,5 @@
 package pixlepix.auracascade.item.books;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -12,6 +10,8 @@ import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 1/27/15.

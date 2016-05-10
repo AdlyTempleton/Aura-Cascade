@@ -11,12 +11,12 @@
  */
 package pixlepix.auracascade.lexicon;
 
+import net.minecraft.util.text.translation.I18n;
+import pixlepix.auracascade.AuraCascade;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import net.minecraft.util.text.translation.I18n;
-import pixlepix.auracascade.AuraCascade;
 
 public class LexiconEntry implements Comparable<LexiconEntry> {
 

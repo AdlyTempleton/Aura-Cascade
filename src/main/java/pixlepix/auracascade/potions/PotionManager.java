@@ -1,10 +1,10 @@
 package pixlepix.auracascade.potions;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import net.minecraft.potion.Potion;
 import pixlepix.auracascade.AuraCascade;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  * Created by localmacaccount on 1/19/15.

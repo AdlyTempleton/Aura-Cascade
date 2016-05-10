@@ -1,8 +1,5 @@
 package pixlepix.auracascade.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,26 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.block.tile.AuraTile;
-import pixlepix.auracascade.block.tile.AuraTileBlack;
-import pixlepix.auracascade.block.tile.AuraTileCapacitor;
-import pixlepix.auracascade.block.tile.AuraTileConserve;
-import pixlepix.auracascade.block.tile.AuraTileOrange;
-import pixlepix.auracascade.block.tile.AuraTilePedestal;
-import pixlepix.auracascade.block.tile.AuraTilePump;
-import pixlepix.auracascade.block.tile.AuraTilePumpAlt;
-import pixlepix.auracascade.block.tile.AuraTilePumpBase;
-import pixlepix.auracascade.block.tile.AuraTilePumpCreative;
-import pixlepix.auracascade.block.tile.AuraTilePumpFall;
-import pixlepix.auracascade.block.tile.AuraTilePumpFallAlt;
-import pixlepix.auracascade.block.tile.AuraTilePumpLight;
-import pixlepix.auracascade.block.tile.AuraTilePumpLightAlt;
-import pixlepix.auracascade.block.tile.AuraTilePumpProjectile;
-import pixlepix.auracascade.block.tile.AuraTilePumpProjectileAlt;
-import pixlepix.auracascade.block.tile.AuraTilePumpRedstone;
-import pixlepix.auracascade.block.tile.AuraTilePumpRedstoneAlt;
-import pixlepix.auracascade.block.tile.AuraTileRF;
-import pixlepix.auracascade.block.tile.CraftingCenterTile;
+import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
@@ -60,6 +38,9 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITileEntityProvider {
 

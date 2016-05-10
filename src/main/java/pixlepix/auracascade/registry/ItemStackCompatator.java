@@ -1,11 +1,11 @@
 package pixlepix.auracascade.registry;
 
-import java.util.Comparator;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.Comparator;
 
 /**
  * Created by pixlepix on 8/3/14.

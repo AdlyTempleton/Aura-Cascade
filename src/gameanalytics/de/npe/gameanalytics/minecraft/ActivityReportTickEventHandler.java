@@ -1,8 +1,7 @@
 package de.npe.gameanalytics.minecraft;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import de.npe.gameanalytics.events.GAUserEvent;
+import de.npe.gameanalytics.util.ACLock;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
@@ -13,8 +12,9 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import de.npe.gameanalytics.events.GAUserEvent;
-import de.npe.gameanalytics.util.ACLock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public final class ActivityReportTickEventHandler {

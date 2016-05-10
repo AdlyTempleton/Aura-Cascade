@@ -1,9 +1,5 @@
 package pixlepix.auracascade.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,6 +22,10 @@ import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by pixlepix on 12/8/14.

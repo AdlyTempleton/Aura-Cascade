@@ -1,11 +1,5 @@
 package pixlepix.auracascade.main.event;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 import baubles.api.BaublesApi;
 import baubles.api.IBauble;
 import net.minecraft.block.Block;
@@ -30,12 +24,7 @@ import net.minecraft.world.Explosion;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.ExplosionEvent;
@@ -49,22 +38,12 @@ import pixlepix.auracascade.block.entity.EntityScareFairy;
 import pixlepix.auracascade.block.tile.AuraTilePumpFall;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.data.PosUtil;
-import pixlepix.auracascade.item.AngelsteelToolHelper;
-import pixlepix.auracascade.item.ItemBlueAmulet;
-import pixlepix.auracascade.item.ItemComboSword;
-import pixlepix.auracascade.item.ItemExplosionRing;
-import pixlepix.auracascade.item.ItemFairyRing;
-import pixlepix.auracascade.item.ItemFoodAmulet;
-import pixlepix.auracascade.item.ItemGreenAmulet;
-import pixlepix.auracascade.item.ItemLexicon;
-import pixlepix.auracascade.item.ItemOrangeAmulet;
-import pixlepix.auracascade.item.ItemPurpleAmulet;
-import pixlepix.auracascade.item.ItemRedAmulet;
-import pixlepix.auracascade.item.ItemThiefSword;
-import pixlepix.auracascade.item.ItemYellowAmulet;
+import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.network.PacketSyncQuestData;
 import pixlepix.auracascade.registry.BlockRegistry;
+
+import java.util.*;
 
 /**
  * Created by pixlepix on 12/16/14.

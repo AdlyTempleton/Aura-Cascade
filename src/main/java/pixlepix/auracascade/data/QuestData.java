@@ -1,13 +1,13 @@
 package pixlepix.auracascade.data;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+
+import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 5/31/15.

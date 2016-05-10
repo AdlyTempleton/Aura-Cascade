@@ -3,18 +3,18 @@
  */
 package de.npe.gameanalytics;
 
+import de.npe.gameanalytics.events.GABusinessEvent;
+import de.npe.gameanalytics.events.GADesignEvent;
+import de.npe.gameanalytics.events.GAErrorEvent;
+import de.npe.gameanalytics.events.GAErrorEvent.Severity;
+import de.npe.gameanalytics.events.GAEvent;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.UUID;
-
-import de.npe.gameanalytics.events.GABusinessEvent;
-import de.npe.gameanalytics.events.GADesignEvent;
-import de.npe.gameanalytics.events.GAErrorEvent;
-import de.npe.gameanalytics.events.GAErrorEvent.Severity;
-import de.npe.gameanalytics.events.GAEvent;
 
 
 /**

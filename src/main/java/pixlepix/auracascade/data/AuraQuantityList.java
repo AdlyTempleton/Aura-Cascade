@@ -1,11 +1,10 @@
 package pixlepix.auracascade.data;
 
-import java.util.ArrayList;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.ArrayList;
 
 public class AuraQuantityList implements Cloneable {
 

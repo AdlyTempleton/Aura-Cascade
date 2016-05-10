@@ -1,11 +1,11 @@
 package pixlepix.auracascade.village;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.gen.structure.StructureVillagePieces;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 3/27/15.

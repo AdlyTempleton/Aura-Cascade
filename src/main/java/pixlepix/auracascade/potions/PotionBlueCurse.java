@@ -1,7 +1,5 @@
 package pixlepix.auracascade.potions;
 
-import java.util.Random;
-
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
@@ -11,6 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
+
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/19/15.

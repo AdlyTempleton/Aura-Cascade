@@ -1,9 +1,5 @@
 package pixlepix.auracascade.gui;
 
-import java.io.IOException;
-
-import org.lwjgl.input.Mouse;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
@@ -21,9 +17,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import org.lwjgl.input.Mouse;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.network.PacketCoordinatorScroll;
+
+import java.io.IOException;
 
 /**
  * Created by localmacaccount on 1/24/15.

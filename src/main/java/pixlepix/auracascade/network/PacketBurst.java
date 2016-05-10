@@ -1,7 +1,5 @@
 package pixlepix.auracascade.network;
 
-import java.util.Random;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumParticleTypes;
@@ -13,6 +11,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.ParticleEffects;
+
+import java.util.Random;
 
 /**
  * Created by pixlepix on 11/29/14.

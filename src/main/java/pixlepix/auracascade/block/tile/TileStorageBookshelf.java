@@ -1,8 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -16,6 +13,9 @@ import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.main.AuraUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by localmacaccount on 1/23/15.

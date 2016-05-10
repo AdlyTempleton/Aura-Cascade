@@ -1,11 +1,5 @@
 package pixlepix.auracascade.item;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -23,11 +17,13 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.potions.PotionManager;
-import pixlepix.auracascade.registry.BlockRegistry;
-import pixlepix.auracascade.registry.CraftingBenchRecipe;
-import pixlepix.auracascade.registry.ITTinkererItem;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
-import pixlepix.auracascade.registry.ThaumicTinkererRecipeMulti;
+import pixlepix.auracascade.registry.*;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/19/15.

@@ -11,12 +11,12 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
-import java.awt.Desktop;
-import java.net.URI;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
+
+import java.awt.*;
+import java.net.URI;
 
 public class PageGuide extends PageText {
 

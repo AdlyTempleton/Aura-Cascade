@@ -11,13 +11,6 @@
  */
 package pixlepix.auracascade.lexicon.page;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
@@ -28,11 +21,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pixlepix.auracascade.lexicon.GuiLexiconEntry;
-import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
-import pixlepix.auracascade.lexicon.LexiconPage;
-import pixlepix.auracascade.lexicon.LexiconRecipeMappings;
-import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import pixlepix.auracascade.lexicon.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class PageRecipe extends LexiconPage {
 

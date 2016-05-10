@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.entity;
 
-import java.util.Random;
-
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import pixlepix.auracascade.main.AuraUtil;
+
+import java.util.Random;
 
 /**
  * Created by pixlepix on 12/14/14.

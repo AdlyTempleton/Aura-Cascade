@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.entity;
 
-import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
@@ -11,6 +9,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.Random;
 
 /**
  * Created by pixlepix on 12/16/14.

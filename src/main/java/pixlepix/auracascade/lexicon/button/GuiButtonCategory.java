@@ -11,20 +11,19 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import java.util.Arrays;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.LexiconCategory;
 import pixlepix.auracascade.lexicon.LibResources;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
+
+import java.util.Arrays;
 
 public class GuiButtonCategory extends GuiButtonLexicon {
 

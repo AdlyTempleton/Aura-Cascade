@@ -1,23 +1,9 @@
 package pixlepix.auracascade.item;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityBlaze;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMagmaCube;
-import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.passive.EntityCow;
-import net.minecraft.entity.passive.EntityMooshroom;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.monster.*;
+import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -25,6 +11,10 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by localmacaccount on 4/3/15.
@@ -63,29 +53,26 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        if (!target.worldObj.isRemote) {
-            if (entityMap.get(target.getClass()) != null && target.getHealth() > 0) {
-                target.setDead();
-                Class<? extends Entity> clazz = entityMap.get(target.getClass());
-                Entity newEntity = null;
-                try {
-                    newEntity = clazz.getConstructor(World.class).newInstance(target.worldObj);
-                    newEntity.setPosition(target.posX, target.posY, target.posZ);
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-
-                target.worldObj.spawnEntityInWorld(newEntity);
-                if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {
-                   // ((EntitySlime) newEntity).setSlimeSize((((EntitySlime) target).getSlimeSize()));
-                	//TODO: This requires ASM, and seems fairly pointless.
-                }
-                if (newEntity instanceof EntityLivingBase) {
-                    ((EntityLivingBase) newEntity).setHealth(Math.min(((EntityLivingBase) newEntity).getMaxHealth(), target.getHealth()));
-
-                }
+        if (!target.worldObj.isRemote) if (entityMap.get(target.getClass()) != null && target.getHealth() > 0) {
+            target.setDead();
+            Class<? extends Entity> clazz = entityMap.get(target.getClass());
+            Entity newEntity = null;
+            try {
+                newEntity = clazz.getConstructor(World.class).newInstance(target.worldObj);
+                newEntity.setPosition(target.posX, target.posY, target.posZ);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
             }
 
+            target.worldObj.spawnEntityInWorld(newEntity);
+            if (newEntity instanceof EntitySlime && target instanceof EntitySlime) {
+                // ((EntitySlime) newEntity).setSlimeSize((((EntitySlime) target).getSlimeSize()));
+                //TODO: This requires ASM, and seems fairly pointless.
+            }
+            if (newEntity instanceof EntityLivingBase) {
+                ((EntityLivingBase) newEntity).setHealth(Math.min(((EntityLivingBase) newEntity).getMaxHealth(), target.getHealth()));
+
+            }
         }
         return super.hitEntity(stack, attacker, target);
     }

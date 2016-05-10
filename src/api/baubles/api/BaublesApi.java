@@ -1,10 +1,10 @@
 package baubles.api;
 
-import java.lang.reflect.Method;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraftforge.fml.common.FMLLog;
+
+import java.lang.reflect.Method;
 
 /**
  * @author Azanor

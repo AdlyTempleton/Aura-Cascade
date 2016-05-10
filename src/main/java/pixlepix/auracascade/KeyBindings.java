@@ -1,9 +1,8 @@
 package pixlepix.auracascade;
 
-import org.lwjgl.input.Keyboard;
-
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import org.lwjgl.input.Keyboard;
 
 /**
  * Created by localmacaccount on 5/30/15.

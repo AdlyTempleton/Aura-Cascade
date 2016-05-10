@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.List;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -9,6 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
+
+import java.util.List;
 
 /**
  * Created by pixlepix on 11/29/14.

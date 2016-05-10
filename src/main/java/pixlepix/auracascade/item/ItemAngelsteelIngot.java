@@ -1,8 +1,5 @@
 package pixlepix.auracascade.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -15,6 +12,9 @@ import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.ISpecialCreativeSort;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/21/14.

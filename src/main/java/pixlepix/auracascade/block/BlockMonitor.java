@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +15,8 @@ import pixlepix.auracascade.block.tile.ConsumerTile;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererBlock;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 5/27/15.

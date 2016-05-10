@@ -1,8 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -22,6 +19,9 @@ import pixlepix.auracascade.data.AuraQuantityList;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class AuraTile extends TileEntity implements ITickable {
 

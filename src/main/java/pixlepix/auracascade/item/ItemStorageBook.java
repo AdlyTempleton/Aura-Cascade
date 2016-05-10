@@ -1,8 +1,5 @@
 package pixlepix.auracascade.item;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,6 +20,9 @@ import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by localmacaccount on 1/23/15.

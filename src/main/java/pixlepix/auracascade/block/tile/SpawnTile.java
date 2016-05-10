@@ -1,7 +1,5 @@
 package pixlepix.auracascade.block.tile;
 
-import java.lang.reflect.InvocationTargetException;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.World;
@@ -9,6 +7,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by pixlepix on 12/21/14.

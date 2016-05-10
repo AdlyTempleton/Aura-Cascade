@@ -11,10 +11,10 @@
  */
 package pixlepix.auracascade.lexicon;
 
-import java.util.List;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * Internal interface for the Lexicon Entry GUI. This contains

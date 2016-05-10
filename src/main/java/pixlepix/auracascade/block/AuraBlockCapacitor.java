@@ -1,12 +1,11 @@
 package pixlepix.auracascade.block;
 
-import java.util.ArrayList;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+
+import java.util.ArrayList;
 
 // Extend so we can use blockstates without forcing them on all the other blocks >.>
 public class AuraBlockCapacitor extends AuraBlock {

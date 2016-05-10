@@ -1,19 +1,18 @@
 package pixlepix.auracascade.block.tile;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.StringUtils;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.recipe.ProcessorRecipe;
 import pixlepix.auracascade.data.recipe.ProcessorRecipeRegistry;
 import pixlepix.auracascade.main.AuraUtil;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/21/14.

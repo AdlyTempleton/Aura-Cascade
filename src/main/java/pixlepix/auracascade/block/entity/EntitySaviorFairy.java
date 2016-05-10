@@ -1,12 +1,12 @@
 package pixlepix.auracascade.block.entity;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/14/14.

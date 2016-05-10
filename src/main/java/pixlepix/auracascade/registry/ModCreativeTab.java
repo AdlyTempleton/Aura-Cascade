@@ -1,8 +1,5 @@
 package pixlepix.auracascade.registry;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -10,6 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.main.ConstantMod;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ModCreativeTab extends CreativeTabs {

@@ -1,13 +1,13 @@
 package pixlepix.auracascade.block.entity;
 
-import java.util.List;
-
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
+
+import java.util.List;
 
 /**
  * Created by pixlepix on 12/16/14.

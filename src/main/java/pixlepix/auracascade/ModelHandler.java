@@ -1,10 +1,6 @@
 package pixlepix.auracascade;
 
-import java.util.Locale;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableSet;
-
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -12,60 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import pixlepix.auracascade.block.AuraBlock;
-import pixlepix.auracascade.block.AuraBlockCapacitor;
-import pixlepix.auracascade.block.BlockBookshelfCoordinator;
-import pixlepix.auracascade.block.BlockExplosionContainer;
-import pixlepix.auracascade.block.BlockMagicRoad;
-import pixlepix.auracascade.block.BlockMonitor;
-import pixlepix.auracascade.block.BlockStorageBookshelf;
-import pixlepix.auracascade.block.BlockTrampoline;
-import pixlepix.auracascade.block.ConsumerBlock;
-import pixlepix.auracascade.block.FairyTorch;
+import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.data.EnumAura;
-import pixlepix.auracascade.item.AngelsteelToolHelper;
-import pixlepix.auracascade.item.ItemAngelJump;
-import pixlepix.auracascade.item.ItemAngelStep;
-import pixlepix.auracascade.item.ItemAngelsteelAxe;
-import pixlepix.auracascade.item.ItemAngelsteelIngot;
-import pixlepix.auracascade.item.ItemAngelsteelPickaxe;
-import pixlepix.auracascade.item.ItemAngelsteelShovel;
-import pixlepix.auracascade.item.ItemAngelsteelSword;
-import pixlepix.auracascade.item.ItemAuraCrystal;
-import pixlepix.auracascade.item.ItemBlackHole;
-import pixlepix.auracascade.item.ItemBlueAmulet;
-import pixlepix.auracascade.item.ItemComboSword;
-import pixlepix.auracascade.item.ItemExplosionRing;
-import pixlepix.auracascade.item.ItemFairyCharm;
-import pixlepix.auracascade.item.ItemFairyRing;
-import pixlepix.auracascade.item.ItemFoodAmulet;
-import pixlepix.auracascade.item.ItemGreenAmulet;
-import pixlepix.auracascade.item.ItemLexicon;
-import pixlepix.auracascade.item.ItemMaterial;
-import pixlepix.auracascade.item.ItemMirror;
-import pixlepix.auracascade.item.ItemOrangeAmulet;
-import pixlepix.auracascade.item.ItemPrismaticWand;
-import pixlepix.auracascade.item.ItemPurpleAmulet;
-import pixlepix.auracascade.item.ItemRedAmulet;
-import pixlepix.auracascade.item.ItemRedHole;
-import pixlepix.auracascade.item.ItemStorageBook;
-import pixlepix.auracascade.item.ItemThiefSword;
-import pixlepix.auracascade.item.ItemTransmutingSword;
-import pixlepix.auracascade.item.ItemYellowAmulet;
-import pixlepix.auracascade.item.books.BasicStorageBook;
-import pixlepix.auracascade.item.books.DenseStorageBook;
-import pixlepix.auracascade.item.books.ExtremelyDenseStorageBook;
-import pixlepix.auracascade.item.books.ExtremelyLightStorageBook;
-import pixlepix.auracascade.item.books.FarmingStorageBook;
-import pixlepix.auracascade.item.books.LightStorageBook;
-import pixlepix.auracascade.item.books.MineralStorageBook;
-import pixlepix.auracascade.item.books.MobStorageBook;
-import pixlepix.auracascade.item.books.ModStorageBook;
-import pixlepix.auracascade.item.books.SuperDenseStorageBook;
-import pixlepix.auracascade.item.books.SuperLightStorageBook;
-import pixlepix.auracascade.item.books.VeryDenseStorageBook;
-import pixlepix.auracascade.item.books.VeryLightStorageBook;
+import pixlepix.auracascade.item.*;
+import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.registry.BlockRegistry;
+
+import java.util.Locale;
+import java.util.Set;
 
 public final class ModelHandler {
 

@@ -1,7 +1,5 @@
 package pixlepix.auracascade;
 
-import java.util.ArrayList;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,14 +10,12 @@ import pixlepix.auracascade.block.AuraBlock;
 import pixlepix.auracascade.block.ConsumerBlock;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.Quest;
-import pixlepix.auracascade.item.ItemAngelsteelIngot;
-import pixlepix.auracascade.item.ItemAuraCrystal;
-import pixlepix.auracascade.item.ItemFairyCharm;
-import pixlepix.auracascade.item.ItemFairyRing;
-import pixlepix.auracascade.item.ItemMaterial;
+import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
+
+import java.util.ArrayList;
 
 /**
  * Created by localmacaccount on 5/31/15.

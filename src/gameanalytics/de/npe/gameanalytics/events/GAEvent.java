@@ -5,7 +5,6 @@ package de.npe.gameanalytics.events;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-
 import de.npe.gameanalytics.Analytics;
 import de.npe.gameanalytics.Analytics.KeyPair;
 
