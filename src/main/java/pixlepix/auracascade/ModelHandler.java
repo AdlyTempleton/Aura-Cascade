@@ -120,9 +120,8 @@ public final class ModelHandler {
         }
 
         for (Item i : BlockRegistry.getItemFromClass(ItemAngelsteelSword.class)) {
-           // ModelLoader.addVariantName(i, "aura:angel_sword", "aura:angel_swordBlue", "aura:angel_swordGreen",
-           //         "aura:angel_swordOrange", "aura:angel_swordRed", "aura:angel_swordViolet", "aura:angel_swordYellow");
-            ModelLoader.registerItemVariants(i, new ResourceLocation("Aura Swords Filler name"));
+            ModelLoader.registerItemVariants(i, new ResourceLocation("aura:angel_sword"), new ResourceLocation(("aura:angel_sword")),  new ResourceLocation("aura:angel_swordGreen"),  new ResourceLocation("aura:angel_swordOrange")
+                    , new ResourceLocation("aura:angel_swordRed"), new ResourceLocation("aura:angel_swordViolet"), new ResourceLocation("aura:angel_swordYellow"));
             ModelLoader.setCustomMeshDefinition(i, new ItemMeshDefinition() {
                 @Override
                 public ModelResourceLocation getModelLocation(ItemStack stack) {

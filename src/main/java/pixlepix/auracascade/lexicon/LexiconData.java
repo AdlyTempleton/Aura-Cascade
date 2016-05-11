@@ -50,7 +50,9 @@ public final class LexiconData {
     public static void init() {
         //Add categories
         LexiconCategory categoryQuest = null;
-        if (Config.questline) {
+        //TODO bring this back
+        //if (Config.questline)
+         if(false){
             categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.diamond_sword));
             CategoryManager.addCategory(categoryQuest);
         }
@@ -76,7 +78,8 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryEnchants);
 
         //Procedurally generate quest entries
-        if (Config.questline) {
+        //TODO questline bring back
+        if (false) {
             for (Quest quest : QuestManager.quests) {
                 int id = quest.id;
                 new LexiconEntryQuest((id > 9 ? "" : "0") + id + "quest", categoryQuest, quest).setLexiconPages(new PageText("Desc"), new PageQuest(quest));
