@@ -1,5 +1,4 @@
 package pixlepix.auracascade;
-import pixlepix.auracascade.main.Config;
 
 /**
  * Created by pixlepix on 8/6/15.

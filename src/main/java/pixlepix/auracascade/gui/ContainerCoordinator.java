@@ -111,7 +111,7 @@ public class ContainerCoordinator extends Container {
 	public void scrollTo(float scroll, String filter) {
         if (!tileEntity.getWorld().isRemote) {
         	BlockPos pos = tileEntity.getPos();
-            tileEntity.getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+            tileEntity.markDirty();
         }
         lastFilter = filter;
 

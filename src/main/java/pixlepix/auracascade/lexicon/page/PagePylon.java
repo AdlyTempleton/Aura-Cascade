@@ -21,7 +21,6 @@ import pixlepix.auracascade.lexicon.LexiconRecipeMappings;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 import pixlepix.auracascade.registry.BlockRegistry;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 /**

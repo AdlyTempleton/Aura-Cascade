@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import pixlepix.auracascade.main.ConstantMod;
@@ -21,13 +20,9 @@ import java.util.*;
 public class BlockRegistry {
 
     public static HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe> recipeMap = new HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe>();
-    @SuppressWarnings("rawtypes")
 	private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
-    @SuppressWarnings("rawtypes")
 	private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
-    @SuppressWarnings("rawtypes")
 	private ArrayList<Class> itemClasses = new ArrayList<Class>();
-    @SuppressWarnings("rawtypes")
 	private ArrayList<Class> blockClasses = new ArrayList<Class>();
 
     public static Set<Item> getAllItems() {
@@ -151,13 +146,9 @@ public class BlockRegistry {
 
                     }
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
@@ -182,11 +173,7 @@ public class BlockRegistry {
                     }
                     itemRegistry.put(clazz, itemList);
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException  | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }

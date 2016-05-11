@@ -17,7 +17,6 @@ import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

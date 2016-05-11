@@ -6,9 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.compat.IMCManager;
-import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 

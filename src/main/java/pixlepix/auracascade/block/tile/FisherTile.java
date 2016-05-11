@@ -2,8 +2,7 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.main.AuraUtil;
+
 /**
  * Created by pixlepix on 7/7/15.
  */

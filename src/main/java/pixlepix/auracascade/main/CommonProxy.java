@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import pixlepix.auracascade.AuraAnalytics;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.AuraBlock;

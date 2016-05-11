@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.LinkedList;
 import java.util.Random;

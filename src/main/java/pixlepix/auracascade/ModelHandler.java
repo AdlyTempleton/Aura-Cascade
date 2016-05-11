@@ -103,6 +103,7 @@ public final class ModelHandler {
         Item item = BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class);
         ResourceLocation l = ForgeRegistries.ITEMS.getKey(item);
         for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
+            assert item != null;
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
     }
@@ -144,6 +145,7 @@ public final class ModelHandler {
         Item item = BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class);
         ResourceLocation l = ForgeRegistries.ITEMS.getKey(item);
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
+            assert item != null;
             ModelLoader.setCustomModelResourceLocation(item, i, new ModelResourceLocation(l, "inventory"));
         }
         ModelLoader.setCustomModelResourceLocation(item, 100, new ModelResourceLocation("aura:fairy_plain", "inventory"));

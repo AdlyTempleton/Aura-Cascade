@@ -2,9 +2,7 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.item.ItemAngelsteelIngot;
-import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 /**

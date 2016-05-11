@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.List;

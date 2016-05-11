@@ -4,10 +4,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumParticleTypes;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityMinerExplosion;
 import pixlepix.auracascade.data.OreDropManager;
-import pixlepix.auracascade.main.AuraUtil;
 
 /**
  * Created by localmacaccount on 6/4/15.

@@ -29,7 +29,7 @@ public class MultiblockPage extends PageText {
 
     @Override
     public void onOpened(IGuiLexiconEntry gui) {
-        int yOff = 0;
+        int yOff;
         if (multiblock != null) {
             ItemStack[][][] structure = multiblock;
             structureHeight = structure.length;

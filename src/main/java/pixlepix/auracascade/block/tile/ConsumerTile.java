@@ -138,7 +138,7 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
                     storedPower -= nextBoostCost;
                     nextBoostCost *= 2;
                     markDirty();
-                    worldObj.notifyBlockOfStateChange(getPos(), worldObj.getBlockState(pos).getBlock());
+                   // worldObj.notifyBlockOfStateChange(getPos(), worldObj.getBlockState(pos).getBlock());
                     worldObj.markAndNotifyBlock(this.pos, this.worldObj.getChunkFromBlockCoords(this.pos),this.blockType.getDefaultState(), this.blockType.getDefaultState(), 2);
                 }
             }

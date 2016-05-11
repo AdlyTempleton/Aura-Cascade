@@ -2,8 +2,6 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.Random;
 

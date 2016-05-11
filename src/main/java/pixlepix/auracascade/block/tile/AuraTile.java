@@ -301,10 +301,7 @@ public class AuraTile extends TileEntity implements ITickable {
         boolean isLower = pos.getY() < this.pos.getY();
 
         boolean isSame = pos.getY() == this.pos.getY();
-        if (!(worldObj.getTileEntity(pos) instanceof AuraTile)) {
-            return false;
-        }
-        return (isSame || isLower) && !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0 && !(this instanceof AuraTileBlack));
+        return worldObj.getTileEntity(pos) instanceof AuraTile && (isSame || isLower) && !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0 && !(this instanceof AuraTileBlack));
 
     }
 
@@ -312,10 +309,7 @@ public class AuraTile extends TileEntity implements ITickable {
         if (!canTransfer(pos)) {
             return false;
         }
-        if (pos.getY() != this.pos.getY() && aura == EnumAura.ORANGE_AURA) {
-            return false;
-        }
-        return !(pos.getY() == this.pos.getY() && aura == EnumAura.BLACK_AURA) && ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos(), aura);
+        return !(pos.getY() != this.pos.getY() && aura == EnumAura.ORANGE_AURA) && !(pos.getY() == this.pos.getY() && aura == EnumAura.BLACK_AURA) && ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos(), aura);
     }
 
     public boolean canReceive(BlockPos source, EnumAura aura) {

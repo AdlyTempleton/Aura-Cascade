@@ -28,7 +28,7 @@ public class EntityItemPoof extends EntityFirework.SparkFX {
 
         this.setParticleTextureIndex(160 + (7 - this.particleAge * 8 / this.particleMaxAge));
         this.xSpeed -= 0.004D;
-        this.moveEntity(this.xSpeed, this.xSpeed, this.zSpeed);
+        this.moveEntity(this.xSpeed, this.ySpeed, this.zSpeed);
 
         if (this.isCollided) {
             this.xSpeed *= 0.699999988079071D;

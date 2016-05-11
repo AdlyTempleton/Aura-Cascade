@@ -12,7 +12,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.*;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.event.EventHandler;

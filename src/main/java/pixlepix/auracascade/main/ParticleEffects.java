@@ -20,15 +20,10 @@ public class ParticleEffects {
     public static void spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ) {
         spawnParticle(particleName, posX, posY, posZ, motX, motY, motZ, 0, 0, 0);
     }
-
-    // todo 1.8.8 From RenderGlobal 1.7.10
+    
     public static void spawnParticle(String particleName, double posX, double posY, double posZ, double motX, double motY, double motZ, double r, double g, double b) {
 
         if (minecraft != null && minecraft.getRenderViewEntity() != null && minecraft.effectRenderer != null) {
-            int var14 = minecraft.gameSettings.particleSetting;
-            if (var14 == 1 && minecraft.theWorld.rand.nextInt(3) == 0) {
-                var14 = 2;
-            }
             double var15 = minecraft.getRenderViewEntity().posX - posX;
             double var17 = minecraft.getRenderViewEntity().posY - posY;
             double var19 = minecraft.getRenderViewEntity().posZ - posZ;
@@ -74,8 +69,7 @@ public class ParticleEffects {
                     ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);
                     float f = Minecraft.getMinecraft().theWorld.rand.nextFloat() * 0.5F + 0.35F;
                     entityfx.setRBGColorF((float) r, (float) g, (float) b);
-                    //TODO Particle effects overhaul
-                    EntityFX.interpPosY = -.07;
+                    entityfx.ySpeed = -.07;
                 }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);

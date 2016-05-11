@@ -23,7 +23,6 @@ import pixlepix.auracascade.lexicon.LexiconCategory;
 import pixlepix.auracascade.lexicon.LibResources;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class GuiButtonCategory extends GuiButtonLexicon {

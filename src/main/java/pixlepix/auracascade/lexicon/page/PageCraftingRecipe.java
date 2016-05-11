@@ -34,7 +34,6 @@ import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

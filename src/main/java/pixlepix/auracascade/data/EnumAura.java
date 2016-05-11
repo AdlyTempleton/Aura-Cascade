@@ -9,7 +9,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.AuraTile;
-import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.main.EnumColor;
 
 import java.util.List;

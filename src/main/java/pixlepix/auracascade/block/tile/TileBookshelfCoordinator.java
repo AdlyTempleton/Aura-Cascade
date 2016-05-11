@@ -89,9 +89,9 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
     }
 
     public boolean hasClearLineOfSight(BlockPos pos) {
-        int x = getPos().getX();
-        int y = getPos().getY();
-        int z = getPos().getZ();
+        int x;
+        int y;
+        int z;
         Vec3d originalVector = new Vec3d(pos.subtract(getPos()));
         Vec3d vec3 = originalVector.normalize();
         double f = 0;

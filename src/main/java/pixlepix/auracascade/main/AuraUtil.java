@@ -133,7 +133,6 @@ public class AuraUtil {
             }
         }
         BlockPos pos = ((TileEntity) tile).getPos();
-       // ((TileEntity) tile).getWorld().markBlockForUpdate(((TileEntity) tile).getPos());
         ((TileEntity) tile).getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         return stack;
     }

@@ -12,7 +12,6 @@ import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
-import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
 
 import java.util.ArrayList;
