@@ -26,6 +26,7 @@ public class QuestManager {
 
 
     public static void check(EntityPlayer player) {
+        /*
         for (Quest quest : quests) {
             if (!quest.hasCompleted(player) && Config.questline) {
                 if (player.inventory.hasItemStack(quest.target)) {
@@ -42,6 +43,7 @@ public class QuestManager {
                 }
             }
         }
+        */
     }
 
     public static void init() {

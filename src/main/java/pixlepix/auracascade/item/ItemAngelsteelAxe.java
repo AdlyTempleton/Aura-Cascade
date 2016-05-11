@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -28,9 +29,8 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
 
     public ItemAngelsteelAxe(Integer i) {
         //super(AngelsteelToolHelper.materials[i]);
-    	//TODO Fix AngelSteel axe, and all of them registering too.
-    	super(ToolMaterial.IRON);
-        System.out.println("I made it here");
+        super(ToolMaterial.DIAMOND);
+    	//TODO find workaround for out of bounds exception when registering tool materials past 5
         this.degree = i;
         setCreativeTab(null);
     }
@@ -38,7 +38,6 @@ public class ItemAngelsteelAxe extends ItemAxe implements ITTinkererItem, IAngel
     public ItemAngelsteelAxe() {
         this(0);
     }
-
     @Override
     public ArrayList<Object> getSpecialParameters() {
         return AngelsteelToolHelper.getDegreeList();

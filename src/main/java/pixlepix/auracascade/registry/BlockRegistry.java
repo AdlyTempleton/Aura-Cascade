@@ -146,9 +146,7 @@ public class BlockRegistry {
 
                     }
                 }
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
@@ -177,7 +175,6 @@ public class BlockRegistry {
                 e.printStackTrace();
             }
         }
-        System.out.println("Made it past item classes");
         for (ArrayList<Block> blockArrayList : blockRegistry.values()) {
             for (Block block : blockArrayList) {
                 if (((ITTinkererBlock) block).getItemBlock() != null) {

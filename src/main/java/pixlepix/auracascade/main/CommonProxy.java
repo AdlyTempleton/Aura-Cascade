@@ -63,10 +63,7 @@ public class CommonProxy {
         AngelsteelToolHelper.initMaterials();
         registry = new BlockRegistry();
         registry.preInit();
-        System.out.println("I mate it past Registry.preInit()");
         EnchantEventHandler.init();
-
-        System.out.println("Made it past enchant handler");
         networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ConstantMod.modId);
         networkWrapper.registerMessage(PacketBurst.class, PacketBurst.class, 0, Side.CLIENT);
 
@@ -80,7 +77,6 @@ public class CommonProxy {
         if (Config.villageGeneration) {
             VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
         }
-        System.out.println("Made it past village gen");
         MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "aura:auraHut");
     }
 
