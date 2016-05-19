@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class BlockMagicRoad extends Block implements ITTinkererBlock {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0F, 0F, 0F, 1F, .8F, 1F);
     public BlockMagicRoad() {
-        super(Material.rock);
+        super(Material.ROCK);
         setHardness(2F);
         setLightLevel(1F);
     }
@@ -78,7 +78,7 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this, 32), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.stonebrick));
+        return new CraftingBenchRecipe(new ItemStack(this, 32), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.STONEBRICK));
     }
 
     @Override

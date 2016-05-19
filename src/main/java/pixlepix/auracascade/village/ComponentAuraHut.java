@@ -49,23 +49,23 @@ public class ComponentAuraHut extends StructureVillagePieces.WoodHut {
         this.fillWithBlocks(worldIn, structureBoundingBox, 1, 0, 1, 2, 0, 3, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
 
 
-        this.fillWithBlocks(worldIn, structureBoundingBox, 1, 5, 1, 2, 5, 3, Blocks.sandstone.getDefaultState(), Blocks.sandstone.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 1, 5, 1, 2, 5, 3, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
 
 
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 1, 4, 0, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 2, 4, 0, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 1, 4, 4, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 2, 4, 4, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 0, 4, 1, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 0, 4, 2, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 0, 4, 3, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 3, 4, 1, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 3, 4, 2, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.sandstone.getDefaultState(), 3, 4, 3, structureBoundingBox);
-        this.fillWithBlocks(worldIn, structureBoundingBox, 0, 1, 0, 0, 3, 0, Blocks.sandstone.getDefaultState(), Blocks.sandstone.getDefaultState(), false);
-        this.fillWithBlocks(worldIn, structureBoundingBox, 3, 1, 0, 3, 3, 0, Blocks.sandstone.getDefaultState(), Blocks.sandstone.getDefaultState(), false);
-        this.fillWithBlocks(worldIn, structureBoundingBox, 0, 1, 4, 0, 3, 4, Blocks.sandstone.getDefaultState(), Blocks.sandstone.getDefaultState(), false);
-        this.fillWithBlocks(worldIn, structureBoundingBox, 3, 1, 4, 3, 3, 4, Blocks.sandstone.getDefaultState(), Blocks.sandstone.getDefaultState(), false);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 1, 4, 0, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 2, 4, 0, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 1, 4, 4, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 2, 4, 4, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 0, 4, 1, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 0, 4, 2, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 0, 4, 3, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 3, 4, 1, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 3, 4, 2, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.SANDSTONE.getDefaultState(), 3, 4, 3, structureBoundingBox);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 0, 1, 0, 0, 3, 0, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 3, 1, 0, 3, 3, 0, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 0, 1, 4, 0, 3, 4, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 3, 1, 4, 3, 3, 4, Blocks.SANDSTONE.getDefaultState(), Blocks.SANDSTONE.getDefaultState(), false);
         this.fillWithBlocks(worldIn, structureBoundingBox, 0, 1, 1, 0, 3, 3, Blocks.PLANKS.getDefaultState(), Blocks.PLANKS.getDefaultState(), false);
         this.fillWithBlocks(worldIn, structureBoundingBox, 3, 1, 1, 3, 3, 3, Blocks.PLANKS.getDefaultState(), Blocks.PLANKS.getDefaultState(), false);
         this.fillWithBlocks(worldIn, structureBoundingBox, 1, 1, 0, 2, 3, 0, Blocks.PLANKS.getDefaultState(), Blocks.PLANKS.getDefaultState(), false);

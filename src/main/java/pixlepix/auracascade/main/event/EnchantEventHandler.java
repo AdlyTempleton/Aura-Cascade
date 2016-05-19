@@ -46,7 +46,7 @@ public class EnchantEventHandler {
 
     static Method dropCommon;
     static Method dropRare;
-    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.COAL_ORE, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.LIT_REDSTONE_ORE, Blocks.quartz_ore};
+    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.lapis_ore, Blocks.IRON_ORE, Blocks.gold_ore, Blocks.COAL_ORE, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.LIT_REDSTONE_ORE, Blocks.quartz_ore};
 
     public static void init() {
     	//TODO FIX THESE. FUCK REFLECTION
@@ -338,7 +338,7 @@ public class EnchantEventHandler {
 
                 int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
 
-                if (stone > 0 && Blocks.stone == block) {
+                if (stone > 0 && Blocks.STONE == block) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, stone)));
                 }
 

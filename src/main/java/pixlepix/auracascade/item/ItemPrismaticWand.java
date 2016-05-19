@@ -294,7 +294,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.blaze_rod));
+        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.BLAZE_ROD));
     }
 
     @Override

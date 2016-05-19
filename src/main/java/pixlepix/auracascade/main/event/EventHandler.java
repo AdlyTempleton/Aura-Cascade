@@ -115,7 +115,7 @@ public class EventHandler {
     //Amulet of the shattered stone
     @SubscribeEvent
     public void onExplode(ExplosionEvent.Detonate event) {
-        List<Block> affectedBlocks = Arrays.asList(Blocks.grass, Blocks.sandstone, Blocks.stone, Blocks.sand, Blocks.DIRT, Blocks.COBBLESTONE, Blocks.gravel);
+        List<Block> affectedBlocks = Arrays.asList(Blocks.grass, Blocks.SANDSTONE, Blocks.STONE, Blocks.sand, Blocks.DIRT, Blocks.COBBLESTONE, Blocks.gravel);
         if (!event.getWorld().isRemote) {
             Explosion explosion = event.getExplosion();
             AxisAlignedBB axisAlignedBB = new AxisAlignedBB(explosion.getPosition().xCoord - 3, explosion.getPosition().yCoord - 3, explosion.getPosition().zCoord - 3, explosion.getPosition().xCoord + 3, explosion.getPosition().yCoord + 3, explosion.getPosition().zCoord + 3);

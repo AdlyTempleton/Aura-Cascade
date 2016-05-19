@@ -15,7 +15,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
  */
 public class MobStorageBook extends ItemStorageBook {
     public Block[] blocks = new Block[]{};
-    public Item[] items = new Item[]{Items.bone, Items.ARROW, Items.blaze_rod, Items.blaze_powder, Items.ender_eye, Items.ender_pearl, Items.fermented_spider_eye, Items.spider_eye, Items.spawn_egg, Items.ghast_tear, Items.gunpowder, Items.rotten_flesh, Items.string, Items.slime_ball, Items.nether_star, Items.bow};
+    public Item[] items = new Item[]{Items.bone, Items.ARROW, Items.BLAZE_ROD, Items.BLAZE_POWDER, Items.ender_eye, Items.ender_pearl, Items.fermented_spider_eye, Items.spider_eye, Items.spawn_egg, Items.ghast_tear, Items.gunpowder, Items.rotten_flesh, Items.string, Items.SLIME_BALL, Items.nether_star, Items.bow};
     public String[] ores = new String[]{};
 
     @Override

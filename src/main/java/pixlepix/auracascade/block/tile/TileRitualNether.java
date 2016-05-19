@@ -107,7 +107,7 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
     }
 
     public Block getMappedBlock(Block b) {
-        if (b == Blocks.stone) {
+        if (b == Blocks.STONE) {
             return Blocks.netherrack;
         }
         if (b == Blocks.grass || b == Blocks.DIRT) {

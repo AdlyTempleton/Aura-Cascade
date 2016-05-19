@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class BlockTrampoline extends Block implements ITTinkererBlock {
 	private static final AxisAlignedBB AABB = new AxisAlignedBB(0F, 0F, 0F, 1F, .8F, 1F);
     public BlockTrampoline() {
-        super(Material.cloth);
+        super(Material.CLOTH);
         setLightLevel(1F);
         setHardness(2F);
     }
@@ -74,7 +74,7 @@ public class BlockTrampoline extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " S ", "SIS", " S ", 'I', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'S', new ItemStack(Items.slime_ball));
+        return new CraftingBenchRecipe(new ItemStack(this), " S ", "SIS", " S ", 'I', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'S', new ItemStack(Items.SLIME_BALL));
     }
 
     @Override

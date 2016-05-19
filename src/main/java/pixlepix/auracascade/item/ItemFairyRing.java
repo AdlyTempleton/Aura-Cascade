@@ -132,7 +132,7 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
         return new PylonRecipe(new ItemStack(this),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.BLUE_AURA, 50000), new ItemStack(Blocks.DIAMOND_block)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.iron_block)),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.IRON_BLOCK)),
 
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 50000), new ItemStack(Blocks.GOLD_BLOCK)),
 

@@ -15,7 +15,7 @@ public class TileRitualEnd extends TileRitualNether {
 
     @Override
     public Block getMappedBlock(Block b) {
-        if (b == Blocks.stone) {
+        if (b == Blocks.STONE) {
             return Blocks.END_STONE;
         }
         if (b == Blocks.grass || b == Blocks.DIRT) {

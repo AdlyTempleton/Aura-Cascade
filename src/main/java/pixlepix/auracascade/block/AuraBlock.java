@@ -280,7 +280,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.ARROW), 'G', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpFall")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.water_bucket), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.WATER_BUCKET), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpLight")) {
             return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.GLOWSTONE), 'G', ItemMaterial.getIngot(EnumAura.YELLOW_AURA), 'P', getAuraNodePumpItemstack());

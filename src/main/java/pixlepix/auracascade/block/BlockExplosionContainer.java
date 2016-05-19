@@ -37,7 +37,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     public static final PropertyInteger DAMAGE = PropertyInteger.create("damage", 0, 15);
 
     public BlockExplosionContainer() {
-        super(Material.rock);
+        super(Material.ROCK);
         //Same as obby
         setResistance(2000F);
         type = "Dirt";
@@ -254,7 +254,7 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
             return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.COBBLESTONE));
         }
         if (type.equals("Stone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.stone));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.STONE));
         }
         if (type.equals("Obsidian")) {
             return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.OBSIDIAN));

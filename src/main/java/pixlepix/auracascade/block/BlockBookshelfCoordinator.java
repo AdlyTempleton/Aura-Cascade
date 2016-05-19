@@ -33,7 +33,7 @@ import java.util.List;
 public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock, ITileEntityProvider, IToolTip {
 
     public BlockBookshelfCoordinator() {
-        super(Material.wood);
+        super(Material.WOOD);
         setHardness(2F);
     }
 

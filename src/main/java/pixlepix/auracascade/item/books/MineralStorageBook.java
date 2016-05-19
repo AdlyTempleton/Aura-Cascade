@@ -18,8 +18,8 @@ import java.util.Arrays;
  * Created by localmacaccount on 1/27/15.
  */
 public class MineralStorageBook extends ItemStorageBook {
-    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.COAL_BLOCK, Blocks.DIAMOND_block, Blocks.GOLD_BLOCK, Blocks.iron_block, Blocks.REDSTONE_BLOCK, Blocks.COAL_ORE, Blocks.DIAMOND_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.REDSTONE_ore};
-    public Item[] items = new Item[]{Items.quartz, Items.DYE, Items.DIAMOND, Items.GOLD_INGOT, Items.IRON_INGOT, Items.coal, Items.REDSTONE, Items.emerald};
+    public Block[] blocks = new Block[]{Blocks.EMERALD_BLOCK, Blocks.LAPIS_BLOCK, Blocks.COAL_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.GOLD_BLOCK, Blocks.IRON_BLOCK, Blocks.REDSTONE_BLOCK, Blocks.COAL_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.GOLD_ORE, Blocks.IRON_ORE, Blocks.LAPIS_BLOCK, Blocks.QUARTZ_ORE, Blocks.QUARTZ_BLOCK, Blocks.REDSTONE_ORE};
+    public Item[] items = new Item[]{Items.QUARTZ, Items.DYE, Items.DIAMOND, Items.GOLD_INGOT, Items.IRON_INGOT, Items.COAL, Items.REDSTONE, Items.EMERALD};
     public String[] ores = new String[]{"ore", "ingot", "dust"};
 
     @Override

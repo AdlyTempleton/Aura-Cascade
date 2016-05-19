@@ -57,7 +57,7 @@ public final class LexiconData {
             CategoryManager.addCategory(categoryQuest);
         }
 
-        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
+        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.WOODen_pickaxe));
         CategoryManager.addCategory(categoryWalkthrough);
 
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
@@ -110,7 +110,7 @@ public final class LexiconData {
                 new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
                 new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.LEATHER))),
-                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.blaze_powder, 20))),
+                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.BLAZE_POWDER, 20))),
                 new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.SADDLE, 1))),
                 new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
                 new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ARROW, 8))),
