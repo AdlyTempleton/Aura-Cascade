@@ -16,12 +16,12 @@ public class EntityBuffFairy extends EntityFairy {
     public EntityBuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
-                new PotionEffect(MobEffects.regeneration, 2400),
-                new PotionEffect(MobEffects.resistance, 2400),
-                new PotionEffect(MobEffects.damageBoost, 2400),
-                new PotionEffect(MobEffects.absorption, 2400),
-                new PotionEffect(MobEffects.jump, 2400),
-                new PotionEffect(MobEffects.moveSpeed, 2400),
+                new PotionEffect(MobEffects.REGENERATION, 2400),
+                new PotionEffect(MobEffects.RESISTANCE, 2400),
+                new PotionEffect(MobEffects.STRENGTH, 2400),
+                new PotionEffect(MobEffects.ABSORPTION, 2400),
+                new PotionEffect(MobEffects.JUMP_BOOST, 2400),
+                new PotionEffect(MobEffects.SPEED, 2400),
                 };
     }
 

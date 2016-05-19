@@ -23,7 +23,7 @@ import java.util.ArrayList;
  */
 public class BlockMonitor extends Block implements ITTinkererBlock {
     public BlockMonitor() {
-        super(Material.redstoneLight);
+        super(Material.REDSTONE_LIGHT);
         setHardness(3);
         setHarvestLevel("pickaxe", 2);
     }
@@ -94,7 +94,7 @@ public class BlockMonitor extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.redstone), 'A', AuraBlock.getAuraNodeItemstack());
+        return new CraftingBenchRecipe(new ItemStack(this), "RRR", "RAR", "RRR", 'R', new ItemStack(Items.REDSTONE), 'A', AuraBlock.getAuraNodeItemstack());
     }
 
     @Override

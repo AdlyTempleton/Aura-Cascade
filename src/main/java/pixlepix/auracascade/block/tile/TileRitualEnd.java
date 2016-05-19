@@ -16,19 +16,19 @@ public class TileRitualEnd extends TileRitualNether {
     @Override
     public Block getMappedBlock(Block b) {
         if (b == Blocks.stone) {
-            return Blocks.end_stone;
+            return Blocks.END_STONE;
         }
-        if (b == Blocks.grass || b == Blocks.dirt) {
-            return Blocks.end_stone;
+        if (b == Blocks.grass || b == Blocks.DIRT) {
+            return Blocks.END_STONE;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.leaves || b == Blocks.leaves2) {
-            return Blocks.obsidian;
+        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+            return Blocks.OBSIDIAN;
         }
         if (b == Blocks.tallgrass) {
             return Blocks.air;
         }
         if (b == Blocks.gravel || b == Blocks.sand) {
-            return Blocks.end_stone;
+            return Blocks.END_STONE;
         }
         if ((b == Blocks.water || b == Blocks.flowing_water)) {
             if (FluidRegistry.isFluidRegistered("ender")) {

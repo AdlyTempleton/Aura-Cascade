@@ -119,7 +119,7 @@ public class ItemMirror extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " G ", "GIG", " G ", 'G', new ItemStack(Blocks.glass), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), " G ", "GIG", " G ", 'G', new ItemStack(Blocks.GLASS), 'I', ItemMaterial.getIngot(EnumAura.RED_AURA));
     }
 
     @Override

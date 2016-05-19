@@ -18,7 +18,7 @@ import java.util.Arrays;
  * Created by localmacaccount on 1/27/15.
  */
 public class MineralStorageBook extends ItemStorageBook {
-    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.coal_block, Blocks.DIAMOND_block, Blocks.gold_block, Blocks.iron_block, Blocks.REDSTONE_BLOCK, Blocks.coal_ore, Blocks.DIAMOND_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.REDSTONE_ore};
+    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.COAL_BLOCK, Blocks.DIAMOND_block, Blocks.GOLD_BLOCK, Blocks.iron_block, Blocks.REDSTONE_BLOCK, Blocks.COAL_ORE, Blocks.DIAMOND_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.REDSTONE_ore};
     public Item[] items = new Item[]{Items.quartz, Items.DYE, Items.DIAMOND, Items.GOLD_INGOT, Items.IRON_INGOT, Items.coal, Items.REDSTONE, Items.emerald};
     public String[] ores = new String[]{"ore", "ingot", "dust"};
 

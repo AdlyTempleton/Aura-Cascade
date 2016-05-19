@@ -28,7 +28,7 @@ public class StorageItemStack {
     }
 
     public static StorageItemStack readFromNBT(NBTTagCompound compound) {
-        Item item = Item.itemRegistry.getObject(new ResourceLocation(compound.getString("item")));
+        Item item = Item.REGISTRY.getObject(new ResourceLocation(compound.getString("item")));
         int stackSize = compound.getInteger("stackSize");
         int damage = compound.getInteger("damage");
         compound = compound.getCompoundTag("compound");
@@ -37,7 +37,7 @@ public class StorageItemStack {
 
     public NBTTagCompound writeToNBT() {
         NBTTagCompound result = new NBTTagCompound();
-        result.setString("item", Item.itemRegistry.getNameForObject(item).toString());
+        result.setString("item", Item.REGISTRY.getNameForObject(item).toString());
         result.setInteger("stackSize", stackSize);
         result.setInteger("damage", damage);
         result.setTag("compound", compound);

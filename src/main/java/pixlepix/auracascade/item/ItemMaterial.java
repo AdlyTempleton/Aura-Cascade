@@ -114,7 +114,7 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         if (materialIndex == 0) {
             ThaumicTinkererRecipeMulti multi = new ThaumicTinkererRecipeMulti();
             for (int i : aura.dyes) {
-                multi.addRecipe(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Items.iron_ingot), new ItemStack(Blocks.wool, 1, i)));
+                multi.addRecipe(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Items.IRON_INGOT), new ItemStack(Blocks.WOOL, 1, i)));
             }
             return multi;
         }

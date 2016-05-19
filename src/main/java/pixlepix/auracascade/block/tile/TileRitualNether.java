@@ -110,11 +110,11 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
         if (b == Blocks.stone) {
             return Blocks.netherrack;
         }
-        if (b == Blocks.grass || b == Blocks.dirt) {
+        if (b == Blocks.grass || b == Blocks.DIRT) {
             return new Random().nextInt(3) == 0 ? Blocks.soul_sand : Blocks.netherrack;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.leaves || b == Blocks.leaves2) {
-            return Blocks.glowstone;
+        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+            return Blocks.GLOWSTONE;
         }
         if (b == Blocks.tallgrass) {
             return Blocks.nether_wart;

@@ -36,7 +36,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
         if (pumpPower == 0 && (!hasSearched || worldObj.getTotalWorldTime() % 1200 == 0)) {
             for (EnumFacing direction : EnumFacing.VALUES) {
                 BlockPos pos = getPos().offset(direction);
-                if (consumeLightSource(pos, Blocks.glowstone)) {
+                if (consumeLightSource(pos, Blocks.GLOWSTONE)) {
 
                     addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
                     break;

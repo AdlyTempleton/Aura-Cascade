@@ -46,7 +46,7 @@ public class EnchantEventHandler {
 
     static Method dropCommon;
     static Method dropRare;
-    Block[] ores = new Block[]{Blocks.redstone_ore, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.lit_redstone_ore, Blocks.quartz_ore};
+    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.lapis_ore, Blocks.iron_ore, Blocks.gold_ore, Blocks.COAL_ORE, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.LIT_REDSTONE_ORE, Blocks.quartz_ore};
 
     public static void init() {
     	//TODO FIX THESE. FUCK REFLECTION
@@ -239,7 +239,7 @@ public class EnchantEventHandler {
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.getWorld().isRemote) {
             Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-            if (block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
+            if (block == Blocks.LOG || block == Blocks.log2 || containsOredict(block, "log")) {
                 ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
                 ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
                 toSearch.add(event.getPos());
@@ -262,7 +262,7 @@ public class EnchantEventHandler {
         int harvester = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.YELLOW_AURA) * 25;
         if (harvester > 0 && !event.getWorld().isRemote) {
             IBlockState state = event.getWorld().getBlockState(event.getPos());
-            if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.grass) {
+            if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.GRASS) {
                 ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
                 ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
                 toSearch.add(event.getPos());
@@ -343,12 +343,12 @@ public class EnchantEventHandler {
                 }
 
                 int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
-                if (logSpeed > 0 && block == Blocks.log || block == Blocks.log2 || containsOredict(block, "log")) {
+                if (logSpeed > 0 && block == Blocks.log || block == Blocks.LOG2 || containsOredict(block, "log")) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, logSpeed)));
                 }
 
                 int digSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
-                if (block == Blocks.grass || block == Blocks.dirt || block == Blocks.gravel || block == Blocks.sand) {
+                if (block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.GRAVEL || block == Blocks.SAND) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, digSpeed)));
 
                 }

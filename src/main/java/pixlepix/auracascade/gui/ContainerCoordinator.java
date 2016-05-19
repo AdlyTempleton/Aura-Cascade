@@ -220,7 +220,7 @@ public class ContainerCoordinator extends Container {
     }
 
     @Override
-    public ItemStack func_184996_a(int slot, int clickedButton, ClickType clickTypeIn, EntityPlayer player) {
+    public ItemStack slotClick(int slot, int clickedButton, ClickType clickTypeIn, EntityPlayer player) {
         ItemStack itemstack = null;
         int mode = this.dragMode;
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {

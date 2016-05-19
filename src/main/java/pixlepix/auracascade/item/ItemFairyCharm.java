@@ -184,15 +184,15 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
                 new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.potionitem, 1, 8257), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 4), " X ", "XCX", " X ", 'X', new ItemStack(Items.fishing_rod), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 5), " X ", "XCX", " X ", 'X', new ItemStack(Items.snowball), 'C', new ItemStack(this)),
-                new CraftingBenchRecipe(new ItemStack(this, 1, 6), " X ", "XCX", " X ", 'X', new ItemStack(Items.arrow), 'C', new ItemStack(this)),
-                new CraftingBenchRecipe(new ItemStack(this, 1, 7), " X ", "XCX", " X ", 'X', new ItemStack(Items.diamond_sword), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 6), " X ", "XCX", " X ", 'X', new ItemStack(Items.ARROW), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 7), " X ", "XCX", " X ", 'X', new ItemStack(Items.DIAMOND_SWORD), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 8), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.chest), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 9), " X ", "XCX", " X ", 'X', new ItemStack(Items.egg), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 10), " X ", "XCX", " X ", 'X', new ItemStack(Items.wheat), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 11), " X ", "XCX", " X ", 'X', new ItemStack(Items.gunpowder), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 12), " X ", "XCX", " X ", 'X', new ItemStack(Items.water_bucket), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 13), " X ", "XCX", " X ", 'X', new ItemStack(Items.golden_pickaxe), 'C', new ItemStack(this)),
-                new CraftingBenchRecipe(new ItemStack(this, 1, 14), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.wool), 'C', new ItemStack(this)),
+                new CraftingBenchRecipe(new ItemStack(this, 1, 14), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.WOOL), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 15), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.torch), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 16), " X ", "XCX", " X ", 'X', new ItemStack(Blocks.lapis_block), 'C', new ItemStack(this))
         );

@@ -110,7 +110,7 @@ public class BlockStorageBookshelf extends Block implements ITTinkererBlock, ITi
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-        result.add(new ItemStack(Blocks.bookshelf));
+        result.add(new ItemStack(Blocks.BOOKSHELF));
         return result;
     }
 

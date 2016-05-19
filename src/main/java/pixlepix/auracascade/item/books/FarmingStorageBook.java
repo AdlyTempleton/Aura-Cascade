@@ -16,8 +16,8 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
  * Created by localmacaccount on 1/27/15.
  */
 public class FarmingStorageBook extends ItemStorageBook {
-    public Block[] blocks = new Block[]{Blocks.lit_pumpkin, Blocks.cactus, Blocks.leaves, Blocks.leaves2, Blocks.log, Blocks.log2, Blocks.melon_block, Blocks.pumpkin, Blocks.cake, Blocks.red_flower, Blocks.yellow_flower, Blocks.sapling};
-    public Item[] items = new Item[]{Items.apple, Items.baked_potato, Items.beef, Items.bread, Items.cake, Items.carrot, Items.chicken, Items.cooked_beef, Items.cooked_chicken, Items.cooked_fish, Items.cooked_porkchop, Items.cookie, Items.egg, Items.feather, Items.fish, Items.leather, Items.melon_seeds, Items.melon, Items.milk_bucket, Items.nether_wart, Items.porkchop, Items.potato, Items.pumpkin_seeds, Items.reeds, Items.speckled_melon, Items.sugar, Items.wheat, Items.wheat_seeds};
+    public Block[] blocks = new Block[]{Blocks.LIT_PUMPKIN , Blocks.CACTUS, Blocks.LEAVES, Blocks.LEAVES2, Blocks.log, Blocks.log2, Blocks.melon_block, Blocks.pumpkin, Blocks.cake, Blocks.red_flower, Blocks.yellow_flower, Blocks.sapling};
+    public Item[] items = new Item[]{Items.APPLE, Items.baked_potato, Items.beef, Items.bread, Items.cake, Items.carrot, Items.chicken, Items.cooked_beef, Items.cooked_chicken, Items.cooked_fish, Items.cooked_porkchop, Items.cookie, Items.egg, Items.feather, Items.fish, Items.LEATHER, Items.melon_seeds, Items.melon, Items.milk_bucket, Items.nether_wart, Items.porkchop, Items.potato, Items.pumpkin_seeds, Items.reeds, Items.speckled_melon, Items.sugar, Items.wheat, Items.wheat_seeds};
     public String[] ores = new String[]{"seed"};
 
     @Override

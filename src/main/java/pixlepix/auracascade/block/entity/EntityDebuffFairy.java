@@ -21,12 +21,12 @@ public class EntityDebuffFairy extends EntityFairy {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
         		
-                new PotionEffect(MobEffects.poison, 200),
-                new PotionEffect(MobEffects.confusion, 200),
-                new PotionEffect(MobEffects.weakness, 200),
-                new PotionEffect(MobEffects.wither, 200),
-                new PotionEffect(MobEffects.moveSlowdown, 200),
-                new PotionEffect(MobEffects.hunger, 200)};
+                new PotionEffect(MobEffects.POISON, 200),
+                new PotionEffect(MobEffects.NAUSEA, 200),
+                new PotionEffect(MobEffects.WEAKNESS, 200),
+                new PotionEffect(MobEffects.WITHER, 200),
+                new PotionEffect(MobEffects.SLOWNESS, 200),
+                new PotionEffect(MobEffects.HUNGER, 200)};
                 
     }
 

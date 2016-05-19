@@ -44,7 +44,7 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
         if (entity instanceof EntityPlayer && !world.isRemote && world.getTotalWorldTime() % 100 == 0) {
             InventoryPlayer inv = ((EntityPlayer) entity).inventory;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
-                if (inv.getStackInSlot(i) != null && Block.getBlockFromItem(inv.getStackInSlot(i).getItem()) == Blocks.cobblestone) {
+                if (inv.getStackInSlot(i) != null && Block.getBlockFromItem(inv.getStackInSlot(i).getItem()) == Blocks.COBBLESTONE) {
                     inv.setInventorySlotContents(i, null);
                 }
             }
@@ -53,7 +53,7 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.cobblestone), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.COBBLESTONE), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
     }
 
     @Override

@@ -69,7 +69,7 @@ public class BlockBookshelfCoordinator extends Block implements ITTinkererBlock,
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "IPI", "IBI", "III", 'P', ItemMaterial.getPrism(), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'B', new ItemStack(Blocks.bookshelf));
+        return new CraftingBenchRecipe(new ItemStack(this), "IPI", "IBI", "III", 'P', ItemMaterial.getPrism(), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'B', new ItemStack(Blocks.BOOKSHELF));
     }
 
     @Override
