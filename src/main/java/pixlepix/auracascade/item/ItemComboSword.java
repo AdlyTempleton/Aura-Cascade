@@ -63,7 +63,7 @@ public class ItemComboSword extends ItemSword implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " d ", " d ", " p ", 'd', new ItemStack(Items.diamond), 'p', ItemMaterial.getGem(EnumAura.RED_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), " d ", " d ", " p ", 'd', new ItemStack(Items.DIAMOND), 'p', ItemMaterial.getGem(EnumAura.RED_AURA));
     }
 
     @Override

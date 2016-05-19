@@ -18,8 +18,8 @@ import java.util.Arrays;
  * Created by localmacaccount on 1/27/15.
  */
 public class MineralStorageBook extends ItemStorageBook {
-    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.coal_block, Blocks.diamond_block, Blocks.gold_block, Blocks.iron_block, Blocks.redstone_block, Blocks.coal_ore, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.redstone_ore};
-    public Item[] items = new Item[]{Items.quartz, Items.dye, Items.diamond, Items.gold_ingot, Items.iron_ingot, Items.coal, Items.redstone, Items.emerald};
+    public Block[] blocks = new Block[]{Blocks.emerald_block, Blocks.lapis_block, Blocks.coal_block, Blocks.DIAMOND_block, Blocks.gold_block, Blocks.iron_block, Blocks.REDSTONE_BLOCK, Blocks.coal_ore, Blocks.DIAMOND_ore, Blocks.emerald_ore, Blocks.gold_ore, Blocks.iron_ore, Blocks.lapis_ore, Blocks.quartz_ore, Blocks.quartz_block, Blocks.REDSTONE_ore};
+    public Item[] items = new Item[]{Items.quartz, Items.DYE, Items.DIAMOND, Items.GOLD_INGOT, Items.IRON_INGOT, Items.coal, Items.REDSTONE, Items.emerald};
     public String[] ores = new String[]{"ore", "ingot", "dust"};
 
     @Override
@@ -54,7 +54,7 @@ public class MineralStorageBook extends ItemStorageBook {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
-                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.iron_ingot));
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.IRON_INGOT));
     }
 
     @Override

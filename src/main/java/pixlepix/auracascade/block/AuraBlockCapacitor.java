@@ -34,6 +34,6 @@ public class AuraBlockCapacitor extends AuraBlock {
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        return Lists.<Object>newArrayList("capacitor");
+        return Lists.newArrayList("capacitor");
     }
 }
