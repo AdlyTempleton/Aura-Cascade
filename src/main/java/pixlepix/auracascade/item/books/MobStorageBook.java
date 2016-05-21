@@ -15,7 +15,7 @@ import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
  */
 public class MobStorageBook extends ItemStorageBook {
     public Block[] blocks = new Block[]{};
-    public Item[] items = new Item[]{Items.bone, Items.ARROW, Items.BLAZE_ROD, Items.BLAZE_POWDER, Items.ender_eye, Items.ender_pearl, Items.fermented_spider_eye, Items.spider_eye, Items.spawn_egg, Items.ghast_tear, Items.gunpowder, Items.rotten_flesh, Items.string, Items.SLIME_BALL, Items.nether_star, Items.bow};
+    public Item[] items = new Item[]{Items.BONE, Items.ARROW, Items.BLAZE_ROD, Items.BLAZE_POWDER, Items.ENDER_EYE, Items.ENDER_PEARL, Items.FERMENTED_SPIDER_EYE, Items.SPIDER_EYE, Items.SPAWN_EGG, Items.GHAST_TEAR, Items.GUNPOWDER, Items.ROTTEN_FLESH, Items.STRING, Items.SLIME_BALL, Items.NETHER_STAR, Items.BOW};
     public String[] ores = new String[]{};
 
     @Override
@@ -41,6 +41,6 @@ public class MobStorageBook extends ItemStorageBook {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
-                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.rotten_flesh));
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(Items.ROTTEN_FLESH));
     }
 }

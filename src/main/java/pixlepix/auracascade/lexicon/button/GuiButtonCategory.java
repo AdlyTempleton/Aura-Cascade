@@ -71,7 +71,7 @@ public class GuiButtonCategory extends GuiButtonLexicon {
 
         ItemStack itemStack;
         if (category == null) {
-            itemStack = new ItemStack(Items.book);
+            itemStack = new ItemStack(Items.BOOK);
         } else {
             itemStack = category.getIcon();
         }

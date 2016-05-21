@@ -92,7 +92,7 @@ public class PotionTile extends ConsumerTile {
     }
 
     public ItemStack getBrewResult(ItemStack stack) {
-        if (stack.getItem() == Items.potionitem) {
+        if (stack.getItem() == Items.POTIONITEM) {
             int meta = stack.getItemDamage();
             Integer[] basePotions = new Integer[]{8193, 8194, 8195, 8196, 8197, 8198, 8200, 8201, 8202, 8204, 8205, 8206};
             int newMeta = -1;
@@ -105,7 +105,7 @@ public class PotionTile extends ConsumerTile {
                 newMeta = meta ^ (1 << (new Random().nextBoolean() ? 5 : 6));
             }
             if (newMeta != -1) {
-                return new ItemStack(Items.potionitem, 1, newMeta);
+                return new ItemStack(Items.POTIONITEM, 1, newMeta);
             }
         }
         return null;

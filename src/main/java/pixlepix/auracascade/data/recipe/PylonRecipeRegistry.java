@@ -34,20 +34,20 @@ public class PylonRecipeRegistry {
         recipes.add(new PylonRecipe(new ItemStack(Items.SADDLE, 1),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.LEATHER))));
         recipes.add(new PylonRecipe(new ItemStack(Items.ENDER_EYE, 2),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.ender_pearl))));
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.ENDER_PEARL))));
         recipes.add(new PylonRecipe(new ItemStack(Items.ARROW, 8),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.feather))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.rail, 32),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.FEATHER))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.RAIL, 32),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.IRON_INGOT))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.lapis_block, 1),
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.LAPIS_BLOCK, 1),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.REDSTONE_BLOCK))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.repeater, 1),
+        recipes.add(new PylonRecipe(new ItemStack(Items.REPEATER, 1),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.REDSTONE))));
-        recipes.add(new PylonRecipe(new ItemStack(Items.comparator, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.repeater))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.soul_sand, 1),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.sand))));
-        recipes.add(new PylonRecipe(new ItemStack(Blocks.DIAMOND_block, 1),
+        recipes.add(new PylonRecipe(new ItemStack(Items.COMPARATOR, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Items.REPEATER))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.SOUL_SAND, 1),
+                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.SAND))));
+        recipes.add(new PylonRecipe(new ItemStack(Blocks.DIAMOND_BLOCK, 1),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.GOLD_BLOCK))));
         recipes.add(new PylonRecipe(new ItemStack(Blocks.GOLD_BLOCK, 1),
                 new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 10000), new ItemStack(Blocks.IRON_BLOCK))));

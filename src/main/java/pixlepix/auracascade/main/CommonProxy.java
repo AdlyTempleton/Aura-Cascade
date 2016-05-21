@@ -1,8 +1,8 @@
 package pixlepix.auracascade.main;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -124,7 +124,7 @@ public class CommonProxy {
 
         //RiM IMC for blacklisting aura nodes
         for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
-            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.blockRegistry.getNameForObject(block).toString());
+            FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.REGISTRY.getNameForObject(block).toString());
         }
         OreDropManager.init();
     }
@@ -134,11 +134,11 @@ public class CommonProxy {
     public void addBlockDestroyEffects(BlockPos tuple) {
     }
 
-    public EffectRenderer getEffectRenderer() {
+    public ParticleManager getEffectRenderer() {
         return null;
     }
 
-    public void addEffectBypassingLimit(EntityFX entityFX) {
+    public void addEffectBypassingLimit(Particle entityFX) {
 
     }
 }

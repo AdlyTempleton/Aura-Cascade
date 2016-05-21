@@ -115,7 +115,7 @@ public class EventHandler {
     //Amulet of the shattered stone
     @SubscribeEvent
     public void onExplode(ExplosionEvent.Detonate event) {
-        List<Block> affectedBlocks = Arrays.asList(Blocks.grass, Blocks.SANDSTONE, Blocks.STONE, Blocks.sand, Blocks.DIRT, Blocks.COBBLESTONE, Blocks.gravel);
+        List<Block> affectedBlocks = Arrays.asList(Blocks.GRASS, Blocks.SANDSTONE, Blocks.STONE, Blocks.SAND, Blocks.DIRT, Blocks.COBBLESTONE, Blocks.GRAVEL);
         if (!event.getWorld().isRemote) {
             Explosion explosion = event.getExplosion();
             AxisAlignedBB axisAlignedBB = new AxisAlignedBB(explosion.getPosition().xCoord - 3, explosion.getPosition().yCoord - 3, explosion.getPosition().zCoord - 3, explosion.getPosition().xCoord + 3, explosion.getPosition().yCoord + 3, explosion.getPosition().zCoord + 3);
@@ -126,7 +126,7 @@ public class EventHandler {
                     while (iterator.hasNext()) {
                         BlockPos position = iterator.next();
                         Block block = event.getWorld().getBlockState(position).getBlock();
-                        if (!affectedBlocks.contains(block) && block != Blocks.air) {
+                        if (!affectedBlocks.contains(block) && block != Blocks.AIR) {
                             iterator.remove();
                         }
                     }
@@ -375,7 +375,7 @@ public class EventHandler {
 	            //Check if item is food
 	            if (!player.worldObj.isRemote && heldStack != null && (heldStack.getItem().getItemUseAction(heldStack) == EnumAction.EAT || heldStack.getItem().getItemUseAction(heldStack) == EnumAction.DRINK)) {
 	                if (heldStack.getItem().getUnlocalizedName().equals("item.apple")) {
-	                    player.addPotionEffect(new PotionEffect(MobEffects.wither, 6 * 60 * 20, 1));
+	                    player.addPotionEffect(new PotionEffect(MobEffects.WITHER, 6 * 60 * 20, 1));
 	                } else {
 	                    String name = heldStack.getUnlocalizedName();
 	                    Random random = new Random(name.hashCode());
@@ -387,7 +387,7 @@ public class EventHandler {
 	                    } while (potion.isInstant());
 	                    int duration = Math.max(0, (int) (random.nextGaussian() * 20 * 120 + 20 * 60 * 4));
 	                    int amplified = random.nextInt(6);
-	                    PotionEffect potionEffect = new PotionEffect(potion.func_188413_j(), duration, amplified);
+	                    PotionEffect potionEffect = new PotionEffect(potion.setBeneficial(), duration, amplified);
 	                    player.addPotionEffect(potionEffect);
 	                }
 	            }

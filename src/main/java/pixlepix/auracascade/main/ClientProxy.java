@@ -3,6 +3,8 @@ package pixlepix.auracascade.main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityFX;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -71,7 +73,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public EffectRenderer getEffectRenderer() {
+    public ParticleManager getEffectRenderer() {
         return Minecraft.getMinecraft().effectRenderer;
     }
 
@@ -95,7 +97,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void addEffectBypassingLimit(EntityFX entityFX) {
+    public void addEffectBypassingLimit(Particle entityFX) {
         if (Config.overrideMaxParticleLimit) {
         	
            Minecraft.getMinecraft().effectRenderer.fxLayers[entityFX.getFXLayer()][entityFX.particleAlpha != 1 ? 0 : 1].add(entityFX);

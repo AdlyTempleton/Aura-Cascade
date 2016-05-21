@@ -96,7 +96,7 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
 
     @Override
     public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && ((world.getBlockState(pos).getBlock() != null && world.getBlockState(pos).getBlock() == AuraCascade.proxy.chiselBookshelf) || world.getBlockState(pos).getBlock() == Blocks.bookshelf)) {
+        if (!world.isRemote && ((world.getBlockState(pos).getBlock() != null && world.getBlockState(pos).getBlock() == AuraCascade.proxy.chiselBookshelf) || world.getBlockState(pos).getBlock() == Blocks.BOOKSHELF)) {
             world.setBlockState(pos, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class).getDefaultState());
             TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(pos);
             te.storedBook = stack.copy();

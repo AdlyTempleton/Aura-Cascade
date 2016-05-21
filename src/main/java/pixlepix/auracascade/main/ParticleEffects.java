@@ -27,7 +27,7 @@ public class ParticleEffects {
             double var15 = minecraft.getRenderViewEntity().posX - posX;
             double var17 = minecraft.getRenderViewEntity().posY - posY;
             double var19 = minecraft.getRenderViewEntity().posZ - posZ;
-            EntityFX entityfx = null;
+            Particle entityfx = null;
             double var22 = 16.0D;
             if (!(var15 * var15 + var17 * var17 + var19 * var19 > var22 * var22)) {
                 if (particleName.equals("fire")) {

@@ -81,7 +81,7 @@ public class ItemAngelStep extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Items.feather), 'P', ItemMaterial.getPrism());
+        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Items.FEATHER), 'P', ItemMaterial.getPrism());
     }
 
     @Override

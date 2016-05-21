@@ -46,7 +46,7 @@ public class EnchantEventHandler {
 
     static Method dropCommon;
     static Method dropRare;
-    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.lapis_ore, Blocks.IRON_ORE, Blocks.gold_ore, Blocks.COAL_ORE, Blocks.diamond_ore, Blocks.emerald_ore, Blocks.LIT_REDSTONE_ORE, Blocks.quartz_ore};
+    Block[] ores = new Block[]{Blocks.REDSTONE_ORE, Blocks.LAPIS_ORE, Blocks.IRON_ORE, Blocks.GOLD_ORE, Blocks.COAL_ORE, Blocks.DIAMOND_ORE, Blocks.EMERALD_ORE, Blocks.LIT_REDSTONE_ORE, Blocks.QUARTZ_ORE};
 
     public static void init() {
     	//TODO FIX THESE. FUCK REFLECTION
@@ -239,7 +239,7 @@ public class EnchantEventHandler {
         int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
         if (treeFeller > 0 && !event.getWorld().isRemote) {
             Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-            if (block == Blocks.LOG || block == Blocks.log2 || containsOredict(block, "log")) {
+            if (block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
                 ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
                 ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
                 toSearch.add(event.getPos());
@@ -343,7 +343,7 @@ public class EnchantEventHandler {
                 }
 
                 int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
-                if (logSpeed > 0 && block == Blocks.log || block == Blocks.LOG2 || containsOredict(block, "log")) {
+                if (logSpeed > 0 && block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, logSpeed)));
                 }
 

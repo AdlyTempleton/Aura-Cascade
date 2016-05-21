@@ -121,7 +121,7 @@ public class ItemMaterial extends Item implements ITTinkererItem {
         if (materialIndex == 1) {
             return new PylonRecipe(
                     new ItemStack(this),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.diamond)),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.DIAMOND)),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))));

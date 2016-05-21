@@ -34,17 +34,17 @@ public class ComponentAuraHut extends StructureVillagePieces.WoodHut {
     }
     @Override
     public boolean addComponentParts(World worldIn, Random random, StructureBoundingBox structureBoundingBox) {
-        if (this.field_143015_k < 0) {
-            this.field_143015_k = this.getAverageGroundLevel(worldIn, structureBoundingBox);
+        if (this.averageGroundLvl < 0) {
+            this.averageGroundLvl = this.getAverageGroundLevel(worldIn, structureBoundingBox);
 
-            if (this.field_143015_k < 0) {
+            if (this.averageGroundLvl < 0) {
                 return true;
             }
 
-            this.boundingBox.offset(0, this.field_143015_k - this.boundingBox.maxY + 6 - 1, 0);
+            this.boundingBox.offset(0, this.averageGroundLvl - this.boundingBox.maxY + 6 - 1, 0);
         }
 
-        this.fillWithBlocks(worldIn, structureBoundingBox, 1, 1, 1, 3, 5, 4, Blocks.air.getDefaultState(), Blocks.air.getDefaultState(), false);
+        this.fillWithBlocks(worldIn, structureBoundingBox, 1, 1, 1, 3, 5, 4, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
         this.fillWithBlocks(worldIn, structureBoundingBox, 0, 0, 0, 3, 0, 4, Blocks.COBBLESTONE.getDefaultState(), Blocks.COBBLESTONE.getDefaultState(), false);
         this.fillWithBlocks(worldIn, structureBoundingBox, 1, 0, 1, 2, 0, 3, Blocks.DIRT.getDefaultState(), Blocks.DIRT.getDefaultState(), false);
 
@@ -73,12 +73,12 @@ public class ComponentAuraHut extends StructureVillagePieces.WoodHut {
         this.setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 0, 2, 2, structureBoundingBox);
         this.setBlockState(worldIn, Blocks.GLASS_PANE.getDefaultState(), 3, 2, 2, structureBoundingBox);
 
-        this.setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 1, 0, structureBoundingBox);
-        this.setBlockState(worldIn, Blocks.air.getDefaultState(), 1, 2, 0, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBox);
+        this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBox);
         this.placeDoorCurrentPosition(worldIn, structureBoundingBox, random, 1, 1, 0, EnumFacing.SOUTH);
 
-        if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBox).getMaterial() == Material.air && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBox).getMaterial() != Material.air) {
-        	this.setBlockState(worldIn, Blocks.stone_stairs.getStateFromMeta(3), 1, 0, -1, structureBoundingBox);
+        if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBox).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBox).getMaterial() != Material.AIR) {
+        	this.setBlockState(worldIn, Blocks.STONE_STAIRS.getStateFromMeta(3), 1, 0, -1, structureBoundingBox);
         }
 
         for (int i = 0; i < 5; ++i) {

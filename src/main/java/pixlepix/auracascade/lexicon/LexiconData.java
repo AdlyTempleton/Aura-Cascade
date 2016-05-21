@@ -26,7 +26,6 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.lexicon.page.*;
-import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererRegisterable;
@@ -57,7 +56,7 @@ public final class LexiconData {
             CategoryManager.addCategory(categoryQuest);
         }
 
-        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.WOODen_pickaxe));
+        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.WOODEN_PICKAXE));
         CategoryManager.addCategory(categoryWalkthrough);
 
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
@@ -112,15 +111,15 @@ public final class LexiconData {
                 new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.LEATHER))),
                 new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.BLAZE_POWDER, 20))),
                 new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.SADDLE, 1))),
-                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
+                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ENDER_EYE, 2))),
                 new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ARROW, 8))),
-                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.rail, 32))),
-                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.lapis_block, 1))),
-                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.repeater))),
-                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.comparator))),
-                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
+                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.RAIL, 32))),
+                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.LAPIS_BLOCK, 1))),
+                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.REPEATER))),
+                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.COMPARATOR))),
+                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.SOUL_SAND))),
                 new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.GOLD_BLOCK))),
-                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
+                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.DIAMOND_BLOCK))));
 
 
         // BASICS ENTRIES
