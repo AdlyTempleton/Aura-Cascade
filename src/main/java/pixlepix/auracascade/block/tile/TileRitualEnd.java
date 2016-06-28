@@ -18,25 +18,25 @@ public class TileRitualEnd extends TileRitualNether {
         if (b == Blocks.STONE) {
             return Blocks.END_STONE;
         }
-        if (b == Blocks.grass || b == Blocks.DIRT) {
+        if (b == Blocks.GRASS || b == Blocks.DIRT) {
             return Blocks.END_STONE;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+        if (b == Blocks.LOG || b == Blocks.LOG2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
             return Blocks.OBSIDIAN;
         }
-        if (b == Blocks.tallgrass) {
-            return Blocks.air;
+        if (b == Blocks.TALLGRASS) {
+            return Blocks.AIR;
         }
-        if (b == Blocks.gravel || b == Blocks.sand) {
+        if (b == Blocks.GRAVEL || b == Blocks.SAND) {
             return Blocks.END_STONE;
         }
-        if ((b == Blocks.water || b == Blocks.flowing_water)) {
+        if ((b == Blocks.WATER || b == Blocks.FLOWING_WATER)) {
             if (FluidRegistry.isFluidRegistered("ender")) {
                 return FluidRegistry.getFluid("ender").getBlock();
             }
         }
-        if (b == Blocks.snow || b == Blocks.snow_layer) {
-            return Blocks.air;
+        if (b == Blocks.SNOW || b == Blocks.SNOW_LAYER) {
+            return Blocks.AIR;
         }
         return null;
     }

@@ -36,24 +36,24 @@ public class ParticleEffects {
                 // todo 1.8.8 recheck all of these
                 //Many particles are rendered here to make use of UnlimitedEffectRendererif (p_72726_1_.equals("spell"))
                 if (particleName.equals("spell")) {
-                    entityfx = new EntitySpellParticleFX.Factory().getEntityFX(-1, minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    entityfx = new ParticleSpell.Factory().getEntityFX(-1, minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                 }
                 if (particleName.equals("happyVillager")) {
-                    entityfx = new EntityAuraFX.HappyVillagerFactory().getEntityFX(-1, minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    entityfx = new ParticleSuspendedTown.HappyVillagerFactory().getEntityFX(-1, minecraft.theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                     entityfx.setParticleTextureIndex(82);
                     entityfx.setRBGColorF(1.0F, 1.0F, 1.0F);
                 }
                 if (particleName.equals("magicCrit")) {
-                    entityfx = new EntityCrit2FX.MagicFactory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    entityfx = new ParticleCrit.MagicFactory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                     entityfx.setRBGColorF(entityfx.getRedColorF() * 0.3F, entityfx.getGreenColorF() * 0.8F, entityfx.getBlueColorF());
                     entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("enchantmenttable")) {
-                    entityfx = new EntityEnchantmentTableParticleFX.EnchantmentTable().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
+                    entityfx = new ParticleEnchantmentTable.EnchantmentTable().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) motX, (float) motY, (float) motZ);
                     entityfx.nextTextureIndexX();
                 }
                 if (particleName.equals("crit")) {
-                    entityfx = new EntityCritFX.Factory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    entityfx = new ParticleCrit.Factory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
                     if (r != 0 || g != 0 || b != 0) {
                         entityfx.setRBGColorF((float) r, (float) g, (float) b);
                     }
@@ -65,11 +65,11 @@ public class ParticleEffects {
                     entityfx = new ParticleBeam(Minecraft.getMinecraft().theWorld, posX, posY, posZ, (float) r, (float) g, (float) b, true);
                 }
                 if (particleName.equals("witchMagic")) {
-                    entityfx = new EntitySpellParticleFX.WitchFactory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
-                    ((EntitySpellParticleFX) entityfx).setBaseSpellTextureIndex(144);
+                    entityfx = new ParticleSpell.WitchFactory().getEntityFX(-1, Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ);
+                    ((ParticleSpell) entityfx).setBaseSpellTextureIndex(144);
                     float f = Minecraft.getMinecraft().theWorld.rand.nextFloat() * 0.5F + 0.35F;
                     entityfx.setRBGColorF((float) r, (float) g, (float) b);
-                    entityfx.ySpeed = -.07;
+                    entityfx.motionY = -.07;
                 }
                 if (particleName.equals("fireworksSpark")) {
                     entityfx = new EntityItemPoof(Minecraft.getMinecraft().theWorld, posX, posY, posZ, motX, motY, motZ, minecraft.effectRenderer);

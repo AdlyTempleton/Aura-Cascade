@@ -41,7 +41,7 @@ public class AuraTilePumpLight extends AuraTilePumpBase {
                     addFuel(Config.pumpGlowstoneDuration, Config.pumpGlowstoneSpeed);
                     break;
                 }
-                if (consumeLightSource(pos, Blocks.torch)) {
+                if (consumeLightSource(pos, Blocks.TORCH)) {
                     addFuel(Config.pumpTorchDuration, Config.pumpTorchSpeed);
                     break;
                 }

@@ -75,7 +75,7 @@ public class ComponentAuraHut extends StructureVillagePieces.WoodHut {
 
         this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 1, 0, structureBoundingBox);
         this.setBlockState(worldIn, Blocks.AIR.getDefaultState(), 1, 2, 0, structureBoundingBox);
-        this.placeDoorCurrentPosition(worldIn, structureBoundingBox, random, 1, 1, 0, EnumFacing.SOUTH);
+        this.func_189927_a(worldIn, structureBoundingBox, random, 1, 1, 0, EnumFacing.SOUTH);
 
         if (this.getBlockStateFromPos(worldIn, 2, 0, -1, structureBoundingBox).getMaterial() == Material.AIR && this.getBlockStateFromPos(worldIn, 2, -1, -1, structureBoundingBox).getMaterial() != Material.AIR) {
         	this.setBlockState(worldIn, Blocks.STONE_STAIRS.getStateFromMeta(3), 1, 0, -1, structureBoundingBox);

@@ -49,13 +49,14 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         writeCustomNBT(nbt);
+        return nbt;
     }
 
 	@Override
-    public Packet<?> getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);
@@ -74,7 +75,7 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
                 for (EnumFacing d2 : EnumFacing.VALUES) {
                     BlockPos pos = getPos().offset(d2).offset(d1);
                     Block b2 = worldObj.getBlockState(pos).getBlock();
-                    b2.onNeighborBlockChange(worldObj, pos, worldObj.getBlockState(pos), b);
+                    b2.onNeighborChange(worldObj, pos, getPos());
                 }
             }
         }

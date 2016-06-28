@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
 
@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class TileRitualNether extends ConsumerTile implements ITickable {
     LinkedList<BlockPos> toSearch = new LinkedList<BlockPos>();
-    BiomeGenBase targetBiome;
+    Biome targetBiome;
     boolean started = false;
 
     @Override
@@ -68,19 +68,19 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
                     }
                 }
             }
-            if (worldObj.getBiomeGenForCoords(getPos().east()) == targetBiome
+            if (worldObj.getBiomeForCoordsBody(getPos().east()) == targetBiome
                     && !toSearch.contains(getPos().east())) {
                 toSearch.addLast(getPos().east());
             }
-            if (worldObj.getBiomeGenForCoords(getPos().west()) == targetBiome
+            if (worldObj.getBiomeForCoordsBody(getPos().west()) == targetBiome
                     && !toSearch.contains(getPos().west())) {
                 toSearch.addLast(getPos().west());
             }
-            if (worldObj.getBiomeGenForCoords(getPos().south()) == targetBiome
+            if (worldObj.getBiomeForCoordsBody(getPos().south()) == targetBiome
                     && !toSearch.contains(getPos().south())) {
                 toSearch.addLast(getPos().south());
             }
-            if (worldObj.getBiomeGenForCoords(getPos().north()) == targetBiome
+            if (worldObj.getBiomeForCoordsBody(getPos().north()) == targetBiome
                     && !toSearch.contains(getPos().north())) {
                 toSearch.addLast(getPos().north());
             }
@@ -96,11 +96,11 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
     @Override
     public void onUsePower() {
        // AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
-        worldObj.getBiomeGenForCoords(getPos());
-        if (!(BiomeGenBase.getIdForBiome(worldObj.getChunkFromBlockCoords(pos).getBiome(pos, worldObj.getBiomeProvider())) == getBiomeId())) {
+        worldObj.getBiomeForCoordsBody(getPos());
+        if (!(Biome.getIdForBiome(worldObj.getChunkFromBlockCoords(pos).getBiome(pos, worldObj.getBiomeProvider())) == getBiomeId())) {
             //BlockPoss are used for convenience, but y-values are irrelavent
             toSearch.addFirst(getPos());
-            targetBiome = worldObj.getBiomeGenForCoords(getPos());
+            targetBiome = worldObj.getBiomeForCoordsBody(getPos());
             started = true;
         }
  
@@ -108,25 +108,25 @@ public class TileRitualNether extends ConsumerTile implements ITickable {
 
     public Block getMappedBlock(Block b) {
         if (b == Blocks.STONE) {
-            return Blocks.netherrack;
+            return Blocks.NETHERRACK;
         }
-        if (b == Blocks.grass || b == Blocks.DIRT) {
-            return new Random().nextInt(3) == 0 ? Blocks.soul_sand : Blocks.netherrack;
+        if (b == Blocks.GRASS || b == Blocks.DIRT) {
+            return new Random().nextInt(3) == 0 ? Blocks.SOUL_SAND : Blocks.NETHERRACK;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+        if (b == Blocks.LOG || b == Blocks.LOG2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
             return Blocks.GLOWSTONE;
         }
-        if (b == Blocks.tallgrass) {
-            return Blocks.nether_wart;
+        if (b == Blocks.TALLGRASS) {
+            return Blocks.NETHER_WART;
         }
-        if (b == Blocks.gravel || b == Blocks.sand) {
-            return Blocks.soul_sand;
+        if (b == Blocks.GRAVEL || b == Blocks.SAND) {
+            return Blocks.SOUL_SAND;
         }
-        if (b == Blocks.water || b == Blocks.flowing_water) {
-            return Blocks.lava;
+        if (b == Blocks.WATER || b == Blocks.FLOWING_WATER) {
+            return Blocks.LAVA;
         }
-        if (b == Blocks.snow || b == Blocks.snow_layer) {
-            return Blocks.air;
+        if (b == Blocks.SNOW || b == Blocks.SNOW_LAYER) {
+            return Blocks.AIR;
 
         }
         return null;

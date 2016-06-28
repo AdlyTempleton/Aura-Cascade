@@ -28,9 +28,10 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     private HashMap<ItemStackMapEntry, Boolean> validCache = new HashMap<ItemStackMapEntry, Boolean>();
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         writeCustomNBT(nbt);
+        return nbt;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     }
 
 	@Override
-    public Packet<?> getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

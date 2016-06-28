@@ -72,9 +72,10 @@ public class AuraTile extends TileEntity implements ITickable {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         writeCustomNBT(nbt);
+        return nbt;
     }
 
     protected void writeCustomNBT(NBTTagCompound nbt) {
@@ -320,8 +321,10 @@ public class AuraTile extends TileEntity implements ITickable {
         return Math.pow(20 - Math.sqrt(pos.distanceSq(getPos())), 2);
     }
 
+
+
 	@Override
-    public Packet<?> getDescriptionPacket() {
+    public SPacketUpdateTileEntity getUpdatePacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
         return new SPacketUpdateTileEntity(getPos(), -999, nbt);

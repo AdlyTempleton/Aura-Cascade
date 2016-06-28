@@ -19,7 +19,7 @@ public class FisherTile extends ConsumerTile {
 
     public boolean hasWater() {
         for (BlockPos pos : BlockPos.getAllInBox(getPos().add(-1, 0, -1), getPos().add(2, 0, 2))) {
-            if (worldObj.getBlockState(pos.down()).getBlock() != Blocks.water && worldObj.getBlockState(pos.down()).getBlock() != Blocks.flowing_water) {
+            if (worldObj.getBlockState(pos.down()).getBlock() != Blocks.WATER && worldObj.getBlockState(pos.down()).getBlock() != Blocks.FLOWING_WATER) {
                 return false;
             }
         }

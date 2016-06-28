@@ -99,7 +99,7 @@ public class AuraUtil {
 
                 for (EnumFacing d2 : EnumFacing.VALUES) {
                     Block b2 = w.getBlockState(pos.offset(d1).offset(d2)).getBlock();
-                    b2.onNeighborBlockChange(w, pos.offset(d1).offset(d2), w.getBlockState(pos.offset(d1).offset(d2)), b);
+                    b2.onNeighborChange(w, pos.offset(d1).offset(d2), pos);
                 }
             }
         }
