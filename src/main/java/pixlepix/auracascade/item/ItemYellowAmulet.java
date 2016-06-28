@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -64,11 +63,6 @@ public class ItemYellowAmulet extends Item implements IBauble, ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:amuletYellow");
-    }
-
-    @Override
     public int getItemStackLimit(ItemStack stack) {
         return 1;
     }
@@ -86,6 +80,6 @@ public class ItemYellowAmulet extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.YELLOW_AURA), 'S', new ItemStack(Items.string));
+        return new CraftingBenchRecipe(new ItemStack(this), "SSS", "S S", "SSG", 'G', ItemMaterial.getGem(EnumAura.YELLOW_AURA), 'S', new ItemStack(Items.STRING));
     }
 }

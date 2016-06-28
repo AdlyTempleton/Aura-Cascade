@@ -6,9 +6,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.text.TextComponentString;
 import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 
@@ -19,7 +19,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
 
     public ItemStack itemStack;
     //Direction to center of crafting
-    public ForgeDirection direction = ForgeDirection.UNKNOWN;
+    public EnumFacing direction = null;
     public int powerReceived = 0;
     public EnumAura typeReceiving;
 
@@ -33,16 +33,16 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     @Override
     public void verifyConnections() {
         super.verifyConnections();
-        if (direction != ForgeDirection.UNKNOWN) {
-            TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+        if (direction != null) {
+            TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(direction));
             if (!(tileEntity instanceof CraftingCenterTile)) {
-                direction = ForgeDirection.UNKNOWN;
+                direction = null;
             }
         }
 
-        if (direction == ForgeDirection.UNKNOWN) {
-            for (ForgeDirection searchDir : CraftingCenterTile.pedestalRelativeLocations) {
-                TileEntity tileEntity = worldObj.getTileEntity(xCoord + searchDir.offsetX, yCoord + searchDir.offsetY, zCoord + searchDir.offsetZ);
+        if (direction == null) {
+            for (EnumFacing searchDir : CraftingCenterTile.pedestalRelativeLocations) {
+                TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(searchDir));
                 if (tileEntity instanceof CraftingCenterTile) {
                     direction = searchDir;
                     break;
@@ -52,10 +52,10 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     }
 
     public CraftingCenterTile getCenter() {
-        if (direction == ForgeDirection.UNKNOWN) {
+        if (direction == null) {
             return null;
         }
-        TileEntity te = new CoordTuple(this).add(direction).getTile(worldObj);
+        TileEntity te = worldObj.getTileEntity(getPos().offset(direction));
         return te instanceof CraftingCenterTile ? (CraftingCenterTile) te : null;
     }
 
@@ -80,14 +80,14 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
                 }
             }
         }
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        markDirty();
     }
 
     @Override
     protected void readCustomNBT(NBTTagCompound nbt) {
         super.readCustomNBT(nbt);
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
-        direction = ForgeDirection.getOrientation(nbt.getInteger("direction"));
+        direction = nbt.getInteger("direction") == -1 ? null : EnumFacing.getFront(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
         typeReceiving = nbt.getInteger("typeReceiving") == -1 ? null : EnumAura.values()[nbt.getInteger("typeReceiving")];
     }
@@ -100,7 +100,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
             itemStack.writeToNBT(compound);
             nbt.setTag("itemStack", compound);
         }
-        nbt.setInteger("direction", direction.ordinal());
+        nbt.setInteger("direction", direction == null ? -1 : direction.getIndex());
         nbt.setInteger("powerReceived", powerReceived);
         nbt.setInteger("typeReceiving", typeReceiving == null ? -1 : typeReceiving.ordinal());
     }
@@ -132,7 +132,7 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+    public ItemStack removeStackFromSlot(int p_70304_1_) {
         ItemStack stack = itemStack;
         itemStack = null;
         return stack;
@@ -144,13 +144,18 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "craftingPedestal";
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
+    public boolean hasCustomName() {
         return true;
+    }
+
+    @Override
+    public TextComponentString getDisplayName() {
+        return new TextComponentString(getName());
     }
 
     @Override
@@ -164,18 +169,38 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     }
 
     @Override
-    public void openInventory() {
+    public void openInventory(EntityPlayer player) {
 
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
 
     }
 
     @Override
     public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
         return true;
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        itemStack = null;
     }
 
 

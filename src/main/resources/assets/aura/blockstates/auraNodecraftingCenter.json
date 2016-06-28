@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_bottom_top",
+    "textures": {
+      "top": "aura:blocks/craftingCenterNode_Top",
+      "bottom": "aura:blocks/craftingCenterNode_Bottom",
+      "side": "aura:blocks/craftingCenterNode_Side"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

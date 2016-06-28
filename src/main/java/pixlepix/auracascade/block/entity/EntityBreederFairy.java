@@ -1,9 +1,9 @@
 package pixlepix.auracascade.block.entity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -21,11 +21,11 @@ public class EntityBreederFairy extends EntityFairy {
     public void onEntityUpdate() {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
-            List<EntityAnimal> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityAnimal.class, AxisAlignedBB.getBoundingBox(posX - 1, posY - 1, posZ - 1, posX + 1, posY + 1, posZ + 1));
+            List<EntityAnimal> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityAnimal.class, new AxisAlignedBB(posX - 1, posY - 1, posZ - 1, posX + 1, posY + 1, posZ + 1));
             for (EntityAnimal entity : nearbyEntities) {
                 if (!entity.isInLove() && entity.getGrowingAge() == 0) {
-                    entity.func_146082_f(player);
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
+                    entity.setInLove(player);
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(5, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
                     break;
 
                 }

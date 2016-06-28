@@ -1,12 +1,12 @@
 package pixlepix.auracascade.potions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
 
@@ -16,8 +16,8 @@ import java.util.Random;
  * Created by localmacaccount on 1/19/15.
  */
 public class PotionYellowCurse extends Potion {
-    public PotionYellowCurse(int id) {
-        super(id, true, EnumAura.YELLOW_AURA.color.getHex());
+    public PotionYellowCurse() {
+        super(true, EnumAura.YELLOW_AURA.color.getHex());
         setPotionName("Yellow Curse");
 
     }
@@ -25,8 +25,8 @@ public class PotionYellowCurse extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(Minecraft.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.YELLOW_AURA).getIconIndex(), 16, 16);
+        mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.YELLOW_AURA), x + 8, y + 8);
     }
 
     @Override
@@ -36,7 +36,6 @@ public class PotionYellowCurse extends Potion {
 
     @Override
     public void performEffect(EntityLivingBase entity, int amplifier) {
-        EntityLightningBolt entityLightningBolt = new EntityLightningBolt(entity.worldObj, entity.posX, entity.posY, entity.posZ);
-        entity.worldObj.addWeatherEffect(entityLightningBolt);
+        entity.worldObj.addWeatherEffect(new EntityLightningBolt(entity.worldObj, entity.posX, entity.posY, entity.posZ, false));
     }
 }

@@ -25,21 +25,24 @@ import java.util.concurrent.Semaphore;
  *
  */
 final class EventHandler {
-	private static final Queue<GAEvent> immediateEvents = new ArrayDeque<>(32);
+	private static boolean init = true;
+
+	private static final Queue<GAEvent> immediateEvents = new ArrayDeque<GAEvent>(32);
+	private static Thread sendImmediateThread;
+	private static ACLock immediateEvents_lock = new ACLock(true);
+	private static Semaphore sendSemaphore = new Semaphore(0);
+
+	private static ACLock getEventsForGame_lock = new ACLock(true);
+	private static ACLock getCategoryEvents_lock = new ACLock(true);
+	private static ACLock sendData_lock = new ACLock(true);
+	private static ACLock errorSend_lock = new ACLock(true);
+
 	/**
 	 * Map containing all not yet sent events.<br>
 	 * <br>
 	 * Map: KeyPair -> Map: category -> event list
 	 */
 	private static final Map<KeyPair, Map<String, List<GAEvent>>> events = new HashMap<>(8);
-	private static boolean init = true;
-	private static Thread sendImmediateThread;
-	private static ACLock immediateEvents_lock = new ACLock(true);
-	private static Semaphore sendSemaphore = new Semaphore(0);
-	private static ACLock getEventsForGame_lock = new ACLock(true);
-	private static ACLock getCategoryEvents_lock = new ACLock(true);
-	private static ACLock sendData_lock = new ACLock(true);
-	private static ACLock errorSend_lock = new ACLock(true);
 
 	private static Map<String, List<GAEvent>> getEventsForGame(KeyPair keyPair) {
 		try (ACLock acl = getEventsForGame_lock.lockAC()) {
@@ -188,12 +191,12 @@ final class EventHandler {
 	}
 
 	private static class RESTHelper {
+		private RESTHelper() {}
+
 		private static final Gson gson = new Gson();
+
 		private static final String contentType = "application/json; charset=utf-8";
 		private static final String accept = "application/json";
-
-		private RESTHelper() {
-		}
 
 		static void sendSingleEvent(GAEvent event) {
 			try {
@@ -205,8 +208,11 @@ final class EventHandler {
 
 		static void sendData(KeyPair keyPair, String category, List<GAEvent> events) {
 			String[] result = sendAndGetResponse(keyPair, category, events);
-			if (!"{\"status\":\"ok\"}".equals(result[0])) {
-				System.err.println("Failed to send analytics event data. Result of attempt: " + result[0] + " | Authentication hash used: " + result[1] + " | Data sent: " + result[2]);
+			String status = result[0];
+			// While we expect JSON here, GA does not seem to care about the requested response
+			// type all the time. That's why we check for plaintext "ok" as well.
+			if (!"{\"status\":\"ok\"}".equals(status) && !"ok".equals(status)) {
+				System.err.println("Failed to send analytics event data. Result of attempt: " + status + " | Authentication hash used: " + result[1] + " | Data sent: " + result[2]);
 			}
 		}
 
@@ -255,7 +261,7 @@ final class EventHandler {
 					}
 				}
 
-				return new String[]{responseSB.toString(), hashedAuthData, postData};
+				return new String[] { responseSB.toString(), hashedAuthData, postData };
 			} catch (Exception ex) {
 				return new String[] { ex.getMessage(), "null", "null" };
 			}

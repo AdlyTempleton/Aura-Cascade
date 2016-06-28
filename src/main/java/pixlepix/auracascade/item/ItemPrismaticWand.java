@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -9,9 +8,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import pixlepix.auracascade.main.EnumColor;
 import pixlepix.auracascade.main.ParticleEffects;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
@@ -36,54 +39,54 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
     }
 
     @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         //More specific selections
         if (!player.isSneaking() && !world.isRemote) {
-            if (stack.stackTagCompound == null) {
-                stack.stackTagCompound = new NBTTagCompound();
+            if (stack.getTagCompound() == null) {
+                stack.setTagCompound(new NBTTagCompound());
             }
 
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             if (stack.getItemDamage() == 0) {
                 if (nbt.hasKey("x1")) {
                     nbt.setInteger("x2", nbt.getInteger("x1"));
                     nbt.setInteger("y2", nbt.getInteger("y1"));
                     nbt.setInteger("z2", nbt.getInteger("z1"));
                 }
-                nbt.setInteger("x1", x);
-                nbt.setInteger("y1", y);
-                nbt.setInteger("z1", z);
-                player.addChatComponentMessage(new ChatComponentText("Position set"));
-                return true;
+                nbt.setInteger("x1", pos.getX());
+                nbt.setInteger("y1", pos.getY());
+                nbt.setInteger("z1", pos.getZ());
+                player.addChatComponentMessage(new TextComponentString("Position set"));
+                return EnumActionResult.PASS;
             }
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
         list.add(modes[stack.getItemDamage()]);
 
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand){
         int mode = stack.getItemDamage();
         if (player.isSneaking()) {
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             mode++;
             mode = mode % modes.length;
             stack.setItemDamage(mode);
-            stack.stackTagCompound = nbt;
+            stack.setTagCompound(nbt);
             if (!world.isRemote) {
-                player.addChatComponentMessage(new ChatComponentText("Switched to: " + modes[mode]));
+                player.addChatComponentMessage(new TextComponentString("Switched to: " + modes[mode]));
             }
         } else {
-            if (stack.stackTagCompound == null) {
-                stack.stackTagCompound = new NBTTagCompound();
+            if (stack.getTagCompound() == null) {
+                stack.setTagCompound(new NBTTagCompound());
             }
-            NBTTagCompound nbt = stack.stackTagCompound;
+            NBTTagCompound nbt = stack.getTagCompound();
             switch (mode) {
                 case 1:
                     if (nbt.hasKey("x1") && nbt.hasKey("x2")) {
@@ -100,12 +103,12 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         nbt.setInteger("czo", nbt.getInteger("z1") - roundToZero(player.posZ));
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Copied to clipboard"));
+                            player.addChatComponentMessage(new TextComponentString("Copied to clipboard"));
                         }
                     } else {
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Invalid selection"));
+                            player.addChatComponentMessage(new TextComponentString("Invalid selection"));
                         }
                     }
                     break;
@@ -176,22 +179,17 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                     int dy = yi - cy1;
                                     int dz = zi - cz1;
 
-                                    int oldX = cx1 + dx;
-                                    int oldY = cy1 + dy;
-                                    int oldZ = cz1 + dz;
+                                    BlockPos oldPos = new BlockPos(cx1 + dx, cy1 + dy, cz1 + dz);
+                                    BlockPos newPos = new BlockPos(x + dx + xo, y + dy + yo, z + dz + zo);
 
-                                    int newX = x + dx + xo;
-                                    int newY = y + dy + yo;
-                                    int newZ = z + dz + zo;
-
-                                    if (world.isAirBlock(newX, newY, newZ)) {
-                                        Block block = world.getBlock(oldX, oldY, oldZ);
+                                    if (world.isAirBlock(newPos)) {
+                                        Block block = world.getBlockState(oldPos).getBlock();
                                         Item item = Item.getItemFromBlock(block);
-                                        int worldDmg = world.getBlockMetadata(oldX, oldY, oldZ);
-                                        int dmg = block.getDamageValue(world, oldX, oldY, oldZ);
+                                        int worldDmg = block.getMetaFromState(world.getBlockState(oldPos));
+                                        int dmg = block.damageDropped(world.getBlockState(oldPos));
 
                                         boolean usesMetadataForPlacing = false;
-                                        ArrayList<ItemStack> drops = block.getDrops(world, oldX, oldY, oldZ, dmg, 0);
+                                        List<ItemStack> drops = block.getDrops(world, oldPos, block.getStateFromMeta(dmg), 0);
                                         if (drops.size() == 1) {
                                             ItemStack dropStack = drops.get(0);
                                             usesMetadataForPlacing = dropStack.getItem() == item && dropStack.getItemDamage() == 0 && worldDmg != 0;
@@ -199,20 +197,20 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
                                         if (player.capabilities.isCreativeMode) {
                                             if (!world.isRemote) {
-                                                world.setBlock(newX, newY, newZ, block, worldDmg, 3);
-                                                particles(newX, newY, newZ);
+                                                world.setBlockState(newPos, block.getStateFromMeta(worldDmg), 3);
+                                                particles(newPos);
                                             }
 
                                         } else if (player.inventory.hasItemStack(new ItemStack(item, 1, dmg))) {
                                             int slot = slotOfItemStack(new ItemStack(item, 1, dmg), player.inventory);
                                             if (item instanceof ItemBlock) {
                                                 if (!world.isRemote) {
-                                                    ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, x + dx + xo, y + dy + yo, z + dz + zo, 0, 0, 0, 0, dmg);
+                                                    ((ItemBlock) item).placeBlockAt(player.inventory.getStackInSlot(slot), player, world, newPos, EnumFacing.DOWN, 0, 0, 0, ((ItemBlock) item).block.getStateFromMeta(dmg));
                                                     if (usesMetadataForPlacing) {
-                                                        world.setBlockMetadataWithNotify(newX, newY, newZ, worldDmg, 3);
+                                                        world.setBlockState(newPos, world.getBlockState(newPos).getBlock().getStateFromMeta(worldDmg), 3);
                                                     }
                                                 }
-                                                particles(newX, newY, newZ);
+                                                particles(newPos);
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
@@ -227,11 +225,11 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                         } while (xi <= cx2);
 
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Successfully pasted building"));
+                            player.addChatComponentMessage(new TextComponentString("Successfully pasted building"));
                         }
                     } else {
                         if (!world.isRemote) {
-                            player.addChatComponentMessage(new ChatComponentText("Nothing copied"));
+                            player.addChatComponentMessage(new TextComponentString("Nothing copied"));
                         }
 
                     }
@@ -240,7 +238,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
             }
         }
-        return stack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, stack);
     }
 
     public int roundToZero(double d) {
@@ -248,13 +246,13 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
     }
 
-    private void particles(int bx, int by, int bz) {
-        for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
+    private void particles(BlockPos pos) {
+        for (EnumFacing direction : EnumFacing.VALUES) {
             for (int i = 0; i < 3; i++) {
                 Random random = new Random();
-                double x = bx + random.nextDouble();
-                double y = by + random.nextDouble();
-                double z = bz + random.nextDouble();
+                double x = pos.getX() + random.nextDouble();
+                double y = pos.getY() + random.nextDouble();
+                double z = pos.getZ() + random.nextDouble();
                 ParticleEffects.spawnParticle("witchMagic", x, y, z, 0, 0, 0, 0, 34, 264);
             }
         }
@@ -296,12 +294,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.blaze_rod));
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:prismaticWand");
+        return new CraftingBenchRecipe(new ItemStack(this), " P ", " I ", " I ", 'P', ItemMaterial.getPrism(), 'I', new ItemStack(Items.BLAZE_ROD));
     }
 
     @Override

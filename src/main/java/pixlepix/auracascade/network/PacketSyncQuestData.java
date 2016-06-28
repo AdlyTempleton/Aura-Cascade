@@ -1,15 +1,12 @@
 package pixlepix.auracascade.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
-import pixlepix.auracascade.QuestManager;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.data.Quest;
-import pixlepix.auracascade.data.QuestData;
 
 import java.util.ArrayList;
 
@@ -22,7 +19,7 @@ public class PacketSyncQuestData implements IMessage {
 
     public PacketSyncQuestData(EntityPlayer entityPlayer) {
         this.entityPlayer = entityPlayer;
-        this.completed = ((QuestData) entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME)).completedQuests;
+       // this.completed = ((QuestData) entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME)).completedQuests;
     }
 
     public PacketSyncQuestData() {
@@ -35,6 +32,7 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void fromBytes(ByteBuf data) {
+    	/*
         World world = DimensionManager.getWorld(data.readInt());
         if (world != null) {
             entityPlayer = (EntityPlayer) world.getEntityByID(data.readInt());
@@ -44,6 +42,7 @@ public class PacketSyncQuestData implements IMessage {
                 completed.add(QuestManager.quests.get(data.readByte()));
             }
         }
+       */
     }
 
     /**
@@ -53,13 +52,13 @@ public class PacketSyncQuestData implements IMessage {
      */
     @Override
     public void toBytes(ByteBuf data) {
-        data.writeInt(entityPlayer.worldObj.provider.dimensionId);
-        data.writeInt(entityPlayer.getEntityId());
+       // data.writeInt(entityPlayer.worldObj.provider.getDimension());
+       // data.writeInt(entityPlayer.getEntityId());
 
-        data.writeByte(completed.size());
-        for (Quest Quest : completed) {
-            data.writeByte(Quest.id);
-        }
+      //  data.writeByte(completed.size());
+       // for (Quest Quest : completed) {
+      //      data.writeByte(Quest.id);
+      //  }
     }
 
     public static class PacketSyncQuestDataHandler implements IMessageHandler<PacketSyncQuestData, IMessage> {
@@ -76,11 +75,16 @@ public class PacketSyncQuestData implements IMessage {
          * @return an optional return message
          */
         @Override
-        public IMessage onMessage(PacketSyncQuestData message, MessageContext ctx) {
-            if (message.entityPlayer != null) {
-                QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
-                data.completedQuests = message.completed;
-            }
+        public IMessage onMessage(final PacketSyncQuestData message, MessageContext ctx) {
+            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (message.entityPlayer != null) {
+                   //     QuestData data = (QuestData) message.entityPlayer.getExtendedProperties(QuestData.EXT_PROP_NAME);
+                    //    data.completedQuests = message.completed;
+                    }
+                }
+            });
             return null;
         }
     }

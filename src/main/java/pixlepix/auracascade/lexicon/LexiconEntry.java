@@ -11,7 +11,7 @@
  */
 package pixlepix.auracascade.lexicon;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.AuraCascade;
 
 import java.util.ArrayList;
@@ -78,10 +78,9 @@ public class LexiconEntry implements Comparable<LexiconEntry> {
     }
 
     public String getNameForSorting() {
-        return (priority ? 0 : 1) + StatCollector.translateToLocal(getUnlocalizedName());
+        return (priority ? 0 : 1) + I18n.translateToLocal(getUnlocalizedName());
     }
 
-    @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(LexiconEntry o) {
         return getNameForSorting().compareTo(o.getNameForSorting());

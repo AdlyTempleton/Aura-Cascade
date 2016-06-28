@@ -1,12 +1,7 @@
 package pixlepix.auracascade.block.tile;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
-import net.minecraftforge.common.FishingHooks;
-import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.main.AuraUtil;
-
-import java.util.Random;
+import net.minecraft.util.math.BlockPos;
 
 /**
  * Created by pixlepix on 7/7/15.
@@ -23,13 +18,9 @@ public class FisherTile extends ConsumerTile {
     }
 
     public boolean hasWater() {
-        for (int x = xCoord - 1; x < xCoord + 2; x++) {
-
-            for (int z = zCoord - 1; z < zCoord + 2; z++) {
-
-                if (worldObj.getBlock(x, yCoord - 1, z) != Blocks.water && worldObj.getBlock(x, yCoord - 1, z) != Blocks.flowing_water) {
-                    return false;
-                }
+        for (BlockPos pos : BlockPos.getAllInBox(getPos().add(-1, 0, -1), getPos().add(2, 0, 2))) {
+            if (worldObj.getBlockState(pos.down()).getBlock() != Blocks.water && worldObj.getBlockState(pos.down()).getBlock() != Blocks.flowing_water) {
+                return false;
             }
         }
         return true;
@@ -42,14 +33,15 @@ public class FisherTile extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerLoot", AuraUtil.formatLocation(this));
+     //   AuraCascade.analytics.eventDesign("consumerLoot", AuraUtil.formatLocation(this));
         if (hasWater()) {
-
-            EntityItem entityItem = new EntityItem(worldObj, xCoord + .5, yCoord + 1.5, zCoord + .5, FishingHooks.getRandomFishable(new Random(), new Random().nextFloat()));
-            entityItem.motionX = 0;
-            entityItem.motionY = 0;
-            entityItem.motionZ = 0;
-            worldObj.spawnEntityInWorld(entityItem);
+        	//TODO FIX fishing tile
+           // EntityItem entityItem = new EntityItem(worldObj, pos.getX() + .5, pos.getY() + 1.5, pos.getZ() + .5, worldObj.getLootTableManager().getLootTableFromLocation(new ResourceLocation("minecraft",))
+            		//OLD CODE:(new Random(), new Random().nextFloat()));
+         //   entityItem.motionX = 0;
+          //  entityItem.motionY = 0;
+        //    entityItem.motionZ = 0;
+           // worldObj.spawnEntityInWorld(entityItem);
 
         }
     }

@@ -16,14 +16,14 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.input.Mouse;
 import pixlepix.auracascade.lexicon.button.GuiButtonBackWithShift;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -43,17 +43,17 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
         this.entry = entry;
         this.parent = parent;
 
-        title = StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
+        title = I18n.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
     }
 
     public void renderToolTip(ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_) {
-        List list = p_146285_1_.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+        List<String> list = p_146285_1_.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
         for (int k = 0; k < list.size(); ++k) {
             if (k == 0) {
-                list.set(k, p_146285_1_.getRarity().rarityColor + (String) list.get(k));
+                list.set(k, p_146285_1_.getRarity().rarityColor + list.get(k));
             } else {
-                list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
+                list.set(k, TextFormatting.GRAY + list.get(k));
             }
         }
 
@@ -92,7 +92,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
 
     @Override
     String getTitle() {
-        return String.format("%s " + EnumChatFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
+        return String.format("%s " + TextFormatting.ITALIC + "(%s/%s)", title, page + 1, entry.pages.size());
     }
 
     @Override
@@ -172,7 +172,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
                 tutorial.poll();
                 positionTutorialArrow();
                 if (tutorial.isEmpty()) {
-                    mc.thePlayer.addChatMessage(new ChatComponentTranslation("aura.tutorialEnded").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                    mc.thePlayer.addChatMessage(new TextComponentString("aura.tutorialEnded"));
                     hasTutorialArrow = false;
                 }
             }
@@ -237,7 +237,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
+    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
         super.mouseClicked(par1, par2, par3);
 
         fx = par1;
@@ -246,7 +246,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
 
         if (Mouse.getEventButton() == 0)
@@ -260,7 +260,7 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         LexiconPage page = entry.pages.get(this.page);
         page.onKeyPressed(par1, par2);
 
@@ -281,21 +281,21 @@ public class GuiLexiconEntry extends GuiLexicon implements IGuiLexiconEntry, IPa
     void back() {
         if (backButton.enabled) {
             actionPerformed(backButton);
-            backButton.func_146113_a(mc.getSoundHandler());
+            backButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void nextPage() {
         if (rightButton.enabled) {
             actionPerformed(rightButton);
-            rightButton.func_146113_a(mc.getSoundHandler());
+            rightButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void prevPage() {
         if (leftButton.enabled) {
             actionPerformed(leftButton);
-            leftButton.func_146113_a(mc.getSoundHandler());
+            leftButton.playPressSound(mc.getSoundHandler());
         }
     }
 

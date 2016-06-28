@@ -8,6 +8,6 @@ import pixlepix.auracascade.main.Config;
  */
 public class AuraTilePumpFall extends AuraTilePumpBase {
     public void onFall(LivingFallEvent event) {
-        addFuel((int) (Config.pumpFallDuration * event.distance), Config.pumpFallSpeed);
+        addFuel((int) (Config.pumpFallDuration * event.getDistance()), Config.pumpFallSpeed);
     }
 }

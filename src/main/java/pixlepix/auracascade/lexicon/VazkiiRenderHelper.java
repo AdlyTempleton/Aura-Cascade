@@ -13,7 +13,10 @@ package pixlepix.auracascade.lexicon;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -52,7 +55,7 @@ public final class VazkiiRenderHelper {
             int var5 = 0;
             int var6;
             int var7;
-            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
             for (var6 = 0; var6 < tooltipData.size(); ++var6) {
                 var7 = fontRenderer.getStringWidth(tooltipData.get(var6));
                 if (var7 > var5)
@@ -75,7 +78,7 @@ public final class VazkiiRenderHelper {
             drawGradientRect(var6 - 3, var7 - 3, z, var6 + var5 + 3, var7 - 3 + 1, color, color);
             drawGradientRect(var6 - 3, var7 + var9 + 2, z, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
 
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
+            GlStateManager.disableDepth();
             for (int var13 = 0; var13 < tooltipData.size(); ++var13) {
                 String var14 = tooltipData.get(var13);
                 fontRenderer.drawStringWithShadow(var14, var6, var7, -1);
@@ -83,11 +86,11 @@ public final class VazkiiRenderHelper {
                     var7 += 2;
                 var7 += 10;
             }
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GlStateManager.enableDepth();
         }
         if (!lighting)
             net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1, 1, 1, 1);
     }
 
     public static void drawGradientRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
@@ -99,24 +102,23 @@ public final class VazkiiRenderHelper {
         float var12 = (par6 >> 16 & 255) / 255F;
         float var13 = (par6 >> 8 & 255) / 255F;
         float var14 = (par6 & 255) / 255F;
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glShadeModel(GL11.GL_SMOOTH);
-        Tessellator var15 = Tessellator.instance;
-        var15.startDrawingQuads();
-        var15.setColorRGBA_F(var8, var9, var10, var7);
-        var15.addVertex(par3, par2, z);
-        var15.addVertex(par1, par2, z);
-        var15.setColorRGBA_F(var12, var13, var14, var11);
-        var15.addVertex(par1, par4, z);
-        var15.addVertex(par3, par4, z);
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableBlend();
+        GlStateManager.disableAlpha();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.shadeModel(GL11.GL_SMOOTH);
+        Tessellator var15 = Tessellator.getInstance();
+        VertexBuffer wr = var15.getBuffer();
+        wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
+        wr.pos(par3, par2, z).color(var8, var9, var10, var7).endVertex();
+        wr.pos(par1, par2, z).color(var8, var9, var10, var7).endVertex();
+        wr.pos(par1, par4, z).color(var12, var13, var14, var11).endVertex();
+        wr.pos(par3, par4, z).color(var12, var13, var14, var11).endVertex();
         var15.draw();
-        GL11.glShadeModel(GL11.GL_FLAT);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glEnable(GL11.GL_ALPHA_TEST);
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GlStateManager.shadeModel(GL11.GL_FLAT);
+        GlStateManager.disableBlend();
+        GlStateManager.enableAlpha();
+        GlStateManager.enableTexture2D();
     }
 
     public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
@@ -124,12 +126,13 @@ public final class VazkiiRenderHelper {
     }
 
     public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6, float f, float f1) {
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(par1, par2 + par6, z, (par3) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2 + par6, z, (par3 + par5) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2, z, (par3 + par5) * f, (par4) * f1);
-        tessellator.addVertexWithUV(par1, par2, z, (par3) * f, (par4) * f1);
+        Tessellator tessellator = Tessellator.getInstance();
+        VertexBuffer wr = tessellator.getBuffer();
+        wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        wr.pos(par1, par2 + par6, z).tex((par3) * f, (par4 + par6) * f1).endVertex();
+        wr.pos(par1 + par5, par2 + par6, z).tex((par3 + par5) * f, (par4 + par6) * f1).endVertex();
+        wr.pos(par1 + par5, par2, z).tex((par3 + par5) * f, (par4) * f1).endVertex();
+        wr.pos(par1, par2, z).tex((par3) * f, (par4) * f1).endVertex();
         tessellator.draw();
     }
 

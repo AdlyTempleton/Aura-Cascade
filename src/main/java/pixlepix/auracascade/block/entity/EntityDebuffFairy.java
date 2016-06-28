@@ -1,11 +1,11 @@
 package pixlepix.auracascade.block.entity;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -20,25 +20,27 @@ public class EntityDebuffFairy extends EntityFairy {
     public EntityDebuffFairy(World p_i1582_1_) {
         super(p_i1582_1_);
         potionEffects = new PotionEffect[]{
-                new PotionEffect(Potion.poison.getId(), 200),
-                new PotionEffect(Potion.confusion.getId(), 200),
-                new PotionEffect(Potion.weakness.getId(), 200),
-                new PotionEffect(Potion.wither.getId(), 200),
-                new PotionEffect(Potion.moveSlowdown.getId(), 200),
-                new PotionEffect(Potion.hunger.getId(), 200)};
+        		
+                new PotionEffect(MobEffects.POISON, 200),
+                new PotionEffect(MobEffects.NAUSEA, 200),
+                new PotionEffect(MobEffects.WEAKNESS, 200),
+                new PotionEffect(MobEffects.WITHER, 200),
+                new PotionEffect(MobEffects.SLOWNESS, 200),
+                new PotionEffect(MobEffects.HUNGER, 200)};
+                
     }
 
     @Override
     public void onEntityUpdate() {
         super.onEntityUpdate();
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 3 == 0) {
-            List<EntityMob> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
+            List<EntityMob> nearbyEntities = worldObj.getEntitiesWithinAABB(EntityMob.class, new AxisAlignedBB(posX - 2, posY - 2, posZ - 2, posX + 2, posY + 2, posZ + 2));
             if (nearbyEntities.size() > 0) {
                 EntityMob entity = nearbyEntities.get(0);
                 for (PotionEffect potionEffect : potionEffects) {
                     entity.addPotionEffect(potionEffect);
                 }
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
+               AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(4, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
             }
         }
     }

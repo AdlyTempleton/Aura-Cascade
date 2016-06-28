@@ -2,11 +2,11 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
-import pixlepix.auracascade.main.AuraUtil;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -14,8 +14,8 @@ import java.util.Random;
 /**
  * Created by localmacaccount on 2/8/15.
  */
-public class TileRitualNether extends ConsumerTile {
-    LinkedList<CoordTuple> toSearch = new LinkedList<CoordTuple>();
+public class TileRitualNether extends ConsumerTile implements ITickable {
+    LinkedList<BlockPos> toSearch = new LinkedList<BlockPos>();
     BiomeGenBase targetBiome;
     boolean started = false;
 
@@ -41,49 +41,48 @@ public class TileRitualNether extends ConsumerTile {
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         int count = 0;
         if (!worldObj.isRemote && toSearch.size() == 0 && started) {
-            worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+            worldObj.setBlockToAir(getPos());
         }
         while (toSearch.size() > 0) {
-            CoordTuple tuple = toSearch.getFirst();
+            BlockPos pos = toSearch.getFirst();
             toSearch.removeFirst();
-            int x = tuple.getX();
-            int z = tuple.getZ();
-            if (new CoordTuple(this).dist(tuple) > 150) {
+            int x = pos.getX();
+            int z = pos.getZ();
+            if (getPos().distanceSq(pos) > 150 * 150) {
                 continue;
             }
-            Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
+            Chunk chunk = worldObj.getChunkFromBlockCoords(pos);
             byte[] biomeData = chunk.getBiomeArray();
             biomeData[(z & 15) << 4 | (x & 15)] = getBiomeId();
             boolean particle = true;
             for (int y = 0; y < 255; y++) {
-                Block b = getMappedBlock(worldObj.getBlock(x, y, z));
+                Block b = getMappedBlock(worldObj.getBlockState(new BlockPos(x, y, z)).getBlock());
                 if (b != null) {
-                    worldObj.setBlock(x, y, z, b, 0, 2);
+                    worldObj.setBlockState(new BlockPos(x, y, z), b.getDefaultState(), 2);
                     if (particle) {
                         particle = false;
-                        AuraCascade.proxy.addBlockDestroyEffects(new CoordTuple(x, y, z));
+                        AuraCascade.proxy.addBlockDestroyEffects(new BlockPos(x, y, z));
                     }
                 }
             }
-            if (worldObj.getBiomeGenForCoords(x + 1, z) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x + 1, tuple.getY(), z))) {
-                toSearch.addLast(new CoordTuple(x + 1, tuple.getY(), z));
+            if (worldObj.getBiomeGenForCoords(getPos().east()) == targetBiome
+                    && !toSearch.contains(getPos().east())) {
+                toSearch.addLast(getPos().east());
             }
-            if (worldObj.getBiomeGenForCoords(x - 1, z) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x - 1, tuple.getY(), z))) {
-                toSearch.addLast(new CoordTuple(x - 1, tuple.getY(), z));
+            if (worldObj.getBiomeGenForCoords(getPos().west()) == targetBiome
+                    && !toSearch.contains(getPos().west())) {
+                toSearch.addLast(getPos().west());
             }
-            if (worldObj.getBiomeGenForCoords(x, z + 1) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x, tuple.getY(), z + 1))) {
-                toSearch.addLast(new CoordTuple(x, tuple.getY(), z + 1));
+            if (worldObj.getBiomeGenForCoords(getPos().south()) == targetBiome
+                    && !toSearch.contains(getPos().south())) {
+                toSearch.addLast(getPos().south());
             }
-            if (worldObj.getBiomeGenForCoords(x, z - 1) == targetBiome
-                    && !toSearch.contains(new CoordTuple(x + 1, tuple.getY(), z - 1))) {
-                toSearch.addLast(new CoordTuple(x, tuple.getY(), z - 1));
+            if (worldObj.getBiomeGenForCoords(getPos().north()) == targetBiome
+                    && !toSearch.contains(getPos().north())) {
+                toSearch.addLast(getPos().north());
             }
             count++;
             if (count > 30) {
@@ -96,24 +95,26 @@ public class TileRitualNether extends ConsumerTile {
 
     @Override
     public void onUsePower() {
-        AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
-        if (!(worldObj.getBiomeGenForCoords(xCoord, zCoord).biomeID == getBiomeId())) {
-            //Coordtuples are used for convenience, but y-values are irrelavent
-            toSearch.addFirst(new CoordTuple(this));
-            targetBiome = worldObj.getBiomeGenForCoords(xCoord, zCoord);
+       // AuraCascade.analytics.eventDesign("consumerRitual", AuraUtil.formatLocation(this));
+        worldObj.getBiomeGenForCoords(getPos());
+        if (!(BiomeGenBase.getIdForBiome(worldObj.getChunkFromBlockCoords(pos).getBiome(pos, worldObj.getBiomeProvider())) == getBiomeId())) {
+            //BlockPoss are used for convenience, but y-values are irrelavent
+            toSearch.addFirst(getPos());
+            targetBiome = worldObj.getBiomeGenForCoords(getPos());
             started = true;
         }
+ 
     }
 
     public Block getMappedBlock(Block b) {
-        if (b == Blocks.stone) {
+        if (b == Blocks.STONE) {
             return Blocks.netherrack;
         }
-        if (b == Blocks.grass || b == Blocks.dirt) {
+        if (b == Blocks.grass || b == Blocks.DIRT) {
             return new Random().nextInt(3) == 0 ? Blocks.soul_sand : Blocks.netherrack;
         }
-        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.leaves || b == Blocks.leaves2) {
-            return Blocks.glowstone;
+        if (b == Blocks.log || b == Blocks.log2 || b == Blocks.LEAVES || b == Blocks.LEAVES2) {
+            return Blocks.GLOWSTONE;
         }
         if (b == Blocks.tallgrass) {
             return Blocks.nether_wart;

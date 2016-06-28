@@ -2,13 +2,10 @@ package pixlepix.auracascade.lexicon.page;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 import pixlepix.auracascade.lexicon.GuiButtonManualNavigation;
-import pixlepix.auracascade.lexicon.GuiLexiconEntry;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 
 /**
@@ -32,7 +29,7 @@ public class MultiblockPage extends PageText {
 
     @Override
     public void onOpened(IGuiLexiconEntry gui) {
-        int yOff = 0;
+        int yOff;
         if (multiblock != null) {
             ItemStack[][][] structure = multiblock;
             structureHeight = structure.length;
@@ -88,10 +85,9 @@ public class MultiblockPage extends PageText {
             yOffPartial = (structureHeight - 1) * 12 + structureWidth * 5 + structureLength * 5 + 16;
             int yOffTotal = Math.max(48, yOffPartial + 16);
 
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+            GlStateManager.disableDepth();
+            GlStateManager.enableRescaleNormal();
             RenderHelper.enableGUIStandardItemLighting();
-            RenderItem.getInstance().renderWithColor = true;
             int i = 0;
             ItemStack highlighted = null;
             for (int h = 0; h < structure.length; h++)
@@ -102,10 +98,10 @@ public class MultiblockPage extends PageText {
                         for (int w = row.length - 1; w >= 0; w--) {
                             int xx = 60 + xHalf - 10 * w + 10 * l - 7;
                             int yy = yOffPartial - 5 * w - 5 * l - 12 * h;
-                            GL11.glTranslated(0, 0, 1);
+                            GlStateManager.translate(0, 0, 1);
                             if (row[w] != null && i <= limiter) {
                                 i++;
-                                RenderItem.getInstance().renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, row[w], x + xx, y + yy);
+                                Minecraft.getMinecraft().getRenderItem().renderItemIntoGUI(row[w], x + xx, y + yy);
                                 if (mx >= x + xx && mx < x + xx + 16 && my >= y + yy && my < y + yy + 16)
                                     highlighted = row[w];
                             }
@@ -113,15 +109,15 @@ public class MultiblockPage extends PageText {
                     }
                 }
 
-            GL11.glTranslated(0, 0, -i);
+            GlStateManager.translate(0, 0, -i);
             RenderHelper.disableStandardItemLighting();
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            GlStateManager.disableRescaleNormal();
+            GlStateManager.enableBlend();
+            GlStateManager.enableDepth();
 
-            Minecraft.getMinecraft().fontRenderer.setUnicodeFlag(false);
+            Minecraft.getMinecraft().fontRendererObj.setUnicodeFlag(false);
             if (highlighted != null) {
-                ((GuiLexiconEntry) gui).renderToolTip(highlighted, mx, my);
+                gui.renderToolTip(highlighted, mx, my);
             }
             RenderHelper.disableStandardItemLighting();
             /*

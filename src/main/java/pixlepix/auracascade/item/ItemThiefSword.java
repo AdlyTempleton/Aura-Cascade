@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import pixlepix.auracascade.data.EnumAura;
@@ -39,11 +38,6 @@ public class ItemThiefSword extends ItemSword implements ITTinkererItem {
     @Override
     public boolean shouldDisplayInTab() {
         return true;
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:thiefSword");
     }
 
     @Override

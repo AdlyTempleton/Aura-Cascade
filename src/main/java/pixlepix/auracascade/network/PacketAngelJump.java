@@ -1,13 +1,14 @@
 package pixlepix.auracascade.network;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.item.ItemAngelJump;
 import pixlepix.auracascade.main.event.EventHandler;
@@ -39,7 +40,7 @@ public class PacketAngelJump implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        buf.writeInt(entityPlayer.worldObj.provider.dimensionId);
+        buf.writeInt(entityPlayer.worldObj.provider.getDimension());
         buf.writeInt(entityPlayer.getEntityId());
         buf.writeBoolean(up);
     }
@@ -47,31 +48,38 @@ public class PacketAngelJump implements IMessage {
     public static class PacketAngelJumpHandler implements IMessageHandler<PacketAngelJump, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketAngelJump msg, MessageContext ctx) {
-            if (msg.entityPlayer != null) {
-                EntityPlayer player = msg.entityPlayer;
-                if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
-                    for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
+        public IMessage onMessage(final PacketAngelJump msg, MessageContext ctx) {
+            ctx.getServerHandler().playerEntity.mcServer.addScheduledTask(new Runnable() {
+                @Override
+                public void run() {
+                    if (msg.entityPlayer != null) {
+                        EntityPlayer player = msg.entityPlayer;
+                        if (EventHandler.getBaubleFromInv(ItemAngelJump.class, player) != null) {
+                            for (int y = (int) (player.posY + (msg.up ? 2 : -2)); y < 255 && y > -1; y += msg.up ? 1 : -1) {
 
-                        int z = (int) Math.floor(player.posZ);
-                        int x = (int) Math.floor(player.posX);
+                                int z = (int) Math.floor(player.posZ);
+                                int x = (int) Math.floor(player.posX);
 
-                        //If the player is going down, we want them to be able to land on bedrock
-                        //But not the other way around
-                        if (player.worldObj.getBlock(x, msg.up ? y : y + 1, z).getBlockHardness(player.worldObj, x, y, z) < 0) {
-                            break;
+                                BlockPos pos = new BlockPos(x, y, z);
+                                //If the player is going down, we want them to be able to land on bedrock
+                                //But not the other way around
+                                if (player.worldObj.getBlockState(msg.up ? pos.up() : pos).getBlock().getBlockHardness(player.worldObj.getBlockState(pos), player.worldObj, pos) < 0) {
+                                    break;
+                                }
+                                if (!player.worldObj.isAirBlock(pos) &&
+                                        player.worldObj.isAirBlock(pos.up()) &&
+                                        player.worldObj.isAirBlock(pos.up(2))) {
+                                    player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
+                                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.getDimension(), player.posX, player.posY, player.posZ, 32));
+                                    break;
+                                }
+                            }
                         }
-                        if (!player.worldObj.isAirBlock(x, y, z) &&
-                                player.worldObj.isAirBlock(x, y + 1, z) &&
-                                player.worldObj.isAirBlock(x, y + 2, z)) {
-                            player.setPositionAndUpdate(player.posX, y + 2, player.posZ);
-                            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(8, player.posX, player.posY - 0.5, player.posZ), new NetworkRegistry.TargetPoint(player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, 32));
-                            break;
-                        }
+
                     }
-                }
 
-            }
+                }
+            });
             return null;
         }
     }

@@ -1,11 +1,11 @@
 package pixlepix.auracascade.potions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
 
@@ -13,8 +13,8 @@ import java.util.Random;
 
 
 public class PotionOrangeCurse extends Potion {
-    public PotionOrangeCurse(int id) {
-        super(id, true, EnumAura.ORANGE_AURA.color.getHex());
+    public PotionOrangeCurse() {
+        super(true, EnumAura.ORANGE_AURA.color.getHex());
         setPotionName("Orange Curse");
 
     }
@@ -22,8 +22,8 @@ public class PotionOrangeCurse extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(Minecraft.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA).getIconIndex(), 16, 16);
+        mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA), x + 8, y + 8);
     }
 
     @Override

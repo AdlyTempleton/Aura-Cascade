@@ -2,13 +2,16 @@ package pixlepix.auracascade.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemMaterial;
@@ -22,9 +25,9 @@ import java.util.ArrayList;
  * Created by localmacaccount on 2/4/15.
  */
 public class BlockMagicRoad extends Block implements ITTinkererBlock {
+	private static final AxisAlignedBB AABB = new AxisAlignedBB(0F, 0F, 0F, 1F, .8F, 1F);
     public BlockMagicRoad() {
-        super(Material.rock);
-        setBlockBounds(0F, 0F, 0F, 1F, .8F, 1F);
+        super(Material.ROCK);
         setHardness(2F);
         setLightLevel(1F);
     }
@@ -40,8 +43,8 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        Vec3 dir = Vec3.createVectorHelper(entity.motionX, entity.motionY, entity.motionZ);
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+        Vec3d dir = new Vec3d(entity.motionX, entity.motionY, entity.motionZ);
         if (dir.lengthVector() > 0.25) {
             dir = dir.normalize();
             entity.addVelocity(dir.xCoord * 5, dir.yCoord * 5, dir.zCoord * 5);
@@ -54,12 +57,7 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:bricks");
-    }
-
-    @Override
-    public boolean isOpaqueCube() {
+    public boolean isFullyOpaque(IBlockState state) {
         return false;
     }
 
@@ -80,11 +78,15 @@ public class BlockMagicRoad extends Block implements ITTinkererBlock {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this, 32), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.stonebrick));
+        return new CraftingBenchRecipe(new ItemStack(this, 32), "BBB", "BIB", "BBB", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'B', new ItemStack(Blocks.STONEBRICK));
     }
 
     @Override
     public int getCreativeTabPriority() {
         return -50;
     }
+    @Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABB;
+	}
 }

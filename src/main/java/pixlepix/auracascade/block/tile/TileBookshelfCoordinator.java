@@ -1,19 +1,20 @@
 package pixlepix.auracascade.block.tile;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.block.BlockBookshelf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Vec3;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.main.AuraUtil;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by localmacaccount on 1/24/15.
  */
-public class TileBookshelfCoordinator extends TileEntity implements IInventory {
+public class TileBookshelfCoordinator extends TileEntity implements IInventory, ITickable {
 
     public ArrayList<TileStorageBookshelf> bookshelfLocations = new ArrayList<TileStorageBookshelf>();
 
@@ -75,39 +76,40 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         nbt.setInteger("neededPower", neededPower);
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
+	@Override
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        readCustomNBT(pkt.func_148857_g());
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        readCustomNBT(pkt.getNbtCompound());
     }
 
-    public boolean hasClearLineOfSight(CoordTuple tuple) {
-        int x = (xCoord);
-        int y = (yCoord);
-        int z = (zCoord);
-
-        Vec3 originalVector = Vec3.createVectorHelper(tuple.getX() - x, tuple.getY() - y, tuple.getZ() - z);
-        Vec3 vec3 = originalVector.normalize();
+    public boolean hasClearLineOfSight(BlockPos pos) {
+        int x;
+        int y;
+        int z;
+        Vec3d originalVector = new Vec3d(pos.subtract(getPos()));
+        Vec3d vec3 = originalVector.normalize();
         double f = 0;
         while (true) {
             f += .1;
-            x = (int) (xCoord + f * vec3.xCoord);
-            y = (int) (yCoord + f * vec3.yCoord);
-            z = (int) (zCoord + f * vec3.zCoord);
+            x = (int) (getPos().getX() + f * vec3.xCoord);
+            y = (int) (getPos().getY() + f * vec3.yCoord);
+            z = (int) (getPos().getZ() + f * vec3.zCoord);
 
-            if (new CoordTuple(x, y, z).equals(tuple)) {
+            BlockPos pos_ = new BlockPos(x, y, z);
+
+            if (pos_.equals(pos)) {
                 return true;
             }
-            if (new CoordTuple(x, y, z).equals(new CoordTuple(xCoord, yCoord, zCoord))) {
+            if (pos_.equals(getPos())) {
                 continue;
             }
-            if (!worldObj.isAirBlock(x, y, z) && new CoordTuple(x, y, z).dist(this) >= 1.5 && new CoordTuple(x, y, z).dist(tuple) >= 1.5) {
+            if (!worldObj.isAirBlock(pos_) && pos_.distanceSq(getPos()) >= 2.25 && pos_.distanceSq(pos) >= 2.25) {
                 return false;
             }
             if (f > originalVector.lengthVector()) {
@@ -119,55 +121,57 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     @Override
-    public void updateEntity() {
+    public void update() {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 200 == 5) {
             int numShelves = getBookshelves().size();
 
-            AuraCascade.analytics.eventDesign("booshelfUsage", AuraUtil.formatLocation(this), numShelves);
+       //     AuraCascade.analytics.eventDesign("booshelfUsage", AuraUtil.formatLocation(this), numShelves);
             neededPower = (int) (5 * numShelves * Math.pow(1.05, numShelves));
             //Drain power from aura nodes
             lastPower = 0;
-            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+            for (EnumFacing direction : EnumFacing.VALUES) {
+                TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(direction));
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(getPos(), "magicCrit", EnumAura.WHITE_AURA, 1);
                         lastPower += auraTile.energy;
                         auraTile.energy = 0;
                     }
                 }
             }
-            worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            markDirty();
         }
         if (worldObj.getTotalWorldTime() % 200 == 0 || !hasCheckedShelves) {
+/* TODO 1.8.8 this causes an infinite loop wtf
             bookshelfLocations = new ArrayList<TileStorageBookshelf>();
-            ArrayList<CoordTuple> checkedLocations = new ArrayList<CoordTuple>();
-            ArrayList<CoordTuple> toSearch = new ArrayList<CoordTuple>();
-            toSearch.add(new CoordTuple(this));
+            ArrayList<BlockPos> checkedLocations = new ArrayList<BlockPos>();
+            ArrayList<BlockPos> toSearch = new ArrayList<BlockPos>();
+            toSearch.add(getPos());
             while (toSearch.size() > 0) {
-                CoordTuple nextTuple = toSearch.remove(0);
-                for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple newTuple = nextTuple.add(direction);
-                    TileEntity storageBookshelf = newTuple.getTile(worldObj);
-                    if (storageBookshelf instanceof TileStorageBookshelf && !checkedLocations.contains(newTuple)) {
-                        toSearch.add(newTuple);
-                        if (hasClearLineOfSight(newTuple)) {
-                            bookshelfLocations.add((TileStorageBookshelf) newTuple.getTile(worldObj));
+                BlockPos nextPos = toSearch.remove(0);
+                for (EnumFacing direction : EnumFacing.VALUES) {
+                    BlockPos newPos = nextPos.offset(direction);
+                    TileEntity storageBookshelf = worldObj.getTileEntity(newPos);
+                    if (storageBookshelf instanceof TileStorageBookshelf && !checkedLocations.contains(newPos)) {
+                        toSearch.add(newPos);
+                        if (hasClearLineOfSight(newPos)) {
+                            bookshelfLocations.add((TileStorageBookshelf) worldObj.getTileEntity(newPos));
                             if (!worldObj.isRemote) {
-                                burst(newTuple, "enchantmenttable", EnumAura.WHITE_AURA, 1);
+                                burst(newPos, "enchantmenttable", EnumAura.WHITE_AURA, 1);
                             }
                         }
-                        checkedLocations.add(newTuple);
+                        checkedLocations.add(newPos);
                     }
-                    if ((newTuple.getBlock(worldObj) instanceof BlockBookshelf || (newTuple.getBlock(worldObj) != null && newTuple.getBlock(worldObj) == AuraCascade.proxy.chiselBookshelf))
-                            && !checkedLocations.contains(newTuple)) {
-                        toSearch.add(newTuple);
-                        checkedLocations.add(newTuple);
+                    if ((worldObj.getBlockState(newPos).getBlock() instanceof BlockBookshelf || (worldObj.getBlockState(newPos).getBlock() != null && worldObj.getBlockState(newPos).getBlock() == AuraCascade.proxy.chiselBookshelf))
+                            && !checkedLocations.contains(newPos)) {
+                        toSearch.add(newPos);
+                        checkedLocations.add(newPos);
                     }
                 }
             }
             hasCheckedShelves = true;
+*/
         }
     }
 
@@ -229,7 +233,7 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int p_70304_1_) {
+    public ItemStack removeStackFromSlot(int p_70304_1_) {
         return null;
     }
 
@@ -249,13 +253,18 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "Bookshelf Coordinator";
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
+    public boolean hasCustomName() {
         return false;
+    }
+
+    @Override
+    public TextComponentString getDisplayName() {
+        return new TextComponentString(getName());
     }
 
     @Override
@@ -269,12 +278,12 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
     }
 
     @Override
-    public void openInventory() {
+    public void openInventory(EntityPlayer player) {
 
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
 
     }
 
@@ -283,8 +292,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         return getAbstractInventoryFromInv(startInv);
     }
 
-    public void burst(CoordTuple target, String particle, EnumAura aura, double composition) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(new CoordTuple(this), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, xCoord, yCoord, zCoord, 32));
+    public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
     }
 
     @Override
@@ -294,6 +303,26 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory {
         }
         TileStorageBookshelf bookshelf = getBookshelfAtIndex(i);
         return bookshelf.isItemValidForSlot(getIndexWithinBookshelf(i), stack);
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {
+
+    }
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+
     }
 
     //Used by SlotCoordinator.

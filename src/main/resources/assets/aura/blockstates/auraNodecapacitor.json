@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aura:miniblock_top_bottom",
+    "textures": {
+      "top": "aura:blocks/capacitorNode_Top",
+      "bottom": "aura:blocks/capacitorNode_Bottom",
+      "side": "aura:blocks/capacitorNode_Side"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "bursting": {
+      "true": {},
+      "false": {}
+    },
+    "inventory": [{}]
+  }
+}

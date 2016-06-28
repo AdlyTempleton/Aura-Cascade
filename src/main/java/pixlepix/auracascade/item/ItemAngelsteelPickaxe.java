@@ -1,13 +1,13 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.data.IAngelsteelTool;
 import pixlepix.auracascade.main.AuraUtil;
@@ -38,17 +38,12 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:angel_pickaxe");
-    }
-
-    @Override
     public ArrayList<Object> getSpecialParameters() {
         return AngelsteelToolHelper.getDegreeList();
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean p_77624_4_) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean p_77624_4_) {
         super.addInformation(stack, player, list, p_77624_4_);
 
         AuraUtil.addAngelsteelDesc(list, stack);
@@ -77,19 +72,19 @@ public class ItemAngelsteelPickaxe extends ItemPickaxe implements ITTinkererItem
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int p_77663_4_, boolean p_77663_5_) {
 
-        if (!world.isRemote && stack.stackTagCompound == null) {
-            stack.stackTagCompound = AngelsteelToolHelper.getRandomBuffCompound(degree);
+        if (!world.isRemote && stack.getTagCompound() == null) {
+            stack.setTagCompound(AngelsteelToolHelper.getRandomBuffCompound(degree));
         }
         super.onUpdate(stack, world, entity, p_77663_4_, p_77663_5_);
     }
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AAA", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.stick));
+        return new CraftingBenchRecipe(new ItemStack(this, 1, 0), "AAA", " S ", " S ", 'A', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAngelsteelIngot.class), 1, degree), 'S', new ItemStack(Items.STICK));
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         return true;
     }
 

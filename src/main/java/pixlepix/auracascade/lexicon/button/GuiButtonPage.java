@@ -12,12 +12,12 @@
 package pixlepix.auracascade.lexicon.button;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.StatCollector;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.lexicon.GuiLexicon;
 import pixlepix.auracascade.lexicon.VazkiiRenderHelper;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 public class GuiButtonPage extends GuiButtonLexicon {
 
@@ -31,15 +31,15 @@ public class GuiButtonPage extends GuiButtonLexicon {
     @Override
     public void drawButton(Minecraft par1Minecraft, int par2, int par3) {
         if (enabled) {
-            field_146123_n = par2 >= xPosition && par3 >= yPosition && par2 < xPosition + width && par3 < yPosition + height;
-            int k = getHoverState(field_146123_n);
+            hovered = par2 >= xPosition && par3 >= yPosition && par2 < xPosition + width && par3 < yPosition + height;
+            int k = getHoverState(hovered);
 
             par1Minecraft.renderEngine.bindTexture(GuiLexicon.texture);
-            GL11.glColor4f(1F, 1F, 1F, 1F);
+            GlStateManager.color(1F, 1F, 1F, 1F);
             drawTexturedModalRect(xPosition, yPosition, k == 2 ? 18 : 0, right ? 180 : 190, 18, 10);
 
             if (k == 2)
-                VazkiiRenderHelper.renderTooltip(par2, par3, Arrays.asList(StatCollector.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
+                VazkiiRenderHelper.renderTooltip(par2, par3, Collections.singletonList(I18n.translateToLocal(right ? "auramisc.nextPage" : "auramisc.prevPage")));
         }
     }
 

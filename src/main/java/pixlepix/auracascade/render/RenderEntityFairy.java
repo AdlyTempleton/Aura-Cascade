@@ -1,14 +1,13 @@
 package pixlepix.auracascade.render;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.entity.EntityFairy;
 import pixlepix.auracascade.item.ItemFairyCharm;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -16,63 +15,35 @@ import pixlepix.auracascade.registry.BlockRegistry;
 /**
  * Created by pixlepix on 12/8/14.
  */
-public class RenderEntityFairy extends Render {
+public class RenderEntityFairy extends Render<EntityFairy> {
 
-    RenderItem renderItem = new RenderItem() {
-        @Override
-        public boolean shouldBob() {
-            return false;
-        }
-    };
+    private final ItemStack stack = new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100);
+
+    public RenderEntityFairy(RenderManager renderManager) {
+        super(renderManager);
+    }
 
     @Override
-    public void doRender(Entity entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
+    public void doRender(EntityFairy entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
 
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(x, y, z);
+        GlStateManager.enableRescaleNormal();
+        GlStateManager.scale(0.5F, 0.5F, 0.5F);
+        // Billboard towards the player
+        GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
+        this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.GROUND);
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.popMatrix();
+        super.doRender(entity, x, y, z, p_76986_8_, p_76986_9_);
 
-        renderItem.setRenderManager(RenderManager.instance);
-
-        EntityItem entityItem = ((EntityFairy) entity).entityItemRender;
-        entityItem.age = 0;
-        entityItem.velocityChanged = true;
-        entityItem.setEntityItemStack(new ItemStack(BlockRegistry.getFirstItemFromClass(ItemFairyCharm.class), 1, 100));
-
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_BLEND);
-        //This parameter is never used ._.
-
-        Minecraft.getMinecraft().entityRenderer.disableLightmap(0D);
-
-
-        //Prevent 'jump' in the bobbing
-        //Bobbing is calculated as the age plus the yaw
-        entityItem.age = 0;
-        renderItem.doRender(entityItem, x, y, z, 0, 0);
-
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
-
-
-        Minecraft.getMinecraft().entityRenderer.enableLightmap(0D);
-
-            /*
-            GL11.glPushMatrix();
-            this.entityItem.hoverStart = 0.0F;
-            RenderItem.renderInFrame = true;
-            GL11.glTranslatef((float) x + 0.5F, (float) y + 2.02F, (float) z + 0.3F);
-            //GL11.glRotatef(180, 0, 1, 1);
-
-            RenderManager.instance.renderEntityWithPosYaw(this.entityItem, 0.0D, 0.0D, 0.0D, (float) Math.PI, 0);
-            RenderItem.renderInFrame = false;
-            GL11.glPopMatrix();
-            */
     }
 
 
     @Override
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-        return new ResourceLocation("minecraft", "/blocks/cobblestone.png");
+    protected ResourceLocation getEntityTexture(EntityFairy p_110775_1_) {
+        return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 }

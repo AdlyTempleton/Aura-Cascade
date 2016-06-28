@@ -1,16 +1,18 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.ChatStyle;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.QuestManager;
@@ -71,31 +73,27 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:book");
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
+    public EnumActionResult onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (par2EntityPlayer.isSneaking()) {
-            Block block = par3World.getBlock(par4, par5, par6);
+            Block block = par3World.getBlockState(pos).getBlock();
             if (block != null) {
                 if (block instanceof ILexiconable) {
-                    LexiconEntry entry = ((ILexiconable) block).getEntry(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
+                    LexiconEntry entry = ((ILexiconable) block).getEntry(par3World, pos, par2EntityPlayer, par1ItemStack);
                     if (entry != null) {
                         AuraCascade.proxy.setEntryToOpen(entry);
                         AuraCascade.proxy.setLexiconStack(par1ItemStack);
 
                         par2EntityPlayer.openGui(AuraCascade.instance, 0, par3World, 0, 0, 0);
                         if (!par3World.isRemote) {
-                            par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
+                        	//TODO fix sounds
+                            //par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
                         }
-                        return true;
+                        return EnumActionResult.PASS;
                     }
                 }
             }
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     private void addStringToTooltip(String s, List<String> tooltip) {
@@ -103,14 +101,14 @@ public class ItemLexicon extends Item implements ITTinkererItem {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+    public  ActionResult<ItemStack> onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, EnumHand hand){
         String force = getForcedPage(par1ItemStack);
         if (force != null && !force.isEmpty()) {
             LexiconEntry entry = getEntryFromForce(par1ItemStack);
             if (entry != null) {
                 AuraCascade.proxy.setEntryToOpen(entry);
             } else {
-                par3EntityPlayer.addChatMessage(new ChatComponentTranslation("aura.misc.cantOpen").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
+                par3EntityPlayer.addChatMessage(new TextComponentString("aura.misc.cantOpen"));
             }
             setForcedPage(par1ItemStack, "");
         }
@@ -120,9 +118,10 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         AuraCascade.proxy.setLexiconStack(par1ItemStack);
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound)
-            par2World.playSoundAtEntity(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
+        	//TODO Fix soundat
+        //par2World.playSoundAt(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
         skipSound = false;
-        return par1ItemStack;
+        return new ActionResult<ItemStack>(EnumActionResult.PASS, par1ItemStack);
     }
 
     @Override
@@ -131,14 +130,14 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         if (ticks > 0 && entity instanceof EntityPlayer) {
             skipSound = ticks < 5;
             if (ticks == 1)
-                onItemRightClick(stack, world, (EntityPlayer) entity);
+                onItemRightClick(stack, world, (EntityPlayer) entity, EnumHand.MAIN_HAND);
             setQueueTicks(stack, ticks - 1);
         }
     }
 
     @Override
     public EnumRarity getRarity(ItemStack par1ItemStack) {
-        return EnumRarity.uncommon;
+        return EnumRarity.UNCOMMON;
     }
 
     @Override
@@ -163,7 +162,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.book));
+        return new CraftingBenchRecipe(new ItemStack(this), "CB", "  ", 'C', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA), 'B', new ItemStack(Items.BOOK));
     }
 
     @Override

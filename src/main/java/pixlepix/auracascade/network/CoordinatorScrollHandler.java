@@ -1,9 +1,9 @@
 package pixlepix.auracascade.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.inventory.Container;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.gui.ContainerCoordinator;
 
 /**
@@ -15,12 +15,17 @@ public class CoordinatorScrollHandler implements IMessageHandler<PacketCoordinat
     }
 
     @Override
-    public IMessage onMessage(PacketCoordinatorScroll message, MessageContext ctx) {
-        Container container = message.player.openContainer;
-        if (container instanceof ContainerCoordinator) {
-            ContainerCoordinator coordinator = (ContainerCoordinator) container;
-            coordinator.scrollTo(message.scroll, message.filter);
-        }
+    public IMessage onMessage(final PacketCoordinatorScroll message, MessageContext ctx) {
+        ctx.getServerHandler().playerEntity.mcServer.addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                Container container = message.player.openContainer;
+                if (container instanceof ContainerCoordinator) {
+                    ContainerCoordinator coordinator = (ContainerCoordinator) container;
+                    coordinator.scrollTo(message.scroll, message.filter);
+                }
+            }
+        });
         return null;
     }
 }

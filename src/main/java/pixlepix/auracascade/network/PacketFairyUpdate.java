@@ -1,11 +1,12 @@
 package pixlepix.auracascade.network;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.entity.EntityFairy;
 
@@ -56,15 +57,20 @@ public class PacketFairyUpdate implements IMessage, IMessageHandler<PacketFairyU
     }
 
     @Override
-    public IMessage onMessage(PacketFairyUpdate msg, MessageContext ctx) {
-        if (msg.fairy != null) {
-            msg.fairy.theta = msg.theta;
-            msg.fairy.rho = msg.rho;
-            msg.fairy.dPhi = msg.dPhi;
-            msg.fairy.dTheta = msg.dTheta;
-            msg.fairy.phi = msg.phi;
-            msg.fairy.player = msg.player;
-        }
+    public IMessage onMessage(final PacketFairyUpdate msg, MessageContext ctx) {
+        Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+            @Override
+            public void run() {
+                if (msg.fairy != null) {
+                    msg.fairy.theta = msg.theta;
+                    msg.fairy.rho = msg.rho;
+                    msg.fairy.dPhi = msg.dPhi;
+                    msg.fairy.dTheta = msg.dTheta;
+                    msg.fairy.phi = msg.phi;
+                    msg.fairy.player = msg.player;
+                }
+            }
+        });
         return null;
     }
 }

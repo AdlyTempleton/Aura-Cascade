@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aura:biggerThanSlab",
+    "textures": {
+      "bottom": "aura:blocks/bricks",
+      "top": "aura:blocks/bricks",
+      "side": "aura:blocks/bricks"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

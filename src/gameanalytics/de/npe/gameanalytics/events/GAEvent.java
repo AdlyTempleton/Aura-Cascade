@@ -28,7 +28,6 @@ public abstract class GAEvent {
 
 	@SerializedName("build")
 	private final String build;
-	private transient String toString;
 
 	GAEvent(Analytics an) {
 		keyPair = an.keyPair();
@@ -38,6 +37,8 @@ public abstract class GAEvent {
 	}
 
 	public abstract String category();
+
+	private transient String toString;
 
 	@Override
 	public String toString() {

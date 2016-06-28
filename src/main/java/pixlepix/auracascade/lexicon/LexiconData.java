@@ -12,10 +12,10 @@
 package pixlepix.auracascade.lexicon;
 
 
-import cpw.mods.fml.common.ModAPIManager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.ModAPIManager;
 import pixlepix.auracascade.QuestManager;
 import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.block.entity.*;
@@ -26,7 +26,6 @@ import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
 import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.lexicon.page.*;
-import pixlepix.auracascade.main.Config;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererRegisterable;
@@ -37,7 +36,7 @@ public final class LexiconData {
     public static CraftingBenchRecipe getRecipeFromFairy(Class<? extends EntityFairy> clazz) {
         int num = 0;
         for (int i = 0; i < ItemFairyCharm.fairyClasses.length; i++) {
-            Class clazzCompare = ItemFairyCharm.fairyClasses[i];
+            Class<?> clazzCompare = ItemFairyCharm.fairyClasses[i];
             if (clazzCompare.equals(clazz)) {
                 num = i;
                 break;
@@ -50,12 +49,14 @@ public final class LexiconData {
     public static void init() {
         //Add categories
         LexiconCategory categoryQuest = null;
-        if (Config.questline) {
-            categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.diamond_sword));
+        //TODO bring this back
+        //if (Config.questline)
+         if(false){
+            categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.DIAMOND_SWORD));
             CategoryManager.addCategory(categoryQuest);
         }
 
-        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.wooden_pickaxe));
+        LexiconCategory categoryWalkthrough = CategoryManager.categoryWalkthrough = new LexiconCategory("Walkthrough").setIcon(new ItemStack(Items.WOODEN_PICKAXE));
         CategoryManager.addCategory(categoryWalkthrough);
 
         LexiconCategory categoryBasics = CategoryManager.categoryBasics = new LexiconCategory("Basics").setIcon(new ItemStack(AuraBlock.getBlockFromName("")));
@@ -76,7 +77,8 @@ public final class LexiconData {
         CategoryManager.addCategory(categoryEnchants);
 
         //Procedurally generate quest entries
-        if (Config.questline) {
+        //TODO questline bring back
+        if (false) {
             for (Quest quest : QuestManager.quests) {
                 int id = quest.id;
                 new LexiconEntryQuest((id > 9 ? "" : "0") + id + "quest", categoryQuest, quest).setLexiconPages(new PageText("Desc"), new PageQuest(quest));
@@ -106,18 +108,18 @@ public final class LexiconData {
         new BLexiconEntry("crafting", categoryConsumers).tutorial().setPriority().setLexiconPages(new PageText("0"), new PageText("1"),
                 new PageCraftingRecipe("2", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingCenter"))),
                 new PageCraftingRecipe("3", (CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("craftingPedestal"))),
-                new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.leather))),
-                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.blaze_powder, 20))),
-                new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.saddle, 1))),
-                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ender_eye, 2))),
-                new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.arrow, 8))),
-                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.rail, 32))),
-                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.lapis_block, 1))),
-                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.repeater))),
-                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.comparator))),
-                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.soul_sand))),
-                new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.gold_block))),
-                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.diamond_block))));
+                new PagePylon("4", PylonRecipeRegistry.getRecipe(new ItemStack(Items.LEATHER))),
+                new PagePylon("5", PylonRecipeRegistry.getRecipe(new ItemStack(Items.BLAZE_POWDER, 20))),
+                new PagePylon("6", PylonRecipeRegistry.getRecipe(new ItemStack(Items.SADDLE, 1))),
+                new PagePylon("7", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ENDER_EYE, 2))),
+                new PagePylon("8", PylonRecipeRegistry.getRecipe(new ItemStack(Items.ARROW, 8))),
+                new PagePylon("9", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.RAIL, 32))),
+                new PagePylon("10", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.LAPIS_BLOCK, 1))),
+                new PagePylon("11", PylonRecipeRegistry.getRecipe(new ItemStack(Items.REPEATER))),
+                new PagePylon("12", PylonRecipeRegistry.getRecipe(new ItemStack(Items.COMPARATOR))),
+                new PagePylon("13", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.SOUL_SAND))),
+                new PagePylon("14", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.GOLD_BLOCK))),
+                new PagePylon("15", PylonRecipeRegistry.getRecipe(new ItemStack(Blocks.DIAMOND_BLOCK))));
 
 
         // BASICS ENTRIES
@@ -263,7 +265,7 @@ public final class LexiconData {
         ItemStack pedestal = new ItemStack(AuraBlock.getBlockFromName("craftingPedestal"));
         ItemStack vortex = new ItemStack(AuraBlock.getBlockFromName("craftingCenter"));
         ItemStack monitor = new ItemStack(BlockRegistry.getFirstBlockFromClass(BlockMonitor.class));
-        ItemStack cobble = new ItemStack(Blocks.cobblestone);
+        ItemStack cobble = new ItemStack(Blocks.COBBLESTONE);
         new BLexiconEntry("patreon", categoryWalkthrough).setPriority().setLexiconPages(new PageGuide("0", "auramisc.support", "https://www.patreon.com/pixlepix"));
         new BLexiconEntry("basicSetup", categoryWalkthrough).setLexiconPages(new PageText("0"), new MultiblockPage("1", new ItemStack[][][]{
                 {{pumpnode, node, furnacenode}},

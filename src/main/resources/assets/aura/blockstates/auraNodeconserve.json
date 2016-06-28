@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aura:miniblock_top_bottom",
+    "textures": {
+      "top": "aura:blocks/conserveNode_Top",
+      "bottom": "aura:blocks/conserveNode_Bottom",
+      "side": "aura:blocks/conserveNode_Side"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

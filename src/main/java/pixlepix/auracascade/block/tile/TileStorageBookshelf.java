@@ -6,8 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.text.TextComponentString;
 import pixlepix.auracascade.data.ItemStackMapEntry;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.item.ItemStorageBook;
@@ -60,16 +61,16 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         nbt.setTag("book", compound);
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
+	@Override
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        readCustomNBT(pkt.func_148857_g());
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        readCustomNBT(pkt.getNbtCompound());
     }
 
     @Override
@@ -99,7 +100,7 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlotOnClosing(int i) {
+    public ItemStack removeStackFromSlot(int i) {
         return getStackInSlot(i);
     }
 
@@ -124,10 +125,8 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
             inv = new ArrayList<ItemStack>();
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
-
-    @Override
+        markDirty();
+    }   @Override
     public void markDirty() {
         super.markDirty();
         if (storedBook != null) {
@@ -139,17 +138,22 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
 
         }
         validCache = new HashMap<ItemStackMapEntry, Boolean>();
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+        //TODO BS storage, verify an extra mark dirty is needed?
     }
 
     @Override
-    public String getInventoryName() {
+    public String getName() {
         return "Storage Bookshelf";
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
+    public boolean hasCustomName() {
         return false;
+    }
+
+    @Override
+    public TextComponentString getDisplayName() {
+        return new TextComponentString(getName());
     }
 
     @Override
@@ -163,12 +167,12 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
     }
 
     @Override
-    public void openInventory() {
+    public void openInventory(EntityPlayer player) {
 
     }
 
     @Override
-    public void closeInventory() {
+    public void closeInventory(EntityPlayer player) {
 
     }
 
@@ -200,6 +204,24 @@ public class TileStorageBookshelf extends TileEntity implements IInventory {
         validCache.put(new ItemStackMapEntry(item), true);
         return true;
 
+    }
+
+    @Override
+    public int getField(int id) {
+        return 0;
+    }
+
+    @Override
+    public void setField(int id, int value) {}
+
+    @Override
+    public int getFieldCount() {
+        return 0;
+    }
+
+    @Override
+    public void clear() {
+        inv.clear();
     }
 
     public boolean isItemValidForSlotSensitive(int slot, ItemStack item) {

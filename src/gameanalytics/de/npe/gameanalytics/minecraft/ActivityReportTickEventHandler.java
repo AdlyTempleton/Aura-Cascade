@@ -1,37 +1,35 @@
 package de.npe.gameanalytics.minecraft;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModContainer;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
-import cpw.mods.fml.common.gameevent.TickEvent.Phase;
-import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import de.npe.gameanalytics.events.GAUserEvent;
 import de.npe.gameanalytics.util.ACLock;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModContainer;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public final class ActivityReportTickEventHandler {
+	private ActivityReportTickEventHandler() {} // singleton
+
 	private static ACLock lock = new ACLock();
 	private static boolean initialized;
-	private static List<MCSimpleAnalytics> analyticsList = new ArrayList<>();
-	private static long nextActivityReport = 0;
-	private static GAUserEvent activityGAEvent;
 
-	private ActivityReportTickEventHandler() {
-	} // singleton
+	private static List<MCSimpleAnalytics> analyticsList = new ArrayList<>();
 
 	static void addToReportList(MCSimpleAnalytics mcSimpleAnalytics) {
 		try (ACLock acl = lock.lockAC()) {
 			if (!initialized) {
 				initialized = true;
-				FMLCommonHandler.instance().bus().register(new ActivityReportTickEventHandler());
+				MinecraftForge.EVENT_BUS.register(new ActivityReportTickEventHandler());
 			}
 
 			// check if an analytics object with the same keys and client status is already in the list
@@ -58,6 +56,9 @@ public final class ActivityReportTickEventHandler {
 			analyticsList.add(mcSimpleAnalytics);
 		}
 	}
+
+	private static long nextActivityReport = 0;
+	private static GAUserEvent activityGAEvent;
 
 	private static void sendAnalyticsActivityEvent() {
 		long now = System.currentTimeMillis();

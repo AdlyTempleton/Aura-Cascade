@@ -15,14 +15,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.button.GuiButtonBookmark;
 import pixlepix.auracascade.lexicon.button.GuiButtonCategory;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 
+import java.io.IOException;
 import java.util.*;
 
 
@@ -34,8 +36,8 @@ public class GuiLexicon extends GuiScreen {
     private static final int TUTORIAL_ARROW_HEIGHT = 12;
     public static GuiLexicon currentOpenLexicon = new GuiLexicon();
     public static ItemStack stackUsed;
-    public static List<GuiLexicon> bookmarks = new ArrayList();
-    public static Queue<LexiconEntry> tutorial = new ArrayDeque();
+    public static List<GuiLexicon> bookmarks = new ArrayList<GuiLexicon>();
+    public static Queue<LexiconEntry> tutorial = new ArrayDeque<LexiconEntry>();
     public static ArrayList<LexiconEntry> tutorialMaster = new ArrayList<LexiconEntry>();
     public float lastTime = 0F;
     public float partialTicks = 0F;
@@ -62,7 +64,7 @@ public class GuiLexicon extends GuiScreen {
     public void initGui() {
         super.initGui();
 
-        allCategories = new ArrayList(CategoryManager.getAllCategories());
+        allCategories = new ArrayList<LexiconCategory>(CategoryManager.getAllCategories());
         Collections.sort(allCategories);
 
         lastTime = ClientTickHandler.ticksInGame;
@@ -107,16 +109,16 @@ public class GuiLexicon extends GuiScreen {
         lastTime = time;
         partialTicks = par3;
 
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1F, 1F, 1F, 1F);
         mc.renderEngine.bindTexture(texture);
         drawTexturedModalRect(left, top, 0, 0, guiWidth, guiHeight);
 
         drawBookmark(left + guiWidth / 2, top - getTitleHeight(), getTitle(), true);
         String subtitle = getSubtitle();
         if (subtitle != null) {
-            GL11.glScalef(0.5F, 0.5F, 1F);
+            GlStateManager.scale(0.5F, 0.5F, 1F);
             drawCenteredString(fontRendererObj, subtitle, left * 2 + guiWidth, (top - getTitleHeight() + 11) * 2, 0x00FF00);
-            GL11.glScalef(2F, 2F, 1F);
+            GlStateManager.scale(2F, 2F, 1F);
         }
 
         drawHeader();
@@ -130,17 +132,17 @@ public class GuiLexicon extends GuiScreen {
 
         if (hasTutorialArrow) {
             mc.renderEngine.bindTexture(texture);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glColor4f(1F, 1F, 1F, 0.7F + (float) (Math.sin((ClientTickHandler.ticksInGame + par3) * 0.3F) + 1) * 0.15F);
+            GlStateManager.enableBlend();
+            GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GlStateManager.color(1F, 1F, 1F, 0.7F + (float) (Math.sin((ClientTickHandler.ticksInGame + par3) * 0.3F) + 1) * 0.15F);
             drawTexturedModalRect(tutorialArrowX, tutorialArrowY, 20, 200, TUTORIAL_ARROW_WIDTH, TUTORIAL_ARROW_HEIGHT);
-            GL11.glDisable(GL11.GL_BLEND);
+            GlStateManager.disableBlend();
         }
     }
 
     public void drawBookmark(int x, int y, String s, boolean drawLeft) {
         // This function is called from the buttons so I can't use fontRendererObj
-        FontRenderer font = Minecraft.getMinecraft().fontRenderer;
+        FontRenderer font = Minecraft.getMinecraft().fontRendererObj;
         boolean unicode = font.getUnicodeFlag();
         font.setUnicodeFlag(true);
         int l = font.getStringWidth(s);
@@ -153,7 +155,7 @@ public class GuiLexicon extends GuiScreen {
 
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.color(1F, 1F, 1F, 1F);
         drawTexturedModalRect(x + l / 2 + 3, y - 1, 54, 180, 6, 11);
         if (drawLeft)
             drawTexturedModalRect(x - l / 2 - 9, y - 1, 61, 180, 6, 11);
@@ -167,7 +169,7 @@ public class GuiLexicon extends GuiScreen {
     void drawHeader() {
         boolean unicode = fontRendererObj.getUnicodeFlag();
         fontRendererObj.setUnicodeFlag(true);
-        fontRendererObj.drawSplitString(String.format(StatCollector.translateToLocal("aura.gui.lexicon.header")), left + 18, top + 12, 110, 0);
+        fontRendererObj.drawSplitString(I18n.translateToLocal("aura.gui.lexicon.header"), left + 18, top + 12, 110, 0);
         fontRendererObj.setUnicodeFlag(unicode);
     }
 
@@ -246,16 +248,16 @@ public class GuiLexicon extends GuiScreen {
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i);
             LexiconCategory category = i_ >= categoryList.size() ? null : categoryList.get(i_);
             if (category != null)
-                button.displayString = StatCollector.translateToLocal(category.getUnlocalizedName());
+                button.displayString = I18n.translateToLocal(category.getUnlocalizedName());
             else {
-                button.displayString = StatCollector.translateToLocal("auramisc.lexiconIndex");
+                button.displayString = I18n.translateToLocal("auramisc.lexiconIndex");
                 break;
             }
         }
     }
 
     void populateBookmarks() {
-        List remove = new ArrayList();
+        List<GuiButton> remove = new ArrayList<GuiButton>();
         List<GuiButton> buttons = buttonList;
         for (GuiButton button : buttons)
             if (button.id >= BOOKMARK_START)
@@ -281,7 +283,7 @@ public class GuiLexicon extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         if (closeScreenOnInvKey() && mc.gameSettings.keyBindInventory.getKeyCode() == par2) {
             mc.displayGuiScreen(null);
             mc.setIngameFocus();

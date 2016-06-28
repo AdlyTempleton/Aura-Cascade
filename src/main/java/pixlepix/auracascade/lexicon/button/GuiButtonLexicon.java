@@ -11,10 +11,8 @@
  */
 package pixlepix.auracascade.lexicon.button;
 
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiButtonLexicon extends GuiButton {
 
@@ -23,8 +21,9 @@ public class GuiButtonLexicon extends GuiButton {
     }
 
     @Override
-    public void func_146113_a(SoundHandler p_146113_1_) {
-        p_146113_1_.playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("aura:lexiconPage"), 1.0F));
+    public void playPressSound(SoundHandler soundHandler) {
+    	//TODO reimplement sounds
+        //p_146113_1_.playSound(PositionedSoundRecord.create(new ResourceLocation("aura:lexiconPage"), 1.0F));
     }
 
 }

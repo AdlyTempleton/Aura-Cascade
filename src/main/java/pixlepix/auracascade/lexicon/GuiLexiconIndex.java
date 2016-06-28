@@ -13,15 +13,16 @@ package pixlepix.auracascade.lexicon;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.button.GuiButtonBack;
 import pixlepix.auracascade.lexicon.button.GuiButtonInvisible;
 import pixlepix.auracascade.lexicon.button.GuiButtonPage;
 import pixlepix.auracascade.main.EnumColor;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,13 +40,13 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     GuiLexicon parent;
     GuiTextField searchField;
 
-    List<LexiconEntry> entriesToDisplay = new ArrayList();
+    List<LexiconEntry> entriesToDisplay = new ArrayList<>();
     int fx = 0;
     boolean swiped = false;
 
     public GuiLexiconIndex(LexiconCategory category) {
         this.category = category;
-        title = StatCollector.translateToLocal(category == null ? "auramisc.lexiconIndex" : category.getUnlocalizedName());
+        title = I18n.translateToLocal(category == null ? "auramisc.lexiconIndex" : category.getUnlocalizedName());
         parent = new GuiLexicon();
     }
 
@@ -76,7 +77,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
         buttonList.add(leftButton = new GuiButtonPage(13, left, top + guiHeight - 10, false));
         buttonList.add(rightButton = new GuiButtonPage(14, left + guiWidth - 18, top + guiHeight - 10, true));
 
-        searchField = new GuiTextField(fontRendererObj, left + guiWidth / 2 + 28, top + guiHeight + 6, 200, 10);
+        searchField = new GuiTextField(15, fontRendererObj, left + guiWidth / 2 + 28, top + guiHeight + 6, 200, 10);
         searchField.setCanLoseFocus(false);
         searchField.setFocused(true);
         searchField.setEnableBackgroundDrawing(false);
@@ -93,7 +94,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     void buildEntries() {
         entriesToDisplay.clear();
         for (LexiconEntry entry : category == null ? CategoryManager.getAllEntries() : category.entries) {
-            if (StatCollector.translateToLocal(entry.getUnlocalizedName()).toLowerCase().contains(searchField.getText().toLowerCase().trim()))
+            if (I18n.translateToLocal(entry.getUnlocalizedName()).toLowerCase().contains(searchField.getText().toLowerCase().trim()))
                 entriesToDisplay.add(entry);
         }
         Collections.sort(entriesToDisplay);
@@ -107,7 +108,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
             GuiButtonInvisible button = (GuiButtonInvisible) buttonList.get(i - page * 12);
             LexiconEntry entry = i >= entriesToDisplay.size() ? null : entriesToDisplay.get(i);
             if (entry != null) {
-                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? EnumChatFormatting.ITALIC : "") + StatCollector.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
+                button.displayString = EnumColor.BLACK + "" + (entry.isPriority() ? TextFormatting.ITALIC : "") + I18n.translateToLocal(entry.getUnlocalizedName()) + entry.getSuffix();
                 if (entry == tutEntry) {
                     tutPage = page;
                 }
@@ -151,7 +152,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
         if (!searchField.getText().isEmpty()) {
             drawBookmark(left + 138, top + guiHeight - 24, "  " + searchField.getText(), false);
             mc.renderEngine.bindTexture(texture);
-            GL11.glColor4f(1F, 1F, 1F, 1F);
+            GlStateManager.color(1F, 1F, 1F, 1F);
             drawTexturedModalRect(left + 134, top + guiHeight - 26, 86, 180, 12, 12);
         }
     }
@@ -220,7 +221,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    protected void mouseClicked(int par1, int par2, int par3) {
+    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
         super.mouseClicked(par1, par2, par3);
 
         searchField.mouseClicked(par1, par2, par3);
@@ -230,7 +231,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput() throws IOException {
         super.handleMouseInput();
 
         if (Mouse.getEventButton() == 0)
@@ -249,7 +250,7 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     }
 
     @Override
-    protected void keyTyped(char par1, int par2) {
+    protected void keyTyped(char par1, int par2) throws IOException {
         if (par2 == 203 || par2 == 200 || par2 == 201) // Left, Up, Page Up
             prevPage();
         else if (par2 == 205 || par2 == 208 || par2 == 209) // Right, Down Page Down
@@ -273,21 +274,21 @@ public class GuiLexiconIndex extends GuiLexicon implements IParented {
     void back() {
         if (backButton.enabled) {
             actionPerformed(backButton);
-            backButton.func_146113_a(mc.getSoundHandler());
+            backButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void nextPage() {
         if (rightButton.enabled) {
             actionPerformed(rightButton);
-            rightButton.func_146113_a(mc.getSoundHandler());
+            rightButton.playPressSound(mc.getSoundHandler());
         }
     }
 
     void prevPage() {
         if (leftButton.enabled) {
             actionPerformed(leftButton);
-            leftButton.func_146113_a(mc.getSoundHandler());
+            leftButton.playPressSound(mc.getSoundHandler());
         }
     }
 }

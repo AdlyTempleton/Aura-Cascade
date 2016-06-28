@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -60,11 +59,6 @@ public class ItemAngelJump extends Item implements IBauble, ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister reg) {
-        itemIcon = reg.registerIcon("aura:amuletAngel");
-    }
-
-    @Override
     public boolean shouldRegister() {
         return true;
     }
@@ -76,7 +70,7 @@ public class ItemAngelJump extends Item implements IBauble, ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Blocks.piston), 'P', ItemMaterial.getPrism());
+        return new CraftingBenchRecipe(new ItemStack(this), " F ", "FPF", " F ", 'F', new ItemStack(Blocks.PISTON), 'P', ItemMaterial.getPrism());
     }
 
     @Override

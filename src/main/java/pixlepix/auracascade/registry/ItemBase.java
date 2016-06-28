@@ -14,9 +14,6 @@
  */
 package pixlepix.auracascade.registry;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
 import java.util.ArrayList;
@@ -26,12 +23,6 @@ public abstract class ItemBase extends Item implements ITTinkererItem {
     public ItemBase() {
         super();
         setCreativeTab(ModCreativeTab.INSTANCE);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister par1IconRegister) {
-        itemIcon = IconHelper.forItem(par1IconRegister, this);
     }
 
     @Override

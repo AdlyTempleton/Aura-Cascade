@@ -12,47 +12,48 @@
 package pixlepix.auracascade.lexicon;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import pixlepix.auracascade.main.ConstantMod;
 
 public final class IconHelper {
 
 
-    public static IIcon forName(IIconRegister ir, String name) {
-        return ir.registerIcon(ConstantMod.modId + ":" + name);
+    public static TextureAtlasSprite forName(TextureMap ir, String name) {
+        return ir.registerSprite(new ResourceLocation(ConstantMod.modId, name));
     }
 
-    public static IIcon forBlock(IIconRegister ir, Block block) {
+    public static TextureAtlasSprite forBlock(TextureMap ir, Block block) {
         return forName(ir, block.getUnlocalizedName().replaceAll("tile\\.", ""));
     }
 
-    public static IIcon forBlock(IIconRegister ir, Block block, int i) {
+    public static TextureAtlasSprite forBlock(TextureMap ir, Block block, int i) {
         return forBlock(ir, block, Integer.toString(i));
     }
 
-    public static IIcon forBlock(IIconRegister ir, Block block, int i, String dir) {
+    public static TextureAtlasSprite forBlock(TextureMap ir, Block block, int i, String dir) {
         return forBlock(ir, block, Integer.toString(i), dir);
     }
 
-    public static IIcon forBlock(IIconRegister ir, Block block, String s) {
+    public static TextureAtlasSprite forBlock(TextureMap ir, Block block, String s) {
         return forName(ir, block.getUnlocalizedName().replaceAll("tile\\.", "") + s);
     }
 
-    public static IIcon forBlock(IIconRegister ir, Block block, String s, String dir) {
+    public static TextureAtlasSprite forBlock(TextureMap ir, Block block, String s, String dir) {
         return forName(ir, dir + "/" + block.getUnlocalizedName().replaceAll("tile\\.", "") + s);
     }
 
-    public static IIcon forItem(IIconRegister ir, Item item) {
+    public static TextureAtlasSprite forItem(TextureMap ir, Item item) {
         return forName(ir, item.getUnlocalizedName().replaceAll("item\\.", ""));
     }
 
-    public static IIcon forItem(IIconRegister ir, Item item, int i) {
+    public static TextureAtlasSprite forItem(TextureMap ir, Item item, int i) {
         return forItem(ir, item, Integer.toString(i));
     }
 
-    public static IIcon forItem(IIconRegister ir, Item item, String s) {
+    public static TextureAtlasSprite forItem(TextureMap ir, Item item, String s) {
         return forName(ir, item.getUnlocalizedName().replaceAll("item\\.", "") + s);
     }
 

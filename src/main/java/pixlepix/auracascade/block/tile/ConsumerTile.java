@@ -4,18 +4,19 @@ import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.block.BlockMonitor;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
 
 /**
  * Created by pixlepix on 12/21/14.
  */
-public abstract class ConsumerTile extends TileEntity {
+public abstract class ConsumerTile extends TileEntity implements ITickable {
 
     public int storedPower;
     public int lastPower;
@@ -53,35 +54,34 @@ public abstract class ConsumerTile extends TileEntity {
         writeCustomNBT(nbt);
     }
 
-    @Override
-    public Packet getDescriptionPacket() {
+	@Override
+    public Packet<?> getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeCustomNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, -999, nbt);
+        return new SPacketUpdateTileEntity(getPos(), -999, nbt);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-        readCustomNBT(pkt.func_148857_g());
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        readCustomNBT(pkt.getNbtCompound());
     }
 
     public void updateMonitor() {
-        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(this).add(d1).getBlock(worldObj);
+        for (EnumFacing d1 : EnumFacing.VALUES) {
+            Block b = worldObj.getBlockState(getPos().offset(d1)).getBlock();
             if (b instanceof BlockMonitor) {
 
-                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(this).add(d2).add(d1);
-                    Block b2 = tuple.getBlock(worldObj);
-                    b2.onNeighborBlockChange(worldObj, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                for (EnumFacing d2 : EnumFacing.VALUES) {
+                    BlockPos pos = getPos().offset(d2).offset(d1);
+                    Block b2 = worldObj.getBlockState(pos).getBlock();
+                    b2.onNeighborBlockChange(worldObj, pos, worldObj.getBlockState(pos), b);
                 }
             }
         }
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
+    public void update() {
         if (!worldObj.isRemote) {
             if (worldObj.getTotalWorldTime() % 20 == 18) {
                 storedPower *= .25;
@@ -96,12 +96,12 @@ public abstract class ConsumerTile extends TileEntity {
 
             boolean changeLastPower = false;
             //Drain energy from aura Nodes
-            for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS) {
-                TileEntity tileEntity = worldObj.getTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+            for (EnumFacing direction : EnumFacing.VALUES) {
+                TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(direction));
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(new CoordTuple(this), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(getPos(), "magicCrit", EnumAura.WHITE_AURA, 1);
                         storedPower += auraTile.energy;
                         auraTile.energy = 0;
                         changeLastPower = true;
@@ -113,13 +113,9 @@ public abstract class ConsumerTile extends TileEntity {
             }
             if (changeLastPower) {
                 lastPower = storedPower;
-
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-
+                markDirty();
             } else if (worldObj.getTotalWorldTime() % 20 == 2) {
-
-                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-
+            	markDirty();
             }
 
             if (worldObj.getTotalWorldTime() % 500 == 0) {
@@ -133,7 +129,7 @@ public abstract class ConsumerTile extends TileEntity {
                     if (progress > getMaxProgress()) {
                         progress = 0;
                         onUsePower();
-                        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                        markDirty();
                     }
                     if (storedPower < nextBoostCost) {
                         break;
@@ -141,8 +137,9 @@ public abstract class ConsumerTile extends TileEntity {
                     progress += 1;
                     storedPower -= nextBoostCost;
                     nextBoostCost *= 2;
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-                    worldObj.notifyBlockChange(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord));
+                    markDirty();
+                   // worldObj.notifyBlockOfStateChange(getPos(), worldObj.getBlockState(pos).getBlock());
+                    worldObj.markAndNotifyBlock(this.pos, this.worldObj.getChunkFromBlockCoords(this.pos),this.blockType.getDefaultState(), this.blockType.getDefaultState(), 2);
                 }
             }
         }

@@ -11,9 +11,9 @@
  */
 package pixlepix.auracascade.lexicon;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class LexiconPage {
 
@@ -78,7 +78,6 @@ public abstract class LexiconPage {
     /**
      * Called when a key is pressed.
      */
-    @SuppressWarnings("EmptyMethod")
     @SideOnly(Side.CLIENT)
     public void onKeyPressed(char c, int key) {
         // NO-OP

@@ -35,6 +35,6 @@ public class VeryDenseStorageBook extends ItemStorageBook {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
-                new ItemStack(BlockRegistry.getFirstItemFromClass(SuperDenseStorageBook.class)), 'S', new ItemStack(Blocks.stone));
+                new ItemStack(BlockRegistry.getFirstItemFromClass(SuperDenseStorageBook.class)), 'S', new ItemStack(Blocks.STONE));
     }
 }

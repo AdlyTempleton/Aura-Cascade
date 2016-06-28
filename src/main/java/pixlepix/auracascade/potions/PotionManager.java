@@ -2,7 +2,6 @@ package pixlepix.auracascade.potions;
 
 import net.minecraft.potion.Potion;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.main.Config;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -43,12 +42,12 @@ public class PotionManager {
             }
         }
 
-        potionRed = new PotionRedCurse(Config.potionRed);
-        potionOrange = new PotionOrangeCurse(Config.potionOrange);
-        potionYellow = new PotionYellowCurse(Config.potionYellow);
-        potionGreen = new PotionGreenCurse(Config.potionGreen);
-        potionBlue = new PotionBlueCurse(Config.potionBlue);
-        potionPurple = new PotionVioletCurse(Config.potionViolet);
+        potionRed = new PotionRedCurse();
+        potionOrange = new PotionOrangeCurse();
+        potionYellow = new PotionYellowCurse();
+        potionGreen = new PotionGreenCurse();
+        potionBlue = new PotionBlueCurse();
+        potionPurple = new PotionVioletCurse();
     }
 
 }

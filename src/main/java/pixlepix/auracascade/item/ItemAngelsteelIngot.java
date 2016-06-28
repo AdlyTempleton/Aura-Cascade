@@ -1,13 +1,12 @@
 package pixlepix.auracascade.item;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.network.PacketBurst;
 import pixlepix.auracascade.registry.ISpecialCreativeSort;
@@ -29,13 +28,8 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:angelsteel");
-    }
-
-    @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack).replace("%n", StatCollector.translateToLocal(stack.getItemDamage() + ".aurasteel.name"));
+        return super.getItemStackDisplayName(stack).replace("%n", I18n.translateToLocal(stack.getItemDamage() + ".aurasteel.name"));
     }
 
     @Override
@@ -57,7 +51,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
             int degree = entityItem.getEntityItem().getItemDamage();
 
             if (i != 3) {
-                AxisAlignedBB range = AxisAlignedBB.getBoundingBox(entityItem.posX - 3, entityItem.posY - 3, entityItem.posZ - 3, entityItem.posX + 3, entityItem.posY + 3, entityItem.posZ + 3);
+                AxisAlignedBB range = new AxisAlignedBB(entityItem.posX - 3, entityItem.posY - 3, entityItem.posZ - 3, entityItem.posX + 3, entityItem.posY + 3, entityItem.posZ + 3);
                 List<EntityItem> entityItems = entityItem.worldObj.getEntitiesWithinAABB(EntityItem.class, range);
                 for (EntityItem nearbyItem : entityItems) {
                     ItemStack nearbyStack = nearbyItem.getEntityItem();
@@ -86,7 +80,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
                 }
                 EntityItem item = new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, new ItemStack(this, 1, degree + 1));
                 entityItem.worldObj.spawnEntityInWorld(item);
-                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(item.worldObj.provider.dimensionId, item.posX, item.posY, item.posZ, 32));
+                AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, item.posX, item.posY, item.posZ), new NetworkRegistry.TargetPoint(item.worldObj.provider.getDimension(), item.posX, item.posY, item.posZ, 32));
             }
         }
         return false;
@@ -123,7 +117,7 @@ public class ItemAngelsteelIngot extends Item implements ITTinkererItem, ISpecia
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         for (int i = 0; i < AngelsteelToolHelper.MAX_DEGREE; i++) {
             list.add(new ItemStack(item, 1, i));
         }

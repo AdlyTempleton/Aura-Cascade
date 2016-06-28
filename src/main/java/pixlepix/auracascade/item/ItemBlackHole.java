@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -45,7 +44,7 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
         if (entity instanceof EntityPlayer && !world.isRemote && world.getTotalWorldTime() % 100 == 0) {
             InventoryPlayer inv = ((EntityPlayer) entity).inventory;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
-                if (inv.getStackInSlot(i) != null && Block.getBlockFromItem(inv.getStackInSlot(i).getItem()) == Blocks.cobblestone) {
+                if (inv.getStackInSlot(i) != null && Block.getBlockFromItem(inv.getStackInSlot(i).getItem()) == Blocks.COBBLESTONE) {
                     inv.setInventorySlotContents(i, null);
                 }
             }
@@ -54,12 +53,7 @@ public class ItemBlackHole extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.cobblestone), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:blackHole");
+        return new CraftingBenchRecipe(new ItemStack(this), "CCC", "CIC", "CCC", 'C', new ItemStack(Blocks.COBBLESTONE), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
     }
 
     @Override

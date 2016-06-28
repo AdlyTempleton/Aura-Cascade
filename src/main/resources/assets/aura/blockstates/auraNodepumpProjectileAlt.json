@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "aura:miniblock_top_bottom",
+    "textures": {
+      "top": "aura:blocks/pumpProjectileNode_Top",
+      "bottom": "aura:blocks/pumpProjectileNode_Bottom",
+      "side": "aura:blocks/pumpProjectileNode_Side_Alt"
+    },
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

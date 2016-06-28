@@ -1,12 +1,12 @@
 package pixlepix.auracascade.potions;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
 
@@ -18,8 +18,8 @@ import java.util.Random;
  */
 public class PotionVioletCurse extends Potion {
 
-    public PotionVioletCurse(int id) {
-        super(id, true, EnumAura.VIOLET_AURA.color.getHex());
+    public PotionVioletCurse() {
+        super(true, EnumAura.VIOLET_AURA.color.getHex());
         setPotionName("Violet Curse");
     }
 
@@ -31,13 +31,13 @@ public class PotionVioletCurse extends Potion {
     @Override
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(Minecraft.getMinecraft().renderEngine.getResourceLocation(1));
-        mc.currentScreen.drawTexturedModelRectFromIcon(x + 8, y + 8, ItemAngelsteelSword.getStackFirstDegree(EnumAura.VIOLET_AURA).getIconIndex(), 16, 16);
+        mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.VIOLET_AURA), x + 8, y + 8);
     }
 
     @Override
     public void performEffect(EntityLivingBase entity, int amplifier) {
-        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, AxisAlignedBB.getBoundingBox(entity.posX - 15, entity.posY - 15, entity.posZ - 15, entity.posX + 15, entity.posY + 15, entity.posZ + 15));
+        List<EntityLivingBase> entities = entity.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(entity.posX - 15, entity.posY - 15, entity.posZ - 15, entity.posX + 15, entity.posY + 15, entity.posZ + 15));
         EntityLivingBase entityLiving = entities.get(new Random().nextInt(entities.size()));
         if (entityLiving != entity) {
             //XOR, XOR, blah blah blah

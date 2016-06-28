@@ -2,11 +2,13 @@ package pixlepix.auracascade.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
 import pixlepix.auracascade.block.tile.TileBookshelfCoordinator;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
 import pixlepix.auracascade.data.StorageItemStack;
@@ -57,7 +59,7 @@ public class ContainerCoordinator extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) inventorySlots.get(slot);
+        Slot slotObject = inventorySlots.get(slot);
 
         //null checks and checks if the item can be stacked (maxStackSize > 1)
         if (slotObject != null && slotObject.getHasStack()) {
@@ -105,17 +107,19 @@ public class ContainerCoordinator extends Container {
 
     }
 
-    public void scrollTo(float scroll, String filter) {
-        if (!tileEntity.getWorldObj().isRemote) {
-            tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+    @SuppressWarnings("unchecked")
+	public void scrollTo(float scroll, String filter) {
+        if (!tileEntity.getWorld().isRemote) {
+        	BlockPos pos = tileEntity.getPos();
+            tileEntity.markDirty();
         }
         lastFilter = filter;
 
         ArrayList<StorageItemStack> stacks = (ArrayList<StorageItemStack>) tileEntity.getAbstractInventory().clone();
-        Iterator iter = stacks.iterator();
+        Iterator<StorageItemStack> iter = stacks.iterator();
         while (iter.hasNext()) {
-            StorageItemStack storageItemStack = (StorageItemStack) iter.next();
-            String name = StatCollector.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
+            StorageItemStack storageItemStack = iter.next();
+            String name = I18n.translateToFallback(storageItemStack.toItemStack().getUnlocalizedName() + ".name").toUpperCase();
 
             if (!name.contains(filter)) {
                 iter.remove();
@@ -216,18 +220,18 @@ public class ContainerCoordinator extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int slot, int clickedButton, int mode, EntityPlayer player) {
+    public ItemStack slotClick(int slot, int clickedButton, ClickType clickTypeIn, EntityPlayer player) {
         ItemStack itemstack = null;
-
+        int mode = this.dragMode;
         if (player.inventory.getItemStack() != null && slot == -999 && (clickedButton == 0 || clickedButton == 1) && (mode == 0 || mode == 1)) {
             if (clickedButton == 0) {
-                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack(), true);
+            	//TODO Something graphics and dropping shit
+                player.dropItem(player.inventory.getItemStack(), true, true);
                 player.inventory.setItemStack(null);
             }
 
             if (clickedButton == 1) {
-                player.dropPlayerItemWithRandomChoice(player.inventory.getItemStack().splitStack(1), true);
-
+            	player.dropItem(player.inventory.getItemStack().splitStack(1), true, true);
                 if (player.inventory.getItemStack().stackSize == 0) {
                     player.inventory.setItemStack(null);
                 }
@@ -241,7 +245,7 @@ public class ContainerCoordinator extends Container {
                     target.stackSize = clickedButton == 0 ? maxStackSize : maxStackSize / 2;
                     ItemStack result = takeFromInventory(target);
                     player.inventory.setItemStack(result);
-                    ((SlotCoordinator) inventorySlots.get(slot)).onPickupFromSlot(player, result);
+                    inventorySlots.get(slot).onPickupFromSlot(player, result);
                     update();
                 } else if (player.inventory.getItemStack() != null) {
                     ItemStack placedStack = player.inventory.getItemStack().copy();
@@ -268,7 +272,7 @@ public class ContainerCoordinator extends Container {
                 return null;
             }
 
-            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+            Slot slot2 = this.inventorySlots.get(slot);
 
             if (slot2 != null && slot2.canTakeStack(player)) {
                 ItemStack itemstack3 = this.transferStackInSlot(player, slot);
@@ -288,7 +292,7 @@ public class ContainerCoordinator extends Container {
                 return null;
             }
 
-            Slot slot2 = (Slot) this.inventorySlots.get(slot);
+            Slot slot2 = this.inventorySlots.get(slot);
 
             if (slot2 != null) {
                 ItemStack stackInSlot = slot2.getStack();

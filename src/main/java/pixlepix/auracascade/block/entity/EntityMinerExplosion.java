@@ -2,8 +2,9 @@ package pixlepix.auracascade.block.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.BlockExplosionContainer;
 
@@ -59,7 +60,7 @@ public class EntityMinerExplosion extends Entity {
         }
         moveEntity(motionX, motionY, motionZ);
         if (worldObj.isRemote && worldObj.getTotalWorldTime() % 2 == 0) {
-            this.worldObj.spawnParticle("largeexplode", posX, posY, posZ, 0.0D, 0.0D, 0.0D);
+            this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
         }
     }
 
@@ -67,28 +68,27 @@ public class EntityMinerExplosion extends Entity {
         int delay = (int) Math.max(0, (100 - 20 * Math.log10(charge)));
         if (lastExplosion + delay < worldObj.getTotalWorldTime()) {
             lastExplosion = worldObj.getTotalWorldTime();
-            int xCoord = (int) posX;
-            int yCoord = (int) posY;
-            int zCoord = (int) posZ;
+            BlockPos pos = new BlockPos(this);
 
             boolean contained = false;
 
             for (int i = -2; i < 3; i++) {
                 for (int j = -2; j < 3; j++) {
                     for (int k = -2; k < 3; k++) {
-                        Block block = worldObj.getBlock(xCoord + i, yCoord + j, zCoord + k);
+                        BlockPos pos_ = pos.add(i, j, k);
+                        Block block = worldObj.getBlockState(pos_).getBlock();
                         if (block instanceof BlockExplosionContainer) {
                             contained = true;
                             Random r = new Random();
-                            int meta = worldObj.getBlockMetadata(xCoord + i, yCoord + j, zCoord + k) + 1;
+                            int nextDamage = worldObj.getBlockState(pos_).getValue(BlockExplosionContainer.DAMAGE) + 1;
                             if (r.nextDouble() > ((BlockExplosionContainer) block).getChanceToResist()) {
 
-                                if (meta > 15) {
+                                if (nextDamage > 15) {
 
-                                    worldObj.setBlockToAir(xCoord + i, yCoord + j, zCoord + k);
+                                    worldObj.setBlockToAir(pos_);
                                 } else {
 
-                                    worldObj.setBlockMetadataWithNotify(xCoord + i, yCoord + j, zCoord + k, meta, 3);
+                                    worldObj.setBlockState(pos_, worldObj.getBlockState(pos_).withProperty(BlockExplosionContainer.DAMAGE, nextDamage), 3);
                                 }
                             }
                         }
@@ -110,21 +110,6 @@ public class EntityMinerExplosion extends Entity {
 
     }
 
-    /**
-     * Sets the held item, or an armor slot. Slot 0 is held item. Slot 1-4 is armor. Params: Item, slot
-     *
-     * @param p_70062_1_
-     * @param p_70062_2_
-     */
-    @Override
-    public void setCurrentItemOrArmor(int p_70062_1_, ItemStack p_70062_2_) {
-
-    }
-
-    @Override
-    public ItemStack[] getLastActiveItems() {
-        return new ItemStack[0];
-    }
 
     @Override
     public boolean shouldRenderInPass(int pass) {

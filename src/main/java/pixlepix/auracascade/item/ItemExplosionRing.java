@@ -2,7 +2,6 @@ package pixlepix.auracascade.item;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -46,7 +45,7 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'T', new ItemStack(Blocks.tnt), 'G', new ItemStack(Items.gunpowder));
+        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'T', new ItemStack(Blocks.TNT), 'G', new ItemStack(Items.GUNPOWDER));
     }
 
     @Override
@@ -67,11 +66,6 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public void onUnequipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {
 
-    }
-
-    @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:explosion_ring");
     }
 
     @Override

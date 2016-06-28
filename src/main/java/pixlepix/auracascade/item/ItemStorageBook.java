@@ -1,13 +1,16 @@
 package pixlepix.auracascade.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.oredict.OreDictionary;
@@ -31,8 +34,8 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     public static void setInventory(ItemStack stack, ArrayList<ItemStack> newInventory) {
-        if (stack.stackTagCompound == null) {
-            stack.stackTagCompound = new NBTTagCompound();
+        if (stack.getTagCompound() == null) {
+            stack.setTagCompound(new NBTTagCompound());
         }
         NBTTagList list = new NBTTagList();
         for (ItemStack itemStack : newInventory) {
@@ -42,7 +45,7 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
             }
             list.appendTag(nbt);
         }
-        stack.stackTagCompound.setTag("items", list);
+        stack.getTagCompound().setTag("items", list);
     }
 
     public boolean isValid(ItemStack stack, Block[] blocks, Item[] items, String[] ores) {
@@ -71,7 +74,7 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     public ArrayList<ItemStack> getInventory(ItemStack stack) {
         ArrayList<ItemStack> result = new ArrayList<ItemStack>();
 
-        NBTTagCompound compound = stack.stackTagCompound;
+        NBTTagCompound compound = stack.getTagCompound();
         if (compound != null) {
             NBTTagList itemsList = compound.getTagList("items", Constants.NBT.TAG_COMPOUND);
             for (int i = 0; i < itemsList.tagCount(); i++) {
@@ -87,34 +90,27 @@ public abstract class ItemStorageBook extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:storageBook");
-    }
-
-    @Override
     public ArrayList<Object> getSpecialParameters() {
         return null;
     }
 
     @Override
-    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && ((world.getBlock(x, y, z) != null && world.getBlock(x, y, z) == AuraCascade.proxy.chiselBookshelf) || world.getBlock(x, y, z) == Blocks.bookshelf)) {
-            world.setBlock(x, y, z, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class));
-            TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(x, y, z);
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && ((world.getBlockState(pos).getBlock() != null && world.getBlockState(pos).getBlock() == AuraCascade.proxy.chiselBookshelf) || world.getBlockState(pos).getBlock() == Blocks.BOOKSHELF)) {
+            world.setBlockState(pos, BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class).getDefaultState());
+            TileStorageBookshelf te = (TileStorageBookshelf) world.getTileEntity(pos);
             te.storedBook = stack.copy();
             te.markDirty();
-            world.markBlockForUpdate(x, y, z);
             player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
-            return true;
+            return EnumActionResult.PASS;
         }
-        return false;
+        return EnumActionResult.FAIL;
     }
 
     public abstract int getMaxStackSize();
 
     public abstract int getHeldStacks();
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public abstract boolean isItemValid(ItemStack stack, TileStorageBookshelf tileStorageBookshelf);
 
     public int getActualCount() {

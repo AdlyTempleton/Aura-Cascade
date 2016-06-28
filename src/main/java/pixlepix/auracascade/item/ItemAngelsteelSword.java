@@ -1,7 +1,6 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.data.EnumAura;
@@ -21,8 +20,10 @@ import pixlepix.auracascade.potions.PotionManager;
 import pixlepix.auracascade.registry.*;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by localmacaccount on 1/19/15.
@@ -32,7 +33,6 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public static String[] patrons = new String[]{"Pixlepix", "JGPhoenix"};
     public int degree = 0;
     public EnumAura[] auraSwords = new EnumAura[]{EnumAura.BLUE_AURA, EnumAura.GREEN_AURA, EnumAura.ORANGE_AURA, EnumAura.RED_AURA, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA};
-    public HashMap<EnumAura, IIcon> iconHashMap = new HashMap<EnumAura, IIcon>();
 
     public ItemAngelsteelSword(Integer i) {
         super(AngelsteelToolHelper.materials[i]);
@@ -49,36 +49,18 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:angel_sword");
-        for (EnumAura aura : auraSwords) {
-            iconHashMap.put(aura, register.registerIcon("aura:angel_sword" + aura.name));
-        }
-    }
-
-    @Override
     public int getCreativeTabPriority() {
         return -5;
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+    public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         return true;
     }
 
-    @Override
-    public IIcon getIconIndex(ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("aura")) {
-            EnumAura aura = EnumAura.values()[stack.stackTagCompound.getInteger("aura")];
-            return iconHashMap.get(aura);
-
-        }
-        return super.getIconIndex(stack);
-    }
-
-    public EnumAura getAura(ItemStack stack) {
-        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("aura")) {
-            return EnumAura.values()[stack.stackTagCompound.getInteger("aura")];
+    public static EnumAura getAura(ItemStack stack) {
+        if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("aura")) {
+            return EnumAura.values()[stack.getTagCompound().getInteger("aura")];
 
         }
         return EnumAura.RED_AURA;
@@ -86,8 +68,8 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
 
     public ItemStack getStack(EnumAura aura) {
         ItemStack stack = new ItemStack(this);
-        stack.stackTagCompound = new NBTTagCompound();
-        stack.stackTagCompound.setInteger("aura", aura.ordinal());
+        stack.setTagCompound(new NBTTagCompound());
+        stack.getTagCompound().setInteger("aura", aura.ordinal());
         return stack;
     }
 
@@ -117,7 +99,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         for (EnumAura aura : auraSwords) {
             list.add(getStack(aura));
         }
@@ -127,22 +109,22 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
     public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase attacker) {
         EnumAura aura = getAura(stack);
         if (aura == EnumAura.RED_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionRed, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.ORANGE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionOrange, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.YELLOW_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionYellow, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.GREEN_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionGreen, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.BLUE_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionBlue, degree * degree * 100 + 100));
         }
         if (aura == EnumAura.VIOLET_AURA) {
-            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple.getId(), degree * degree * 100 + 100));
+            entity.addPotionEffect(new PotionEffect(PotionManager.potionPurple, degree * degree * 100 + 100));
         }
         return true;
     }
@@ -158,7 +140,7 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
 
     @Override
     public void onUpdate(ItemStack stack, World w, Entity e, int p_77663_4_, boolean p_77663_5_) {
-        if (w.isRemote && e instanceof EntityPlayer && Arrays.asList(patrons).contains(((EntityPlayer) e).getDisplayName())) {
+        if (w.isRemote && e instanceof EntityPlayer && Arrays.asList(patrons).contains(e.getDisplayName().getUnformattedText())) {
             float hue = (w.getTotalWorldTime() % 1200) / 1200F;
             Color color = Color.getHSBColor(hue, 1F, .5F);
             Random r = new Random();

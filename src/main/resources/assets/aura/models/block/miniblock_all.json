@@ -1,0 +1,12 @@
+{
+  "parent": "aura:block/miniblock",
+  "textures": {
+    "down": "#all",
+    "up": "#all",
+    "north": "#all",
+    "south": "#all",
+    "west": "#all",
+    "east": "#all",
+    "particle": "#all"
+  }
+}

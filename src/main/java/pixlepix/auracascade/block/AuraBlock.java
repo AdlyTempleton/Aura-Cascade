@@ -1,12 +1,11 @@
 package pixlepix.auracascade.block;
 
-import cpw.mods.fml.common.ModAPIManager;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,14 +14,18 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.common.ModAPIManager;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.tile.*;
 import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.item.ItemAuraCrystal;
@@ -45,20 +48,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     //"" is default
     //"pump" is AuraTilePump\
     //"black" is AuraTileBlack etc
-    String type;
-    private IIcon topIcon;
-    private IIcon sideIcon;
-    private IIcon botIcon;
-
-
-    @SuppressWarnings("SameParameterValue")
+    private String type;
+    private static AxisAlignedBB AABB = new AxisAlignedBB(.25F, .25F, .25F, .75F, .75F, .75F);
     public AuraBlock(String type) {
-        super(Material.glass);
+        super(Material.GLASS);
         this.type = type;
-
-        if (!type.equals("craftingCenter")) {
-            setBlockBounds(.25F, .25F, .25F, .75F, .75F, .75F);
-        }
         setLightOpacity(0);
         setHardness(2F);
     }
@@ -67,9 +61,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         this("");
         setHardness(2F);
     }
-
     public static AuraBlock getBlockFromName(String name) {
         List<Block> blockList = BlockRegistry.getBlockFromClass(AuraBlock.class);
+        if ("capacitor".equals(name)) {
+            blockList = BlockRegistry.getBlockFromClass(AuraBlockCapacitor.class);
+        }
         for (Block b : blockList) {
             if (((AuraBlock) b).type.equals(name)) {
                 return (AuraBlock) b;
@@ -101,49 +97,62 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     //Prevents being moved by RIM
-    @SuppressWarnings({"SameReturnValue", "UnusedDeclaration"})
+    @SuppressWarnings({})
     public static boolean _Immovable() {
         return true;
     }
 
     @Override
-    public String getHarvestTool(int metadata) {
+    public String getHarvestTool(IBlockState state) {
         return "pickaxe";
     }
-
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isVisuallyOpaque()
+    {
         return false;
     }
-
     @Override
-    public boolean hasComparatorInputOverride() {
+    public boolean isBlockNormalCube(IBlockState state)
+    {
+        return false;
+    }
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+    @Override
+    public boolean isCollidable()
+    {
         return true;
     }
-
     @Override
-    public int getComparatorInputOverride(World world, int x, int y, int z, int meta) {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+    public boolean hasComparatorInputOverride(IBlockState state) {
+        return true;
+    }
+    @Override
+    public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
         if (tileEntity instanceof AuraTile) {
             int aura = ((AuraTile) tileEntity).storage.getTotalAura();
             return (int) Math.floor(Math.log10(aura));
         } else {
-            return super.getComparatorInputOverride(world, x, y, z, meta);
+            return super.getComparatorInputOverride(blockState, worldIn, pos);
         }
     }
-
+    
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof AuraTile) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote && world.getTileEntity(pos) instanceof AuraTile) {
 
-            if (world.getTileEntity(x, y, z) instanceof AuraTileCapacitor && player.isSneaking()) {
-                AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(x, y, z);
+            if (world.getTileEntity(pos) instanceof AuraTileCapacitor && player.isSneaking()) {
+                AuraTileCapacitor capacitor = (AuraTileCapacitor) world.getTileEntity(pos);
                 capacitor.storageValueIndex = (capacitor.storageValueIndex + 1) % capacitor.storageValues.length;
-                player.addChatComponentMessage(new ChatComponentText("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
-                world.markBlockForUpdate(x, y, z);
+                player.addChatComponentMessage(new TextComponentString("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]));
+                world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
                 return true;
-            } else if (world.getTileEntity(x, y, z) instanceof AuraTilePedestal && !player.isSneaking()) {
-                AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(x, y, z);
+            } else if (world.getTileEntity(pos) instanceof AuraTilePedestal && !player.isSneaking()) {
+                AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(pos);
 
                 //Remove current itemstack from pedestal
                 if (pedestal.itemStack != null) {
@@ -152,58 +161,56 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 }
 
                 pedestal.itemStack = player.inventory.getCurrentItem() != null ? player.inventory.decrStackSize(player.inventory.currentItem, 1) : null;
-                world.markBlockForUpdate(x, y, z);
-                world.notifyBlockChange(x, y, z, this);
+                world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+                world.notifyBlockOfStateChange(pos, this);
                 return true;
 
-            } else if (world.getTileEntity(x, y, z) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
-                player.addChatComponentMessage(new ChatComponentText("Aura:"));
+            } else if (world.getTileEntity(pos) instanceof AuraTile && player.inventory.getCurrentItem() == null) {
+                player.addChatComponentMessage(new TextComponentString("Aura:"));
                 for (EnumAura aura : EnumAura.values()) {
-                    if (((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura) != 0) {
-                        player.addChatComponentMessage(new ChatComponentText(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(x, y, z)).storage.get(aura)));
+                    if (((AuraTile) world.getTileEntity(pos)).storage.get(aura) != 0) {
+                        player.addChatComponentMessage(new TextComponentString(aura.name + " Aura: " + ((AuraTile) world.getTileEntity(pos)).storage.get(aura)));
                     }
                 }
 
-                if (world.getTileEntity(x, y, z) instanceof AuraTilePumpBase) {
+                if (world.getTileEntity(pos) instanceof AuraTilePumpBase) {
 
-                    player.addChatComponentMessage(new ChatComponentText("Power: " + ((AuraTilePumpBase) world.getTileEntity(x, y, z)).pumpPower));
+                    player.addChatComponentMessage(new TextComponentString("Power: " + ((AuraTilePumpBase) world.getTileEntity(pos)).pumpPower));
                 }
                 return true;
             }
-        } else if (!world.isRemote && world.getTileEntity(x, y, z) instanceof CraftingCenterTile && player.inventory.getCurrentItem() == null) {
-            CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(x, y, z);
+        } else if (!world.isRemote && world.getTileEntity(pos) instanceof CraftingCenterTile && player.inventory.getCurrentItem() == null) {
+            CraftingCenterTile tile = (CraftingCenterTile) world.getTileEntity(pos);
             if (tile.getRecipe() != null) {
-                player.addChatComponentMessage(new ChatComponentText(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
-                for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
-                    AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
+                player.addChatComponentMessage(new TextComponentString(EnumColor.DARK_BLUE + "Making: " + tile.getRecipe().result.getDisplayName()));
+                for (EnumFacing direction : CraftingCenterTile.pedestalRelativeLocations) {
+                    AuraTilePedestal pedestal = ((AuraTilePedestal) world.getTileEntity(pos.offset(direction)));
                     if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
-                        player.addChatComponentMessage(new ChatComponentText("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
+                        player.addChatComponentMessage(new TextComponentString("" + EnumColor.AQUA + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")"));
                     } else {
                         AuraCascade.log.warn("Invalid recipe when checking crafting center");
                     }
                 }
             } else {
-                player.addChatComponentMessage(new ChatComponentText("No Recipe Selected"));
+            	player.addChatComponentMessage(new TextComponentString("No Recipe Selected"));
             }
             return true;
         }
         return true;
     }
-
-
     @Override
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        super.onEntityCollidedWithBlock(world, x, y, z, entity);
+    public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState blockState, Entity entity) {
+        super.onEntityCollidedWithBlock(world, pos, this.getDefaultState(), entity);
 
-        TileEntity te = world.getTileEntity(x, y, z);
+        TileEntity te = world.getTileEntity(pos);
         if (entity instanceof EntityItem && !world.isRemote) {
             ItemStack stack = ((EntityItem) entity).getEntityItem();
             if (stack.getItem() instanceof ItemAuraCrystal) {
                 if (te instanceof AuraTile) {
                     ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000 * stack.stackSize));
-                    world.markBlockForUpdate(x, y, z);
-                    world.notifyBlockChange(x, y, z, this);
-                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, 32));
+                    world.markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
+                    world.notifyNeighborsOfStateChange(pos, this);
+                    AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, entity.posX, entity.posY, entity.posZ), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
 
                     entity.setDead();
                 }
@@ -216,55 +223,14 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-
-
-        if (type.contains("Alt")) {
-
-            topIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Top");
-            sideIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Side_Alt");
-
-            botIcon = iconRegister.registerIcon("aura:" + type.replace("Alt", "") + "Node_Bottom");
-        } else {
-            sideIcon = iconRegister.registerIcon("aura:" + type + "Node_Side");
-
-            botIcon = iconRegister.registerIcon("aura:" + type + "Node_Bottom");
-            topIcon = iconRegister.registerIcon("aura:" + type + "Node_Top");
-        }
-
-
-    }
-
-    /**
-     * Called after a block is placed
-     *
-     * @param world
-     * @param x
-     * @param z
-     * @param z
-     * @param p_149714_5_
-     */
-    @Override
-    public void onPostBlockPlaced(World world, int x, int y, int z, int p_149714_5_) {
-        super.onPostBlockPlaced(world, x, y, z, p_149714_5_);
-        AuraUtil.updateMonitor(world, x, y, z);
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(world, pos, state, placer, stack);
+        AuraUtil.updateMonitor(world, pos);
     }
 
     @Override
-    public IIcon getIcon(int side, int meta) {
-        switch (side) {
-            case 0:
-                return botIcon;
-            case 1:
-                return topIcon;
-            default:
-                return sideIcon;
-        }
-    }
-
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int p_149749_6_) {
-        TileEntity te = world.getTileEntity(x, y, z);
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntity te = world.getTileEntity(pos);
         if (te instanceof IInventory) {
             IInventory inv = (IInventory) te;
             for (int i = 0; i < inv.getSizeInventory(); i++) {
@@ -272,21 +238,20 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                     double d0 = AuraUtil.getDropOffset(world);
                     double d1 = AuraUtil.getDropOffset(world);
                     double d2 = AuraUtil.getDropOffset(world);
-                    EntityItem entityitem = new EntityItem(world, (double) x + d0, (double) y + d1, (double) z + d2, inv.getStackInSlot(i));
-                    entityitem.delayBeforeCanPickup = 10;
+                    EntityItem entityitem = new EntityItem(world, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, inv.getStackInSlot(i));
+                    AuraUtil.setItemDelay(entityitem, 10);
                     world.spawnEntityInWorld(entityitem);
                 }
             }
         }
-        super.breakBlock(world, x, y, z, block, p_149749_6_);
-        AuraUtil.updateMonitor(world, x, y, z);
+        super.breakBlock(world, pos, state);
+        AuraUtil.updateMonitor(world, pos);
     }
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        // TODO Auto-generated method stub
         if (type.equals("pump")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.iron_ingot), 'L', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "ILI", "INI", "ILI", 'I', new ItemStack(Items.IRON_INGOT), 'L', new ItemStack(Items.DYE, 1, 4), 'N', getAuraNodeItemstack());
         }
         if (type.equals("black")) {
             return new CraftingBenchRecipe(new ItemStack(this), " I ", " N ", " I ", 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA), 'N', getAuraNodeItemstack());
@@ -299,11 +264,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
 
         if (type.equals("craftingPedestal")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BNB", "BBB", 'B', new ItemStack(Items.dye, 1, 4), 'N', getAuraNodeItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "BBB", "BNB", "BBB", 'B', new ItemStack(Items.DYE, 1, 4), 'N', getAuraNodeItemstack());
         }
 
         if (type.equals("craftingCenter")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "GGG", "RDR", "RRR", 'G', new ItemStack(Items.gold_ingot), 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'D', new ItemStack(Items.diamond));
+            return new CraftingBenchRecipe(new ItemStack(this), "GGG", "RDR", "RRR", 'G', new ItemStack(Items.GOLD_INGOT), 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'D', new ItemStack(Items.DIAMOND));
         }
 
 
@@ -312,31 +277,31 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
 
         if (type.equals("pumpProjectile")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.arrow), 'G', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.ARROW), 'G', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpFall")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.water_bucket), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", 'X', new ItemStack(Items.WATER_BUCKET), 'G', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpLight")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.glowstone), 'G', ItemMaterial.getIngot(EnumAura.YELLOW_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.GLOWSTONE), 'G', ItemMaterial.getIngot(EnumAura.YELLOW_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpRedstone")) {
-            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.redstone_block), 'G', ItemMaterial.getIngot(EnumAura.RED_AURA), 'P', getAuraNodePumpItemstack());
+            return new CraftingBenchRecipe(new ItemStack(this), "XXX", "GPG", "G G", 'X', new ItemStack(Blocks.REDSTONE_BLOCK), 'G', ItemMaterial.getIngot(EnumAura.RED_AURA), 'P', getAuraNodePumpItemstack());
         }
         if (type.equals("pumpAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")), 'E', Items.redstone);
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pump")), 'E', Items.REDSTONE);
         }
         if (type.equals("pumpRedstoneAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")), 'E', Items.redstone);
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpRedstone")), 'E', Items.REDSTONE);
         }
         if (type.equals("pumpLightAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")), 'E', Items.redstone);
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpLight")), 'E', Items.REDSTONE);
         }
         if (type.equals("pumpFallAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")), 'E', Items.redstone);
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpFall")), 'E', Items.REDSTONE);
         }
         if (type.equals("pumpProjectileAlt")) {
-            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpProjectile")), 'E', Items.redstone);
+            return new CraftingBenchRecipe(new ItemStack(this), " E ", "EPE", " E ", 'P', new ItemStack(getBlockFromName("pumpProjectile")), 'E', Items.REDSTONE);
         }
         if (type.equals("flux")) {
             return new CraftingBenchRecipe(new ItemStack(this), "RNR", 'R', ItemMaterial.getIngot(EnumAura.RED_AURA), 'N', getAuraNodeItemstack());
@@ -345,7 +310,7 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             return null;
 
         }
-        return new CraftingBenchRecipe(new ItemStack(this, 4), "PPP", "PRP", "PPP", 'P', new ItemStack(Items.gold_nugget), 'R', new ItemStack(Items.redstone));
+        return new CraftingBenchRecipe(new ItemStack(this, 4), "PPP", "PRP", "PPP", 'P', new ItemStack(Items.GOLD_NUGGET), 'R', new ItemStack(Items.REDSTONE));
     }
 
     @Override
@@ -365,12 +330,11 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public ArrayList<Object> getSpecialParameters() {
-        // TODO Auto-generated method stub
-        ArrayList result = new ArrayList<Object>();
+    	//This was typed to Object from no-type.
+        ArrayList<Object> result = new ArrayList<Object>();
         result.add("pump");
         result.add("black");
         result.add("conserve");
-        result.add("capacitor");
 
         result.add("craftingCenter");
 
@@ -398,25 +362,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
     @Override
     public String getBlockName() {
-        // TODO Auto-generated method stub
         return name + type;
     }
 
     @Override
     public boolean shouldRegister() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean shouldDisplayInTab() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -494,23 +454,21 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
 
         try {
             return getTileEntity().newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return null;
     }
 
     @Override
-    public int damageDropped(int meta) {
-        return meta;
+    public int damageDropped(IBlockState state) {
+        return getMetaFromState(state);
     }
 
     @Override
-    public List<String> getTooltipData(World world, EntityPlayer player, int x, int y, int z) {
+    public List<String> getTooltipData(World world, EntityPlayer player, BlockPos pos) {
         List<String> result = new ArrayList<String>();
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity instanceof AuraTile) {
 
             if (tileEntity instanceof AuraTileCapacitor) {
@@ -555,8 +513,8 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
             CraftingCenterTile tile = (CraftingCenterTile) tileEntity;
             if (tile.getRecipe() != null) {
                 result.add("Making: " + tile.getRecipe().result.getDisplayName());
-                for (ForgeDirection direction : CraftingCenterTile.pedestalRelativeLocations) {
-                    AuraTilePedestal pedestal = (AuraTilePedestal) new CoordTuple(x, y, z).add(direction).getTile(world);
+                for (EnumFacing direction : CraftingCenterTile.pedestalRelativeLocations) {
+                    AuraTilePedestal pedestal = (AuraTilePedestal) world.getTileEntity(pos.offset(direction));
                     if (tile.getRecipe() != null && tile.getRecipe().getAuraFromItem(pedestal.itemStack) != null) {
                         result.add("    Power received:" + pedestal.powerReceived + "/" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getNum() + " (" + tile.getRecipe().getAuraFromItem(pedestal.itemStack).getType().name + ")");
                     } else {
@@ -570,5 +528,9 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
         }
         return result;
     }
+    @Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABB;
+	}
 }
 

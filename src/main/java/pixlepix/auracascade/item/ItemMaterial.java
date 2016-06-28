@@ -1,6 +1,5 @@
 package pixlepix.auracascade.item;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -111,23 +110,18 @@ public class ItemMaterial extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon("aura:" + names[materialIndex] + aura.name);
-    }
-
-    @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         if (materialIndex == 0) {
             ThaumicTinkererRecipeMulti multi = new ThaumicTinkererRecipeMulti();
             for (int i : aura.dyes) {
-                multi.addRecipe(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Items.iron_ingot), new ItemStack(Blocks.wool, 1, i)));
+                multi.addRecipe(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Items.IRON_INGOT), new ItemStack(Blocks.WOOL, 1, i)));
             }
             return multi;
         }
         if (materialIndex == 1) {
             return new PylonRecipe(
                     new ItemStack(this),
-                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.diamond)),
+                    new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 60000), new ItemStack(Items.DIAMOND)),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))),
                     new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 20000), new ItemStack(getItemFromSpecs(new MaterialPair(aura, 0)))));

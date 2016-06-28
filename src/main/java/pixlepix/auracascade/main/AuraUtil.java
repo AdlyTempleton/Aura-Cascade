@@ -1,6 +1,5 @@
 package pixlepix.auracascade.main;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -8,12 +7,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.BlockMonitor;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.item.AngelsteelToolHelper;
 import pixlepix.auracascade.network.PacketBurst;
 
@@ -70,18 +71,18 @@ public class AuraUtil {
     };
 
     public static void keepAlive(TileEntity te, int range) {
-        List<EntityItem> nearbyItems = te.getWorldObj().getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(te.xCoord - range, te.yCoord - range, te.zCoord - range, te.xCoord + range, te.yCoord + range, te.zCoord + range));
+        List<EntityItem> nearbyItems = te.getWorld().getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(te.getPos().add(-range, -range, -range), te.getPos().add(range, range, range)));
         for (EntityItem entityItem : nearbyItems) {
             entityItem.lifespan = Integer.MAX_VALUE;
-            entityItem.age = 0;
+            setItemAge(entityItem, 0);
         }
     }
 
     public static String formatLocation(TileEntity te) {
-        return te.xCoord + "|" + te.yCoord + "|" + te.zCoord;
+        return te.getPos().getX() + "|" + te.getPos().getY() + "|" + te.getPos().getZ();
     }
 
-    public static String formatLocation(CoordTuple te) {
+    public static String formatLocation(BlockPos te) {
         return te.getX() + "|" + te.getY() + "|" + te.getZ();
     }
 
@@ -91,15 +92,14 @@ public class AuraUtil {
     }
     
 
-    public static void updateMonitor(World w, int x, int y, int z) {
-        for (ForgeDirection d1 : ForgeDirection.VALID_DIRECTIONS) {
-            Block b = new CoordTuple(x, y, z).add(d1).getBlock(w);
+    public static void updateMonitor(World w, BlockPos pos) {
+        for (EnumFacing d1 : EnumFacing.VALUES) {
+            Block b = w.getBlockState(pos.offset(d1)).getBlock();
             if (b instanceof BlockMonitor) {
 
-                for (ForgeDirection d2 : ForgeDirection.VALID_DIRECTIONS) {
-                    CoordTuple tuple = new CoordTuple(x, y, z).add(d2).add(d1);
-                    Block b2 = tuple.getBlock(w);
-                    b2.onNeighborBlockChange(w, tuple.getX(), tuple.getY(), tuple.getZ(), b);
+                for (EnumFacing d2 : EnumFacing.VALUES) {
+                    Block b2 = w.getBlockState(pos.offset(d1).offset(d2)).getBlock();
+                    b2.onNeighborBlockChange(w, pos.offset(d1).offset(d2), w.getBlockState(pos.offset(d1).offset(d2)), b);
                 }
             }
         }
@@ -108,14 +108,14 @@ public class AuraUtil {
     public static void respawnItemWithParticles(World worldObj, EntityItem oldItem, ItemStack stack) {
         EntityItem newEntity = new EntityItem(worldObj, oldItem.posX, oldItem.posY, oldItem.posZ, stack);
 
-        newEntity.delayBeforeCanPickup = oldItem.delayBeforeCanPickup;
+        setItemDelay(newEntity, getItemDelay(oldItem));
         newEntity.motionX = oldItem.motionX;
         newEntity.motionY = oldItem.motionY;
         newEntity.motionZ = oldItem.motionZ;
 
         worldObj.spawnEntityInWorld(newEntity);
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(1, newEntity.posX, newEntity.posY, newEntity.posZ), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), (int) oldItem.posX, (int) oldItem.posY, (int) oldItem.posZ, 32));
 
 
     }
@@ -132,14 +132,14 @@ public class AuraUtil {
                 }
             }
         }
-
-        ((TileEntity) tile).getWorldObj().markBlockForUpdate(((TileEntity) tile).xCoord, ((TileEntity) tile).yCoord, ((TileEntity) tile).zCoord);
+        BlockPos pos = ((TileEntity) tile).getPos();
+        ((TileEntity) tile).getWorld().markBlocksDirtyVertical(pos.getX(), pos.getZ(), pos.getX(), pos.getZ());
         return stack;
     }
 
-    public static void addAngelsteelDesc(List infoList, ItemStack stack) {
+    public static void addAngelsteelDesc(List<String> infoList, ItemStack stack) {
         if (AngelsteelToolHelper.hasValidBuffs(stack)) {
-            int[] buffs = AngelsteelToolHelper.readFromNBT(stack.stackTagCompound);
+            int[] buffs = AngelsteelToolHelper.readFromNBT(stack.getTagCompound());
             infoList.add("Angel's Efficiency: " + buffs[0]);
             infoList.add("Angel's Fortune: " + buffs[1]);
             infoList.add("Angel's Shatter: " + buffs[2]);
@@ -149,23 +149,32 @@ public class AuraUtil {
     }
 
     public static double getDropOffset(World w) {
-        return (w.rand.nextFloat() * .7) + (double) (1.0F - .7) * 0.5D;
+        return (w.rand.nextFloat() * .7) + (1.0F - .7) * 0.5D;
     }
 
     public static void diamondBurst(Entity entity, String particle) {
-        CoordTuple centerTuple = new CoordTuple((int) entity.posX, (int) entity.posY + 1, (int) entity.posZ);
-        CoordTuple topTuple = centerTuple.add(ForgeDirection.UP, 5);
-        ForgeDirection[] directions = new ForgeDirection[]{ForgeDirection.EAST, ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.SOUTH};
-        for (int i = 0; i < directions.length; i++) {
-            ForgeDirection primaryDirection = directions[i];
-            ForgeDirection connectingDirection = directions[i + 1 < directions.length ? i + 1 : 0];
-            CoordTuple corner = centerTuple.add(primaryDirection, 5);
-            CoordTuple connectingCorner = centerTuple.add(connectingDirection, 5);
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerTuple, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
-            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topTuple, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.dimensionId, entity.posX, entity.posY, entity.posZ, 32));
+        BlockPos centerPos = new BlockPos(entity).up();
+        BlockPos topPos = centerPos.up(5);
+        for (EnumFacing e : EnumFacing.HORIZONTALS) {
+            EnumFacing connectingDirection = e.rotateYCCW();
+            BlockPos corner = centerPos.offset(e, 5);
+            BlockPos connectingCorner = centerPos.offset(connectingDirection, 5);
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, centerPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, connectingCorner, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
+            AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(corner, topPos, particle, 1, 1, 1, 1), new NetworkRegistry.TargetPoint(entity.worldObj.provider.getDimension(), entity.posX, entity.posY, entity.posZ, 32));
 
         }
     }
 
+    public static void setItemAge(EntityItem item, int age) {
+        ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, item, age, "age", "field_70292_b", "c");
+    }
+
+    public static int getItemDelay(EntityItem item) {
+        return ((Integer) ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, item, "delayBeforeCanPickup", "field_145804_b", "d"));
+    }
+
+    public static void setItemDelay(EntityItem item, int age) {
+        ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, item, age, "delayBeforeCanPickup", "field_145804_b", "d");
+    }
 }

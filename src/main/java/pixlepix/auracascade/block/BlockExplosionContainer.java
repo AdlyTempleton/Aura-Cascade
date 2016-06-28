@@ -1,18 +1,22 @@
 package pixlepix.auracascade.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pixlepix.auracascade.AuraCascade;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import pixlepix.auracascade.data.recipe.ProcessorRecipe;
 import pixlepix.auracascade.lexicon.page.PageCraftingRecipe;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -30,15 +34,31 @@ import java.util.Random;
 public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     public String type;
-
+    public static final PropertyInteger DAMAGE = PropertyInteger.create("damage", 0, 15);
 
     public BlockExplosionContainer() {
-        super(Material.rock);
+        super(Material.ROCK);
         //Same as obby
         setResistance(2000F);
         type = "Dirt";
         setTickRandomly(true);
         setHardness(2F);
+        setDefaultState(blockState.getBaseState().withProperty(DAMAGE, 0));
+    }
+
+    @Override
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, DAMAGE);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return state.getValue(DAMAGE);
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(DAMAGE, meta);
     }
 
     public BlockExplosionContainer(String s) {
@@ -65,10 +85,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public int onBlockPlaced(World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int meta) {
-        super.onBlockPlaced(world, x, y, z, side, hitX, hitY, hitZ, meta);
-        world.scheduleBlockUpdate(x, y, z, this, tickRate(world));
-        return meta;
+    public IBlockState onBlockPlaced(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        super.onBlockPlaced(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+        world.scheduleUpdate(pos, this, tickRate(world));
+        return getStateFromMeta(meta);
     }
 
     @Override
@@ -77,36 +97,23 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
-        super.updateTick(world, x, y, z, rand);
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(world, pos, state, rand);
         if (rand.nextDouble() < getChanceToRepair()) {
-            int meta = world.getBlockMetadata(x, y, z);
-            if (meta > 0) {
-                world.setBlockMetadataWithNotify(x, y, z, meta - 1, 3);
-
+            int damage = state.getValue(DAMAGE);
+            if (damage > 0) {
+                world.setBlockState(pos, state.withProperty(DAMAGE, damage - 1), 3);
             }
         }
-        world.scheduleBlockUpdate(x, y, z, this, tickRate(world) + rand.nextInt(5));
-    }
-
-    /**
-     * Determines if this block should render in this pass.
-     *
-     * @param pass The pass in question
-     * @return True to render
-     */
-    @Override
-    public boolean canRenderInPass(int pass) {
-        AuraCascade.proxy.renderPass = pass;
-        return true;
+        world.scheduleUpdate(pos, this, tickRate(world) + rand.nextInt(5));
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
     @Override
-    public boolean renderAsNormalBlock() {
-        return isOpaqueCube();
+    public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return isOpaqueCube(state);
     }
 
     public double getChanceToResist() {
@@ -164,14 +171,8 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("aura:fortified" + type);
-    }
-
-    @Override
     public ArrayList<Object> getSpecialParameters() {
-        // TODO Auto-generated method stub
-        ArrayList result = new ArrayList<Object>();
+        ArrayList<Object> result = new ArrayList<Object>();
         result.add("Wood");
         result.add("Glass");
         result.add("Cobblestone");
@@ -181,20 +182,21 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     }
 
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+    public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
         if (!type.equals("Glass")) {
             return true;
         }
-        Block block = world.getBlock(x, y, z);
+        Block block = world.getBlockState(pos).getBlock();
         return block != this;
     }
 
-    /**
-     * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha
-     */
     @Override
-    public int getRenderBlockPass() {
-        return 1;
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        if ("Glass".equals(type)) {
+            return layer == BlockRenderLayer.CUTOUT_MIPPED || layer == BlockRenderLayer.TRANSLUCENT;
+        } else {
+            return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
+        }
     }
 
     @Override
@@ -212,40 +214,6 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
         return true;
     }
 
-    /**
-     * Gets the block's texture. Args: side, meta
-     *
-     * @param side
-     * @param meta
-     */
-    @Override
-    public IIcon getIcon(int side, int meta) {
-
-        return blockIcon;
-    }
-
-    @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        int meta = world.getBlockMetadata(x, y, z);
-        if (AuraCascade.proxy.renderPass == 1) {
-            if (meta != 0) {
-                return AuraCascade.proxy.breakingIcons[getCrackedStage(meta)];
-            } else {
-                return AuraCascade.proxy.blankIcon;
-            }
-        }
-        return blockIcon;
-    }
-
-    public int getCrackedStage(int meta) {
-        if (meta <= 5) {
-            return meta - 1;
-        } else {
-            return (int) (4 + Math.ceil((meta - 5) / 2));
-        }
-
-    }
-
     @Override
     public Class<? extends ItemBlock> getItemBlock() {
         return null;
@@ -258,10 +226,10 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
 
     /**
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
-     * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
+     * adjacent blocks and also whether the player can attach torches, REDSTONE wire, etc to this block.
      */
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isFullyOpaque(IBlockState state) {
         return type == null || !type.equals("Glass");
     }
 
@@ -269,27 +237,27 @@ public class BlockExplosionContainer extends Block implements ITTinkererBlock {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         if (type.equals("Dirt")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.dirt));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.DIRT));
         }
         if (type.equals("Wood")) {
-            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 1)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 2)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 3)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 4)),
-                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.planks, 1, 5)));
+            return new ThaumicTinkererRecipeMulti(new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 1)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 2)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 3)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 4)),
+                    new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.PLANKS, 1, 5)));
         }
         if (type.equals("Glass")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.glass));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.GLASS));
         }
         if (type.equals("Cobblestone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.cobblestone));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.COBBLESTONE));
         }
         if (type.equals("Stone")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.stone));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.STONE));
         }
         if (type.equals("Obsidian")) {
-            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.end_stone), new ItemStack(Blocks.obsidian));
+            return new ProcessorRecipe(new ItemStack(this), false, new ItemStack(Blocks.END_STONE), new ItemStack(Blocks.OBSIDIAN));
         }
         return null;
     }

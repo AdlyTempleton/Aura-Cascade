@@ -2,8 +2,8 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.CoordTuple;
 import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
 
@@ -33,13 +33,13 @@ public class AuraTilePumpBase extends AuraTile {
     }
 
     @Override
-    public boolean canTransfer(CoordTuple tuple, EnumAura aura) {
+    public boolean canTransfer(BlockPos tuple, EnumAura aura) {
         return false;
     }
 
     @Override
-    public boolean canReceive(CoordTuple source, EnumAura aura) {
-        return source.getY() <= yCoord && super.canReceive(source, aura);
+    public boolean canReceive(BlockPos source, EnumAura aura) {
+        return source.getY() <= getPos().getY() && super.canReceive(source, aura);
     }
 
     public void addFuel(int time, int speed) {
@@ -51,20 +51,20 @@ public class AuraTilePumpBase extends AuraTile {
 
             }
         }
-        AuraUtil.updateMonitor(worldObj, xCoord, yCoord, zCoord);
+        AuraUtil.updateMonitor(worldObj, getPos());
     }
 
 
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && !worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)) {
+    public void update() {
+        super.update();
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 20 == 2 && worldObj.isBlockIndirectlyGettingPowered(getPos()) == 0) {
             if (pumpPower > 0) {
                 AuraTile upNode = null;
                 for (int i = 1; i < 16; i++) {
-                    TileEntity te = worldObj.getTileEntity(xCoord, yCoord + i, zCoord);
-                    if (te instanceof AuraTile && isOpenPath(new CoordTuple(xCoord, yCoord + i, zCoord))) {
+                    TileEntity te = worldObj.getTileEntity(getPos().up(i));
+                    if (te instanceof AuraTile && isOpenPath(getPos().up(i))) {
                         upNode = (AuraTile) te;
                         break;
                     }
@@ -73,11 +73,11 @@ public class AuraTilePumpBase extends AuraTile {
 
                     pumpPower--;
                     if (pumpPower == 0) {
-                        AuraUtil.updateMonitor(worldObj, xCoord, yCoord, zCoord);
+                        AuraUtil.updateMonitor(worldObj, getPos());
 
                     }
                     for (EnumAura aura : EnumAura.values()) {
-                        int dist = upNode.yCoord - yCoord;
+                        int dist = upNode.getPos().getY() - getPos().getY();
                         int quantity = pumpSpeed / dist;
                         if (isAlternator()) {
                             float f = getAlternatingFactor();
@@ -87,7 +87,7 @@ public class AuraTilePumpBase extends AuraTile {
                         quantity = aura.getRelativeMass(worldObj) == 0 ? 0 : (int) ((double) quantity / aura.getRelativeMass(worldObj));
                         quantity *= aura.getAscentBoost(worldObj);
                         quantity = Math.min(quantity, storage.get(aura));
-                        burst(new CoordTuple(upNode), "magicCrit", aura, 1D);
+                        burst(upNode.getPos(), "magicCrit", aura, 1D);
                         storage.subtract(aura, quantity);
                         upNode.storage.add(new AuraQuantity(aura, quantity));
                     }

@@ -1,54 +1,59 @@
 package pixlepix.auracascade.registry;
 
+import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import pixlepix.auracascade.main.ConstantMod;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BlockRegistry {
 
     public static HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe> recipeMap = new HashMap<ITTinkererRegisterable, ThaumicTinkererRecipe>();
-    private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
-    private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
-    private ArrayList<Class> itemClasses = new ArrayList<Class>();
-    private ArrayList<Class> blockClasses = new ArrayList<Class>();
+	private static HashMap<Class, ArrayList<Item>> itemRegistry = new HashMap<Class, ArrayList<Item>>();
+	private static HashMap<Class, ArrayList<Block>> blockRegistry = new HashMap<Class, ArrayList<Block>>();
+	private ArrayList<Class> itemClasses = new ArrayList<Class>();
+	private ArrayList<Class> blockClasses = new ArrayList<Class>();
+
+    public static Set<Item> getAllItems() {
+        Set<Item> ret = Sets.newHashSet();
+        for (List<Item> list : itemRegistry.values()) {
+            ret.addAll(list);
+        }
+        return ret;
+    }
 
     public static ThaumicTinkererRecipe getRecipe(ITTinkererRegisterable item) {
         return recipeMap.get(item);
     }
 
-    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromItem(Class<? extends Item> item) {
         return recipeMap.get(getFirstItemFromClass(item));
     }
 
-    @SuppressWarnings("SuspiciousMethodCalls")
     public static ThaumicTinkererRecipe getFirstRecipeFromBlock(Class<? extends Block> item) {
         return recipeMap.get(getFirstBlockFromClass(item));
     }
 
-    public static ArrayList<Item> getItemFromClass(Class clazz) {
+    public static ArrayList<Item> getItemFromClass(Class<?> clazz) {
         return itemRegistry.get(clazz);
     }
 
-    public static Item getFirstItemFromClass(Class clazz) {
+    public static Item getFirstItemFromClass(Class<? extends Item> clazz) {
         return itemRegistry.get(clazz) != null ? itemRegistry.get(clazz).get(0) : null;
     }
 
-    public static Item getItemFromClassAndName(Class clazz, String s) {
+    public static Item getItemFromClassAndName(Class<?> clazz, String s) {
         if (itemRegistry.get(clazz) == null) {
             return null;
         }
@@ -60,7 +65,7 @@ public class BlockRegistry {
         return null;
     }
 
-    public static Block getBlockFromClassAndName(Class clazz, String s) {
+    public static Block getBlockFromClassAndName(Class<?> clazz, String s) {
         if (blockRegistry.get(clazz) == null) {
             return null;
         }
@@ -72,11 +77,11 @@ public class BlockRegistry {
         return null;
     }
 
-    public static ArrayList<Block> getBlockFromClass(Class clazz) {
+    public static ArrayList<Block> getBlockFromClass(Class<?> clazz) {
         return blockRegistry.get(clazz);
     }
 
-    public static Block getFirstBlockFromClass(Class clazz) {
+    public static Block getFirstBlockFromClass(Class<? extends Block> clazz) {
         return blockRegistry.get(clazz) != null ? blockRegistry.get(clazz).get(0) : null;
     }
 
@@ -109,21 +114,21 @@ public class BlockRegistry {
 
     public void preInit() {
         registerClasses();
-        for (Class clazz : blockClasses) {
+        for (Class<?> clazz : blockClasses) {
             try {
                 Block newBlock = (Block) clazz.newInstance();
                 if (((ITTinkererBlock) newBlock).shouldRegister()) {
-                    newBlock.setBlockName(((ITTinkererBlock) newBlock).getBlockName());
+                    newBlock.setUnlocalizedName(((ITTinkererBlock) newBlock).getBlockName());
                     ArrayList<Block> blockList = new ArrayList<Block>();
                     blockList.add(newBlock);
 
                     if (((ITTinkererBlock) newBlock).getSpecialParameters() != null) {
                         for (Object param : ((ITTinkererBlock) newBlock).getSpecialParameters()) {
 
-                            for (Constructor constructor : clazz.getConstructors()) {
+                            for (Constructor<?> constructor : clazz.getConstructors()) {
                                 if (constructor.getParameterTypes().length > 0 && constructor.getParameterTypes()[0].isAssignableFrom(param.getClass())) {
                                     Block nextBlock = (Block) clazz.getConstructor(param.getClass()).newInstance(param);
-                                    nextBlock.setBlockName(((ITTinkererBlock) nextBlock).getBlockName());
+                                    nextBlock.setUnlocalizedName(((ITTinkererBlock) nextBlock).getBlockName());
                                     blockList.add(nextBlock);
                                     break;
                                 }
@@ -141,17 +146,11 @@ public class BlockRegistry {
 
                     }
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
-        for (Class clazz : itemClasses) {
+        for (Class<?> clazz : itemClasses) {
             try {
                 Item newItem = (Item) clazz.newInstance();
                 if (((ITTinkererItem) newItem).shouldRegister()) {
@@ -160,7 +159,7 @@ public class BlockRegistry {
                     itemList.add(newItem);
                     if (((ITTinkererItem) newItem).getSpecialParameters() != null) {
                         for (Object param : ((ITTinkererItem) newItem).getSpecialParameters()) {
-                            for (Constructor constructor : clazz.getConstructors()) {
+                            for (Constructor<?> constructor : clazz.getConstructors()) {
                                 if (constructor.getParameterTypes().length > 0 && constructor.getParameterTypes()[0].isAssignableFrom(param.getClass())) {
                                     Item nextItem = (Item) constructor.newInstance(param);
                                     nextItem.setUnlocalizedName(((ITTinkererItem) nextItem).getItemName());
@@ -172,20 +171,20 @@ public class BlockRegistry {
                     }
                     itemRegistry.put(clazz, itemList);
                 }
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException  | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
         for (ArrayList<Block> blockArrayList : blockRegistry.values()) {
             for (Block block : blockArrayList) {
                 if (((ITTinkererBlock) block).getItemBlock() != null) {
+                	//TODO these may break
                     GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getItemBlock(), ((ITTinkererBlock) block).getBlockName());
+                    //ForgeRegistries.BLOCKS.register(block);
                 } else {
                     GameRegistry.registerBlock(block, ((ITTinkererBlock) block).getBlockName());
+                   // ForgeRegistries.BLOCKS.register(block);
+                    //ForgeRegistries.BLOCKS.re
                 }
                 if (((ITTinkererBlock) block).getTileEntity() != null) {
                     GameRegistry.registerTileEntity(((ITTinkererBlock) block).getTileEntity(), ConstantMod.prefixMod + ((ITTinkererBlock) block).getBlockName());
@@ -201,6 +200,18 @@ public class BlockRegistry {
             }
         }
 
+        for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
+            for (Item item : itemArrayList) {
+                if (!(item instanceof ItemBlock)) {
+                	//TODO this may have broken.
+                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
+                    //ForgeRegistries.ITEMS.register(item);
+                    if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+                        ModCreativeTab.INSTANCE.addItem(item);
+                    }
+                }
+            }
+        }
     }
 
     public void init() {
@@ -214,18 +225,6 @@ public class BlockRegistry {
         for (ArrayList<Block> blockArrayList : blockRegistry.values()) {
             for (Block block : blockArrayList) {
                 registerRecipe((ITTinkererRegisterable) block);
-
-            }
-        }
-        for (ArrayList<Item> itemArrayList : itemRegistry.values()) {
-            for (Item item : itemArrayList) {
-                if (!(item instanceof ItemBlock)) {
-                    GameRegistry.registerItem(item, ((ITTinkererItem) item).getItemName());
-
-                    if (((ITTinkererItem) item).shouldDisplayInTab() && FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-                        ModCreativeTab.INSTANCE.addItem(item);
-                    }
-                }
             }
         }
 
