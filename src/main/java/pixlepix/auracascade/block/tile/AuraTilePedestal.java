@@ -8,8 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.TextComponentString;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 
 /**
@@ -21,7 +19,6 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     //Direction to center of crafting
     public EnumFacing direction = null;
     public int powerReceived = 0;
-    public EnumAura typeReceiving;
 
     //Not stored or synchronized
     //Not placed in world
@@ -60,23 +57,18 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
     }
 
     @Override
-    public void receivePower(int power, EnumAura type) {
+    public void receivePower(int power) {
         verifyConnections();
         CraftingCenterTile center = getCenter();
         if (center != null) {
             PylonRecipe recipe = center.getRecipe();
             if (recipe != null) {
-                AuraQuantity quantity = recipe.getAuraFromItem(itemStack);
-                if (quantity != null && quantity.getType() != typeReceiving) {
-                    typeReceiving = quantity.getType();
-                    powerReceived = 0;
-                }
-                if (quantity != null && (quantity.getType() == EnumAura.WHITE_AURA || quantity.getType() == type)) {
-                    powerReceived += power;
-                    powerReceived = Math.min(powerReceived, quantity.getNum());
-                    if (powerReceived >= quantity.getNum()) {
-                        center.checkRecipeComplete();
-                    }
+                int quantity = recipe.getAuraFromItem(itemStack);
+                powerReceived += power;
+
+                powerReceived = Math.min(powerReceived, quantity);
+                if (powerReceived >= quantity) {
+                    center.checkRecipeComplete();
                 }
             }
         }
@@ -89,7 +81,6 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
         itemStack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("itemStack"));
         direction = nbt.getInteger("direction") == -1 ? null : EnumFacing.getFront(nbt.getInteger("direction"));
         powerReceived = nbt.getInteger("powerReceived");
-        typeReceiving = nbt.getInteger("typeReceiving") == -1 ? null : EnumAura.values()[nbt.getInteger("typeReceiving")];
     }
 
     @Override
@@ -102,7 +93,6 @@ public class AuraTilePedestal extends AuraTile implements IInventory {
         }
         nbt.setInteger("direction", direction == null ? -1 : direction.getIndex());
         nbt.setInteger("powerReceived", powerReceived);
-        nbt.setInteger("typeReceiving", typeReceiving == null ? -1 : typeReceiving.ordinal());
     }
 
 

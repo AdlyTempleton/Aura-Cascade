@@ -12,8 +12,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.block.tile.CraftingCenterTile;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.lexicon.IGuiLexiconEntry;
 import pixlepix.auracascade.lexicon.LexiconEntry;
@@ -27,7 +25,7 @@ import java.util.Collections;
  * Created by pixlepix on 12/28/14.
  */
 public class PagePylon extends PageRecipe {
-    private static final ResourceLocation craftingOverlay = new ResourceLocation("aura:textures/gui/pylonOverlay.png");
+    private static final ResourceLocation craftingOverlay = new ResourceLocation("color:textures/gui/pylonOverlay.png");
 
     PylonRecipe recipe;
 
@@ -86,14 +84,14 @@ public class PagePylon extends PageRecipe {
 
             int xPos = gui.getLeft() + x * 29 + 7 + (y == 0 && x == 3 ? 10 : 0);
             int yPos = gui.getTop() + y * 29 + 24 - (y == 0 ? 7 : 0);
-            AuraQuantity quantity = recipe.componentList.get(i).auraQuantity;
+            int quantity = recipe.componentList.get(i).auraQuantity;
             //If the 'Shift click to see recipe is present
-            //We need to offset the aura display
+            //We need to offset the color display
 
             LexiconRecipeMappings.EntryData data = LexiconRecipeMappings.getDataForStack(recipe.componentList.get(i).itemStack);
             int yOffset = (data != null && (data.entry != gui.getEntry() || data.page != gui.getPageOn())) ? 32 : 16;
             if (mx >= xPos && my >= yPos && mx < xPos + 16 && my < yPos + 16) {
-                VazkiiRenderHelper.renderTooltip(mx, my + yOffset, Collections.singletonList("" + quantity.getNum() + "(" + (quantity.getType() == EnumAura.WHITE_AURA ? "Any" : quantity.getType().name) + ")"));
+                VazkiiRenderHelper.renderTooltip(mx, my + yOffset, Collections.singletonList("" + quantity));
             }
         }
         renderItemAtGridPos(gui, 2, 0, recipe.result, false);

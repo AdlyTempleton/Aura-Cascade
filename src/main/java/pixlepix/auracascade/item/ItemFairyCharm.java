@@ -13,7 +13,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.*;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.main.event.EventHandler;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
@@ -178,7 +178,7 @@ public class ItemFairyCharm extends Item implements ITTinkererItem {
     public ThaumicTinkererRecipe getRecipeItem() {
 
         return new ThaumicTinkererRecipeMulti(
-                new CraftingBenchRecipe(new ItemStack(this), "BGB", 'B', new ItemStack(Items.BRICK), 'G', ItemMaterial.getGem(EnumAura.WHITE_AURA)),
+                new CraftingBenchRecipe(new ItemStack(this), "BGB", 'B', new ItemStack(Items.BRICK), 'G', ItemMaterial.getGem(EnumRainbowColor.WHITE)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 1), " X ", "XCX", " X ", 'X', new ItemStack(Items.GOLDEN_SWORD), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 2), " X ", "XCX", " X ", 'X', new ItemStack(Items.POTIONITEM, 1, 8196), 'C', new ItemStack(this)),
                 new CraftingBenchRecipe(new ItemStack(this, 1, 3), " X ", "XCX", " X ", 'X', new ItemStack(Items.POTIONITEM, 1, 8257), 'C', new ItemStack(this)),

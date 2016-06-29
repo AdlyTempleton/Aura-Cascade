@@ -2,7 +2,6 @@ package pixlepix.auracascade.block.tile;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
-import pixlepix.auracascade.data.EnumAura;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -153,7 +152,7 @@ public class AuraTileRF extends AuraTile {
             }
         }
 
-        //Just before aura moves
+        //Just before color moves
         if (worldObj.getTotalWorldTime() % 20 == 0 && !worldObj.isRemote) {
             lastPower = 0;
         }
@@ -165,7 +164,7 @@ public class AuraTileRF extends AuraTile {
     }
 
     @Override
-    public void receivePower(int power, EnumAura type) {
+    public void receivePower(int power) {
         lastPower += power;
     }
 }

@@ -13,8 +13,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.AuraTile;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.registry.*;
 
 import java.util.ArrayList;
@@ -25,30 +23,17 @@ import java.util.List;
  */
 public class ItemAuraCrystal extends Item implements ITTinkererItem {
 
-    public static final String name = "AuraCrystal";
-
-    public static ItemStack getCrystalFromAura(EnumAura aura) {
-        return new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 1, aura.ordinal());
-    }
-
-    public static ItemStack getCrystalFromAuraMax(EnumAura aura) {
-        return new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class), 64, aura.ordinal());
-    }
+    public static final String name = "whiteCrystal";
 
     @Override
     public EnumActionResult onItemUseFirst(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand){
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof AuraTile) {
             stack.stackSize--;
-            ((AuraTile) te).storage.add(new AuraQuantity(EnumAura.values()[stack.getItemDamage()], 1000));
+            ((AuraTile) te).storage += 1000;
         }
         //Changing anything to fail literally breaks all of it.
         return EnumActionResult.PASS;
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack stack) {
-        return super.getItemStackDisplayName(stack) + " " + EnumAura.values()[stack.getItemDamage()].name;
     }
 
     @Override
@@ -72,13 +57,6 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs p_150895_2_, List<ItemStack> list) {
-        for (int i = 0; i < EnumAura.values().length; i++) {
-            list.add(new ItemStack(item, 1, i));
-        }
-    }
-
-    @Override
     public boolean getHasSubtypes() {
         return true;
     }
@@ -86,38 +64,7 @@ public class ItemAuraCrystal extends Item implements ITTinkererItem {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
 
-        return new ThaumicTinkererRecipeMulti(
-                new OreCraftingBenchRecipe(new ItemStack(this, 2, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.IRON_INGOT), 'G', new ItemStack(Items.GOLD_NUGGET)),
-                //Green
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', "dyeGreen", 'C', new ItemStack(this, 1, 0)),
-                //Black
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', "dyeBlack", 'C', new ItemStack(this, 1, 0)),
-                //Red
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', "dyeRed", 'C', new ItemStack(this, 1, 0)),
-                //Orange
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', "dyeOrange", 'C', new ItemStack(this, 1, 0)),
-                //Yellow
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', "dyeYellow", 'C', new ItemStack(this, 1, 0)),
-                //Blue
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', "dyeBlue", 'C', new ItemStack(this, 1, 0)),
-                //Violet
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', "dyePurple", 'C', new ItemStack(this, 1, 0)),
-                //Green
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 1), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 13), 'C', new ItemStack(this, 1, 0)),
-                //Black
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 2), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 15), 'C', new ItemStack(this, 1, 0)),
-                //Red
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 3), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 14), 'C', new ItemStack(this, 1, 0)),
-                //Orange
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 4), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 1), 'C', new ItemStack(this, 1, 0)),
-                //Yellow
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 5), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 4), 'C', new ItemStack(this, 1, 0)),
-                //Blue
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 6), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 11), 'C', new ItemStack(this, 1, 0)),
-                //Violet
-                new OreCraftingBenchRecipe(new ItemStack(this, 8, 7), "CCC", "CXC", "CCC", 'X', new ItemStack(Blocks.WOOL, 1, 10), 'C', new ItemStack(this, 1, 0))
-
-        );
+        return new OreCraftingBenchRecipe(new ItemStack(this, 2, 0), "GGG", "GDG", "GGG", 'D', new ItemStack(Items.IRON_INGOT), 'G', new ItemStack(Items.GOLD_NUGGET));
     }
 
     @Override

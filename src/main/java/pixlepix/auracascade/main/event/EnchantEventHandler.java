@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.StringUtils;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.main.AuraUtil;
 
@@ -82,33 +82,33 @@ public class EnchantEventHandler {
         };
     }
 
-    public int getIndexFromAura(EnumAura aura) {
-        if (aura == EnumAura.RED_AURA) {
+    public int getIndexFromAura(EnumRainbowColor aura) {
+        if (aura == EnumRainbowColor.RED) {
             return 0;
         }
-        if (aura == EnumAura.ORANGE_AURA) {
+        if (aura == EnumRainbowColor.ORANGE) {
             return 1;
         }
-        if (aura == EnumAura.YELLOW_AURA) {
+        if (aura == EnumRainbowColor.YELLOW) {
             return 2;
         }
-        if (aura == EnumAura.GREEN_AURA) {
+        if (aura == EnumRainbowColor.GREEN) {
             return 3;
         }
-        if (aura == EnumAura.BLUE_AURA) {
+        if (aura == EnumRainbowColor.BLUE) {
             return 4;
         }
-        if (aura == EnumAura.VIOLET_AURA) {
+        if (aura == EnumRainbowColor.VIOLET) {
             return 5;
         }
         return -1;
     }
 
-    public int getEffectStrength(ItemStack stack, EnumAura aura) {
+    public int getEffectStrength(ItemStack stack, EnumRainbowColor aura) {
         return getEffectData(stack)[getIndexFromAura(aura)];
     }
 
-    public int getEffectStrength(ItemStack stack, EnumAura aura, EnumAura aura2) {
+    public int getEffectStrength(ItemStack stack, EnumRainbowColor aura, EnumRainbowColor aura2) {
         return (int) Math.ceil(Math.sqrt(getEffectStrength(stack, aura) * getEffectStrength(stack, aura2)));
     }
 
@@ -130,7 +130,7 @@ public class EnchantEventHandler {
         if (event.getHarvester() != null && event.getHarvester().inventory.getCurrentItem() != null) {
             ItemStack stack = event.getHarvester().inventory.getCurrentItem();
             //Silk touch
-            int multiply = getEffectStrength(stack, EnumAura.RED_AURA, EnumAura.YELLOW_AURA);
+            int multiply = getEffectStrength(stack, EnumRainbowColor.RED, EnumRainbowColor.YELLOW);
             if (new Random().nextInt(4) < multiply && canMultiplyDrops(event)) {
                 ArrayList<ItemStack> newDrops = new ArrayList<ItemStack>(event.getDrops().size());
                 for (ItemStack dropStack : event.getDrops()) {
@@ -139,7 +139,7 @@ public class EnchantEventHandler {
                 event.getDrops().clear();
                 event.getDrops().addAll(newDrops);
             } else {
-                if (getEffectStrength(stack, EnumAura.RED_AURA) > 0 && block.canSilkHarvest(world, event.getPos(), event.getState(), event.getHarvester())) {
+                if (getEffectStrength(stack, EnumRainbowColor.RED) > 0 && block.canSilkHarvest(world, event.getPos(), event.getState(), event.getHarvester())) {
                     event.setDropChance(0);
                     event.getDrops().clear();
                     ItemStack itemstack = createStackedBlock(event.getState());
@@ -148,7 +148,7 @@ public class EnchantEventHandler {
                     }
                 } else {
 
-                    int fortune = getEffectStrength(stack, EnumAura.YELLOW_AURA, EnumAura.YELLOW_AURA);
+                    int fortune = getEffectStrength(stack, EnumRainbowColor.YELLOW, EnumRainbowColor.YELLOW);
                     //Crops nullifies the fortune level passed to dropBlockAsItemWithChance
                     if (fortune != 0 && event.getFortuneLevel() < fortune && !(event.getState().getBlock() instanceof BlockCrops)) {
                         //Cancels the event and breaks the block again
@@ -166,14 +166,14 @@ public class EnchantEventHandler {
         EntityPlayer player = event.getEntityPlayer();
         ItemStack tool = player.inventory.getCurrentItem();
 
-        int areaOfEffect = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.BLUE_AURA);
+        int areaOfEffect = getEffectStrength(tool, EnumRainbowColor.VIOLET, EnumRainbowColor.BLUE);
         if (areaOfEffect != 0) {
             World world = event.getTarget().worldObj;
             List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(event.getTarget().posX - 2, event.getTarget().posY - 2, event.getTarget().posZ - 2, event.getTarget().posX + 2, event.getTarget().posY + 2, event.getTarget().posZ + 2));
             for (EntityLivingBase entityLivingBase : list) {
                 if (entityLivingBase != event.getEntityLiving() && entityLivingBase != event.getTarget()) {
                     entityLivingBase.attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.getEntityPlayer(), event.getTarget()), areaOfEffect);
-                    int fire = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.BLUE_AURA);
+                    int fire = getEffectStrength(tool, EnumRainbowColor.YELLOW, EnumRainbowColor.BLUE);
                     if (fire > 0) {
                         entityLivingBase.setFire(10 * fire);
                     }
@@ -182,22 +182,22 @@ public class EnchantEventHandler {
             }
         }
 
-        int knockback = getEffectStrength(tool, EnumAura.BLUE_AURA, EnumAura.BLUE_AURA);
+        int knockback = getEffectStrength(tool, EnumRainbowColor.BLUE, EnumRainbowColor.BLUE);
         if (knockback > 0 && !event.getTarget().isEntityInvulnerable(DamageSource.causePlayerDamage(player))) { // todo 1.8.8 check damagesource
             event.getTarget().addVelocity((double) (-MathHelper.sin(event.getEntity().rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F), 0.1D, (double) (MathHelper.cos(event.getEntity().rotationYaw * (float) Math.PI / 180.0F) * (float) knockback * 0.5F));
         }
 
-        int recoil = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.BLUE_AURA);
+        int recoil = getEffectStrength(tool, EnumRainbowColor.RED, EnumRainbowColor.BLUE);
         if (recoil > 0) {
             event.getEntityPlayer().attackEntityFrom(DamageSource.causeIndirectMagicDamage(event.getEntityPlayer(), event.getEntityPlayer()), recoil);
         }
 
-        int lifeSteal = getEffectStrength(tool, EnumAura.GREEN_AURA, EnumAura.BLUE_AURA);
+        int lifeSteal = getEffectStrength(tool, EnumRainbowColor.GREEN, EnumRainbowColor.BLUE);
         if (lifeSteal > 0) {
             event.getEntityPlayer().heal((float) Math.ceil(lifeSteal / 2));
         }
 
-        int fire = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.BLUE_AURA);
+        int fire = getEffectStrength(tool, EnumRainbowColor.YELLOW, EnumRainbowColor.BLUE);
         if (fire > 0) {
             event.getTarget().setFire(20 * fire);
         }
@@ -208,12 +208,12 @@ public class EnchantEventHandler {
     public void getDamage(LivingHurtEvent attackEvent) {
         if (attackEvent.getSource() != null && attackEvent.getSource().getEntity() instanceof EntityPlayer) {
             ItemStack tool = ((EntityPlayer) attackEvent.getSource().getEntity()).inventory.getCurrentItem();
-            int sharpness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.VIOLET_AURA);
+            int sharpness = getEffectStrength(tool, EnumRainbowColor.VIOLET, EnumRainbowColor.VIOLET);
             if (sharpness > 0) {
                 attackEvent.setAmount((float) (attackEvent.getAmount() + .5 * sharpness));
             }
 
-            int dullness = getEffectStrength(tool, EnumAura.VIOLET_AURA, EnumAura.GREEN_AURA);
+            int dullness = getEffectStrength(tool, EnumRainbowColor.VIOLET, EnumRainbowColor.GREEN);
             if (dullness > 0) {
                 attackEvent.setAmount(attackEvent.getAmount() - dullness);
                 if (attackEvent.getAmount() < 0) {
@@ -225,7 +225,7 @@ public class EnchantEventHandler {
         if (attackEvent.getEntity() instanceof EntityPlayer) {
             ItemStack heldStack = ((EntityPlayer) attackEvent.getEntity()).inventory.getCurrentItem();
             if (heldStack != null) {
-                int protection = getEffectStrength(heldStack, EnumAura.RED_AURA, EnumAura.VIOLET_AURA);
+                int protection = getEffectStrength(heldStack, EnumRainbowColor.RED, EnumRainbowColor.VIOLET);
                 if (protection > 0) {
                     attackEvent.setAmount((float) (attackEvent.getAmount() * Math.pow(.9, protection)));
                 }
@@ -236,7 +236,7 @@ public class EnchantEventHandler {
     @SubscribeEvent
     public void onBreakBlock(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().inventory.getCurrentItem();
-        int treeFeller = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.GREEN_AURA) * 25;
+        int treeFeller = getEffectStrength(stack, EnumRainbowColor.GREEN, EnumRainbowColor.GREEN) * 25;
         if (treeFeller > 0 && !event.getWorld().isRemote) {
             Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
             if (block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
@@ -259,7 +259,7 @@ public class EnchantEventHandler {
         }
 
         //Similar code to tree feller
-        int harvester = getEffectStrength(stack, EnumAura.GREEN_AURA, EnumAura.YELLOW_AURA) * 25;
+        int harvester = getEffectStrength(stack, EnumRainbowColor.GREEN, EnumRainbowColor.YELLOW) * 25;
         if (harvester > 0 && !event.getWorld().isRemote) {
             IBlockState state = event.getWorld().getBlockState(event.getPos());
             if (state.getBlock() instanceof IGrowable && state.getBlock() != Blocks.GRASS) {
@@ -283,7 +283,7 @@ public class EnchantEventHandler {
 
         //Silk touch handling is done in another location
         //But this prevents XP drops
-        int silk = getEffectStrength(stack, EnumAura.RED_AURA);
+        int silk = getEffectStrength(stack, EnumRainbowColor.RED);
         if (silk > 0) {
             event.setExpToDrop(0);
         }
@@ -294,7 +294,7 @@ public class EnchantEventHandler {
         Entity entity = event.getSource().getSourceOfDamage();
         if (entity instanceof EntityPlayer && !entity.worldObj.isRemote) {
             ItemStack stack = ((EntityPlayer) entity).inventory.getCurrentItem();
-            int looting = getEffectStrength(stack, EnumAura.VIOLET_AURA, EnumAura.YELLOW_AURA);
+            int looting = getEffectStrength(stack, EnumRainbowColor.VIOLET, EnumRainbowColor.YELLOW);
             if (looting > 0) {
                 try {
                     dropCommon.invoke(event.getEntity(), true, looting);
@@ -315,39 +315,39 @@ public class EnchantEventHandler {
         if (event.getEntityPlayer().inventory.getCurrentItem() != null) {
             ItemStack tool = event.getEntityPlayer().inventory.getCurrentItem();
 
-            int miningDebuff = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.GREEN_AURA);
+            int miningDebuff = getEffectStrength(tool, EnumRainbowColor.RED, EnumRainbowColor.GREEN);
             if (miningDebuff > 0) {
                 event.setNewSpeed((float) (event.getNewSpeed() / Math.pow(3, miningDebuff)));
             }
 
             if (ForgeHooks.canToolHarvestBlock(event.getEntityPlayer().worldObj, event.getPos(), tool)) {
                 Block block = event.getState().getBlock();
-                int efficiency = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.ORANGE_AURA);
+                int efficiency = getEffectStrength(tool, EnumRainbowColor.ORANGE, EnumRainbowColor.ORANGE);
                 event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.15, efficiency)));
-                int shatter = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.VIOLET_AURA);
+                int shatter = getEffectStrength(tool, EnumRainbowColor.ORANGE, EnumRainbowColor.VIOLET);
                 if (shatter > 0 && event.getState().getBlock().getBlockHardness(event.getState(), event.getEntity().worldObj, event.getPos()) >= 3F) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.5, shatter)));
                 }
 
-                int oreSpeed = getEffectStrength(tool, EnumAura.RED_AURA, EnumAura.ORANGE_AURA);
+                int oreSpeed = getEffectStrength(tool, EnumRainbowColor.RED, EnumRainbowColor.ORANGE);
 
                 if (oreSpeed > 0 && (Arrays.asList(ores).contains(event.getState().getBlock()) || containsOredict(block, "ore"))) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, oreSpeed)));
                 }
 
 
-                int stone = getEffectStrength(tool, EnumAura.YELLOW_AURA, EnumAura.ORANGE_AURA);
+                int stone = getEffectStrength(tool, EnumRainbowColor.YELLOW, EnumRainbowColor.ORANGE);
 
                 if (stone > 0 && Blocks.STONE == block) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, stone)));
                 }
 
-                int logSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
+                int logSpeed = getEffectStrength(tool, EnumRainbowColor.ORANGE, EnumRainbowColor.GREEN);
                 if (logSpeed > 0 && block == Blocks.LOG || block == Blocks.LOG2 || containsOredict(block, "log")) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, logSpeed)));
                 }
 
-                int digSpeed = getEffectStrength(tool, EnumAura.ORANGE_AURA, EnumAura.GREEN_AURA);
+                int digSpeed = getEffectStrength(tool, EnumRainbowColor.ORANGE, EnumRainbowColor.GREEN);
                 if (block == Blocks.GRASS || block == Blocks.DIRT || block == Blocks.GRAVEL || block == Blocks.SAND) {
                     event.setNewSpeed((float) (event.getNewSpeed() * Math.pow(1.25, digSpeed)));
 

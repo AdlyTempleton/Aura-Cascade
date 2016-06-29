@@ -8,7 +8,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Random;
  */
 public class PotionGreenCurse extends Potion {
     public PotionGreenCurse() {
-        super(true, EnumAura.GREEN_AURA.color.getHex());
+        super(true, EnumRainbowColor.GREEN.color.getHex());
         setPotionName("Green Curse");
 
     }
@@ -29,7 +29,7 @@ public class PotionGreenCurse extends Potion {
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
 
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.GREEN_AURA), x + 8, y + 8);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumRainbowColor.GREEN), x + 8, y + 8);
     }
 
     @Override

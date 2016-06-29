@@ -74,7 +74,7 @@ public class CommonProxy {
         if (Config.villageGeneration) {
             VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
         }
-        MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "aura:auraHut");
+        MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "color:auraHut");
     }
 
     public void addToTutorial(LexiconEntry entry) {
@@ -119,7 +119,7 @@ public class CommonProxy {
             TCCompat.postInit();
         }
 
-        //RiM IMC for blacklisting aura nodes
+        //RiM IMC for blacklisting color nodes
         for (Block block : BlockRegistry.getBlockFromClass(AuraBlock.class)) {
             FMLInterModComms.sendMessage("JAKJ_RedstoneInMotion", "blacklistHard", Block.REGISTRY.getNameForObject(block).toString());
         }

@@ -32,6 +32,7 @@ import org.lwjgl.opengl.GL11;
 import pixlepix.auracascade.lexicon.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
+import pixlepix.auracascade.registry.OreCraftingBenchRecipe;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.Collections;
@@ -57,6 +58,11 @@ public class PageCraftingRecipe extends PageRecipe {
     }
 
     public PageCraftingRecipe(String unlocalizedName, CraftingBenchRecipe recipe) {
+        this(unlocalizedName, recipe.iRecipe);
+    }
+
+
+    public PageCraftingRecipe(String unlocalizedName, OreCraftingBenchRecipe recipe) {
         this(unlocalizedName, recipe.iRecipe);
     }
 

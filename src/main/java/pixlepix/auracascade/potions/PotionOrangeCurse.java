@@ -6,7 +6,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.item.ItemAngelsteelSword;
 
 import java.util.Random;
@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class PotionOrangeCurse extends Potion {
     public PotionOrangeCurse() {
-        super(true, EnumAura.ORANGE_AURA.color.getHex());
+        super(true, EnumRainbowColor.ORANGE.color.getHex());
         setPotionName("Orange Curse");
 
     }
@@ -23,7 +23,7 @@ public class PotionOrangeCurse extends Potion {
     @SideOnly(Side.CLIENT)
     public void renderInventoryEffect(int x, int y, PotionEffect effect, net.minecraft.client.Minecraft mc) {
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumAura.ORANGE_AURA), x + 8, y + 8);
+        mc.getRenderItem().renderItemIntoGUI(ItemAngelsteelSword.getStackFirstDegree(EnumRainbowColor.ORANGE), x + 8, y + 8);
     }
 
     @Override

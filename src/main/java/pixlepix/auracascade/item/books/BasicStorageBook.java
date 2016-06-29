@@ -3,7 +3,7 @@ package pixlepix.auracascade.item.books;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.item.ItemMaterial;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
@@ -35,6 +35,6 @@ public class BasicStorageBook extends ItemStorageBook {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "BIB", 'B', new ItemStack(Items.BOOK), 'I', ItemMaterial.getIngot(EnumAura.BLACK_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), "BIB", 'B', new ItemStack(Items.BOOK), 'I', ItemMaterial.getIngot(EnumRainbowColor.BLACK));
     }
 }

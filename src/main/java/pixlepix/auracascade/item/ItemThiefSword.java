@@ -2,7 +2,7 @@ package pixlepix.auracascade.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -42,7 +42,7 @@ public class ItemThiefSword extends ItemSword implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " A ", " A ", " E ", 'A', ItemMaterial.getIngot(EnumAura.BLUE_AURA), 'E', ItemMaterial.getGem(EnumAura.BLACK_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), " A ", " A ", " E ", 'A', ItemMaterial.getIngot(EnumRainbowColor.BLUE), 'E', ItemMaterial.getGem(EnumRainbowColor.BLACK));
     }
 
     @Override

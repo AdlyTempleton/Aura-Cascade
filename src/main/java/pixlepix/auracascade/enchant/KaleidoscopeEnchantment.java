@@ -4,7 +4,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 
 /**
  * Created by localmacaccount on 2/14/15.
@@ -13,7 +13,7 @@ public class KaleidoscopeEnchantment extends Enchantment {
 	private static EntityEquipmentSlot[] slots = new EntityEquipmentSlot[]{
 			EntityEquipmentSlot.CHEST
 	};
-    public KaleidoscopeEnchantment(int id, EnumAura aura) {
+    public KaleidoscopeEnchantment(EnumRainbowColor aura) {
         //super(id, new ResourceLocation(ConstantMod.prefixMod, "kaleidoscope"), 0, EnumEnchantmentType.ALL);
     	
     	super(Enchantment.Rarity.RARE, EnumEnchantmentType.ALL, slots);

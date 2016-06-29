@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,8 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.tile.*;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.data.IToolTip;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
@@ -98,33 +98,35 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
+        Item auraCrystal = BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class);
+
         if (name != null) {
             if (name.equals("plant")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.GREEN_AURA, 100000), ItemMaterial.getGem(EnumAura.GREEN_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(100000, ItemMaterial.getGem(EnumRainbowColor.GREEN)));
             }
             if (name.equals("ore")) {
-                return new CraftingBenchRecipe(new ItemStack(this), "IFI", "FIF", "IFI", 'F', new ItemStack(Blocks.FURNACE), 'I', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
+                return new CraftingBenchRecipe(new ItemStack(this), "IFI", "FIF", "IFI", 'F', new ItemStack(Blocks.FURNACE), 'I', new ItemStack(auraCrystal));
             }
             if (name.equals("loot")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 100000), ItemMaterial.getGem(EnumAura.YELLOW_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(100000, ItemMaterial.getGem(EnumRainbowColor.YELLOW)));
             }
             if (name.equals("mob")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.VIOLET_AURA, 100000), ItemMaterial.getGem(EnumAura.VIOLET_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(100000, ItemMaterial.getGem(EnumRainbowColor.VIOLET)));
             }
             if (name.equals("angel")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 300000), ItemMaterial.getPrism()),
-                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.IRON_INGOT)),
-                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.IRON_INGOT)),
-                        new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 200000), new ItemStack(Items.IRON_INGOT)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(300000, ItemMaterial.getPrism()),
+                        new PylonRecipeComponent(200000, new ItemStack(Items.IRON_INGOT)),
+                        new PylonRecipeComponent(200000, new ItemStack(Items.IRON_INGOT)),
+                        new PylonRecipeComponent(200000, new ItemStack(Items.IRON_INGOT)));
             }
             if (name.equals("nether")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 100000), ItemMaterial.getGem(EnumAura.RED_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(100000, ItemMaterial.getGem(EnumRainbowColor.RED)));
             }
             if (name.equals("potion")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 100000), ItemMaterial.getGem(EnumAura.ORANGE_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(100000, ItemMaterial.getGem(EnumRainbowColor.ORANGE)));
             }
             if (name.equals("enchant")) {
-                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 250000), ItemMaterial.getGem(EnumAura.BLACK_AURA)));
+                return new PylonRecipe(new ItemStack(this), new PylonRecipeComponent(250000, ItemMaterial.getGem(EnumRainbowColor.BLACK)));
             }
             if (name.equals("oreAdv")) {
                 return new CraftingBenchRecipe(new ItemStack(this), "GPG", "GCG", "GGG", 'P', ItemMaterial.getPrism(), 'G', new ItemStack(Blocks.GLASS), 'C', new ItemStack(getBlockFromName("ore")));
@@ -139,11 +141,11 @@ public class ConsumerBlock extends Block implements IToolTip, ITTinkererBlock, I
                 return new CraftingBenchRecipe(new ItemStack(this), "EPE", "ENE", "EEE", 'P', ItemMaterial.getPrism(), 'E', new ItemStack(Blocks.END_STONE), 'N', new ItemStack(getBlockFromName("nether")));
             }
             if (name.equals("fish")) {
-                return new CraftingBenchRecipe(new ItemStack(this), "RRR", "III", 'R', new ItemStack(Items.FISHING_ROD), 'I', ItemMaterial.getIngot(EnumAura.BLUE_AURA));
+                return new CraftingBenchRecipe(new ItemStack(this), "RRR", "III", 'R', new ItemStack(Items.FISHING_ROD), 'I', ItemMaterial.getIngot(EnumRainbowColor.BLUE));
 
             }
         }
-        return new CraftingBenchRecipe(new ItemStack(this), "FFF", "FIF", "FFF", 'F', new ItemStack(Blocks.FURNACE), 'I', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), "FFF", "FIF", "FFF", 'F', new ItemStack(Blocks.FURNACE), 'I', new ItemStack(auraCrystal));
     }
 
     @Override

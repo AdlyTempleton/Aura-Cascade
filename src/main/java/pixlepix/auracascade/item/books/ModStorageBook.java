@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.block.tile.TileStorageBookshelf;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.item.ItemStorageBook;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -50,6 +50,6 @@ public class ModStorageBook extends ItemStorageBook {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new CraftingBenchRecipe(new ItemStack(this), "SSS", "SBS", "SSS", 'B',
-                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', ItemAuraCrystal.getCrystalFromAura(EnumAura.WHITE_AURA));
+                new ItemStack(BlockRegistry.getFirstItemFromClass(BasicStorageBook.class)), 'S', new ItemStack(BlockRegistry.getFirstItemFromClass(ItemAuraCrystal.class)));
     }
 }

@@ -1,7 +1,7 @@
 package pixlepix.auracascade.enchant;
 
 import net.minecraft.enchantment.Enchantment;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.main.Config;
 
 /**
@@ -17,11 +17,11 @@ public class EnchantmentManager {
     public static Enchantment purple;
 
     public static void init() {
-        red = new KaleidoscopeEnchantment(Config.enchantRed, EnumAura.RED_AURA);
-        orange = new KaleidoscopeEnchantment(Config.enchantOrange, EnumAura.ORANGE_AURA);
-        yellow = new KaleidoscopeEnchantment(Config.enchantYellow, EnumAura.YELLOW_AURA);
-        green = new KaleidoscopeEnchantment(Config.enchantGreen, EnumAura.GREEN_AURA);
-        blue = new KaleidoscopeEnchantment(Config.enchantBlue, EnumAura.BLUE_AURA);
-        purple = new KaleidoscopeEnchantment(Config.enchantViolet, EnumAura.VIOLET_AURA);
+        red = new KaleidoscopeEnchantment(EnumRainbowColor.RED);
+        orange = new KaleidoscopeEnchantment(EnumRainbowColor.ORANGE);
+        yellow = new KaleidoscopeEnchantment(EnumRainbowColor.YELLOW);
+        green = new KaleidoscopeEnchantment(EnumRainbowColor.GREEN);
+        blue = new KaleidoscopeEnchantment(EnumRainbowColor.BLUE);
+        purple = new KaleidoscopeEnchantment(EnumRainbowColor.VIOLET);
     }
 }

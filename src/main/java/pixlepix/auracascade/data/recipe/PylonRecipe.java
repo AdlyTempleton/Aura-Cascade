@@ -1,7 +1,6 @@
 package pixlepix.auracascade.data.recipe;
 
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.AuraQuantity;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
 
 import java.util.ArrayList;
@@ -32,13 +31,13 @@ public class PylonRecipe extends ThaumicTinkererRecipe {
         PylonRecipeRegistry.registerRecipe(this);
     }
 
-    public AuraQuantity getAuraFromItem(ItemStack stack) {
+    public int getAuraFromItem(ItemStack stack) {
         for (PylonRecipeComponent component : componentList) {
             if (ItemStack.areItemStacksEqual(stack, component.itemStack)) {
                 return component.auraQuantity;
             }
         }
-        return null;
+        return 0;
     }
 
     public boolean matches(List<ItemStack> stacks) {

@@ -7,7 +7,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -99,6 +99,6 @@ public class ItemTransmutingSword extends Item implements ITTinkererItem {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), " I ", " I ", " G ", 'I', ItemMaterial.getIngot(EnumAura.VIOLET_AURA), 'G', ItemMaterial.getGem(EnumAura.VIOLET_AURA));
+        return new CraftingBenchRecipe(new ItemStack(this), " I ", " I ", " G ", 'I', ItemMaterial.getIngot(EnumRainbowColor.VIOLET), 'G', ItemMaterial.getGem(EnumRainbowColor.VIOLET));
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.commons.lang3.math.NumberUtils;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.data.PosUtil;
 import pixlepix.auracascade.enchant.EnchantmentManager;
 import pixlepix.auracascade.item.ItemMaterial;
@@ -63,7 +63,7 @@ public class EnchanterTile extends ConsumerTile {
                 for (EntityItem ingot : nextItems) {
                     if (ingot.getEntityItem().getItem() instanceof ItemMaterial && ((ItemMaterial) ingot.getEntityItem().getItem()).materialIndex == 0) {
                         ItemStack ingotStack = ingot.getEntityItem();
-                        EnumAura aura = ((ItemMaterial) ingotStack.getItem()).aura;
+                        EnumRainbowColor aura = ((ItemMaterial) ingotStack.getItem()).color;
                         Enchantment enchant = getEnchantFromAura(aura);
                         if (enchant != null) {
                             int level = EnchantmentHelper.getEnchantmentLevel(enchant, toolStack);
@@ -117,19 +117,19 @@ public class EnchanterTile extends ConsumerTile {
     }
 
     @SuppressWarnings("incomplete-switch")
-	public Enchantment getEnchantFromAura(EnumAura aura) {
+	public Enchantment getEnchantFromAura(EnumRainbowColor aura) {
         switch (aura) {
-            case RED_AURA:
+            case RED:
                 return EnchantmentManager.red;
-            case ORANGE_AURA:
+            case ORANGE:
                 return EnchantmentManager.orange;
-            case YELLOW_AURA:
+            case YELLOW:
                 return EnchantmentManager.yellow;
-            case BLUE_AURA:
+            case BLUE:
                 return EnchantmentManager.blue;
-            case GREEN_AURA:
+            case GREEN:
                 return EnchantmentManager.green;
-            case VIOLET_AURA:
+            case VIOLET:
                 return EnchantmentManager.purple;
         }
         return null;

@@ -15,8 +15,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import pixlepix.auracascade.block.entity.EntityFairy;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeComponent;
 import pixlepix.auracascade.registry.BlockRegistry;
@@ -130,13 +128,13 @@ public class ItemFairyRing extends Item implements ITTinkererItem, IBauble {
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
         return new PylonRecipe(new ItemStack(this),
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.BLUE_AURA, 50000), new ItemStack(Blocks.DIAMOND_BLOCK)),
+                new PylonRecipeComponent(50000, new ItemStack(Blocks.DIAMOND_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.WHITE_AURA, 50000), new ItemStack(Blocks.IRON_BLOCK)),
+                new PylonRecipeComponent(50000, new ItemStack(Blocks.IRON_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.YELLOW_AURA, 50000), new ItemStack(Blocks.GOLD_BLOCK)),
+                new PylonRecipeComponent(50000, new ItemStack(Blocks.GOLD_BLOCK)),
 
-                new PylonRecipeComponent(new AuraQuantity(EnumAura.RED_AURA, 50000), new ItemStack(Blocks.REDSTONE_BLOCK)));
+                new PylonRecipeComponent(50000, new ItemStack(Blocks.REDSTONE_BLOCK)));
     }
 
     @Override

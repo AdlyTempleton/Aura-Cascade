@@ -3,14 +3,13 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import pixlepix.auracascade.block.BlockMonitor;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.main.AuraUtil;
 
 /**
@@ -96,13 +95,13 @@ public abstract class ConsumerTile extends TileEntity implements ITickable {
             }
 
             boolean changeLastPower = false;
-            //Drain energy from aura Nodes
+            //Drain energy from color Nodes
             for (EnumFacing direction : EnumFacing.VALUES) {
                 TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(direction));
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(getPos(), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(getPos(), "magicCrit");
                         storedPower += auraTile.energy;
                         auraTile.energy = 0;
                         changeLastPower = true;

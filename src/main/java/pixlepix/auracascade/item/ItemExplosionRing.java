@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.registry.CraftingBenchRecipe;
 import pixlepix.auracascade.registry.ITTinkererItem;
 import pixlepix.auracascade.registry.ThaumicTinkererRecipe;
@@ -45,7 +45,7 @@ public class ItemExplosionRing extends Item implements ITTinkererItem, IBauble {
 
     @Override
     public ThaumicTinkererRecipe getRecipeItem() {
-        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumAura.RED_AURA), 'T', new ItemStack(Blocks.TNT), 'G', new ItemStack(Items.GUNPOWDER));
+        return new CraftingBenchRecipe(new ItemStack(this), "GTG", "TRT", "GTG", 'R', ItemMaterial.getGem(EnumRainbowColor.RED), 'T', new ItemStack(Blocks.TNT), 'G', new ItemStack(Items.GUNPOWDER));
     }
 
     @Override

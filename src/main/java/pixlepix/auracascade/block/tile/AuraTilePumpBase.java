@@ -3,8 +3,6 @@ package pixlepix.auracascade.block.tile;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.main.AuraUtil;
 
 /**
@@ -33,13 +31,13 @@ public class AuraTilePumpBase extends AuraTile {
     }
 
     @Override
-    public boolean canTransfer(BlockPos tuple, EnumAura aura) {
+    public boolean canTransfer(BlockPos tuple) {
         return false;
     }
 
     @Override
-    public boolean canReceive(BlockPos source, EnumAura aura) {
-        return source.getY() <= getPos().getY() && super.canReceive(source, aura);
+    public boolean canReceive(BlockPos source) {
+        return source.getY() <= getPos().getY() && super.canReceive(source);
     }
 
     public void addFuel(int time, int speed) {
@@ -76,21 +74,18 @@ public class AuraTilePumpBase extends AuraTile {
                         AuraUtil.updateMonitor(worldObj, getPos());
 
                     }
-                    for (EnumAura aura : EnumAura.values()) {
-                        int dist = upNode.getPos().getY() - getPos().getY();
-                        int quantity = pumpSpeed / dist;
-                        if (isAlternator()) {
-                            float f = getAlternatingFactor();
-                            quantity *= f;
-                        }
-                        quantity *= storage.getComposition(aura);
-                        quantity = aura.getRelativeMass(worldObj) == 0 ? 0 : (int) ((double) quantity / aura.getRelativeMass(worldObj));
-                        quantity *= aura.getAscentBoost(worldObj);
-                        quantity = Math.min(quantity, storage.get(aura));
-                        burst(upNode.getPos(), "magicCrit", aura, 1D);
-                        storage.subtract(aura, quantity);
-                        upNode.storage.add(new AuraQuantity(aura, quantity));
+                    int dist = upNode.getPos().getY() - getPos().getY();
+                    int quantity = pumpSpeed / dist;
+                    if (isAlternator()) {
+                        float f = getAlternatingFactor();
+                        quantity *= f;
                     }
+
+                    quantity = Math.min(quantity, storage);
+                    burst(upNode.getPos(), "magicCrit");
+                    storage -= quantity;
+                    upNode.storage += quantity;
+
                 }
             }
         }

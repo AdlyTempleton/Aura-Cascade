@@ -7,8 +7,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.AuraQuantity;
-import pixlepix.auracascade.data.EnumAura;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.network.PacketBurst;
@@ -60,8 +58,8 @@ public class CraftingCenterTile extends TileEntity {
         boolean valid = true;
         for (EnumFacing direction : pedestalRelativeLocations) {
             AuraTilePedestal pedestal = (AuraTilePedestal) worldObj.getTileEntity(getPos().offset(direction));
-            AuraQuantity targetAura = recipe.getAuraFromItem(pedestal.itemStack);
-            if (targetAura.getNum() > pedestal.powerReceived) {
+            int targetAura = recipe.getAuraFromItem(pedestal.itemStack);
+            if (targetAura > pedestal.powerReceived) {
                 valid = false;
             }
         }
@@ -72,10 +70,9 @@ public class CraftingCenterTile extends TileEntity {
                 for (EnumFacing beamDir : EnumFacing.VALUES) {
                     if (beamDir != direction && beamDir != direction.getOpposite()) {
                         BlockPos mid = pedestal.getPos().offset(beamDir).offset(direction);
-                        EnumAura aura = recipe.getAuraFromItem(pedestal.itemStack).getType();
-                        burst(mid, pedestal.getPos(), "happyVillager", aura, 1);
 
-                        burst(mid, getPos(), "happyVillager", aura, 1);
+                        burst(mid, pedestal.getPos(), "happyVillager");
+                        burst(mid, getPos(), "happyVillager");
 
                     }
                 }
@@ -93,9 +90,9 @@ public class CraftingCenterTile extends TileEntity {
         }
     }
 
-    public void burst(BlockPos origin, BlockPos target, String particle, EnumAura aura, double composition) {
+    public void burst(BlockPos origin, BlockPos target, String particle) {
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(origin, target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(),getPos().getY(), getPos().getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(origin, target, particle), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(),getPos().getY(), getPos().getZ(), 32));
 
     }
 

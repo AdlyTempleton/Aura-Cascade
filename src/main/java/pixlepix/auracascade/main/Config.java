@@ -31,13 +31,6 @@ public class Config {
     public static boolean questline = true;
     public static boolean villageGeneration = true;
 
-    public static int enchantRed = 110;
-    public static int enchantOrange = 111;
-    public static int enchantYellow = 112;
-    public static int enchantGreen = 113;
-    public static int enchantBlue = 114;
-    public static int enchantViolet = 115;
-
     public static float powerFactor = .75F;
 
     public static boolean analytics = true;
@@ -77,14 +70,6 @@ public class Config {
         villageGeneration = config.getBoolean("generateVillage", Configuration.CATEGORY_GENERAL, villageGeneration, "");
 
         overrideMaxParticleLimit = config.getBoolean("overrideMaxParticleLimit", Configuration.CATEGORY_GENERAL, true, "HIGHLY RECOMENDED TO KEEP ON. Disabling this will lead to erratic rendering behavior.");
-
-        enchantRed = config.getInt("enchantRed", Configuration.CATEGORY_GENERAL, enchantRed, 1, 256, "Red Enchant ID");
-        enchantOrange = config.getInt("enchantOrange", Configuration.CATEGORY_GENERAL, enchantOrange, 1, 256, "Orange Enchant ID");
-        enchantYellow = config.getInt("enchantYellow", Configuration.CATEGORY_GENERAL, enchantYellow, 1, 256, "Yellow Enchant ID");
-        enchantBlue = config.getInt("enchantBlue", Configuration.CATEGORY_GENERAL, enchantBlue, 1, 256, "Blue Enchant ID");
-        enchantGreen = config.getInt("enchantGreen", Configuration.CATEGORY_GENERAL, enchantGreen, 1, 256, "Green Enchant ID");
-        enchantViolet = config.getInt("enchantViolet", Configuration.CATEGORY_GENERAL, enchantViolet, 1, 256, "Violet Enchant ID");
-
 
         giveBook = config.getBoolean("Give Encyclopedia Aura automatically", Configuration.CATEGORY_GENERAL, giveBook, "");
         questline = config.getBoolean("Questline enabled", Configuration.CATEGORY_GENERAL, questline, "");

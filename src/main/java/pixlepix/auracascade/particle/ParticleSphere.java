@@ -39,7 +39,7 @@ public class ParticleSphere extends Particle {
     public void renderParticle(VertexBuffer wr, Entity e, float par2, float par3, float par4, float par5, float par6, float par7) {
         // todo 1.8.8 verify
         Tessellator.getInstance().draw();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("aura:textures/particles/particleFire.png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("color:textures/particles/particleFire.png"));
         wr.begin(GL11.GL_QUADS, DefaultVertexFormats.PARTICLE_POSITION_TEX_COLOR_LMAP);
         wr.putBrightness4(200, 200, 200, 200);
         super.renderParticle(wr, e, par2, par3, par4, par5, par6, par7);

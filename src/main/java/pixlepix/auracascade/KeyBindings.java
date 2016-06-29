@@ -13,8 +13,8 @@ public class KeyBindings {
     public static KeyBinding jumpDownKeyBind;
 
     public static void init() {
-        jumpKeyBind = new KeyBinding("aura.angelJump", Keyboard.KEY_UP, "aura.keyBindCategory");
-        jumpDownKeyBind = new KeyBinding("aura.angelJumpDown", Keyboard.KEY_DOWN, "aura.keyBindCategory");
+        jumpKeyBind = new KeyBinding("color.angelJump", Keyboard.KEY_UP, "color.keyBindCategory");
+        jumpDownKeyBind = new KeyBinding("color.angelJumpDown", Keyboard.KEY_DOWN, "color.keyBindCategory");
         ClientRegistry.registerKeyBinding(jumpKeyBind);
         ClientRegistry.registerKeyBinding(jumpDownKeyBind);
     }

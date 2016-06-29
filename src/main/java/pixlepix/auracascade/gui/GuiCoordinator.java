@@ -55,7 +55,7 @@ public class GuiCoordinator extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        ResourceLocation tex = new ResourceLocation("aura", "textures/gui/coordinator.png");
+        ResourceLocation tex = new ResourceLocation("color", "textures/gui/coordinator.png");
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(tex);
     }
 
@@ -128,7 +128,7 @@ public class GuiCoordinator extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
-        ResourceLocation tex = new ResourceLocation("aura", "textures/gui/coordinator.png");
+        ResourceLocation tex = new ResourceLocation("color", "textures/gui/coordinator.png");
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(tex);
 
         GlStateManager.color(1, 1, 1, 1);

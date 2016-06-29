@@ -5,7 +5,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -15,7 +14,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
-import pixlepix.auracascade.data.EnumAura;
+import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.data.StorageItemStack;
 import pixlepix.auracascade.main.AuraUtil;
 import pixlepix.auracascade.network.PacketBurst;
@@ -128,14 +127,14 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
 
        //     AuraCascade.analytics.eventDesign("booshelfUsage", AuraUtil.formatLocation(this), numShelves);
             neededPower = (int) (5 * numShelves * Math.pow(1.05, numShelves));
-            //Drain power from aura nodes
+            //Drain power from color nodes
             lastPower = 0;
             for (EnumFacing direction : EnumFacing.VALUES) {
                 TileEntity tileEntity = worldObj.getTileEntity(getPos().offset(direction));
                 if (tileEntity instanceof AuraTile) {
                     AuraTile auraTile = (AuraTile) tileEntity;
                     if (auraTile.energy > 0) {
-                        auraTile.burst(getPos(), "magicCrit", EnumAura.WHITE_AURA, 1);
+                        auraTile.burst(getPos(), "magicCrit");
                         lastPower += auraTile.energy;
                         auraTile.energy = 0;
                     }
@@ -293,8 +292,8 @@ public class TileBookshelfCoordinator extends TileEntity implements IInventory, 
         return getAbstractInventoryFromInv(startInv);
     }
 
-    public void burst(BlockPos target, String particle, EnumAura aura, double composition) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, aura.r, aura.g, aura.b, composition), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
+    public void burst(BlockPos target, String particle) {
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
     }
 
     @Override
