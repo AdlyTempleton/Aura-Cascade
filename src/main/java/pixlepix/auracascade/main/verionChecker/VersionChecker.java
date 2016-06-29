@@ -31,7 +31,6 @@ public class VersionChecker {
                 System.out.println("VC: " + VersionChecker.version + " " + "AC V: " + ConstantMod.version);
                 player.addChatComponentMessage(new TextComponentString("There is a new version of Aura Cascade Available!"));
             }
-            player.addChatComponentMessage(new TextComponentString("This is a beta build of Aura Cascade. Report any issues to https://github.com/DrasticDemise/Aura-Cascade"));
             VersionChecker.doneChecking = true;
         }
     }

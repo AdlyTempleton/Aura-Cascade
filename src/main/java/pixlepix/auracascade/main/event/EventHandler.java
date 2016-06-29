@@ -393,7 +393,7 @@ public class EventHandler {
 	            }
 	        }
     	}catch(Exception e){
-    		System.out.println("This failed and drastic has failed you. Please report this to the 1.9 repository for Aura Cascade by DrasticDemise.");
+            e.printStackTrace();
     	}
     }
 
