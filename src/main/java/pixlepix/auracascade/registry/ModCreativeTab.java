@@ -9,6 +9,7 @@ import pixlepix.auracascade.item.ItemAuraCrystal;
 import pixlepix.auracascade.main.ConstantMod;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -16,7 +17,6 @@ public class ModCreativeTab extends CreativeTabs {
     public static ModCreativeTab INSTANCE;
     //Holds the registered items and blocks before they are sorted
     public ArrayList<ItemStack> creativeTabQueue = new ArrayList<ItemStack>();
-    ItemStack displayItem;
     List<ItemStack> list = new ArrayList<ItemStack>();
 
     public ModCreativeTab() {
@@ -50,7 +50,7 @@ public class ModCreativeTab extends CreativeTabs {
     }
 
     public void addAllItemsAndBlocks() {
-        // todo 1.8.8 your comparator is broken Collections.sort(creativeTabQueue, new ItemStackCompatator());
+        Collections.sort(creativeTabQueue, new ItemStackCompatator());
         list.addAll(creativeTabQueue);
     }
 }
