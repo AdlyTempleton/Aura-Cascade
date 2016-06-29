@@ -15,6 +15,6 @@ public class KnowledgeType {
     }
 
     public String getUnlocalizedName() {
-        return "color.knowledge." + id;
+        return "knowledge." + id;
     }
 }

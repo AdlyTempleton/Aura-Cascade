@@ -23,7 +23,7 @@ public class PageTutorial extends PageText {
 
     @Override
     public void onOpened(IGuiLexiconEntry gui) {
-        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, I18n.translateToLocal("color.startTutorial"));
+        button = new GuiButton(101, gui.getLeft() + 30, gui.getTop() + gui.getHeight() - 50, gui.getWidth() - 60, 20, I18n.translateToLocal("startTutorial"));
         gui.getButtonList().add(button);
     }
 
@@ -38,7 +38,7 @@ public class PageTutorial extends PageText {
         if (button == this.button) {
             GuiLexicon.startTutorial();
             getMinecraft().displayGuiScreen(new GuiLexicon());
-            getMinecraft().thePlayer.addChatMessage(new TextComponentString("color.tutorialStarted"));
+            getMinecraft().thePlayer.addChatMessage(new TextComponentString("tutorialStarted"));
         }
     }
 

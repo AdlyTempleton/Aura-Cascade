@@ -108,7 +108,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
             if (entry != null) {
                 AuraCascade.proxy.setEntryToOpen(entry);
             } else {
-                par3EntityPlayer.addChatMessage(new TextComponentString("color.misc.cantOpen"));
+                par3EntityPlayer.addChatMessage(new TextComponentString("aura.misc.cantOpen"));
             }
             setForcedPage(par1ItemStack, "");
         }

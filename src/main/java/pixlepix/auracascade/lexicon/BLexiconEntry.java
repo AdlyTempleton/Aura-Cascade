@@ -21,10 +21,10 @@ public class BLexiconEntry extends LexiconEntry {
     @Override
     public LexiconEntry setLexiconPages(LexiconPage... pages) {
         for (LexiconPage page : pages) {
-            page.unlocalizedName = "color.page." + getLazyUnlocalizedName() + page.unlocalizedName;
+            page.unlocalizedName = "page." + getLazyUnlocalizedName() + page.unlocalizedName;
             if (page instanceof ITwoNamedPage) {
                 ITwoNamedPage dou = (ITwoNamedPage) page;
-                dou.setSecondUnlocalizedName("color.page." + getLazyUnlocalizedName() + dou.getSecondUnlocalizedName());
+                dou.setSecondUnlocalizedName("page." + getLazyUnlocalizedName() + dou.getSecondUnlocalizedName());
             }
         }
 
@@ -33,7 +33,7 @@ public class BLexiconEntry extends LexiconEntry {
 
     @Override
     public String getUnlocalizedName() {
-        return "color.entry." + super.getUnlocalizedName();
+        return "entry." + super.getUnlocalizedName();
     }
 
     public String getLazyUnlocalizedName() {
