@@ -11,7 +11,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import pixlepix.auracascade.block.*;
 import pixlepix.auracascade.data.EnumRainbowColor;
 import pixlepix.auracascade.item.*;
-import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.registry.BlockRegistry;
 
 import java.util.Locale;
@@ -25,7 +24,6 @@ public final class ModelHandler {
         registerAngelSteelTools();
         registerFairyCharms();
         registerMulticolors();
-        registerBooks();
         registerAmulets();
 
         Item fairyTorchItem = Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(FairyTorch.class));
@@ -69,8 +67,6 @@ public final class ModelHandler {
 
         registerItem(Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(BlockMagicRoad.class)));
         registerItem(Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(BlockTrampoline.class)));
-        registerItem(Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(BlockStorageBookshelf.class)));
-        registerItem(Item.getItemFromBlock(BlockRegistry.getFirstBlockFromClass(BlockBookshelfCoordinator.class)));
 
         registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedWood")));
         registerItem(Item.getItemFromBlock(BlockRegistry.getBlockFromClassAndName(BlockExplosionContainer.class, "fortifiedGlass")));
@@ -152,18 +148,6 @@ public final class ModelHandler {
     private static void registerMulticolors() {
         for (Item i : BlockRegistry.getItemFromClass(ItemMaterial.class)) {
             registerItem(i);
-        }
-    }
-
-    private static void registerBooks() {
-        @SuppressWarnings("unchecked")
-        Set<Class<? extends ItemStorageBook>> classes = ImmutableSet.of(BasicStorageBook.class, DenseStorageBook.class, ExtremelyDenseStorageBook.class,
-                ExtremelyLightStorageBook.class, FarmingStorageBook.class, LightStorageBook.class, MineralStorageBook.class, MobStorageBook.class,
-                ModStorageBook.class, SuperDenseStorageBook.class, SuperLightStorageBook.class, VeryDenseStorageBook.class, VeryLightStorageBook.class);
-
-        for (Class<? extends ItemStorageBook> clazz : classes) {
-            Item item = BlockRegistry.getFirstItemFromClass(clazz);
-            ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation("aura:storageBook", "inventory"));
         }
     }
 

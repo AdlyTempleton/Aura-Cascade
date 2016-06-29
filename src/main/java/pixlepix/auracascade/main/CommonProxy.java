@@ -66,7 +66,6 @@ public class CommonProxy {
 
         networkWrapper.registerMessage(PacketFairyUpdate.class, PacketFairyUpdate.class, 1, Side.CLIENT);
         networkWrapper.registerMessage(PacketFairyRequestUpdate.class, PacketFairyRequestUpdate.class, 2, Side.SERVER);
-        networkWrapper.registerMessage(CoordinatorScrollHandler.class, PacketCoordinatorScroll.class, 3, Side.SERVER);
         networkWrapper.registerMessage(PacketAngelJump.PacketAngelJumpHandler.class, PacketAngelJump.class, 4, Side.SERVER);
         networkWrapper.registerMessage(PacketSyncQuestData.PacketSyncQuestDataHandler.class, PacketSyncQuestData.class, 5, Side.CLIENT);
 

@@ -24,7 +24,6 @@ import pixlepix.auracascade.data.Quest;
 import pixlepix.auracascade.data.recipe.PylonRecipe;
 import pixlepix.auracascade.data.recipe.PylonRecipeRegistry;
 import pixlepix.auracascade.item.*;
-import pixlepix.auracascade.item.books.*;
 import pixlepix.auracascade.lexicon.page.*;
 import pixlepix.auracascade.registry.*;
 
@@ -48,7 +47,7 @@ public final class LexiconData {
         LexiconCategory categoryQuest = null;
         //TODO bring this back
         //if (Config.questline)
-         if(false){
+        if(false){
             categoryQuest = CategoryManager.categoryQuest = new LexiconCategory("Quests").setIcon(new ItemStack(Items.DIAMOND_SWORD));
             CategoryManager.addCategory(categoryQuest);
         }
@@ -157,23 +156,7 @@ public final class LexiconData {
                 new PageCraftingRecipe("5", ItemGreenAmulet.class),
                 new PageCraftingRecipe("6", ItemBlueAmulet.class),
                 new PageCraftingRecipe("7", ItemPurpleAmulet.class));
-        new BLexiconEntry("books", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageText("2"), new PageCraftingRecipe("3", BlockRegistry.getFirstRecipeFromBlock(BlockBookshelfCoordinator.class)),
-                new PageCraftingRecipe("4", (BlockRegistry.getFirstRecipeFromItem(BasicStorageBook.class))),
-                new PageText("5"),
-                new PageCraftingRecipe("6", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(DenseStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("7", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(VeryDenseStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("8", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(SuperDenseStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("9", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(ExtremelyDenseStorageBook.class)).iRecipe),
-                new PageText("10"),
-                new PageCraftingRecipe("11", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(LightStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("12", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(VeryLightStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("13", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(SuperLightStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("14", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(ExtremelyLightStorageBook.class)).iRecipe),
-                new PageText("15"), new PageText("16"),
-                new PageCraftingRecipe("17", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(MineralStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("18", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(MobStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("19", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(FarmingStorageBook.class)).iRecipe),
-                new PageCraftingRecipe("20", ((CraftingBenchRecipe) BlockRegistry.getFirstRecipeFromItem(ModStorageBook.class)).iRecipe));
+
 
         if (ModAPIManager.INSTANCE.hasAPI("CoFHAPI|energy")) {
             new BLexiconEntry("flux", categoryConsumers).setPriority().setLexiconPages(new PageText("0"), new PageText("1"), new PageCraftingRecipe("2", ((CraftingBenchRecipe) BlockRegistry.getRecipe(AuraBlock.getBlockFromName("flux"))).iRecipe));
