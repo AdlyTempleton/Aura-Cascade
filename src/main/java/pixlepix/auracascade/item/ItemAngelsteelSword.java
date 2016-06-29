@@ -48,6 +48,8 @@ public class ItemAngelsteelSword extends ItemSword implements ITTinkererItem, IA
         return ((ItemAngelsteelSword) BlockRegistry.getFirstItemFromClass(ItemAngelsteelSword.class)).getStack(aura);
     }
 
+
+
     @Override
     public int getCreativeTabPriority() {
         return -5;
