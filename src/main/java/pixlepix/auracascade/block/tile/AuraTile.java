@@ -184,7 +184,6 @@ public class AuraTile extends TileEntity implements ITickable {
                 for (BlockPos pos : connected) {
                     double factor = getWeight(pos) / totalWeight;
                     AuraTile other = (AuraTile) worldObj.getTileEntity(pos);
-                    int auraToSend;
 
                     if (canTransfer(pos)) {
                         int diff = Math.abs(storage - other.storage);
@@ -240,7 +239,7 @@ public class AuraTile extends TileEntity implements ITickable {
         boolean isLower = pos.getY() < this.pos.getY();
 
         boolean isSame = pos.getY() == this.pos.getY();
-        return worldObj.getTileEntity(pos) instanceof AuraTile && (isSame || isLower) && !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0);
+        return worldObj.getTileEntity(pos) instanceof AuraTile && (isSame || isLower) && !(worldObj.isBlockIndirectlyGettingPowered(this.pos) > 0) && ((AuraTile) worldObj.getTileEntity(pos)).canReceive(getPos());
 
     }
 
