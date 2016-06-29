@@ -56,9 +56,6 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         Config.init(event);
-
-       // AuraCascade.analytics = new AuraAnalytics(ConstantMod.version, ConstantMod.analyticsKey, ConstantMod.analyticsKeySecret);
-       
         ModCreativeTab.INSTANCE = new ModCreativeTab();
         AngelsteelToolHelper.initMaterials();
         registry = new BlockRegistry();
