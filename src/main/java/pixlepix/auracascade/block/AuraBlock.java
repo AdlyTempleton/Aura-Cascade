@@ -459,11 +459,10 @@ public class AuraBlock extends Block implements IToolTip, ITTinkererBlock, ITile
                 result.add("Max Storage: " + capacitor.storageValues[capacitor.storageValueIndex]);
 
             }
-            if (((AuraTile) tileEntity).storage > 0) {
-                result.add("Aura Stored: ");
-                result.add("Aura: " + ((AuraTile) tileEntity).storage);
+            result.add("Aura Stored: ");
+            result.add("Aura: " + ((AuraTile) tileEntity).storage);
 
-            }
+
         } else {
             result.add("No Aura");
         }
