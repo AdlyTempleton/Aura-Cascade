@@ -50,7 +50,7 @@ public class AuraTileCapacitor extends AuraTile {
 
             if (worldObj.getTotalWorldTime() % 5 == 0 && aboutToBurst) {
                 aboutToBurst = false;
-                ticksDisabled = 110;
+                ticksDisabled = 410;
 
                 worldObj.setBlockState(getPos(), worldObj.getBlockState(getPos()).withProperty(AuraBlockCapacitor.BURSTING, false), 3);
                 worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
@@ -65,6 +65,6 @@ public class AuraTileCapacitor extends AuraTile {
 
     @Override
     public boolean canReceive(BlockPos source) {
-        return ticksDisabled == 0 && super.canReceive(source);
+        return super.canReceive(source);
     }
 }

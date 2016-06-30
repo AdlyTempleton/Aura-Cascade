@@ -134,9 +134,12 @@ public class AuraTile extends TileEntity implements ITickable {
         }
     }
 
-    public void burst(BlockPos target, String particle) {
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
+    public void burst(BlockPos target, String particle, double r, double g, double b) {
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(getPos(), target, particle, r, g, b), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 32));
+    }
 
+    public void burst(BlockPos target, String particle) {
+        burst(target, particle, 1, 1, 1);
     }
 
     @Override

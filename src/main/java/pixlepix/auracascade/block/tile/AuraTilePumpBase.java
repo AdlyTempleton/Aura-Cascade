@@ -82,7 +82,7 @@ public class AuraTilePumpBase extends AuraTile {
                     }
 
                     quantity = Math.min(quantity, storage);
-                    burst(upNode.getPos(), "magicCrit");
+                    burst(upNode.getPos(), "spell", .1, .1, 1);
                     storage -= quantity;
                     upNode.storage += quantity;
 

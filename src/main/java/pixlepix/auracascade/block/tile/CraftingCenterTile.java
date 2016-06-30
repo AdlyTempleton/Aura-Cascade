@@ -92,7 +92,7 @@ public class CraftingCenterTile extends TileEntity {
 
     public void burst(BlockPos origin, BlockPos target, String particle) {
 
-        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(origin, target, particle), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(),getPos().getY(), getPos().getZ(), 32));
+        AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(origin, target, particle, 1, 1, 1), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(),getPos().getY(), getPos().getZ(), 32));
 
     }
 
