@@ -59,7 +59,7 @@ public enum EnumColor {
      * @return localized name
      */
     public String getLocalizedName() {
-        return I18n.translateToLocal("" + unlocalizedName);
+        return I18n.translateToLocal("aura." + unlocalizedName);
     }
 
     public String getDyeName() {

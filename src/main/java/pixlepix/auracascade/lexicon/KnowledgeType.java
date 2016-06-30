@@ -15,6 +15,6 @@ public class KnowledgeType {
     }
 
     public String getUnlocalizedName() {
-        return "knowledge." + id;
+        return "aura.knowledge." + id;
     }
 }
