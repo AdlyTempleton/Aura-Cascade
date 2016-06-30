@@ -69,7 +69,7 @@ public class PylonRecipeHandler extends TemplateRecipeHandler {
 
     @Override
     public String getGuiTexture() {
-        return "color:textures/blankgui.png";
+        return "aura:textures/blankgui.png";
     }
 
     @Override

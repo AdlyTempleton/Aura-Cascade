@@ -73,7 +73,7 @@ public class CommonProxy {
         if (Config.villageGeneration) {
             VillagerRegistry.instance().registerVillageCreationHandler(new AuraHutHandler());
         }
-        MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "color:auraHut");
+        MapGenStructureIO.registerStructureComponent(ComponentAuraHut.class, "aura:auraHut");
     }
 
     public void addToTutorial(LexiconEntry entry) {

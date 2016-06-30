@@ -86,7 +86,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
                         par2EntityPlayer.openGui(AuraCascade.instance, 0, par3World, 0, 0, 0);
                         if (!par3World.isRemote) {
                             //TODO fix sounds
-                            //par3World.playSoundAtEntity(par2EntityPlayer, "color:lexiconOpen", 0.5F, 1F);
+                            //par3World.playSoundAtEntity(par2EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
                         }
                         return EnumActionResult.PASS;
                     }
@@ -119,7 +119,7 @@ public class ItemLexicon extends Item implements ITTinkererItem {
         par3EntityPlayer.openGui(AuraCascade.instance, 0, par2World, 0, 0, 0);
         if (!par2World.isRemote && !skipSound){
             //TODO Fix soundat
-            //par2World.playSoundAt(par3EntityPlayer, "color:lexiconOpen", 0.5F, 1F);
+            //par2World.playSoundAt(par3EntityPlayer, "aura:lexiconOpen", 0.5F, 1F);
         }
         skipSound = false;
         return new ActionResult<ItemStack>(EnumActionResult.PASS, par1ItemStack);

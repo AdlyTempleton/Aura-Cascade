@@ -25,7 +25,7 @@ import java.util.Collections;
  * Created by pixlepix on 12/28/14.
  */
 public class PagePylon extends PageRecipe {
-    private static final ResourceLocation craftingOverlay = new ResourceLocation("color:textures/gui/pylonOverlay.png");
+    private static final ResourceLocation craftingOverlay = new ResourceLocation("aura:textures/gui/pylonOverlay.png");
 
     PylonRecipe recipe;
 

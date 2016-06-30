@@ -5,12 +5,12 @@ package pixlepix.auracascade.lexicon;
  */
 public class LibResources {
 
-    public static String PREFIX_GUI = "color:textures/gui/";
+    public static String PREFIX_GUI = "aura:textures/gui/";
     public static final String GUI_PAPER = PREFIX_GUI + "paper.png";
     public static final String GUI_LEXICON = PREFIX_GUI + "lexicon.png";
     public static final String GUI_TOFF = PREFIX_GUI + "toff.png";
     public static final String GUI_CRAFTING_OVERLAY = PREFIX_GUI + "craftingOverlay.png";
-    public static String PREFIX_CATEGORIES = "color:textures/gui/categories/";
+    public static String PREFIX_CATEGORIES = "aura:textures/gui/categories/";
     public static final String CATEGORY_INDEX = PREFIX_CATEGORIES + "index.png";
 
 
