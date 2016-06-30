@@ -1,6 +1,7 @@
 package pixlepix.auracascade.block.tile;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.NetworkManager;
@@ -10,6 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import pixlepix.auracascade.AuraCascade;
 import pixlepix.auracascade.block.AuraBlock;
@@ -36,6 +38,11 @@ public class AuraTile extends TileEntity implements ITickable {
 
         super.readFromNBT(nbt);
         readCustomNBT(nbt);
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() == newSate.getBlock();
     }
 
     protected void readCustomNBT(NBTTagCompound nbt) {
@@ -214,11 +221,13 @@ public class AuraTile extends TileEntity implements ITickable {
                 }
                 burstMap = null;
             }
+            markDirty();
+            worldObj.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getX(), pos.getX(), pos.getY(), pos.getZ());
+            worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
+            worldObj.markAndNotifyBlock(this.pos, this.worldObj.getChunkFromBlockCoords(this.pos),this.blockType.getDefaultState(), this.blockType.getDefaultState(), 2);
+
         }
-        markDirty();
-        worldObj.markBlockRangeForRenderUpdate(pos.getX(), pos.getY(), pos.getX(), pos.getX(), pos.getY(), pos.getZ());
-        worldObj.notifyBlockOfStateChange(pos, worldObj.getBlockState(pos).getBlock());
-        worldObj.markAndNotifyBlock(this.pos, this.worldObj.getChunkFromBlockCoords(this.pos),this.blockType.getDefaultState(), this.blockType.getDefaultState(), 2);
+
     }
 
     public void transferAura(BlockPos pos, int auraToTransfer) {

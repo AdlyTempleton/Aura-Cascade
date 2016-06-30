@@ -42,7 +42,7 @@ public class AuraTileCapacitor extends AuraTile {
                 ticksDisabled--;
             }
 
-            if (worldObj.getTotalWorldTime() % 19 == 0 && storage >= storageValues[storageValueIndex]) {
+            if (worldObj.getTotalWorldTime() % 20 == 19 && storage >= storageValues[storageValueIndex]) {
                 aboutToBurst = true;
                 worldObj.setBlockState(getPos(), worldObj.getBlockState(getPos()).withProperty(AuraBlockCapacitor.BURSTING, true), 3);
                 AuraCascade.proxy.networkWrapper.sendToAllAround(new PacketBurst(2, getPos().getX() + .5, getPos().getY() + .5, getPos().getZ() + .5), new NetworkRegistry.TargetPoint(worldObj.provider.getDimension(), getPos().getX(), getPos().getY(), getPos().getZ(), 32));
