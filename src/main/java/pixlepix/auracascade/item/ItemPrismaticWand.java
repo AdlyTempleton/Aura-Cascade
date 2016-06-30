@@ -198,6 +198,7 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                         if (player.capabilities.isCreativeMode) {
                                             if (!world.isRemote) {
                                                 world.setBlockState(newPos, block.getStateFromMeta(worldDmg), 3);
+                                            }else{
                                                 particles(newPos);
                                             }
 
@@ -209,8 +210,9 @@ public class ItemPrismaticWand extends Item implements ITTinkererItem {
                                                     if (usesMetadataForPlacing) {
                                                         world.setBlockState(newPos, world.getBlockState(newPos).getBlock().getStateFromMeta(worldDmg), 3);
                                                     }
+                                                }else{
+                                                    particles(newPos);
                                                 }
-                                                particles(newPos);
 
                                                 player.inventory.decrStackSize(slot, 1);
                                             }
