@@ -42,7 +42,7 @@ public class AuraTile extends TileEntity implements ITickable {
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
-        return oldState.getBlock() == newSate.getBlock();
+        return oldState.getBlock() != newSate.getBlock();
     }
 
     protected void readCustomNBT(NBTTagCompound nbt) {
