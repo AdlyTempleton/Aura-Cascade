@@ -65,6 +65,6 @@ public class AuraTileCapacitor extends AuraTile {
 
     @Override
     public boolean canReceive(BlockPos source) {
-        return super.canReceive(source);
+        return super.canReceive(source) && ticksDisabled == 0;
     }
 }
